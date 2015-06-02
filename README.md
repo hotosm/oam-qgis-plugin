@@ -5,8 +5,8 @@ QGIS plugin to access and upload data to OpenAerialMap
 ## Development guidelines
 
 1. Use of qtcreator for:
-1.1 GUI layout/development
-1.2 defining most of the common signals/slots for the GUI components
+  1.1 GUI layout/development
+  1.2 defining most of the common signals/slots for the GUI components
 2. Do not change any generated code directly but create a subclass and then
 override/extend it, to keep our code and the automatically generated code
 separated
