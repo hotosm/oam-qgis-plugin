@@ -5,8 +5,8 @@ QGIS plugin to access and upload data to OpenAerialMap
 ## Development guidelines
 
 1. Use of qtcreator for:
- . GUI layout/development
- . defining most of the common signals/slots for the GUI components
+1.1 GUI layout/development
+1.2 defining most of the common signals/slots for the GUI components
 2. Do not change any generated code directly but create a subclass and then
 override/extend it, to keep our code and the automatically generated code
 separated
@@ -19,6 +19,4 @@ The development progress can be followed through the repository [Millestones](ht
 
 ## Communication channel
 
-Weekly meetings on Wednesdays at 19h30 UTC on out gitter channel:
-
-[![Join the chat at https://gitter.im/hotosm/oam-qgis-plugin](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hotosm/oam-qgis-plugin?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+Weekly meetings on Wednesdays at 19h30 UTC on out gitter channel: [![Join the chat at https://gitter.im/hotosm/oam-qgis-plugin](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hotosm/oam-qgis-plugin?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
