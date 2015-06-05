@@ -2,6 +2,20 @@
 
 QGIS plugin to access and upload data to OpenAerialMap
 
+## Features
+
+* select input data (from individual files, a VRT or a loaded layer)
+* insert/load/change metadata
+* validate metadata
+* choose OIN upload destination
+* upload transaction
+* notify OAM of new OIN resource
+* trigger tile service on OAM
+* authenticate to OAM (if requesting tile service)
+* provide additional OAM metadata (if requesting tile service)
+* re-projecting to EPSG:3857 (optional)
+* convert format to GeoTIFF RGB (optional)
+
 ## Development guidelines
 
 1. Use of qtcreator for:
