@@ -34,4 +34,5 @@ The development progress can be followed through the repository [Millestones](ht
 ## Communication channel
 
 Weekly meetings on Wednesdays at 19h30 UTC on out gitter channel:
+
 [![Join the chat at https://gitter.im/hotosm/oam-qgis-plugin](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hotosm/oam-qgis-plugin?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
