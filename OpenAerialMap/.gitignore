@@ -1,0 +1,5 @@
+.coverage
+.noseids
+help/build/
+i18n/*.qm
+*.pyc
