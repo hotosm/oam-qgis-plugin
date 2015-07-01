@@ -161,9 +161,16 @@ class OpenAerialMap:
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
         icon_path = ':/plugins/OpenAerialMap/icon.png'
+        
         self.add_action(
             icon_path,
             text=self.tr(u'Upload imagery'),
+            callback=self.run,
+            parent=self.iface.mainWindow())
+
+        self.add_action(
+            icon_path,
+            text=self.tr(u'Search imagery'),
             callback=self.run,
             parent=self.iface.mainWindow())
 
