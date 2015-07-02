@@ -4,6 +4,6 @@ The current interface can be generated using the xml provided in the plugin repo
 
 Execute the following commands in a terminal to generate and execute the python code:
 
-> pyuic4 -xo oam_client_dialog_base.py oam_client_dialog_base.ui
+> $ pyuic4 -xo oam_client_dialog_base.py oam_client_dialog_base.ui
 
-> python oam_client_dialog_base.py 
+> $ python oam_client_dialog_base.py 
