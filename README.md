@@ -7,9 +7,9 @@ QGIS plugin to access and upload data to OpenAerialMap
 The plugin is still in early development phase, but tests and feedbacks are always appreciated.
 Use the following commands to install it in a unix system:
 
-$ git clone https://github.com/hotosm/oam-qgis-plugin.git \
+$ git clone https://github.com/hotosm/oam-qgis-plugin.git 
 
-$ cd oam-qgis-plugin/OpenAerialMap/ \
+$ cd oam-qgis-plugin/OpenAerialMap/ 
 
 $ make deploy
 
@@ -18,9 +18,9 @@ You should see the OAM icons in your manu at this point.
 
 After any change in the code you can re-deploy the plugin by doing:
 
-$ cd oam-qgis-plugin/OpenAerialMap/ \
+$ cd oam-qgis-plugin/OpenAerialMap/ 
 
-$ make clean \
+$ make clean 
 
 $ make deploy
 
