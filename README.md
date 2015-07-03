@@ -26,7 +26,7 @@ $ make deploy
 
 You also need to restart QGIS to reload the new compiled code.
 
-## Rquired features
+## Required features
 
 * select input data (from individual files, a VRT or a loaded layer)
 * insert/load/change metadata
