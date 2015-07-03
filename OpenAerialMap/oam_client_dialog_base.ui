@@ -671,7 +671,7 @@
       <string>Cancel</string>
      </property>
     </widget>
-    <widget class="QLineEdit" name="secret_key_dit">
+    <widget class="QLineEdit" name="secret_key_edit">
      <property name="geometry">
       <rect>
        <x>385</x>
@@ -720,7 +720,7 @@
     <zorder>review_metadata_label</zorder>
     <zorder>upload_button</zorder>
     <zorder>cancel_button</zorder>
-    <zorder>secret_key_dit</zorder>
+    <zorder>secret_key_edit</zorder>
     <zorder>secret_key_label</zorder>
    </widget>
   </widget>

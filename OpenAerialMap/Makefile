@@ -25,7 +25,7 @@
 
 #Add iso code for any locales you want to support here (space separated)
 # default is no locales
-LOCALES = af
+LOCALES = pt_BR
 #LOCALES =
 
 # If locales are enabled, set the name of the lrelease binary on your system. If
@@ -39,14 +39,16 @@ LRELEASE = lrelease
 SOURCES = \
 	__init__.py \
 	oam_client.py \
-	oam_client_dialog.py
+	oam_client_dialog.py \
+        filechunkio.py
 
 PLUGINNAME = OpenAerialMap
 
 PY_FILES = \
 	oam_client.py \
 	oam_client_dialog.py \
-	__init__.py
+	__init__.py \
+        filechunkio.py
 
 UI_FILES = oam_client_dialog_base.ui
 

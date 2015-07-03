@@ -21,13 +21,16 @@
  ***************************************************************************/
 """
 from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
-from PyQt4.QtGui import QAction, QIcon
+from PyQt4.QtGui import QAction, QIcon, QMessageBox, QFileDialog
 # Initialize Qt resources from file resources.py
 import resources_rc
 # Import the code for the dialog
 from oam_client_dialog import OpenAerialMapDialog
-import os.path
-
+import os, math
+# Import modules needed for upload
+from boto.s3.connection import S3Connection
+from boto.s3.key import Key
+from filechunkio import FileChunkIO
 
 class OpenAerialMap:
     """QGIS Plugin Implementation."""
@@ -161,6 +164,7 @@ class OpenAerialMap:
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
         icon_path = ':/plugins/OpenAerialMap/icon.png'
+        search_icon_path = ':/plugins/OpenAerialMap/search_icon.png'
         
         self.add_action(
             icon_path,
@@ -169,11 +173,18 @@ class OpenAerialMap:
             parent=self.iface.mainWindow())
 
         self.add_action(
-            icon_path,
+            search_icon_path,
             text=self.tr(u'Search imagery'),
             callback=self.run,
             parent=self.iface.mainWindow())
 
+        # Imagery tab
+        self.dlg.file_tool_button.clicked.connect(self.selectFile)
+        self.dlg.add_source_button.clicked.connect(self.addSource)
+
+        # Upload tab
+        self.dlg.upload_button.clicked.connect(self.uploadS3)
+        self.dlg.cancel_button.clicked.connect(self.closeDialog)
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
@@ -185,6 +196,57 @@ class OpenAerialMap:
         # remove the toolbar
         del self.toolbar
 
+    def closeDialog(self):
+        self.dlg.close()
+
+    def selectFile(self):
+        selected_file = QFileDialog.getOpenFileName(self.dlg, 'Select File', os.path.expanduser("~"))
+        self.dlg.source_file_edit.setText(selected_file)
+
+    def addSource(self):
+        file_name = self.dlg.source_file_edit.text()
+        self.dlg.sources_list_widget.addItem(file_name)
+
+    def uploadS3(self):
+        bucket_name = 'oam-qgis-plugin-test'
+        bucket_key = str(self.dlg.key_id_edit.text())
+        bucket_secret = str(self.dlg.secret_key_edit.text())
+        
+        # uncomment the following lines and fill it in with your key info to bypass the plugin form
+        #bucket_key = ''
+        #bucket_secret = ''
+        
+        connection = S3Connection(bucket_key,bucket_secret)
+        bucket = connection.get_bucket(bucket_name)
+        QMessageBox.information(self.iface.mainWindow(),"going to... file ", "Uploading...")
+
+        for index in xrange(self.dlg.sources_list_widget.count()):
+            file_path = str(self.dlg.sources_list_widget.item(index).text())
+            self.uploadFile(file_path,bucket)
+
+
+    def uploadFile(self,file_path,bucket): 
+        
+        multipart = bucket.initiate_multipart_upload(os.path.basename(file_path))
+
+        # Use a chunk size of 50 MiB
+        file_size = os.stat(file_path).st_size
+        chunk_size = 52428800
+        chunk_count = int(math.ceil(file_size / float(chunk_size)))
+        
+        # Send the file parts, using FileChunkIO to create a file-like object
+        # that points to a certain byte range within the original file. We
+        # set bytes to never exceed the original file size.
+        for i in range(chunk_count):
+            offset = chunk_size * i
+            bytes = min(chunk_size, file_size - offset)
+            with FileChunkIO(file_path, 'r', offset=offset,
+                             bytes=bytes) as fp:
+                multipart.upload_part_from_file(fp, part_num=i + 1)
+        
+        # Finish the upload
+        multipart.complete_upload()
+        QMessageBox.information(self.iface.mainWindow(),"Upload succeeded", "Uploaded file \'%s'\'" % file_path)
 
     def run(self):
         """Run method that performs all the real work"""
