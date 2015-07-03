@@ -30,8 +30,14 @@ class OpenAerialMapDialogTest(unittest.TestCase):
         pass
 
     def test_icon_png(self):
-        """Test we can click OK."""
+        """Test icon OK."""
         path = ':/plugins/OpenAerialMap/icon.png'
+        icon = QIcon(path)
+        self.assertFalse(icon.isNull())
+
+    def test_search_icon_png(self):
+        """Test search icon OK."""
+        path = ':/plugins/OpenAerialMap/search_icon.png'
         icon = QIcon(path)
         self.assertFalse(icon.isNull())
 

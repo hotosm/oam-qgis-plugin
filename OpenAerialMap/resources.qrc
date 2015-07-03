@@ -2,4 +2,7 @@
     <qresource prefix="/plugins/OpenAerialMap" >
         <file>icon.png</file>
     </qresource>
+    <qresource prefix="/plugins/OpenAerialMap" >
+        <file>search_icon.png</file>
+    </qresource>
 </RCC>
