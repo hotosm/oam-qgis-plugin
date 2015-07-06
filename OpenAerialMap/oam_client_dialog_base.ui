@@ -26,7 +26,7 @@
     <string/>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="imagery_tab">
     <attribute name="title">
@@ -154,6 +154,9 @@
        <height>171</height>
       </rect>
      </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::MultiSelection</enum>
+     </property>
     </widget>
     <widget class="QListWidget" name="layers_list_widget">
      <property name="geometry">
@@ -163,6 +166,9 @@
        <width>226</width>
        <height>111</height>
       </rect>
+     </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::MultiSelection</enum>
      </property>
     </widget>
     <widget class="QLabel" name="label">
@@ -467,6 +473,9 @@
        <height>216</height>
       </rect>
      </property>
+     <property name="selectionMode">
+      <enum>QAbstractItemView::MultiSelection</enum>
+     </property>
     </widget>
     <widget class="QPushButton" name="default_button">
      <property name="geometry">
@@ -725,7 +734,6 @@
    </widget>
   </widget>
  </widget>
- <resources>
- </resources>
+ <resources/>
  <connections/>
 </ui>
