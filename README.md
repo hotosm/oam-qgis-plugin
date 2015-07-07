@@ -2,6 +2,17 @@
 
 QGIS plugin to access and upload data to OpenAerialMap
 
+## Dependencies
+
+The plugin depends on the following python libraries:
+
+* [Boto](https://pypi.python.org/pypi/boto) - Amazon Web Services Library
+* [FileChunkIO](https://pypi.python.org/pypi/filechunkio/) - represents a chunk of an OS-level file containing bytes data
+
+If you have python-pip installed, both dependecies can be installed with the command:
+
+$ pip install filechunkio boto
+
 ## Install instructions
 
 The plugin is still in early development phase, but tests and feedbacks are always appreciated.
@@ -16,15 +27,7 @@ $ make deploy
 Then activate the plugin through QGIS menu (Plugins -> Manage and Install Plugins).
 You should see the OAM icons in your manu at this point.
 
-After any change in the code you can re-deploy the plugin by doing:
-
-$ cd oam-qgis-plugin/OpenAerialMap/ 
-
-$ make clean 
-
-$ make deploy
-
-You also need to restart QGIS to reload the new compiled code.
+After any change in the code you should run 'make deploy' again. You also need to restart QGIS to reload the new compiled code. A handy alternative is to use the "Plugin Reloader" plugin to reload and live test your changes on the code. 
 
 ## Required features
 
