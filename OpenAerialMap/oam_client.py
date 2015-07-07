@@ -20,13 +20,13 @@
  *                                                                         *
  ***************************************************************************/
 """
-from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
+from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication 
 from PyQt4.QtGui import QAction, QIcon, QMessageBox, QFileDialog
 # Initialize Qt resources from file resources.py
 import resources_rc
 # Import the code for the dialog
 from oam_client_dialog import OpenAerialMapDialog
-import os, math
+import os, sys, math
 # Import modules needed for upload
 from boto.s3.connection import S3Connection
 from boto.s3.key import Key
@@ -179,8 +179,10 @@ class OpenAerialMap:
             parent=self.iface.mainWindow())
 
         # Imagery tab
+        self.loadLayers()
         self.dlg.file_tool_button.clicked.connect(self.selectFile)
         self.dlg.add_source_button.clicked.connect(self.addSource)
+        self.dlg.remove_source_button.clicked.connect(self.removeSources)
 
         # Upload tab
         self.dlg.upload_button.clicked.connect(self.uploadS3)
@@ -196,6 +198,11 @@ class OpenAerialMap:
         # remove the toolbar
         del self.toolbar
 
+    def loadLayers(self):
+        all_layers = self.iface.mapCanvas().layers()
+        for layer in all_layers:
+            self.dlg.layers_list_widget.addItem(layer.name())
+
     def closeDialog(self):
         self.dlg.close()
 
@@ -205,7 +212,25 @@ class OpenAerialMap:
 
     def addSource(self):
         file_name = self.dlg.source_file_edit.text()
-        self.dlg.sources_list_widget.addItem(file_name)
+        if file_name:
+            self.dlg.sources_list_widget.addItem(file_name)
+            self.dlg.source_file_edit.setText('')
+        else:
+            selected_layers = self.dlg.layers_list_widget.selectedItems()
+            if selected_layers:
+                for item in selected_layers:
+                    self.dlg.sources_list_widget.addItem(item.text())
+                    self.dlg.layers_list_widget.takeItem(self.dlg.layers_list_widget.row(item))
+
+    def removeSources(self):
+        selected_layers = self.dlg.sources_list_widget.selectedItems()
+        if selected_layers:
+            for item in selected_layers:
+                self.dlg.sources_list_widget.takeItem(self.dlg.sources_list_widget.row(item))
+                all_layers = self.iface.mapCanvas().layers()
+                for layer in all_layers:
+                    if item.text() == layer.name():
+                        self.dlg.layers_list_widget.addItem(item.text())
 
     def uploadS3(self):
         bucket_name = 'oam-qgis-plugin-test'
