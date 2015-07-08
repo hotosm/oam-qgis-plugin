@@ -203,7 +203,7 @@ class OpenAerialMap:
         for layer in all_layers:
             item = QListWidgetItem()
             item.setText(layer.name())
-            item.setData(32, os.path.basename(layer.dataProvider().dataSourceUri())) # 32 = Qt::UserRole, The first role that can be used for application-specific purposes
+            item.setData(32, layer.dataProvider().dataSourceUri()) # 32 = Qt::UserRole, The first role that can be used for application-specific purposes
             self.dlg.layers_list_widget.addItem(item)
 
     def closeDialog(self):
@@ -249,10 +249,10 @@ class OpenAerialMap:
         
         connection = S3Connection(bucket_key,bucket_secret)
         bucket = connection.get_bucket(bucket_name)
-        QMessageBox.information(self.iface.mainWindow(),"going to... file ", "Uploading...")
+        QMessageBox.information(self.iface.mainWindow(),'Uploading...','The upload is about to start')
 
         for index in xrange(self.dlg.sources_list_widget.count()):
-            file_path = str(self.dlg.sources_list_widget.item(index).text())
+            file_path = str(self.dlg.sources_list_widget.item(index).data(32))
             self.uploadFile(file_path,bucket)
 
 
@@ -277,7 +277,7 @@ class OpenAerialMap:
         
         # Finish the upload
         multipart.complete_upload()
-        QMessageBox.information(self.iface.mainWindow(),"Upload succeeded", "Uploaded file \'%s'\'" % file_path)
+        QMessageBox.information(self.iface.mainWindow(),'Upload succeeded', 'Uploaded file \"%s\"' % file_path)
 
     def run(self):
         """Run method that performs all the real work"""
