@@ -181,8 +181,10 @@ class OpenAerialMap:
         # Imagery tab
         self.loadLayers()
         self.dlg.file_tool_button.clicked.connect(self.selectFile)
-        self.dlg.add_source_button.clicked.connect(self.addSource)
+        self.dlg.add_source_button.clicked.connect(self.addSources)
         self.dlg.remove_source_button.clicked.connect(self.removeSources)
+        self.dlg.up_source_button.clicked.connect(self.upSource)
+        self.dlg.down_source_button.clicked.connect(self.downSource)
 
         # Upload tab
         self.dlg.upload_button.clicked.connect(self.uploadS3)
@@ -213,7 +215,7 @@ class OpenAerialMap:
         selected_file = QFileDialog.getOpenFileName(self.dlg, 'Select File', os.path.expanduser("~"))
         self.dlg.source_file_edit.setText(selected_file)
 
-    def addSource(self):
+    def addSources(self):
         file_name = self.dlg.source_file_edit.text()
         selected_layers = self.dlg.layers_list_widget.selectedItems()
         if file_name:
@@ -237,6 +239,24 @@ class OpenAerialMap:
                 for layer in all_layers:
                     if item.text() == layer.name():
                         self.dlg.layers_list_widget.addItem(item)
+
+    def upSource(self):
+        selected_layers = self.dlg.sources_list_widget.selectedItems()
+        if selected_layers:
+            position = self.dlg.sources_list_widget.row(selected_layers[0])
+            if position > 0:
+                item = self.dlg.sources_list_widget.takeItem(position)
+                self.dlg.sources_list_widget.insertItem(position-1,item)
+                item.setSelected(1)
+
+    def downSource(self):
+        selected_layers = self.dlg.sources_list_widget.selectedItems()
+        if selected_layers:
+            position = self.dlg.sources_list_widget.row(selected_layers[0])
+            if position < self.dlg.sources_list_widget.count()-1:
+                item = self.dlg.sources_list_widget.takeItem(position)
+                self.dlg.sources_list_widget.insertItem(position+1,item)
+                item.setSelected(1)
 
     def uploadS3(self):
         bucket_name = 'oam-qgis-plugin-test'
