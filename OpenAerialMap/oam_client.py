@@ -195,6 +195,7 @@ class OpenAerialMap:
         # Upload tab
         self.dlg.upload_button.clicked.connect(self.uploadS3)
         self.dlg.cancel_button.clicked.connect(self.closeDialog)
+        self.dlg.storage_combo_box.currentIndexChanged.connect(self.enableUrl)
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
@@ -291,8 +292,22 @@ class OpenAerialMap:
                 self.dlg.sources_list_widget.insertItem(position+1,item)
                 item.setSelected(1)
 
+    def enableUrl(self):
+        if self.dlg.storage_combo_box.currentIndex() == 1:
+            self.dlg.url_label.setEnabled(1)
+            self.dlg.url_edit.setEnabled(1)
+        else:
+            self.dlg.url_label.setEnabled(0)
+            self.dlg.url_edit.setText('')
+            self.dlg.url_edit.setEnabled(0)
+
     def uploadS3(self):
-        bucket_name = 'oam-qgis-plugin-test'
+        if self.dlg.storage_combo_box == 0:
+            bucket_name = 'oam-qgis-plugin-test'
+        else:
+            bucket_name = str(self.dlg.url_edit.text())
+            if not bucket_name:
+                self.dlg.bar.pushMessage('Missing storage', 'the bucket must be provided in the format s3://name_of_bucket', level=QgsMessageBar.CRITICAL)
         bucket_key = str(self.dlg.key_id_edit.text())
         bucket_secret = str(self.dlg.secret_key_edit.text())
         
@@ -302,7 +317,8 @@ class OpenAerialMap:
         
         connection = S3Connection(bucket_key,bucket_secret)
         bucket = connection.get_bucket(bucket_name)
-        self.dlg.bar.pushMessage('Info:', 'The upload is about to start', level=QgsMessageBar.INFO)
+        if not bucket:
+            self.dlg.bar.pushMessage('Missing connection', 'please check your connectivity and credentials', level=QgsMessageBar.CRITICAL)
 
         for index in xrange(self.dlg.sources_list_widget.count()):
             file_path = str(self.dlg.sources_list_widget.item(index).data(32))

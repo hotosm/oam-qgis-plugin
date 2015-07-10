@@ -371,7 +371,7 @@
         <rect>
          <x>315</x>
          <y>150</y>
-         <width>226</width>
+         <width>231</width>
          <height>109</height>
         </rect>
        </property>
@@ -393,12 +393,12 @@
          <widget class="QComboBox" name="storage_combo_box">
           <item>
            <property name="text">
-            <string>OAM S3 bucket</string>
+            <string>oam-qgis-plugin-test</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>Digital Globe</string>
+            <string>other...</string>
            </property>
           </item>
          </widget>
