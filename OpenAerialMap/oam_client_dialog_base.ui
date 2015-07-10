@@ -6,733 +6,542 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>641</width>
-    <height>375</height>
+    <width>712</width>
+    <height>360</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Open Aerial Map (OAM)</string>
   </property>
-  <widget class="QTabWidget" name="tab_widget">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>25</y>
-     <width>596</width>
-     <height>331</height>
-    </rect>
-   </property>
-   <property name="toolTip">
-    <string/>
-   </property>
-   <property name="currentIndex">
-    <number>0</number>
-   </property>
-   <widget class="QWidget" name="imagery_tab">
-    <attribute name="title">
-     <string>Imagery</string>
-    </attribute>
-    <widget class="QPushButton" name="remove_source_button">
-     <property name="geometry">
-      <rect>
-       <x>275</x>
-       <y>120</y>
-       <width>41</width>
-       <height>26</height>
-      </rect>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QTabWidget" name="tab_widget">
+     <property name="toolTip">
+      <string/>
      </property>
-     <property name="text">
-      <string>&lt;</string>
+     <property name="currentIndex">
+      <number>0</number>
      </property>
+     <widget class="QWidget" name="imagery_tab">
+      <attribute name="title">
+       <string>Imagery</string>
+      </attribute>
+      <widget class="QWidget" name="verticalLayoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>310</x>
+         <y>60</y>
+         <width>56</width>
+         <height>128</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QPushButton" name="add_source_button">
+          <property name="cursor">
+           <cursorShape>ArrowCursor</cursorShape>
+          </property>
+          <property name="text">
+           <string>&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="remove_source_button">
+          <property name="text">
+           <string>&lt;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="up_source_button">
+          <property name="cursor">
+           <cursorShape>ArrowCursor</cursorShape>
+          </property>
+          <property name="text">
+           <string>Up</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="down_source_button">
+          <property name="cursor">
+           <cursorShape>ArrowCursor</cursorShape>
+          </property>
+          <property name="text">
+           <string>Down</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="">
+       <property name="geometry">
+        <rect>
+         <x>385</x>
+         <y>25</y>
+         <width>258</width>
+         <height>226</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QLabel" name="reorganize_label">
+          <property name="text">
+           <string>Reorganize and change upload order</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QListWidget" name="sources_list_widget">
+          <property name="selectionMode">
+           <enum>QAbstractItemView::MultiSelection</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>25</y>
+         <width>260</width>
+         <height>226</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_1">
+          <item>
+           <widget class="QLabel" name="select_source_label">
+            <property name="text">
+             <string>Select sources</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QListWidget" name="layers_list_widget">
+            <property name="lineWidth">
+             <number>2</number>
+            </property>
+            <property name="selectionMode">
+             <enum>QAbstractItemView::MultiSelection</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_1">
+          <item>
+           <widget class="QLabel" name="file_label">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string>File</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="source_file_edit"/>
+          </item>
+          <item>
+           <widget class="QToolButton" name="file_tool_button">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <zorder>sources_list_widget</zorder>
+      <zorder>select_source_label</zorder>
+      <zorder>layers_list_widget</zorder>
+      <zorder>verticalLayoutWidget</zorder>
+      <zorder>file_tool_button</zorder>
+      <zorder>reorganize_label</zorder>
+     </widget>
+     <widget class="QWidget" name="metadata_tab">
+      <attribute name="title">
+       <string>Metadata</string>
+      </attribute>
+      <widget class="QWidget" name="formLayoutWidget_2">
+       <property name="geometry">
+        <rect>
+         <x>300</x>
+         <y>30</y>
+         <width>251</width>
+         <height>226</height>
+        </rect>
+       </property>
+       <layout class="QFormLayout" name="formLayout_1">
+        <property name="fieldGrowthPolicy">
+         <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+        </property>
+        <property name="verticalSpacing">
+         <number>2</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QLabel" name="title_label">
+          <property name="text">
+           <string>Title:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="title_edit"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="provider_label">
+          <property name="text">
+           <string>Provider:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="provider_edit"/>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="platform_label">
+          <property name="text">
+           <string>Platform:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="platform_edit"/>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="tags_label">
+          <property name="text">
+           <string>Tags:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLineEdit" name="tags_edit"/>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="license_label">
+          <property name="text">
+           <string>License:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <widget class="QLineEdit" name="license_edit"/>
+        </item>
+        <item row="5" column="0">
+         <widget class="QLabel" name="sensor_label">
+          <property name="text">
+           <string>Sensor:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <widget class="QLineEdit" name="sensor_edit"/>
+        </item>
+        <item row="6" column="0">
+         <widget class="QLabel" name="contact_label">
+          <property name="text">
+           <string>Contact:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <widget class="QLineEdit" name="contact_edit"/>
+        </item>
+        <item row="7" column="0">
+         <widget class="QLabel" name="website_label">
+          <property name="text">
+           <string>Website:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="1">
+         <widget class="QLineEdit" name="website_edit"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="">
+       <property name="geometry">
+        <rect>
+         <x>580</x>
+         <y>75</y>
+         <width>81</width>
+         <height>128</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QPushButton" name="default_button">
+          <property name="text">
+           <string>Default</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="as_previous_button">
+          <property name="text">
+           <string>As previous</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="clean_button">
+          <property name="text">
+           <string>Clean</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="save_button">
+          <property name="text">
+           <string>Save</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="">
+       <property name="geometry">
+        <rect>
+         <x>25</x>
+         <y>30</y>
+         <width>251</width>
+         <height>226</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <widget class="QLabel" name="select_source_metadata_label">
+          <property name="text">
+           <string>Sources to edit metadata</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QListWidget" name="added_sources_list_widget">
+          <property name="selectionMode">
+           <enum>QAbstractItemView::MultiSelection</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <zorder>added_sources_list_widget</zorder>
+      <zorder>select_source_metadata_label</zorder>
+      <zorder>save_button</zorder>
+      <zorder>clean_button</zorder>
+      <zorder>default_button</zorder>
+      <zorder>formLayoutWidget_2</zorder>
+     </widget>
+     <widget class="QWidget" name="upload_tab">
+      <attribute name="title">
+       <string>Upload</string>
+      </attribute>
+      <widget class="QWidget" name="">
+       <property name="geometry">
+        <rect>
+         <x>25</x>
+         <y>30</y>
+         <width>258</width>
+         <height>221</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_8">
+        <item>
+         <widget class="QLabel" name="review_metadata_label">
+          <property name="text">
+           <string>Review the full metadata</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTextBrowser" name="metadata_review_browser"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="">
+       <property name="geometry">
+        <rect>
+         <x>315</x>
+         <y>150</y>
+         <width>226</width>
+         <height>109</height>
+        </rect>
+       </property>
+       <layout class="QFormLayout" name="formLayout_2">
+        <property name="fieldGrowthPolicy">
+         <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+        </property>
+        <property name="verticalSpacing">
+         <number>2</number>
+        </property>
+        <item row="0" column="0">
+         <widget class="QLabel" name="storage_label">
+          <property name="text">
+           <string>Storage</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QComboBox" name="storage_combo_box">
+          <item>
+           <property name="text">
+            <string>OAM S3 bucket</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Digital Globe</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="key_id_label">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>Key-id</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="key_id_edit"/>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="secret_key_label">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>Secret key</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLineEdit" name="secret_key_edit"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="url_label">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Url</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="url_edit">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="">
+       <property name="geometry">
+        <rect>
+         <x>315</x>
+         <y>30</y>
+         <width>226</width>
+         <height>95</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <widget class="QCheckBox" name="notify_oam_check">
+          <property name="text">
+           <string>Notify OAM of new resource</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="trigger_tiling_check">
+          <property name="text">
+           <string>Trigger OAM tile service</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="reproject_check">
+          <property name="text">
+           <string>Reproject to EPSG:3857</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="convert_geotiff_rgb_check">
+          <property name="text">
+           <string>Convert format to GeoTIFF RGB</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="">
+       <property name="geometry">
+        <rect>
+         <x>575</x>
+         <y>70</y>
+         <width>87</width>
+         <height>95</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <item>
+         <widget class="QPushButton" name="cancel_button">
+          <property name="text">
+           <string>Cancel</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="final_save_button">
+          <property name="text">
+           <string>Save</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="upload_button">
+          <property name="text">
+           <string>Upload</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <zorder>metadata_review_browser</zorder>
+      <zorder>notify_oam_check</zorder>
+      <zorder>trigger_tiling_check</zorder>
+      <zorder>reproject_check</zorder>
+      <zorder>convert_geotiff_rgb_check</zorder>
+      <zorder>key_id_label</zorder>
+      <zorder>storage_combo_box</zorder>
+      <zorder>storage_label</zorder>
+      <zorder>key_id_edit</zorder>
+      <zorder>review_metadata_label</zorder>
+      <zorder>upload_button</zorder>
+      <zorder>cancel_button</zorder>
+      <zorder>secret_key_edit</zorder>
+      <zorder>secret_key_label</zorder>
+      <zorder>final_save_button</zorder>
+     </widget>
     </widget>
-    <widget class="QLabel" name="file_label">
-     <property name="geometry">
-      <rect>
-       <x>25</x>
-       <y>65</y>
-       <width>46</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="text">
-      <string>File</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="source_file_edit">
-     <property name="geometry">
-      <rect>
-       <x>60</x>
-       <y>60</y>
-       <width>151</width>
-       <height>26</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QToolButton" name="file_tool_button">
-     <property name="geometry">
-      <rect>
-       <x>220</x>
-       <y>60</y>
-       <width>31</width>
-       <height>26</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>...</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="select_source_label">
-     <property name="geometry">
-      <rect>
-       <x>25</x>
-       <y>25</y>
-       <width>226</width>
-       <height>26</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Imagery sources to be added</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="up_source_button">
-     <property name="geometry">
-      <rect>
-       <x>275</x>
-       <y>150</y>
-       <width>41</width>
-       <height>27</height>
-      </rect>
-     </property>
-     <property name="cursor">
-      <cursorShape>ArrowCursor</cursorShape>
-     </property>
-     <property name="text">
-      <string>Up</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="down_source_button">
-     <property name="geometry">
-      <rect>
-       <x>275</x>
-       <y>180</y>
-       <width>41</width>
-       <height>27</height>
-      </rect>
-     </property>
-     <property name="cursor">
-      <cursorShape>ArrowCursor</cursorShape>
-     </property>
-     <property name="text">
-      <string>Down</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="add_source_button">
-     <property name="geometry">
-      <rect>
-       <x>275</x>
-       <y>90</y>
-       <width>41</width>
-       <height>27</height>
-      </rect>
-     </property>
-     <property name="cursor">
-      <cursorShape>ArrowCursor</cursorShape>
-     </property>
-     <property name="text">
-      <string>&gt;</string>
-     </property>
-    </widget>
-    <widget class="QListWidget" name="sources_list_widget">
-     <property name="geometry">
-      <rect>
-       <x>330</x>
-       <y>65</y>
-       <width>236</width>
-       <height>171</height>
-      </rect>
-     </property>
-     <property name="selectionMode">
-      <enum>QAbstractItemView::MultiSelection</enum>
-     </property>
-    </widget>
-    <widget class="QListWidget" name="layers_list_widget">
-     <property name="geometry">
-      <rect>
-       <x>25</x>
-       <y>125</y>
-       <width>226</width>
-       <height>111</height>
-      </rect>
-     </property>
-     <property name="selectionMode">
-      <enum>QAbstractItemView::MultiSelection</enum>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label">
-     <property name="geometry">
-      <rect>
-       <x>25</x>
-       <y>100</y>
-       <width>136</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Loaded layers</string>
-     </property>
-    </widget>
-    <widget class="QScrollBar" name="layers_vertical_scroll">
-     <property name="geometry">
-      <rect>
-       <x>235</x>
-       <y>125</y>
-       <width>16</width>
-       <height>111</height>
-      </rect>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-    <widget class="QScrollBar" name="sources_vertical_scroll">
-     <property name="geometry">
-      <rect>
-       <x>550</x>
-       <y>65</y>
-       <width>16</width>
-       <height>171</height>
-      </rect>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-    <zorder>sources_list_widget</zorder>
-    <zorder>remove_source_button</zorder>
-    <zorder>file_label</zorder>
-    <zorder>source_file_edit</zorder>
-    <zorder>file_tool_button</zorder>
-    <zorder>select_source_label</zorder>
-    <zorder>up_source_button</zorder>
-    <zorder>down_source_button</zorder>
-    <zorder>add_source_button</zorder>
-    <zorder>layers_list_widget</zorder>
-    <zorder>label</zorder>
-    <zorder>layers_vertical_scroll</zorder>
-    <zorder>sources_vertical_scroll</zorder>
-   </widget>
-   <widget class="QWidget" name="metadata_tab">
-    <attribute name="title">
-     <string>Metadata</string>
-    </attribute>
-    <widget class="QLabel" name="title_label">
-     <property name="geometry">
-      <rect>
-       <x>340</x>
-       <y>55</y>
-       <width>59</width>
-       <height>14</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Title:</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="tags_label">
-     <property name="geometry">
-      <rect>
-       <x>335</x>
-       <y>80</y>
-       <width>59</width>
-       <height>14</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Tags:</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="provider_label">
-     <property name="geometry">
-      <rect>
-       <x>315</x>
-       <y>105</y>
-       <width>59</width>
-       <height>14</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Provider:</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="platform_label">
-     <property name="geometry">
-      <rect>
-       <x>315</x>
-       <y>130</y>
-       <width>59</width>
-       <height>14</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Platform:</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="sensor_label">
-     <property name="geometry">
-      <rect>
-       <x>320</x>
-       <y>155</y>
-       <width>59</width>
-       <height>14</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Sensor:</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="license_label">
-     <property name="geometry">
-      <rect>
-       <x>320</x>
-       <y>180</y>
-       <width>59</width>
-       <height>14</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>License:</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="website_label">
-     <property name="geometry">
-      <rect>
-       <x>315</x>
-       <y>205</y>
-       <width>59</width>
-       <height>14</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Website:</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="contact_label">
-     <property name="geometry">
-      <rect>
-       <x>315</x>
-       <y>230</y>
-       <width>59</width>
-       <height>14</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Contact:</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="title_edit">
-     <property name="geometry">
-      <rect>
-       <x>380</x>
-       <y>50</y>
-       <width>191</width>
-       <height>22</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="tags_edit">
-     <property name="geometry">
-      <rect>
-       <x>380</x>
-       <y>75</y>
-       <width>191</width>
-       <height>22</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="provider_edit">
-     <property name="geometry">
-      <rect>
-       <x>380</x>
-       <y>100</y>
-       <width>191</width>
-       <height>22</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="platform_edit">
-     <property name="geometry">
-      <rect>
-       <x>380</x>
-       <y>125</y>
-       <width>191</width>
-       <height>22</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="sensor_edit">
-     <property name="geometry">
-      <rect>
-       <x>380</x>
-       <y>150</y>
-       <width>191</width>
-       <height>22</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="license_edit">
-     <property name="geometry">
-      <rect>
-       <x>380</x>
-       <y>175</y>
-       <width>191</width>
-       <height>22</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="website_edit">
-     <property name="geometry">
-      <rect>
-       <x>380</x>
-       <y>200</y>
-       <width>191</width>
-       <height>22</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="contact_edit">
-     <property name="geometry">
-      <rect>
-       <x>380</x>
-       <y>225</y>
-       <width>191</width>
-       <height>22</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="select_source_metadata_label">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>20</y>
-       <width>231</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Select sources to edit metadata</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="save_button">
-     <property name="geometry">
-      <rect>
-       <x>315</x>
-       <y>255</y>
-       <width>71</width>
-       <height>27</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Save</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="clean_button">
-     <property name="geometry">
-      <rect>
-       <x>395</x>
-       <y>255</y>
-       <width>76</width>
-       <height>27</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Clean</string>
-     </property>
-    </widget>
-    <widget class="QScrollBar" name="list_sources_scroll_bar">
-     <property name="geometry">
-      <rect>
-       <x>240</x>
-       <y>50</y>
-       <width>20</width>
-       <height>216</height>
-      </rect>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-    <widget class="QListWidget" name="added_sources_list_widget">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>50</y>
-       <width>221</width>
-       <height>216</height>
-      </rect>
-     </property>
-     <property name="selectionMode">
-      <enum>QAbstractItemView::MultiSelection</enum>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="default_button">
-     <property name="geometry">
-      <rect>
-       <x>478</x>
-       <y>255</y>
-       <width>91</width>
-       <height>27</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Default</string>
-     </property>
-    </widget>
-    <zorder>added_sources_list_widget</zorder>
-    <zorder>title_label</zorder>
-    <zorder>tags_label</zorder>
-    <zorder>provider_label</zorder>
-    <zorder>platform_label</zorder>
-    <zorder>sensor_label</zorder>
-    <zorder>license_label</zorder>
-    <zorder>website_label</zorder>
-    <zorder>contact_label</zorder>
-    <zorder>title_edit</zorder>
-    <zorder>tags_edit</zorder>
-    <zorder>provider_edit</zorder>
-    <zorder>platform_edit</zorder>
-    <zorder>sensor_edit</zorder>
-    <zorder>license_edit</zorder>
-    <zorder>website_edit</zorder>
-    <zorder>contact_edit</zorder>
-    <zorder>select_source_metadata_label</zorder>
-    <zorder>save_button</zorder>
-    <zorder>clean_button</zorder>
-    <zorder>list_sources_scroll_bar</zorder>
-    <zorder>default_button</zorder>
-   </widget>
-   <widget class="QWidget" name="upload_tab">
-    <attribute name="title">
-     <string>Upload</string>
-    </attribute>
-    <widget class="QCheckBox" name="notify_oam_check">
-     <property name="geometry">
-      <rect>
-       <x>305</x>
-       <y>50</y>
-       <width>251</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Notify OAM of new resource</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="trigger_tiling_check">
-     <property name="geometry">
-      <rect>
-       <x>305</x>
-       <y>75</y>
-       <width>226</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Trigger OAM tile service</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="reproject_check">
-     <property name="geometry">
-      <rect>
-       <x>305</x>
-       <y>100</y>
-       <width>231</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Reproject to EPSG:3857</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="convert_geotiff_rgb_check">
-     <property name="geometry">
-      <rect>
-       <x>305</x>
-       <y>125</y>
-       <width>226</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Convert format to GeoTIFF RGB</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="key_id_label">
-     <property name="geometry">
-      <rect>
-       <x>310</x>
-       <y>195</y>
-       <width>58</width>
-       <height>14</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="text">
-      <string>Key-id:</string>
-     </property>
-    </widget>
-    <widget class="QComboBox" name="storage_combo_box">
-     <property name="geometry">
-      <rect>
-       <x>385</x>
-       <y>160</y>
-       <width>191</width>
-       <height>22</height>
-      </rect>
-     </property>
-     <item>
-      <property name="text">
-       <string>OAM S3 bucket</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Digital Globe</string>
-      </property>
-     </item>
-    </widget>
-    <widget class="QLabel" name="storage_label">
-     <property name="geometry">
-      <rect>
-       <x>310</x>
-       <y>165</y>
-       <width>61</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Storage</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="key_id_edit">
-     <property name="geometry">
-      <rect>
-       <x>385</x>
-       <y>185</y>
-       <width>191</width>
-       <height>26</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QScrollBar" name="metadata_review_scroll_bar">
-     <property name="geometry">
-      <rect>
-       <x>250</x>
-       <y>55</y>
-       <width>20</width>
-       <height>211</height>
-      </rect>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-    </widget>
-    <widget class="QLabel" name="review_metadata_label">
-     <property name="geometry">
-      <rect>
-       <x>35</x>
-       <y>20</y>
-       <width>226</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Review below the full metadata file</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="upload_button">
-     <property name="geometry">
-      <rect>
-       <x>330</x>
-       <y>255</y>
-       <width>89</width>
-       <height>27</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Upload</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="cancel_button">
-     <property name="geometry">
-      <rect>
-       <x>445</x>
-       <y>255</y>
-       <width>89</width>
-       <height>27</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Cancel</string>
-     </property>
-    </widget>
-    <widget class="QLineEdit" name="secret_key_edit">
-     <property name="geometry">
-      <rect>
-       <x>385</x>
-       <y>215</y>
-       <width>191</width>
-       <height>26</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QLabel" name="secret_key_label">
-     <property name="geometry">
-      <rect>
-       <x>310</x>
-       <y>220</y>
-       <width>76</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="text">
-      <string>Secret key</string>
-     </property>
-    </widget>
-    <widget class="QTextBrowser" name="metadata_review_browser">
-     <property name="geometry">
-      <rect>
-       <x>25</x>
-       <y>55</y>
-       <width>241</width>
-       <height>211</height>
-      </rect>
-     </property>
-    </widget>
-    <zorder>metadata_review_browser</zorder>
-    <zorder>notify_oam_check</zorder>
-    <zorder>trigger_tiling_check</zorder>
-    <zorder>reproject_check</zorder>
-    <zorder>convert_geotiff_rgb_check</zorder>
-    <zorder>key_id_label</zorder>
-    <zorder>storage_combo_box</zorder>
-    <zorder>storage_label</zorder>
-    <zorder>key_id_edit</zorder>
-    <zorder>metadata_review_scroll_bar</zorder>
-    <zorder>review_metadata_label</zorder>
-    <zorder>upload_button</zorder>
-    <zorder>cancel_button</zorder>
-    <zorder>secret_key_edit</zorder>
-    <zorder>secret_key_label</zorder>
-   </widget>
-  </widget>
+   </item>
+  </layout>
+  <zorder>tab_widget</zorder>
+  <zorder></zorder>
  </widget>
  <resources/>
  <connections/>

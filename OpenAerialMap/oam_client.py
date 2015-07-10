@@ -21,12 +21,14 @@
  ***************************************************************************/
 """
 from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication 
-from PyQt4.QtGui import QAction, QIcon, QMessageBox, QFileDialog, QListWidgetItem
+from PyQt4.QtGui import QAction, QIcon, QMessageBox, QFileDialog, QListWidgetItem, QSizePolicy, QGridLayout, QPushButton
+from qgis.gui import QgsMessageBar
+from qgis.core import QgsMapLayer
 # Initialize Qt resources from file resources.py
 import resources_rc
 # Import the code for the dialog
 from oam_client_dialog import OpenAerialMapDialog
-import os, sys, math
+import os, sys, math, imghdr
 # Import modules needed for upload
 from boto.s3.connection import S3Connection
 from boto.s3.key import Key
@@ -70,6 +72,10 @@ class OpenAerialMap:
         # TODO: We are going to let the user set this up in a future iteration
         self.toolbar = self.iface.addToolBar(u'OpenAerialMap')
         self.toolbar.setObjectName(u'OpenAerialMap')
+
+        self.dlg.bar = QgsMessageBar()
+        self.dlg.bar.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
+        self.dlg.layout().addWidget(self.dlg.bar)
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -207,6 +213,7 @@ class OpenAerialMap:
             item.setText(layer.name())
             item.setData(32, layer.dataProvider().dataSourceUri()) # 32 = Qt::UserRole, The first role that can be used for application-specific purposes
             self.dlg.layers_list_widget.addItem(item)
+        self.dlg.bar.pushMessage("Loaded layers", "All layer are loaded, please select your sources", level=QgsMessageBar.INFO)
 
     def closeDialog(self):
         self.dlg.close()
@@ -215,19 +222,43 @@ class OpenAerialMap:
         selected_file = QFileDialog.getOpenFileName(self.dlg, 'Select File', os.path.expanduser("~"))
         self.dlg.source_file_edit.setText(selected_file)
 
+    def validateFile(self,file_name):
+        if not os.path.isfile(file_name):
+            self.dlg.bar.pushMessage("Invalid", "The file %s does not exist" % file_name, level=QgsMessageBar.CRITICAL)
+            return 0
+        elif not imghdr.what(file_name):
+            self.dlg.bar.pushMessage("Invalid", "The file %s is not a supported data source" % file_name, level=QgsMessageBar.CRITICAL)
+            return 0
+        else:
+            return 1
+
+    def validateLayer(self,layer_name):
+        all_layers = self.iface.mapCanvas().layers()
+        for layer in all_layers:
+            if layer_name == layer.name():
+                if layer.type() == QgsMapLayer.VectorLayer:
+                    self.dlg.bar.pushMessage("Invalid", "Vector layers can not be selected for upload", level=QgsMessageBar.CRITICAL)
+                    return 0
+                else:
+                    return 1
+
     def addSources(self):
         file_name = self.dlg.source_file_edit.text()
         selected_layers = self.dlg.layers_list_widget.selectedItems()
+        if not file_name and not selected_layers:
+            self.dlg.bar.pushMessage('Invalid', 'Please select a layer or file to be added', level=QgsMessageBar.WARNING)
         if file_name:
-            item = QListWidgetItem()
-            item.setText(os.path.basename(file_name))
-            item.setData(32, file_name) # 32 = Qt::UserRole, The first role that can be used for application-specific purposes
-            self.dlg.sources_list_widget.addItem(item)
-            self.dlg.source_file_edit.setText('')
+            if self.validateFile(file_name):
+                item = QListWidgetItem()
+                item.setText(os.path.basename(file_name))
+                item.setData(32, file_name) # 32 = Qt::UserRole, The first role that can be used for application-specific purposes
+                self.dlg.sources_list_widget.addItem(item)
+                self.dlg.source_file_edit.setText('')
         if selected_layers:
             for item in selected_layers:
-                self.dlg.layers_list_widget.takeItem(self.dlg.layers_list_widget.row(item))
-                self.dlg.sources_list_widget.addItem(item)
+                if self.validateLayer(item.text()):
+                    self.dlg.layers_list_widget.takeItem(self.dlg.layers_list_widget.row(item))
+                    self.dlg.sources_list_widget.addItem(item)
                    
 
     def removeSources(self):
@@ -239,6 +270,8 @@ class OpenAerialMap:
                 for layer in all_layers:
                     if item.text() == layer.name():
                         self.dlg.layers_list_widget.addItem(item)
+        else:
+            self.dlg.bar.pushMessage('Invalid', 'Please select a source to be removed', level=QgsMessageBar.WARNING)
 
     def upSource(self):
         selected_layers = self.dlg.sources_list_widget.selectedItems()
@@ -269,7 +302,7 @@ class OpenAerialMap:
         
         connection = S3Connection(bucket_key,bucket_secret)
         bucket = connection.get_bucket(bucket_name)
-        QMessageBox.information(self.iface.mainWindow(),'Uploading...','The upload is about to start')
+        self.dlg.bar.pushMessage('Info:', 'The upload is about to start', level=QgsMessageBar.INFO)
 
         for index in xrange(self.dlg.sources_list_widget.count()):
             file_path = str(self.dlg.sources_list_widget.item(index).data(32))
@@ -297,7 +330,7 @@ class OpenAerialMap:
         
         # Finish the upload
         multipart.complete_upload()
-        QMessageBox.information(self.iface.mainWindow(),'Upload succeeded', 'Uploaded file \"%s\"' % file_path)
+        self.dlg.bar.pushMessage('Succeeded:', 'Uploaded file \"%s\"' % file_path, level=QgsMessageBar.SUCCESS)
 
     def run(self):
         """Run method that performs all the real work"""
