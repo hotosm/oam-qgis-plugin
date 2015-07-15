@@ -21,7 +21,8 @@
  ***************************************************************************/
 """
 from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication 
-from PyQt4.QtGui import QAction, QIcon, QMessageBox, QFileDialog, QListWidgetItem, QSizePolicy, QGridLayout, QPushButton
+from PyQt4.QtGui import QAction, QIcon, QMessageBox, QFileDialog, QListWidgetItem, QSizePolicy, QGridLayout, QPushButton, QProgressBar
+from PyQt4.Qt import *
 from qgis.gui import QgsMessageBar
 from qgis.core import QgsMapLayer
 # Initialize Qt resources from file resources.py
@@ -34,6 +35,7 @@ from boto.s3.connection import S3Connection, S3ResponseError
 from boto.s3.key import Key
 from filechunkio import FileChunkIO
 from osgeo import gdal, osr
+import time
 
 class OpenAerialMap:
     """QGIS Plugin Implementation."""
@@ -371,7 +373,7 @@ class OpenAerialMap:
             self.dlg.specify_edit.setEnabled(0)
 
     def uploadS3(self):
-        if self.dlg.storage_combo_box == 0:
+        if self.dlg.storage_combo_box.currentIndex() == 0:
             bucket_name = 'oam-qgis-plugin-test'
         else:
             bucket_name = str(self.dlg.specify_edit.text())
@@ -386,11 +388,8 @@ class OpenAerialMap:
             for index in xrange(self.dlg.sources_list_widget.count()):
                 file_path = str(self.dlg.sources_list_widget.item(index).data(32))
                 self.uploadFile(file_path,bucket)
-
         except S3ResponseError:
             self.dlg.bar.pushMessage('Connection error', 'please check your connectivity and credentials', level=QgsMessageBar.CRITICAL)
-        except:
-            self.dlg.bar.pushMessage('Unexpected error', sys.exc_info()[0], level=QgsMessageBar.CRITICAL)
 
     def uploadFile(self,file_path,bucket): 
         
@@ -405,12 +404,20 @@ class OpenAerialMap:
         # that points to a certain byte range within the original file. We
         # set bytes to never exceed the original file size.
         self.dlg.bar.pushMessage('Starting upload:', 'file \"%s\"' % file_path, level=QgsMessageBar.INFO)
+        progress = QProgressBar()
+        progress.setMaximum(chunk_count)
+        progress.setAlignment(Qt.AlignLeft|Qt.AlignVCenter)
+        #progressMessageBar = self.dlg.bar.createMessage("Uploading...")
+        #self.dlg.bar.layout().addWidget(progress)
+        self.dlg.bar.pushWidget(progress)
         for i in range(chunk_count):
             offset = chunk_size * i
             bytes = min(chunk_size, file_size - offset)
             with FileChunkIO(file_path, 'r', offset=offset,
                              bytes=bytes) as fp:
                 multipart.upload_part_from_file(fp, part_num=i + 1)
+            time.sleep(1)
+            progress.setValue(i + 1)
         
         # Finish the upload
         multipart.complete_upload()
