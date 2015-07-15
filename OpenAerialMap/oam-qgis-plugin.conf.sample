@@ -1,0 +1,16 @@
+
+[Metadata]
+CONTACT=Full name <e-mail>
+WEBSITE=http://your.website
+
+[Storage]
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+S3_BUCKET_NAME=
+S3_BUCKET_PREFIX=
+
+[Options]
+NOTIFY_OAM=true
+TRIGGER_OAM_TS=true
+REPROJECT=false
+CONVERT_GEOTIFF_RGB=false
