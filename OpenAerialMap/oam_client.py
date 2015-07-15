@@ -30,9 +30,10 @@ import resources_rc
 from oam_client_dialog import OpenAerialMapDialog
 import os, sys, math, imghdr
 # Import modules needed for upload
-from boto.s3.connection import S3Connection
+from boto.s3.connection import S3Connection, S3ResponseError
 from boto.s3.key import Key
 from filechunkio import FileChunkIO
+from osgeo import gdal, osr
 
 class OpenAerialMap:
     """QGIS Plugin Implementation."""
@@ -184,6 +185,8 @@ class OpenAerialMap:
             callback=self.run,
             parent=self.iface.mainWindow())
 
+        self.loadSettings()
+
         # Imagery tab
         self.loadLayers()
         self.dlg.file_tool_button.clicked.connect(self.selectFile)
@@ -192,10 +195,13 @@ class OpenAerialMap:
         self.dlg.up_source_button.clicked.connect(self.upSource)
         self.dlg.down_source_button.clicked.connect(self.downSource)
 
+        # Metadata tab
+        self.dlg.save_button.clicked.connect(self.saveMetadata)
+
         # Upload tab
         self.dlg.upload_button.clicked.connect(self.uploadS3)
         self.dlg.cancel_button.clicked.connect(self.closeDialog)
-        self.dlg.storage_combo_box.currentIndexChanged.connect(self.enableUrl)
+        self.dlg.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
@@ -206,6 +212,41 @@ class OpenAerialMap:
             self.iface.removeToolBarIcon(action)
         # remove the toolbar
         del self.toolbar
+
+    def loadSettings(self):
+        self.settings = QSettings('QGIS','oam-qgis-plugin')
+
+        self.settings.beginGroup("Metadata")
+        self.dlg.contact_edit.setText(self.settings.value('CONTACT'))
+        self.dlg.contact_edit.setCursorPosition(0)
+        self.dlg.website_edit.setText(self.settings.value('WEBSITE'))
+        self.dlg.website_edit.setCursorPosition(0)
+        self.settings.endGroup()
+
+        self.settings.beginGroup("Storage")
+        bucket = self.settings.value('S3_BUCKET_NAME')
+        if bucket:
+            self.dlg.key_id_edit.setText(self.settings.value('AWS_ACCESS_KEY_ID'))
+            self.dlg.key_id_edit.setCursorPosition(0)
+            self.dlg.secret_key_edit.setText(self.settings.value('AWS_SECRET_ACCESS_KEY'))
+            self.dlg.secret_key_edit.setCursorPosition(0)
+            if not bucket == 'oam-qgis-plugin-test':
+                self.dlg.storage_combo_box.setCurrentIndex(1)
+                self.dlg.specify_label.setEnabled(1)
+                self.dlg.specify_edit.setEnabled(1)
+                self.dlg.specify_edit.setText(self.settings.value('S3_BUCKET_NAME'))
+        self.settings.endGroup()
+
+        self.settings.beginGroup("Options")
+        if self.settings.value('NOTIFY_OAM'):
+            self.dlg.notify_oam_check.setCheckState(2)
+        if self.settings.value('TRIGGER_OAM_TS'):
+            self.dlg.trigger_tiling_check.setCheckState(2)
+        if self.settings.value('REPROJECT'):
+            self.dlg.notify_oam_check.setCheckState(2)
+        if self.settings.value('CONVERT_GEOTIFF_RGB'):
+            self.dlg.notify_oam_check.setCheckState(2)
+        self.settings.endGroup()
 
     def loadLayers(self):
         all_layers = self.iface.mapCanvas().layers()
@@ -254,12 +295,14 @@ class OpenAerialMap:
                 item.setText(os.path.basename(file_name))
                 item.setData(32, file_name) # 32 = Qt::UserRole, The first role that can be used for application-specific purposes
                 self.dlg.sources_list_widget.addItem(item)
+                self.dlg.added_sources_list_widget.addItem(item.clone())
                 self.dlg.source_file_edit.setText('')
         if selected_layers:
             for item in selected_layers:
                 if self.validateLayer(item.text()):
                     self.dlg.layers_list_widget.takeItem(self.dlg.layers_list_widget.row(item))
                     self.dlg.sources_list_widget.addItem(item)
+                    self.dlg.added_sources_list_widget.addItem(item.clone())
                    
 
     def removeSources(self):
@@ -292,38 +335,62 @@ class OpenAerialMap:
                 self.dlg.sources_list_widget.insertItem(position+1,item)
                 item.setSelected(1)
 
-    def enableUrl(self):
-        if self.dlg.storage_combo_box.currentIndex() == 1:
-            self.dlg.url_label.setEnabled(1)
-            self.dlg.url_edit.setEnabled(1)
+    def extractMetadata(self,filename):
+        datafile = gdal.Open(filename)
+        # origin
+        geoinformation = datafile.GetGeoTransform()
+        topLeftX = geoinformation[0]
+        topLeftY = geoinformation[3]
+        # projection
+        projInfo = datafile.GetProjection()
+        spatialRef = osr.SpatialReference()
+        spatialRef.ImportFromWkt(projInfo)
+        spatialRefProj = spatialRef.ExportToProj4()
+        print "WKT format: " + str(spatialRef)
+        print "Proj4 format: " + str(spatialRefProj)
+        print "x ",topLeftX
+        print "y ",topLeftY
+
+    def saveMetadata(self):
+        selected_layers = self.dlg.added_sources_list_widget.selectedItems()
+        if selected_layers:
+            for item in selected_layers:
+                filename = item.data(32)
+                print filename
+                self.extractMetadata(filename)
         else:
-            self.dlg.url_label.setEnabled(0)
-            self.dlg.url_edit.setText('')
-            self.dlg.url_edit.setEnabled(0)
+            self.dlg.bar.pushMessage('Invalid', 'Please select a source to save metadata', level=QgsMessageBar.WARNING)
+
+    def enableSpecify(self):
+        if self.dlg.storage_combo_box.currentIndex() == 1:
+            self.dlg.specify_label.setEnabled(1)
+            self.dlg.specify_edit.setEnabled(1)
+        else:
+            self.dlg.specify_label.setEnabled(0)
+            self.dlg.specify_edit.setText('')
+            self.dlg.specify_edit.setEnabled(0)
 
     def uploadS3(self):
         if self.dlg.storage_combo_box == 0:
             bucket_name = 'oam-qgis-plugin-test'
         else:
-            bucket_name = str(self.dlg.url_edit.text())
+            bucket_name = str(self.dlg.specify_edit.text())
             if not bucket_name:
-                self.dlg.bar.pushMessage('Missing storage', 'the bucket must be provided in the format s3://name_of_bucket', level=QgsMessageBar.CRITICAL)
+                self.dlg.bar.pushMessage('Missing storage', 'please provide the bucket for upload', level=QgsMessageBar.CRITICAL)
         bucket_key = str(self.dlg.key_id_edit.text())
         bucket_secret = str(self.dlg.secret_key_edit.text())
-        
-        # uncomment the following lines and fill it in with your key info to bypass the plugin form
-        #bucket_key = ''
-        #bucket_secret = ''
-        
-        connection = S3Connection(bucket_key,bucket_secret)
-        bucket = connection.get_bucket(bucket_name)
-        if not bucket:
-            self.dlg.bar.pushMessage('Missing connection', 'please check your connectivity and credentials', level=QgsMessageBar.CRITICAL)
+       
+        try: 
+            connection = S3Connection(bucket_key,bucket_secret)
+            bucket = connection.get_bucket(bucket_name)
+            for index in xrange(self.dlg.sources_list_widget.count()):
+                file_path = str(self.dlg.sources_list_widget.item(index).data(32))
+                self.uploadFile(file_path,bucket)
 
-        for index in xrange(self.dlg.sources_list_widget.count()):
-            file_path = str(self.dlg.sources_list_widget.item(index).data(32))
-            self.uploadFile(file_path,bucket)
-
+        except S3ResponseError:
+            self.dlg.bar.pushMessage('Connection error', 'please check your connectivity and credentials', level=QgsMessageBar.CRITICAL)
+        except:
+            self.dlg.bar.pushMessage('Unexpected error', sys.exc_info()[0], level=QgsMessageBar.CRITICAL)
 
     def uploadFile(self,file_path,bucket): 
         
@@ -337,6 +404,7 @@ class OpenAerialMap:
         # Send the file parts, using FileChunkIO to create a file-like object
         # that points to a certain byte range within the original file. We
         # set bytes to never exceed the original file size.
+        self.dlg.bar.pushMessage('Starting upload:', 'file \"%s\"' % file_path, level=QgsMessageBar.INFO)
         for i in range(chunk_count):
             offset = chunk_size * i
             bytes = min(chunk_size, file_size - offset)
@@ -346,7 +414,7 @@ class OpenAerialMap:
         
         # Finish the upload
         multipart.complete_upload()
-        self.dlg.bar.pushMessage('Succeeded:', 'Uploaded file \"%s\"' % file_path, level=QgsMessageBar.SUCCESS)
+        self.dlg.bar.pushMessage('Succeeded:', 'Uploaded file \"%s\"' % file_path, level=QgsMessageBar.INFO)
 
     def run(self):
         """Run method that performs all the real work"""

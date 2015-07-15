@@ -172,9 +172,9 @@
       <widget class="QWidget" name="formLayoutWidget_2">
        <property name="geometry">
         <rect>
-         <x>300</x>
+         <x>280</x>
          <y>30</y>
-         <width>251</width>
+         <width>271</width>
          <height>226</height>
         </rect>
        </property>
@@ -253,7 +253,11 @@
          </widget>
         </item>
         <item row="6" column="1">
-         <widget class="QLineEdit" name="contact_edit"/>
+         <widget class="QLineEdit" name="contact_edit">
+          <property name="cursorPosition">
+           <number>0</number>
+          </property>
+         </widget>
         </item>
         <item row="7" column="0">
          <widget class="QLabel" name="website_label">
@@ -271,9 +275,9 @@
        <property name="geometry">
         <rect>
          <x>580</x>
-         <y>75</y>
-         <width>81</width>
-         <height>128</height>
+         <y>85</y>
+         <width>87</width>
+         <height>91</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -281,13 +285,6 @@
          <widget class="QPushButton" name="default_button">
           <property name="text">
            <string>Default</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="as_previous_button">
-          <property name="text">
-           <string>As previous</string>
           </property>
          </widget>
         </item>
@@ -312,7 +309,7 @@
         <rect>
          <x>25</x>
          <y>30</y>
-         <width>251</width>
+         <width>226</width>
          <height>226</height>
         </rect>
        </property>
@@ -369,9 +366,9 @@
       <widget class="QWidget" name="">
        <property name="geometry">
         <rect>
-         <x>315</x>
-         <y>150</y>
-         <width>231</width>
+         <x>310</x>
+         <y>145</y>
+         <width>246</width>
          <height>109</height>
         </rect>
        </property>
@@ -385,12 +382,18 @@
         <item row="0" column="0">
          <widget class="QLabel" name="storage_label">
           <property name="text">
-           <string>Storage</string>
+           <string>AWS Bucket</string>
           </property>
          </widget>
         </item>
         <item row="0" column="1">
          <widget class="QComboBox" name="storage_combo_box">
+          <property name="editable">
+           <bool>false</bool>
+          </property>
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
           <item>
            <property name="text">
             <string>oam-qgis-plugin-test</string>
@@ -430,19 +433,22 @@
          <widget class="QLineEdit" name="secret_key_edit"/>
         </item>
         <item row="1" column="0">
-         <widget class="QLabel" name="url_label">
+         <widget class="QLabel" name="specify_label">
           <property name="enabled">
            <bool>false</bool>
           </property>
           <property name="text">
-           <string>Url</string>
+           <string>   Specify</string>
           </property>
          </widget>
         </item>
         <item row="1" column="1">
-         <widget class="QLineEdit" name="url_edit">
+         <widget class="QLineEdit" name="specify_edit">
           <property name="enabled">
            <bool>false</bool>
+          </property>
+          <property name="text">
+           <string/>
           </property>
          </widget>
         </item>
