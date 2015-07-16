@@ -78,6 +78,7 @@ class OpenAerialMap:
 
         self.dlg.bar = QgsMessageBar()
         self.dlg.bar.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
+        #self.dlg.bar.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         self.dlg.layout().addWidget(self.dlg.bar)
 
     # noinspection PyMethodMayBeStatic
@@ -202,7 +203,7 @@ class OpenAerialMap:
 
         # Upload tab
         self.dlg.upload_button.clicked.connect(self.uploadS3)
-        self.dlg.cancel_button.clicked.connect(self.closeDialog)
+        self.dlg.quit_button.clicked.connect(self.closeDialog)
         self.dlg.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)
 
     def unload(self):
@@ -407,16 +408,16 @@ class OpenAerialMap:
         progress = QProgressBar()
         progress.setMaximum(chunk_count)
         progress.setAlignment(Qt.AlignLeft|Qt.AlignVCenter)
+        self.dlg.bar.pushWidget(progress)
         #progressMessageBar = self.dlg.bar.createMessage("Uploading...")
         #self.dlg.bar.layout().addWidget(progress)
-        self.dlg.bar.pushWidget(progress)
         for i in range(chunk_count):
             offset = chunk_size * i
             bytes = min(chunk_size, file_size - offset)
             with FileChunkIO(file_path, 'r', offset=offset,
                              bytes=bytes) as fp:
                 multipart.upload_part_from_file(fp, part_num=i + 1)
-            time.sleep(1)
+            time.sleep(10)
             progress.setValue(i + 1)
         
         # Finish the upload
