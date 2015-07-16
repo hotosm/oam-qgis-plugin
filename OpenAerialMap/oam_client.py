@@ -25,17 +25,15 @@ from PyQt4.QtGui import QAction, QIcon, QMessageBox, QFileDialog, QListWidgetIte
 from PyQt4.Qt import *
 from qgis.gui import QgsMessageBar
 from qgis.core import QgsMapLayer
-# Initialize Qt resources from file resources.py
 import resources_rc
-# Import the code for the dialog
 from oam_client_dialog import OpenAerialMapDialog
 import os, sys, math, imghdr
-# Import modules needed for upload
+from osgeo import gdal, osr
+import time
+# Modules needed for upload
 from boto.s3.connection import S3Connection, S3ResponseError
 from boto.s3.key import Key
 from filechunkio import FileChunkIO
-from osgeo import gdal, osr
-import time
 
 class OpenAerialMap:
     """QGIS Plugin Implementation."""
@@ -78,7 +76,6 @@ class OpenAerialMap:
 
         self.dlg.bar = QgsMessageBar()
         self.dlg.bar.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
-        #self.dlg.bar.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         self.dlg.layout().addWidget(self.dlg.bar)
 
     # noinspection PyMethodMayBeStatic
@@ -189,17 +186,20 @@ class OpenAerialMap:
             parent=self.iface.mainWindow())
 
         self.loadSettings()
+        self.loadLayers()
 
         # Imagery tab
-        self.loadLayers()
+        self.dlg.layers_tool_button.clicked.connect(self.loadLayers)
         self.dlg.file_tool_button.clicked.connect(self.selectFile)
         self.dlg.add_source_button.clicked.connect(self.addSources)
         self.dlg.remove_source_button.clicked.connect(self.removeSources)
         self.dlg.up_source_button.clicked.connect(self.upSource)
         self.dlg.down_source_button.clicked.connect(self.downSource)
+        self.dlg.imagery_next_button.clicked.connect(self.nextTab)
 
         # Metadata tab
         self.dlg.save_button.clicked.connect(self.saveMetadata)
+        self.dlg.metadata_next_button.clicked.connect(self.nextTab)
 
         # Upload tab
         self.dlg.upload_button.clicked.connect(self.uploadS3)
@@ -337,6 +337,9 @@ class OpenAerialMap:
                 item = self.dlg.sources_list_widget.takeItem(position)
                 self.dlg.sources_list_widget.insertItem(position+1,item)
                 item.setSelected(1)
+
+    def nextTab(self):
+        self.dlg.tab_widget.setCurrentIndex(self.dlg.tab_widget.currentIndex()+1)
 
     def extractMetadata(self,filename):
         datafile = gdal.Open(filename)
