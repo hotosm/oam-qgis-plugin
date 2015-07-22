@@ -30,6 +30,7 @@ from oam_client_dialog import OpenAerialMapDialog
 import os, sys, math, imghdr
 from osgeo import gdal, osr
 import time
+import json
 # Modules needed for upload
 from boto.s3.connection import S3Connection, S3ResponseError
 from boto.s3.key import Key
@@ -70,13 +71,13 @@ class OpenAerialMap:
         # Declare instance attributes
         self.actions = []
         self.menu = self.tr(u'&Open Aerial Map (OAM)')
-        # TODO: We are going to let the user set this up in a future iteration
         self.toolbar = self.iface.addToolBar(u'OpenAerialMap')
         self.toolbar.setObjectName(u'OpenAerialMap')
-
         self.dlg.bar = QgsMessageBar()
         self.dlg.bar.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         self.dlg.layout().addWidget(self.dlg.bar)
+        self.settings = QSettings('QGIS','oam-qgis-plugin')
+        self.metadata = {}
 
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
@@ -185,10 +186,14 @@ class OpenAerialMap:
             callback=self.run,
             parent=self.iface.mainWindow())
 
-        self.loadSettings()
+        # Load widgets
         self.loadLayers()
+        self.loadMetadataSettings()
+        self.loadStorageSettings()
+        self.loadOptionsSettings()
+        self.loadFullMetadata()
 
-        # Imagery tab
+        # Imagery tab connections
         self.dlg.layers_tool_button.clicked.connect(self.loadLayers)
         self.dlg.file_tool_button.clicked.connect(self.selectFile)
         self.dlg.add_source_button.clicked.connect(self.addSources)
@@ -197,14 +202,22 @@ class OpenAerialMap:
         self.dlg.down_source_button.clicked.connect(self.downSource)
         self.dlg.imagery_next_button.clicked.connect(self.nextTab)
 
-        # Metadata tab
+        # Metadata tab connections
+	self.dlg.sense_start_edit.setCalendarPopup(1)
+        self.dlg.sense_start_edit.setDisplayFormat('dd.MM.yyyy HH:mm')
+        self.dlg.sense_end_edit.setCalendarPopup(1)
+        self.dlg.sense_end_edit.setDisplayFormat('dd.MM.yyyy HH:mm')
+        self.dlg.default_button.clicked.connect(self.loadMetadataSettings)
+        self.dlg.clean_button.clicked.connect(self.cleanMetadataSettings)
         self.dlg.save_button.clicked.connect(self.saveMetadata)
         self.dlg.metadata_next_button.clicked.connect(self.nextTab)
+        self.dlg.metadata_previous_button.clicked.connect(self.previousTab)
 
-        # Upload tab
+        # Upload tab connections
         self.dlg.upload_button.clicked.connect(self.uploadS3)
         self.dlg.quit_button.clicked.connect(self.closeDialog)
         self.dlg.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)
+        self.dlg.upload_previous_button.clicked.connect(self.previousTab)
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
@@ -213,33 +226,60 @@ class OpenAerialMap:
                 self.tr(u'&Open Aerial Map (OAM)'),
                 action)
             self.iface.removeToolBarIcon(action)
-        # remove the toolbar
         del self.toolbar
 
-    def loadSettings(self):
-        self.settings = QSettings('QGIS','oam-qgis-plugin')
+    def cleanMetadataSettings(self):
+        self.dlg.title_edit.setText('')
+        self.dlg.platform_combo_box.setCurrentIndex(0)
+        self.dlg.sensor_edit.setText('')
+        self.dlg.sense_start_edit.setDate(QDateTime().fromString('1970-01-01T00:00:00',Qt.ISODate).date())
+        self.dlg.sense_start_edit.setTime(QDateTime().fromString('1970-01-01T00:00:00',Qt.ISODate).time())
+        self.dlg.sense_end_edit.setDate(QDateTime().fromString('1970-01-01T00:00:00',Qt.ISODate).date())
+        self.dlg.sense_end_edit.setTime(QDateTime().fromString('1970-01-01T00:00:00',Qt.ISODate).time())
+        self.dlg.tags_edit.setText('')
+        self.dlg.provider_edit.setText('')
+        self.dlg.contact_edit.setText('')
+        self.dlg.website_edit.setText('')
 
+    def loadMetadataSettings(self):
         self.settings.beginGroup("Metadata")
+        self.dlg.title_edit.setText(self.settings.value('TITLE'))
+        self.dlg.title_edit.setCursorPosition(0)
+        self.dlg.platform_combo_box.setCurrentIndex(int(self.settings.value('PLATFORM')))
+        self.dlg.sensor_edit.setText(self.settings.value('SENSOR'))
+        self.dlg.sensor_edit.setCursorPosition(0)
+        self.dlg.sense_start_edit.setDate(QDateTime.fromString(self.settings.value('SENSE_START'), Qt.ISODate).date())
+        self.dlg.sense_start_edit.setTime(QDateTime.fromString(self.settings.value('SENSE_START'), Qt.ISODate).time())
+        self.dlg.sense_end_edit.setDate(QDateTime.fromString(self.settings.value('SENSE_END'), Qt.ISODate).date())
+        self.dlg.sense_end_edit.setTime(QDateTime.fromString(self.settings.value('SENSE_END'), Qt.ISODate).time())
+        self.dlg.tags_edit.setText(', '.join(self.settings.value('TAGS')))
+        self.dlg.tags_edit.setCursorPosition(0)
+        self.dlg.provider_edit.setText(self.settings.value('PROVIDER'))
+        self.dlg.provider_edit.setCursorPosition(0)
         self.dlg.contact_edit.setText(self.settings.value('CONTACT'))
         self.dlg.contact_edit.setCursorPosition(0)
         self.dlg.website_edit.setText(self.settings.value('WEBSITE'))
         self.dlg.website_edit.setCursorPosition(0)
         self.settings.endGroup()
 
+    def loadStorageSettings(self):
         self.settings.beginGroup("Storage")
         bucket = self.settings.value('S3_BUCKET_NAME')
-        if bucket:
-            self.dlg.key_id_edit.setText(self.settings.value('AWS_ACCESS_KEY_ID'))
-            self.dlg.key_id_edit.setCursorPosition(0)
-            self.dlg.secret_key_edit.setText(self.settings.value('AWS_SECRET_ACCESS_KEY'))
-            self.dlg.secret_key_edit.setCursorPosition(0)
-            if not bucket == 'oam-qgis-plugin-test':
-                self.dlg.storage_combo_box.setCurrentIndex(1)
-                self.dlg.specify_label.setEnabled(1)
-                self.dlg.specify_edit.setEnabled(1)
-                self.dlg.specify_edit.setText(self.settings.value('S3_BUCKET_NAME'))
+        storage_index = self.dlg.storage_combo_box.findText(bucket,Qt.MatchExactly)
+        if not storage_index == -1:
+            self.dlg.storage_combo_box.setCurrentIndex(storage_index)
+        else:
+            self.dlg.storage_combo_box.setCurrentIndex(self.dlg.storage_combo_box.findText(self.tr('other...')))
+            self.dlg.specify_label.setEnabled(1)
+            self.dlg.specify_edit.setEnabled(1)
+            self.dlg.specify_edit.setText(self.settings.value('S3_BUCKET_NAME'))
+        self.dlg.key_id_edit.setText(self.settings.value('AWS_ACCESS_KEY_ID'))
+        self.dlg.key_id_edit.setCursorPosition(0)
+        self.dlg.secret_key_edit.setText(self.settings.value('AWS_SECRET_ACCESS_KEY'))
+        self.dlg.secret_key_edit.setCursorPosition(0)
         self.settings.endGroup()
 
+    def loadOptionsSettings(self):
         self.settings.beginGroup("Options")
         if self.settings.value('NOTIFY_OAM'):
             self.dlg.notify_oam_check.setCheckState(2)
@@ -254,11 +294,13 @@ class OpenAerialMap:
     def loadLayers(self):
         all_layers = self.iface.mapCanvas().layers()
         for layer in all_layers:
-            item = QListWidgetItem()
-            item.setText(layer.name())
-            item.setData(32, layer.dataProvider().dataSourceUri()) # 32 = Qt::UserRole, The first role that can be used for application-specific purposes
-            self.dlg.layers_list_widget.addItem(item)
-        self.dlg.bar.pushMessage("Loaded layers", "All layer are loaded, please select your sources", level=QgsMessageBar.INFO)
+            if not self.dlg.layers_list_widget.findItems(layer.name(),Qt.MatchExactly):
+                item = QListWidgetItem()
+                item.setText(layer.name())
+                item.setData(Qt.UserRole, layer.dataProvider().dataSourceUri())
+                self.dlg.layers_list_widget.addItem(item)
+        self.dlg.bar.clearWidgets()
+        self.dlg.bar.pushMessage("Ready to go", "please select the source imagery for upload", level=QgsMessageBar.INFO)
 
     def closeDialog(self):
         self.dlg.close()
@@ -267,12 +309,14 @@ class OpenAerialMap:
         selected_file = QFileDialog.getOpenFileName(self.dlg, 'Select File', os.path.expanduser("~"))
         self.dlg.source_file_edit.setText(selected_file)
 
-    def validateFile(self,file_name):
-        if not os.path.isfile(file_name):
-            self.dlg.bar.pushMessage("Invalid", "The file %s does not exist" % file_name, level=QgsMessageBar.CRITICAL)
+    def validateFile(self,filename):
+        if not os.path.isfile(filename):
+            self.dlg.bar.clearWidgets()
+            self.dlg.bar.pushMessage("Invalid", "The file %s does not exist" % filename, level=QgsMessageBar.CRITICAL)
             return 0
-        elif not imghdr.what(file_name):
-            self.dlg.bar.pushMessage("Invalid", "The file %s is not a supported data source" % file_name, level=QgsMessageBar.CRITICAL)
+        elif not imghdr.what(filename):
+            self.dlg.bar.clearWidgets()
+            self.dlg.bar.pushMessage("Invalid", "The file %s is not a supported data source" % filename, level=QgsMessageBar.CRITICAL)
             return 0
         else:
             return 1
@@ -282,42 +326,54 @@ class OpenAerialMap:
         for layer in all_layers:
             if layer_name == layer.name():
                 if layer.type() == QgsMapLayer.VectorLayer:
+                    self.dlg.bar.clearWidgets()
                     self.dlg.bar.pushMessage("Invalid", "Vector layers can not be selected for upload", level=QgsMessageBar.CRITICAL)
                     return 0
                 else:
                     return 1
 
     def addSources(self):
-        file_name = self.dlg.source_file_edit.text()
+        filename = self.dlg.source_file_edit.text()
         selected_layers = self.dlg.layers_list_widget.selectedItems()
-        if not file_name and not selected_layers:
+        if not filename and not selected_layers:
+            self.dlg.bar.clearWidgets()
             self.dlg.bar.pushMessage('Invalid', 'Please select a layer or file to be added', level=QgsMessageBar.WARNING)
-        if file_name:
-            if self.validateFile(file_name):
-                item = QListWidgetItem()
-                item.setText(os.path.basename(file_name))
-                item.setData(32, file_name) # 32 = Qt::UserRole, The first role that can be used for application-specific purposes
-                self.dlg.sources_list_widget.addItem(item)
-                self.dlg.added_sources_list_widget.addItem(item.clone())
-                self.dlg.source_file_edit.setText('')
+        if filename:
+            if self.validateFile(filename):
+                if not self.dlg.sources_list_widget.findItems(filename,Qt.MatchExactly):
+                    item = QListWidgetItem()
+                    item.setText(os.path.basename(filename))
+                    item.setData(Qt.UserRole, filename)
+                    self.dlg.sources_list_widget.addItem(item)
+                    self.dlg.added_sources_list_widget.addItem(item.clone())
+                    self.dlg.source_file_edit.setText('')
         if selected_layers:
             for item in selected_layers:
                 if self.validateLayer(item.text()):
-                    self.dlg.layers_list_widget.takeItem(self.dlg.layers_list_widget.row(item))
-                    self.dlg.sources_list_widget.addItem(item)
-                    self.dlg.added_sources_list_widget.addItem(item.clone())
-                   
+                    if not self.dlg.sources_list_widget.findItems(item.text(),Qt.MatchExactly):
+                        self.dlg.layers_list_widget.takeItem(self.dlg.layers_list_widget.row(item))
+                        self.dlg.sources_list_widget.addItem(item)
+                        self.dlg.added_sources_list_widget.addItem(item.clone())
+        self.dlg.bar.clearWidgets()
+        self.dlg.bar.pushMessage('Loaded', 'The select sources were added to the upload queue', level=QgsMessageBar.INFO)
+        self.loadFullMetadata()           
 
     def removeSources(self):
-        selected_layers = self.dlg.sources_list_widget.selectedItems()
-        if selected_layers:
-            for item in selected_layers:
+        selected_sources = self.dlg.sources_list_widget.selectedItems()
+        added_sources = self.dlg.added_sources_list_widget.selectedItems()
+        if selected_sources:
+            for item in selected_sources:
                 self.dlg.sources_list_widget.takeItem(self.dlg.sources_list_widget.row(item))
+                added_item = self.dlg.added_sources_list_widget.findItems(item.text(),Qt.MatchExactly)
+                if added_item:
+                    self.dlg.added_sources_list_widget.takeItem(self.dlg.added_sources_list_widget.row(added_item[0]))
                 all_layers = self.iface.mapCanvas().layers()
                 for layer in all_layers:
                     if item.text() == layer.name():
-                        self.dlg.layers_list_widget.addItem(item)
+                        if not self.dlg.layers_list_widget.findItems(item.text(),Qt.MatchExactly):
+                            self.dlg.layers_list_widget.addItem(item)
         else:
+            self.dlg.bar.clearWidgets()
             self.dlg.bar.pushMessage('Invalid', 'Please select a source to be removed', level=QgsMessageBar.WARNING)
 
     def upSource(self):
@@ -341,31 +397,97 @@ class OpenAerialMap:
     def nextTab(self):
         self.dlg.tab_widget.setCurrentIndex(self.dlg.tab_widget.currentIndex()+1)
 
+    def previousTab(self):
+        self.dlg.tab_widget.setCurrentIndex(self.dlg.tab_widget.currentIndex()-1)
+
     def extractMetadata(self,filename):
-        datafile = gdal.Open(filename)
-        # origin
-        geoinformation = datafile.GetGeoTransform()
-        topLeftX = geoinformation[0]
-        topLeftY = geoinformation[3]
+        """Extract filesize, projection, bbox and gsd from image file"""
+
+        self.metadata[filename]['File size'] = os.stat(filename).st_size
+
+        datafile = gdal.Open(filename,gdal.GA_ReadOnly)
+        if datafile is None:
+            self.dlg.bar.clearWidgets()
+            self.dlg.bar.pushMessage('Failed', 'Unable to extract raster metadata', level=QgsMessageBar.CRITICAL)
+
         # projection
         projInfo = datafile.GetProjection()
         spatialRef = osr.SpatialReference()
+        #print "WKT format: " + str(spatialRef)
         spatialRef.ImportFromWkt(projInfo)
         spatialRefProj = spatialRef.ExportToProj4()
-        print "WKT format: " + str(spatialRef)
-        print "Proj4 format: " + str(spatialRefProj)
-        print "x ",topLeftX
-        print "y ",topLeftY
+        #print "Proj4 format: " + str(spatialRefProj)
+        self.metadata[filename]['Projection'] = str(spatialRefProj)
+
+        #bbox
+        print( "Corner Coordinates:" )
+        upper_left = self.GDALInfoReportCorner(datafile,0.0,0.0 );
+        lower_left = self.GDALInfoReportCorner(datafile,0.0,datafile.RasterYSize);
+        upper_right = self.GDALInfoReportCorner(datafile,datafile.RasterXSize,0.0 );
+        lower_right = self.GDALInfoReportCorner(datafile,datafile.RasterXSize,datafile.RasterYSize );
+        center = self.GDALInfoReportCorner(datafile,datafile.RasterXSize/2.0,datafile.RasterYSize/2.0 );
+        self.metadata[filename]['BBOX'] = (upper_left,lower_left,upper_right,lower_right)
+
+    def GDALInfoReportCorner(self,hDataset,x,y):
+        """GDALInfoReportCorner: extracted and adapted from the python port of gdalinfo"""
+
+        # Transform the point into georeferenced coordinates
+        adfGeoTransform = hDataset.GetGeoTransform(can_return_null = True)
+        if adfGeoTransform is not None:
+            dfGeoX = adfGeoTransform[0] + adfGeoTransform[1] * x + adfGeoTransform[2] * y
+            dfGeoY = adfGeoTransform[3] + adfGeoTransform[4] * x + adfGeoTransform[5] * y
+        else:
+            self.dlg.bar.clearWidgets()
+            self.dlg.bar.pushMessage('Failed', 'Transformation coefficient could not be fetched from raster', level=QgsMessageBar.WARNING)
+            return (x,y)
+
+        # Report the georeferenced coordinates
+        if abs(dfGeoX) < 181 and abs(dfGeoY) < 91:
+            return ("(%12.7f,%12.7f) " % (dfGeoX, dfGeoY ))
+        else:
+            return ("(%12.3f,%12.3f) " % (dfGeoX, dfGeoY ))
+
+    def loadInputMetadata(self, filename):
+        self.metadata[filename]['Title'] = self.dlg.title_edit.text()
+        self.metadata[filename]['Platform'] = self.dlg.platform_combo_box.currentIndex()
+        self.metadata[filename]['Sensor'] = self.dlg.sensor_edit.text()
+        start = QDateTime()
+        start.setDate(self.dlg.sense_start_edit.date())
+        start.setTime(self.dlg.sense_start_edit.time())
+        self.metadata[filename]['Sensor start'] = start.toString(Qt.ISODate) 
+        end = QDateTime()
+        end.setDate(self.dlg.sense_end_edit.date())
+        end.setTime(self.dlg.sense_end_edit.time())
+        self.metadata[filename]['Sensor end'] = end.toString(Qt.ISODate)
+        self.metadata[filename]['Tags'] = self.dlg.tags_edit.text()
+        self.metadata[filename]['Provider'] = self.dlg.provider_edit.text()
+        self.metadata[filename]['Contact'] = self.dlg.contact_edit.text()
+        self.metadata[filename]['Website'] = self.dlg.website_edit.text()
 
     def saveMetadata(self):
         selected_layers = self.dlg.added_sources_list_widget.selectedItems()
         if selected_layers:
             for item in selected_layers:
-                filename = item.data(32)
-                print filename
+                filename = item.data(Qt.UserRole)
+                self.metadata[filename] = {}
                 self.extractMetadata(filename)
+                self.loadInputMetadata(filename)
+                print json.dumps(self.metadata[filename], indent=4, separators=(',', ': '))
+                jsonfile = os.path.splitext(filename)[0]+'.json'
+                with open(jsonfile, 'w') as outfile:
+                    json.dump(self.metadata[filename],outfile)
+            self.loadFullMetadata()
+            self.dlg.bar.clearWidgets()
+            self.dlg.bar.pushMessage('Saved', 'Metadata for the selected sources was saved', level=QgsMessageBar.INFO)
         else:
+            self.dlg.bar.clearWidgets()
             self.dlg.bar.pushMessage('Invalid', 'Please select a source to save metadata', level=QgsMessageBar.WARNING)
+
+    def loadFullMetadata(self):
+        print "loadFullMetadata"
+        for index in xrange(self.dlg.sources_list_widget.count()):
+            jsonfile = os.path.splitext(str(self.dlg.sources_list_widget.item(index).data(Qt.UserRole)))[0]+'.json'
+            self.dlg.metadata_review_browser.setSource(QUrl().fromLocalFile(jsonfile))
 
     def enableSpecify(self):
         if self.dlg.storage_combo_box.currentIndex() == 1:
@@ -382,6 +504,7 @@ class OpenAerialMap:
         else:
             bucket_name = str(self.dlg.specify_edit.text())
             if not bucket_name:
+                self.dlg.bar.clearWidgets()
                 self.dlg.bar.pushMessage('Missing storage', 'please provide the bucket for upload', level=QgsMessageBar.CRITICAL)
         bucket_key = str(self.dlg.key_id_edit.text())
         bucket_secret = str(self.dlg.secret_key_edit.text())
@@ -389,43 +512,59 @@ class OpenAerialMap:
         try: 
             connection = S3Connection(bucket_key,bucket_secret)
             bucket = connection.get_bucket(bucket_name)
-            for index in xrange(self.dlg.sources_list_widget.count()):
-                file_path = str(self.dlg.sources_list_widget.item(index).data(32))
-                self.uploadFile(file_path,bucket)
-        except S3ResponseError:
+        except:
+            self.dlg.bar.clearWidgets()
             self.dlg.bar.pushMessage('Connection error', 'please check your connectivity and credentials', level=QgsMessageBar.CRITICAL)
 
-    def uploadFile(self,file_path,bucket): 
-        
-        multipart = bucket.initiate_multipart_upload(os.path.basename(file_path))
+        for index in xrange(self.dlg.sources_list_widget.count()):
+            filename = str(self.dlg.sources_list_widget.item(index).data(Qt.UserRole))
+            try:
+                self.uploadFile(filename,bucket)
+                self.dlg.bar.clearWidgets()
+                self.dlg.bar.pushMessage('Succeeded:', 'Uploaded file \"%s\"' % filename, level=QgsMessageBar.INFO)
+            except:
+                self.dlg.bar.clearWidgets()
+                self.dlg.bar.pushMessage('Transfer error', 'The upload of \"%s\" could not be completed' % filename, level=QgsMessageBar.CRITICAL)
 
-        # Use a chunk size of 50 MiB
-        file_size = os.stat(file_path).st_size
-        chunk_size = 52428800
+    def uploadFile(self,filename,bucket): 
+        
+        # Send metadata file
+        jsonfile = os.path.splitext(filename)[0]+'.json'
+        k = Key(bucket)
+        k.key = os.path.basename(jsonfile)
+        k.set_contents_from_filename(jsonfile)
+
+        # Send the imagery file in mulptiple chuncks
+        multipart = bucket.initiate_multipart_upload(os.path.basename(filename))
+
+        file_size = os.stat(filename).st_size
+        #chunk_size = 52428800
+        chunk_size = 5242880
         chunk_count = int(math.ceil(file_size / float(chunk_size)))
         
         # Send the file parts, using FileChunkIO to create a file-like object
         # that points to a certain byte range within the original file. We
         # set bytes to never exceed the original file size.
-        self.dlg.bar.pushMessage('Starting upload:', 'file \"%s\"' % file_path, level=QgsMessageBar.INFO)
         progress = QProgressBar()
         progress.setMaximum(chunk_count)
         progress.setAlignment(Qt.AlignLeft|Qt.AlignVCenter)
+        self.dlg.bar.clearWidgets()
         self.dlg.bar.pushWidget(progress)
-        #progressMessageBar = self.dlg.bar.createMessage("Uploading...")
-        #self.dlg.bar.layout().addWidget(progress)
+        progressMessageBar = self.dlg.bar.createMessage("Uploading...")
+        self.dlg.bar.layout().addWidget(progress)
         for i in range(chunk_count):
             offset = chunk_size * i
             bytes = min(chunk_size, file_size - offset)
-            with FileChunkIO(file_path, 'r', offset=offset,
+            with FileChunkIO(filename, 'r', offset=offset,
                              bytes=bytes) as fp:
                 multipart.upload_part_from_file(fp, part_num=i + 1)
-            time.sleep(10)
+            time.sleep(5)
+            print "progress = ", i
             progress.setValue(i + 1)
         
         # Finish the upload
         multipart.complete_upload()
-        self.dlg.bar.pushMessage('Succeeded:', 'Uploaded file \"%s\"' % file_path, level=QgsMessageBar.INFO)
+        self.dlg.bar.popWidget()
 
     def run(self):
         """Run method that performs all the real work"""
