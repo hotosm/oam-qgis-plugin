@@ -300,7 +300,7 @@ class OpenAerialMap:
                 item.setData(Qt.UserRole, layer.dataProvider().dataSourceUri())
                 self.dlg.layers_list_widget.addItem(item)
         self.dlg.bar.clearWidgets()
-        self.dlg.bar.pushMessage("Ready to go", "please select the source imagery for upload", level=QgsMessageBar.INFO)
+        self.dlg.bar.pushMessage("INFO", "Source imagery for upload must be selected from layers or files.", level=QgsMessageBar.INFO)
 
     def closeDialog(self):
         self.dlg.close()
@@ -312,11 +312,11 @@ class OpenAerialMap:
     def validateFile(self,filename):
         if not os.path.isfile(filename):
             self.dlg.bar.clearWidgets()
-            self.dlg.bar.pushMessage("Invalid", "The file %s does not exist" % filename, level=QgsMessageBar.CRITICAL)
+            self.dlg.bar.pushMessage("CRITICAL", "The file %s does not exist" % filename, level=QgsMessageBar.CRITICAL)
             return 0
         elif not imghdr.what(filename):
             self.dlg.bar.clearWidgets()
-            self.dlg.bar.pushMessage("Invalid", "The file %s is not a supported data source" % filename, level=QgsMessageBar.CRITICAL)
+            self.dlg.bar.pushMessage("CRITICAL", "The file %s is not a supported data source" % filename, level=QgsMessageBar.CRITICAL)
             return 0
         else:
             return 1
@@ -327,7 +327,7 @@ class OpenAerialMap:
             if layer_name == layer.name():
                 if layer.type() == QgsMapLayer.VectorLayer:
                     self.dlg.bar.clearWidgets()
-                    self.dlg.bar.pushMessage("Invalid", "Vector layers can not be selected for upload", level=QgsMessageBar.CRITICAL)
+                    self.dlg.bar.pushMessage("CRITICAL", "Vector layers cannot be selected for upload", level=QgsMessageBar.CRITICAL)
                     return 0
                 else:
                     return 1
@@ -337,7 +337,7 @@ class OpenAerialMap:
         selected_layers = self.dlg.layers_list_widget.selectedItems()
         if not filename and not selected_layers:
             self.dlg.bar.clearWidgets()
-            self.dlg.bar.pushMessage('Invalid', 'Please select a layer or file to be added', level=QgsMessageBar.WARNING)
+            self.dlg.bar.pushMessage('WARNING', 'Either a layer or file must be selected to be added', level=QgsMessageBar.WARNING)
         if filename:
             if self.validateFile(filename):
                 if not self.dlg.sources_list_widget.findItems(filename,Qt.MatchExactly):
@@ -355,7 +355,7 @@ class OpenAerialMap:
                         self.dlg.sources_list_widget.addItem(item)
                         self.dlg.added_sources_list_widget.addItem(item.clone())
         self.dlg.bar.clearWidgets()
-        self.dlg.bar.pushMessage('Loaded', 'The select sources were added to the upload queue', level=QgsMessageBar.INFO)
+        self.dlg.bar.pushMessage('INFO', 'Select sources were added to the upload queue', level=QgsMessageBar.INFO)
         self.loadFullMetadata()           
 
     def removeSources(self):
@@ -374,7 +374,7 @@ class OpenAerialMap:
                             self.dlg.layers_list_widget.addItem(item)
         else:
             self.dlg.bar.clearWidgets()
-            self.dlg.bar.pushMessage('Invalid', 'Please select a source to be removed', level=QgsMessageBar.WARNING)
+            self.dlg.bar.pushMessage('WARNING', 'An imagery source must be selected to be removed', level=QgsMessageBar.WARNING)
 
     def upSource(self):
         selected_layers = self.dlg.sources_list_widget.selectedItems()
@@ -408,7 +408,7 @@ class OpenAerialMap:
         datafile = gdal.Open(filename,gdal.GA_ReadOnly)
         if datafile is None:
             self.dlg.bar.clearWidgets()
-            self.dlg.bar.pushMessage('Failed', 'Unable to extract raster metadata', level=QgsMessageBar.CRITICAL)
+            self.dlg.bar.pushMessage('CRITICAL', 'Extraction of raster metadata failed.', level=QgsMessageBar.CRITICAL)
 
         # projection
         projInfo = datafile.GetProjection()
@@ -420,7 +420,6 @@ class OpenAerialMap:
         self.metadata[filename]['Projection'] = str(spatialRefProj)
 
         #bbox
-        print( "Corner Coordinates:" )
         upper_left = self.GDALInfoReportCorner(datafile,0.0,0.0 );
         lower_left = self.GDALInfoReportCorner(datafile,0.0,datafile.RasterYSize);
         upper_right = self.GDALInfoReportCorner(datafile,datafile.RasterXSize,0.0 );
@@ -438,7 +437,7 @@ class OpenAerialMap:
             dfGeoY = adfGeoTransform[3] + adfGeoTransform[4] * x + adfGeoTransform[5] * y
         else:
             self.dlg.bar.clearWidgets()
-            self.dlg.bar.pushMessage('Failed', 'Transformation coefficient could not be fetched from raster', level=QgsMessageBar.WARNING)
+            self.dlg.bar.pushMessage('WARNING', 'BBOX might be wrong. Transformation coefficient could not be fetched from raster.', level=QgsMessageBar.WARNING)
             return (x,y)
 
         # Report the georeferenced coordinates
@@ -472,19 +471,20 @@ class OpenAerialMap:
                 self.metadata[filename] = {}
                 self.extractMetadata(filename)
                 self.loadInputMetadata(filename)
-                print json.dumps(self.metadata[filename], indent=4, separators=(',', ': '))
-                jsonfile = os.path.splitext(filename)[0]+'.json'
-                with open(jsonfile, 'w') as outfile:
-                    json.dump(self.metadata[filename],outfile)
+                json_string = json.dumps(self.metadata[filename],indent=4,separators=(',', ': '))
+                json_filename = os.path.splitext(filename)[0]+'.json'
+                json_file = open(json_filename, 'w')
+                print >> json_file, json_string
+                json_file.close()
+
             self.loadFullMetadata()
             self.dlg.bar.clearWidgets()
-            self.dlg.bar.pushMessage('Saved', 'Metadata for the selected sources was saved', level=QgsMessageBar.INFO)
+            self.dlg.bar.pushMessage('INFO', 'Metadata for the selected sources was saved', level=QgsMessageBar.INFO)
         else:
             self.dlg.bar.clearWidgets()
-            self.dlg.bar.pushMessage('Invalid', 'Please select a source to save metadata', level=QgsMessageBar.WARNING)
+            self.dlg.bar.pushMessage('WARNING', 'One or more source imagery must be selected to have the metadata saved.', level=QgsMessageBar.WARNING)
 
     def loadFullMetadata(self):
-        print "loadFullMetadata"
         for index in xrange(self.dlg.sources_list_widget.count()):
             jsonfile = os.path.splitext(str(self.dlg.sources_list_widget.item(index).data(Qt.UserRole)))[0]+'.json'
             self.dlg.metadata_review_browser.setSource(QUrl().fromLocalFile(jsonfile))
@@ -505,66 +505,75 @@ class OpenAerialMap:
             bucket_name = str(self.dlg.specify_edit.text())
             if not bucket_name:
                 self.dlg.bar.clearWidgets()
-                self.dlg.bar.pushMessage('Missing storage', 'please provide the bucket for upload', level=QgsMessageBar.CRITICAL)
+                self.dlg.bar.pushMessage('WARNING', 'The bucket for upload must be provided', level=QgsMessageBar.CRITICAL)
         bucket_key = str(self.dlg.key_id_edit.text())
         bucket_secret = str(self.dlg.secret_key_edit.text())
        
         try: 
             connection = S3Connection(bucket_key,bucket_secret)
             bucket = connection.get_bucket(bucket_name)
+            self.dlg.bar.clearWidgets()
+            self.dlg.bar.pushMessage('INFO', 'Established connection with bucket', level=QgsMessageBar.INFO)
         except:
             self.dlg.bar.clearWidgets()
-            self.dlg.bar.pushMessage('Connection error', 'please check your connectivity and credentials', level=QgsMessageBar.CRITICAL)
+            self.dlg.bar.pushMessage('CRITICAL', 'Connection could not be established, please check your link and credentials', level=QgsMessageBar.CRITICAL)
 
         for index in xrange(self.dlg.sources_list_widget.count()):
             filename = str(self.dlg.sources_list_widget.item(index).data(Qt.UserRole))
-            try:
-                self.uploadFile(filename,bucket)
-                self.dlg.bar.clearWidgets()
-                self.dlg.bar.pushMessage('Succeeded:', 'Uploaded file \"%s\"' % filename, level=QgsMessageBar.INFO)
-            except:
-                self.dlg.bar.clearWidgets()
-                self.dlg.bar.pushMessage('Transfer error', 'The upload of \"%s\" could not be completed' % filename, level=QgsMessageBar.CRITICAL)
+            self.uploadImagery(filename,bucket)
 
-    def uploadFile(self,filename,bucket): 
-        
-        # Send metadata file
+    def uploadImagery(self,filename,bucket): 
+        """Upload imagery and correspondig metadata file"""
+
+        # Send first metadata file
         jsonfile = os.path.splitext(filename)[0]+'.json'
-        k = Key(bucket)
-        k.key = os.path.basename(jsonfile)
-        k.set_contents_from_filename(jsonfile)
-
-        # Send the imagery file in mulptiple chuncks
-        multipart = bucket.initiate_multipart_upload(os.path.basename(filename))
+        try:
+            k = Key(bucket)
+            k.key = os.path.basename(jsonfile)
+            k.set_contents_from_filename(jsonfile)
+            self.dlg.bar.clearWidgets()
+            self.dlg.bar.pushMessage('INFO', 'Uploaded metadata of file \"%s\"' % filename, level=QgsMessageBar.INFO)
+        except:
+            self.dlg.bar.clearWidgets()
+            self.dlg.bar.pushMessage('CRITICAL', 'Error on transfer of metadata of \"%s\"' % filename, level=QgsMessageBar.CRITICAL)
 
         file_size = os.stat(filename).st_size
-        #chunk_size = 52428800
         chunk_size = 5242880
         chunk_count = int(math.ceil(file_size / float(chunk_size)))
         
-        # Send the file parts, using FileChunkIO to create a file-like object
-        # that points to a certain byte range within the original file. We
-        # set bytes to never exceed the original file size.
+        # Set up progress bar
         progress = QProgressBar()
         progress.setMaximum(chunk_count)
         progress.setAlignment(Qt.AlignLeft|Qt.AlignVCenter)
         self.dlg.bar.clearWidgets()
         self.dlg.bar.pushWidget(progress)
-        progressMessageBar = self.dlg.bar.createMessage("Uploading...")
-        self.dlg.bar.layout().addWidget(progress)
-        for i in range(chunk_count):
-            offset = chunk_size * i
-            bytes = min(chunk_size, file_size - offset)
-            with FileChunkIO(filename, 'r', offset=offset,
-                             bytes=bytes) as fp:
-                multipart.upload_part_from_file(fp, part_num=i + 1)
-            time.sleep(5)
-            print "progress = ", i
-            progress.setValue(i + 1)
-        
-        # Finish the upload
-        multipart.complete_upload()
-        self.dlg.bar.popWidget()
+        #cancel = QPushButton("Cancel")
+        #self.dlg.bar.pushWidget(cancel)
+
+        try:
+            # Send the imagery file in multiple chunks
+            multipart = bucket.initiate_multipart_upload(os.path.basename(filename))
+
+            # Send the file parts, using FileChunkIO to create a file-like object
+            # that points to a certain byte range within the original file. We
+            # set bytes to never exceed the original file size.
+            for i in range(chunk_count):
+                offset = chunk_size * i
+                bytes = min(chunk_size, file_size - offset)
+                with FileChunkIO(filename, 'r', offset=offset, bytes=bytes) as fp:
+                    multipart.upload_part_from_file(fp, part_num=i + 1)
+                time.sleep(2)
+                print "progress ",i
+                print chunk_count
+                progress.setValue(i + 1)
+            
+            # Finish the upload
+            multipart.complete_upload()
+            self.dlg.bar.clearWidgets()
+            self.dlg.bar.pushMessage('INFO', 'Uploaded file \"%s\"' % filename, level=QgsMessageBar.INFO)
+        except:
+            self.dlg.bar.clearWidgets()
+            self.dlg.bar.pushMessage('CRITICAL', 'Error on transfer, the upload of \"%s\" could not be completed' % filename, level=QgsMessageBar.CRITICAL)
 
     def run(self):
         """Run method that performs all the real work"""
