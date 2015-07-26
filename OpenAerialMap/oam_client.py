@@ -20,7 +20,7 @@
  *                                                                         *
  ***************************************************************************/
 """
-from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication 
+from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
 from PyQt4.QtGui import QAction, QIcon, QMessageBox, QFileDialog, QListWidgetItem, QSizePolicy, QGridLayout, QPushButton, QProgressBar
 from PyQt4.Qt import *
 from qgis.gui import QgsMessageBar
@@ -173,7 +173,7 @@ class OpenAerialMap:
 
         icon_path = ':/plugins/OpenAerialMap/icon.png'
         search_icon_path = ':/plugins/OpenAerialMap/search_icon.png'
-        
+
         self.add_action(
             icon_path,
             text=self.tr(u'Upload imagery'),
@@ -245,14 +245,16 @@ class OpenAerialMap:
         self.settings.beginGroup("Metadata")
         self.dlg.title_edit.setText(self.settings.value('TITLE'))
         self.dlg.title_edit.setCursorPosition(0)
-        self.dlg.platform_combo_box.setCurrentIndex(int(self.settings.value('PLATFORM')))
+        #self.dlg.platform_combo_box.setCurrentIndex(int(self.settings.value('PLATFORM')))
+        self.dlg.platform_combo_box.setCurrentIndex(0)
         self.dlg.sensor_edit.setText(self.settings.value('SENSOR'))
         self.dlg.sensor_edit.setCursorPosition(0)
         self.dlg.sense_start_edit.setDate(QDateTime.fromString(self.settings.value('SENSE_START'), Qt.ISODate).date())
         self.dlg.sense_start_edit.setTime(QDateTime.fromString(self.settings.value('SENSE_START'), Qt.ISODate).time())
         self.dlg.sense_end_edit.setDate(QDateTime.fromString(self.settings.value('SENSE_END'), Qt.ISODate).date())
         self.dlg.sense_end_edit.setTime(QDateTime.fromString(self.settings.value('SENSE_END'), Qt.ISODate).time())
-        self.dlg.tags_edit.setText(', '.join(self.settings.value('TAGS')))
+        #self.dlg.tags_edit.setText(', '.join(self.settings.value('TAGS')))
+        self.dlg.tags_edit.setText(', '.join(''))
         self.dlg.tags_edit.setCursorPosition(0)
         self.dlg.provider_edit.setText(self.settings.value('PROVIDER'))
         self.dlg.provider_edit.setCursorPosition(0)
@@ -356,7 +358,7 @@ class OpenAerialMap:
                         self.dlg.added_sources_list_widget.addItem(item.clone())
         self.dlg.bar.clearWidgets()
         self.dlg.bar.pushMessage('INFO', 'Select sources were added to the upload queue', level=QgsMessageBar.INFO)
-        self.loadFullMetadata()           
+        self.loadFullMetadata()
 
     def removeSources(self):
         selected_sources = self.dlg.sources_list_widget.selectedItems()
@@ -453,7 +455,7 @@ class OpenAerialMap:
         start = QDateTime()
         start.setDate(self.dlg.sense_start_edit.date())
         start.setTime(self.dlg.sense_start_edit.time())
-        self.metadata[filename]['Sensor start'] = start.toString(Qt.ISODate) 
+        self.metadata[filename]['Sensor start'] = start.toString(Qt.ISODate)
         end = QDateTime()
         end.setDate(self.dlg.sense_end_edit.date())
         end.setTime(self.dlg.sense_end_edit.time())
@@ -508,8 +510,8 @@ class OpenAerialMap:
                 self.dlg.bar.pushMessage('WARNING', 'The bucket for upload must be provided', level=QgsMessageBar.CRITICAL)
         bucket_key = str(self.dlg.key_id_edit.text())
         bucket_secret = str(self.dlg.secret_key_edit.text())
-       
-        try: 
+
+        try:
             connection = S3Connection(bucket_key,bucket_secret)
             bucket = connection.get_bucket(bucket_name)
             self.dlg.bar.clearWidgets()
@@ -522,7 +524,7 @@ class OpenAerialMap:
             filename = str(self.dlg.sources_list_widget.item(index).data(Qt.UserRole))
             self.uploadImagery(filename,bucket)
 
-    def uploadImagery(self,filename,bucket): 
+    def uploadImagery(self,filename,bucket):
         """Upload imagery and correspondig metadata file"""
 
         # Send first metadata file
@@ -540,7 +542,7 @@ class OpenAerialMap:
         file_size = os.stat(filename).st_size
         chunk_size = 5242880
         chunk_count = int(math.ceil(file_size / float(chunk_size)))
-        
+
         # Set up progress bar
         progress = QProgressBar()
         progress.setMaximum(chunk_count)
@@ -566,7 +568,7 @@ class OpenAerialMap:
                 print "progress ",i
                 print chunk_count
                 progress.setValue(i + 1)
-            
+
             # Finish the upload
             multipart.complete_upload()
             self.dlg.bar.clearWidgets()
