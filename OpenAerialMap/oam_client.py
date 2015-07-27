@@ -244,8 +244,12 @@ class OpenAerialMap:
     def loadMetadataSettings(self):
         self.settings.beginGroup("Metadata")
         self.dlg.title_edit.setText(self.settings.value('TITLE'))
-        self.dlg.title_edit.setCursorPosition(0)
-        #self.dlg.platform_combo_box.setCurrentIndex(int(self.settings.value('PLATFORM')))
+
+        if self.settings.value('PLATFORM') == None:
+            self.dlg.title_edit.setCursorPosition(0)
+        else:
+            self.dlg.platform_combo_box.setCurrentIndex(int(self.settings.value('PLATFORM')))
+        
         self.dlg.platform_combo_box.setCurrentIndex(0)
         self.dlg.sensor_edit.setText(self.settings.value('SENSOR'))
         self.dlg.sensor_edit.setCursorPosition(0)
@@ -253,8 +257,12 @@ class OpenAerialMap:
         self.dlg.sense_start_edit.setTime(QDateTime.fromString(self.settings.value('SENSE_START'), Qt.ISODate).time())
         self.dlg.sense_end_edit.setDate(QDateTime.fromString(self.settings.value('SENSE_END'), Qt.ISODate).date())
         self.dlg.sense_end_edit.setTime(QDateTime.fromString(self.settings.value('SENSE_END'), Qt.ISODate).time())
-        #self.dlg.tags_edit.setText(', '.join(self.settings.value('TAGS')))
-        self.dlg.tags_edit.setText(', '.join(''))
+        
+        if self.settings.value('TAGS') == None:
+            self.dlg.tags_edit.setText(', '.join(''))
+        else:
+            self.dlg.tags_edit.setText(', '.join(self.settings.value('TAGS')))
+        
         self.dlg.tags_edit.setCursorPosition(0)
         self.dlg.provider_edit.setText(self.settings.value('PROVIDER'))
         self.dlg.provider_edit.setCursorPosition(0)
