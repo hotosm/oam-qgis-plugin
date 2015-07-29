@@ -3,3 +3,4 @@
 help/build/
 i18n/*.qm
 *.pyc
+resources_rc.py
