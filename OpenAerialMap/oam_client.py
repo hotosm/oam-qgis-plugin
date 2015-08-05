@@ -20,11 +20,11 @@
  *                                                                         *
  ***************************************************************************/
 """
-from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
+from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, pyqtSignal, QObject, QThread
 from PyQt4.QtGui import QAction, QIcon, QMessageBox, QFileDialog, QListWidgetItem, QSizePolicy, QGridLayout, QPushButton, QProgressBar
 from PyQt4.Qt import *
 from qgis.gui import QgsMessageBar
-from qgis.core import QgsMapLayer
+from qgis.core import QgsMapLayer, QgsMessageLog
 import resources_rc
 from oam_client_dialog import OpenAerialMapDialog
 import os, sys, math, imghdr
@@ -35,6 +35,7 @@ import json
 from boto.s3.connection import S3Connection, S3ResponseError
 from boto.s3.key import Key
 from filechunkio import FileChunkIO
+import syslog, traceback
 
 class OpenAerialMap:
     """QGIS Plugin Implementation."""
@@ -66,7 +67,7 @@ class OpenAerialMap:
                 QCoreApplication.installTranslator(self.translator)
 
         # Create the dialog (after translation) and keep reference
-        self.dlg = OpenAerialMapDialog()
+        self.dlg = ExtendedOAMDialog()
 
         # Declare instance attributes
         self.actions = []
@@ -214,7 +215,7 @@ class OpenAerialMap:
         self.dlg.metadata_previous_button.clicked.connect(self.previousTab)
 
         # Upload tab connections
-        self.dlg.upload_button.clicked.connect(self.uploadS3)
+        self.dlg.upload_button.clicked.connect(self.dlg.startUploader)
         self.dlg.quit_button.clicked.connect(self.closeDialog)
         self.dlg.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)
         self.dlg.upload_previous_button.clicked.connect(self.previousTab)
@@ -324,7 +325,8 @@ class OpenAerialMap:
             self.dlg.bar.clearWidgets()
             self.dlg.bar.pushMessage("CRITICAL", "The file %s does not exist" % filename, level=QgsMessageBar.CRITICAL)
             return 0
-        elif not imghdr.what(filename):
+        elif imghdr.what(filename) is None:
+            print imghdr.what(filename)
             self.dlg.bar.clearWidgets()
             self.dlg.bar.pushMessage("CRITICAL", "The file %s is not a supported data source" % filename, level=QgsMessageBar.CRITICAL)
             return 0
@@ -508,83 +510,6 @@ class OpenAerialMap:
             self.dlg.specify_edit.setText('')
             self.dlg.specify_edit.setEnabled(0)
 
-    def uploadS3(self):
-        if self.dlg.storage_combo_box.currentIndex() == 0:
-            bucket_name = 'oam-qgis-plugin-test'
-        else:
-            bucket_name = str(self.dlg.specify_edit.text())
-            if not bucket_name:
-                self.dlg.bar.clearWidgets()
-                self.dlg.bar.pushMessage('WARNING', 'The bucket for upload must be provided', level=QgsMessageBar.CRITICAL)
-        bucket_key = str(self.dlg.key_id_edit.text())
-        bucket_secret = str(self.dlg.secret_key_edit.text())
-
-        try:
-            connection = S3Connection(bucket_key,bucket_secret)
-            bucket = connection.get_bucket(bucket_name)
-            self.dlg.bar.clearWidgets()
-            self.dlg.bar.pushMessage('INFO', 'Established connection with bucket', level=QgsMessageBar.INFO)
-        except:
-            self.dlg.bar.clearWidgets()
-            self.dlg.bar.pushMessage('CRITICAL', 'Connection could not be established, please check your link and credentials', level=QgsMessageBar.CRITICAL)
-
-        for index in xrange(self.dlg.sources_list_widget.count()):
-            filename = str(self.dlg.sources_list_widget.item(index).data(Qt.UserRole))
-            self.uploadImagery(filename,bucket)
-
-    def uploadImagery(self,filename,bucket):
-        """Upload imagery and correspondig metadata file"""
-
-        # Send first metadata file
-        jsonfile = os.path.splitext(filename)[0]+'.json'
-        try:
-            k = Key(bucket)
-            k.key = os.path.basename(jsonfile)
-            k.set_contents_from_filename(jsonfile)
-            self.dlg.bar.clearWidgets()
-            self.dlg.bar.pushMessage('INFO', 'Uploaded metadata of file \"%s\"' % filename, level=QgsMessageBar.INFO)
-        except:
-            self.dlg.bar.clearWidgets()
-            self.dlg.bar.pushMessage('CRITICAL', 'Error on transfer of metadata of \"%s\"' % filename, level=QgsMessageBar.CRITICAL)
-
-        file_size = os.stat(filename).st_size
-        chunk_size = 5242880
-        chunk_count = int(math.ceil(file_size / float(chunk_size)))
-
-        # Set up progress bar
-        progress = QProgressBar()
-        progress.setMaximum(chunk_count)
-        progress.setAlignment(Qt.AlignLeft|Qt.AlignVCenter)
-        self.dlg.bar.clearWidgets()
-        self.dlg.bar.pushWidget(progress)
-        #cancel = QPushButton("Cancel")
-        #self.dlg.bar.pushWidget(cancel)
-
-        try:
-            # Send the imagery file in multiple chunks
-            multipart = bucket.initiate_multipart_upload(os.path.basename(filename))
-
-            # Send the file parts, using FileChunkIO to create a file-like object
-            # that points to a certain byte range within the original file. We
-            # set bytes to never exceed the original file size.
-            for i in range(chunk_count):
-                offset = chunk_size * i
-                bytes = min(chunk_size, file_size - offset)
-                with FileChunkIO(filename, 'r', offset=offset, bytes=bytes) as fp:
-                    multipart.upload_part_from_file(fp, part_num=i + 1)
-                time.sleep(2)
-                print "progress ",i
-                print chunk_count
-                progress.setValue(i + 1)
-
-            # Finish the upload
-            multipart.complete_upload()
-            self.dlg.bar.clearWidgets()
-            self.dlg.bar.pushMessage('INFO', 'Uploaded file \"%s\"' % filename, level=QgsMessageBar.INFO)
-        except:
-            self.dlg.bar.clearWidgets()
-            self.dlg.bar.pushMessage('CRITICAL', 'Error on transfer, the upload of \"%s\" could not be completed' % filename, level=QgsMessageBar.CRITICAL)
-
     def run(self):
         """Run method that performs all the real work"""
         # show the dialog
@@ -593,6 +518,145 @@ class OpenAerialMap:
         result = self.dlg.exec_()
         # See if OK was pressed
         if result:
-            # Do something useful here - delete the line containing pass and
-            # substitute with your code.
             pass
+
+class ExtendedOAMDialog(OpenAerialMapDialog):
+    '''Class that extends automated generated OAM dialog, basically for threading purpose'''
+
+    def startConnection(self):
+        if self.storage_combo_box.currentIndex() == 0:
+            bucket_name = 'oam-qgis-plugin-test'
+        else:
+            bucket_name = str(self.specify_edit.text())
+            if not bucket_name:
+                self.bar.clearWidgets()
+                self.bar.pushMessage('WARNING', 'The bucket for upload must be provided', level=QgsMessageBar.CRITICAL)
+        bucket_key = str(self.key_id_edit.text())
+        bucket_secret = str(self.secret_key_edit.text())
+
+        self.bucket = None
+        for trial in xrange(3):
+            if self.bucket: break
+            try:
+                connection = S3Connection(bucket_key,bucket_secret)
+                self.bucket = connection.get_bucket(bucket_name)
+                QgsMessageLog.logMessage('INFO','Connection established' % trial, level=QgsMessageLog.INFO)
+            except:
+                if trial == 2:
+                   QgsMessageLog.logMessage('CRITICAL','Failed to connect after 3 attempts', level=QgsMessageLog.CRITICAL)
+        return self.bucket
+
+    def startUploader(self):
+        if self.startConnection():
+            for index in xrange(self.sources_list_widget.count()):
+                filename = str(self.sources_list_widget.item(index).data(Qt.UserRole))
+
+                # create a new uploader instance
+                uploader = Uploader(filename,self.bucket)
+                QgsMessageLog.logMessage('started uploader\n', level=QgsMessageLog.CRITICAL)
+    
+                # configure the QgsMessageBar
+                messageBar = self.bar.createMessage('Performing upload...', )
+                progressBar = QProgressBar()
+                progressBar.setAlignment(Qt.AlignLeft|Qt.AlignVCenter)
+                cancelButton = QPushButton()
+                cancelButton.setText('Cancel')
+                cancelButton.clicked.connect(uploader.kill)
+                messageBar.layout().addWidget(progressBar)
+                messageBar.layout().addWidget(cancelButton)
+                self.bar.clearWidgets()
+                self.bar.pushWidget(messageBar, level=QgsMessageBar.INFO)
+                self.messageBar = messageBar
+    
+                # start the worker in a new thread
+                thread = QThread(self)
+                uploader.moveToThread(thread)
+                uploader.finished.connect(self.uploaderFinished)
+                uploader.error.connect(self.uploaderError)
+                uploader.progress.connect(progressBar.setValue)
+                thread.started.connect(uploader.run)
+                thread.start()
+                self.thread = thread
+                self.uploader = uploader
+
+    def uploaderFinished(self, success):
+        # clean up the uploader and thread
+        self.uploader.deleteLater()
+        self.thread.quit()
+        self.thread.wait()
+        self.thread.deleteLater()
+        # remove widget from message bar
+        self.bar.popWidget(self.messageBar)
+        if success:
+            # report the result
+            self.bar.clearWidgets()
+            self.bar.pushMessage('INFO','Upload completed with success.',level=QgsMessageBar.INFO)
+            QgsMessageLog.logMessage('Upload succeeded', level=QgsMessageLog.CRITICAL)
+        else:
+            # notify the user that something went wrong
+            self.bar.pushMessage('CRITICAL','Upload could not be completeded.',level=QgsMessageBar.CRITICAL)
+            QgsMessageLog.logMessage('Upload failed', level=QgsMessageLog.CRITICAL)
+    
+    def uploaderError(self, e, exception_string):
+        QgsMessageLog.logMessage('Uploader thread raised an exception:\n'.format(exception_string), level=QgsMessageLog.CRITICAL)
+
+class Uploader(QObject):
+    '''Handle uploads in a separate thread'''
+
+    finished = pyqtSignal(bool)
+    error = pyqtSignal(Exception, basestring)
+    progress = pyqtSignal(float)
+
+    def __init__(self,filename,bucket):
+        QObject.__init__(self)
+        self.filename = filename
+        self.bucket = bucket
+        self.killed = False
+
+    def sendMetadata(self):
+        jsonfile = os.path.splitext(self.filename)[0]+'.json'
+        try:
+            k = Key(self.bucket)
+            k.key = os.path.basename(jsonfile)
+            k.set_contents_from_filename(jsonfile)
+            QgsMessageLog.logMessage('Sent %s\n' % jsonfile, level=QgsMessageLog.CRITICAL)
+        except:
+            QgsMessageLog.logMessage('Could not send %s\n' % jsonfile, level=QgsMessageLog.CRITICAL)
+
+
+    def run(self):
+        self.sendMetadata()
+        success = False
+        try:
+            file_size = os.stat(self.filename).st_size
+            chunk_size = 5242880
+            chunk_count = int(math.ceil(file_size / float(chunk_size)))
+            progress_count = 0
+
+            multipart = self.bucket.initiate_multipart_upload(os.path.basename(self.filename))
+
+            QgsMessageLog.logMessage('About to send %s chunks\n' % chunk_count, level=QgsMessageLog.CRITICAL)
+            for i in range(chunk_count):
+                if self.killed is True:
+                    # kill request received, exit loop early
+                    break
+                offset = chunk_size * i
+                # bytes are set to never exceed the original file size.
+                bytes = min(chunk_size, file_size - offset)
+                with FileChunkIO(self.filename, 'r', offset=offset, bytes=bytes) as fp:
+                    multipart.upload_part_from_file(fp, part_num=i + 1)
+                progress_count += 1
+                QgsMessageLog.logMessage('chunk %d\n' % progress_count, level=QgsMessageLog.CRITICAL)
+                self.progress.emit(progress_count / float(chunk_count)*100)
+                QgsMessageLog.logMessage('progress %f' % (progress_count / float(chunk_count)), level=QgsMessageLog.CRITICAL)
+            if self.killed is False:
+                multipart.complete_upload()
+                self.progress.emit(100)
+                success = True
+        except Exception, e:
+            # forward the exception upstream
+            self.error.emit(e, traceback.format_exc())
+        self.finished.emit(success)
+
+    def kill(self):
+        self.killed = True
