@@ -38,21 +38,22 @@ LRELEASE = lrelease
 # translation
 SOURCES = \
 	__init__.py \
-	oam_client.py \
-	oam_client_dialog.py \
+	oam_main.py \
         filechunkio.py
 
 PLUGINNAME = OpenAerialMap
 
 PY_FILES = \
-	oam_client.py \
-	oam_client_dialog.py \
 	__init__.py \
+	oam_main.py \
         filechunkio.py
 
-UI_FILES = oam_client_dialog_base.ui
+PY_FOLDERS = module gui icon
 
-EXTRAS = icon.png metadata.txt
+#please modify the 'clean' section of this Makefile
+#UI_FILES = oam_client_dialog_base.ui
+
+EXTRAS = metadata.txt
 
 COMPILED_RESOURCE_FILES = resources_rc.py
 
@@ -109,7 +110,8 @@ deploy: compile doc transcompile
 	# $HOME/$(QGISDIR)/python/plugins
 	mkdir -p $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
 	cp -vf $(PY_FILES) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
-	cp -vf $(UI_FILES) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
+	cp -vrf $(PY_FOLDERS) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)/	
+	#cp -vf $(UI_FILES) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
 	cp -vf $(COMPILED_RESOURCE_FILES) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
 	cp -vf $(EXTRAS) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
 	cp -vfr i18n $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
@@ -124,7 +126,6 @@ dclean:
 	@echo "-----------------------------------"
 	find $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME) -iname "*.pyc" -delete
 	find $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME) -iname ".git" -prune -exec rm -Rf {} \;
-
 
 derase:
 	@echo
