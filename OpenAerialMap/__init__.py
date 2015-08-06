@@ -22,6 +22,16 @@
  This script initializes the plugin, making it known to QGIS.
 """
 
+import sys
+import os
+
+#add path to models subfolder
+path_root = os.path.join(os.path.dirname(__file__))
+path_module = os.path.join(os.path.dirname(__file__), 'module')
+path_gui = os.path.join(os.path.dirname(__file__), 'gui')
+sys.path.append(path_root)
+sys.path.append(path_module)
+sys.path.append(path_gui)
 
 # noinspection PyPep8Naming
 def classFactory(iface):  # pylint: disable=invalid-name
@@ -30,6 +40,5 @@ def classFactory(iface):  # pylint: disable=invalid-name
     :param iface: A QGIS interface instance.
     :type iface: QgsInterface
     """
-    #
-    from .oam_client import OpenAerialMap
+    from .oam_main import OpenAerialMap
     return OpenAerialMap(iface)
