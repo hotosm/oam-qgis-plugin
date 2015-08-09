@@ -6,9 +6,9 @@ from boto.s3.key import Key
 from filechunkio import FileChunkIO
 import syslog, traceback
 
-def connect_s3():
-    conn = S3Connection('', '')
-    myBucket = conn.get_bucket('oam-qgis-plugin-test')
+def connect_s3(accessKeyId, secretAccessKey, bucketName):
+    conn = S3Connection(accessKeyId, secretAccessKey)
+    myBucket = conn.get_bucket(bucketName)
 
     listStr = ""
     for key in myBucket.list():

@@ -8,7 +8,7 @@
         begin                : 2015-07-01
         git sha              : $Format:%H$
         copyright            : (C) 2015 by Humanitarian OpenStreetMap Team (HOT)
-        email                : tassia@acaia.ca
+        email                : tassia@acaia.ca  / yoji.salut@gmail.com
  ***************************************************************************/
 
 /***************************************************************************

@@ -8,7 +8,7 @@
         begin                : 2015-07-01
         git sha              : $Format:%H$
         copyright            : (C) 2015 by Humanitarian OpenStreetMap Team (HOT)
-        email                : tassia@acaia.ca
+        email                : tassia@acaia.ca / yoji.salut@gmail.com
  ***************************************************************************/
 
 /***************************************************************************
@@ -40,8 +40,8 @@ from filechunkio import FileChunkIO
 import syslog, traceback
 
 
-from temp_module import *
-from access_local_storage import *
+from test_module import *
+from module_access_local_storage import *
 
 
 #for testing purpose only
@@ -107,7 +107,7 @@ class OpenAerialMap:
         #check the connection to oin s3 bucket
         #sys.argv = [""]
         """
-        resultCon = connect_s3()
+        resultCon = connect_s3('', '', '')
         root = Tk()
         root.title('Test for S3 connection')
         msgWigt = Message(root, text=resultCon, width=300)
@@ -555,6 +555,7 @@ class OpenAerialMap:
         if result:
             pass
 
+
 class ExtendedOAMDialog(OpenAerialMapDialog):
     '''Class that extends automated generated OAM dialog, basically for threading purpose'''
 
@@ -634,6 +635,7 @@ class ExtendedOAMDialog(OpenAerialMapDialog):
     
     def uploaderError(self, e, exception_string):
         QgsMessageLog.logMessage('Uploader thread raised an exception:\n'.format(exception_string), level=QgsMessageLog.CRITICAL)
+
 
 class Uploader(QObject):
     '''Handle uploads in a separate thread'''
