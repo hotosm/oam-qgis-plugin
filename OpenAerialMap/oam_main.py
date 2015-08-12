@@ -8,7 +8,7 @@
         begin                : 2015-07-01
         git sha              : $Format:%H$
         copyright            : (C) 2015 by Humanitarian OpenStreetMap Team (HOT)
-        email                : tassia@acaia.ca
+        email                : tassia@acaia.ca / yoji.salut@gmail.com
  ***************************************************************************/
 
 /***************************************************************************
@@ -26,7 +26,9 @@ from PyQt4.Qt import *
 from qgis.gui import QgsMessageBar
 from qgis.core import QgsMapLayer, QgsMessageLog
 import resources_rc
+
 from oam_client_dialog import OpenAerialMapDialog
+
 import os, sys, math, imghdr
 from osgeo import gdal, osr
 import time
@@ -37,21 +39,34 @@ from boto.s3.key import Key
 from filechunkio import FileChunkIO
 import syslog, traceback
 
+
+from test_module import *
+from module_access_local_storage import *
+
+
+#for testing purpose only
+from test_tkinter import HelloTkWindow
+from test_s3_connection import *
+from Tkinter import * 
+#import sys
+ 
 class OpenAerialMap:
     """QGIS Plugin Implementation."""
 
     def __init__(self, iface):
         """Constructor.
-
         :param iface: An interface instance that will be passed to this class
             which provides the hook by which you can manipulate the QGIS
             application at run time.
         :type iface: QgsInterface
         """
+        
         # Save reference to the QGIS interface
         self.iface = iface
+        
         # initialize plugin directory
         self.plugin_dir = os.path.dirname(__file__)
+        
         # initialize locale
         locale = QSettings().value('locale/userLocale')[0:2]
         locale_path = os.path.join(
@@ -80,6 +95,26 @@ class OpenAerialMap:
         self.settings = QSettings('QGIS','oam-qgis-plugin')
         self.metadata = {}
 
+        
+        #Testing purpose only
+        #check the paths
+        """
+        masterWigt = Tk()
+        helloTkWindow = HelloTkWindow(masterWigt, "Hello,world!", str(sys.path))
+        helloTkWindow.mainloop()
+        """
+        
+        #check the connection to oin s3 bucket
+        #sys.argv = [""]
+        """
+        resultCon = connect_s3('', '', '')
+        root = Tk()
+        root.title('Test for S3 connection')
+        msgWigt = Message(root, text=resultCon, width=300)
+        msgWigt.pack()
+        root.mainloop()        
+        """
+        
     # noinspection PyMethodMayBeStatic
     def tr(self, message):
         """Get the translation for a string using Qt translation API.
@@ -204,7 +239,7 @@ class OpenAerialMap:
         self.dlg.imagery_next_button.clicked.connect(self.nextTab)
 
         # Metadata tab connections
-	self.dlg.sense_start_edit.setCalendarPopup(1)
+        self.dlg.sense_start_edit.setCalendarPopup(1)
         self.dlg.sense_start_edit.setDisplayFormat('dd.MM.yyyy HH:mm')
         self.dlg.sense_end_edit.setCalendarPopup(1)
         self.dlg.sense_end_edit.setDisplayFormat('dd.MM.yyyy HH:mm')
@@ -520,6 +555,7 @@ class OpenAerialMap:
         if result:
             pass
 
+
 class ExtendedOAMDialog(OpenAerialMapDialog):
     '''Class that extends automated generated OAM dialog, basically for threading purpose'''
 
@@ -599,6 +635,7 @@ class ExtendedOAMDialog(OpenAerialMapDialog):
     
     def uploaderError(self, e, exception_string):
         QgsMessageLog.logMessage('Uploader thread raised an exception:\n'.format(exception_string), level=QgsMessageLog.CRITICAL)
+
 
 class Uploader(QObject):
     '''Handle uploads in a separate thread'''
