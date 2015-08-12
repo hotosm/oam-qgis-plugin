@@ -1,6 +1,9 @@
-.coverage
-.noseids
-help/build/
-i18n/*.qm
-*.pyc
-resources_rc.py
+.project
+.pydevproject
+.settings
+OpenAerialMap/.coverage
+OpenAerialMap/.noseids
+OpenAerialMap/help/build/
+OpenAerialMap/i18n/*.qm
+OpenAerialMap/*.pyc
+OpenAerialMap/resources_rc.py
