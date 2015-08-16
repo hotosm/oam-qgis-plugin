@@ -44,7 +44,6 @@ from filechunkio import FileChunkIO
 import syslog, traceback
 
 
-from test_module import *
 from module_access_local_storage import *
 
 
