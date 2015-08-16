@@ -202,6 +202,11 @@ class OpenAerialMap:
         helloTkWindow = HelloTkWindow(masterWigt, "Hello,world!", "OAM Search Tool")
         helloTkWindow.mainloop()
     
+    def displaySettingDialog(self):
+        masterWigt = Tk()
+        helloTkWindow = HelloTkWindow(masterWigt, "Hello,world!", "Setting Dialog")
+        helloTkWindow.mainloop()
+    
     #Testing purpose only
     def displayPaths(self):
         masterWigt = Tk()
@@ -214,6 +219,12 @@ class OpenAerialMap:
         self.testS3.show()
 
     #Testing purpose only
+    def testImgUploader(self):
+        masterWigt = Tk()
+        helloTkWindow = HelloTkWindow(masterWigt, "Hello,world!", "Image Uploader")
+        helloTkWindow.mainloop()
+
+    #Testing purpose onl
     """    
     def renderTest(self, painter):
         masterWigt = Tk()
@@ -226,15 +237,19 @@ class OpenAerialMap:
         # Testing purpose only
         self.actionTest1 = QAction(QIcon(":/plugins/testplug/icon.png"), "Test paths", self.iface.mainWindow())
         self.actionTest1.setObjectName("testPaths")
-        
         QObject.connect(self.actionTest1, SIGNAL("triggered()"), self.displayPaths)
     
         self.actionTest2 = QAction(QIcon(":/plugins/testplug/icon.png"), "Test S3", self.iface.mainWindow())
         self.actionTest2.setObjectName("testS3")
         QObject.connect(self.actionTest2, SIGNAL("triggered()"), self.testS3)
 
+        self.actionTest3 = QAction(QIcon(":/plugins/testplug/icon.png"), "Test Image Uploader", self.iface.mainWindow())
+        self.actionTest3.setObjectName("testImgUploader")
+        QObject.connect(self.actionTest3, SIGNAL("triggered()"), self.testImgUploader)
+
         self.iface.addPluginToMenu("Test plugins", self.actionTest1)
         self.iface.addPluginToMenu("Test plugins", self.actionTest2)
+        self.iface.addPluginToMenu("Test plugins", self.actionTest3)
    
         # connect to signal renderComplete which is emitted when canvas
         # rendering is done
@@ -248,14 +263,20 @@ class OpenAerialMap:
 
         self.add_action(
             icon_path,
-            text=self.tr(u'Upload imagery'),
+            text=self.tr(u'Upload Imagery'),
             callback=self.displayLoadImageryWizard,
             parent=self.iface.mainWindow())
 
         self.add_action(
             search_icon_path,
-            text=self.tr(u'Search imagery'),
+            text=self.tr(u'Search Imagery'),
             callback=self.displaySearchTool,
+            parent=self.iface.mainWindow())
+
+        self.add_action(
+            search_icon_path,
+            text=self.tr(u'Change Settings'),
+            callback=self.displaySettingDialog,
             parent=self.iface.mainWindow())
 
         # Load widgets
@@ -294,11 +315,17 @@ class OpenAerialMap:
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
         for action in self.actions:
-            self.iface.removePluginMenu(
-                self.tr(u'&Open Aerial Map (OAM)'),
-                action)
+            self.iface.removePluginMenu(self.tr(u'&Open Aerial Map (OAM)'), action)
             self.iface.removeToolBarIcon(action)
         del self.toolbar
+        
+        # Testing purpose only
+        self.iface.removePluginMenu("Test plugins", self.actionTest1)
+        #self.iface.removeToolBarIcon(self.actionTest1)
+        self.iface.removePluginMenu("Test plugins", self.actionTest2)
+        #self.iface.removeToolBarIcon(self.actionTest2)
+        self.iface.removePluginMenu("Test plugins", self.actionTest3)
+        #self.iface.removeToolBarIcon(self.actionTest3)
 
     def cleanMetadataSettings(self):
         self.dlg.title_edit.setText('')
