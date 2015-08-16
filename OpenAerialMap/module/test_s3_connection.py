@@ -1,5 +1,3 @@
-from Tkinter import * #only for testing purpose
-import sys #only for testing purpose
 
 from boto.s3.connection import S3Connection, S3ResponseError
 from boto.s3.key import Key
@@ -13,5 +11,5 @@ def connect_s3(accessKeyId, secretAccessKey, bucketName):
     listStr = ""
     for key in myBucket.list():
         listStr += str(key) + "\n"
-        
+
     return listStr

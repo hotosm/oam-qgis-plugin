@@ -3,7 +3,8 @@
 /***************************************************************************
  OpenAerialMapDialog
                                  A QGIS plugin
- This plugin can be used as an OAM client to browse, search, download and upload imagery from/to the OAM catalog.
+ This plugin can be used as an OAM client to browse, search, download and 
+ upload imagery from/to the OAM catalog.
                              -------------------
         begin                : 2015-07-01
         git sha              : $Format:%H$
@@ -26,7 +27,7 @@ import os
 from PyQt4 import QtGui, uic
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
-    os.path.dirname(__file__), 'oam_client_dialog_base.ui'))
+    os.path.dirname(__file__), 'ui/oam_client_dialog_base.ui'))
 
 
 class OpenAerialMapDialog(QtGui.QDialog, FORM_CLASS):
@@ -39,3 +40,6 @@ class OpenAerialMapDialog(QtGui.QDialog, FORM_CLASS):
         # http://qt-project.org/doc/qt-4.8/designer-using-a-ui-file.html
         # #widgets-and-dialogs-with-auto-connect
         self.setupUi(self)
+        
+        #need to register event handlers
+        

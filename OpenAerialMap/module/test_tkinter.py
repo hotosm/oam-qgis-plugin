@@ -1,4 +1,4 @@
-from Tkinter import *
+from Tkinter import Frame, Message
 
 class HelloTkWindow(Frame):
 

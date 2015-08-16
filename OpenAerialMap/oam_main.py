@@ -3,7 +3,8 @@
 /***************************************************************************
  OpenAerialMap
                                  A QGIS plugin
- This plugin can be used as an OAM client to browse, search, download and upload imagery from/to the OAM catalog.
+ This plugin can be used as an OAM client to browse, search, download and 
+ upload imagery from/to the OAM catalog.
                               -------------------
         begin                : 2015-07-01
         git sha              : $Format:%H$
@@ -20,8 +21,11 @@
  *                                                                         *
  ***************************************************************************/
 """
-from PyQt4.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, pyqtSignal, QObject, QThread
-from PyQt4.QtGui import QAction, QIcon, QMessageBox, QFileDialog, QListWidgetItem, QSizePolicy, QGridLayout, QPushButton, QProgressBar
+from PyQt4.QtCore import (QSettings, QTranslator, qVersion, QCoreApplication, 
+                          pyqtSignal, QObject, QThread)
+from PyQt4.QtGui import (QAction, QIcon, QMessageBox, QFileDialog, 
+                         QListWidgetItem, QSizePolicy, QGridLayout, QPushButton, 
+                         QProgressBar)
 from PyQt4.Qt import *
 from qgis.gui import QgsMessageBar
 from qgis.core import QgsMapLayer, QgsMessageLog
@@ -40,13 +44,13 @@ from filechunkio import FileChunkIO
 import syslog, traceback
 
 
-from test_module import *
 from module_access_local_storage import *
 
 
 #for testing purpose only
 from test_tkinter import HelloTkWindow
 from test_s3_connection import *
+from test_s3_connection_wizard_class import TestS3ConnectionWizard
 from Tkinter import * 
 #import sys
  
@@ -95,27 +99,7 @@ class OpenAerialMap:
         self.settings = QSettings('QGIS','oam-qgis-plugin')
         self.metadata = {}
 
-        
-        #Testing purpose only
-        #check the paths
-        """
-        masterWigt = Tk()
-        helloTkWindow = HelloTkWindow(masterWigt, "Hello,world!", str(sys.path))
-        helloTkWindow.mainloop()
-        """
-        
-        #check the connection to oin s3 bucket
-        #sys.argv = [""]
-        """
-        resultCon = connect_s3('', '', '')
-        root = Tk()
-        root.title('Test for S3 connection')
-        msgWigt = Message(root, text=resultCon, width=300)
-        msgWigt.pack()
-        root.mainloop()        
-        """
-        
-    # noinspection PyMethodMayBeStatic
+    # noinspection PyMethodMayBeStatisc
     def tr(self, message):
         """Get the translation for a string using Qt translation API.
 
@@ -203,8 +187,75 @@ class OpenAerialMap:
         self.actions.append(action)
 
         return action
+    
+    def displayLoadImageryWizard(self):
+        # show the dialog
+        self.dlg.show()
+        # Run the dialog event loop
+        result = self.dlg.exec_()
+        # See if OK was pressed
+        if result:
+            pass
+        
+    def displaySearchTool(self):
+        masterWigt = Tk()
+        helloTkWindow = HelloTkWindow(masterWigt, "Hello,world!", "OAM Search Tool")
+        helloTkWindow.mainloop()
+    
+    def displaySettingDialog(self):
+        masterWigt = Tk()
+        helloTkWindow = HelloTkWindow(masterWigt, "Hello,world!", "Setting Dialog")
+        helloTkWindow.mainloop()
+    
+    #Testing purpose only
+    def displayPaths(self):
+        masterWigt = Tk()
+        helloTkWindow = HelloTkWindow(masterWigt, "Hello,world!", str(sys.path))
+        helloTkWindow.mainloop()
+
+    #Testing purpose only
+    def testS3(self):
+        self.testS3 = TestS3ConnectionWizard()
+        self.testS3.show()
+
+    #Testing purpose only
+    def testImgUploader(self):
+        masterWigt = Tk()
+        helloTkWindow = HelloTkWindow(masterWigt, "Hello,world!", "Image Uploader")
+        helloTkWindow.mainloop()
+
+    #Testing purpose onl
+    """    
+    def renderTest(self, painter):
+        masterWigt = Tk()
+        helloTkWindow = HelloTkWindow(masterWigt, "Hello,world!", "TestPlugin: renderTest called!")
+        helloTkWindow.mainloop()
+    """
 
     def initGui(self):
+        
+        # Testing purpose only
+        self.actionTest1 = QAction(QIcon(":/plugins/testplug/icon.png"), "Test paths", self.iface.mainWindow())
+        self.actionTest1.setObjectName("testPaths")
+        QObject.connect(self.actionTest1, SIGNAL("triggered()"), self.displayPaths)
+    
+        self.actionTest2 = QAction(QIcon(":/plugins/testplug/icon.png"), "Test S3", self.iface.mainWindow())
+        self.actionTest2.setObjectName("testS3")
+        QObject.connect(self.actionTest2, SIGNAL("triggered()"), self.testS3)
+
+        self.actionTest3 = QAction(QIcon(":/plugins/testplug/icon.png"), "Test Image Uploader", self.iface.mainWindow())
+        self.actionTest3.setObjectName("testImgUploader")
+        QObject.connect(self.actionTest3, SIGNAL("triggered()"), self.testImgUploader)
+
+        self.iface.addPluginToMenu("Test plugins", self.actionTest1)
+        self.iface.addPluginToMenu("Test plugins", self.actionTest2)
+        self.iface.addPluginToMenu("Test plugins", self.actionTest3)
+   
+        # connect to signal renderComplete which is emitted when canvas
+        # rendering is done
+        #QObject.connect(self.iface.mapCanvas(), SIGNAL("renderComplete(QPainter *)"), self.renderTest)        
+
+        
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
         icon_path = ':/plugins/OpenAerialMap/icon.png'
@@ -212,14 +263,20 @@ class OpenAerialMap:
 
         self.add_action(
             icon_path,
-            text=self.tr(u'Upload imagery'),
-            callback=self.run,
+            text=self.tr(u'Upload Imagery'),
+            callback=self.displayLoadImageryWizard,
             parent=self.iface.mainWindow())
 
         self.add_action(
             search_icon_path,
-            text=self.tr(u'Search imagery'),
-            callback=self.run,
+            text=self.tr(u'Search Imagery'),
+            callback=self.displaySearchTool,
+            parent=self.iface.mainWindow())
+
+        self.add_action(
+            search_icon_path,
+            text=self.tr(u'Change Settings'),
+            callback=self.displaySettingDialog,
             parent=self.iface.mainWindow())
 
         # Load widgets
@@ -258,11 +315,17 @@ class OpenAerialMap:
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
         for action in self.actions:
-            self.iface.removePluginMenu(
-                self.tr(u'&Open Aerial Map (OAM)'),
-                action)
+            self.iface.removePluginMenu(self.tr(u'&Open Aerial Map (OAM)'), action)
             self.iface.removeToolBarIcon(action)
         del self.toolbar
+        
+        # Testing purpose only
+        self.iface.removePluginMenu("Test plugins", self.actionTest1)
+        #self.iface.removeToolBarIcon(self.actionTest1)
+        self.iface.removePluginMenu("Test plugins", self.actionTest2)
+        #self.iface.removeToolBarIcon(self.actionTest2)
+        self.iface.removePluginMenu("Test plugins", self.actionTest3)
+        #self.iface.removeToolBarIcon(self.actionTest3)
 
     def cleanMetadataSettings(self):
         self.dlg.title_edit.setText('')
@@ -546,15 +609,17 @@ class OpenAerialMap:
             self.dlg.specify_edit.setEnabled(0)
 
     def run(self):
-        """Run method that performs all the real work"""
-        # show the dialog
-        self.dlg.show()
-        # Run the dialog event loop
-        result = self.dlg.exec_()
-        # See if OK was pressed
-        if result:
-            pass
-
+        
+        """
+        Run method that performs all the real work.
+        Please refer to the following functions for details:
+        
+        def displayLoadImageryWizard(self):
+        def displaySearchTool(self):
+        def displayPaths(self):
+        def testS3(self):
+            
+        """        
 
 class ExtendedOAMDialog(OpenAerialMapDialog):
     '''Class that extends automated generated OAM dialog, basically for threading purpose'''
