@@ -24,11 +24,9 @@ class TestS3ConnectionWizard(QtGui.QWizard):
         accKeyID = unicode(self.ui.inputAccKeyID.toPlainText())
         secretAccKey = unicode(self.ui.inputSecretAccKey.toPlainText())
         bucketName = unicode(self.ui.inputBucketName.toPlainText())
-        r = connect_s3(accKeyID, secretAccKey, bucketName)
-        self.ui.textBrowser.setText(r)
-        #print r
-        #print repr(r)
+        rs = connect_s3(accKeyID, secretAccKey, bucketName)
 
-    #testing purpose only
-    def hello_world(self):
-        print "Hello, world!"
+        for key in rs:
+            item = QListWidgetItem()
+            item.setText(str(key))
+            self.ui.listWidget.addItem(item)

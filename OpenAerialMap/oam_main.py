@@ -3,7 +3,7 @@
 /***************************************************************************
  OpenAerialMap
                                  A QGIS plugin
- This plugin can be used as an OAM client to browse, search, download and 
+ This plugin can be used as an OAM client to browse, search, download and
  upload imagery from/to the OAM catalog.
                               -------------------
         begin                : 2015-07-01
@@ -21,10 +21,10 @@
  *                                                                         *
  ***************************************************************************/
 """
-from PyQt4.QtCore import (QSettings, QTranslator, qVersion, QCoreApplication, 
+from PyQt4.QtCore import (QSettings, QTranslator, qVersion, QCoreApplication,
                           pyqtSignal, QObject, QThread)
-from PyQt4.QtGui import (QAction, QIcon, QMessageBox, QFileDialog, 
-                         QListWidgetItem, QSizePolicy, QGridLayout, QPushButton, 
+from PyQt4.QtGui import (QAction, QIcon, QMessageBox, QFileDialog,
+                         QListWidgetItem, QSizePolicy, QGridLayout, QPushButton,
                          QProgressBar)
 from PyQt4.Qt import *
 from qgis.gui import QgsMessageBar
@@ -51,9 +51,10 @@ from module_access_local_storage import *
 from test_tkinter import HelloTkWindow
 from test_s3_connection import *
 from test_s3_connection_wizard_class import TestS3ConnectionWizard
-from Tkinter import * 
+from Tkinter import *
 #import sys
- 
+from test_img_uploader_dialog import ImageUploaderDialog
+
 class OpenAerialMap:
     """QGIS Plugin Implementation."""
 
@@ -64,13 +65,14 @@ class OpenAerialMap:
             application at run time.
         :type iface: QgsInterface
         """
-        
+
         # Save reference to the QGIS interface
         self.iface = iface
-        
+
+        """move this part for tr into __init__.py?"""
         # initialize plugin directory
         self.plugin_dir = os.path.dirname(__file__)
-        
+
         # initialize locale
         locale = QSettings().value('locale/userLocale')[0:2]
         locale_path = os.path.join(
@@ -85,19 +87,25 @@ class OpenAerialMap:
             if qVersion() > '4.3.3':
                 QCoreApplication.installTranslator(self.translator)
 
+        """should be able to move into the class of dialog later?"""
         # Create the dialog (after translation) and keep reference
         self.dlg = ExtendedOAMDialog()
 
-        # Declare instance attributes
-        self.actions = []
-        self.menu = self.tr(u'&Open Aerial Map (OAM)')
-        self.toolbar = self.iface.addToolBar(u'OpenAerialMap')
-        self.toolbar.setObjectName(u'OpenAerialMap')
         self.dlg.bar = QgsMessageBar()
         self.dlg.bar.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         self.dlg.layout().addWidget(self.dlg.bar)
+
+        # Declare instance attributes
+        self.actions = []
+
+        """make sure if this QSettings object should be belong to
+        the object of OpenAerialMap class"""
         self.settings = QSettings('QGIS','oam-qgis-plugin')
         self.metadata = {}
+
+        """this part is only for testImgUploader() function"""
+        self.currentImgSettings = self.settings
+        self.currentImgMetadata = self.metadata
 
     # noinspection PyMethodMayBeStatisc
     def tr(self, message):
@@ -187,8 +195,8 @@ class OpenAerialMap:
         self.actions.append(action)
 
         return action
-    
-    def displayLoadImageryWizard(self):
+
+    def displayImgUploaderWizard(self):
         # show the dialog
         self.dlg.show()
         # Run the dialog event loop
@@ -196,21 +204,24 @@ class OpenAerialMap:
         # See if OK was pressed
         if result:
             pass
-        
+
     def displaySearchTool(self):
         masterWigt = Tk()
         helloTkWindow = HelloTkWindow(masterWigt, "Hello,world!", "OAM Search Tool")
         helloTkWindow.mainloop()
-    
+
     def displaySettingDialog(self):
         masterWigt = Tk()
         helloTkWindow = HelloTkWindow(masterWigt, "Hello,world!", "Setting Dialog")
         helloTkWindow.mainloop()
-    
+
     #Testing purpose only
     def displayPaths(self):
+
+        outStr = "" + repr(self.settings) + "\n" + str(self.metadata) + "\n" + str(sys.path)
+
         masterWigt = Tk()
-        helloTkWindow = HelloTkWindow(masterWigt, "Hello,world!", str(sys.path))
+        helloTkWindow = HelloTkWindow(masterWigt, "Hello,world!", outStr)
         helloTkWindow.mainloop()
 
     #Testing purpose only
@@ -220,12 +231,17 @@ class OpenAerialMap:
 
     #Testing purpose only
     def testImgUploader(self):
+
+        self.testIgmUpDlg = ImageUploaderDialog(self.iface, self.currentImgSettings, self.currentImgMetadata)
+        self.testIgmUpDlg.show()
+        """
         masterWigt = Tk()
         helloTkWindow = HelloTkWindow(masterWigt, "Hello,world!", "Image Uploader")
         helloTkWindow.mainloop()
+        """
 
-    #Testing purpose onl
-    """    
+    #Testing purpose only
+    """
     def renderTest(self, painter):
         masterWigt = Tk()
         helloTkWindow = HelloTkWindow(masterWigt, "Hello,world!", "TestPlugin: renderTest called!")
@@ -233,12 +249,12 @@ class OpenAerialMap:
     """
 
     def initGui(self):
-        
+
         # Testing purpose only
-        self.actionTest1 = QAction(QIcon(":/plugins/testplug/icon.png"), "Test paths", self.iface.mainWindow())
+        self.actionTest1 = QAction(QIcon(":/e/testplug/icon.png"), "Test paths", self.iface.mainWindow())
         self.actionTest1.setObjectName("testPaths")
         QObject.connect(self.actionTest1, SIGNAL("triggered()"), self.displayPaths)
-    
+
         self.actionTest2 = QAction(QIcon(":/plugins/testplug/icon.png"), "Test S3", self.iface.mainWindow())
         self.actionTest2.setObjectName("testS3")
         QObject.connect(self.actionTest2, SIGNAL("triggered()"), self.testS3)
@@ -250,37 +266,46 @@ class OpenAerialMap:
         self.iface.addPluginToMenu("Test plugins", self.actionTest1)
         self.iface.addPluginToMenu("Test plugins", self.actionTest2)
         self.iface.addPluginToMenu("Test plugins", self.actionTest3)
-   
+
         # connect to signal renderComplete which is emitted when canvas
         # rendering is done
-        #QObject.connect(self.iface.mapCanvas(), SIGNAL("renderComplete(QPainter *)"), self.renderTest)        
+        #QObject.connect(self.iface.mapCanvas(), SIGNAL("renderComplete(QPainter *)"), self.renderTest)
 
-        
+
+        """Create the menu and toolbar inside the QGIS GUI."""
+
+        self.menu = self.tr(u'&Open Aerial Map (OAM)')
+        self.toolbar = self.iface.addToolBar(u'OpenAerialMap')
+        self.toolbar.setObjectName(u'OpenAerialMap')
+
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
-        icon_path = ':/plugins/OpenAerialMap/icon.png'
-        search_icon_path = ':/plugins/OpenAerialMap/search_icon.png'
+        icon_path_img_loader = ':/plugins/OpenAerialMap/icon.png'
+        icon_path_search_tool = ':/plugins/OpenAerialMap/search_icon.png'
+        icon_path_setting_dialog = ':/plugins/OpenAerialMap/search_icon.png' #need to be modified
 
         self.add_action(
-            icon_path,
+            icon_path_img_loader,
             text=self.tr(u'Upload Imagery'),
-            callback=self.displayLoadImageryWizard,
+            callback=self.displayImgUploaderWizard,
             parent=self.iface.mainWindow())
 
         self.add_action(
-            search_icon_path,
+            icon_path_search_tool,
             text=self.tr(u'Search Imagery'),
             callback=self.displaySearchTool,
             parent=self.iface.mainWindow())
 
         self.add_action(
-            search_icon_path,
+            icon_path_setting_dialog,
             text=self.tr(u'Change Settings'),
             callback=self.displaySettingDialog,
             parent=self.iface.mainWindow())
 
         # Load widgets
-        self.loadLayers()
+        self.loadLayers() # why we need to invoke this function here?
+
+        #make sure if this part is right or not
         self.loadMetadataSettings()
         self.loadStorageSettings()
         self.loadOptionsSettings()
@@ -318,7 +343,7 @@ class OpenAerialMap:
             self.iface.removePluginMenu(self.tr(u'&Open Aerial Map (OAM)'), action)
             self.iface.removeToolBarIcon(action)
         del self.toolbar
-        
+
         # Testing purpose only
         self.iface.removePluginMenu("Test plugins", self.actionTest1)
         #self.iface.removeToolBarIcon(self.actionTest1)
@@ -348,7 +373,7 @@ class OpenAerialMap:
             self.dlg.title_edit.setCursorPosition(0)
         else:
             self.dlg.platform_combo_box.setCurrentIndex(int(self.settings.value('PLATFORM')))
-        
+
         self.dlg.platform_combo_box.setCurrentIndex(0)
         self.dlg.sensor_edit.setText(self.settings.value('SENSOR'))
         self.dlg.sensor_edit.setCursorPosition(0)
@@ -356,12 +381,12 @@ class OpenAerialMap:
         self.dlg.sense_start_edit.setTime(QDateTime.fromString(self.settings.value('SENSE_START'), Qt.ISODate).time())
         self.dlg.sense_end_edit.setDate(QDateTime.fromString(self.settings.value('SENSE_END'), Qt.ISODate).date())
         self.dlg.sense_end_edit.setTime(QDateTime.fromString(self.settings.value('SENSE_END'), Qt.ISODate).time())
-        
+
         if self.settings.value('TAGS') == None:
             self.dlg.tags_edit.setText(', '.join(''))
         else:
             self.dlg.tags_edit.setText(', '.join(self.settings.value('TAGS')))
-        
+
         self.dlg.tags_edit.setCursorPosition(0)
         self.dlg.provider_edit.setText(self.settings.value('PROVIDER'))
         self.dlg.provider_edit.setCursorPosition(0)
@@ -609,17 +634,17 @@ class OpenAerialMap:
             self.dlg.specify_edit.setEnabled(0)
 
     def run(self):
-        
+
         """
         Run method that performs all the real work.
         Please refer to the following functions for details:
-        
+
         def displayLoadImageryWizard(self):
         def displaySearchTool(self):
         def displayPaths(self):
         def testS3(self):
-            
-        """        
+
+        """
 
 class ExtendedOAMDialog(OpenAerialMapDialog):
     '''Class that extends automated generated OAM dialog, basically for threading purpose'''
@@ -655,7 +680,7 @@ class ExtendedOAMDialog(OpenAerialMapDialog):
                 # create a new uploader instance
                 uploader = Uploader(filename,self.bucket)
                 QgsMessageLog.logMessage('started uploader\n', level=QgsMessageLog.CRITICAL)
-    
+
                 # configure the QgsMessageBar
                 messageBar = self.bar.createMessage('Performing upload...', )
                 progressBar = QProgressBar()
@@ -668,7 +693,7 @@ class ExtendedOAMDialog(OpenAerialMapDialog):
                 self.bar.clearWidgets()
                 self.bar.pushWidget(messageBar, level=QgsMessageBar.INFO)
                 self.messageBar = messageBar
-    
+
                 # start the worker in a new thread
                 thread = QThread(self)
                 uploader.moveToThread(thread)
@@ -697,7 +722,7 @@ class ExtendedOAMDialog(OpenAerialMapDialog):
             # notify the user that something went wrong
             self.bar.pushMessage('CRITICAL','Upload could not be completeded.',level=QgsMessageBar.CRITICAL)
             QgsMessageLog.logMessage('Upload failed', level=QgsMessageLog.CRITICAL)
-    
+
     def uploaderError(self, e, exception_string):
         QgsMessageLog.logMessage('Uploader thread raised an exception:\n'.format(exception_string), level=QgsMessageLog.CRITICAL)
 

@@ -165,12 +165,12 @@
      <string>Test Connection</string>
     </property>
    </widget>
-   <widget class="QTextBrowser" name="textBrowser">
+   <widget class="QListWidget" name="listWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>10</y>
-      <width>391</width>
+      <width>411</width>
       <height>161</height>
      </rect>
     </property>

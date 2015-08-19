@@ -8,8 +8,12 @@ def connect_s3(accessKeyId, secretAccessKey, bucketName):
     conn = S3Connection(accessKeyId, secretAccessKey)
     myBucket = conn.get_bucket(bucketName)
 
-    listStr = ""
+    #convert botoList into normal python list
+    rsKey = []
     for key in myBucket.list():
-        listStr += str(key) + "\n"
+        rsKey.append(repr(key))
 
-    return listStr
+    #display results in console
+    print repr(rsKey)
+
+    return rsKey

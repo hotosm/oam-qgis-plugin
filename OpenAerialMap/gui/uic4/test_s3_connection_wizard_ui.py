@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'ui/test_s3_connection_wizard.ui'
 #
-# Created: Sat Aug 15 23:48:17 2015
+# Created: Tue Aug 18 19:35:51 2015
 #      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -71,9 +71,9 @@ class Ui_Wizard(object):
         self.btnTestConn = QtGui.QPushButton(self.wizardPage3)
         self.btnTestConn.setGeometry(QtCore.QRect(260, 190, 111, 27))
         self.btnTestConn.setObjectName(_fromUtf8("btnTestConn"))
-        self.textBrowser = QtGui.QTextBrowser(self.wizardPage3)
-        self.textBrowser.setGeometry(QtCore.QRect(20, 10, 391, 161))
-        self.textBrowser.setObjectName(_fromUtf8("textBrowser"))
+        self.listWidget = QtGui.QListWidget(self.wizardPage3)
+        self.listWidget.setGeometry(QtCore.QRect(10, 10, 411, 161))
+        self.listWidget.setObjectName(_fromUtf8("listWidget"))
         Wizard.addPage(self.wizardPage3)
 
         self.retranslateUi(Wizard)
