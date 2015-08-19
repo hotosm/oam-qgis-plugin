@@ -87,13 +87,14 @@ class OpenAerialMap:
             if qVersion() > '4.3.3':
                 QCoreApplication.installTranslator(self.translator)
 
-        """should be able to move into the class of dialog later?"""
+        """
         # Create the dialog (after translation) and keep reference
         self.dlg = ExtendedOAMDialog()
 
         self.dlg.bar = QgsMessageBar()
         self.dlg.bar.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         self.dlg.layout().addWidget(self.dlg.bar)
+        """
 
         # Declare instance attributes
         self.actions = []
@@ -197,6 +198,7 @@ class OpenAerialMap:
         return action
 
     def displayImgUploaderWizard(self):
+        """
         # show the dialog
         self.dlg.show()
         # Run the dialog event loop
@@ -204,6 +206,10 @@ class OpenAerialMap:
         # See if OK was pressed
         if result:
             pass
+        """
+        masterWigt = Tk()
+        helloTkWindow = HelloTkWindow(masterWigt, "Hello,world!", "Img Uploader Dialog")
+        helloTkWindow.mainloop()
 
     def displaySearchTool(self):
         masterWigt = Tk()
@@ -302,6 +308,7 @@ class OpenAerialMap:
             callback=self.displaySettingDialog,
             parent=self.iface.mainWindow())
 
+        """
         # Load widgets
         self.loadLayers() # why we need to invoke this function here?
 
@@ -336,6 +343,7 @@ class OpenAerialMap:
         self.dlg.quit_button.clicked.connect(self.closeDialog)
         self.dlg.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)
         self.dlg.upload_previous_button.clicked.connect(self.previousTab)
+        """
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
@@ -352,6 +360,7 @@ class OpenAerialMap:
         self.iface.removePluginMenu("Test plugins", self.actionTest3)
         #self.iface.removeToolBarIcon(self.actionTest3)
 
+    """
     def cleanMetadataSettings(self):
         self.dlg.title_edit.setText('')
         self.dlg.platform_combo_box.setCurrentIndex(0)
@@ -536,7 +545,7 @@ class OpenAerialMap:
         self.dlg.tab_widget.setCurrentIndex(self.dlg.tab_widget.currentIndex()-1)
 
     def extractMetadata(self,filename):
-        """Extract filesize, projection, bbox and gsd from image file"""
+        #Extract filesize, projection, bbox and gsd from image file
 
         self.metadata[filename]['File size'] = os.stat(filename).st_size
 
@@ -563,7 +572,7 @@ class OpenAerialMap:
         self.metadata[filename]['BBOX'] = (upper_left,lower_left,upper_right,lower_right)
 
     def GDALInfoReportCorner(self,hDataset,x,y):
-        """GDALInfoReportCorner: extracted and adapted from the python port of gdalinfo"""
+        #GDALInfoReportCorner: extracted and adapted from the python port of gdalinfo
 
         # Transform the point into georeferenced coordinates
         adfGeoTransform = hDataset.GetGeoTransform(can_return_null = True)
@@ -633,6 +642,8 @@ class OpenAerialMap:
             self.dlg.specify_edit.setText('')
             self.dlg.specify_edit.setEnabled(0)
 
+    """
+
     def run(self):
 
         """
@@ -645,7 +656,9 @@ class OpenAerialMap:
         def testS3(self):
 
         """
+        pass
 
+"""
 class ExtendedOAMDialog(OpenAerialMapDialog):
     '''Class that extends automated generated OAM dialog, basically for threading purpose'''
 
@@ -787,3 +800,4 @@ class Uploader(QObject):
 
     def kill(self):
         self.killed = True
+"""
