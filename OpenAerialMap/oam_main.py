@@ -31,29 +31,28 @@ from qgis.gui import QgsMessageBar
 from qgis.core import QgsMapLayer, QgsMessageLog
 import resources_rc
 
-from oam_client_dialog import OpenAerialMapDialog
+#classes for GUI
+from img_uploader_wizard import ImgUploaderWizard
+from img_search_wizard import ImgSearchWizard
+from setting_dialog import SettingDialog
+from backup_img_uploader_dialog import ImageUploaderDialog
 
 import os, sys, math, imghdr
 from osgeo import gdal, osr
 import time
 import json
+
 # Modules needed for upload
 from boto.s3.connection import S3Connection, S3ResponseError
 from boto.s3.key import Key
 from filechunkio import FileChunkIO
 import syslog, traceback
 
-
-from module_access_local_storage import *
-
-
 #for testing purpose only
 from test_tkinter import HelloTkWindow
 from test_s3_connection import *
 from test_s3_connection_wizard_class import TestS3ConnectionWizard
 from Tkinter import *
-#import sys
-from test_img_uploader_dialog import ImageUploaderDialog
 
 class OpenAerialMap:
     """QGIS Plugin Implementation."""
@@ -113,7 +112,6 @@ class OpenAerialMap:
         """
         # noinspection PyTypeChecker,PyArgumentList,PyCallByClass
         return QCoreApplication.translate('OpenAerialMap', message)
-
 
     def add_action(
         self,
@@ -189,19 +187,25 @@ class OpenAerialMap:
         return action
 
     def displayImgUploaderWizard(self):
-        masterWigt = Tk()
-        helloTkWindow = HelloTkWindow(masterWigt, "Hello,world!", "Please check Test Plugins Menu -> Test Img Uploader")
-        helloTkWindow.mainloop()
+
+        self.imgUploaderWizard = ImgUploaderWizard(self.iface)
+        self.imgUploaderWizard.show()
 
     def displaySearchTool(self):
-        masterWigt = Tk()
-        helloTkWindow = HelloTkWindow(masterWigt, "Hello,world!", "OAM Search Tool")
-        helloTkWindow.mainloop()
+
+        self.imgSearchWizard = ImgSearchWizard(self.iface)
+        self.imgSearchWizard.show()
 
     def displaySettingDialog(self):
-        masterWigt = Tk()
-        helloTkWindow = HelloTkWindow(masterWigt, "Hello,world!", "Setting Dialog")
-        helloTkWindow.mainloop()
+
+        self.settingDialog = SettingDialog(self.iface)
+        self.settingDialog.show()
+
+    #Delete this part later
+    def displayImgUploaderDialog(self):
+
+        self.testIgmUpDlg = ImageUploaderDialog(self.iface, self.currentImgSettings, self.currentImgMetadata)
+        self.testIgmUpDlg.show()
 
     #Testing purpose only
     def displayPaths(self):
@@ -216,17 +220,6 @@ class OpenAerialMap:
     def testS3(self):
         self.testS3 = TestS3ConnectionWizard()
         self.testS3.show()
-
-    #Testing purpose only
-    def testImgUploader(self):
-
-        self.testIgmUpDlg = ImageUploaderDialog(self.iface, self.currentImgSettings, self.currentImgMetadata)
-        self.testIgmUpDlg.show()
-        """
-        masterWigt = Tk()
-        helloTkWindow = HelloTkWindow(masterWigt, "Hello,world!", "Image Uploader")
-        helloTkWindow.mainloop()
-        """
 
     #Testing purpose only
     """
@@ -247,13 +240,8 @@ class OpenAerialMap:
         self.actionTest2.setObjectName("testS3")
         QObject.connect(self.actionTest2, SIGNAL("triggered()"), self.testS3)
 
-        self.actionTest3 = QAction(QIcon(":/plugins/testplug/icon.png"), "Test Image Uploader", self.iface.mainWindow())
-        self.actionTest3.setObjectName("testImgUploader")
-        QObject.connect(self.actionTest3, SIGNAL("triggered()"), self.testImgUploader)
-
         self.iface.addPluginToMenu("Test plugins", self.actionTest1)
         self.iface.addPluginToMenu("Test plugins", self.actionTest2)
-        self.iface.addPluginToMenu("Test plugins", self.actionTest3)
 
         # connect to signal renderComplete which is emitted when canvas
         # rendering is done
@@ -268,12 +256,17 @@ class OpenAerialMap:
 
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
-        icon_path_img_loader = ':/plugins/OpenAerialMap/icon.png'
+        icon_path_img_wizard = ':/plugins/OpenAerialMap/icon.png'
         icon_path_search_tool = ':/plugins/OpenAerialMap/search_icon.png'
-        icon_path_setting_dialog = ':/plugins/OpenAerialMap/search_icon.png' #need to be modified
+
+        #need to be modified for icon
+        icon_path_setting_dialog = ':/plugins/OpenAerialMap/search_icon.png'
+
+        #delete this part later
+        icon_path_img_dialog = ':/plugins/OpenAerialMap/icon.png'
 
         self.add_action(
-            icon_path_img_loader,
+            icon_path_img_wizard,
             text=self.tr(u'Upload Imagery'),
             callback=self.displayImgUploaderWizard,
             parent=self.iface.mainWindow())
@@ -290,6 +283,14 @@ class OpenAerialMap:
             callback=self.displaySettingDialog,
             parent=self.iface.mainWindow())
 
+        #delete this part later
+        self.add_action(
+            icon_path_img_dialog,
+            text=self.tr(u'Image Uploader Dialog (Backup)'),
+            callback=self.displayImgUploaderDialog,
+            parent=self.iface.mainWindow())
+
+
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
         for action in self.actions:
@@ -299,17 +300,15 @@ class OpenAerialMap:
 
         # Testing purpose only
         self.iface.removePluginMenu("Test plugins", self.actionTest1)
-        #self.iface.removeToolBarIcon(self.actionTest1)
         self.iface.removePluginMenu("Test plugins", self.actionTest2)
-        #self.iface.removeToolBarIcon(self.actionTest2)
-        self.iface.removePluginMenu("Test plugins", self.actionTest3)
-        #self.iface.removeToolBarIcon(self.actionTest3)
 
     def run(self):
         """
         Please refer to the following functions for details:
-        def displayLoadImageryWizard(self):
+        def displayImgUploaderWizard(self):
         def displaySearchTool(self):
+        def displaySettingDialog(self):
+        def displayImgUploaderDialog(self):
         def displayPaths(self):
         def testS3(self):
         """

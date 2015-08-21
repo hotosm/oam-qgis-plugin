@@ -72,9 +72,8 @@ class ImageUploaderDialog(QtGui.QDialog, FORM_CLASS):
         self.loadStorageSettings()
         self.loadOptionsSettings()
 
-        """ this function does not exist?
+        # make sure about this function...
         self.loadFullMetadata()
-        """
 
         #register event handlers
         # Imagery tab connections
