@@ -22,7 +22,7 @@
  ***************************************************************************/
 """
 
-import os
+import os, sys
 
 from PyQt4 import QtGui, uic
 from PyQt4.Qt import *
@@ -31,6 +31,8 @@ from qgis.gui import QgsMessageBar
 from qgis.core import QgsMapLayer, QgsMessageLog
 from osgeo import gdal, osr
 import json
+import time
+import math, imghdr
 
 # Modules needed for upload
 from boto.s3.connection import S3Connection, S3ResponseError
@@ -100,6 +102,9 @@ class ImageUploaderDialog(QtGui.QDialog, FORM_CLASS):
         self.upload_button.clicked.connect(self.startUploader)
         self.quit_button.clicked.connect(self.closeDialog)
         self.upload_previous_button.clicked.connect(self.previousTab)
+
+        #make sure about this function
+        #self.exec_()
 
     # event handling for tab paging
     def nextTab(self):
@@ -510,8 +515,7 @@ class ImageUploaderDialog(QtGui.QDialog, FORM_CLASS):
                 self.thread = thread
                 self.uploader = uploader
         else:
-            #for testing purpose
-            print "message from tester: " + str(self.storage_combo_box.currentIndex())
+            print "error"
 
     def uploaderFinished(self, success):
         # clean up the uploader and thread
@@ -588,6 +592,7 @@ class Uploader(QObject):
             QgsMessageLog.logMessage(
                 'About to send %s chunks\n' % chunk_count,
                 level=QgsMessageLog.CRITICAL)
+
             for i in range(chunk_count):
                 if self.killed is True:
                     # kill request received, exit loop early
