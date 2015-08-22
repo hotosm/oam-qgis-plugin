@@ -15,6 +15,8 @@
   </property>
   <widget class="QWizardPage" name="wizardPage1"/>
   <widget class="QWizardPage" name="wizardPage2"/>
+  <widget class="QWizardPage" name="wizardPage3"/>
+  <widget class="QWizardPage" name="wizardPage4"/>
  </widget>
  <resources/>
  <connections/>
