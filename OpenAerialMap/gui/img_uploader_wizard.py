@@ -40,22 +40,23 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.iface = iface
         self.setupUi(self)
 
-        #metadata = {}
-        #storageSettings = {}
-        #optionSettings = {}
-
-        #add QGISMessageBar bar on the dialog
-
-        """ need to figure out how to put QgisMessageBar on Wizard"""
-        #self.layout = QtGui.QGridLayout()
+        """need to figure out how to put QgisMessageBar on Wizard"""
         self.bar = iface.messageBar()
         #self.bar = QgsMessageBar()
         #self.bar.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         #self.layout().addWidget(self.bar)
 
+        #create widget in the wizard
+        #create layout in the widget above
+        #add QgisMessageBar in the layout
 
-        """modify this part later!"""
+
+        """make sure how to store imgMetadata, listImgMetadata, storageSettings, and optionSettings"""
         #img_settings = QSettings('QGIS','oam-qgis-plugin')
+        #imgMetadata = {}
+        #listImgMetadata = []
+        #storageSettings = {}
+        #optionSettings = {}
         """
         self.settings = imgSettings
         self.metadata = imgMetadata
@@ -75,7 +76,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.button(QWizard.FinishButton).clicked.connect(self.finishWizard)
         self.button(QWizard.CancelButton).clicked.connect(self.cancelWizard)
 
-        """List of page navigation buttons"""
+        """Reference: List of page navigation buttons"""
         """
         QWizard.BackButton 	0 	The Back button (Go Back on Mac OS X)
         QWizard.NextButton 	1 	The Next button (Continue on Mac OS X)
@@ -98,9 +99,9 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         # Registering event handlers for editing metadata
         self.added_sources_list_widget.setSelectionMode(QtGui.QAbstractItemView.SingleSelection)
-        self.default_button.clicked.connect(self.loadMetadataSettings)
-        self.clean_button.clicked.connect(self.cleanMetadataSettings)
-        self.save_button.clicked.connect(self.saveMetadata)
+        self.default_button.clicked.connect(self.loadImgMetadata)
+        self.clean_button.clicked.connect(self.cleanImgMetadata)
+        self.save_button.clicked.connect(self.saveImgMetadata)
 
         #set the format of calendars
         self.sense_start_edit.setCalendarPopup(1)
@@ -115,7 +116,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         #make sure about this function
         #self.exec_()
 
-    #function for testing
+    # Function for testing
     def test(self):
         #outStr = "" + repr(self.settings.value('locale/userLocale')) + "\n" + str(self.metadata) + "\n" + str(sys.path)
         outStr = "Bonjour!"
@@ -152,6 +153,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         elif self.currentId() == 2:
             self.button(QWizard.FinishButton).setEnabled(False)
+            self.metadata_review_browser.setText("Under construction: Metadata information will be displayed here.")
+
         else:
             pass
 
@@ -165,7 +168,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         #need confirmation
         pass
 
-    # event handling for image/layer source
+    # Event handling for image/layer source
     def loadLayers(self):
         all_layers = self.iface.mapCanvas().layers()
         for layer in all_layers:
@@ -299,8 +302,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 else:
                     return 1
 
-    # event handling for editing metadata
-    def loadMetadataSettings(self):
+    # Event handling for editing metadata
+    def loadImgMetadata(self):
 
         """ need to modify this part! """
         #items_for_metadata = None
@@ -310,18 +313,18 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         file_path = first_item.data(Qt.UserRole)
 
         mHdl = MetadataHandler()
-        fileName = mHdl.extractMetadata(file_path)
+        result_file_path = mHdl.extractMetadata(file_path)
 
         qMsgBox = QMessageBox()
-        qMsgBox.setText("Under construction: metadata will be extracted from " + repr(fileName))
+        qMsgBox.setText("Under construction: metadata will be extracted from the file " + repr(result_file_path))
         qMsgBox.exec_()
 
-    def cleanMetadataSettings(self):
+    def cleanImgMetadata(self):
         qMsgBox = QMessageBox()
         qMsgBox.setText("Under construction: message from cleanMetadataSettings method.")
         qMsgBox.exec_()
 
-    def saveMetadata(self):
+    def saveImgMetadata(self):
         qMsgBox = QMessageBox()
         qMsgBox.setText("Under construction: message from saveMetadata method.")
         qMsgBox.exec_()
@@ -331,14 +334,32 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         """note: please replace this part into module_access_oam_catalog.py,
         when access via oam-catalog"""
-        s3Manager = S3Manager()
 
-        if s3Manager.uploadExe():
+        bucket_key_id = str(self.key_id_edit.text())
+        bucket_secret_key = str(self.secret_key_edit.text())
+
+        if self.storage_combo_box.currentIndex() == 0:
+            bucket_name = 'oam-qgis-plugin-test'
+        else:
+            bucket_name = str(self.specify_edit.text())
+            if not bucket_name:
+                self.bar.clearWidgets()
+                self.bar.pushMessage(
+                    'WARNING',
+                    'The bucket for upload must be provided',
+                    level=QgsMessageBar.CRITICAL)
+
+        file_path = "path for imagery" # need to implement this part later!
+
+        s3Manager = S3Manager()
+        result = s3Manager.test(bucket_key_id, bucket_secret_key, bucket_name, file_path)
+
+        if result:
             self.button(QWizard.FinishButton).setEnabled(True)
             self.button(QWizard.CancelButton).setEnabled(False)
             self.button(QWizard.BackButton).setEnabled(False)
             qMsgBox = QMessageBox()
-            qMsgBox.setText("Files were successfully uploaded.")
+            qMsgBox.setText("Under construnction: " + str(result))
             qMsgBox.exec_()
         else:
             pass

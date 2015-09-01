@@ -10,6 +10,12 @@ from filechunkio import FileChunkIO
 import syslog, traceback
 
 class S3Manager:
+    #inherit from S3 Connection later
+    #def __init__(self, bucket_key_id, bucket_secret_key, parent=None):
+    #    super(S3Manager, self).__init__(bucket_key_id, bucket_secret_key, parent)
 
-    def uploadExe(self):
-        return True
+    def test(self, bucket_key_id, bucket_secret_key, bucket_name, file_path):
+
+        outStr = str(bucket_key_id) + ", " + str(bucket_secret_key) + ", " + str(bucket_name) + ", " + str(file_path)
+
+        return outStr

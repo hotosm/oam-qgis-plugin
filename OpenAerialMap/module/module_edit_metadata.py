@@ -4,15 +4,17 @@
  Module for handling metadata
  ***************************************************************************/
 """
+import json
+
 class MetadataHandler:
 
     def extractMetadata(self,fileName):
+
+        self.fileName = fileName
+
         """Extract filesize, projection, bbox and gsd from image file"""
 
         """
-        #make sure about this part later!
-        self.metadata = {}
-
         self.metadata[filename]['File size'] = os.stat(filename).st_size
 
         datafile = gdal.Open(filename,gdal.GA_ReadOnly)
@@ -40,7 +42,7 @@ class MetadataHandler:
         center = self.GDALInfoReportCorner(datafile,datafile.RasterXSize/2.0,datafile.RasterYSize/2.0 );
         self.metadata[filename]['BBOX'] = (upper_left,lower_left,upper_right,lower_right)
         """
-        return fileName
+        return self.fileName
 
     def GDALInfoReportCorner(self,hDataset,x,y):
         """GDALInfoReportCorner: extracted and adapted from the python port of gdalinfo"""
