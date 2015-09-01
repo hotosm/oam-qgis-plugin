@@ -210,7 +210,7 @@ class OpenAerialMap:
     #Testing purpose only
     def displayPaths(self):
 
-        outStr = "" + repr(self.settings) + "\n" + str(self.metadata) + "\n" + str(sys.path)
+        outStr = "" + repr(self.settings.value('locale/userLocale')) + "\n" + str(self.metadata) + "\n" + str(sys.path)
 
         masterWigt = Tk()
         helloTkWindow = HelloTkWindow(masterWigt, "Hello,world!", outStr)
