@@ -33,7 +33,7 @@ import resources_rc
 
 #classes for GUI
 from img_uploader_wizard import ImgUploaderWizard
-from img_search_wizard import ImgSearchWizard
+from img_search_dialog import ImgSearchDialog
 from setting_dialog import SettingDialog
 from backup_img_uploader_dialog import ImageUploaderDialog
 
@@ -193,8 +193,8 @@ class OpenAerialMap:
 
     def displaySearchTool(self):
 
-        self.imgSearchWizard = ImgSearchWizard(self.iface)
-        self.imgSearchWizard.show()
+        self.imgSearchDialog = ImgSearchDialog(self.iface)
+        self.imgSearchDialog.show()
 
     def displaySettingDialog(self):
 

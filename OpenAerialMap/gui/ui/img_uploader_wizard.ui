@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>747</width>
-    <height>472</height>
+    <width>802</width>
+    <height>488</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Wizard</string>
+   <string>Upload imagery</string>
   </property>
   <widget class="QWizardPage" name="wizardPage1">
    <property name="title">
     <string>Select and sort Imagery</string>
    </property>
    <property name="subTitle">
-    <string>Please choose imagery among the loaded layers in QGIS or select files from the file system</string>
+    <string>Please choose imagery among the loaded layers in QGIS or select files from your file system.</string>
    </property>
    <layout class="QGridLayout" name="gridLayout_3">
     <item row="0" column="0">
@@ -255,7 +255,7 @@
     <string>Provide imagery metadata</string>
    </property>
    <property name="subTitle">
-    <string>First select which imagery you will input metadata, then fil lthe form and save. You need to provide metadata for all source imagery before attempting to upload.</string>
+    <string>Select the imagery to which you will input metadata, fill the form and save. You need to provide metadat for every source.</string>
    </property>
    <layout class="QGridLayout" name="gridLayout_4">
     <item row="0" column="0">
@@ -495,6 +495,13 @@
           </property>
          </widget>
         </item>
+        <item row="11" column="0" colspan="2">
+         <widget class="QCheckBox" name="checkBox_2">
+          <property name="text">
+           <string>Reproject to EPSG:3857</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
      </layout>
@@ -519,7 +526,7 @@
     <string>Review metadata and upload</string>
    </property>
    <property name="subTitle">
-    <string>If the metadata presented is correct, you can finish the wizard and proceed to upload. If you notice any mistake, please go back and correct it.</string>
+    <string>If you notice any mistake in the preseted metadata, please go back and correct it before uploading.</string>
    </property>
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="0" column="0">
@@ -637,6 +644,13 @@
            </widget>
           </item>
          </layout>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBox">
+          <property name="text">
+           <string>Notify OAM of new upload</string>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QCheckBox" name="trigger_tiling_check">
