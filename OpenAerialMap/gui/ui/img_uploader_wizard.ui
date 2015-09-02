@@ -20,6 +20,9 @@
    <property name="subTitle">
     <string>Please choose imagery among the loaded layers in QGIS or select files from your file system.</string>
    </property>
+   <attribute name="pageId">
+    <string notr="true">1</string>
+   </attribute>
    <layout class="QGridLayout" name="gridLayout_3">
     <item row="0" column="0">
      <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -257,6 +260,9 @@
    <property name="subTitle">
     <string>Select the imagery to which you will input metadata, fill the form and save. You need to provide metadat for every source.</string>
    </property>
+   <attribute name="pageId">
+    <string notr="true">2</string>
+   </attribute>
    <layout class="QGridLayout" name="gridLayout_4">
     <item row="0" column="0">
      <layout class="QGridLayout" name="gridLayout">
@@ -528,6 +534,9 @@
    <property name="subTitle">
     <string>If you notice any mistake in the preseted metadata, please go back and correct it before uploading.</string>
    </property>
+   <attribute name="pageId">
+    <string notr="true">3</string>
+   </attribute>
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="0" column="0">
      <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -671,6 +680,13 @@
            </size>
           </property>
          </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="upload_button">
+          <property name="text">
+           <string>Start Upload</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
