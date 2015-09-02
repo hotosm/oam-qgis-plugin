@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>802</width>
-    <height>488</height>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <string>Select and sort Imagery</string>
    </property>
    <property name="subTitle">
-    <string>Please choose imagery among the loaded layers in QGIS or select files from your file system.</string>
+    <string>Please choose imagery among the loaded layers in QGIS or select files from your file system</string>
    </property>
    <layout class="QGridLayout" name="gridLayout_3">
     <item row="0" column="0">
@@ -496,7 +496,7 @@
          </widget>
         </item>
         <item row="11" column="0" colspan="2">
-         <widget class="QCheckBox" name="checkBox_2">
+         <widget class="QCheckBox" name="reproject_check_box">
           <property name="text">
            <string>Reproject to EPSG:3857</string>
           </property>
@@ -646,7 +646,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QCheckBox" name="checkBox">
+         <widget class="QCheckBox" name="notify_oam_check">
           <property name="text">
            <string>Notify OAM of new upload</string>
           </property>

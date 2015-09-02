@@ -188,7 +188,7 @@ class OpenAerialMap:
 
     def displayImgUploaderWizard(self):
 
-        self.imgUploaderWizard = ImgUploaderWizard(self.iface)
+        self.imgUploaderWizard = ImgUploaderWizard(self.iface, self.currentImgSettings, self.currentImgMetadata)
         self.imgUploaderWizard.show()
 
     def displaySearchTool(self):
@@ -279,16 +279,18 @@ class OpenAerialMap:
 
         self.add_action(
             icon_path_setting_dialog,
-            text=self.tr(u'Change Settings'),
+            text=self.tr(u'Edit Settings'),
             callback=self.displaySettingDialog,
-            parent=self.iface.mainWindow())
+            parent=self.iface.mainWindow(),
+            add_to_toolbar=False)
 
         #delete this part later
         self.add_action(
             icon_path_img_dialog,
             text=self.tr(u'Image Uploader Dialog (Backup)'),
             callback=self.displayImgUploaderDialog,
-            parent=self.iface.mainWindow())
+            parent=self.iface.mainWindow(),
+            add_to_toolbar=False)
 
 
     def unload(self):
