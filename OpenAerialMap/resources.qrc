@@ -1,8 +1,8 @@
 <RCC>
     <qresource prefix="/plugins/OpenAerialMap" >
-        <file>icon.png</file>
+        <file>icon/icon.png</file>
     </qresource>
     <qresource prefix="/plugins/OpenAerialMap" >
-        <file>search_icon.png</file>
+        <file>icon/search_icon.png</file>
     </qresource>
 </RCC>
