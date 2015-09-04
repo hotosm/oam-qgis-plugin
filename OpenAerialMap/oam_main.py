@@ -48,12 +48,6 @@ from boto.s3.key import Key
 from filechunkio import FileChunkIO
 import syslog, traceback
 
-#for testing purpose only
-from test_tkinter import HelloTkWindow
-from test_s3_connection import *
-from test_s3_connection_wizard_class import TestS3ConnectionWizard
-from Tkinter import *
-
 class OpenAerialMap:
     """QGIS Plugin Implementation."""
 
@@ -207,46 +201,7 @@ class OpenAerialMap:
         self.testIgmUpDlg = ImageUploaderDialog(self.iface, self.currentImgSettings, self.currentImgMetadata)
         self.testIgmUpDlg.show()
 
-    #Testing purpose only
-    def displayPaths(self):
-
-        outStr = "" + repr(self.settings) + "\n" + str(self.metadata) + "\n" + str(sys.path)
-
-        masterWigt = Tk()
-        helloTkWindow = HelloTkWindow(masterWigt, "Hello,world!", outStr)
-        helloTkWindow.mainloop()
-
-    #Testing purpose only
-    def testS3(self):
-        self.testS3 = TestS3ConnectionWizard()
-        self.testS3.show()
-
-    #Testing purpose only
-    """
-    def renderTest(self, painter):
-        masterWigt = Tk()
-        helloTkWindow = HelloTkWindow(masterWigt, "Hello,world!", "TestPlugin: renderTest called!")
-        helloTkWindow.mainloop()
-    """
-
     def initGui(self):
-
-        # Testing purpose only
-        self.actionTest1 = QAction(QIcon(":/e/testplug/icon.png"), "Test paths", self.iface.mainWindow())
-        self.actionTest1.setObjectName("testPaths")
-        QObject.connect(self.actionTest1, SIGNAL("triggered()"), self.displayPaths)
-
-        self.actionTest2 = QAction(QIcon(":/plugins/testplug/icon.png"), "Test S3", self.iface.mainWindow())
-        self.actionTest2.setObjectName("testS3")
-        QObject.connect(self.actionTest2, SIGNAL("triggered()"), self.testS3)
-
-        self.iface.addPluginToMenu("Test plugins", self.actionTest1)
-        self.iface.addPluginToMenu("Test plugins", self.actionTest2)
-
-        # connect to signal renderComplete which is emitted when canvas
-        # rendering is done
-        #QObject.connect(self.iface.mapCanvas(), SIGNAL("renderComplete(QPainter *)"), self.renderTest)
-
 
         """Create the menu and toolbar inside the QGIS GUI."""
 
@@ -300,10 +255,6 @@ class OpenAerialMap:
             self.iface.removeToolBarIcon(action)
         del self.toolbar
 
-        # Testing purpose only
-        self.iface.removePluginMenu("Test plugins", self.actionTest1)
-        self.iface.removePluginMenu("Test plugins", self.actionTest2)
-
     def run(self):
         """
         Please refer to the following functions for details:
@@ -311,7 +262,5 @@ class OpenAerialMap:
         def displaySearchTool(self):
         def displaySettingDialog(self):
         def displayImgUploaderDialog(self):
-        def displayPaths(self):
-        def testS3(self):
         """
         pass
