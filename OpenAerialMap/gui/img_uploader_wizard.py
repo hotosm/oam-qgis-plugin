@@ -81,6 +81,9 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         self.settings = settings
 
+        # Do we need modify this part later?
+        self.metadata = {}
+
         self.loadLayers()
         self.loadMetadataSettings()
         self.loadStorageSettings()
