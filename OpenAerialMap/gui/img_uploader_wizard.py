@@ -46,7 +46,7 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
 
 class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
-    def __init__(self, iface, imgSettings, imgMetadata, parent=None):
+    def __init__(self, iface, settings, parent=None):
         """Constructor."""
         super(ImgUploaderWizard, self).__init__(parent)
         # Set up the user interface from Designer.
@@ -79,10 +79,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.setButtonText(QtGui.QWizard.CustomButton1, self.tr("&Start upload"));
         self.setOption(QtGui.QWizard.HaveCustomButton1, True);
 
-        """modify this part later!"""
-        #img_settings = QSettings('QGIS','oam-qgis-plugin')
-        self.settings = imgSettings
-        self.metadata = imgMetadata
+        self.settings = settings
 
         self.loadLayers()
         self.loadMetadataSettings()
