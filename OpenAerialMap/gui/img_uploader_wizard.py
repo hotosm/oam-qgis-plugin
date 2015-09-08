@@ -46,7 +46,7 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
 
 class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
-    def __init__(self, iface, imgSettings, imgMetadata, parent=None):
+    def __init__(self, iface, settings, parent=None):
         """Constructor."""
         super(ImgUploaderWizard, self).__init__(parent)
         # Set up the user interface from Designer.
@@ -56,7 +56,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         # #widgets-and-dialogs-with-auto-connect
         self.iface = iface
         self.setupUi(self)
-        
+
         # Message bars need to be attached to pages, since the wizard object
         # does not have a layout. It doesn't work to attach the same bar
         # object to all pages (it is only shown in the last one). The only way
@@ -79,10 +79,10 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.setButtonText(QtGui.QWizard.CustomButton1, self.tr("&Start upload"));
         self.setOption(QtGui.QWizard.HaveCustomButton1, True);
 
-        """modify this part later!"""
-        #img_settings = QSettings('QGIS','oam-qgis-plugin')
-        self.settings = imgSettings
-        self.metadata = imgMetadata
+        self.settings = settings
+
+        # Do we need modify this part later?
+        self.metadata = {}
 
         self.loadLayers()
         self.loadMetadataSettings()
@@ -93,7 +93,12 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.loadFullMetadata()
 
         # register event handlers
-        # event handling for tab paging - deprecated: wizard already implements it
+        """Reference: List of page navigation buttons in QWizard.
+            Please comment out and implement following functions if necessary."""
+        #self.button(QWizard.BackButton).clicked.connect(self.previousPage)
+        #self.button(QWizard.NextButton).clicked.connect(self.nextPage)
+        #self.button(QWizard.FinishButton).clicked.connect(self.finishWizard)
+        #self.button(QWizard.CancelButton).clicked.connect(self.cancelWizard)
 
         # Imagery connections (wizard page 1)
         self.layers_tool_button.clicked.connect(self.loadLayers)
@@ -102,9 +107,9 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.remove_source_button.clicked.connect(self.removeSources)
         self.up_source_button.clicked.connect(self.upSource)
         self.down_source_button.clicked.connect(self.downSource)
-        #self.imagery_next_button.clicked.connect(self.nextTab)
 
         # Metadata connections (wizard page 2)
+        self.added_sources_list_widget.setSelectionMode(QtGui.QAbstractItemView.SingleSelection)
         self.sense_start_edit.setCalendarPopup(1)
         self.sense_start_edit.setDisplayFormat('dd.MM.yyyy HH:mm')
         self.sense_end_edit.setCalendarPopup(1)
@@ -112,27 +117,13 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.default_button.clicked.connect(self.loadMetadataSettings)
         self.clean_button.clicked.connect(self.cleanMetadataSettings)
         self.save_button.clicked.connect(self.saveMetadata)
-        #self.metadata_next_button.clicked.connect(self.nextTab)
-        #self.metadata_previous_button.clicked.connect(self.previousTab)
 
         # Upload tab connections (wizard page 3)
         self.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)
         self.customButtonClicked.connect(self.startUploader)
-        #self.quit_button.clicked.connect(self.closeDialog)
-        #self.upload_previous_button.clicked.connect(self.previousTab)
 
         #make sure about this function
         #self.exec_()
-
-    #def nextTab(self):
-    #    self.tab_widget.setCurrentIndex(self.tab_widget.currentIndex()+1)
-    #
-    #def previousTab(self):
-    #    self.tab_widget.setCurrentIndex(self.tab_widget.currentIndex()-1)
-    #
-    #def closeDialog(self):
-    #    #return imgSettigs and imgMetadata?
-    #    self.close()
 
     # event handling for imagery tab
     def loadLayers(self):

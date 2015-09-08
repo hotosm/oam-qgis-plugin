@@ -83,14 +83,16 @@ class OpenAerialMap:
         # Declare instance attributes
         self.actions = []
 
-        """make sure if this QSettings object should be belong to
-        the object of OpenAerialMap class"""
+        # need to send this setting object to setting dialog.
         self.settings = QSettings('QGIS','oam-qgis-plugin')
-        self.metadata = {}
+
+        #Testing purpose only
+        #self.settings.remove('')
 
         """this part is only for testImgUploader() function"""
+        """Please delete these statements when we delete the testImgUploader() function"""
         self.currentImgSettings = self.settings
-        self.currentImgMetadata = self.metadata
+        self.currentImgMetadata = {}
 
     # noinspection PyMethodMayBeStatisc
     def tr(self, message):
@@ -182,7 +184,7 @@ class OpenAerialMap:
 
     def displayImgUploaderWizard(self):
 
-        self.imgUploaderWizard = ImgUploaderWizard(self.iface, self.currentImgSettings, self.currentImgMetadata)
+        self.imgUploaderWizard = ImgUploaderWizard(self.iface, self.settings)
         self.imgUploaderWizard.show()
 
     def displaySearchTool(self):
