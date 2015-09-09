@@ -134,11 +134,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 item.setText(layer.name())
                 item.setData(Qt.UserRole, layer.dataProvider().dataSourceUri())
                 self.layers_list_widget.addItem(item)
-        self.bar0.clearWidgets()
-        self.bar0.pushMessage(
-            "INFO",
-            "Source imagery for upload must be selected from layers or files.",
-            level=QgsMessageBar.INFO)
 
     def selectFile(self):
         selected_file = QFileDialog.getOpenFileName(
@@ -154,30 +149,31 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.bar0.clearWidgets()
             self.bar0.pushMessage(
                 'WARNING',
-                'Either a layer or file must be selected to be added',
+                'Either a layer or file should be selected to be added',
                 level=QgsMessageBar.WARNING)
-        if filename:
-            if self.validateFile(filename):
-                if not self.sources_list_widget.findItems(filename,Qt.MatchExactly):
-                    item = QListWidgetItem()
-                    item.setText(os.path.basename(filename))
-                    item.setData(Qt.UserRole, filename)
-                    self.sources_list_widget.addItem(item)
-                    self.added_sources_list_widget.addItem(item.clone())
-                    self.source_file_edit.setText('')
-        if selected_layers:
-            for item in selected_layers:
-                if self.validateLayer(item.text()):
-                    if not self.sources_list_widget.findItems(item.text(),Qt.MatchExactly):
-                        self.layers_list_widget.takeItem(self.layers_list_widget.row(item))
+        else:
+            if filename:
+                if self.validateFile(filename):
+                    if not self.sources_list_widget.findItems(filename,Qt.MatchExactly):
+                        item = QListWidgetItem()
+                        item.setText(os.path.basename(filename))
+                        item.setData(Qt.UserRole, filename)
                         self.sources_list_widget.addItem(item)
                         self.added_sources_list_widget.addItem(item.clone())
-        self.bar0.clearWidgets()
-        self.bar0.pushMessage(
-            'INFO',
-            'Select sources were added to the upload queue',
-            level=QgsMessageBar.INFO)
-        self.loadFullMetadata()
+                        self.source_file_edit.setText('')
+            if selected_layers:
+                for item in selected_layers:
+                    if self.validateLayer(item.text()):
+                        if not self.sources_list_widget.findItems(item.text(),Qt.MatchExactly):
+                            self.layers_list_widget.takeItem(self.layers_list_widget.row(item))
+                            self.sources_list_widget.addItem(item)
+                            self.added_sources_list_widget.addItem(item.clone())
+            self.bar0.clearWidgets()
+            self.bar0.pushMessage(
+                'INFO',
+                'Select sources were added to the upload queue',
+                level=QgsMessageBar.INFO)
+            self.loadFullMetadata()
 
     def removeSources(self):
         selected_sources = self.sources_list_widget.selectedItems()
@@ -299,13 +295,13 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.bar1.clearWidgets()
             self.bar1.pushMessage(
                 'INFO',
-                'Metadata for the selected sources was saved',
+                'Metadata for the selected sources were saved',
                 level=QgsMessageBar.INFO)
         else:
             self.bar1.clearWidgets()
             self.bar1.pushMessage(
                 'WARNING',
-                'One or more source imagery must be selected to have the metadata saved.',
+                'One or more source imagery should be selected to have the metadata saved',
                 level=QgsMessageBar.WARNING)
 
     # event handling for upload tab
@@ -388,7 +384,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.bar1.clearWidgets()
             self.bar1.pushMessage(
                 'CRITICAL',
-                'Extraction of raster metadata failed.',
+                'Extraction of raster metadata failed',
                 level=QgsMessageBar.CRITICAL)
 
         # projection
@@ -420,7 +416,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.bar1.clearWidgets()
             self.bar1.pushMessage(
                 'WARNING',
-                'BBOX might be wrong. Transformation coefficient could not be fetched from raster.',
+                'BBOX might be wrong. Transformation coefficient could not be fetched from raster',
                 level=QgsMessageBar.WARNING)
             return (x,y)
 
@@ -555,7 +551,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.bar2.clearWidgets()
             self.bar2.pushMessage(
                 'INFO',
-                'Upload completed with success.',
+                'Upload completed with success',
                 level=QgsMessageBar.INFO)
             QgsMessageLog.logMessage(
                 'Upload succeeded',
@@ -565,7 +561,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             # notify the user that something went wrong
             self.bar2.pushMessage(
                 'CRITICAL',
-                'Upload could not be completeded.',
+                'Upload could not be completeded',
                 level=QgsMessageBar.CRITICAL)
             QgsMessageLog.logMessage(
                 'Upload failed',
