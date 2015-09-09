@@ -446,6 +446,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.metadata[filename]['Provider'] = self.provider_edit.text()
         self.metadata[filename]['Contact'] = self.contact_edit.text()
         self.metadata[filename]['Website'] = self.website_edit.text()
+        if self.license_check_box.isChecked():
+            self.metadata[filename]['License'] = "OAM license"
 
     def loadFullMetadata(self):
         for index in xrange(self.sources_list_widget.count()):
@@ -463,7 +465,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 self.bar2.pushMessage(
                     'WARNING',
                     'The bucket for upload must be provided',
-                    level=QgsMessageBar.CRITICAL)
+                    level=QgsMessageBar.WARNING)
 
         bucket_key = str(self.key_id_edit.text())
         bucket_secret = str(self.secret_key_edit.text())
@@ -475,27 +477,41 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 connection = S3Connection(bucket_key,bucket_secret)
                 self.bucket = connection.get_bucket(bucket_name)
                 QgsMessageLog.logMessage(
-                    'INFO',
                     'Connection established' % trial,
+                    'OAM',
                     level=QgsMessageLog.INFO)
             except:
                 if trial == 2:
                    QgsMessageLog.logMessage(
-                    'CRITICAL',
                     'Failed to connect after 3 attempts',
+                    'OAM',
                     level=QgsMessageLog.CRITICAL)
         return self.bucket
+
+    def reproject(self,filename):
+        (head,tail) = os.path.split(filename)
+        os.rename(filename,"%s/original_%s" % (head,tail))
+        os.system("gdalwarp -of GTiff -t_srs epsg:3857 %s/original_%s %s" % (head,tail,filename))
+        QgsMessageLog.logMessage(
+            'Reprojected to EPSG:3857',
+            'OAM',
+            level=QgsMessageLog.INFO)
 
     def startUploader(self):
         if self.startConnection():
             for index in xrange(self.sources_list_widget.count()):
                 filename = str(self.sources_list_widget.item(index).data(Qt.UserRole))
 
+                # Check projection
+                if self.settings.value("Metadata/REPROJECT"):
+                    self.reproject(filename)
+                
                 # create a new uploader instance
                 uploader = Uploader(filename,self.bucket)
                 QgsMessageLog.logMessage(
-                    'started uploader\n',
-                    level=QgsMessageLog.CRITICAL)
+                    'Uploader started\n',
+                    'OAM',
+                    level=QgsMessageLog.INFO)
 
                 # configure the QgsMessageBar
                 messageBar = self.bar2.createMessage('Performing upload...', )
@@ -521,7 +537,10 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 self.thread = thread
                 self.uploader = uploader
         else:
-            print "error"
+                QgsMessageLog.logMessage(
+                    'No connection to the server\n',
+                    'OAM',
+                    level=QgsMessageLog.CRITICAL)
 
     def uploaderFinished(self, success):
         # clean up the uploader and thread
@@ -540,7 +559,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 level=QgsMessageBar.INFO)
             QgsMessageLog.logMessage(
                 'Upload succeeded',
-                level=QgsMessageLog.CRITICAL)
+                'OAM',
+                level=QgsMessageLog.INFO)
         else:
             # notify the user that something went wrong
             self.bar2.pushMessage(
@@ -549,11 +569,13 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 level=QgsMessageBar.CRITICAL)
             QgsMessageLog.logMessage(
                 'Upload failed',
+                'OAM',
                 level=QgsMessageLog.CRITICAL)
 
     def uploaderError(self, e, exception_string):
         QgsMessageLog.logMessage(
             'Uploader thread raised an exception:\n'.format(exception_string),
+            'OAM',
             level=QgsMessageLog.CRITICAL)
 
 
@@ -578,10 +600,12 @@ class Uploader(QObject):
             k.set_contents_from_filename(jsonfile)
             QgsMessageLog.logMessage(
                 'Sent %s\n' % jsonfile,
-                level=QgsMessageLog.CRITICAL)
+                'OAM',
+                level=QgsMessageLog.INFO)
         except:
             QgsMessageLog.logMessage(
                 'Could not send %s\n' % jsonfile,
+                'OAM',
                 level=QgsMessageLog.CRITICAL)
 
     def notifyOAM(self):
@@ -594,23 +618,27 @@ class Uploader(QObject):
         uri = "s3://%s/%s" % (self.bucket.name,os.path.basename(self.filename))
         QgsMessageLog.logMessage(
             'Imagery uri %s\n' % uri,
-            level=QgsMessageLog.CRITICAL)
+            'OAM',
+            level=QgsMessageLog.INFO)
         d = json.dumps({'sources':[uri]})
         p = requests.post(url,headers=h,data=d)
         post_dict = json.loads(p.text)
         QgsMessageLog.logMessage(
             'Post response: %s' % post_dict,
-            level=QgsMessageLog.CRITICAL)
+            'OAM',
+            level=QgsMessageLog.INFO)
 
         if u'id' in post_dict:
             ts_id = post_dict[u'id']
             time = post_dict[u'queued_at']
             QgsMessageLog.logMessage(
                 'Tile service \#%s triggered on %s\n' % (ts_id,time),
-                level=QgsMessageLog.CRITICAL)
+                'OAM',
+                level=QgsMessageLog.INFO)
         else:
             QgsMessageLog.logMessage(
                 'Tile service could not be created\n',
+                'OAM',
                 level=QgsMessageLog.CRITICAL)
         return(0)
 
@@ -627,7 +655,8 @@ class Uploader(QObject):
 
             QgsMessageLog.logMessage(
                 'About to send %s chunks\n' % chunk_count,
-                level=QgsMessageLog.CRITICAL)
+                'OAM',
+                level=QgsMessageLog.INFO)
 
             for i in range(chunk_count):
                 if self.killed is True:
@@ -641,11 +670,13 @@ class Uploader(QObject):
                 progress_count += 1
                 QgsMessageLog.logMessage(
                     'Chunk #%d\n' % progress_count,
-                    level=QgsMessageLog.CRITICAL)
+                    'OAM',
+                    level=QgsMessageLog.INFO)
                 self.progress.emit(progress_count / float(chunk_count)*100)
                 QgsMessageLog.logMessage(
                     'Progress %f' % (progress_count / float(chunk_count)),
-                    level=QgsMessageLog.CRITICAL)
+                    'OAM',
+                    level=QgsMessageLog.INFO)
             if self.killed is False:
                 multipart.complete_upload()
                 self.progress.emit(100)
