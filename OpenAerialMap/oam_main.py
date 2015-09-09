@@ -32,10 +32,10 @@ from qgis.core import QgsMapLayer, QgsMessageLog
 import resources_rc
 
 #classes for GUI
-from img_uploader_wizard import ImgUploaderWizard
-from img_search_dialog import ImgSearchDialog
-from setting_dialog import SettingDialog
-from backup_img_uploader_dialog import ImageUploaderDialog
+from gui.img_uploader_wizard import ImgUploaderWizard
+from gui.img_search_dialog import ImgSearchDialog
+from gui.setting_dialog import SettingDialog
+from gui.backup_img_uploader_dialog import ImageUploaderDialog
 
 import os, sys, math, imghdr
 from osgeo import gdal, osr
@@ -45,7 +45,7 @@ import json
 # Modules needed for upload
 from boto.s3.connection import S3Connection, S3ResponseError
 from boto.s3.key import Key
-from filechunkio import FileChunkIO
+from ext_libs.filechunkio import FileChunkIO
 import syslog, traceback
 
 class OpenAerialMap:

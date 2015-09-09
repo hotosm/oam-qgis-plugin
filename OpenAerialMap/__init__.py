@@ -26,13 +26,8 @@
 import sys
 import os
 
-#add path to models subfolder
 path_root = os.path.join(os.path.dirname(__file__))
-path_module = os.path.join(os.path.dirname(__file__), 'module')
-path_gui = os.path.join(os.path.dirname(__file__), 'gui')
 sys.path.append(path_root)
-sys.path.append(path_module)
-sys.path.append(path_gui)
 
 # noinspection PyPep8Naming
 def classFactory(iface):  # pylint: disable=invalid-name

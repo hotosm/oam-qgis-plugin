@@ -38,13 +38,15 @@ LRELEASE = lrelease
 # translation
 SOURCES = \
 	__init__.py \
-	oam_main.py
+	oam_main.py \
+#        filechunkio.py
 
 PLUGINNAME = OpenAerialMap
 
 PY_FILES = \
 	__init__.py \
-	oam_main.py
+	oam_main.py \
+#        filechunkio.py
 
 PY_FOLDERS = module gui icon ext_libs
 
