@@ -38,17 +38,15 @@ LRELEASE = lrelease
 # translation
 SOURCES = \
 	__init__.py \
-	oam_main.py \
-        filechunkio.py
+	oam_main.py
 
 PLUGINNAME = OpenAerialMap
 
 PY_FILES = \
 	__init__.py \
-	oam_main.py \
-        filechunkio.py
+	oam_main.py
 
-PY_FOLDERS = module gui icon
+PY_FOLDERS = module gui icon ext_libs
 
 #please modify the 'clean' section of this Makefile
 #UI_FILES = oam_client_dialog_base.ui
@@ -110,8 +108,7 @@ deploy: compile doc transcompile
 	# $HOME/$(QGISDIR)/python/plugins
 	mkdir -p $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
 	cp -vf $(PY_FILES) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
-	cp -vrf $(PY_FOLDERS) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)/	
-	#cp -vf $(UI_FILES) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
+	cp -vrf $(PY_FOLDERS) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)/
 	cp -vf $(COMPILED_RESOURCE_FILES) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
 	cp -vf $(EXTRAS) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
 	cp -vfr i18n $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)

@@ -194,7 +194,7 @@ class OpenAerialMap:
 
     def displaySettingDialog(self):
 
-        self.settingDialog = SettingDialog(self.iface)
+        self.settingDialog = SettingDialog(self.iface, self.settings)
         self.settingDialog.show()
 
     #Delete this part later

@@ -85,7 +85,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.metadata = {}
 
         self.loadLayers()
-        self.loadMetadataSettings()
+        #self.loadMetadataSettings()
         self.loadStorageSettings()
         self.loadOptionsSettings()
 
@@ -228,9 +228,14 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         else:
             self.platform_combo_box.setCurrentIndex(int(self.settings.value('PLATFORM')))
 
-        self.platform_combo_box.setCurrentIndex(0)
+        #self.platform_combo_box.setCurrentIndex(0)
         self.sensor_edit.setText(self.settings.value('SENSOR'))
         self.sensor_edit.setCursorPosition(0)
+
+        self.sense_start_edit.setDateTime(QDateTime(self.settings.value('SENSE_START')))
+        self.sense_end_edit.setDateTime(QDateTime(self.settings.value('SENSE_END')))
+
+        """
         self.sense_start_edit.setDate(QDateTime.fromString(
             self.settings.value('SENSE_START'),
             Qt.ISODate).date())
@@ -243,6 +248,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.sense_end_edit.setTime(
             QDateTime.fromString(self.settings.value('SENSE_END'),
             Qt.ISODate).time())
+        """
 
         if self.settings.value('TAGS') == None:
             self.tags_edit.setText(', '.join(''))
