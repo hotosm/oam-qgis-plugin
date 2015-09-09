@@ -155,16 +155,18 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
         self.website_edit.setCursorPosition(0)
 
         """
-        need to make sure about the boolean value of PyQt
-        (sometimes, it becomes lower case, just like C++)
+        Boolean values are converted into string and lower case for
+        'if' statement, since PyQt sometimes returns 'true', just like C++,
+        instead of 'True', Python style.
+        Maybe we can use integer values (0 or 1), instead of using string.
         """
         print str(self.settings.value('LICENSE'))
         print str(self.settings.value('REPROJECT'))
 
-        if self.settings.value('LICENSE') == 'true':
+        if str(self.settings.value('LICENSE')).lower() == 'true':
             self.license_check_box.setCheckState(2)
 
-        if self.settings.value('REPROJECT') == 'true':
+        if str(self.settings.value('REPROJECT')).lower() == 'true':
             self.reproject_check_box.setCheckState(2)
 
         self.settings.endGroup()
@@ -173,15 +175,17 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
         self.settings.beginGroup("Options")
 
         """
-        need to make sure about the boolean value of PyQt
-        (sometimes, it becomes lower case, just like C++)
+        Boolean values are converted into string and lower case for
+        'if' statement, since PyQt sometimes returns 'true', just like C++,
+        instead of 'True', Python style.
+        Maybe we can use integer values (0 or 1), instead of using string.
         """
         print str(self.settings.value('NOTIFY_OAM'))
         print str(self.settings.value('TRIGGER_OAM_TS'))
 
-        if self.settings.value('NOTIFY_OAM') == 'true':
+        if str(self.settings.value('NOTIFY_OAM')).lower() == 'true':
             self.notify_oam_check.setCheckState(2)
-        if self.settings.value('TRIGGER_OAM_TS') == 'true':
+        if str(self.settings.value('TRIGGER_OAM_TS')).lower() == 'true':
             self.trigger_tiling_check.setCheckState(2)
 
         self.settings.endGroup()

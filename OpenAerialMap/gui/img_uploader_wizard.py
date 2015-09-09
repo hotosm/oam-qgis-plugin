@@ -262,10 +262,25 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.contact_edit.setCursorPosition(0)
         self.website_edit.setText(self.settings.value('WEBSITE'))
         self.website_edit.setCursorPosition(0)
+
+        """
+        Boolean values are converted into string and lower case for
+        'if' statement, since PyQt sometimes returns 'true', just like C++,
+        instead of 'True', Python style.
+        Maybe we can use integer values (0 or 1), instead of using string.
+        """
+        if str(self.settings.value('LICENSE')).lower() == 'true':
+            self.license_check_box.setCheckState(2)
+        if str(self.settings.value('REPROJECT')).lower() == 'true':
+            self.reproject_check_box.setCheckState(2)
+
+        """
         if self.settings.value('LICENSE'):
             self.license_check_box.setCheckState(2)
         if self.settings.value('REPROJECT'):
             self.reproject_check_box.setCheckState(2)
+        """
+
         self.settings.endGroup()
 
     def cleanMetadataSettings(self):
@@ -344,10 +359,25 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
     def loadOptionsSettings(self):
         self.settings.beginGroup("Options")
+
+        """
+        Boolean values are converted into string and lower case for
+        'if' statement, since PyQt sometimes returns 'true', just like C++,
+        instead of 'True', Python style.
+        Maybe we can use integer values (0 or 1), instead of using string.
+        """
+        if str(self.settings.value('NOTIFY_OAM')).lower() == 'true':
+            self.notify_oam_check.setCheckState(2)
+        if str(self.settings.value('TRIGGER_OAM_TS')).lower() == 'true':
+            self.trigger_tiling_check.setCheckState(2)
+
+        """
         if self.settings.value('NOTIFY_OAM'):
             self.notify_oam_check.setCheckState(2)
         if self.settings.value('TRIGGER_OAM_TS'):
             self.trigger_tiling_check.setCheckState(2)
+        """
+
         self.settings.endGroup()
 
     # other functions
@@ -511,7 +541,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 # Check projection
                 if self.settings.value("Metadata/REPROJECT"):
                     self.reproject(filename)
-                
+
                 # create a new uploader instance
                 uploader = Uploader(filename,self.bucket)
                 QgsMessageLog.logMessage(
