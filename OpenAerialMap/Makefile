@@ -39,16 +39,16 @@ LRELEASE = lrelease
 SOURCES = \
 	__init__.py \
 	oam_main.py \
-        filechunkio.py
+#        filechunkio.py
 
 PLUGINNAME = OpenAerialMap
 
 PY_FILES = \
 	__init__.py \
 	oam_main.py \
-        filechunkio.py
+#        filechunkio.py
 
-PY_FOLDERS = module gui icon
+PY_FOLDERS = module gui icon ext_libs
 
 #please modify the 'clean' section of this Makefile
 #UI_FILES = oam_client_dialog_base.ui
