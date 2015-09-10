@@ -3,7 +3,7 @@
 /***************************************************************************
  OpenAerialMap
                                  A QGIS plugin
- This plugin can be used as an OAM client to browse, search, download and 
+ This plugin can be used as an OAM client to browse, search, download and
  upload imagery from/to the OAM catalog.
                              -------------------
         begin                : 2015-07-01

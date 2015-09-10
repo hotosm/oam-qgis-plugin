@@ -85,7 +85,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.metadata = {}
 
         self.loadLayers()
-        self.loadMetadataSettings()
+        #self.loadMetadataSettings()
         self.loadStorageSettings()
         self.loadOptionsSettings()
 
@@ -224,9 +224,14 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         else:
             self.platform_combo_box.setCurrentIndex(int(self.settings.value('PLATFORM')))
 
-        self.platform_combo_box.setCurrentIndex(0)
+        #self.platform_combo_box.setCurrentIndex(0)
         self.sensor_edit.setText(self.settings.value('SENSOR'))
         self.sensor_edit.setCursorPosition(0)
+
+        self.sense_start_edit.setDateTime(QDateTime(self.settings.value('SENSE_START')))
+        self.sense_end_edit.setDateTime(QDateTime(self.settings.value('SENSE_END')))
+
+        """
         self.sense_start_edit.setDate(QDateTime.fromString(
             self.settings.value('SENSE_START'),
             Qt.ISODate).date())
@@ -239,6 +244,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.sense_end_edit.setTime(
             QDateTime.fromString(self.settings.value('SENSE_END'),
             Qt.ISODate).time())
+        """
 
         if self.settings.value('TAGS') == None:
             self.tags_edit.setText(', '.join(''))
@@ -252,10 +258,25 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.contact_edit.setCursorPosition(0)
         self.website_edit.setText(self.settings.value('WEBSITE'))
         self.website_edit.setCursorPosition(0)
+
+        """
+        Boolean values are converted into string and lower case for
+        'if' statement, since PyQt sometimes returns 'true', just like C++,
+        instead of 'True', Python style.
+        Maybe we can use integer values (0 or 1), instead of using string.
+        """
+        if str(self.settings.value('LICENSE')).lower() == 'true':
+            self.license_check_box.setCheckState(2)
+        if str(self.settings.value('REPROJECT')).lower() == 'true':
+            self.reproject_check_box.setCheckState(2)
+
+        """
         if self.settings.value('LICENSE'):
             self.license_check_box.setCheckState(2)
         if self.settings.value('REPROJECT'):
             self.reproject_check_box.setCheckState(2)
+        """
+
         self.settings.endGroup()
 
     def cleanMetadataSettings(self):
@@ -334,10 +355,25 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
     def loadOptionsSettings(self):
         self.settings.beginGroup("Options")
+
+        """
+        Boolean values are converted into string and lower case for
+        'if' statement, since PyQt sometimes returns 'true', just like C++,
+        instead of 'True', Python style.
+        Maybe we can use integer values (0 or 1), instead of using string.
+        """
+        if str(self.settings.value('NOTIFY_OAM')).lower() == 'true':
+            self.notify_oam_check.setCheckState(2)
+        if str(self.settings.value('TRIGGER_OAM_TS')).lower() == 'true':
+            self.trigger_tiling_check.setCheckState(2)
+
+        """
         if self.settings.value('NOTIFY_OAM'):
             self.notify_oam_check.setCheckState(2)
         if self.settings.value('TRIGGER_OAM_TS'):
             self.trigger_tiling_check.setCheckState(2)
+        """
+
         self.settings.endGroup()
 
     # other functions
@@ -501,7 +537,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 # Check projection
                 if self.settings.value("Metadata/REPROJECT"):
                     self.reproject(filename)
-                
+
                 # create a new uploader instance
                 uploader = Uploader(filename,self.bucket)
                 QgsMessageLog.logMessage(

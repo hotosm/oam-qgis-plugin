@@ -47,7 +47,7 @@
       <x>10</x>
       <y>25</y>
       <width>341</width>
-      <height>256</height>
+      <height>271</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout_1">
@@ -225,7 +225,7 @@
       <x>10</x>
       <y>25</y>
       <width>341</width>
-      <height>100</height>
+      <height>108</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -237,21 +237,21 @@
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_3">
+      <widget class="QCheckBox" name="reproject_check_box">
        <property name="text">
         <string>Reproject to EPSG:3857</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox">
+      <widget class="QCheckBox" name="notify_oam_check">
        <property name="text">
         <string>Notify OAM of new upload</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QCheckBox" name="checkBox_2">
+      <widget class="QCheckBox" name="trigger_tiling_check">
        <property name="text">
         <string>Trigger OAM tile service</string>
        </property>
@@ -278,7 +278,7 @@
       <x>15</x>
       <y>20</y>
       <width>341</width>
-      <height>108</height>
+      <height>122</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout_2">
