@@ -89,8 +89,8 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
         self.settings.setValue('PLATFORM', self.platform_combo_box.currentIndex())
         self.settings.setValue('SENSOR', self.sensor_edit.text())
 
-        self.settings.setValue('SENSE_START', self.sense_start_edit.dateTime())
-        self.settings.setValue('SENSE_END', self.sense_end_edit.dateTime())
+        self.settings.setValue('SENSE_START', self.sense_start_edit.dateTime().toString(Qt.ISODate))
+        self.settings.setValue('SENSE_END', self.sense_end_edit.dateTime().toString(Qt.ISODate))
         #make sure about TAGS
         self.settings.setValue('TAGS', self.tags_edit.text())
 
