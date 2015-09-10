@@ -137,8 +137,22 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
         self.sensor_edit.setText(self.settings.value('SENSOR'))
         self.sensor_edit.setCursorPosition(0)
 
+        """
         self.sense_start_edit.setDateTime(QDateTime(self.settings.value('SENSE_START')))
         self.sense_end_edit.setDateTime(QDateTime(self.settings.value('SENSE_END')))
+        """
+        self.sense_start_edit.setDate(QDateTime.fromString(
+            self.settings.value('SENSE_START'),
+            Qt.ISODate).date())
+        self.sense_start_edit.setTime(
+            QDateTime.fromString(self.settings.value('SENSE_START'),
+            Qt.ISODate).time())
+        self.sense_end_edit.setDate(
+            QDateTime.fromString(self.settings.value('SENSE_END'),
+            Qt.ISODate).date())
+        self.sense_end_edit.setTime(
+            QDateTime.fromString(self.settings.value('SENSE_END'),
+            Qt.ISODate).time())
 
         #make sure about TAGS
         if self.settings.value('TAGS') == None:
