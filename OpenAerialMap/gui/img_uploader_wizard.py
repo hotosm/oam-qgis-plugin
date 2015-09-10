@@ -246,11 +246,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             QDateTime.fromString(self.settings.value('SENSE_END'),
             Qt.ISODate).time())
 
-        if self.settings.value('TAGS') == None:
-            self.tags_edit.setText(', '.join(''))
-        else:
-            self.tags_edit.setText(', '.join(self.settings.value('TAGS')))
-
+        self.tags_edit.setText(self.settings.value('TAGS'))
         self.tags_edit.setCursorPosition(0)
         self.provider_edit.setText(self.settings.value('PROVIDER'))
         self.provider_edit.setCursorPosition(0)
