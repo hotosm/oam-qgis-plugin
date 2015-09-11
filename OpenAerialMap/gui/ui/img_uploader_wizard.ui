@@ -18,7 +18,7 @@
     <string>Select and sort imagery</string>
    </property>
    <property name="subTitle">
-    <string>Select imagery among layers and files and place them in the desired order of upload.</string>
+    <string>Select imagery among loaded layers on QGIS map canvas or any local file. In the box on the right, place them in the desired order of upload.</string>
    </property>
    <layout class="QGridLayout" name="gridLayout_3">
     <item row="0" column="0">
@@ -266,7 +266,7 @@
     <string>Provide imagery information</string>
    </property>
    <property name="subTitle">
-    <string>Select the imagery to which you will input metadata, fill the form and save. Each source needs a saved metadata file.</string>
+    <string>Select one or multiple sources to input the corresponding metadata. You need to accept the license terms and save a metadata file for each imagery before attempting to upload.</string>
    </property>
    <layout class="QGridLayout" name="gridLayout_4">
     <item row="0" column="0">
@@ -553,7 +553,7 @@
     <string>Review metadata and upload</string>
    </property>
    <property name="subTitle">
-    <string>If you notice any mistake in the presented metadata, please go back and correct it before uploading.</string>
+    <string>Review the complete metadata collected and go back to correct any mistake. Provide the upload destination and select if  the OAM catalog should be imediately notified of the new resource and if a tile service should be created.</string>
    </property>
    <layout class="QGridLayout" name="gridLayout_2">
     <item row="0" column="0">
