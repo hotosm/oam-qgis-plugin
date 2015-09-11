@@ -110,7 +110,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.down_source_button.clicked.connect(self.downSource)
 
         # Metadata connections (wizard page 2)
-        self.added_sources_list_widget.setSelectionMode(QtGui.QAbstractItemView.SingleSelection)
         self.sense_start_edit.setCalendarPopup(1)
         self.sense_start_edit.setDisplayFormat('dd.MM.yyyy HH:mm')
         self.sense_end_edit.setCalendarPopup(1)
