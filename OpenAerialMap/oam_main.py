@@ -213,14 +213,9 @@ class OpenAerialMap:
 
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
-        icon_path_img_wizard = ':/plugins/OpenAerialMap/icon.png'
-        icon_path_search_tool = ':/plugins/OpenAerialMap/search_icon.png'
-
-        #need to be modified for icon
-        icon_path_setting_dialog = ':/plugins/OpenAerialMap/search_icon.png'
-
-        #delete this part later
-        icon_path_img_dialog = ':/plugins/OpenAerialMap/icon.png'
+        icon_path_img_wizard = ':/plugins/OpenAerialMap/icon/icon.png'
+        icon_path_search_tool = ':/plugins/OpenAerialMap/icon/search_icon.png'
+        icon_path_setting_dialog = ':/plugins/OpenAerialMap/icon/settings_icon.png'
 
         self.add_action(
             icon_path_img_wizard,
@@ -238,17 +233,7 @@ class OpenAerialMap:
             icon_path_setting_dialog,
             text=self.tr(u'Edit Settings'),
             callback=self.displaySettingDialog,
-            parent=self.iface.mainWindow(),
-            add_to_toolbar=False)
-
-        #delete this part later
-        self.add_action(
-            icon_path_img_dialog,
-            text=self.tr(u'Image Uploader Dialog (Backup)'),
-            callback=self.displayImgUploaderDialog,
-            parent=self.iface.mainWindow(),
-            add_to_toolbar=False)
-
+            parent=self.iface.mainWindow())
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
