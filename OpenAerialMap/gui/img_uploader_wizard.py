@@ -82,7 +82,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         self.settings = settings
 
-        # Dictionaries to save imagery info (should be defined as a class in the future) 
+        # Dictionaries to save imagery info (should be defined as a class in the future)
         self.metadata = {}
         self.reprojected = []
         self.licensed = []
@@ -429,7 +429,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             upper_right = self.GDALInfoReportCorner(datafile,datafile.RasterXSize,0.0 );
             lower_right = self.GDALInfoReportCorner(datafile,datafile.RasterXSize,datafile.RasterYSize );
             center = self.GDALInfoReportCorner(datafile,datafile.RasterXSize/2.0,datafile.RasterYSize/2.0 );
-          
+
             # get new bbox values if reprojection will happen
             try:
                 if filename in self.reprojected:
@@ -514,7 +514,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
     def loadMetadataReviewBox(self):
         print "loadMetadataReviewBox called"
-        
+
         json_filenames = []
         for index in xrange(self.sources_list_widget.count()):
             filename = str(self.sources_list_widget.item(index).data(Qt.UserRole))
@@ -582,7 +582,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
     def convert(self,filename):
         (head,tail) = string.rsplit(filename,".",1)
-        tif_filename = head+".tif" 
+        tif_filename = head+".tif"
         #Open existing dataset
         src_ds = gdal.Open(filename)
         driver = gdal.GetDriverByName("GTiff")
@@ -599,11 +599,11 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 # Check projection
                 if filename in self.reprojected:
                     filename = self.reproject(filename)
-                
+
                 # Check file format
                 if not (imghdr.what(filename) == 'tiff'):
                     filename = self.convert(filename)
-                
+
                 # create a new uploader instance
                 uploader = Uploader(filename,self.bucket)
                 QgsMessageLog.logMessage(
