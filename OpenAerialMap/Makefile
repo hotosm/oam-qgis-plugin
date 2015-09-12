@@ -53,7 +53,7 @@ PY_FOLDERS = gui icon ext_libs
 #please modify the 'clean' section of this Makefile
 #UI_FILES = oam_client_dialog_base.ui
 
-EXTRAS = metadata.txt oam-qgis-plugin.conf.sample README INSTALL LICENSE 
+EXTRAS = metadata.txt oam-qgis-plugin.conf.sample ABOUT INSTALL LICENSE 
 
 COMPILED_RESOURCE_FILES = resources_rc.py
 
