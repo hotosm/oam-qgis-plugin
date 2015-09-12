@@ -30,7 +30,7 @@ from PyQt4.Qt import *
 from qgis.gui import QgsMessageBar
 from qgis.core import QgsMapLayer, QgsMessageLog
 from osgeo import gdal, osr, ogr
-import json, time 
+import json, time
 import math, imghdr
 
 # Modules needed for upload
@@ -81,7 +81,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         self.settings = settings
 
-        # Dictionaries to save imagery info (todo: defined as a classes in the future) 
+        # Dictionaries to save imagery info (todo: defined as a classes in the future)
         self.metadata = {}
         self.reprojected = []
         self.licensed = []
@@ -299,7 +299,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                     json_filename = os.path.splitext(filename)[0]+'.json'
                 else:
                     # to avoid repetition of "EPSG3857" in filename:
-                    if not "EPSG3857" in filename: 
+                    if not "EPSG3857" in filename:
                         json_filename = os.path.splitext(filename)[0]+'_EPSG3857.json'
                 json_file = open(json_filename, 'w')
                 print >> json_file, json_string
@@ -463,7 +463,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             upper_right = self.GDALInfoReportCorner(datafile,datafile.RasterXSize,0.0 );
             lower_right = self.GDALInfoReportCorner(datafile,datafile.RasterXSize,datafile.RasterYSize );
             center = self.GDALInfoReportCorner(datafile,datafile.RasterXSize/2.0,datafile.RasterYSize/2.0 );
-          
+
             # get new bbox values if reprojection will happen
             try:
                 if filename in self.reprojected:
@@ -611,7 +611,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
     def reproject(self,filename):
         # to avoid repetition of "EPSG3857" in filename:
-        if not "EPSG3857" in filename: 
+        if not "EPSG3857" in filename:
             reproject_filename = os.path.splitext(filename)[0]+'_EPSG3857.tif'
         os.system("gdalwarp -of GTiff -t_srs epsg:3857 %s %s" % (filename,reproject_filename))
         QgsMessageLog.logMessage(
@@ -621,7 +621,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         return reproject_filename
 
     def convert(self,filename):
-        tif_filename = os.path.splitext(filename)[0]+".tif" 
+        tif_filename = os.path.splitext(filename)[0]+".tif"
         #Open existing dataset
         src_ds = gdal.Open(filename)
         driver = gdal.GetDriverByName("GTiff")
@@ -655,7 +655,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                         'Created reprojected file: %s' % filename,
                         'OAM',
                         level=QgsMessageLog.INFO)
-                
+
                 # Convert file format
                 if not (imghdr.what(filename) == 'tiff'):
                     filename = self.convert(filename)
@@ -663,7 +663,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                         'Converted file to tiff: %s' % filename,
                         'OAM',
                         level=QgsMessageLog.INFO)
-                
+
                 # create a new uploader instance
                 uploader = Uploader(filename,self.bucket,self.upload_options)
                 QgsMessageLog.logMessage(
@@ -831,14 +831,14 @@ class Uploader(QObject):
             chunk_size = 5242880
             chunk_count = int(math.ceil(file_size / float(chunk_size)))
             progress_count = 0
-        
+
             multipart = self.bucket.initiate_multipart_upload(os.path.basename(self.filename))
-        
+
             QgsMessageLog.logMessage(
                 'Preparing to send %s chunks in total\n' % chunk_count,
                 'OAM',
                 level=QgsMessageLog.INFO)
-        
+
             for i in range(chunk_count):
                 if self.killed is True:
                     # kill request received, exit loop early
@@ -870,7 +870,7 @@ class Uploader(QObject):
             # forward the exception upstream (or try to...)
             # chunk size smaller than 5MB can cause an error, server does not expect it
             self.error.emit(e, traceback.format_exc())
-   
+
         self.finished.emit(success)
 
     def kill(self):
