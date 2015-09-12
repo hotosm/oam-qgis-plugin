@@ -46,12 +46,14 @@ PY_FILES = \
 	__init__.py \
 	oam_main.py \
 
-PY_FOLDERS = module gui icon ext_libs
+# removed 'module' while it is non-functional
+#PY_FOLDERS = module gui icon ext_libs
+PY_FOLDERS = gui icon ext_libs
 
 #please modify the 'clean' section of this Makefile
 #UI_FILES = oam_client_dialog_base.ui
 
-EXTRAS = metadata.txt
+EXTRAS = metadata.txt README INSTALL LICENSE
 
 COMPILED_RESOURCE_FILES = resources_rc.py
 
