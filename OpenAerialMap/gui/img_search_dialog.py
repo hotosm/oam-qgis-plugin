@@ -27,11 +27,6 @@ import os, sys
 from PyQt4 import QtGui, uic
 from PyQt4.Qt import *
 
-from qgis.gui import QgsMessageBar
-from qgis.core import QgsMapLayer, QgsMessageLog
-from osgeo import gdal, osr
-
-
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_search_dialog.ui'))
 

@@ -21,32 +21,23 @@
  *                                                                         *
  ***************************************************************************/
 """
+# Qt classes
+from PyQt4.Qt import *
 from PyQt4.QtCore import (QSettings, QTranslator, qVersion, QCoreApplication,
                           pyqtSignal, QObject, QThread)
 from PyQt4.QtGui import (QAction, QIcon, QMessageBox, QFileDialog,
                          QListWidgetItem, QSizePolicy, QGridLayout, QPushButton,
                          QProgressBar)
-from PyQt4.Qt import *
-from qgis.gui import QgsMessageBar
-from qgis.core import QgsMapLayer, QgsMessageLog
+
+# icon images
 import resources_rc
 
-#classes for GUI
+# classes for GUI
 from gui.img_uploader_wizard import ImgUploaderWizard
 from gui.img_search_dialog import ImgSearchDialog
 from gui.setting_dialog import SettingDialog
-from gui.backup_img_uploader_dialog import ImageUploaderDialog
 
-import os, sys, math, imghdr
-from osgeo import gdal, osr
-import time
-import json
-
-# Modules needed for upload
-from boto.s3.connection import S3Connection, S3ResponseError
-from boto.s3.key import Key
-from ext_libs.filechunkio import FileChunkIO
-import syslog, traceback
+import os
 
 class OpenAerialMap:
     """QGIS Plugin Implementation."""
@@ -197,12 +188,6 @@ class OpenAerialMap:
         self.settingDialog = SettingDialog(self.iface, self.settings)
         self.settingDialog.show()
 
-    #Delete this part later
-    def displayImgUploaderDialog(self):
-
-        self.testIgmUpDlg = ImageUploaderDialog(self.iface, self.currentImgSettings, self.currentImgMetadata)
-        self.testIgmUpDlg.show()
-
     def initGui(self):
 
         """Create the menu and toolbar inside the QGIS GUI."""
@@ -248,6 +233,5 @@ class OpenAerialMap:
         def displayImgUploaderWizard(self):
         def displaySearchTool(self):
         def displaySettingDialog(self):
-        def displayImgUploaderDialog(self):
         """
         pass

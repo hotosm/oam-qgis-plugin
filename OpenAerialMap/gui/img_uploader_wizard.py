@@ -36,8 +36,8 @@ import math, imghdr
 # Modules needed for upload
 from boto.s3.connection import S3Connection, S3ResponseError
 from boto.s3.key import Key
-from ext_libs.filechunkio import FileChunkIO
-import syslog, traceback
+from filechunkio import FileChunkIO
+import traceback
 import requests, json
 import pyproj
 from ast import literal_eval
