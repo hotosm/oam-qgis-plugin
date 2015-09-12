@@ -378,7 +378,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 level=QgsMessageBar.CRITICAL)
             return False
         # check that file is an image
-        elif imghdr.what(filename) is None:
+        if imghdr.what(filename) is None:
             print "no image"
             self.bar0.clearWidgets()
             self.bar0.pushMessage(
@@ -386,37 +386,38 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 "The file %s is not a supported data source" % filename,
                 level=QgsMessageBar.CRITICAL)
             return False
-        else:
-            # check if gdal can read file
-            try:
-                raster = gdal.Open(filename,gdal.GA_ReadOnly)
-            except:
-                self.bar0.clearWidgets()
-                self.bar0.pushMessage(
-                    "CRITICAL",
-                    "GDAL could not read file %s" % filename,
-                    level=QgsMessageBar.CRITICAL)
-                return False
-            # check that image has at least 3 bands
-            if raster.RasterCount < 3:
-                self.bar0.clearWidgets()
-                self.bar0.pushMessage(
-                    "CRITICAL",
-                    "The file %s has less than 3 raster bands" % filename,
-                    level=QgsMessageBar.CRITICAL)
-                return False
-            # check if projection is set
-            elif raster.GetProjection() is '':
-                print "projection="
-                print raster.GetProjection
-                self.bar0.clearWidgets()
-                self.bar0.pushMessage(
-                    "CRITICAL",
-                    "Could not extract projection from file %s" % filename,
-                    level=QgsMessageBar.CRITICAL)
-                return False
-            # otherwise return True, the file is valid    
-            else:
+        # check if gdal can read file
+        try:
+            raster = gdal.Open(filename,gdal.GA_ReadOnly)
+        except:
+            self.bar0.clearWidgets()
+            self.bar0.pushMessage(
+                "CRITICAL",
+                "GDAL could not read file %s" % filename,
+                level=QgsMessageBar.CRITICAL)
+            return False
+        # check that image has at least 3 bands
+        if raster.RasterCount < 3:
+            self.bar0.clearWidgets()
+            self.bar0.pushMessage(
+                "CRITICAL",
+                "The file %s has less than 3 raster bands" % filename,
+                level=QgsMessageBar.CRITICAL)
+            return False
+        # check if projection is set
+        if raster.GetProjection() is '':
+            print "projection="
+            print raster.GetProjection
+            self.bar0.clearWidgets()
+            self.bar0.pushMessage(
+                "CRITICAL",
+                "Could not extract projection from file %s" % filename,
+                level=QgsMessageBar.CRITICAL)
+            return False
+        # finally, check if bbox has valid data
+        xy_points = [(0.0,0.0),(0.0,raster.RasterYSize),(raster.RasterXSize,0.0),(raster.RasterXSize,raster.RasterYSize)]
+        for point in xy_points:
+            if point != self.GDALInfoReportCorner(raster,point[0],point[1]):
                 QgsMessageLog.logMessage(
                     'File %s is a valid data source' % filename,
                     'OAM',
