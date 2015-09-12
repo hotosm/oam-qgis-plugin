@@ -30,7 +30,7 @@ from PyQt4.Qt import *
 from qgis.gui import QgsMessageBar
 from qgis.core import QgsMapLayer, QgsMessageLog
 from osgeo import gdal, osr
-import json, time, string
+import json, time 
 import math, imghdr
 
 # Modules needed for upload
@@ -149,6 +149,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 'Either a layer or file should be selected to be added',
                 level=QgsMessageBar.WARNING)
         else:
+            added = False
             if filename:
                 if self.validateFile(filename):
                     if not self.sources_list_widget.findItems(filename,Qt.MatchExactly):
@@ -158,6 +159,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                         self.sources_list_widget.addItem(item)
                         self.added_sources_list_widget.addItem(item.clone())
                         self.source_file_edit.setText('')
+                        added = True
             if selected_layers:
                 for item in selected_layers:
                     if self.validateLayer(item.text()):
@@ -165,12 +167,14 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                             self.layers_list_widget.takeItem(self.layers_list_widget.row(item))
                             self.sources_list_widget.addItem(item)
                             self.added_sources_list_widget.addItem(item.clone())
-            self.bar0.clearWidgets()
-            self.bar0.pushMessage(
-                'INFO',
-                'Select sources were added to the upload queue',
-                level=QgsMessageBar.INFO)
-            self.loadMetadataReviewBox()
+                            added = True
+            if added:
+                self.bar0.clearWidgets()
+                self.bar0.pushMessage(
+                    'INFO',
+                    'Source(s) added to the upload queue',
+                    level=QgsMessageBar.INFO)
+                self.loadMetadataReviewBox()
 
     def removeSources(self):
         selected_sources = self.sources_list_widget.selectedItems()
@@ -297,7 +301,9 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 if filename not in self.reprojected:
                     json_filename = os.path.splitext(filename)[0]+'.json'
                 else:
-                    json_filename = os.path.splitext(filename)[0]+'_EPSG3857.json'
+                    # to avoid repetition of "EPSG3857" in filename:
+                    if not "EPSG3857" in filename: 
+                        json_filename = os.path.splitext(filename)[0]+'_EPSG3857.json'
                 print json_filename
                 print "writing to file"+json_filename
                 json_file = open(json_filename, 'w')
@@ -363,23 +369,59 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
     # other functions
     def validateFile(self,filename):
-        if not os.path.isfile(filename):
+        # check that file exists
+        if not os.path.exists(filename):
             self.bar0.clearWidgets()
             self.bar0.pushMessage(
                 "CRITICAL",
                 "The file %s does not exist" % filename,
                 level=QgsMessageBar.CRITICAL)
-            return 0
+            return False
+        # check that file is an image
         elif imghdr.what(filename) is None:
-            print imghdr.what(filename)
+            print "no image"
             self.bar0.clearWidgets()
             self.bar0.pushMessage(
                 "CRITICAL",
                 "The file %s is not a supported data source" % filename,
                 level=QgsMessageBar.CRITICAL)
-            return 0
+            return False
         else:
-            return 1
+            # check if gdal can read file
+            try:
+                raster = gdal.Open(filename,gdal.GA_ReadOnly)
+            except:
+                self.bar0.clearWidgets()
+                self.bar0.pushMessage(
+                    "CRITICAL",
+                    "GDAL could not read file %s" % filename,
+                    level=QgsMessageBar.CRITICAL)
+                return False
+            # check that image has at least 3 bands
+            if raster.RasterCount < 3:
+                self.bar0.clearWidgets()
+                self.bar0.pushMessage(
+                    "CRITICAL",
+                    "The file %s has less than 3 raster bands" % filename,
+                    level=QgsMessageBar.CRITICAL)
+                return False
+            # check if projection is set
+            elif raster.GetProjection() is '':
+                print "projection="
+                print raster.GetProjection
+                self.bar0.clearWidgets()
+                self.bar0.pushMessage(
+                    "CRITICAL",
+                    "Could not extract projection from file %s" % filename,
+                    level=QgsMessageBar.CRITICAL)
+                return False
+            # otherwise return True, the file is valid    
+            else:
+                QgsMessageLog.logMessage(
+                    'File %s is a valid data source' % filename,
+                    'OAM',
+                    level=QgsMessageLog.INFO)
+                return True
 
     def validateLayer(self,layer_name):
         all_layers = self.iface.mapCanvas().layers()
@@ -512,8 +554,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.extractMetadata(filename)
 
     def loadMetadataReviewBox(self):
-        print "loadMetadataReviewBox called"
-        
         json_filenames = []
         for index in xrange(self.sources_list_widget.count()):
             filename = str(self.sources_list_widget.item(index).data(Qt.UserRole))
@@ -522,7 +562,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             else:
                 f = os.path.splitext(filename)[0]+'_EPSG3857.json'
             json_filenames.append(f)
-        print "json_filenames "+str(json_filenames)
 
         with open('/tmp/full_metadata', 'w') as tmpfile:
             for f in json_filenames:
@@ -570,8 +609,9 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         return self.bucket
 
     def reproject(self,filename):
-        (head,tail) = string.rsplit(filename,".",1)
-        reproject_filename = head+"_EPSG3857."+tail
+        # to avoid repetition of "EPSG3857" in filename:
+        if not "EPSG3857" in filename: 
+            reproject_filename = os.path.splitext(filename)[0]+'_EPSG3857.tif'
         os.system("gdalwarp -of GTiff -t_srs epsg:3857 %s %s" % (filename,reproject_filename))
         QgsMessageLog.logMessage(
             'Reprojected to EPSG:3857',
@@ -580,8 +620,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         return reproject_filename
 
     def convert(self,filename):
-        (head,tail) = string.rsplit(filename,".",1)
-        tif_filename = head+".tif" 
+        tif_filename = os.path.splitext(filename)[0]+".tif" 
         #Open existing dataset
         src_ds = gdal.Open(filename)
         driver = gdal.GetDriverByName("GTiff")
@@ -595,13 +634,27 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             for index in xrange(self.sources_list_widget.count()):
                 filename = str(self.sources_list_widget.item(index).data(Qt.UserRole))
 
-                # Check projection
+                self.bar2.clearWidgets()
+                self.bar2.pushMessage(
+                    'INFO',
+                    'Pre-upload image processing...',
+                    level=QgsMessageBar.INFO)
+
+                # Perfom reprojection
                 if filename in self.reprojected:
                     filename = self.reproject(filename)
+                    QgsMessageLog.logMessage(
+                        'Created reprojected file: %s' % filename,
+                        'OAM',
+                        level=QgsMessageLog.INFO)
                 
-                # Check file format
+                # Convert file format
                 if not (imghdr.what(filename) == 'tiff'):
                     filename = self.convert(filename)
+                    QgsMessageLog.logMessage(
+                        'Converted file to tiff: %s' % filename,
+                        'OAM',
+                        level=QgsMessageLog.INFO)
                 
                 # create a new uploader instance
                 uploader = Uploader(filename,self.bucket)
