@@ -21,32 +21,23 @@
  *                                                                         *
  ***************************************************************************/
 """
+# Qt classes
+from PyQt4.Qt import *
 from PyQt4.QtCore import (QSettings, QTranslator, qVersion, QCoreApplication,
                           pyqtSignal, QObject, QThread)
 from PyQt4.QtGui import (QAction, QIcon, QMessageBox, QFileDialog,
                          QListWidgetItem, QSizePolicy, QGridLayout, QPushButton,
                          QProgressBar)
-from PyQt4.Qt import *
-from qgis.gui import QgsMessageBar
-from qgis.core import QgsMapLayer, QgsMessageLog
+
+# icon images
 import resources_rc
 
-#classes for GUI
+# classes for GUI
 from gui.img_uploader_wizard import ImgUploaderWizard
 from gui.img_search_dialog import ImgSearchDialog
 from gui.setting_dialog import SettingDialog
-from gui.backup_img_uploader_dialog import ImageUploaderDialog
 
-import os, sys, math, imghdr
-from osgeo import gdal, osr
-import time
-import json
-
-# Modules needed for upload
-from boto.s3.connection import S3Connection, S3ResponseError
-from boto.s3.key import Key
-from ext_libs.filechunkio import FileChunkIO
-import syslog, traceback
+import os
 
 class OpenAerialMap:
     """QGIS Plugin Implementation."""
@@ -197,12 +188,6 @@ class OpenAerialMap:
         self.settingDialog = SettingDialog(self.iface, self.settings)
         self.settingDialog.show()
 
-    #Delete this part later
-    def displayImgUploaderDialog(self):
-
-        self.testIgmUpDlg = ImageUploaderDialog(self.iface, self.currentImgSettings, self.currentImgMetadata)
-        self.testIgmUpDlg.show()
-
     def initGui(self):
 
         """Create the menu and toolbar inside the QGIS GUI."""
@@ -213,14 +198,9 @@ class OpenAerialMap:
 
         """Create the menu entries and toolbar icons inside the QGIS GUI."""
 
-        icon_path_img_wizard = ':/plugins/OpenAerialMap/icon.png'
-        icon_path_search_tool = ':/plugins/OpenAerialMap/search_icon.png'
-
-        #need to be modified for icon
-        icon_path_setting_dialog = ':/plugins/OpenAerialMap/search_icon.png'
-
-        #delete this part later
-        icon_path_img_dialog = ':/plugins/OpenAerialMap/icon.png'
+        icon_path_img_wizard = ':/plugins/OpenAerialMap/icon/icon.png'
+        icon_path_search_tool = ':/plugins/OpenAerialMap/icon/search_icon.png'
+        icon_path_setting_dialog = ':/plugins/OpenAerialMap/icon/settings_icon.png'
 
         self.add_action(
             icon_path_img_wizard,
@@ -238,17 +218,7 @@ class OpenAerialMap:
             icon_path_setting_dialog,
             text=self.tr(u'Edit Settings'),
             callback=self.displaySettingDialog,
-            parent=self.iface.mainWindow(),
-            add_to_toolbar=False)
-
-        #delete this part later
-        self.add_action(
-            icon_path_img_dialog,
-            text=self.tr(u'Image Uploader Dialog (Backup)'),
-            callback=self.displayImgUploaderDialog,
-            parent=self.iface.mainWindow(),
-            add_to_toolbar=False)
-
+            parent=self.iface.mainWindow())
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
@@ -263,6 +233,5 @@ class OpenAerialMap:
         def displayImgUploaderWizard(self):
         def displaySearchTool(self):
         def displaySettingDialog(self):
-        def displayImgUploaderDialog(self):
         """
         pass

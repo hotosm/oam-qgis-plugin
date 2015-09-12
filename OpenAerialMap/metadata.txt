@@ -9,9 +9,9 @@
 [general]
 name=Open Aerial Map (OAM)
 qgisMinimumVersion=2.0
-description=This plugin can be used as an OAM client to browse, search, download and upload imagery from/to the OAM catalog.
-version=0.1
-author=Humanitarian OpenStreetMap Team (HOT)
+description=This plugin can be used as an OAM client to upload, search and download imagery to/from the OAM catalog.
+version=0.1-alpha.1
+author=Tassia Camoes Araujo
 email=tassia@acaia.ca
 
 # End of mandatory metadata
@@ -22,7 +22,7 @@ email=tassia@acaia.ca
 # changelog=
 
 # Tags are comma separated with spaces allowed
-tags=database, metadata, openlayers, openstreetmap, osm, raster, remote sensing, tiles, uav
+tags=metadata, openstreetmap, osm, raster, remote sensing, tiles, uav
 
 homepage=https://github.com/hotosm/oam-qgis-plugin
 tracker=https://github.com/hotosm/oam-qgis-plugin/issues

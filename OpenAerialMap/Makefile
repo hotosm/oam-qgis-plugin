@@ -39,21 +39,21 @@ LRELEASE = lrelease
 SOURCES = \
 	__init__.py \
 	oam_main.py \
-#        filechunkio.py
 
 PLUGINNAME = OpenAerialMap
 
 PY_FILES = \
 	__init__.py \
 	oam_main.py \
-#        filechunkio.py
 
-PY_FOLDERS = module gui icon ext_libs
+# removed 'module' while it is non-functional
+#PY_FOLDERS = module gui icon ext_libs
+PY_FOLDERS = gui icon ext_libs
 
 #please modify the 'clean' section of this Makefile
 #UI_FILES = oam_client_dialog_base.ui
 
-EXTRAS = metadata.txt
+EXTRAS = metadata.txt oam-qgis-plugin.conf.sample README INSTALL LICENSE 
 
 COMPILED_RESOURCE_FILES = resources_rc.py
 
@@ -100,7 +100,8 @@ test: compile transcompile
 	@echo "e.g. source run-env-linux.sh <path to qgis install>; make test"
 	@echo "----------------------"
 
-deploy: compile doc transcompile
+#deploy: compile doc transcompile
+deploy: compile
 	@echo
 	@echo "------------------------------------------"
 	@echo "Deploying plugin to your .qgis2 directory."

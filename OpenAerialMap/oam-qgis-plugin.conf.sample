@@ -1,0 +1,22 @@
+[Metadata]
+TITLE=Example imagery
+PLATFORM=0
+SENSOR=camera
+SENSE_START=1997-07-18T19:22:30
+SENSE_END=1997-07-20T19:22:30
+TAGS=tag1, tag2
+PROVIDER=Provider inc.
+CONTACT=Contact name <email>
+WEBSITE=http://website.com
+LICENSE=true
+REPROJECT=true
+
+[Options]
+NOTIFY_OAM=true
+TRIGGER_OAM_TS=true
+
+[Storage]
+S3_BUCKET_NAME=
+S3_BUCKET_PREFIX=
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=

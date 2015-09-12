@@ -27,13 +27,8 @@ import os, sys
 from PyQt4 import QtGui, uic
 from PyQt4.Qt import *
 
-from qgis.gui import QgsMessageBar
-from qgis.core import QgsMapLayer, QgsMessageLog
-from osgeo import gdal, osr
-import json
+from qgis.core import QgsMessageLog
 import time
-import math, imghdr
-
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/setting_dialog.ui'))

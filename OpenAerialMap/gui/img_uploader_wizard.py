@@ -29,17 +29,16 @@ from PyQt4.Qt import *
 
 from qgis.gui import QgsMessageBar
 from qgis.core import QgsMapLayer, QgsMessageLog
-from osgeo import gdal, osr
-import json, time, string
+from osgeo import gdal, osr, ogr
+import json, time
 import math, imghdr
 
 # Modules needed for upload
 from boto.s3.connection import S3Connection, S3ResponseError
 from boto.s3.key import Key
-from ext_libs.filechunkio import FileChunkIO
-import syslog, traceback
+from filechunkio import FileChunkIO
+import traceback
 import requests, json
-import pyproj
 from ast import literal_eval
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
@@ -82,7 +81,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         self.settings = settings
 
-        # Dictionaries to save imagery info (should be defined as a class in the future)
+        # Dictionaries to save imagery info (todo: defined as a classes in the future)
         self.metadata = {}
         self.reprojected = []
         self.licensed = []
@@ -110,7 +109,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.down_source_button.clicked.connect(self.downSource)
 
         # Metadata connections (wizard page 2)
-        self.added_sources_list_widget.setSelectionMode(QtGui.QAbstractItemView.SingleSelection)
         self.sense_start_edit.setCalendarPopup(1)
         self.sense_start_edit.setDisplayFormat('dd.MM.yyyy HH:mm')
         self.sense_end_edit.setCalendarPopup(1)
@@ -150,6 +148,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 'Either a layer or file should be selected to be added',
                 level=QgsMessageBar.WARNING)
         else:
+            added = False
             if filename:
                 if self.validateFile(filename):
                     if not self.sources_list_widget.findItems(filename,Qt.MatchExactly):
@@ -159,6 +158,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                         self.sources_list_widget.addItem(item)
                         self.added_sources_list_widget.addItem(item.clone())
                         self.source_file_edit.setText('')
+                        added = True
             if selected_layers:
                 for item in selected_layers:
                     if self.validateLayer(item.text()):
@@ -166,12 +166,14 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                             self.layers_list_widget.takeItem(self.layers_list_widget.row(item))
                             self.sources_list_widget.addItem(item)
                             self.added_sources_list_widget.addItem(item.clone())
-            self.bar0.clearWidgets()
-            self.bar0.pushMessage(
-                'INFO',
-                'Select sources were added to the upload queue',
-                level=QgsMessageBar.INFO)
-            self.loadMetadataReviewBox()
+                            added = True
+            if added:
+                self.bar0.clearWidgets()
+                self.bar0.pushMessage(
+                    'INFO',
+                    'Source(s) added to the upload queue',
+                    level=QgsMessageBar.INFO)
+                self.loadMetadataReviewBox()
 
     def removeSources(self):
         selected_sources = self.sources_list_widget.selectedItems()
@@ -292,15 +294,13 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             for item in selected_layers:
                 filename = item.data(Qt.UserRole)
                 self.loadImageryInfo(filename)
-                print "reprojected after load: "+str(self.reprojected)
                 json_string = json.dumps(self.metadata[filename],indent=4,separators=(',', ': '))
-                print json_string
                 if filename not in self.reprojected:
                     json_filename = os.path.splitext(filename)[0]+'.json'
                 else:
-                    json_filename = os.path.splitext(filename)[0]+'_EPSG3857.json'
-                print json_filename
-                print "writing to file"+json_filename
+                    # to avoid repetition of "EPSG3857" in filename:
+                    if not "EPSG3857" in filename:
+                        json_filename = os.path.splitext(filename)[0]+'_EPSG3857.json'
                 json_file = open(json_filename, 'w')
                 print >> json_file, json_string
                 json_file.close()
@@ -364,23 +364,57 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
     # other functions
     def validateFile(self,filename):
-        if not os.path.isfile(filename):
+        # check that file exists
+        if not os.path.exists(filename):
             self.bar0.clearWidgets()
             self.bar0.pushMessage(
                 "CRITICAL",
                 "The file %s does not exist" % filename,
                 level=QgsMessageBar.CRITICAL)
-            return 0
-        elif imghdr.what(filename) is None:
-            print imghdr.what(filename)
+            return False
+        # check that file is an image
+        if imghdr.what(filename) is None:
             self.bar0.clearWidgets()
             self.bar0.pushMessage(
                 "CRITICAL",
                 "The file %s is not a supported data source" % filename,
                 level=QgsMessageBar.CRITICAL)
-            return 0
-        else:
-            return 1
+            return False
+        # check if gdal can read file
+        try:
+            raster = gdal.Open(filename,gdal.GA_ReadOnly)
+        except:
+            self.bar0.clearWidgets()
+            self.bar0.pushMessage(
+                "CRITICAL",
+                "GDAL could not read file %s" % filename,
+                level=QgsMessageBar.CRITICAL)
+            return False
+        # check that image has at least 3 bands
+        if raster.RasterCount < 3:
+            self.bar0.clearWidgets()
+            self.bar0.pushMessage(
+                "CRITICAL",
+                "The file %s has less than 3 raster bands" % filename,
+                level=QgsMessageBar.CRITICAL)
+            return False
+        # check if projection is set
+        if raster.GetProjection() is '':
+            self.bar0.clearWidgets()
+            self.bar0.pushMessage(
+                "CRITICAL",
+                "Could not extract projection from file %s" % filename,
+                level=QgsMessageBar.CRITICAL)
+            return False
+        # finally, check if bbox has valid data
+        xy_points = [(0.0,0.0),(0.0,raster.RasterYSize),(raster.RasterXSize,0.0),(raster.RasterXSize,raster.RasterYSize)]
+        for point in xy_points:
+            if point != self.GDALInfoReportCorner(raster,point[0],point[1]):
+                QgsMessageLog.logMessage(
+                    'File %s is a valid data source' % filename,
+                    'OAM',
+                    level=QgsMessageLog.INFO)
+                return True
 
     def validateLayer(self,layer_name):
         all_layers = self.iface.mapCanvas().layers()
@@ -433,13 +467,26 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             # get new bbox values if reprojection will happen
             try:
                 if filename in self.reprojected:
-                    orig = pyproj.Proj(str(spatialRefProj))
-                    dst = pyproj.Proj("+init=EPSG:3857")
-                    upper_left = pyproj.transform(orig,dst,upper_left[0],upper_left[1])
-                    lower_left = pyproj.transform(orig,dst,lower_left[0],lower_left[1])
-                    upper_right = pyproj.transform(orig,dst,upper_right[0],upper_right[1])
-                    lower_right = pyproj.transform(orig,dst,lower_right[0],lower_right[1])
                     self.metadata[filename]['Projection'] = "EPSG:3857"
+                    target = osr.SpatialReference()
+                    target.ImportFromEPSG(3857)
+                    transform = osr.CoordinateTransformation(spatialRef,target)
+
+                    point = ogr.CreateGeometryFromWkt("POINT (%f %f)" % (upper_left[0],upper_left[1]))
+                    point.Transform(transform)
+                    upper_left = json.loads(point.ExportToJson())['coordinates']
+
+                    point = ogr.CreateGeometryFromWkt("POINT (%f %f)" % (lower_left[0],lower_left[1]))
+                    point.Transform(transform)
+                    lower_left = json.loads(point.ExportToJson())['coordinates']
+
+                    point = ogr.CreateGeometryFromWkt("POINT (%f %f)" % (upper_right[0],upper_right[1]))
+                    point.Transform(transform)
+                    upper_right = json.loads(point.ExportToJson())['coordinates']
+
+                    point = ogr.CreateGeometryFromWkt("POINT (%f %f)" % (lower_right[0],lower_right[1]))
+                    point.Transform(transform)
+                    lower_right = json.loads(point.ExportToJson())['coordinates']
             except (RuntimeError, TypeError, NameError) as error:
                 print error
             except:
@@ -489,32 +536,25 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.metadata[filename]['Provider'] = self.provider_edit.text()
         self.metadata[filename]['Contact'] = self.contact_edit.text()
         self.metadata[filename]['Website'] = self.website_edit.text()
-        print "isChecked reproject ="
-        print self.reproject_check_box.isChecked()
+
         if self.reproject_check_box.isChecked():
             if filename not in self.reprojected:
                 self.reprojected.append(filename)
-                print "Appended reprojected"
         else:
             while filename in self.reprojected:
                 self.reprojected.remove(filename)
-                print "Removed reprojected"
-        print "isChecked license ="
-        print self.license_check_box.isChecked()
+
         if self.license_check_box.isChecked():
             self.metadata[filename]['License'] = "Licensed under CC-BY 4.0 and allow tracing in OSM"
             if filename not in self.licensed:
                 self.licensed.append(filename)
-                print "Appended licensed"
         else:
             while filename in self.licensed:
                 self.licensed.remove(filename)
-                print "Removed license"
+
         self.extractMetadata(filename)
 
     def loadMetadataReviewBox(self):
-        print "loadMetadataReviewBox called"
-
         json_filenames = []
         for index in xrange(self.sources_list_widget.count()):
             filename = str(self.sources_list_widget.item(index).data(Qt.UserRole))
@@ -523,7 +563,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             else:
                 f = os.path.splitext(filename)[0]+'_EPSG3857.json'
             json_filenames.append(f)
-        print "json_filenames "+str(json_filenames)
 
         with open('/tmp/full_metadata', 'w') as tmpfile:
             for f in json_filenames:
@@ -532,11 +571,11 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                         tmpfile.write(infile.read())
 
         metadata = QFile('/tmp/full_metadata')
-        metadata.open(QIODevice.ReadOnly) # The device is open for reading (QIODevice::ReadOnly)
+        metadata.open(QIODevice.ReadOnly)
         stream = QTextStream(metadata)
         self.review_metadata_box.setText(stream.readAll())
 
-    '''functions for threading purpose'''
+    #functions for threading purpose
     def startConnection(self):
         if self.storage_combo_box.currentIndex() == 0:
             bucket_name = 'oam-qgis-plugin-test'
@@ -571,8 +610,9 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         return self.bucket
 
     def reproject(self,filename):
-        (head,tail) = string.rsplit(filename,".",1)
-        reproject_filename = head+"_EPSG3857."+tail
+        # to avoid repetition of "EPSG3857" in filename:
+        if not "EPSG3857" in filename:
+            reproject_filename = os.path.splitext(filename)[0]+'_EPSG3857.tif'
         os.system("gdalwarp -of GTiff -t_srs epsg:3857 %s %s" % (filename,reproject_filename))
         QgsMessageLog.logMessage(
             'Reprojected to EPSG:3857',
@@ -581,8 +621,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         return reproject_filename
 
     def convert(self,filename):
-        (head,tail) = string.rsplit(filename,".",1)
-        tif_filename = head+".tif"
+        tif_filename = os.path.splitext(filename)[0]+".tif"
         #Open existing dataset
         src_ds = gdal.Open(filename)
         driver = gdal.GetDriverByName("GTiff")
@@ -592,34 +631,54 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         src_ds = None
 
     def startUploader(self):
+        # initialize options
+        self.upload_options = []
+        if self.notify_oam_check.isChecked():
+            self.upload_options.append("notify_oam")
+        if self.trigger_tiling_check.isChecked():
+            self.upload_options.append("trigger_tiling")
+
         if self.startConnection():
             for index in xrange(self.sources_list_widget.count()):
                 filename = str(self.sources_list_widget.item(index).data(Qt.UserRole))
 
-                # Check projection
+                self.bar2.clearWidgets()
+                self.bar2.pushMessage(
+                    'INFO',
+                    'Pre-upload image processing...',
+                    level=QgsMessageBar.INFO)
+
+                # Perfom reprojection
                 if filename in self.reprojected:
                     filename = self.reproject(filename)
+                    QgsMessageLog.logMessage(
+                        'Created reprojected file: %s' % filename,
+                        'OAM',
+                        level=QgsMessageLog.INFO)
 
-                # Check file format
+                # Convert file format
                 if not (imghdr.what(filename) == 'tiff'):
                     filename = self.convert(filename)
+                    QgsMessageLog.logMessage(
+                        'Converted file to tiff: %s' % filename,
+                        'OAM',
+                        level=QgsMessageLog.INFO)
 
                 # create a new uploader instance
-                uploader = Uploader(filename,self.bucket)
+                uploader = Uploader(filename,self.bucket,self.upload_options)
                 QgsMessageLog.logMessage(
                     'Uploader started\n',
                     'OAM',
                     level=QgsMessageLog.INFO)
                 # configure the QgsMessageBar
-                messageBar = self.bar2.createMessage('Performing upload...', )
+                messageBar = self.bar2.createMessage('INFO: Performing upload...', )
                 progressBar = QProgressBar()
                 progressBar.setAlignment(Qt.AlignLeft|Qt.AlignVCenter)
                 messageBar.layout().addWidget(progressBar)
-                # to be enabled later
-                #cancelButton = QPushButton()
-                #cancelButton.setText('Cancel')
-                #cancelButton.clicked.connect(uploader.kill)
-                #messageBar.layout().addWidget(cancelButton)
+                cancelButton = QPushButton()
+                cancelButton.setText('Cancel')
+                cancelButton.clicked.connect(self.cancelUpload)
+                messageBar.layout().addWidget(cancelButton)
                 self.bar2.clearWidgets()
                 self.bar2.pushWidget(messageBar, level=QgsMessageBar.INFO)
                 self.messageBar = messageBar
@@ -640,12 +699,32 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                     'OAM',
                     level=QgsMessageLog.CRITICAL)
 
+    def cancelUpload(self):
+        self.uploader.kill()
+        self.bar2.clearWidgets()
+        self.bar2.pushMessage(
+            'WARNING',
+            'Canceling upload...',
+            level=QgsMessageBar.WARNING)
+
     def uploaderFinished(self, success):
         # clean up the uploader and thread
-        self.uploader.deleteLater()
+        try:
+            self.uploader.deleteLater()
+        except:
+            QgsMessageLog.logMessage(
+                'Exception on deleting uploader\n',
+                'OAM',
+                level=QgsMessageLog.CRITICAL)
         self.thread.quit()
         self.thread.wait()
-        self.thread.deleteLater()
+        try:
+            self.thread.deleteLater()
+        except:
+            QgsMessageLog.logMessage(
+                'Exception on deleting thread\n',
+                'OAM',
+                level=QgsMessageLog.CRITICAL)
         # remove widget from message bar
         self.bar2.popWidget(self.messageBar)
         if success:
@@ -663,10 +742,10 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             # notify the user that something went wrong
             self.bar2.pushMessage(
                 'CRITICAL',
-                'Upload could not be completeded',
+                'Upload was interrupted',
                 level=QgsMessageBar.CRITICAL)
             QgsMessageLog.logMessage(
-                'Upload failed',
+                'Upload was interrupted',
                 'OAM',
                 level=QgsMessageLog.CRITICAL)
 
@@ -684,11 +763,12 @@ class Uploader(QObject):
     error = pyqtSignal(Exception, basestring)
     progress = pyqtSignal(float)
 
-    def __init__(self,filename,bucket):
+    def __init__(self,filename,bucket,options):
         QObject.__init__(self)
         self.filename = filename
         self.bucket = bucket
         self.killed = False
+        self.options = options
 
     def sendMetadata(self):
         jsonfile = os.path.splitext(self.filename)[0]+'.json'
@@ -707,8 +787,11 @@ class Uploader(QObject):
                 level=QgsMessageLog.CRITICAL)
 
     def notifyOAM(self):
-        '''not needed at the moment, indexing happens every 10 mins'''
-        pass
+        '''Just a stub method, not needed at the moment because indexing happens every 10 mins'''
+        QgsMessageLog.logMessage(
+            'AOM notified of new resource',
+            'OAM',
+            level=QgsMessageLog.INFO)
 
     def triggerTileService(self):
         url = "http://hotosm-oam-server-stub.herokuapp.com/tile"
@@ -730,7 +813,7 @@ class Uploader(QObject):
             ts_id = post_dict[u'id']
             time = post_dict[u'queued_at']
             QgsMessageLog.logMessage(
-                'Tile service \#%s triggered on %s\n' % (ts_id,time),
+                'Tile service #%s triggered on %s\n' % (ts_id,time),
                 'OAM',
                 level=QgsMessageLog.INFO)
         else:
@@ -752,7 +835,7 @@ class Uploader(QObject):
             multipart = self.bucket.initiate_multipart_upload(os.path.basename(self.filename))
 
             QgsMessageLog.logMessage(
-                'About to send %s chunks\n' % chunk_count,
+                'Preparing to send %s chunks in total\n' % chunk_count,
                 'OAM',
                 level=QgsMessageLog.INFO)
 
@@ -767,23 +850,27 @@ class Uploader(QObject):
                     multipart.upload_part_from_file(fp, part_num=i + 1)
                 progress_count += 1
                 QgsMessageLog.logMessage(
-                    'Chunk #%d\n' % progress_count,
+                    'Sent chunk #%d\n' % progress_count,
                     'OAM',
                     level=QgsMessageLog.INFO)
                 self.progress.emit(progress_count / float(chunk_count)*100)
                 QgsMessageLog.logMessage(
-                    'Progress %f' % (progress_count / float(chunk_count)),
+                    'Progress = %f' % (progress_count / float(chunk_count)),
                     'OAM',
                     level=QgsMessageLog.INFO)
             if self.killed is False:
                 multipart.complete_upload()
                 self.progress.emit(100)
                 success = True
-            self.notifyOAM()
-            self.triggerTileService()
+                if "notify_oam" in self.options:
+                    self.notifyOAM()
+                if "trigger_tiling" in self.options:
+                    self.triggerTileService()
         except Exception, e:
-            # forward the exception upstream
+            # forward the exception upstream (or try to...)
+            # chunk size smaller than 5MB can cause an error, server does not expect it
             self.error.emit(e, traceback.format_exc())
+
         self.finished.emit(success)
 
     def kill(self):
