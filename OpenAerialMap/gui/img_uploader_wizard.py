@@ -669,10 +669,11 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 progressBar.setAlignment(Qt.AlignLeft|Qt.AlignVCenter)
                 messageBar.layout().addWidget(progressBar)
                 # to be enabled later
-                #cancelButton = QPushButton()
-                #cancelButton.setText('Cancel')
+                cancelButton = QPushButton()
+                cancelButton.setText('Cancel')
+                cancelButton.clicked.connect(self.cancelUpload)
                 #cancelButton.clicked.connect(uploader.kill)
-                #messageBar.layout().addWidget(cancelButton)
+                messageBar.layout().addWidget(cancelButton)
                 self.bar2.clearWidgets()
                 self.bar2.pushWidget(messageBar, level=QgsMessageBar.INFO)
                 self.messageBar = messageBar
@@ -692,6 +693,14 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                     'No connection to the server\n',
                     'OAM',
                     level=QgsMessageLog.CRITICAL)
+
+    def cancelUpload(self):
+        self.uploader.kill()
+        self.bar2.clearWidgets()
+        self.bar2.pushMessage(
+            'WARNING',
+            'Canceling upload...',
+            level=QgsMessageBar.WARNING)
 
     def uploaderFinished(self, success):
         # clean up the uploader and thread
@@ -728,7 +737,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             # notify the user that something went wrong
             self.bar2.pushMessage(
                 'CRITICAL',
-                'Upload could not be completeded',
+                'Upload was interrupted',
                 level=QgsMessageBar.CRITICAL)
             QgsMessageLog.logMessage(
                 'Upload failed',
@@ -810,7 +819,7 @@ class Uploader(QObject):
         success = False
         try:
             file_size = os.stat(self.filename).st_size
-            chunk_size = 5242880
+            chunk_size = 1048576
             chunk_count = int(math.ceil(file_size / float(chunk_size)))
             progress_count = 0
 
