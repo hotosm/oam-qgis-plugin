@@ -1,0 +1,37 @@
+## Install
+
+An experimental package containing all the needed dependencies is available at http://acaia.ca/~tassia/OpenAerialMap-0.1alpha1.tar.gz
+
+After performing the following steps you should see OAM icons in QGIS action bar:
+
+* Unpack the file OpenAerialMap-0.1-alpha.1.tar.gz
+* Place the resulting directory in QGIS plugins directory
+* Activate the plugin through QGIS menu (Plugins -> Manage and Install Plugins)
+
+## Build
+
+Build, tests and feedbacks are super appreciated, specially in this early development phase.
+
+The plugin depends on the following python libraries that are not installed by default with QGIS:
+
+* [Boto](https://pypi.python.org/pypi/boto) - Amazon Web Services Library
+* [FileChunkIO](https://pypi.python.org/pypi/filechunkio/) - represents a chunk of an OS-level file containing bytes data
+* [python-pyproj](https://pypi.python.org/pypi/pyproj/) - Python interface to PROJ.4 library (>=1.9.4-1) 
+
+If you have python-pip installed, all dependecies can be installed with the command:
+
+$ pip install filechunkio boto pyproj
+
+If you use UNIX, check first if your distribution provides corresponding packages. 
+
+After installing dependencies you can proceed to get the plugin code and deploy:
+
+$ git clone https://github.com/hotosm/oam-qgis-plugin.git 
+
+$ cd oam-qgis-plugin/OpenAerialMap/ 
+
+$ make deploy
+
+Then activate the plugin through QGIS menu (Plugins -> Manage and Install Plugins). You should see the OAM icons in your manu at this point.
+
+After any change in the code you should run 'make deploy' again. You also need to restart QGIS to reload the new compiled code. A handy alternative is to use the "Plugin Reloader" plugin to reload and live test your changes on the code. 
