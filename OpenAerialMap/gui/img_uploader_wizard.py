@@ -82,7 +82,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         self.settings = settings
 
-        # Dictionaries to save imagery info (should be defined as a class in the future) 
+        # Dictionaries to save imagery info (todo: defined as a classes in the future) 
         self.metadata = {}
         self.reprojected = []
         self.licensed = []
@@ -295,17 +295,13 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             for item in selected_layers:
                 filename = item.data(Qt.UserRole)
                 self.loadImageryInfo(filename)
-                print "reprojected after load: "+str(self.reprojected)
                 json_string = json.dumps(self.metadata[filename],indent=4,separators=(',', ': '))
-                print json_string
                 if filename not in self.reprojected:
                     json_filename = os.path.splitext(filename)[0]+'.json'
                 else:
                     # to avoid repetition of "EPSG3857" in filename:
                     if not "EPSG3857" in filename: 
                         json_filename = os.path.splitext(filename)[0]+'_EPSG3857.json'
-                print json_filename
-                print "writing to file"+json_filename
                 json_file = open(json_filename, 'w')
                 print >> json_file, json_string
                 json_file.close()
@@ -379,7 +375,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             return False
         # check that file is an image
         if imghdr.what(filename) is None:
-            print "no image"
             self.bar0.clearWidgets()
             self.bar0.pushMessage(
                 "CRITICAL",
@@ -406,8 +401,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             return False
         # check if projection is set
         if raster.GetProjection() is '':
-            print "projection="
-            print raster.GetProjection
             self.bar0.clearWidgets()
             self.bar0.pushMessage(
                 "CRITICAL",
@@ -531,27 +524,22 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.metadata[filename]['Provider'] = self.provider_edit.text()
         self.metadata[filename]['Contact'] = self.contact_edit.text()
         self.metadata[filename]['Website'] = self.website_edit.text()
-        print "isChecked reproject ="
-        print self.reproject_check_box.isChecked()
+
         if self.reproject_check_box.isChecked():
             if filename not in self.reprojected:
                 self.reprojected.append(filename)
-                print "Appended reprojected"
         else:
             while filename in self.reprojected:
                 self.reprojected.remove(filename)
-                print "Removed reprojected"
-        print "isChecked license ="
-        print self.license_check_box.isChecked()
+
         if self.license_check_box.isChecked():
             self.metadata[filename]['License'] = "Licensed under CC-BY 4.0 and allow tracing in OSM"
             if filename not in self.licensed:
                 self.licensed.append(filename)
-                print "Appended licensed"
         else:
             while filename in self.licensed:
                 self.licensed.remove(filename)
-                print "Removed license"
+
         self.extractMetadata(filename)
 
     def loadMetadataReviewBox(self):
@@ -695,10 +683,22 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
     def uploaderFinished(self, success):
         # clean up the uploader and thread
-        self.uploader.deleteLater()
+        try:
+            self.uploader.deleteLater()
+        except:
+            QgsMessageLog.logMessage(
+                'Exception on deleting uploader\n',
+                'OAM',
+                level=QgsMessageLog.CRITICAL)
         self.thread.quit()
         self.thread.wait()
-        self.thread.deleteLater()
+        try:
+            self.thread.deleteLater()
+        except:
+            QgsMessageLog.logMessage(
+                'Exception on deleting thread\n',
+                'OAM',
+                level=QgsMessageLog.CRITICAL)
         # remove widget from message bar
         self.bar2.popWidget(self.messageBar)
         if success:
