@@ -30,9 +30,9 @@ path_root = os.path.join(os.path.dirname(__file__))
 sys.path.append(path_root)
 
 # path to external libs
-path_boto = os.path.join(os.path.dirname(__file__),'ext_libs/boto-2.38.0/boto')
-path_filechunkio = os.path.join(os.path.dirname(__file__),'ext_libs/filechunkio-1.6/filechunkio')
-path_pyproj = os.path.join(os.path.dirname(__file__),'ext_libs/pyproj-1.9.4/lib/pyproj')
+path_boto = os.path.join(os.path.dirname(__file__),'ext_libs/boto-2.38.0')
+path_filechunkio = os.path.join(os.path.dirname(__file__),'ext_libs/filechunkio-1.6')
+path_pyproj = os.path.join(os.path.dirname(__file__),'ext_libs/pyproj-1.9.4/lib')
 sys.path.append(path_boto)
 sys.path.append(path_filechunkio)
 sys.path.append(path_pyproj)
