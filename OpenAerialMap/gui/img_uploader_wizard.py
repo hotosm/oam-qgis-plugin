@@ -29,7 +29,7 @@ from PyQt4.Qt import *
 
 from qgis.gui import QgsMessageBar
 from qgis.core import QgsMapLayer, QgsMessageLog
-from osgeo import gdal, osr
+from osgeo import gdal, osr, ogr
 import json, time 
 import math, imghdr
 
@@ -39,7 +39,6 @@ from boto.s3.key import Key
 from filechunkio import FileChunkIO
 import traceback
 import requests, json
-import pyproj
 from ast import literal_eval
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
@@ -468,13 +467,26 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             # get new bbox values if reprojection will happen
             try:
                 if filename in self.reprojected:
-                    orig = pyproj.Proj(str(spatialRefProj))
-                    dst = pyproj.Proj("+init=EPSG:3857")
-                    upper_left = pyproj.transform(orig,dst,upper_left[0],upper_left[1])
-                    lower_left = pyproj.transform(orig,dst,lower_left[0],lower_left[1])
-                    upper_right = pyproj.transform(orig,dst,upper_right[0],upper_right[1])
-                    lower_right = pyproj.transform(orig,dst,lower_right[0],lower_right[1])
                     self.metadata[filename]['Projection'] = "EPSG:3857"
+                    target = osr.SpatialReference()
+                    target.ImportFromEPSG(3857)
+                    transform = osr.CoordinateTransformation(spatialRef,target)
+
+                    point = ogr.CreateGeometryFromWkt("POINT (%f %f)" % (upper_left[0],upper_left[1]))
+                    point.Transform(transform)
+                    upper_left = json.loads(point.ExportToJson())['coordinates']
+
+                    point = ogr.CreateGeometryFromWkt("POINT (%f %f)" % (lower_left[0],lower_left[1]))
+                    point.Transform(transform)
+                    lower_left = json.loads(point.ExportToJson())['coordinates']
+
+                    point = ogr.CreateGeometryFromWkt("POINT (%f %f)" % (upper_right[0],upper_right[1]))
+                    point.Transform(transform)
+                    upper_right = json.loads(point.ExportToJson())['coordinates']
+
+                    point = ogr.CreateGeometryFromWkt("POINT (%f %f)" % (lower_right[0],lower_right[1]))
+                    point.Transform(transform)
+                    lower_right = json.loads(point.ExportToJson())['coordinates']
             except (RuntimeError, TypeError, NameError) as error:
                 print error
             except:
