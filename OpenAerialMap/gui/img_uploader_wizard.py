@@ -571,11 +571,11 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                         tmpfile.write(infile.read())
 
         metadata = QFile('/tmp/full_metadata')
-        metadata.open(QIODevice.ReadOnly) # The device is open for reading (QIODevice::ReadOnly)
+        metadata.open(QIODevice.ReadOnly)
         stream = QTextStream(metadata)
         self.review_metadata_box.setText(stream.readAll())
 
-    '''functions for threading purpose'''
+    #functions for threading purpose
     def startConnection(self):
         if self.storage_combo_box.currentIndex() == 0:
             bucket_name = 'oam-qgis-plugin-test'
@@ -631,6 +631,13 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         src_ds = None
 
     def startUploader(self):
+        # initialize options
+        self.upload_options = []
+        if self.notify_oam_check.isChecked():
+            self.upload_options.append("notify_oam")
+        if self.trigger_tiling_check.isChecked():
+            self.upload_options.append("trigger_tiling")
+
         if self.startConnection():
             for index in xrange(self.sources_list_widget.count()):
                 filename = str(self.sources_list_widget.item(index).data(Qt.UserRole))
@@ -658,21 +665,19 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                         level=QgsMessageLog.INFO)
                 
                 # create a new uploader instance
-                uploader = Uploader(filename,self.bucket)
+                uploader = Uploader(filename,self.bucket,self.upload_options)
                 QgsMessageLog.logMessage(
                     'Uploader started\n',
                     'OAM',
                     level=QgsMessageLog.INFO)
                 # configure the QgsMessageBar
-                messageBar = self.bar2.createMessage('Performing upload...', )
+                messageBar = self.bar2.createMessage('INFO: Performing upload...', )
                 progressBar = QProgressBar()
                 progressBar.setAlignment(Qt.AlignLeft|Qt.AlignVCenter)
                 messageBar.layout().addWidget(progressBar)
-                # to be enabled later
                 cancelButton = QPushButton()
                 cancelButton.setText('Cancel')
                 cancelButton.clicked.connect(self.cancelUpload)
-                #cancelButton.clicked.connect(uploader.kill)
                 messageBar.layout().addWidget(cancelButton)
                 self.bar2.clearWidgets()
                 self.bar2.pushWidget(messageBar, level=QgsMessageBar.INFO)
@@ -740,7 +745,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 'Upload was interrupted',
                 level=QgsMessageBar.CRITICAL)
             QgsMessageLog.logMessage(
-                'Upload failed',
+                'Upload was interrupted',
                 'OAM',
                 level=QgsMessageLog.CRITICAL)
 
@@ -758,11 +763,12 @@ class Uploader(QObject):
     error = pyqtSignal(Exception, basestring)
     progress = pyqtSignal(float)
 
-    def __init__(self,filename,bucket):
+    def __init__(self,filename,bucket,options):
         QObject.__init__(self)
         self.filename = filename
         self.bucket = bucket
         self.killed = False
+        self.options = options
 
     def sendMetadata(self):
         jsonfile = os.path.splitext(self.filename)[0]+'.json'
@@ -781,8 +787,11 @@ class Uploader(QObject):
                 level=QgsMessageLog.CRITICAL)
 
     def notifyOAM(self):
-        '''not needed at the moment, indexing happens every 10 mins'''
-        pass
+        '''Just a stub method, not needed at the moment because indexing happens every 10 mins'''
+        QgsMessageLog.logMessage(
+            'AOM notified of new resource',
+            'OAM',
+            level=QgsMessageLog.INFO)
 
     def triggerTileService(self):
         url = "http://hotosm-oam-server-stub.herokuapp.com/tile"
@@ -804,7 +813,7 @@ class Uploader(QObject):
             ts_id = post_dict[u'id']
             time = post_dict[u'queued_at']
             QgsMessageLog.logMessage(
-                'Tile service \#%s triggered on %s\n' % (ts_id,time),
+                'Tile service #%s triggered on %s\n' % (ts_id,time),
                 'OAM',
                 level=QgsMessageLog.INFO)
         else:
@@ -819,17 +828,17 @@ class Uploader(QObject):
         success = False
         try:
             file_size = os.stat(self.filename).st_size
-            chunk_size = 1048576
+            chunk_size = 5242880
             chunk_count = int(math.ceil(file_size / float(chunk_size)))
             progress_count = 0
-
+        
             multipart = self.bucket.initiate_multipart_upload(os.path.basename(self.filename))
-
+        
             QgsMessageLog.logMessage(
-                'About to send %s chunks\n' % chunk_count,
+                'Preparing to send %s chunks in total\n' % chunk_count,
                 'OAM',
                 level=QgsMessageLog.INFO)
-
+        
             for i in range(chunk_count):
                 if self.killed is True:
                     # kill request received, exit loop early
@@ -841,23 +850,27 @@ class Uploader(QObject):
                     multipart.upload_part_from_file(fp, part_num=i + 1)
                 progress_count += 1
                 QgsMessageLog.logMessage(
-                    'Chunk #%d\n' % progress_count,
+                    'Sent chunk #%d\n' % progress_count,
                     'OAM',
                     level=QgsMessageLog.INFO)
                 self.progress.emit(progress_count / float(chunk_count)*100)
                 QgsMessageLog.logMessage(
-                    'Progress %f' % (progress_count / float(chunk_count)),
+                    'Progress = %f' % (progress_count / float(chunk_count)),
                     'OAM',
                     level=QgsMessageLog.INFO)
             if self.killed is False:
                 multipart.complete_upload()
                 self.progress.emit(100)
                 success = True
-            self.notifyOAM()
-            self.triggerTileService()
+                if "notify_oam" in self.options:
+                    self.notifyOAM()
+                if "trigger_tiling" in self.options:
+                    self.triggerTileService()
         except Exception, e:
-            # forward the exception upstream
+            # forward the exception upstream (or try to...)
+            # chunk size smaller than 5MB can cause an error, server does not expect it
             self.error.emit(e, traceback.format_exc())
+   
         self.finished.emit(success)
 
     def kill(self):
