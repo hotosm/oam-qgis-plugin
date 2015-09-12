@@ -48,12 +48,12 @@ PY_FILES = \
 
 # removed 'module' while it is non-functional
 #PY_FOLDERS = module gui icon ext_libs
-PY_FOLDERS = gui icon ext_libs
+PY_FOLDERS = gui icon
 
 #please modify the 'clean' section of this Makefile
 #UI_FILES = oam_client_dialog_base.ui
 
-EXTRAS = metadata.txt oam-qgis-plugin.conf.sample README INSTALL LICENSE 
+EXTRAS = metadata.txt oam-qgis-plugin.conf.sample README INSTALL LICENSE
 
 COMPILED_RESOURCE_FILES = resources_rc.py
 
