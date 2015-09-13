@@ -30,8 +30,7 @@ from PyQt4.Qt import *
 from qgis.gui import QgsMessageBar
 from qgis.core import QgsMapLayer, QgsMessageLog
 from osgeo import gdal, osr, ogr
-import json, time
-import math, imghdr
+import json, time, math, imghdr, tempfile
 
 # Modules needed for upload
 from boto.s3.connection import S3Connection, S3ResponseError
@@ -390,6 +389,14 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 "GDAL could not read file %s" % filename,
                 level=QgsMessageBar.CRITICAL)
             return False
+        # check if there is an object raster
+        if not raster:
+            self.bar0.clearWidgets()
+            self.bar0.pushMessage(
+                "CRITICAL",
+                "GDAL could not read file %s" % filename,
+                level=QgsMessageBar.CRITICAL)
+            return False
         # check that image has at least 3 bands
         if raster.RasterCount < 3:
             self.bar0.clearWidgets()
@@ -564,15 +571,16 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 f = os.path.splitext(filename)[0]+'_EPSG3857.json'
             json_filenames.append(f)
 
-        with open('/tmp/full_metadata', 'w') as tmpfile:
-            for f in json_filenames:
-                if os.path.exists(f):
-                    with open(f) as infile:
-                        tmpfile.write(infile.read())
+        temp = QTemporaryFile()
+        temp.open()
+        for f in json_filenames:
+            if os.path.exists(f):
+                with open(f) as infile:
+                    temp.write(infile.read())
+        temp.flush()
+        temp.seek(0)
 
-        metadata = QFile('/tmp/full_metadata')
-        metadata.open(QIODevice.ReadOnly)
-        stream = QTextStream(metadata)
+        stream = QTextStream(temp)
         self.review_metadata_box.setText(stream.readAll())
 
     #functions for threading purpose

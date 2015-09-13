@@ -10,6 +10,7 @@
 name=Open Aerial Map (OAM)
 qgisMinimumVersion=2.0
 description=This plugin can be used as an OAM client to upload, search and download imagery to/from the OAM catalog.
+about=Through the 'Upload wizard' the user is guided in order to create a metadata json file for each source, which is mandatory for OAM imagery. Some information is also extracted directly from the imagery files, and the user has a chance to review all metadata before performing the upload. Default settings can be stored and changed through the 'Edit settings' dialog, and loaded at the convenience of the user. In the currente implementation, the 'Search imagery' dialog is a stub, to be implemented in future versions
 version=0.1-alpha.1
 author=Tassia Camoes Araujo
 email=tassia@acaia.ca
