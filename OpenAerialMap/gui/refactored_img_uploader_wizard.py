@@ -526,7 +526,6 @@ class RefactoredImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             return literal_eval(("(%12.3f,%12.3f) " % (dfGeoX, dfGeoY )))
 
 
-
     def loadImageryInfoForm(self, filename):
         pass
 
@@ -590,27 +589,30 @@ class RefactoredImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
     #event handler for upload button
     def startUpload(self):
-        # initialize the upload options
+
+        """ pre-upload processing """
+        self.bar2.clearWidgets()
+        self.bar2.pushMessage(
+            'INFO',
+            'Pre-upload image processing...',
+            level=QgsMessageBar.INFO)
+
+        # get_upload_options - is it better to simply use list?
+        # make a separate function?
+        upload_options = []
+        if self.reproject_check_box.isChecked():
+            upload_options.append("reprojection")
+        if self.license_check_box.isChecked():
+            upload_options.append("license")
+        if self.notify_oam_check.isChecked():
+            upload_options.append("notify_oam")
+        if self.trigger_tiling_check.isChecked():
+            upload_options.append("trigger_tiling")
+
+        #get login information for bucket
         bucket_name = None
         bucket_key = None
         bucket_secret = None
-        filenames = []
-        dict_upload_options = {}
-
-        # store the values for argumants
-        dict_upload_options["reprojection"] = False
-        dict_upload_options["license"] = False
-        dict_upload_options["notify_oam"] = False
-        dict_upload_options["trigger_tiling"] = False
-
-        if self.reproject_check_box.isChecked():
-            dict_upload_options["reprojection"] = True
-        if self.license_check_box.isChecked():
-            dict_upload_options["license"] = True
-        if self.notify_oam_check.isChecked():
-            dict_upload_options["notify_oam"] = True
-        if self.trigger_tiling_check.isChecked():
-            dict_upload_options["trigger_tiling"] = True
 
         if self.storage_combo_box.currentIndex() == 0:
             bucket_name = 'oam-qgis-plugin-test'
@@ -626,12 +628,35 @@ class RefactoredImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         bucket_key = str(self.key_id_edit.text())
         bucket_secret = str(self.secret_key_edit.text())
 
+        #get filenames
+        filenames = []
+
         for index in xrange(self.sources_list_widget.count()):
             filename = str(self.sources_list_widget.item(index).data(Qt.UserRole))
+
+            # make sure about the following functions
+            """
+            # Perfom reprojection
+            if filename in self.reprojected:
+                filename = self.reproject(filename)
+                QgsMessageLog.logMessage(
+                    'Created reprojected file: %s' % filename,
+                    'OAM',
+                    level=QgsMessageLog.INFO)
+
+            # Convert file format
+            if not (imghdr.what(filename) == 'tiff'):
+                filename = self.convert(filename)
+                QgsMessageLog.logMessage(
+                    'Converted file to tiff: %s' % filename,
+                    'OAM',
+                    level=QgsMessageLog.INFO)
+            """
+
             filenames.append(filename)
 
         #create S3Manager Object
-        s3Mgr = S3Manager(bucket_key, bucket_secret, bucket_name, filenames, dict_upload_options, self.bar2)
+        s3Mgr = S3Manager(bucket_key, bucket_secret, bucket_name, filenames, upload_options, self.bar2)
 
         if s3Mgr.get_bucket():
             try:
@@ -639,7 +664,7 @@ class RefactoredImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 #msg = repr(s3Mgr.test())
                 msg = repr(s3Mgr.upload_files())
             except:
-                msg = "error"
+                msg = "Error!"
                 qMsgBox = QMessageBox()
                 qMsgBox.setText(msg)
                 qMsgBox.exec_()
@@ -653,9 +678,6 @@ class RefactoredImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 'OAM',
                 level=QgsMessageLog.CRITICAL)
 
-
-
-    """ Should we move followin part to module_access_s3? """
 
     def reproject(self,filename):
         # to avoid repetition of "EPSG3857" in filename:

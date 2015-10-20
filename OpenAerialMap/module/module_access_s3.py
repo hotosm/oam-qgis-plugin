@@ -67,6 +67,16 @@ class S3Manager(S3Connection):
     #functions for threading purpose
     def upload_files(self):
 
+        # Testing purpose only
+        if "reprojection" in self.upload_options:
+            print "reprojection"
+        if "license" in self.upload_options:
+            print "license"
+        if "notify_oam" in self.upload_options:
+            print "notify_oam"
+        if "trigger_tiling" in self.upload_options:
+            print "trigger_tiling"
+
         # configure the QgsMessageBar
         messageBar = self.bar2.createMessage('INFO: Performing upload...', )
         progressBar = QProgressBar()
@@ -81,36 +91,11 @@ class S3Manager(S3Connection):
         self.messageBar = messageBar
 
         #strFileNames = ''
-        #testQThreads = []
         self.num_uploading_images = len(self.filenames)
 
         for i in range(0, self.num_uploading_images):
             filename = self.filenames[i]
             #strFileNames += filename
-
-            """
-            self.bar2.clearWidgets()
-            self.bar2.pushMessage(
-                'INFO',
-                'Pre-upload image processing...',
-                level=QgsMessageBar.INFO)
-
-            # Perfom reprojection
-            if filename in self.reprojected:
-                filename = self.reproject(filename)
-                QgsMessageLog.logMessage(
-                    'Created reprojected file: %s' % filename,
-                    'OAM',
-                    level=QgsMessageLog.INFO)
-
-            # Convert file format
-            if not (imghdr.what(filename) == 'tiff'):
-                filename = self.convert(filename)
-                QgsMessageLog.logMessage(
-                    'Converted file to tiff: %s' % filename,
-                    'OAM',
-                    level=QgsMessageLog.INFO)
-            """
 
             # create a new uploader instance
             #self.uploaders.append(Uploader(filename,self.bucket,self.upload_options, i))
@@ -125,21 +110,18 @@ class S3Manager(S3Connection):
                 uploader.moveToThread(self.threads[i])
                 uploader.finished.connect(self.uploaderFinished)
                 uploader.error.connect(self.uploaderError)
-                #uploader.progress.connect(progressBar.setValue)
+                #need to modify this part?
                 uploader.progress.connect(progressBar.setValue)
                 self.threads[i].started.connect(uploader.run)
                 self.threads[i].start()
 
                 print repr(self.threads[i])
-                print str(i+1)
 
             except Exception, e:
                 return repr(e)
 
-            #testQThreads.append(TestQThread(filename, self.bucket, self.upload_options))
-
     def cancelUpload(self):
-        #delete list by loop?
+        # use self.uploaders[i] and loop?
         self.uploader.kill()
         self.bar2.clearWidgets()
         self.bar2.pushMessage(
@@ -173,16 +155,27 @@ class S3Manager(S3Connection):
         if success:
             self.count_uploaded_images += 1
             print str(self.count_uploaded_images)
+
             # report the result
             self.bar2.clearWidgets()
-            self.bar2.pushMessage(
-                'INFO',
-                str(self.count_uploaded_images) + ' image(s) out of ' + str(self.num_uploading_images) + ' was(were) uploaded.',
-                level=QgsMessageBar.INFO)
-            QgsMessageLog.logMessage(
-                'Upload succeeded',
-                'OAM',
-                level=QgsMessageLog.INFO)
+            if self.count_uploaded_images < self.num_uploading_images:
+                self.bar2.pushMessage(
+                    'INFO',
+                    'The ' + str(self.count_uploaded_images + 1) + '(th) image out of ' + str(self.num_uploading_images) + ' are being uploaded...',
+                    level=QgsMessageBar.INFO)
+                QgsMessageLog.logMessage(
+                    'Upload succeeded',
+                    'OAM',
+                    level=QgsMessageLog.INFO)
+            else:
+                self.bar2.pushMessage(
+                    'INFO',
+                    'Upload was successfully completed.',
+                    level=QgsMessageBar.INFO)
+                QgsMessageLog.logMessage(
+                    'Upload succeeded',
+                    'OAM',
+                    level=QgsMessageLog.INFO)
         else:
             # notify the user that something went wrong
             self.bar2.pushMessage(
@@ -252,6 +245,8 @@ class Uploader(QObject):
                 level=QgsMessageLog.CRITICAL)
 
     def notifyOAM(self):
+        pass
+
         '''Just a stub method, not needed at the moment because indexing happens every 10 mins'''
         QgsMessageLog.logMessage(
             'AOM notified of new resource',
@@ -259,6 +254,8 @@ class Uploader(QObject):
             level=QgsMessageLog.INFO)
 
     def triggerTileService(self):
+        pass
+        """
         url = "http://hotosm-oam-server-stub.herokuapp.com/tile"
         h = {'content-type':'application/json'}
         uri = "s3://%s/%s" % (self.bucket.name,os.path.basename(self.filename))
@@ -287,6 +284,7 @@ class Uploader(QObject):
                 'OAM',
                 level=QgsMessageLog.CRITICAL)
         return(0)
+        """
 
     def run(self):
         self.sendMetadata()
@@ -327,10 +325,13 @@ class Uploader(QObject):
                 multipart.complete_upload()
                 self.progress.emit(100)
                 success = True
+
+                # need to modify this part?
                 if "notify_oam" in self.options:
                     self.notifyOAM()
                 if "trigger_tiling" in self.options:
                     self.triggerTileService()
+
         except Exception, e:
             # forward the exception upstream (or try to...)
             # chunk size smaller than 5MB can cause an error, server does not expect it
