@@ -80,12 +80,6 @@ class S3Manager(S3Connection):
         # configure the QgsMessageBar
         messageBar = self.bar2.createMessage('INFO: Performing upload...', )
 
-        """
-        progressBar = QProgressBar()
-        progressBar.setAlignment(Qt.AlignLeft|Qt.AlignVCenter)
-        messageBar.layout().addWidget(progressBar)
-        """
-
         cancelButton = QPushButton()
         cancelButton.setText('Cancel')
         cancelButton.clicked.connect(self.cancelUpload)
@@ -95,31 +89,21 @@ class S3Manager(S3Connection):
 
         self.messageBar = messageBar
 
-        #strFileNames = ''
         self.num_uploading_images = len(self.filenames)
 
         for i in range(0, self.num_uploading_images):
             filename = self.filenames[i]
-            #strFileNames += filename
 
             # create a new uploader instance
             self.uploaders.append(Uploader(filename,self.bucket,self.upload_options, i))
-            #uploader = Uploader(filename,self.bucket,self.upload_options, i)
-            #self.uploader = uploader
 
             try:
                 # start the worker in a new thread
                 self.threads.append(QThread())
-                #self.thread = thread
 
                 self.uploaders[i].moveToThread(self.threads[i])
                 self.uploaders[i].finished.connect(self.uploaderFinished)
                 self.uploaders[i].error.connect(self.uploaderError)
-                #uploader.moveToThread(self.threads[i])
-                #uploader.finished.connect(self.uploaderFinished)
-                #uploader.error.connect(self.uploaderError)
-                #need to modify this part?
-                #uploader.progress.connect(progressBar.setValue)
                 self.threads[i].started.connect(self.uploaders[i].run)
                 self.threads[i].start()
 
@@ -151,7 +135,7 @@ class S3Manager(S3Connection):
                 #is it better to use destructor?
                 self.uploaders[i].kill()
                 self.progressBars[i] = None
-                #self.uploader.kill()
+                #self.threads[i] = None
         except:
             print "Error: problem occurred to kill uploaders"
 
@@ -167,18 +151,17 @@ class S3Manager(S3Connection):
                 level=QgsMessageLog.CRITICAL)
         self.threads[index].quit()
         self.threads[index].wait()
-        #self.thread.quit()
-        #self.thread.wait()
         try:
             self.threads[index].deleteLater()
-            #self.thread.deleteLater()
         except:
             QgsMessageLog.logMessage(
                 'Exception on deleting thread\n',
                 'OAM',
                 level=QgsMessageLog.CRITICAL)
+
         # remove widget from message bar
         #self.bar2.popWidget(self.messageBar)
+
         if success:
             self.count_uploaded_images += 1
             print str(self.count_uploaded_images)
