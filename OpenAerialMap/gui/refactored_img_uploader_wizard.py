@@ -98,8 +98,8 @@ class RefactoredImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         Please comment out and implement following functions if necessary."""
         #self.button(QWizard.BackButton).clicked.connect(self.previousPage)
         #self.button(QWizard.NextButton).clicked.connect(self.nextPage)
-        #self.button(QWizard.FinishButton).clicked.connect(self.finishWizard)
-        #self.button(QWizard.CancelButton).clicked.connect(self.cancelWizard)
+        self.button(QWizard.FinishButton).clicked.connect(self.finishWizard)
+        self.button(QWizard.CancelButton).clicked.connect(self.cancelWizard)
 
         # Imagery connections (wizard page 1)
         self.layers_tool_button.clicked.connect(self.loadLayers)
@@ -121,6 +121,19 @@ class RefactoredImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         # Upload tab connections (wizard page 3)
         self.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)
         self.customButtonClicked.connect(self.startUpload)
+
+        # Initialize the object for S3Manager
+        self.s3Mgr = None
+
+    def finishWizard(self):
+        print "finish wizard button was clicked."
+        if self.s3Mgr != None:
+            self.s3Mgr.cancelUpload()
+
+    def cancelWizard(self):
+        print "cancel wizard button was clicked."
+        if self.s3Mgr != None:
+            self.s3Mgr.cancelUpload()
 
     # event handling for wizard page 1
     def loadLayers(self):
@@ -590,14 +603,6 @@ class RefactoredImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
     #event handler for upload button
     def startUpload(self):
 
-        """ pre-upload processing """
-        self.bar2.clearWidgets()
-        self.bar2.pushMessage(
-            'INFO',
-            'Pre-upload image processing...',
-            level=QgsMessageBar.INFO)
-
-        # get_upload_options - is it better to simply use list?
         # make a separate function?
         upload_options = []
         if self.reproject_check_box.isChecked():
@@ -635,8 +640,8 @@ class RefactoredImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             filename = str(self.sources_list_widget.item(index).data(Qt.UserRole))
 
             # make sure about the following functions
-            """
             # Perfom reprojection
+            """
             if filename in self.reprojected:
                 filename = self.reproject(filename)
                 QgsMessageLog.logMessage(
@@ -656,13 +661,13 @@ class RefactoredImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             filenames.append(filename)
 
         #create S3Manager Object
-        s3Mgr = S3Manager(bucket_key, bucket_secret, bucket_name, filenames, upload_options, self.bar2)
+        self.s3Mgr = S3Manager(bucket_key, bucket_secret, bucket_name, filenames, upload_options, self.bar2)
 
-        if s3Mgr.get_bucket():
+        if self.s3Mgr.get_bucket():
             try:
-                #msg = repr(s3Mgr.get_all_keys())
-                #msg = repr(s3Mgr.test())
-                msg = repr(s3Mgr.upload_files())
+                #msg = repr(self.s3Mgr.get_all_keys())
+                #msg = reprself.(s3Mgr.test())
+                msg = repr(self.s3Mgr.upload_files())
             except:
                 msg = "Error!"
                 qMsgBox = QMessageBox()

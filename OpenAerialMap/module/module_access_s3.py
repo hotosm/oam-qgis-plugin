@@ -9,7 +9,6 @@ import os, sys
 from PyQt4 import QtGui
 from PyQt4.Qt import *
 from PyQt4.QtCore import QThread
-#import threading
 import json, time, math, imghdr, tempfile
 
 from qgis.gui import QgsMessageBar
@@ -33,8 +32,9 @@ class S3Manager(S3Connection):
         self.bucket = None
         self.filenames = filenames
         self.bar2 = qMsgBar
-        #self.uploaders = []
+        self.uploaders = []
         self.threads = []
+        self.progressBars = []
         self.count_uploaded_images = 0
         self.num_uploading_images = 0
 
@@ -79,15 +79,20 @@ class S3Manager(S3Connection):
 
         # configure the QgsMessageBar
         messageBar = self.bar2.createMessage('INFO: Performing upload...', )
+
+        """
         progressBar = QProgressBar()
         progressBar.setAlignment(Qt.AlignLeft|Qt.AlignVCenter)
         messageBar.layout().addWidget(progressBar)
+        """
+
         cancelButton = QPushButton()
         cancelButton.setText('Cancel')
         cancelButton.clicked.connect(self.cancelUpload)
         messageBar.layout().addWidget(cancelButton)
         self.bar2.clearWidgets()
         self.bar2.pushWidget(messageBar, level=QgsMessageBar.INFO)
+
         self.messageBar = messageBar
 
         #strFileNames = ''
@@ -98,41 +103,63 @@ class S3Manager(S3Connection):
             #strFileNames += filename
 
             # create a new uploader instance
-            #self.uploaders.append(Uploader(filename,self.bucket,self.upload_options, i))
-            uploader = Uploader(filename,self.bucket,self.upload_options, i)
-            self.uploader = uploader
+            self.uploaders.append(Uploader(filename,self.bucket,self.upload_options, i))
+            #uploader = Uploader(filename,self.bucket,self.upload_options, i)
+            #self.uploader = uploader
 
             try:
                 # start the worker in a new thread
                 self.threads.append(QThread())
                 #self.thread = thread
 
-                uploader.moveToThread(self.threads[i])
-                uploader.finished.connect(self.uploaderFinished)
-                uploader.error.connect(self.uploaderError)
+                self.uploaders[i].moveToThread(self.threads[i])
+                self.uploaders[i].finished.connect(self.uploaderFinished)
+                self.uploaders[i].error.connect(self.uploaderError)
+                #uploader.moveToThread(self.threads[i])
+                #uploader.finished.connect(self.uploaderFinished)
+                #uploader.error.connect(self.uploaderError)
                 #need to modify this part?
-                uploader.progress.connect(progressBar.setValue)
-                self.threads[i].started.connect(uploader.run)
+                #uploader.progress.connect(progressBar.setValue)
+                self.threads[i].started.connect(self.uploaders[i].run)
                 self.threads[i].start()
 
                 print repr(self.threads[i])
 
+                self.progressBars.append(QProgressBar())
+                self.progressBars[i].setAlignment(Qt.AlignLeft|Qt.AlignVCenter)
+                messageBar.layout().addWidget(self.progressBars[i])
+                self.uploaders[i].progress.connect(self.updateProgressBar)
+
             except Exception, e:
                 return repr(e)
 
+    def updateProgressBar(self, progressValue, index):
+        print "Progress: " + str(progressValue) + ", index: " + str(index)
+        if self.progressBars[index] != None:
+            self.progressBars[index].setValue(progressValue)
+
     def cancelUpload(self):
-        # use self.uploaders[i] and loop?
-        self.uploader.kill()
+
         self.bar2.clearWidgets()
         self.bar2.pushMessage(
             'WARNING',
             'Canceling upload...',
             level=QgsMessageBar.WARNING)
 
+        try:
+            for i in range(0, self.num_uploading_images):
+                #is it better to use destructor?
+                self.uploaders[i].kill()
+                self.progressBars[i] = None
+                #self.uploader.kill()
+        except:
+            print "Error: problem occurred to kill uploaders"
+
+
     def uploaderFinished(self, success, index):
         # clean up the uploader and thread
         try:
-            self.uploader.deleteLater()
+            self.uploaders[index].deleteLater()
         except:
             QgsMessageLog.logMessage(
                 'Exception on deleting uploader\n',
@@ -151,20 +178,22 @@ class S3Manager(S3Connection):
                 'OAM',
                 level=QgsMessageLog.CRITICAL)
         # remove widget from message bar
-        self.bar2.popWidget(self.messageBar)
+        #self.bar2.popWidget(self.messageBar)
         if success:
             self.count_uploaded_images += 1
             print str(self.count_uploaded_images)
 
             # report the result
-            self.bar2.clearWidgets()
+            #self.bar2.clearWidgets()
             if self.count_uploaded_images < self.num_uploading_images:
+                """
                 self.bar2.pushMessage(
                     'INFO',
-                    'The ' + str(self.count_uploaded_images + 1) + '(th) image out of ' + str(self.num_uploading_images) + ' are being uploaded...',
+                    'The ' + str(self.count_uploaded_images) + '(th) image out of ' + str(self.num_uploading_images) + ' were uploaded.',
                     level=QgsMessageBar.INFO)
+                """
                 QgsMessageLog.logMessage(
-                    'Upload succeeded',
+                    'Upload succeeded (' + str(self.count_uploaded_images) + ' out of ' + str(self.num_uploading_images) + ')' ,
                     'OAM',
                     level=QgsMessageLog.INFO)
             else:
@@ -193,7 +222,6 @@ class S3Manager(S3Connection):
             'OAM',
             level=QgsMessageLog.CRITICAL)
 
-
     #Testing purpose only
     def test(self):
         strResult = repr(self.upload_options) + repr(self.bucket_name) + repr(self.bucket) + repr(self.filenames)
@@ -218,7 +246,7 @@ class Uploader(QObject):
 
     finished = pyqtSignal(bool, int)
     error = pyqtSignal(Exception, basestring)
-    progress = pyqtSignal(float)
+    progress = pyqtSignal(float, int)
 
     def __init__(self,filename,bucket,options, index):
         QObject.__init__(self)
@@ -245,7 +273,6 @@ class Uploader(QObject):
                 level=QgsMessageLog.CRITICAL)
 
     def notifyOAM(self):
-        pass
 
         '''Just a stub method, not needed at the moment because indexing happens every 10 mins'''
         QgsMessageLog.logMessage(
@@ -254,8 +281,6 @@ class Uploader(QObject):
             level=QgsMessageLog.INFO)
 
     def triggerTileService(self):
-        pass
-        """
         url = "http://hotosm-oam-server-stub.herokuapp.com/tile"
         h = {'content-type':'application/json'}
         uri = "s3://%s/%s" % (self.bucket.name,os.path.basename(self.filename))
@@ -284,7 +309,6 @@ class Uploader(QObject):
                 'OAM',
                 level=QgsMessageLog.CRITICAL)
         return(0)
-        """
 
     def run(self):
         self.sendMetadata()
@@ -316,20 +340,21 @@ class Uploader(QObject):
                     'Sent chunk #%d\n' % progress_count,
                     'OAM',
                     level=QgsMessageLog.INFO)
-                self.progress.emit(progress_count / float(chunk_count)*100)
+                self.progress.emit(progress_count / float(chunk_count)*100, self.index)
                 QgsMessageLog.logMessage(
                     'Progress = %f' % (progress_count / float(chunk_count)),
                     'OAM',
                     level=QgsMessageLog.INFO)
             if self.killed is False:
                 multipart.complete_upload()
-                self.progress.emit(100)
+                self.progress.emit(100, self.index)
                 success = True
 
-                # need to modify this part?
+                # need to modify this part.
                 if "notify_oam" in self.options:
                     self.notifyOAM()
                 if "trigger_tiling" in self.options:
+                    #pass
                     self.triggerTileService()
 
         except Exception, e:
