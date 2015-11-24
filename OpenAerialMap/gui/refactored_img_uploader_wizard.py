@@ -82,7 +82,8 @@ class RefactoredImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         self.settings = settings
 
-        # Dictionaries to save imagery info (todo: defined as a classes in the future)
+        # Dictionaries to save imagery info
+        #(todo: defined as a classes in the future)
         self.metadata = {}
         self.reprojected = []
         self.licensed = []

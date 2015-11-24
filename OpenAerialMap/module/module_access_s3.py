@@ -87,7 +87,7 @@ class S3Manager(S3Connection):
         self.bar2.clearWidgets()
         self.bar2.pushWidget(messageBar, level=QgsMessageBar.INFO)
 
-        self.messageBar = messageBar
+        #self.messageBar = messageBar
 
         self.num_uploading_images = len(self.filenames)
 
@@ -257,7 +257,8 @@ class Uploader(QObject):
 
     def notifyOAM(self):
 
-        '''Just a stub method, not needed at the moment because indexing happens every 10 mins'''
+        '''Just a stub method, not needed at the moment
+        because indexing happens every 10 mins'''
         QgsMessageLog.logMessage(
             'AOM notified of new resource',
             'OAM',
@@ -328,7 +329,9 @@ class Uploader(QObject):
                     'Progress = %f' % (progress_count / float(chunk_count)),
                     'OAM',
                     level=QgsMessageLog.INFO)
+
             if self.killed is False:
+
                 multipart.complete_upload()
                 self.progress.emit(100, self.index)
                 success = True
