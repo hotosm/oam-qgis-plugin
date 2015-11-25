@@ -38,7 +38,7 @@ class S3Manager(S3Connection):
         self.count_uploaded_images = 0
         self.num_uploading_images = 0
 
-    def get_bucket(self):
+    def getBucket(self):
 
         for trial in xrange(3):
             if self.bucket: break
@@ -57,6 +57,7 @@ class S3Manager(S3Connection):
 
         return self.bucket
 
+        """for testing purpose"""
         """
         rsKeys = []
         for key in self.bucket.list():
@@ -65,7 +66,7 @@ class S3Manager(S3Connection):
         """
 
     #functions for threading purpose
-    def upload_files(self):
+    def uploadFiles(self):
 
         # Testing purpose only
         if "reprojection" in self.upload_options:
@@ -87,7 +88,6 @@ class S3Manager(S3Connection):
         self.bar2.clearWidgets()
         self.bar2.pushWidget(messageBar, level=QgsMessageBar.INFO)
 
-        #self.messageBar = messageBar
 
         self.num_uploading_images = len(self.filenames)
 
@@ -121,6 +121,9 @@ class S3Manager(S3Connection):
         print "Progress: " + str(progressValue) + ", index: " + str(index)
         if self.progressBars[index] != None:
             self.progressBars[index].setValue(progressValue)
+
+    def cancelAllUploads(self):
+        pass
 
     def cancelUpload(self):
 
@@ -211,7 +214,7 @@ class S3Manager(S3Connection):
         return strResult
 
     #Testing purpose only
-    def get_all_keys(self):
+    def getAllKeys(self):
         rsKeys = []
         try:
             myBucket = super(S3Manager,self).get_bucket(self.bucket_name)
@@ -311,9 +314,11 @@ class Uploader(QObject):
                 level=QgsMessageLog.INFO)
 
             for i in range(chunk_count):
+
                 if self.killed is True:
                     # kill request received, exit loop early
                     break
+
                 offset = chunk_size * i
                 # bytes are set to never exceed the original file size.
                 bytes = min(chunk_size, file_size - offset)
