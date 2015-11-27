@@ -40,6 +40,9 @@ class S3Manager(S3Connection):
         #for gui
         self.wizard_page = wizard_page
         self.msg_bar_main = None
+        self.msg_bar_main_content = None
+        self.cancel_button_main = None
+
         self.msg_bars = []
         self.progress_bars = []
         #self.cancel_buttons = []
@@ -74,7 +77,8 @@ class S3Manager(S3Connection):
     #functions for threading purpose
     def uploadFiles(self):
 
-        # Testing purpose only
+        """ Testing purpose only """
+        """
         if "reprojection" in self.upload_options:
             print "reprojection"
         if "license" in self.upload_options:
@@ -83,21 +87,22 @@ class S3Manager(S3Connection):
             print "notify_oam"
         if "trigger_tiling" in self.upload_options:
             print "trigger_tiling"
+        """
 
         # configure the msg_bar_main
         self.msg_bar_main = QgsMessageBar()
         self.msg_bar_main.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         self.wizard_page.layout().addWidget(self.msg_bar_main)
 
-        messageBar = self.msg_bar_main.createMessage('INFO: Performing upload...', )
+        self.msg_bar_main_content = self.msg_bar_main.createMessage('INFO: Performing upload...', )
 
-        cancelButton = QPushButton()
-        cancelButton.setText('Cancel')
-        cancelButton.clicked.connect(self.cancelAllUploads)
+        self.cancel_button_main = QPushButton()
+        self.cancel_button_main.setText('Cancel')
+        self.cancel_button_main.clicked.connect(self.cancelAllUploads)
 
-        messageBar.layout().addWidget(cancelButton)
+        self.msg_bar_main_content.layout().addWidget(self.cancel_button_main)
         self.msg_bar_main.clearWidgets()
-        self.msg_bar_main.pushWidget(messageBar, level=QgsMessageBar.INFO)
+        self.msg_bar_main.pushWidget(self.msg_bar_main_content, level=QgsMessageBar.INFO)
 
 
         self.num_uploading_images = len(self.filenames)
