@@ -78,18 +78,7 @@ class RefactoredImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.page(2).layout().addWidget(self.bar2)
 
         #for testing purpose
-        """
-        self.bars = []
-        for i in range(0,5):
-            self.bars.append(QgsMessageBar())
-            self.bars[i].setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
-            self.page(0).layout().addWidget(self.bars[i])
-            self.bars[i].clearWidgets()
-            self.bars[i].pushMessage(
-                "INFO",
-                "Test " + str(i),
-                level=QgsMessageBar.INFO)
-        """
+        #self.bars = []
 
         self.setButtonText(QtGui.QWizard.CustomButton1, self.tr("&Start upload"));
         self.setOption(QtGui.QWizard.HaveCustomButton1, True);
@@ -143,12 +132,12 @@ class RefactoredImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
     def finishWizard(self):
         print "finish wizard button was clicked."
         if self.s3Mgr != None:
-            self.s3Mgr.cancelUpload()
+            self.s3Mgr.cancelAllUploads()
 
     def cancelWizard(self):
         print "cancel wizard button was clicked."
         if self.s3Mgr != None:
-            self.s3Mgr.cancelUpload()
+            self.s3Mgr.cancelAllUploads()
 
     # event handling for wizard page 1
     def loadLayers(self):
@@ -696,13 +685,27 @@ class RefactoredImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             filenames.append(filename)
 
         #create S3Manager Object
-        self.s3Mgr = S3Manager(bucket_key, bucket_secret, bucket_name, filenames, upload_options, self.bar2)
+        self.s3Mgr = S3Manager(bucket_key, bucket_secret, bucket_name, filenames, upload_options, self.page(2))
 
         if self.s3Mgr.getBucket():
             try:
                 #msg = repr(self.s3Mgr.getAllKeys())
                 #msg = reprself.(s3Mgr.test())
                 msg = repr(self.s3Mgr.uploadFiles())
+
+                """Testing purpose"""
+                """
+                for i in range(0,len(filenames)):
+                    self.bars.append(QgsMessageBar())
+                    self.bars[i].setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
+                    self.page(2).layout().addWidget(self.bars[i])
+                    self.bars[i].clearWidgets()
+                    self.bars[i].pushMessage(
+                        "INFO",
+                        "Test " + str(i),
+                        level=QgsMessageBar.INFO)
+                """
+
             except:
                 msg = "Error!"
                 qMsgBox = QMessageBox()

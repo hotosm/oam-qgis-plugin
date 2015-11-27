@@ -24,19 +24,25 @@ from ast import literal_eval
 
 class S3Manager(S3Connection):
 
-    def __init__(self, access_key_id, secret_access_key, bucket_name, filenames, upload_options, qMsgBar, parent=None):
+    def __init__(self, access_key_id, secret_access_key, bucket_name, filenames, upload_options, wizard_page, parent=None):
 
         S3Connection.__init__(self, access_key_id, secret_access_key)
         self.upload_options = upload_options
         self.bucket_name = bucket_name
         self.bucket = None
         self.filenames = filenames
-        self.bar2 = qMsgBar
-        self.uploaders = []
+        self.s3Uploaders = []
         self.threads = []
-        self.progressBars = []
+
         self.count_uploaded_images = 0
         self.num_uploading_images = 0
+
+        #for gui
+        self.wizard_page = wizard_page
+        self.msg_bar_main = None
+        self.msg_bars = []
+        self.progress_bars = []
+        #self.cancel_buttons = []
 
     def getBucket(self):
 
@@ -78,15 +84,20 @@ class S3Manager(S3Connection):
         if "trigger_tiling" in self.upload_options:
             print "trigger_tiling"
 
-        # configure the QgsMessageBar
-        messageBar = self.bar2.createMessage('INFO: Performing upload...', )
+        # configure the msg_bar_main
+        self.msg_bar_main = QgsMessageBar()
+        self.msg_bar_main.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
+        self.wizard_page.layout().addWidget(self.msg_bar_main)
+
+        messageBar = self.msg_bar_main.createMessage('INFO: Performing upload...', )
 
         cancelButton = QPushButton()
         cancelButton.setText('Cancel')
-        cancelButton.clicked.connect(self.cancelUpload)
+        cancelButton.clicked.connect(self.cancelAllUploads)
+
         messageBar.layout().addWidget(cancelButton)
-        self.bar2.clearWidgets()
-        self.bar2.pushWidget(messageBar, level=QgsMessageBar.INFO)
+        self.msg_bar_main.clearWidgets()
+        self.msg_bar_main.pushWidget(messageBar, level=QgsMessageBar.INFO)
 
 
         self.num_uploading_images = len(self.filenames)
@@ -94,41 +105,55 @@ class S3Manager(S3Connection):
         for i in range(0, self.num_uploading_images):
             filename = self.filenames[i]
 
-            # create a new uploader instance
-            self.uploaders.append(Uploader(filename,self.bucket,self.upload_options, i))
+            # create a new S3Uploader instance
+            self.s3Uploaders.append(S3Uploader(filename, self.bucket, self.upload_options, i))
 
             try:
                 # start the worker in a new thread
                 self.threads.append(QThread())
-
-                self.uploaders[i].moveToThread(self.threads[i])
-                self.uploaders[i].finished.connect(self.uploaderFinished)
-                self.uploaders[i].error.connect(self.uploaderError)
-                self.threads[i].started.connect(self.uploaders[i].run)
+                self.s3Uploaders[i].moveToThread(self.threads[i])
+                self.s3Uploaders[i].finished.connect(self.finishUpload)
+                self.s3Uploaders[i].error.connect(self.displayUploadError)
+                self.threads[i].started.connect(self.s3Uploaders[i].run)
                 self.threads[i].start()
 
                 print repr(self.threads[i])
 
-                self.progressBars.append(QProgressBar())
-                self.progressBars[i].setAlignment(Qt.AlignLeft|Qt.AlignVCenter)
-                messageBar.layout().addWidget(self.progressBars[i])
-                self.uploaders[i].progress.connect(self.updateProgressBar)
+                """ need to figure out how to layout the bars """
+                self.msg_bars.append(QgsMessageBar())
+                self.msg_bars[i].setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
+                self.wizard_page.layout().addWidget(self.msg_bars[i])
+
+                """need to get only filename from absoulte path"""
+                self.msg_bars[i].clearWidgets()
+                self.msg_bars[i].pushMessage(
+                    "Uploading: ",
+                    str(filename),
+                    level=QgsMessageBar.INFO)
+
+                self.progress_bars.append(QProgressBar())
+                self.msg_bars[i].layout().addWidget(self.progress_bars[i])
+                self.s3Uploaders[i].progress.connect(self.updateProgressBar)
+
+                """
+                self.cancel_buttons.append(QPushButton())
+                self.cancel_buttons[i].setText('Cancel')
+                self.cancel_buttons[i].clicked.connect(self.cancelUpload)
+                self.msg_bars[i].layout().addWidget(self.cancel_buttons[i])
+                """
 
             except Exception, e:
                 return repr(e)
 
-    def updateProgressBar(self, progressValue, index):
-        print "Progress: " + str(progressValue) + ", index: " + str(index)
-        if self.progressBars[index] != None:
-            self.progressBars[index].setValue(progressValue)
+    def updateProgressBar(self, progress_value, index):
+        print "Progress: " + str(progress_value) + ", index: " + str(index)
+        if self.progress_bars[index] != None:
+            self.progress_bars[index].setValue(progress_value)
 
     def cancelAllUploads(self):
-        pass
 
-    def cancelUpload(self):
-
-        self.bar2.clearWidgets()
-        self.bar2.pushMessage(
+        self.msg_bar_main.clearWidgets()
+        self.msg_bar_main.pushMessage(
             'WARNING',
             'Canceling upload...',
             level=QgsMessageBar.WARNING)
@@ -136,17 +161,32 @@ class S3Manager(S3Connection):
         try:
             for i in range(0, self.num_uploading_images):
                 #is it better to use destructor?
-                self.uploaders[i].kill()
-                self.progressBars[i] = None
+                self.s3Uploaders[i].kill()
+                self.progress_bars[i] = None
+                #self.cancel_buttons[i] = None
                 #self.threads[i] = None
+
         except:
             print "Error: problem occurred to kill uploaders"
 
+    def cancelUpload(self, index):
 
-    def uploaderFinished(self, success, index):
-        # clean up the uploader and thread
+        pass
+        """
         try:
-            self.uploaders[index].deleteLater()
+            #is it better to use destructor?
+            self.s3Uploaders[index].kill()
+            self.progress_bars[index] = None
+            self.cancel_buttons[index] = None
+            #self.threads[index] = None
+        except:
+            print "Error: problem occurred to kill uploader"
+        """
+
+    def finishUpload(self, success, index):
+        # clean up the s3Uploader and thread
+        try:
+            self.s3Uploaders[index].deleteLater()
         except:
             QgsMessageLog.logMessage(
                 'Exception on deleting uploader\n',
@@ -163,17 +203,17 @@ class S3Manager(S3Connection):
                 level=QgsMessageLog.CRITICAL)
 
         # remove widget from message bar
-        #self.bar2.popWidget(self.messageBar)
+        #self.msg_bar_main.popWidget(self.messageBar)
 
         if success:
             self.count_uploaded_images += 1
             print str(self.count_uploaded_images)
 
             # report the result
-            #self.bar2.clearWidgets()
+            #self.msg_bar_main.clearWidgets()
             if self.count_uploaded_images < self.num_uploading_images:
                 """
-                self.bar2.pushMessage(
+                self.msg_bar_main.pushMessage(
                     'INFO',
                     'The ' + str(self.count_uploaded_images) + '(th) image out of ' + str(self.num_uploading_images) + ' were uploaded.',
                     level=QgsMessageBar.INFO)
@@ -183,7 +223,7 @@ class S3Manager(S3Connection):
                     'OAM',
                     level=QgsMessageLog.INFO)
             else:
-                self.bar2.pushMessage(
+                self.msg_bar_main.pushMessage(
                     'INFO',
                     'Upload was successfully completed.',
                     level=QgsMessageBar.INFO)
@@ -193,7 +233,7 @@ class S3Manager(S3Connection):
                     level=QgsMessageLog.INFO)
         else:
             # notify the user that something went wrong
-            self.bar2.pushMessage(
+            self.msg_bar_main.pushMessage(
                 'CRITICAL',
                 'Upload was interrupted',
                 level=QgsMessageBar.CRITICAL)
@@ -202,7 +242,10 @@ class S3Manager(S3Connection):
                 'OAM',
                 level=QgsMessageLog.CRITICAL)
 
-    def uploaderError(self, e, exception_string):
+    def displayUploadError(self, e, exception_string):
+
+        #display error message
+
         QgsMessageLog.logMessage(
             'Uploader thread raised an exception:\n'.format(exception_string),
             'OAM',
@@ -227,14 +270,14 @@ class S3Manager(S3Connection):
         return rsKeys
 
 
-class Uploader(QObject):
+class S3Uploader(QObject):
     '''Handle uploads in a separate thread'''
 
     finished = pyqtSignal(bool, int)
     error = pyqtSignal(Exception, basestring)
     progress = pyqtSignal(float, int)
 
-    def __init__(self,filename,bucket,options, index):
+    def __init__(self, filename, bucket, options, index):
         QObject.__init__(self)
         self.filename = filename
         self.bucket = bucket
@@ -258,48 +301,10 @@ class Uploader(QObject):
                 'OAM',
                 level=QgsMessageLog.CRITICAL)
 
-    def notifyOAM(self):
+    def sendImageFiles(self):
 
-        '''Just a stub method, not needed at the moment
-        because indexing happens every 10 mins'''
-        QgsMessageLog.logMessage(
-            'AOM notified of new resource',
-            'OAM',
-            level=QgsMessageLog.INFO)
-
-    def triggerTileService(self):
-        url = "http://hotosm-oam-server-stub.herokuapp.com/tile"
-        h = {'content-type':'application/json'}
-        uri = "s3://%s/%s" % (self.bucket.name,os.path.basename(self.filename))
-        QgsMessageLog.logMessage(
-            'Imagery uri %s\n' % uri,
-            'OAM',
-            level=QgsMessageLog.INFO)
-        d = json.dumps({'sources':[uri]})
-        p = requests.post(url,headers=h,data=d)
-        post_dict = json.loads(p.text)
-        QgsMessageLog.logMessage(
-            'Post response: %s' % post_dict,
-            'OAM',
-            level=QgsMessageLog.INFO)
-
-        if u'id' in post_dict.keys():
-            ts_id = post_dict[u'id']
-            time = post_dict[u'queued_at']
-            QgsMessageLog.logMessage(
-                'Tile service #%s triggered on %s\n' % (ts_id,time),
-                'OAM',
-                level=QgsMessageLog.INFO)
-        else:
-            QgsMessageLog.logMessage(
-                'Tile service could not be created\n',
-                'OAM',
-                level=QgsMessageLog.CRITICAL)
-        return(0)
-
-    def run(self):
-        self.sendMetadata()
         success = False
+
         try:
             file_size = os.stat(self.filename).st_size
             chunk_size = 5242880
@@ -342,11 +347,13 @@ class Uploader(QObject):
                 success = True
 
                 # need to modify this part.
+                """
                 if "notify_oam" in self.options:
                     self.notifyOAM()
                 if "trigger_tiling" in self.options:
                     #pass
                     self.triggerTileService()
+                """
 
         except Exception, e:
             # forward the exception upstream (or try to...)
@@ -354,6 +361,51 @@ class Uploader(QObject):
             self.error.emit(e, traceback.format_exc())
 
         self.finished.emit(success, self.index)
+
+    #for option
+    def notifyOAM(self):
+
+        '''Just a stub method, not needed at the moment
+        because indexing happens every 10 mins'''
+        QgsMessageLog.logMessage(
+            'AOM notified of new resource',
+            'OAM',
+            level=QgsMessageLog.INFO)
+
+    #for option
+    def triggerTileService(self):
+        url = "http://hotosm-oam-server-stub.herokuapp.com/tile"
+        h = {'content-type':'application/json'}
+        uri = "s3://%s/%s" % (self.bucket.name,os.path.basename(self.filename))
+        QgsMessageLog.logMessage(
+            'Imagery uri %s\n' % uri,
+            'OAM',
+            level=QgsMessageLog.INFO)
+        d = json.dumps({'sources':[uri]})
+        p = requests.post(url,headers=h,data=d)
+        post_dict = json.loads(p.text)
+        QgsMessageLog.logMessage(
+            'Post response: %s' % post_dict,
+            'OAM',
+            level=QgsMessageLog.INFO)
+
+        if u'id' in post_dict.keys():
+            ts_id = post_dict[u'id']
+            time = post_dict[u'queued_at']
+            QgsMessageLog.logMessage(
+                'Tile service #%s triggered on %s\n' % (ts_id,time),
+                'OAM',
+                level=QgsMessageLog.INFO)
+        else:
+            QgsMessageLog.logMessage(
+                'Tile service could not be created\n',
+                'OAM',
+                level=QgsMessageLog.CRITICAL)
+        return(0)
+
+    def run(self):
+        self.sendMetadata()
+        self.sendImageFiles()
 
     def kill(self):
         self.killed = True
