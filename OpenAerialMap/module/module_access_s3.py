@@ -44,8 +44,9 @@ class S3Manager(S3Connection):
         self.cancel_button_main = None
 
         self.msg_bars = []
+        self.msg_bars_content = []
         self.progress_bars = []
-        #self.cancel_buttons = []
+        self.cancel_buttons = []
 
     def getBucket(self):
 
@@ -94,7 +95,7 @@ class S3Manager(S3Connection):
         self.msg_bar_main.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         self.wizard_page.layout().addWidget(self.msg_bar_main)
 
-        self.msg_bar_main_content = self.msg_bar_main.createMessage('INFO: Performing upload...', )
+        self.msg_bar_main_content = self.msg_bar_main.createMessage('Performing upload...', )
 
         self.cancel_button_main = QPushButton()
         self.cancel_button_main.setText('Cancel')
@@ -129,22 +130,25 @@ class S3Manager(S3Connection):
                 self.msg_bars[i].setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
                 self.wizard_page.layout().addWidget(self.msg_bars[i])
 
-                """need to get only filename from absoulte path"""
+                #set text in the message bar for each upload file
+                file_basename = str(os.path.basename(str(filename)))
+                self.msg_bars_content.append(self.msg_bars[i].createMessage(file_basename, ))
                 self.msg_bars[i].clearWidgets()
-                self.msg_bars[i].pushMessage(
-                    "Uploading: ",
-                    str(filename),
-                    level=QgsMessageBar.INFO)
+                self.msg_bars[i].pushWidget(self.msg_bars_content[i], level=QgsMessageBar.INFO)
 
+                #set progress bar in the message bar for each upload file
                 self.progress_bars.append(QProgressBar())
-                self.msg_bars[i].layout().addWidget(self.progress_bars[i])
+                self.progress_bars[i].setAlignment(Qt.AlignLeft|Qt.AlignVCenter)
+                self.msg_bars_content[i].layout().addWidget(self.progress_bars[i])
                 self.s3Uploaders[i].progress.connect(self.updateProgressBar)
 
+                #set cancel button in the message bar for each upload file
                 """
                 self.cancel_buttons.append(QPushButton())
                 self.cancel_buttons[i].setText('Cancel')
-                self.cancel_buttons[i].clicked.connect(self.cancelUpload)
-                self.msg_bars[i].layout().addWidget(self.cancel_buttons[i])
+                self.cancel_buttons[i].clicked.connect(self.cancelAllUploads)
+                self.msg_bars_content[i].layout().addWidget(self.cancel_buttons[i])
+                #self.cancel_buttons[i].clicked.connect(self.cancelUpload)
                 """
 
             except Exception, e:
@@ -176,7 +180,8 @@ class S3Manager(S3Connection):
 
     def cancelUpload(self, index):
 
-        pass
+        print "Cancel button was clicked!"
+
         """
         try:
             #is it better to use destructor?
