@@ -77,8 +77,6 @@ class RefactoredImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.bar2.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         self.page(2).layout().addWidget(self.bar2)
 
-        #for testing purpose
-        #self.bars = []
 
         self.setButtonText(QtGui.QWizard.CustomButton1, self.tr("&Start upload"));
         self.setOption(QtGui.QWizard.HaveCustomButton1, True);
@@ -337,7 +335,7 @@ class RefactoredImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 level=QgsMessageBar.WARNING)
 
     # event handling for wizard page 3
-    # also see multi-thread for startUpload function
+    # please also see startUpload function for event handling of Start Upload button
     def enableSpecify(self):
         if self.storage_combo_box.currentIndex() == 1:
             self.specify_label.setEnabled(1)
@@ -627,7 +625,7 @@ class RefactoredImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
     #event handler for upload button
     def startUpload(self):
 
-        # make a separate function?
+        #get the information of options
         upload_options = []
         if self.reproject_check_box.isChecked():
             upload_options.append("reprojection")
@@ -684,34 +682,14 @@ class RefactoredImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
             filenames.append(filename)
 
-        #create S3Manager Object
+        #create S3Manager Object and start upload
         self.s3Mgr = S3Manager(bucket_key, bucket_secret, bucket_name, filenames, upload_options, self.page(2))
 
         if self.s3Mgr.getBucket():
-            try:
-                #msg = repr(self.s3Mgr.getAllKeys())
-                #msg = reprself.(s3Mgr.test())
-                msg = repr(self.s3Mgr.uploadFiles())
-
-                """Testing purpose"""
-                """
-                for i in range(0,len(filenames)):
-                    self.bars.append(QgsMessageBar())
-                    self.bars[i].setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
-                    self.page(2).layout().addWidget(self.bars[i])
-                    self.bars[i].clearWidgets()
-                    self.bars[i].pushMessage(
-                        "INFO",
-                        "Test " + str(i),
-                        level=QgsMessageBar.INFO)
-                """
-
-            except:
-                msg = "Error!"
-                qMsgBox = QMessageBox()
-                qMsgBox.setText(msg)
-                qMsgBox.exec_()
-
+            #msg = repr(self.s3Mgr.getAllKeys())
+            #msg = reprself.(s3Mgr.test())
+            result = repr(self.s3Mgr.uploadFiles())
+            print result
         else:
             qMsgBox = QMessageBox()
             qMsgBox.setText('No connection to the server.')

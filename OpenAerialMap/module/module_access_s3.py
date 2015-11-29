@@ -37,7 +37,7 @@ class S3Manager(S3Connection):
         self.count_uploaded_images = 0
         self.num_uploading_images = 0
 
-        #for gui
+        #For GUI (mainly progress bars)
         self.wizard_page = wizard_page
         self.msg_bar_main = None
         self.msg_bar_main_content = None
@@ -79,7 +79,6 @@ class S3Manager(S3Connection):
     def uploadFiles(self):
 
         """ Testing purpose only """
-        """
         if "reprojection" in self.upload_options:
             print "reprojection"
         if "license" in self.upload_options:
@@ -88,23 +87,18 @@ class S3Manager(S3Connection):
             print "notify_oam"
         if "trigger_tiling" in self.upload_options:
             print "trigger_tiling"
-        """
 
-        # configure the msg_bar_main
+        # configure the msg_bar_main (including Cancel button and its container)
         self.msg_bar_main = QgsMessageBar()
         self.msg_bar_main.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         self.wizard_page.layout().addWidget(self.msg_bar_main)
-
         self.msg_bar_main_content = self.msg_bar_main.createMessage('Performing upload...', )
-
         self.cancel_button_main = QPushButton()
         self.cancel_button_main.setText('Cancel')
         self.cancel_button_main.clicked.connect(self.cancelAllUploads)
-
         self.msg_bar_main_content.layout().addWidget(self.cancel_button_main)
         self.msg_bar_main.clearWidgets()
         self.msg_bar_main.pushWidget(self.msg_bar_main_content, level=QgsMessageBar.INFO)
-
 
         self.num_uploading_images = len(self.filenames)
 
@@ -125,18 +119,18 @@ class S3Manager(S3Connection):
 
                 print repr(self.threads[i])
 
-                """ need to figure out how to layout the bars """
+                # configure the msg_bars for progress bar
                 self.msg_bars.append(QgsMessageBar())
                 self.msg_bars[i].setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
                 self.wizard_page.layout().addWidget(self.msg_bars[i])
 
-                #set text in the message bar for each upload file
+                #set the texts of uploading files
                 file_basename = str(os.path.basename(str(filename)))
                 self.msg_bars_content.append(self.msg_bars[i].createMessage(file_basename, ))
                 self.msg_bars[i].clearWidgets()
                 self.msg_bars[i].pushWidget(self.msg_bars_content[i], level=QgsMessageBar.INFO)
 
-                #set progress bar in the message bar for each upload file
+                #add progress bars in the message bar
                 self.progress_bars.append(QProgressBar())
                 self.progress_bars[i].setAlignment(Qt.AlignLeft|Qt.AlignVCenter)
                 self.msg_bars_content[i].layout().addWidget(self.progress_bars[i])
@@ -153,6 +147,8 @@ class S3Manager(S3Connection):
 
             except Exception, e:
                 return repr(e)
+
+        return 0
 
     def updateProgressBar(self, progress_value, index):
         print "Progress: " + str(progress_value) + ", index: " + str(index)
@@ -220,7 +216,6 @@ class S3Manager(S3Connection):
             print str(self.count_uploaded_images)
 
             # report the result
-            #self.msg_bar_main.clearWidgets()
             if self.count_uploaded_images < self.num_uploading_images:
                 """
                 self.msg_bar_main.pushMessage(
@@ -254,7 +249,10 @@ class S3Manager(S3Connection):
 
     def displayUploadError(self, e, exception_string):
 
-        #display error message
+        self.msg_bar_main.pushMessage(
+            'CRITICAL',
+            'Uploader thread raised an exception:\n'.format(exception_string),
+            level=QgsMessageBar.CRITICAL)
 
         QgsMessageLog.logMessage(
             'Uploader thread raised an exception:\n'.format(exception_string),
@@ -382,7 +380,7 @@ class S3Uploader(QObject):
             'OAM',
             level=QgsMessageLog.INFO)
 
-    #for option
+    #for options
     def triggerTileService(self):
         url = "http://hotosm-oam-server-stub.herokuapp.com/tile"
         h = {'content-type':'application/json'}
