@@ -45,11 +45,11 @@ from module.module_access_s3 import S3Manager
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_uploader_wizard.ui'))
 
-class RefactoredImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
+class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
     def __init__(self, iface, settings, parent=None):
         """Constructor."""
-        super(RefactoredImgUploaderWizard, self).__init__(parent)
+        super(ImgUploaderWizard, self).__init__(parent)
         # Set up the user interface from Designer.
         # After setupUI you can access any designer object by doing
         # self.<objectname>, and you can use autoconnect slots - see

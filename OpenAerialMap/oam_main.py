@@ -33,11 +33,10 @@ from PyQt4.QtGui import (QAction, QIcon, QMessageBox, QFileDialog,
 import resources_rc
 
 # classes for GUI
-#from gui.img_uploader_wizard import ImgUploaderWizard
+from gui.img_uploader_wizard import ImgUploaderWizard
 from gui.img_search_dialog import ImgSearchDialog
 from gui.setting_dialog import SettingDialog
 
-from gui.refactored_img_uploader_wizard import RefactoredImgUploaderWizard
 from gui.backuped_img_uploader_wizard import BackupedImgUploaderWizard
 
 import os
@@ -191,13 +190,6 @@ class OpenAerialMap:
 
         self.settingDialog = SettingDialog(self.iface, self.settings)
         self.settingDialog.show()
-
-    """
-    def displayRefactoredUploaderWizard(self):
-
-        self.refactoredImgUploaderWizard = RefactoredImgUploaderWizard(self.iface, self.settings)
-        self.refactoredImgUploaderWizard.show()
-    """
 
     def displayBackupedUploaderWizard(self):
 
