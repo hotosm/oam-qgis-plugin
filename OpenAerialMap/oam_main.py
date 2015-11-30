@@ -33,11 +33,12 @@ from PyQt4.QtGui import (QAction, QIcon, QMessageBox, QFileDialog,
 import resources_rc
 
 # classes for GUI
-from gui.img_uploader_wizard import ImgUploaderWizard
+#from gui.img_uploader_wizard import ImgUploaderWizard
 from gui.img_search_dialog import ImgSearchDialog
 from gui.setting_dialog import SettingDialog
 
 from gui.refactored_img_uploader_wizard import RefactoredImgUploaderWizard
+from gui.backuped_img_uploader_wizard import BackupedImgUploaderWizard
 
 import os
 
@@ -176,6 +177,7 @@ class OpenAerialMap:
         return action
 
     def displayImgUploaderWizard(self):
+        pass
 
         self.imgUploaderWizard = ImgUploaderWizard(self.iface, self.settings)
         self.imgUploaderWizard.show()
@@ -190,10 +192,17 @@ class OpenAerialMap:
         self.settingDialog = SettingDialog(self.iface, self.settings)
         self.settingDialog.show()
 
+    """
     def displayRefactoredUploaderWizard(self):
 
         self.refactoredImgUploaderWizard = RefactoredImgUploaderWizard(self.iface, self.settings)
         self.refactoredImgUploaderWizard.show()
+    """
+
+    def displayBackupedUploaderWizard(self):
+
+        self.backupedImgUploaderWizard = BackupedImgUploaderWizard(self.iface, self.settings)
+        self.backupedImgUploaderWizard.show()
 
     def initGui(self):
 
@@ -229,8 +238,8 @@ class OpenAerialMap:
 
         self.add_action(
             icon_path_img_wizard,
-            text=self.tr(u'Upload Imagery (Refactored)'),
-            callback=self.displayRefactoredUploaderWizard,
+            text=self.tr(u'Upload Imagery (Backuped)'),
+            callback=self.displayBackupedUploaderWizard,
             parent=self.iface.mainWindow())
 
     def unload(self):
