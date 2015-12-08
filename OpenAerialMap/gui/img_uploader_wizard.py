@@ -683,11 +683,18 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             filenames.append(filename)
 
         #create S3Manager Object and start upload
-        self.s3Mgr = S3Manager(bucket_key, bucket_secret, bucket_name, filenames, upload_options, self.page(2))
+        self.s3Mgr = S3Manager( bucket_key,
+                                bucket_secret,
+                                bucket_name,
+                                filenames,
+                                upload_options,
+                                self.page(2) )
 
         if self.s3Mgr.getBucket():
             #msg = repr(self.s3Mgr.getAllKeys())
-            #msg = reprself.(s3Mgr.test())
+            #msg = repr(self.s3Mgr.test())
+            #print msg
+
             result = repr(self.s3Mgr.uploadFiles())
             print result
         else:

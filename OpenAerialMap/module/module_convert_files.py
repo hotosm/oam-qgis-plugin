@@ -1,3 +1,27 @@
+# -*- coding: utf-8 -*-
+"""
+/***************************************************************************
+ OpenAerialMapDialog
+                                 A QGIS plugin
+ This plugin can be used as an OAM client to browse, search, download and
+ upload imagery from/to the OAM catalog.
+                             -------------------
+        begin                : 2015-07-01
+        git sha              : $Format:%H$
+        copyright            : (C) 2015 by Humanitarian OpenStreetMap Team (HOT)
+        email                : tassia@acaia.ca  / yoji.salut@gmail.com
+ ***************************************************************************/
+
+/***************************************************************************
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ ***************************************************************************/
+"""
+
 """
 def reproject(self,filename):
     # to avoid repetition of "EPSG3857" in filename:
