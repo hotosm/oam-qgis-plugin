@@ -40,16 +40,14 @@ import traceback
 import requests, json
 from ast import literal_eval
 
-from module.module_access_s3 import S3Manager
-
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_uploader_wizard.ui'))
 
-class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
+class BackupedImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
     def __init__(self, iface, settings, parent=None):
         """Constructor."""
-        super(ImgUploaderWizard, self).__init__(parent)
+        super(BackupedImgUploaderWizard, self).__init__(parent)
         # Set up the user interface from Designer.
         # After setupUI you can access any designer object by doing
         # self.<objectname>, and you can use autoconnect slots - see
@@ -77,14 +75,12 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.bar2.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         self.page(2).layout().addWidget(self.bar2)
 
-
         self.setButtonText(QtGui.QWizard.CustomButton1, self.tr("&Start upload"));
         self.setOption(QtGui.QWizard.HaveCustomButton1, True);
 
         self.settings = settings
 
-        # Dictionaries to save imagery info
-        #(todo: defined as a classes in the future)
+        # Dictionaries to save imagery info (todo: defined as a classes in the future)
         self.metadata = {}
         self.reprojected = []
         self.licensed = []
@@ -100,8 +96,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         Please comment out and implement following functions if necessary."""
         #self.button(QWizard.BackButton).clicked.connect(self.previousPage)
         #self.button(QWizard.NextButton).clicked.connect(self.nextPage)
-        self.button(QWizard.FinishButton).clicked.connect(self.finishWizard)
-        self.button(QWizard.CancelButton).clicked.connect(self.cancelWizard)
+        #self.button(QWizard.FinishButton).clicked.connect(self.finishWizard)
+        #self.button(QWizard.CancelButton).clicked.connect(self.cancelWizard)
 
         # Imagery connections (wizard page 1)
         self.layers_tool_button.clicked.connect(self.loadLayers)
@@ -122,20 +118,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         # Upload tab connections (wizard page 3)
         self.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)
-        self.customButtonClicked.connect(self.startUpload)
-
-        # Initialize the object for S3Manager
-        self.s3Mgr = None
-
-    def finishWizard(self):
-        print "finish wizard button was clicked."
-        if self.s3Mgr != None:
-            self.s3Mgr.cancelAllUploads()
-
-    def cancelWizard(self):
-        print "cancel wizard button was clicked."
-        if self.s3Mgr != None:
-            self.s3Mgr.cancelAllUploads()
+        self.customButtonClicked.connect(self.startUploader)
 
     # event handling for wizard page 1
     def loadLayers(self):
@@ -335,7 +318,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 level=QgsMessageBar.WARNING)
 
     # event handling for wizard page 3
-    # please also see startUpload function for event handling of Start Upload button
+    # also see multi-thread for startUploader function
     def enableSpecify(self):
         if self.storage_combo_box.currentIndex() == 1:
             self.specify_label.setEnabled(1)
@@ -540,7 +523,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         else:
             return literal_eval(("(%12.3f,%12.3f) " % (dfGeoX, dfGeoY )))
 
-
     def loadImageryInfoForm(self, filename):
         pass
 
@@ -601,6 +583,40 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         stream = QTextStream(temp)
         self.review_metadata_box.setText(stream.readAll())
 
+    #functions for threading purpose
+    def startConnection(self):
+        if self.storage_combo_box.currentIndex() == 0:
+            bucket_name = 'oam-qgis-plugin-test'
+        else:
+            bucket_name = str(self.specify_edit.text())
+            if not bucket_name:
+                self.bar2.clearWidgets()
+                self.bar2.pushMessage(
+                    'WARNING',
+                    'The bucket for upload must be provided',
+                    level=QgsMessageBar.WARNING)
+
+        bucket_key = str(self.key_id_edit.text())
+        bucket_secret = str(self.secret_key_edit.text())
+
+        self.bucket = None
+        for trial in xrange(3):
+            if self.bucket: break
+            try:
+                connection = S3Connection(bucket_key,bucket_secret)
+                self.bucket = connection.get_bucket(bucket_name)
+                QgsMessageLog.logMessage(
+                    'Connection established' % trial,
+                    'OAM',
+                    level=QgsMessageLog.INFO)
+            except:
+                if trial == 2:
+                   QgsMessageLog.logMessage(
+                    'Failed to connect after 3 attempts',
+                    'OAM',
+                    level=QgsMessageLog.CRITICAL)
+        return self.bucket
+
     def reproject(self,filename):
         # to avoid repetition of "EPSG3857" in filename:
         if not "EPSG3857" in filename:
@@ -622,86 +638,248 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         dst_ds = None
         src_ds = None
 
-    #event handler for upload button
-    def startUpload(self):
-
-        #get the information of options
-        upload_options = []
-        if self.reproject_check_box.isChecked():
-            upload_options.append("reprojection")
-        if self.license_check_box.isChecked():
-            upload_options.append("license")
+    def startUploader(self):
+        # initialize options
+        self.upload_options = []
         if self.notify_oam_check.isChecked():
-            upload_options.append("notify_oam")
+            self.upload_options.append("notify_oam")
         if self.trigger_tiling_check.isChecked():
-            upload_options.append("trigger_tiling")
+            self.upload_options.append("trigger_tiling")
 
-        #get login information for bucket
-        bucket_name = None
-        bucket_key = None
-        bucket_secret = None
+        if self.startConnection():
+            for index in xrange(self.sources_list_widget.count()):
+                filename = str(self.sources_list_widget.item(index).data(Qt.UserRole))
 
-        if self.storage_combo_box.currentIndex() == 0:
-            bucket_name = 'oam-qgis-plugin-test'
-        else:
-            bucket_name = str(self.specify_edit.text())
-            if not bucket_name:
                 self.bar2.clearWidgets()
                 self.bar2.pushMessage(
-                    'WARNING',
-                    'The bucket for upload must be provided',
-                    level=QgsMessageBar.WARNING)
+                    'INFO',
+                    'Pre-upload image processing...',
+                    level=QgsMessageBar.INFO)
 
-        bucket_key = str(self.key_id_edit.text())
-        bucket_secret = str(self.secret_key_edit.text())
+                # Perfom reprojection
+                if filename in self.reprojected:
+                    filename = self.reproject(filename)
+                    QgsMessageLog.logMessage(
+                        'Created reprojected file: %s' % filename,
+                        'OAM',
+                        level=QgsMessageLog.INFO)
 
-        #get filenames
-        filenames = []
+                # Convert file format
+                if not (imghdr.what(filename) == 'tiff'):
+                    filename = self.convert(filename)
+                    QgsMessageLog.logMessage(
+                        'Converted file to tiff: %s' % filename,
+                        'OAM',
+                        level=QgsMessageLog.INFO)
 
-        for index in xrange(self.sources_list_widget.count()):
-            filename = str(self.sources_list_widget.item(index).data(Qt.UserRole))
-
-            # make sure about the following functions
-            # Perfom reprojection
-            """
-            if filename in self.reprojected:
-                filename = self.reproject(filename)
+                # create a new uploader instance
+                uploader = Uploader(filename,self.bucket,self.upload_options)
                 QgsMessageLog.logMessage(
-                    'Created reprojected file: %s' % filename,
+                    'Uploader started\n',
                     'OAM',
                     level=QgsMessageLog.INFO)
+                # configure the QgsMessageBar
+                messageBar = self.bar2.createMessage('INFO: Performing upload...', )
+                progressBar = QProgressBar()
+                progressBar.setAlignment(Qt.AlignLeft|Qt.AlignVCenter)
+                messageBar.layout().addWidget(progressBar)
+                cancelButton = QPushButton()
+                cancelButton.setText('Cancel')
+                cancelButton.clicked.connect(self.cancelUpload)
+                messageBar.layout().addWidget(cancelButton)
+                self.bar2.clearWidgets()
+                self.bar2.pushWidget(messageBar, level=QgsMessageBar.INFO)
+                self.messageBar = messageBar
 
-            # Convert file format
-            if not (imghdr.what(filename) == 'tiff'):
-                filename = self.convert(filename)
-                QgsMessageLog.logMessage(
-                    'Converted file to tiff: %s' % filename,
-                    'OAM',
-                    level=QgsMessageLog.INFO)
-            """
-
-            filenames.append(filename)
-
-        #create S3Manager Object and start upload
-        self.s3Mgr = S3Manager( bucket_key,
-                                bucket_secret,
-                                bucket_name,
-                                filenames,
-                                upload_options,
-                                self.page(2) )
-
-        if self.s3Mgr.getBucket():
-            #msg = repr(self.s3Mgr.getAllKeys())
-            #msg = repr(self.s3Mgr.test())
-            #print msg
-
-            result = repr(self.s3Mgr.uploadFiles())
-            print result
+                # start the worker in a new thread
+                thread = QThread(self)
+                uploader.moveToThread(thread)
+                uploader.finished.connect(self.uploaderFinished)
+                uploader.error.connect(self.uploaderError)
+                uploader.progress.connect(progressBar.setValue)
+                thread.started.connect(uploader.run)
+                thread.start()
+                self.thread = thread
+                self.uploader = uploader
         else:
-            qMsgBox = QMessageBox()
-            qMsgBox.setText('No connection to the server.')
-            qMsgBox.exec_()
+                QgsMessageLog.logMessage(
+                    'No connection to the server\n',
+                    'OAM',
+                    level=QgsMessageLog.CRITICAL)
+
+    def cancelUpload(self):
+        self.uploader.kill()
+        self.bar2.clearWidgets()
+        self.bar2.pushMessage(
+            'WARNING',
+            'Canceling upload...',
+            level=QgsMessageBar.WARNING)
+
+    def uploaderFinished(self, success):
+        # clean up the uploader and thread
+        try:
+            self.uploader.deleteLater()
+        except:
             QgsMessageLog.logMessage(
-                'No connection to the server\n',
+                'Exception on deleting uploader\n',
                 'OAM',
                 level=QgsMessageLog.CRITICAL)
+        self.thread.quit()
+        self.thread.wait()
+        try:
+            self.thread.deleteLater()
+        except:
+            QgsMessageLog.logMessage(
+                'Exception on deleting thread\n',
+                'OAM',
+                level=QgsMessageLog.CRITICAL)
+        # remove widget from message bar
+        self.bar2.popWidget(self.messageBar)
+        if success:
+            # report the result
+            self.bar2.clearWidgets()
+            self.bar2.pushMessage(
+                'INFO',
+                'Upload completed with success',
+                level=QgsMessageBar.INFO)
+            QgsMessageLog.logMessage(
+                'Upload succeeded',
+                'OAM',
+                level=QgsMessageLog.INFO)
+        else:
+            # notify the user that something went wrong
+            self.bar2.pushMessage(
+                'CRITICAL',
+                'Upload was interrupted',
+                level=QgsMessageBar.CRITICAL)
+            QgsMessageLog.logMessage(
+                'Upload was interrupted',
+                'OAM',
+                level=QgsMessageLog.CRITICAL)
+
+    def uploaderError(self, e, exception_string):
+        QgsMessageLog.logMessage(
+            'Uploader thread raised an exception:\n'.format(exception_string),
+            'OAM',
+            level=QgsMessageLog.CRITICAL)
+
+
+class Uploader(QObject):
+    '''Handle uploads in a separate thread'''
+
+    finished = pyqtSignal(bool)
+    error = pyqtSignal(Exception, basestring)
+    progress = pyqtSignal(float)
+
+    def __init__(self,filename,bucket,options):
+        QObject.__init__(self)
+        self.filename = filename
+        self.bucket = bucket
+        self.killed = False
+        self.options = options
+
+    def sendMetadata(self):
+        jsonfile = os.path.splitext(self.filename)[0]+'.json'
+        try:
+            k = Key(self.bucket)
+            k.key = os.path.basename(jsonfile)
+            k.set_contents_from_filename(jsonfile)
+            QgsMessageLog.logMessage(
+                'Sent %s\n' % jsonfile,
+                'OAM',
+                level=QgsMessageLog.INFO)
+        except:
+            QgsMessageLog.logMessage(
+                'Could not send %s\n' % jsonfile,
+                'OAM',
+                level=QgsMessageLog.CRITICAL)
+
+    def notifyOAM(self):
+        '''Just a stub method, not needed at the moment because indexing happens every 10 mins'''
+        QgsMessageLog.logMessage(
+            'AOM notified of new resource',
+            'OAM',
+            level=QgsMessageLog.INFO)
+
+    def triggerTileService(self):
+        url = "http://hotosm-oam-server-stub.herokuapp.com/tile"
+        h = {'content-type':'application/json'}
+        uri = "s3://%s/%s" % (self.bucket.name,os.path.basename(self.filename))
+        QgsMessageLog.logMessage(
+            'Imagery uri %s\n' % uri,
+            'OAM',
+            level=QgsMessageLog.INFO)
+        d = json.dumps({'sources':[uri]})
+        p = requests.post(url,headers=h,data=d)
+        post_dict = json.loads(p.text)
+        QgsMessageLog.logMessage(
+            'Post response: %s' % post_dict,
+            'OAM',
+            level=QgsMessageLog.INFO)
+
+        if u'id' in post_dict.keys():
+            ts_id = post_dict[u'id']
+            time = post_dict[u'queued_at']
+            QgsMessageLog.logMessage(
+                'Tile service #%s triggered on %s\n' % (ts_id,time),
+                'OAM',
+                level=QgsMessageLog.INFO)
+        else:
+            QgsMessageLog.logMessage(
+                'Tile service could not be created\n',
+                'OAM',
+                level=QgsMessageLog.CRITICAL)
+        return(0)
+
+    def run(self):
+        self.sendMetadata()
+        success = False
+        try:
+            file_size = os.stat(self.filename).st_size
+            chunk_size = 5242880
+            chunk_count = int(math.ceil(file_size / float(chunk_size)))
+            progress_count = 0
+
+            multipart = self.bucket.initiate_multipart_upload(os.path.basename(self.filename))
+
+            QgsMessageLog.logMessage(
+                'Preparing to send %s chunks in total\n' % chunk_count,
+                'OAM',
+                level=QgsMessageLog.INFO)
+
+            for i in range(chunk_count):
+                if self.killed is True:
+                    # kill request received, exit loop early
+                    break
+                offset = chunk_size * i
+                # bytes are set to never exceed the original file size.
+                bytes = min(chunk_size, file_size - offset)
+                with FileChunkIO(self.filename, 'r', offset=offset, bytes=bytes) as fp:
+                    multipart.upload_part_from_file(fp, part_num=i + 1)
+                progress_count += 1
+                QgsMessageLog.logMessage(
+                    'Sent chunk #%d\n' % progress_count,
+                    'OAM',
+                    level=QgsMessageLog.INFO)
+                self.progress.emit(progress_count / float(chunk_count)*100)
+                QgsMessageLog.logMessage(
+                    'Progress = %f' % (progress_count / float(chunk_count)),
+                    'OAM',
+                    level=QgsMessageLog.INFO)
+            if self.killed is False:
+                multipart.complete_upload()
+                self.progress.emit(100)
+                success = True
+                if "notify_oam" in self.options:
+                    self.notifyOAM()
+                if "trigger_tiling" in self.options:
+                    self.triggerTileService()
+        except Exception, e:
+            # forward the exception upstream (or try to...)
+            # chunk size smaller than 5MB can cause an error, server does not expect it
+            self.error.emit(e, traceback.format_exc())
+
+        self.finished.emit(success)
+
+    def kill(self):
+        self.killed = True
