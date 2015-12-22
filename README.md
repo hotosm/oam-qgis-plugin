@@ -1,23 +1,26 @@
 ## oam-qgis-plugin
 
-QGIS plugin to access and upload data to OpenAerialMap
+QGIS plugin to upload data to and access data from OpenAerialMap. The upload module and settings handling work, but the browser/catalog tab is still a non-functional module.
+
+Contact sysadmin@hotosm.org to request an access key if you want to upload to the HOT OIN upload bucket.
 
 ## Install
 
-An experimental package containing all the needed dependencies is available at http://acaia.ca/~tassia/OpenAerialMap-0.1alpha1.tar.gz
+A package containing all the needed dependencies is available at the [QGIS repository](https://plugins.qgis.org/plugins/OpenAerialMap/).
 
-After performing the following steps you should see OAM icons in QGIS action bar:
+It can be installed through the QGIS menu "Plugins" -> "Manage and Install Plugins". Make sure that the option "Show also experimental plugins" is checked, at the Settings tab, otherwise the OAM plugin will not be shown among the available ones.
 
-* Unpack the file OpenAerialMap-0.1-alpha.1.tar.gz
-* Place the resulting directory in QGIS plugins directory
-* Activate the plugin through QGIS menu (Plugins -> Manage and Install Plugins)
+Alternatively, the plugin can be downloaded directly from the [repository](https://plugins.qgis.org/plugins/OpenAerialMap/version/0.1-alpha.2/download/), followed by:
 
+* Unpacking the file OpenAerialMap-0.1-alpha.1.tar.gz
+* Placing the resulting directory in QGIS plugins directory
+* Activating the plugin through QGIS menu ("Plugins" -> "Manage and Install Plugins")
+
+After activation of the plugin one should see the OAM icons at the QGIS action bar:
 
 ## Build
 
-Build, tests and feedbacks are super appreciated, specially in this early development phase.
-
-The plugin depends on the following python libraries that are not installed by default with QGIS:
+Builds, tests and feedbacks are very much appreciated by the development team. The plugin depends on the following python libraries that are not installed by default with QGIS:
 
 * [Boto](https://pypi.python.org/pypi/boto) - Amazon Web Services Library
 * [FileChunkIO](https://pypi.python.org/pypi/filechunkio/) - represents a chunk of an OS-level file containing bytes data
@@ -37,11 +40,13 @@ $ cd oam-qgis-plugin/OpenAerialMap/
 
 $ make deploy
 
-Then activate the plugin through QGIS menu (Plugins -> Manage and Install Plugins). You should see the OAM icons in your manu at this point.
+Then activate the plugin through QGIS menu "Plugins" -> "Manage and Install Plugins". You should see OAM icons in your menu at this point.
 
-After any change in the code you should run 'make deploy' again. You also need to restart QGIS to reload the new compiled code. A handy alternative is to use the "Plugin Reloader" plugin to reload and live test your changes on the code. 
+After any change in the code you need to run 'make deploy' again. You also need to restart QGIS to reload the new compiled code. A handy alternative is to use the "Plugin Reloader" plugin to reload and live test your changes on the code. 
 
 ## Required features
+
+During the plugin planning phase, those were the identified required features
 
 * select input data (from individual files, a VRT or a loaded layer)
 * insert/load/change metadata
@@ -68,10 +73,10 @@ separated
 
 ## Timeline
 
-The development progress can be followed through the repository [Millestones](https://github.com/hotosm/oam-qgis-plugin/milestones).
+The development progress can be followed through the repository [issues](https://github.com/hotosm/oam-qgis-plugin/issues) and [Millestones](https://github.com/hotosm/oam-qgis-plugin/milestones).
 
 ## Communication channel
 
-Weekly meetings on Wednesdays at 19h30 UTC on our gitter channel:
+Regular meetings are not being held at the moment, but please leave any comment or request on our gitter channel:
 
 [![Join the chat at https://gitter.im/hotosm/oam-qgis-plugin](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hotosm/oam-qgis-plugin?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
