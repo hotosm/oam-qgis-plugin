@@ -231,6 +231,12 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 item.setSelected(1)
 
     # event handling for wizard page 2
+
+    # load saved metadata - create a button by designer
+    def loadSavedMetadata(self):
+        pass
+
+    # load default values
     def loadMetadataSettings(self):
         self.settings.beginGroup("Metadata")
         self.title_edit.setText(self.settings.value('TITLE'))
