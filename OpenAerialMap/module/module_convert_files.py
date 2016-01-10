@@ -22,25 +22,37 @@
  ***************************************************************************/
 """
 
-"""
-def reproject(self,filename):
+import os, sys
+from osgeo import gdal, osr, ogr
+from qgis.core import QgsMessageLog
+
+def reproject(file_abspath):
+    """make sure if we need to -overwrite option"""
     # to avoid repetition of "EPSG3857" in filename:
-    if not "EPSG3857" in filename:
-        reproject_filename = os.path.splitext(filename)[0]+'_EPSG3857.tif'
-    os.system("gdalwarp -of GTiff -t_srs epsg:3857 %s %s" % (filename,reproject_filename))
+    if not "EPSG3857" in file_abspath:
+        reprojected_file_abspath = os.path.splitext(file_abspath)[0]+'_EPSG3857.tif'
+    os.system("gdalwarp -of GTiff -overwrite -t_srs epsg:3857 %s %s"
+        % (file_abspath, reprojected_file_abspath))
+
     QgsMessageLog.logMessage(
         'Reprojected to EPSG:3857',
         'OAM',
         level=QgsMessageLog.INFO)
-    return reproject_filename
+    return reprojected_file_abspath
 
-def convert(self,filename):
-    tif_filename = os.path.splitext(filename)[0]+".tif"
-    #Open existing dataset
-    src_ds = gdal.Open(filename)
-    driver = gdal.GetDriverByName("GTiff")
-    dst_ds = driver.CreateCopy(tif_filename, src_ds, 0 )
-    #Properly close the datasets to flush to disk
-    dst_ds = None
+
+"""Probably this function is not necessary, since reproject function
+    automatically convert the non-tiff file into tiff file."""
+def convert_to_tif(file_abspath):
+    if not ".tif" in file_abspath:
+        converted_file_abspath = os.path.splitext(file_abspath)[0]+".tif"
+    src_ds = gdal.Open(file_abspath)
+    conversion_driver = gdal.GetDriverByName("GTiff")
+    converted_ds = conversion_driver.CreateCopy(converted_file_abspath, src_ds, 0)
     src_ds = None
-"""
+    converted_ds = None
+    QgsMessageLog.logMessage(
+        'Converted to Tiff format',
+        'OAM',
+        level=QgsMessageLog.INFO)
+    return converted_file_abspath

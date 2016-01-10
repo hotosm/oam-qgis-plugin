@@ -111,10 +111,6 @@ class S3Manager(S3Connection):
     def uploadFiles(self):
 
         """ Testing purpose only """
-        if "reprojection" in self.upload_options:
-            print "reprojection"
-        if "license" in self.upload_options:
-            print "license"
         if "notify_oam" in self.upload_options:
             print "notify_oam"
         if "trigger_tiling" in self.upload_options:
@@ -398,14 +394,11 @@ class S3Uploader(QObject):
                 self.progress.emit(100, self.index)
                 success = True
 
-                # need to modify this part.
-                """
+                # need to modify this part?
                 if "notify_oam" in self.options:
                     self.notifyOAM()
                 if "trigger_tiling" in self.options:
-                    #pass
                     self.triggerTileService()
-                """
 
         except Exception, e:
             # forward the exception upstream (or try to...)

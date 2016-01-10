@@ -41,6 +41,7 @@ import requests, json
 from ast import literal_eval
 
 from module.module_access_s3 import S3Manager
+from module.module_convert_files import reproject, convert_to_tif
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_uploader_wizard.ui'))
@@ -89,6 +90,11 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.reprojected = []
         self.licensed = []
 
+        # Initialize the object for S3Manager and upload options and filenames
+        self.s3Mgr = None
+        self.upload_options = []
+        self.upload_filenames = []
+
         # Initialize layers and default settings
         self.loadLayers()
         self.loadMetadataSettings()
@@ -119,13 +125,11 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.default_button.clicked.connect(self.loadMetadataSettings)
         self.clean_button.clicked.connect(self.cleanMetadataSettings)
         self.save_button.clicked.connect(self.saveMetadata)
+        self.reload_button.clicked.connect(self.loadSavedMetadata)
 
         # Upload tab connections (wizard page 3)
         self.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)
         self.customButtonClicked.connect(self.startUpload)
-
-        # Initialize the object for S3Manager
-        self.s3Mgr = None
 
     def finishWizard(self):
         print "finish wizard button was clicked."
@@ -231,11 +235,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 item.setSelected(1)
 
     # event handling for wizard page 2
-
-    # load saved metadata - create a button by designer
-    def loadSavedMetadata(self):
-        pass
-
     # load default values
     def loadMetadataSettings(self):
         self.settings.beginGroup("Metadata")
@@ -248,12 +247,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         self.sensor_edit.setText(self.settings.value('SENSOR'))
         self.sensor_edit.setCursorPosition(0)
-
-        """
-        self.sense_start_edit.setDateTime(QDateTime(self.settings.value('SENSE_START')))
-        self.sense_end_edit.setDateTime(QDateTime(self.settings.value('SENSE_END')))
-
-        """
         self.sense_start_edit.setDate(QDateTime.fromString(
             self.settings.value('SENSE_START'),
             Qt.ISODate).date())
@@ -311,6 +304,10 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.reproject_check_box.setCheckState(0)
 
     def saveMetadata(self):
+
+        """Need insert a code to create _EPSG3857.tif file,
+        if reprojection option is checked."""
+
         selected_layers = self.added_sources_list_widget.selectedItems()
         if selected_layers:
             for item in selected_layers:
@@ -339,6 +336,12 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 'WARNING',
                 'One or more source imagery should be selected to have the metadata saved',
                 level=QgsMessageBar.WARNING)
+
+    def loadSavedMetadata(self):
+
+        qMsgBox = QMessageBox()
+        qMsgBox.setText('Under construction:\nMessage from loadSavedMetadata function.')
+        qMsgBox.exec_()
 
     # event handling for wizard page 3
     # please also see startUpload function for event handling of Start Upload button
@@ -607,107 +610,107 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         stream = QTextStream(temp)
         self.review_metadata_box.setText(stream.readAll())
 
-    def reproject(self,filename):
-        # to avoid repetition of "EPSG3857" in filename:
-        if not "EPSG3857" in filename:
-            reproject_filename = os.path.splitext(filename)[0]+'_EPSG3857.tif'
-        os.system("gdalwarp -of GTiff -t_srs epsg:3857 %s %s" % (filename,reproject_filename))
-        QgsMessageLog.logMessage(
-            'Reprojected to EPSG:3857',
-            'OAM',
-            level=QgsMessageLog.INFO)
-        return reproject_filename
+    def startUploadPreprocessing(self):
 
-    def convert(self,filename):
-        tif_filename = os.path.splitext(filename)[0]+".tif"
-        #Open existing dataset
-        src_ds = gdal.Open(filename)
-        driver = gdal.GetDriverByName("GTiff")
-        dst_ds = driver.CreateCopy(tif_filename, src_ds, 0 )
-        #Properly close the datasets to flush to disk
-        dst_ds = None
-        src_ds = None
+        """don't know why this message doesn't show up..."""
+        self.bar2.clearWidgets()
+        self.bar2.pushMessage(
+            'INFO',
+            'Preprocessing....',
+            level=QgsMessageBar.INFO)
+
+        for index in xrange(self.sources_list_widget.count()):
+            upload_filename = str(self.sources_list_widget.item(index).data(Qt.UserRole))
+
+            #print upload_filename
+            #print repr(self.reprojected)
+
+            """make sure how to solve the overwrite of reprojected file"""
+
+            #if upload_filename in self.reprojected:
+            if "reprojection" in self.upload_options:
+                upload_filename = reproject(upload_filename)
+                QgsMessageLog.logMessage(
+                    'Created reprojected file: %s' % upload_filename,
+                    'OAM',
+                    level=QgsMessageLog.INFO)
+            """
+            if not (imghdr.what(upload_filename) == 'tiff'):
+                upload_filename = self.convert_to_tif(upload_filename)
+                QgsMessageLog.logMessage(
+                    'Converted file to tiff: %s' % upload_filename,
+                    'OAM',
+                    level=QgsMessageLog.INFO)
+            """
+
+            """Need to insert a code to create json file, if it doesn't exist."""
+
+            self.upload_filenames.append(upload_filename)
 
     #event handler for upload button
     def startUpload(self):
 
-        #get the information of options
-        upload_options = []
-        if self.reproject_check_box.isChecked():
-            upload_options.append("reprojection")
+        #get the information of upload options
         if self.license_check_box.isChecked():
-            upload_options.append("license")
+            self.upload_options.append("license")
+        if self.reproject_check_box.isChecked():
+            self.upload_options.append("reprojection")
         if self.notify_oam_check.isChecked():
-            upload_options.append("notify_oam")
+            self.upload_options.append("notify_oam")
         if self.trigger_tiling_check.isChecked():
-            upload_options.append("trigger_tiling")
+            self.upload_options.append("trigger_tiling")
 
-        #get login information for bucket
-        bucket_name = None
-        bucket_key = None
-        bucket_secret = None
-
-        if self.storage_combo_box.currentIndex() == 0:
-            bucket_name = 'oam-qgis-plugin-test'
+        if "license" not in self.upload_options:
+            self.bar2.clearWidgets()
+            self.bar2.pushMessage(
+                'CRITICAL',
+                'Please check the lisence term.',
+                level=QgsMessageBar.WARNING)
         else:
-            bucket_name = str(self.specify_edit.text())
-            if not bucket_name:
+            # conversion of file format, reprojection, creation of file paths
+            self.startUploadPreprocessing()
+
+            # get login information for bucket
+            bucket_name = None
+            bucket_key = None
+            bucket_secret = None
+
+            if self.storage_combo_box.currentIndex() == 0:
+                bucket_name = 'oam-qgis-plugin-test'
+            else:
+                bucket_name = str(self.specify_edit.text())
+                if not bucket_name:
+                    self.bar2.clearWidgets()
+                    self.bar2.pushMessage(
+                        'WARNING',
+                        'The bucket for upload must be provided',
+                        level=QgsMessageBar.WARNING)
+
+            bucket_key = str(self.key_id_edit.text())
+            bucket_secret = str(self.secret_key_edit.text())
+
+            #create S3Manager Object and start upload
+            self.s3Mgr = S3Manager( bucket_key,
+                                    bucket_secret,
+                                    bucket_name,
+                                    self.upload_filenames,
+                                    self.upload_options,
+                                    self.page(2) )
+
+            if self.s3Mgr.getBucket():
+                self.bar2.clearWidgets()
+                #msg = repr(self.s3Mgr.getAllKeys())
+                #msg = repr(self.s3Mgr.test())
+                #print msg
+                result = repr(self.s3Mgr.uploadFiles())
+                print result
+            else:
                 self.bar2.clearWidgets()
                 self.bar2.pushMessage(
-                    'WARNING',
-                    'The bucket for upload must be provided',
-                    level=QgsMessageBar.WARNING)
-
-        bucket_key = str(self.key_id_edit.text())
-        bucket_secret = str(self.secret_key_edit.text())
-
-        #get filenames
-        filenames = []
-
-        for index in xrange(self.sources_list_widget.count()):
-            filename = str(self.sources_list_widget.item(index).data(Qt.UserRole))
-
-            # make sure about the following functions
-            # Perfom reprojection
-            """
-            if filename in self.reprojected:
-                filename = self.reproject(filename)
+                    'CRITICAL',
+                    'No connection to the server',
+                    level=QgsMessageBar.CRITICAL)
                 QgsMessageLog.logMessage(
-                    'Created reprojected file: %s' % filename,
+                    'No connection to the server\n',
                     'OAM',
-                    level=QgsMessageLog.INFO)
-
-            # Convert file format
-            if not (imghdr.what(filename) == 'tiff'):
-                filename = self.convert(filename)
-                QgsMessageLog.logMessage(
-                    'Converted file to tiff: %s' % filename,
-                    'OAM',
-                    level=QgsMessageLog.INFO)
-            """
-
-            filenames.append(filename)
-
-        #create S3Manager Object and start upload
-        self.s3Mgr = S3Manager( bucket_key,
-                                bucket_secret,
-                                bucket_name,
-                                filenames,
-                                upload_options,
-                                self.page(2) )
-
-        if self.s3Mgr.getBucket():
-            #msg = repr(self.s3Mgr.getAllKeys())
-            #msg = repr(self.s3Mgr.test())
-            #print msg
-
-            result = repr(self.s3Mgr.uploadFiles())
-            print result
-        else:
-            qMsgBox = QMessageBox()
-            qMsgBox.setText('No connection to the server.')
-            qMsgBox.exec_()
-            QgsMessageLog.logMessage(
-                'No connection to the server\n',
-                'OAM',
-                level=QgsMessageLog.CRITICAL)
+                    level=QgsMessageLog.CRITICAL)
