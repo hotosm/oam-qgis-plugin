@@ -31,7 +31,7 @@ def reproject(file_abspath):
     # to avoid repetition of "EPSG3857" in filename:
     if not "EPSG3857" in file_abspath:
         reprojected_file_abspath = os.path.splitext(file_abspath)[0]+'_EPSG3857.tif'
-    os.system("gdalwarp -of GTiff -overwrite -t_srs epsg:3857 %s %s"
+    os.system("gdalwarp -of GTiff -t_srs epsg:3857 %s %s"
         % (file_abspath, reprojected_file_abspath))
 
     QgsMessageLog.logMessage(

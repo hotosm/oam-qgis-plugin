@@ -86,6 +86,9 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         # Dictionaries to save imagery info
         #(todo: defined as a classes in the future)
+        # metadata stored in settings
+        # metadata embedded in tif
+        # metadata in json format /dictionary (for OIN)
         self.metadata = {}
         self.reprojected = []
         self.licensed = []
@@ -104,8 +107,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         # register event handlers
         """ List of page navigation buttons in QWizard, for reference.
         Please comment out and implement following functions if necessary."""
-        #self.button(QWizard.BackButton).clicked.connect(self.previousPage)
-        #self.button(QWizard.NextButton).clicked.connect(self.nextPage)
+        self.button(QWizard.BackButton).clicked.connect(self.previousPage)
+        self.button(QWizard.NextButton).clicked.connect(self.nextPage)
         self.button(QWizard.FinishButton).clicked.connect(self.finishWizard)
         self.button(QWizard.CancelButton).clicked.connect(self.cancelWizard)
 
@@ -130,6 +133,23 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         # Upload tab connections (wizard page 3)
         self.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)
         self.customButtonClicked.connect(self.startUpload)
+
+    # handlers for navigation
+    def nextPage(self):
+        if self.currentId() == 1:
+            print "Page ID: " + str(self.currentId())
+        elif self.currentId() == 2:
+            print "Page ID: " + str(self.currentId())
+        else:
+            pass
+
+    def previousPage(self):
+        if self.currentId() == 0:
+            print "Page ID: " + str(self.currentId())
+        elif self.currentId() == 1:
+            print "Page ID: " + str(self.currentId())
+        else:
+            pass
 
     def finishWizard(self):
         print "finish wizard button was clicked."
@@ -239,12 +259,11 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
     def loadMetadataSettings(self):
         self.settings.beginGroup("Metadata")
         self.title_edit.setText(self.settings.value('TITLE'))
-
         if self.settings.value('PLATFORM') == None:
             self.platform_combo_box.setCurrentIndex(0)
         else:
-            self.platform_combo_box.setCurrentIndex(int(self.settings.value('PLATFORM')))
-
+            self.platform_combo_box.setCurrentIndex(
+                int(self.settings.value('PLATFORM')))
         self.sensor_edit.setText(self.settings.value('SENSOR'))
         self.sensor_edit.setCursorPosition(0)
         self.sense_start_edit.setDate(QDateTime.fromString(
@@ -293,9 +312,11 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             QDateTime().fromString('1970-01-01T00:00:00',
             Qt.ISODate).time())
         self.sense_end_edit.setDate(
-            QDateTime().fromString('1970-01-01T00:00:00',Qt.ISODate).date())
+            QDateTime().fromString('1970-01-01T00:00:00',
+            Qt.ISODate).date())
         self.sense_end_edit.setTime(
-            QDateTime().fromString('1970-01-01T00:00:00',Qt.ISODate).time())
+            QDateTime().fromString('1970-01-01T00:00:00',
+            Qt.ISODate).time())
         self.tags_edit.setText('')
         self.provider_edit.setText('')
         self.contact_edit.setText('')
@@ -313,7 +334,9 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             for item in selected_layers:
                 filename = item.data(Qt.UserRole)
                 self.loadImageryInfo(filename)
-                json_string = json.dumps(self.metadata[filename],indent=4,separators=(',', ': '))
+                json_string = json.dumps(
+                    self.metadata[filename],
+                    indent=4,separators=(',', ': '))
                 if filename not in self.reprojected:
                     json_filename = os.path.splitext(filename)[0]+'.json'
                 else:
@@ -618,6 +641,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             'INFO',
             'Preprocessing....',
             level=QgsMessageBar.INFO)
+        self.bar2.clearWidgets()
 
         for index in xrange(self.sources_list_widget.count()):
             upload_filename = str(self.sources_list_widget.item(index).data(Qt.UserRole))

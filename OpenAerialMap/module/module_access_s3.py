@@ -181,7 +181,7 @@ class S3Manager(S3Connection):
             #Display upload progress bars in a separate widget
             self.uploader_widget.show()
 
-        return 0
+        return True
 
     def updateProgressBar(self, progress_value, index):
         print "Progress: " + str(progress_value) + ", index: " + str(index)
