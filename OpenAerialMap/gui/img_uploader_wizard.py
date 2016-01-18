@@ -85,15 +85,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         self.settings = settings
 
-        # Dictionaries to save imagery info
-        #(todo: defined as a classes in the future)
-        # metadata stored in settings
-        # metadata embedded in tif
-        # metadata in json format /dictionary (for OIN)
-        #self.metadata = {}
-        #self.reprojected = []
-        #self.licensed = []
-
         # Initialize the object for S3Manager and upload options and filenames
         self.s3Mgr = None
         self.upload_options = []
@@ -106,8 +97,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.loadOptionsSettings()
 
         # register event handlers
-        """ List of page navigation buttons in QWizard, for reference.
-        Please comment out and implement following functions if necessary."""
         self.button(QWizard.BackButton).clicked.connect(self.previousPage)
         self.button(QWizard.NextButton).clicked.connect(self.nextPage)
         self.button(QWizard.FinishButton).clicked.connect(self.finishWizard)
@@ -215,7 +204,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                     'INFO',
                     'Source(s) added to the upload queue',
                     level=QgsMessageBar.INFO)
-                #self.loadMetadataReviewBox()
 
     def removeSources(self):
         selected_sources = self.sources_list_widget.selectedItems()
@@ -389,41 +377,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 'One or more source imagery should be selected to have the metadata saved',
                 level=QgsMessageBar.WARNING)
 
-    """
-    def saveMetadata(self):
-
-        selected_layers = self.added_sources_list_widget.selectedItems()
-        if selected_layers:
-            for item in selected_layers:
-                filename = item.data(Qt.UserRole)
-                self.loadImageryInfo(filename)
-                json_string = json.dumps(
-                    self.metadata[filename],
-                    indent=4,separators=(',', ': '))
-                if filename not in self.reprojected:
-                    json_filename = os.path.splitext(filename)[0]+'.json'
-                else:
-                    # to avoid repetition of "EPSG3857" in filename:
-                    if not "EPSG3857" in filename:
-                        json_filename = os.path.splitext(filename)[0]+'_EPSG3857.json'
-                json_file = open(json_filename, 'w')
-                print >> json_file, json_string
-                json_file.close()
-
-            self.loadMetadataReviewBox()
-            self.bar1.clearWidgets()
-            self.bar1.pushMessage(
-                'INFO',
-                'Metadata for the selected sources were saved',
-                level=QgsMessageBar.INFO)
-        else:
-            self.bar1.clearWidgets()
-            self.bar1.pushMessage(
-                'WARNING',
-                'One or more source imagery should be selected to have the metadata saved',
-                level=QgsMessageBar.WARNING)
-    """
-
     def loadSavedMetadata(self):
 
         qMsgBox = QMessageBox()
@@ -556,138 +509,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 else:
                     return 1
 
-    """
-    def extractMetadata(self,filename):
-        #Extract filesize, projection, bbox and gsd from image file
-
-        self.metadata[filename]['File size'] = os.stat(filename).st_size
-
-        datafile = gdal.Open(filename,gdal.GA_ReadOnly)
-        if datafile is None:
-            self.bar1.clearWidgets()
-            self.bar1.pushMessage(
-                'CRITICAL',
-                'Extraction of raster metadata failed',
-                level=QgsMessageBar.CRITICAL)
-            QgsMessageLog.logMessage(
-                'Failed to extract metadata',
-                'OAM',
-                level=QgsMessageLog.CRITICAL)
-        else:
-            # extract projection
-            projInfo = datafile.GetProjection()
-            # WKT format
-            spatialRef = osr.SpatialReference()
-            spatialRef.ImportFromWkt(projInfo)
-            # Proj4 format
-            spatialRefProj = spatialRef.ExportToProj4()
-
-            self.metadata[filename]['Projection'] = str(spatialRefProj)
-
-            # original bbox
-            upper_left = self.GDALInfoReportCorner(datafile,0.0,0.0 );
-            lower_left = self.GDALInfoReportCorner(datafile,0.0,datafile.RasterYSize);
-            upper_right = self.GDALInfoReportCorner(datafile,datafile.RasterXSize,0.0 );
-            lower_right = self.GDALInfoReportCorner(datafile,datafile.RasterXSize,datafile.RasterYSize );
-            center = self.GDALInfoReportCorner(datafile,datafile.RasterXSize/2.0,datafile.RasterYSize/2.0 );
-
-            # get new bbox values if reprojection will happen
-            try:
-                if filename in self.reprojected:
-                    self.metadata[filename]['Projection'] = "EPSG:3857"
-                    target = osr.SpatialReference()
-                    target.ImportFromEPSG(3857)
-                    transform = osr.CoordinateTransformation(spatialRef,target)
-
-                    point = ogr.CreateGeometryFromWkt("POINT (%f %f)" % (upper_left[0],upper_left[1]))
-                    point.Transform(transform)
-                    upper_left = json.loads(point.ExportToJson())['coordinates']
-
-                    point = ogr.CreateGeometryFromWkt("POINT (%f %f)" % (lower_left[0],lower_left[1]))
-                    point.Transform(transform)
-                    lower_left = json.loads(point.ExportToJson())['coordinates']
-
-                    point = ogr.CreateGeometryFromWkt("POINT (%f %f)" % (upper_right[0],upper_right[1]))
-                    point.Transform(transform)
-                    upper_right = json.loads(point.ExportToJson())['coordinates']
-
-                    point = ogr.CreateGeometryFromWkt("POINT (%f %f)" % (lower_right[0],lower_right[1]))
-                    point.Transform(transform)
-                    lower_right = json.loads(point.ExportToJson())['coordinates']
-            except (RuntimeError, TypeError, NameError) as error:
-                print error
-            except:
-                print "Unexpected error:", sys.exc_info()[0]
-
-            self.metadata[filename]['BBOX'] = (upper_left,lower_left,upper_right,lower_right)
-    """
-
-    """
-    def GDALInfoReportCorner(self,hDataset,x,y):
-        #GDALInfoReportCorner: extracted and adapted from the python port of gdalinfo
-
-        # Transform the point into georeferenced coordinates
-        adfGeoTransform = hDataset.GetGeoTransform(can_return_null = True)
-        if adfGeoTransform is not None:
-            dfGeoX = adfGeoTransform[0] + adfGeoTransform[1] * x + adfGeoTransform[2] * y
-            dfGeoY = adfGeoTransform[3] + adfGeoTransform[4] * x + adfGeoTransform[5] * y
-        else:
-            self.bar1.clearWidgets()
-            self.bar1.pushMessage(
-                'WARNING',
-                'BBOX might be wrong. Transformation coefficient could not be fetched from raster',
-                level=QgsMessageBar.WARNING)
-            return (x,y)
-
-        # Report the georeferenced coordinates
-        if abs(dfGeoX) < 181 and abs(dfGeoY) < 91:
-            return literal_eval(("(%12.7f,%12.7f) " % (dfGeoX, dfGeoY )))
-        else:
-            return literal_eval(("(%12.3f,%12.3f) " % (dfGeoX, dfGeoY )))
-    """
-
-    """
-    def loadImageryInfoForm(self, filename):
-        pass
-    """
-
-    """
-    def loadImageryInfo(self, filename):
-        self.metadata[filename] = {}
-        self.metadata[filename]['Title'] = self.title_edit.text()
-        self.metadata[filename]['Platform'] = self.platform_combo_box.currentIndex()
-        self.metadata[filename]['Sensor'] = self.sensor_edit.text()
-        start = QDateTime()
-        start.setDate(self.sense_start_edit.date())
-        start.setTime(self.sense_start_edit.time())
-        self.metadata[filename]['Sensor start'] = start.toString(Qt.ISODate)
-        end = QDateTime()
-        end.setDate(self.sense_end_edit.date())
-        end.setTime(self.sense_end_edit.time())
-        self.metadata[filename]['Sensor end'] = end.toString(Qt.ISODate)
-        self.metadata[filename]['Tags'] = self.tags_edit.text()
-        self.metadata[filename]['Provider'] = self.provider_edit.text()
-        self.metadata[filename]['Contact'] = self.contact_edit.text()
-        self.metadata[filename]['Website'] = self.website_edit.text()
-
-        if self.reproject_check_box.isChecked():
-            if filename not in self.reprojected:
-                self.reprojected.append(filename)
-        else:
-            while filename in self.reprojected:
-                self.reprojected.remove(filename)
-
-        if self.license_check_box.isChecked():
-            self.metadata[filename]['License'] = "Licensed under CC-BY 4.0 and allow tracing in OSM"
-            if filename not in self.licensed:
-                self.licensed.append(filename)
-        else:
-            while filename in self.licensed:
-                self.licensed.remove(filename)
-
-        self.extractMetadata(filename)
-    """
-
     def loadMetadataReviewBox(self):
         json_file_abspaths = []
         for index in xrange(self.sources_list_widget.count()):
@@ -716,37 +537,12 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         stream = QTextStream(temp)
         self.review_metadata_box.setText(stream.readAll())
 
-    """
-    def loadMetadataReviewBox(self):
-        json_filenames = []
-        for index in xrange(self.sources_list_widget.count()):
-            filename = str(self.sources_list_widget.item(index).data(Qt.UserRole))
-            if filename not in self.reprojected:
-                f = os.path.splitext(filename)[0]+'.json'
-            else:
-                f = os.path.splitext(filename)[0]+'_EPSG3857.json'
-            json_filenames.append(f)
-
-        temp = QTemporaryFile()
-        temp.open()
-        for f in json_filenames:
-            if os.path.exists(f):
-                with open(f) as infile:
-                    temp.write(infile.read())
-        temp.flush()
-        temp.seek(0)
-
-        stream = QTextStream(temp)
-        self.review_metadata_box.setText(stream.readAll())
-    """
-
     def startUploadPreprocessing(self):
 
+        """Probably it is better to let the users to confirm all the metadata and
+        reprojected files are saved before starting upload."""
+
         """don't know why this message doesn't show up..."""
-
-        """Probably it is better to let the users to save all the metadata and
-        reprojected files in advance to start upload."""
-
         self.bar2.clearWidgets()
         self.bar2.pushMessage(
             'INFO',
@@ -756,12 +552,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         for index in xrange(self.sources_list_widget.count()):
             upload_filename = str(self.sources_list_widget.item(index).data(Qt.UserRole))
 
-            #print upload_filename
-            #print repr(self.reprojected)
-
-            """make sure how to solve the overwrite of reprojected file"""
-
-            #if upload_filename in self.reprojected:
             if "reprojection" in self.upload_options:
                 upload_filename = reproject(upload_filename)
                 QgsMessageLog.logMessage(
@@ -776,8 +566,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                     'OAM',
                     level=QgsMessageLog.INFO)
             """
-
-            """Need to insert a code to create json file, if it doesn't exist."""
 
             self.upload_filenames.append(upload_filename)
 
