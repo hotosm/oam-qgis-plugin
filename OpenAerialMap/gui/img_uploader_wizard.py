@@ -40,6 +40,7 @@ import traceback
 import requests, json
 from ast import literal_eval
 
+from module.module_handle_metadata import MetadataHandler
 from module.module_access_s3 import S3Manager
 from module.module_convert_files import reproject, convert_to_tif
 
@@ -89,9 +90,9 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         # metadata stored in settings
         # metadata embedded in tif
         # metadata in json format /dictionary (for OIN)
-        self.metadata = {}
-        self.reprojected = []
-        self.licensed = []
+        #self.metadata = {}
+        #self.reprojected = []
+        #self.licensed = []
 
         # Initialize the object for S3Manager and upload options and filenames
         self.s3Mgr = None
@@ -140,6 +141,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             print "Page ID: " + str(self.currentId())
         elif self.currentId() == 2:
             print "Page ID: " + str(self.currentId())
+            self.loadMetadataReviewBox()
         else:
             pass
 
@@ -213,7 +215,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                     'INFO',
                     'Source(s) added to the upload queue',
                     level=QgsMessageBar.INFO)
-                self.loadMetadataReviewBox()
+                #self.loadMetadataReviewBox()
 
     def removeSources(self):
         selected_sources = self.sources_list_widget.selectedItems()
@@ -326,8 +328,69 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
     def saveMetadata(self):
 
-        """Need insert a code to create _EPSG3857.tif file,
-        if reprojection option is checked."""
+        # get metadata from GUI, and store them in a dictionary
+        metaInputInDic = {}
+        metaInputInDic['title'] = self.title_edit.text()
+        metaInputInDic['platform'] = self.platform_combo_box.currentIndex()
+        metaInputInDic['sensor'] = self.sensor_edit.text()
+        metaInputInDic['acquisition_start'] = self.sense_start_edit.dateTime().toString(Qt.ISODate)
+        metaInputInDic['acquisition_end'] = self.sense_end_edit.dateTime().toString(Qt.ISODate)
+        metaInputInDic['provider'] = self.provider_edit.text()
+        metaInputInDic['contact'] =  self.contact_edit.text()
+        metaInputInDic['properties'] =  self.tags_edit.text() #change name later?
+        metaInputInDic['uuid'] = self.website_edit.text() #change name later?
+
+        # declare list for MetadataHandler object
+        metaHdlrs = []
+        num_selected_layers = 0
+        count = 0
+
+        selected_layers = self.added_sources_list_widget.selectedItems()
+        if selected_layers:
+            num_selected_layers = len(selected_layers)
+            for each_layer in selected_layers:
+                file_abspath = each_layer.data(Qt.UserRole)
+
+                if self.reproject_check_box.isChecked():
+                    self.bar1.clearWidgets()
+                    self.bar1.pushMessage(
+                        'INFO',
+                        'Reprojecting files....',
+                        level=QgsMessageBar.INFO)
+                    file_abspath = reproject(file_abspath)
+
+                metaHdlrs.append(MetadataHandler(metaInputInDic, file_abspath))
+                metaHdlrs[count].createMetaForUpload()
+                str_meta = str(json.dumps(metaHdlrs[count].getMetaForUpload()))
+                print str_meta
+                json_file_abspath = os.path.splitext(file_abspath)[0] + '.json'
+                print json_file_abspath
+                f = open(json_file_abspath,'w')
+                f.write(str_meta)
+                f.close()
+
+                """ this message may not be displayed. """
+                self.bar1.clearWidgets()
+                self.bar1.pushMessage(
+                    'INFO',
+                    '%s out of %s metadata were saved.' % (str(count+1), str(num_selected_layers)),
+                    level=QgsMessageBar.INFO)
+
+            self.bar1.clearWidgets()
+            self.bar1.pushMessage(
+                'INFO',
+                'Metadata for the selected sources were saved',
+                level=QgsMessageBar.INFO)
+
+        else:
+            self.bar1.clearWidgets()
+            self.bar1.pushMessage(
+                'WARNING',
+                'One or more source imagery should be selected to have the metadata saved',
+                level=QgsMessageBar.WARNING)
+
+    """
+    def saveMetadata(self):
 
         selected_layers = self.added_sources_list_widget.selectedItems()
         if selected_layers:
@@ -359,6 +422,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 'WARNING',
                 'One or more source imagery should be selected to have the metadata saved',
                 level=QgsMessageBar.WARNING)
+    """
 
     def loadSavedMetadata(self):
 
@@ -411,7 +475,11 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.settings.endGroup()
 
     # other functions
+    """this function will be moved to a separate file"""
     def validateFile(self,filename):
+        return True
+
+        """
         # check that file exists
         if not os.path.exists(filename):
             self.bar0.clearWidgets()
@@ -471,7 +539,9 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                     'OAM',
                     level=QgsMessageLog.INFO)
                 return True
+        """
 
+    """this function will be moved to a separate file"""
     def validateLayer(self,layer_name):
         all_layers = self.iface.mapCanvas().layers()
         for layer in all_layers:
@@ -486,8 +556,9 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 else:
                     return 1
 
+    """
     def extractMetadata(self,filename):
-        """Extract filesize, projection, bbox and gsd from image file"""
+        #Extract filesize, projection, bbox and gsd from image file
 
         self.metadata[filename]['File size'] = os.stat(filename).st_size
 
@@ -549,9 +620,11 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 print "Unexpected error:", sys.exc_info()[0]
 
             self.metadata[filename]['BBOX'] = (upper_left,lower_left,upper_right,lower_right)
+    """
 
+    """
     def GDALInfoReportCorner(self,hDataset,x,y):
-        """GDALInfoReportCorner: extracted and adapted from the python port of gdalinfo"""
+        #GDALInfoReportCorner: extracted and adapted from the python port of gdalinfo
 
         # Transform the point into georeferenced coordinates
         adfGeoTransform = hDataset.GetGeoTransform(can_return_null = True)
@@ -571,11 +644,14 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             return literal_eval(("(%12.7f,%12.7f) " % (dfGeoX, dfGeoY )))
         else:
             return literal_eval(("(%12.3f,%12.3f) " % (dfGeoX, dfGeoY )))
+    """
 
-
+    """
     def loadImageryInfoForm(self, filename):
         pass
+    """
 
+    """
     def loadImageryInfo(self, filename):
         self.metadata[filename] = {}
         self.metadata[filename]['Title'] = self.title_edit.text()
@@ -610,7 +686,37 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 self.licensed.remove(filename)
 
         self.extractMetadata(filename)
+    """
 
+    def loadMetadataReviewBox(self):
+        json_file_abspaths = []
+        for index in xrange(self.sources_list_widget.count()):
+            file_abspath = str(self.sources_list_widget.item(index).data(Qt.UserRole))
+            json_file_abspath = ''
+            if self.reproject_check_box.isChecked():
+                json_file_abspath = os.path.splitext(file_abspath)[0]+'_EPSG3857.json'
+            else:
+                json_file_abspath = os.path.splitext(file_abspath)[0]+'.json'
+
+            print str(json_file_abspath)
+            json_file_abspaths.append(json_file_abspath)
+
+        temp = QTemporaryFile()
+        temp.open()
+        for json_file_abspath in json_file_abspaths:
+            if os.path.exists(json_file_abspath):
+                with open(json_file_abspath) as infile:
+                    temp.write(infile.read() + '\n\n')
+            else:
+                temp.write('%s was not found. Please save it in advance.\n\n'
+                    % str(json_file_abspath))
+        temp.flush()
+        temp.seek(0)
+
+        stream = QTextStream(temp)
+        self.review_metadata_box.setText(stream.readAll())
+
+    """
     def loadMetadataReviewBox(self):
         json_filenames = []
         for index in xrange(self.sources_list_widget.count()):
@@ -632,16 +738,20 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         stream = QTextStream(temp)
         self.review_metadata_box.setText(stream.readAll())
+    """
 
     def startUploadPreprocessing(self):
 
         """don't know why this message doesn't show up..."""
+
+        """Probably it is better to let the users to save all the metadata and
+        reprojected files in advance to start upload."""
+
         self.bar2.clearWidgets()
         self.bar2.pushMessage(
             'INFO',
             'Preprocessing....',
             level=QgsMessageBar.INFO)
-        self.bar2.clearWidgets()
 
         for index in xrange(self.sources_list_widget.count()):
             upload_filename = str(self.sources_list_widget.item(index).data(Qt.UserRole))
