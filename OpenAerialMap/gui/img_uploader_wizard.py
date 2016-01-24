@@ -42,7 +42,8 @@ from ast import literal_eval
 
 from module.module_handle_metadata import MetadataHandler
 from module.module_access_s3 import S3Manager
-from module.module_convert_files import reproject, convert_to_tif
+from module.module_gdal_utilities import reproject, convert_to_tif
+from module.module_validate_files import validate_layer, validate_file
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_uploader_wizard.ui'))
@@ -181,7 +182,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         else:
             added = False
             if filename:
-                if self.validateFile(filename):
+                result_val = validate_file(filename)
+                if result_val["val"]:
                     if not self.sources_list_widget.findItems(filename,Qt.MatchExactly):
                         item = QListWidgetItem()
                         item.setText(os.path.basename(filename))
@@ -190,14 +192,26 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                         self.added_sources_list_widget.addItem(item.clone())
                         self.source_file_edit.setText('')
                         added = True
+                else:
+                    msg = result_val["msg"]
+                    self.bar0.clearWidgets()
+                    self.bar0.pushMessage("CRITICAL", msg, level=QgsMessageBar.CRITICAL)
+                    QgsMessageLog.logMessage("CRITICAL", msg, level=QgsMessageLog.INFO)
+
             if selected_layers:
                 for item in selected_layers:
-                    if self.validateLayer(item.text()):
+                    if validate_layer(item.text(), self.iface):
                         if not self.sources_list_widget.findItems(item.text(),Qt.MatchExactly):
                             self.layers_list_widget.takeItem(self.layers_list_widget.row(item))
                             self.sources_list_widget.addItem(item)
                             self.added_sources_list_widget.addItem(item.clone())
                             added = True
+                    else:
+                        self.bar0.clearWidgets()
+                        self.bar0.pushMessage(
+                            "CRITICAL",
+                            "Vector layers cannot be selected for upload",
+                            level=QgsMessageBar.CRITICAL)
             if added:
                 self.bar0.clearWidgets()
                 self.bar0.pushMessage(
@@ -427,87 +441,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         self.settings.endGroup()
 
-    # other functions
-    """this function will be moved to a separate file"""
-    def validateFile(self,filename):
-        return True
-
-        """
-        # check that file exists
-        if not os.path.exists(filename):
-            self.bar0.clearWidgets()
-            self.bar0.pushMessage(
-                "CRITICAL",
-                "The file %s does not exist" % filename,
-                level=QgsMessageBar.CRITICAL)
-            return False
-        # check that file is an image
-        if imghdr.what(filename) is None:
-            self.bar0.clearWidgets()
-            self.bar0.pushMessage(
-                "CRITICAL",
-                "The file %s is not a supported data source" % filename,
-                level=QgsMessageBar.CRITICAL)
-            return False
-        # check if gdal can read file
-        try:
-            raster = gdal.Open(filename,gdal.GA_ReadOnly)
-        except:
-            self.bar0.clearWidgets()
-            self.bar0.pushMessage(
-                "CRITICAL",
-                "GDAL could not read file %s" % filename,
-                level=QgsMessageBar.CRITICAL)
-            return False
-        # check if there is an object raster
-        if not raster:
-            self.bar0.clearWidgets()
-            self.bar0.pushMessage(
-                "CRITICAL",
-                "GDAL could not read file %s" % filename,
-                level=QgsMessageBar.CRITICAL)
-            return False
-        # check that image has at least 3 bands
-        if raster.RasterCount < 3:
-            self.bar0.clearWidgets()
-            self.bar0.pushMessage(
-                "CRITICAL",
-                "The file %s has less than 3 raster bands" % filename,
-                level=QgsMessageBar.CRITICAL)
-            return False
-        # check if projection is set
-        if raster.GetProjection() is '':
-            self.bar0.clearWidgets()
-            self.bar0.pushMessage(
-                "CRITICAL",
-                "Could not extract projection from file %s" % filename,
-                level=QgsMessageBar.CRITICAL)
-            return False
-        # finally, check if bbox has valid data
-        xy_points = [(0.0,0.0),(0.0,raster.RasterYSize),(raster.RasterXSize,0.0),(raster.RasterXSize,raster.RasterYSize)]
-        for point in xy_points:
-            if point != self.GDALInfoReportCorner(raster,point[0],point[1]):
-                QgsMessageLog.logMessage(
-                    'File %s is a valid data source' % filename,
-                    'OAM',
-                    level=QgsMessageLog.INFO)
-                return True
-        """
-
-    """this function will be moved to a separate file"""
-    def validateLayer(self,layer_name):
-        all_layers = self.iface.mapCanvas().layers()
-        for layer in all_layers:
-            if layer_name == layer.name():
-                if layer.type() == QgsMapLayer.VectorLayer:
-                    self.bar0.clearWidgets()
-                    self.bar0.pushMessage(
-                        "CRITICAL",
-                        "Vector layers cannot be selected for upload",
-                        level=QgsMessageBar.CRITICAL)
-                    return 0
-                else:
-                    return 1
 
     def loadMetadataReviewBox(self):
         json_file_abspaths = []

@@ -24,6 +24,7 @@
 
 import os, sys
 from osgeo import gdal, osr, ogr
+from ast import literal_eval
 from qgis.core import QgsMessageLog
 
 def reproject(file_abspath):
@@ -56,3 +57,24 @@ def convert_to_tif(file_abspath):
         'OAM',
         level=QgsMessageLog.INFO)
     return converted_file_abspath
+
+
+def gdal_info_report_corner(hDataset, x, y):
+    """gdal_info_report_corner: extracted and adapted
+        from the python port of gdalinfo"""
+
+    # Transform the point into georeferenced coordinates
+    adfGeoTransform = hDataset.GetGeoTransform(can_return_null = True)
+    if adfGeoTransform is not None:
+        dfGeoX = adfGeoTransform[0] + adfGeoTransform[1] * x + adfGeoTransform[2] * y
+        dfGeoY = adfGeoTransform[3] + adfGeoTransform[4] * x + adfGeoTransform[5] * y
+    else:
+        print "BBOX might be wrong. Transformation coefficient " + \
+            "could not be fetched from raster"
+        return (x,y)
+
+    # Report the georeferenced coordinates
+    if abs(dfGeoX) < 181 and abs(dfGeoY) < 91:
+        return literal_eval(("(%12.7f,%12.7f) " % (dfGeoX, dfGeoY )))
+    else:
+        return literal_eval(("(%12.3f,%12.3f) " % (dfGeoX, dfGeoY )))

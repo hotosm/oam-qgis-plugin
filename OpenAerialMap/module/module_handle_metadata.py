@@ -26,6 +26,7 @@ import os, sys
 from osgeo import gdal, osr, ogr
 from ast import literal_eval
 import json
+from module.module_gdal_utilities import gdal_info_report_corner
 
 class MetadataHandler():
 
@@ -86,19 +87,19 @@ class MetadataHandler():
 
     def extractBBox(self):
         # probably need to convert parentheses into bracket later
-        upper_left = self.GDALInfoReportCorner(
+        upper_left = gdal_info_report_corner(
             self.gdalDataset,0.0,0.0 )
-        lower_left = self.GDALInfoReportCorner(
+        lower_left = gdal_info_report_corner(
             self.gdalDataset,0.0,
             self.gdalDataset.RasterYSize)
-        upper_right = self.GDALInfoReportCorner(
+        upper_right = gdal_info_report_corner(
             self.gdalDataset,
             self.gdalDataset.RasterXSize,0.0 )
-        lower_right = self.GDALInfoReportCorner(
+        lower_right = gdal_info_report_corner(
             self.gdalDataset,
             self.gdalDataset.RasterXSize,
             self.gdalDataset.RasterYSize )
-        center = self.GDALInfoReportCorner(
+        center = gdal_info_report_corner(
             self.gdalDataset,
             self.gdalDataset.RasterXSize/2.0,
             self.gdalDataset.RasterYSize/2.0 )
@@ -143,23 +144,3 @@ class MetadataHandler():
 
     def extractGsd(self):
         self.metaInImagery['gsd'] = "xxxxx"
-
-    def GDALInfoReportCorner(self, hDataset, x, y):
-        """GDALInfoReportCorner: extracted and adapted
-            from the python port of gdalinfo"""
-
-        # Transform the point into georeferenced coordinates
-        adfGeoTransform = hDataset.GetGeoTransform(can_return_null = True)
-        if adfGeoTransform is not None:
-            dfGeoX = adfGeoTransform[0] + adfGeoTransform[1] * x + adfGeoTransform[2] * y
-            dfGeoY = adfGeoTransform[3] + adfGeoTransform[4] * x + adfGeoTransform[5] * y
-        else:
-            print "BBOX might be wrong. Transformation coefficient " + \
-                "could not be fetched from raster"
-            return (x,y)
-
-        # Report the georeferenced coordinates
-        if abs(dfGeoX) < 181 and abs(dfGeoY) < 91:
-            return literal_eval(("(%12.7f,%12.7f) " % (dfGeoX, dfGeoY )))
-        else:
-            return literal_eval(("(%12.3f,%12.3f) " % (dfGeoX, dfGeoY )))
