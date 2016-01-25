@@ -357,9 +357,17 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                     self.bar1.clearWidgets()
                     self.bar1.pushMessage(
                         'INFO',
-                        'Reprojecting files....',
+                        'Reprojecting files: %sth image out of %s is being processed...'\
+                         % (str(count+1), str(num_selected_layers)),
                         level=QgsMessageBar.INFO)
                     file_abspath = reproject(file_abspath)
+                else:
+                    self.bar1.clearWidgets()
+                    self.bar1.pushMessage(
+                        'INFO',
+                        '%sth image out of %s is processed.'\
+                         % (str(count+1), str(num_selected_layers)),
+                        level=QgsMessageBar.INFO)
 
                 metaHdlrs.append(MetadataHandler(metaInputInDic, file_abspath))
                 metaHdlrs[count].createMetaForUpload()
@@ -370,13 +378,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 f = open(json_file_abspath,'w')
                 f.write(str_meta)
                 f.close()
-
-                """ this message may not be displayed. """
-                self.bar1.clearWidgets()
-                self.bar1.pushMessage(
-                    'INFO',
-                    '%s out of %s metadata were saved.' % (str(count+1), str(num_selected_layers)),
-                    level=QgsMessageBar.INFO)
+                count += 1
 
             self.bar1.clearWidgets()
             self.bar1.pushMessage(
@@ -485,7 +487,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         for index in xrange(self.sources_list_widget.count()):
             upload_filename = str(self.sources_list_widget.item(index).data(Qt.UserRole))
 
-            if "reprojection" in self.upload_options:
+            if self.reproject_check_box.isChecked():
                 upload_filename = reproject(upload_filename)
                 QgsMessageLog.logMessage(
                     'Created reprojected file: %s' % upload_filename,
@@ -506,16 +508,12 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
     def startUpload(self):
 
         #get the information of upload options
-        if self.license_check_box.isChecked():
-            self.upload_options.append("license")
-        if self.reproject_check_box.isChecked():
-            self.upload_options.append("reprojection")
         if self.notify_oam_check.isChecked():
             self.upload_options.append("notify_oam")
         if self.trigger_tiling_check.isChecked():
             self.upload_options.append("trigger_tiling")
 
-        if "license" not in self.upload_options:
+        if not self.license_check_box.isChecked():
             self.bar2.clearWidgets()
             self.bar2.pushMessage(
                 'CRITICAL',
