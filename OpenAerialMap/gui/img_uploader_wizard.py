@@ -119,6 +119,9 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.default_button.clicked.connect(self.loadMetadataSettings)
         self.clean_button.clicked.connect(self.cleanMetadataSettings)
         self.save_button.clicked.connect(self.saveMetadata)
+
+        # Temporarily hide the reload button
+        self.reload_button.hide()
         self.reload_button.clicked.connect(self.loadSavedMetadata)
 
         # Upload tab connections (wizard page 3)
