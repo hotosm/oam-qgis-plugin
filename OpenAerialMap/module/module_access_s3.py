@@ -25,7 +25,7 @@ import os, sys
 
 from PyQt4 import QtGui
 from PyQt4.Qt import *
-from PyQt4.QtCore import QThread
+from PyQt4.QtCore import QThread, Qt
 import json, time, math, imghdr, tempfile
 
 from qgis.gui import QgsMessageBar
@@ -61,8 +61,16 @@ class S3Manager(S3Connection):
         self.count_uploaded_images = 0
         self.num_uploading_images = 0
 
-        #For GUI (mainly progress bars)
+        #For GUI (messages and progress bars)
         self.wizard_page = wizard_page
+
+        self.uploader_widget = QtGui.QWidget()
+        self.uploader_widget.setWindowTitle("Upload Progress Bars")
+        self.uploader_widget.setWindowFlags(Qt.WindowStaysOnTopHint)
+        self.uploader_widget.move(20,20)
+        self.uploader_v_box = QtGui.QVBoxLayout()
+        self.uploader_widget.setLayout(self.uploader_v_box)
+
         self.msg_bar_main = None
         self.msg_bar_main_content = None
         self.cancel_button_main = None
@@ -103,10 +111,6 @@ class S3Manager(S3Connection):
     def uploadFiles(self):
 
         """ Testing purpose only """
-        if "reprojection" in self.upload_options:
-            print "reprojection"
-        if "license" in self.upload_options:
-            print "license"
         if "notify_oam" in self.upload_options:
             print "notify_oam"
         if "trigger_tiling" in self.upload_options:
@@ -116,6 +120,7 @@ class S3Manager(S3Connection):
         self.msg_bar_main = QgsMessageBar()
         self.msg_bar_main.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         self.wizard_page.layout().addWidget(self.msg_bar_main)
+
         self.msg_bar_main_content = self.msg_bar_main.createMessage('Performing upload...', )
         self.cancel_button_main = QPushButton()
         self.cancel_button_main.setText('Cancel')
@@ -146,7 +151,8 @@ class S3Manager(S3Connection):
                 # configure the msg_bars for progress bar
                 self.msg_bars.append(QgsMessageBar())
                 self.msg_bars[i].setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
-                self.wizard_page.layout().addWidget(self.msg_bars[i])
+                #self.wizard_page.layout().addWidget(self.msg_bars[i])
+                self.uploader_v_box.addWidget(self.msg_bars[i])
 
                 #set the texts of uploading files
                 file_basename = str(os.path.basename(str(filename)))
@@ -172,7 +178,10 @@ class S3Manager(S3Connection):
             except Exception, e:
                 return repr(e)
 
-        return 0
+            #Display upload progress bars in a separate widget
+            self.uploader_widget.show()
+
+        return True
 
     def updateProgressBar(self, progress_value, index):
         print "Progress: " + str(progress_value) + ", index: " + str(index)
@@ -189,7 +198,7 @@ class S3Manager(S3Connection):
 
         try:
             for i in range(0, self.num_uploading_images):
-                #is it better to use destructor?
+                # Is it better to use destructor?
                 self.s3Uploaders[i].kill()
                 self.progress_bars[i] = None
                 #self.cancel_buttons[i] = None
@@ -237,20 +246,16 @@ class S3Manager(S3Connection):
 
         if success:
             self.count_uploaded_images += 1
-            print str(self.count_uploaded_images)
+            #print str(self.count_uploaded_images)
 
             # report the result
             if self.count_uploaded_images < self.num_uploading_images:
-                """
-                self.msg_bar_main.pushMessage(
-                    'INFO',
-                    'The '
+                self.msg_bar_main_content.setText(
+                    ''
                     + str(self.count_uploaded_images)
-                    + '(th) image out of '
+                    + ' image out of '
                     + str(self.num_uploading_images)
-                    + ' were uploaded.',
-                    level=QgsMessageBar.INFO)
-                """
+                    + ' were uploaded.')
                 QgsMessageLog.logMessage(
                     'Upload succeeded ('
                     + str(self.count_uploaded_images)
@@ -389,14 +394,11 @@ class S3Uploader(QObject):
                 self.progress.emit(100, self.index)
                 success = True
 
-                # need to modify this part.
-                """
+                # need to modify this part?
                 if "notify_oam" in self.options:
                     self.notifyOAM()
                 if "trigger_tiling" in self.options:
-                    #pass
                     self.triggerTileService()
-                """
 
         except Exception, e:
             # forward the exception upstream (or try to...)

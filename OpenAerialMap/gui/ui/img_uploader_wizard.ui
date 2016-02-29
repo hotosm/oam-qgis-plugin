@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>793</width>
-    <height>483</height>
+    <height>484</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -309,6 +309,13 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QPushButton" name="reload_button">
+            <property name="text">
+             <string>Reload</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item>
@@ -500,16 +507,16 @@
          </widget>
         </item>
         <item row="14" column="0" colspan="2">
-         <widget class="QCheckBox" name="license_check_box">
+         <widget class="QCheckBox" name="reproject_check_box">
           <property name="text">
-           <string>Licensed under CC-BY 4.0 and allow tracing in OSM</string>
+           <string>Reproject to EPSG:3857</string>
           </property>
          </widget>
         </item>
         <item row="12" column="0" colspan="2">
-         <widget class="QCheckBox" name="reproject_check_box">
+         <widget class="QCheckBox" name="license_check_box">
           <property name="text">
-           <string>Reproject to EPSG:3857</string>
+           <string>Licensed under CC-BY 4.0 and allow tracing in OSM</string>
           </property>
          </widget>
         </item>
