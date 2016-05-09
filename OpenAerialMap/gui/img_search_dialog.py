@@ -26,6 +26,7 @@ import os, sys
 
 from PyQt4 import QtGui, uic
 from PyQt4.Qt import *
+from PyQt4 import QtCore
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_search_dialog.ui'))
@@ -42,3 +43,60 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         # #widgets-and-dialogs-with-auto-connect
         self.iface = iface
         self.setupUi(self)
+
+        self.initializeGui()
+
+        # event handling
+        self.connect(self.buttonBox, QtCore.SIGNAL('accepted()'), self.execOk)
+        self.connect(self.buttonBox, QtCore.SIGNAL('rejected()'), self.execCancel)
+
+        self.pushButtonSearch.clicked.connect(self.startSearch)
+        self.pushButtonBrowseLatest.clicked.connect(self.browseLatest)
+        self.pushButtonBrowseLocation.clicked.connect(self.browseLocation)
+
+        #self.buttonBox.clicked.connect(lambda: self.test(self.buttonBox))
+        #self.connect(self.buttonBox, QtCore.SIGNAL('clicked(QAbstractButton*)'), lambda: self.test(self.buttonBox))
+        #self.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.execOk)
+        #self.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.execCancel)
+        #self.buttonBox.accepted.connect(self.execOk)
+        #self.buttonBox.rejected.connect(self.execCancel)
+
+    def test(self, *argv):
+        print(str(argv))
+
+    def initializeGui(self):
+        item = QListWidgetItem()
+        item.setText("Please set the conditions and press 'Search' button.")
+        self.listWidget.addItem(item)
+
+        scene = QGraphicsScene()
+        icon_abspath = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'icon/icon.png')
+        scene.addPixmap(QPixmap(icon_abspath))
+        self.graphicsView.setScene(scene)
+        self.graphicsView.show()
+
+        self.lineEditLocation.setText("Enter location")
+        self.dateEditStart.setDateTime(QDateTime.currentDateTime())
+        self.dateEditEnd.setDateTime(QDateTime.currentDateTime())
+        self.lineEditResolution.setText("Enter resolution")
+
+    def startSearch(self):
+        queries = []
+        queries.append(self.lineEditLocation.text())
+        queries.append(self.dateEditStart.dateTime().toString(Qt.ISODate))
+        queries.append(self.dateEditEnd.dateTime().toString(Qt.ISODate))
+        queries.append(self.lineEditResolution.text())
+
+        print("Search has started..." + repr(queries))
+
+    def browseLatest(self):
+        print("Browse latest imagery...")
+
+    def browseLocation(self):
+        print("Browse location of loaded layer...")
+
+    def execOk(self):
+        print("OK")
+
+    def execCancel(self):
+        print("Canceled")
