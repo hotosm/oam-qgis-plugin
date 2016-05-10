@@ -28,6 +28,8 @@ from PyQt4 import QtGui, uic
 from PyQt4.Qt import *
 from PyQt4 import QtCore
 
+from module.module_search import OAMCatalogAccess
+
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_search_dialog.ui'))
 
@@ -44,9 +46,8 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         self.iface = iface
         self.setupUi(self)
 
-        self.initializeGui()
-
         # event handling
+        #self.buttonBox.clicked.connect(lambda: self.test(self.buttonBox))
         self.connect(self.buttonBox, QtCore.SIGNAL('accepted()'), self.execOk)
         self.connect(self.buttonBox, QtCore.SIGNAL('rejected()'), self.execCancel)
 
@@ -54,19 +55,17 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         self.pushButtonBrowseLatest.clicked.connect(self.browseLatest)
         self.pushButtonBrowseLocation.clicked.connect(self.browseLocation)
 
-        #self.buttonBox.clicked.connect(lambda: self.test(self.buttonBox))
-        #self.connect(self.buttonBox, QtCore.SIGNAL('clicked(QAbstractButton*)'), lambda: self.test(self.buttonBox))
-        #self.buttonBox.button(QDialogButtonBox.Ok).clicked.connect(self.execOk)
-        #self.buttonBox.button(QDialogButtonBox.Cancel).clicked.connect(self.execCancel)
-        #self.buttonBox.accepted.connect(self.execOk)
-        #self.buttonBox.rejected.connect(self.execCancel)
+        self.connect(self.listWidget, QtCore.SIGNAL("itemClicked(QListWidgetItem *)"), self.getDicResult);
+
+        self.initGui()
 
     def test(self, *argv):
         print(str(argv))
 
-    def initializeGui(self):
+    def initGui(self):
         item = QListWidgetItem()
         item.setText("Please set the conditions and press 'Search' button.")
+        item.setData(Qt.UserRole, "Sample Data")
         self.listWidget.addItem(item)
 
         scene = QGraphicsScene()
@@ -76,18 +75,36 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         self.graphicsView.show()
 
         self.lineEditLocation.setText("Enter location")
+        #need to change the DateTime into only Date
         self.dateEditStart.setDateTime(QDateTime.currentDateTime())
         self.dateEditEnd.setDateTime(QDateTime.currentDateTime())
         self.lineEditResolution.setText("Enter resolution")
 
     def startSearch(self):
-        queries = []
-        queries.append(self.lineEditLocation.text())
-        queries.append(self.dateEditStart.dateTime().toString(Qt.ISODate))
-        queries.append(self.dateEditEnd.dateTime().toString(Qt.ISODate))
-        queries.append(self.lineEditResolution.text())
+        hostUrl = "https://oam-catalog.herokuapp.com"
+        action = "meta"
+        dicQueries = {}
+        dicQueries['location'] = self.lineEditLocation.text()
+        #need to change the DateTime into only Date
+        dicQueries['dateStart'] = self.dateEditStart.dateTime().toString(Qt.ISODate)
+        dicQueries['dateEnd'] = self.dateEditEnd.dateTime().toString(Qt.ISODate)
+        dicQueries['resolution'] = self.lineEditResolution.text()
 
-        print("Search has started..." + repr(queries))
+        oamCatalogAccess = OAMCatalogAccess(hostUrl, action, dicQueries)
+        listResults = oamCatalogAccess.test()
+
+        self.listWidget.clear()
+
+        for dicResult in listResults:
+            item = QListWidgetItem()
+            item.setText(str(dicResult['title']))
+            item.setData(Qt.UserRole, dicResult)
+            #print(str(item.data(Qt.UserRole)))
+            self.listWidget.addItem(item)
+
+    def getDicResult(self, item):
+        dictResult = item.data(Qt.UserRole)
+        print(str(dictResult))
 
     def browseLatest(self):
         print("Browse latest imagery...")
