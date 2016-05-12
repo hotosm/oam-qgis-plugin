@@ -48,7 +48,7 @@ PY_FILES = \
 
 # removed 'module' while it is non-functional
 #PY_FOLDERS = module gui icon ext_libs
-PY_FOLDERS = gui icon module
+PY_FOLDERS = gui icon module temp
 
 #please modify the 'clean' section of this Makefile
 #UI_FILES = oam_client_dialog_base.ui

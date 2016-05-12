@@ -37,7 +37,7 @@ from gui.img_uploader_wizard import ImgUploaderWizard
 from gui.img_search_dialog import ImgSearchDialog
 from gui.setting_dialog import SettingDialog
 
-from gui.backuped_img_uploader_wizard import BackupedImgUploaderWizard
+#from gui.backuped_img_uploader_wizard import BackupedImgUploaderWizard
 
 import os
 

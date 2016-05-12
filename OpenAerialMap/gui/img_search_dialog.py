@@ -28,7 +28,8 @@ from PyQt4 import QtGui, uic
 from PyQt4.Qt import *
 from PyQt4 import QtCore
 
-from module.module_search import OAMCatalogAccess
+from img_browser import ImgBrowser
+from module.module_access_oam_catalog import OAMCatalogAccess
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_search_dialog.ui'))
@@ -55,7 +56,7 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         self.pushButtonBrowseLatest.clicked.connect(self.browseLatest)
         self.pushButtonBrowseLocation.clicked.connect(self.browseLocation)
 
-        self.connect(self.listWidget, QtCore.SIGNAL("itemClicked(QListWidgetItem *)"), self.getDicResult);
+        self.connect(self.listWidget, QtCore.SIGNAL("itemClicked(QListWidgetItem *)"), self.getSingleMetaInDic);
 
         self.initGui()
 
@@ -63,22 +64,19 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         print(str(argv))
 
     def initGui(self):
+
         item = QListWidgetItem()
         item.setText("Please set the conditions and press 'Search' button.")
         item.setData(Qt.UserRole, "Sample Data")
         self.listWidget.addItem(item)
-
-        scene = QGraphicsScene()
-        icon_abspath = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'icon/icon.png')
-        scene.addPixmap(QPixmap(icon_abspath))
-        self.graphicsView.setScene(scene)
-        self.graphicsView.show()
 
         self.lineEditLocation.setText("Enter location")
         #need to change the DateTime into only Date
         self.dateEditStart.setDateTime(QDateTime.currentDateTime())
         self.dateEditEnd.setDateTime(QDateTime.currentDateTime())
         self.lineEditResolution.setText("Enter resolution")
+
+        self.imgBrowser = ImgBrowser(self.iface)
 
     def startSearch(self):
         hostUrl = "https://oam-catalog.herokuapp.com"
@@ -91,20 +89,26 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         dicQueries['resolution'] = self.lineEditResolution.text()
 
         oamCatalogAccess = OAMCatalogAccess(hostUrl, action, dicQueries)
-        listResults = oamCatalogAccess.test()
+        metadataInList = oamCatalogAccess.test()
 
         self.listWidget.clear()
 
-        for dicResult in listResults:
+        for singleMetaInDic in metadataInList:
             item = QListWidgetItem()
-            item.setText(str(dicResult['title']))
-            item.setData(Qt.UserRole, dicResult)
+            item.setText(str(singleMetaInDic['title']))
+            item.setData(Qt.UserRole, singleMetaInDic)
             #print(str(item.data(Qt.UserRole)))
             self.listWidget.addItem(item)
 
-    def getDicResult(self, item):
-        dictResult = item.data(Qt.UserRole)
-        print(str(dictResult))
+    def getSingleMetaInDic(self, item):
+        singleMetaInDic = item.data(Qt.UserRole)
+        print(str(singleMetaInDic))
+
+        if type(singleMetaInDic) is dict:
+            if not self.imgBrowser.isVisible():
+                self.imgBrowser.show()
+
+            self.imgBrowser.setImgAndMeta(singleMetaInDic)
 
     def browseLatest(self):
         print("Browse latest imagery...")
