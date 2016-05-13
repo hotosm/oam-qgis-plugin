@@ -67,7 +67,7 @@ class S3Manager(S3Connection):
         self.uploader_widget = QtGui.QWidget()
         self.uploader_widget.setWindowTitle("Upload Progress Bars")
         self.uploader_widget.setWindowFlags(Qt.WindowStaysOnTopHint)
-        self.uploader_widget.move(20,20)
+
         self.uploader_v_box = QtGui.QVBoxLayout()
         self.uploader_widget.setLayout(self.uploader_v_box)
 
@@ -178,9 +178,15 @@ class S3Manager(S3Connection):
             except Exception, e:
                 return repr(e)
 
-            #Display upload progress bars in a separate widget
-            self.uploader_widget.show()
-
+        #Display upload progress bars in a separate widget
+        self.uploader_widget.show()
+        screenShape = QtGui.QDesktopWidget().screenGeometry()
+        width, height = screenShape.width(), screenShape.height()
+        winW, winH = self.uploader_widget.frameGeometry().width(), self.uploader_widget.frameGeometry().height()
+        left = width - (winW + 10)
+        top = height - (winH + 50)
+        self.uploader_widget.move(left,top)
+        #self.uploader_widget.activateWindow()
         return True
 
     def updateProgressBar(self, progress_value, index):

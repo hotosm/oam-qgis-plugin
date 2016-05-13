@@ -37,7 +37,7 @@ from gui.img_uploader_wizard import ImgUploaderWizard
 from gui.img_search_dialog import ImgSearchDialog
 from gui.setting_dialog import SettingDialog
 
-from gui.backuped_img_uploader_wizard import BackupedImgUploaderWizard
+#from gui.backuped_img_uploader_wizard import BackupedImgUploaderWizard
 
 import os
 
@@ -191,10 +191,12 @@ class OpenAerialMap:
         self.settingDialog = SettingDialog(self.iface, self.settings)
         self.settingDialog.show()
 
+    """
     def displayBackupedUploaderWizard(self):
 
         self.backupedImgUploaderWizard = BackupedImgUploaderWizard(self.iface, self.settings)
         self.backupedImgUploaderWizard.show()
+    """
 
     def initGui(self):
 
@@ -228,11 +230,13 @@ class OpenAerialMap:
             callback=self.displaySettingDialog,
             parent=self.iface.mainWindow())
 
+        """
         self.add_action(
             icon_path_img_wizard,
             text=self.tr(u'Upload Imagery (Backuped)'),
             callback=self.displayBackupedUploaderWizard,
             parent=self.iface.mainWindow())
+        """
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
