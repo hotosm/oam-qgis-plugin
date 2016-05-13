@@ -29,18 +29,38 @@ from StringIO import StringIO
 
 class OAMCatalogAccess:
 
-    def __init__(self, hostUrl, action=None, dicQueries=None, parent=None):
+    def __init__(self, hostUrl, action=None, dictQueries=None, parent=None):
+        #probably need to make a textbox for editing hostUrl later
         self.hostUrl = hostUrl
         self.action = action
-        self.dicQueries = dicQueries
+        self.dictQueries = dictQueries
         self.endPoint = None
 
-    def test(self):
-        print str(self.dicQueries)
-        if self.action is None:
+    def getMetadataInList(self):
+        jMetadata = self.downloadMetadata()
+        metadadaInDic = json.loads(jMetadata)
+        metadataInList = metadadaInDic[u'results']
+        return metadataInList
+
+    def downloadMetadata(self):
+        print(str(self.dictQueries))
+
+        if self.action == None or self.action == '':
             self.endPoint = self.hostUrl
         else:
+            """need to modify this part later"""
             self.endPoint = self.hostUrl + '/' + self.action
+            #if self.dictQueries.get('location') != '':
+            #    self.endPoint += '?location=' + self.dictQueries['location']
+            if self.dictQueries.get('dateAcquisitionFrom') != '':
+                self.endPoint += '?acquisition_from=' + self.dictQueries['dateAcquisitionFrom']
+            if self.dictQueries.get('dateAcquisitionTo') != '':
+                self.endPoint += '&acquisition_to=' + self.dictQueries['dateAcquisitionTo']
+            #if self.dictQueries.get('resolution') != '':
+            #    self.endPoint += '&gsd_to=' + int(self.dictQueries['resolution'])
+
+        print(str(self.endPoint))
+
         strBuffer = StringIO()
         c = pycurl.Curl()
         c.setopt(c.URL, self.endPoint)
@@ -48,19 +68,9 @@ class OAMCatalogAccess:
         c.perform()
         c.close()
         jMetadata = strBuffer.getvalue()
-        metadadaInDic = json.loads(jMetadata)
-        metadataInList = metadadaInDic[u'results']
-        return metadataInList
+        return jMetadata
 
-    """probably this function should move to another class, since this is not using oam catalog"""
-    @staticmethod
-    def getThumbnail(urlThumbnail):
-        img_dir_abspath = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'temp')
-        print(urlThumbnail)
-        img_file_name = urlThumbnail.split('/')[-1]
-        img_abspath = os.path.join(img_dir_abspath, img_file_name)
-        print (img_abspath)
-        f = open(img_abspath,'wb')
-        f.write(urllib.urlopen(urlThumbnail).read())
-        f.close()
-        return img_abspath
+    def uploadMetaData(self):
+        #access to self.hostUrl and upload metadata
+        #invoked form uploader wizard in the future
+        print("Under construction")

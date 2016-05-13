@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>598</width>
+    <width>622</width>
     <height>405</height>
    </rect>
   </property>
@@ -34,7 +34,7 @@
     <rect>
      <x>340</x>
      <y>60</y>
-     <width>231</width>
+     <width>261</width>
      <height>141</height>
     </rect>
    </property>
@@ -52,22 +52,16 @@
     <item row="1" column="0">
      <widget class="QLabel" name="label_3">
       <property name="text">
-       <string>Begin date</string>
+       <string>Acquisition Date From</string>
       </property>
      </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QDateTimeEdit" name="dateEditStart"/>
     </item>
     <item row="2" column="0">
      <widget class="QLabel" name="label_4">
       <property name="text">
-       <string>End date</string>
+       <string>Acquisition Date To</string>
       </property>
      </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QDateTimeEdit" name="dateEditEnd"/>
     </item>
     <item row="3" column="0">
      <widget class="QLabel" name="label_5">
@@ -75,6 +69,12 @@
        <string>Resolution</string>
       </property>
      </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QDateEdit" name="dateEditAcquisitionFrom"/>
+    </item>
+    <item row="2" column="1">
+     <widget class="QDateEdit" name="dateEditAcquisitionTo"/>
     </item>
     <item row="3" column="1">
      <widget class="QLineEdit" name="lineEditResolution"/>
@@ -86,7 +86,7 @@
     <rect>
      <x>340</x>
      <y>220</y>
-     <width>231</width>
+     <width>261</width>
      <height>121</height>
     </rect>
    </property>

@@ -186,7 +186,7 @@ class S3Manager(S3Connection):
         left = width - (winW + 10)
         top = height - (winH + 50)
         self.uploader_widget.move(left,top)
-
+        #self.uploader_widget.activateWindow()
         return True
 
     def updateProgressBar(self, progress_value, index):

@@ -56,7 +56,7 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         self.pushButtonBrowseLatest.clicked.connect(self.browseLatest)
         self.pushButtonBrowseLocation.clicked.connect(self.browseLocation)
 
-        self.connect(self.listWidget, QtCore.SIGNAL("itemClicked(QListWidgetItem *)"), self.getSingleMetaInDic);
+        self.connect(self.listWidget, QtCore.SIGNAL("itemClicked(QListWidgetItem *)"), self.browseThumbnailAndMeta);
 
         self.initGui()
 
@@ -70,45 +70,43 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         item.setData(Qt.UserRole, "Sample Data")
         self.listWidget.addItem(item)
 
-        self.lineEditLocation.setText("Enter location")
-        #need to change the DateTime into only Date
-        self.dateEditStart.setDateTime(QDateTime.currentDateTime())
-        self.dateEditEnd.setDateTime(QDateTime.currentDateTime())
-        self.lineEditResolution.setText("Enter resolution")
+        self.lineEditLocation.setText("")
+        self.dateEditAcquisitionFrom.setDate(QDate.currentDate().addMonths(-3))
+        self.dateEditAcquisitionTo.setDate(QDate.currentDate())
+        self.lineEditResolution.setText("")
 
         self.imgBrowser = ImgBrowser(self.iface)
 
     def startSearch(self):
         hostUrl = "https://oam-catalog.herokuapp.com"
         action = "meta"
-        dicQueries = {}
-        dicQueries['location'] = self.lineEditLocation.text()
-        #need to change the DateTime into only Date
-        dicQueries['dateStart'] = self.dateEditStart.dateTime().toString(Qt.ISODate)
-        dicQueries['dateEnd'] = self.dateEditEnd.dateTime().toString(Qt.ISODate)
-        dicQueries['resolution'] = self.lineEditResolution.text()
+        dictQueries = {}
+        dictQueries['location'] = self.lineEditLocation.text()
+        dictQueries['dateAcquisitionFrom'] = self.dateEditAcquisitionFrom.date().toString(Qt.ISODate)
+        dictQueries['dateAcquisitionTo'] = self.dateEditAcquisitionTo.date().toString(Qt.ISODate)
+        dictQueries['resolution'] = self.lineEditResolution.text()
 
-        oamCatalogAccess = OAMCatalogAccess(hostUrl, action, dicQueries)
-        metadataInList = oamCatalogAccess.test()
+        oamCatalogAccess = OAMCatalogAccess(hostUrl, action, dictQueries)
+        metadataInList = oamCatalogAccess.getMetadataInList()
 
         self.listWidget.clear()
 
-        for singleMetaInDic in metadataInList:
+        for singleMetaInDict in metadataInList:
             item = QListWidgetItem()
-            item.setText(str(singleMetaInDic['title']))
-            item.setData(Qt.UserRole, singleMetaInDic)
-            #print(str(item.data(Qt.UserRole)))
+            item.setText(str(singleMetaInDict['title']))
+            item.setData(Qt.UserRole, singleMetaInDict)
             self.listWidget.addItem(item)
 
-    def getSingleMetaInDic(self, item):
-        singleMetaInDic = item.data(Qt.UserRole)
-        print(str(singleMetaInDic))
+    def browseThumbnailAndMeta(self, item):
+        singleMetaInDict = item.data(Qt.UserRole)
+        print(str(singleMetaInDict))
 
-        if type(singleMetaInDic) is dict:
+        if type(singleMetaInDict) is dict:
             if not self.imgBrowser.isVisible():
                 self.imgBrowser.show()
 
-            self.imgBrowser.setImgAndMeta(singleMetaInDic)
+            self.imgBrowser.setThumbnailAndMeta(singleMetaInDict)
+            self.imgBrowser.activateWindow()
 
     def browseLatest(self):
         print("Browse latest imagery...")

@@ -28,7 +28,7 @@ from PyQt4 import QtGui, uic
 from PyQt4.Qt import *
 from PyQt4 import QtCore
 
-from module.module_access_oam_catalog import OAMCatalogAccess
+from module.module_download_images import ImgDownloader
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_browser.ui'))
@@ -53,14 +53,16 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         top = 100
         self.move(left,top)
 
+        self.connect(self.pushButtonDownload, QtCore.SIGNAL("clicked()"),self.downloadFullImage)
+
         self.singleMetaInDic = None
 
-    def setImgAndMeta(self,singleMetaInDic):
+    def setThumbnailAndMeta(self,singleMetaInDic):
 
         self.singleMetaInDic = singleMetaInDic
 
         urlThumbnail = self.singleMetaInDic[u'properties'][u'thumbnail']
-        img_abspath = OAMCatalogAccess.getThumbnail(urlThumbnail)
+        img_abspath = ImgDownloader.downloadThumbnail(urlThumbnail)
         scene = QGraphicsScene()
         scene.addPixmap(QPixmap(img_abspath))
         self.graphicsView.setScene(scene)
@@ -68,3 +70,8 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
 
         self.lbTest01.setWordWrap(True)
         self.lbTest01.setText(str(self.singleMetaInDic))
+
+    def downloadFullImage(self):
+        urlFullImage = self.singleMetaInDic["uuid"]
+        ImgDownloader.downloadFullImage(urlFullImage)
+        #show message in progress, use background task with multithread?
