@@ -36,6 +36,12 @@ class OAMCatalogAccess:
         self.dictQueries = dictQueries
         self.endPoint = None
 
+    def setAction(self, action):
+        self.action = action
+
+    def setDictQueries(self, dictQueries):
+        self.dictQueries = dictQueries
+
     def getMetadataInList(self):
         jMetadata = self.downloadMetadata()
         metadadaInDic = json.loads(jMetadata)
@@ -45,19 +51,27 @@ class OAMCatalogAccess:
     def downloadMetadata(self):
         print(str(self.dictQueries))
 
-        if self.action == None or self.action == '':
-            self.endPoint = self.hostUrl
-        else:
-            """need to modify this part later"""
-            self.endPoint = self.hostUrl + '/' + self.action
+        self.endPoint = self.hostUrl
+
+        if self.action != None and self.action != '':
+            self.endPoint += '/' + self.action
+
+            """make sure how to handle location"""
             #if self.dictQueries.get('location') != '':
-            #    self.endPoint += '?location=' + self.dictQueries['location']
-            if self.dictQueries.get('dateAcquisitionFrom') != '':
-                self.endPoint += '?acquisition_from=' + self.dictQueries['dateAcquisitionFrom']
-            if self.dictQueries.get('dateAcquisitionTo') != '':
-                self.endPoint += '&acquisition_to=' + self.dictQueries['dateAcquisitionTo']
-            #if self.dictQueries.get('resolution') != '':
-            #    self.endPoint += '&gsd_to=' + int(self.dictQueries['resolution'])
+            #    pass
+
+            count = 0
+            for key in self.dictQueries:
+                print(str(key) + " " + str(self.dictQueries[key]))
+                if self.dictQueries[key] != None and self.dictQueries[key] != '':
+                    if count == 0:
+                        self.endPoint += '?'
+                    else:
+                        self.endPoint += '&'
+                    self.endPoint += str(key) + "=" + str(self.dictQueries[key])
+                    count += 1
+
+
 
         print(str(self.endPoint))
 

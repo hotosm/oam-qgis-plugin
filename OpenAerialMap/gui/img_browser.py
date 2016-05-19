@@ -35,7 +35,7 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
 
 class ImgBrowser(QtGui.QDialog, FORM_CLASS):
 
-    def __init__(self, iface, parent=None):
+    def __init__(self, iface, singleMetaInDic, parent=None):
         """Constructor."""
         super(ImgBrowser, self).__init__(parent)
         # Set up the user interface from Designer.
@@ -53,18 +53,21 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         top = 100
         self.move(left,top)
 
-        self.connect(self.pushButtonDownload, QtCore.SIGNAL("clicked()"),self.downloadFullImage)
-
-        self.singleMetaInDic = None
-
-    def setThumbnailAndMeta(self,singleMetaInDic):
+        self.connect(self.pushButtonDownload, QtCore.SIGNAL("clicked()"), self.downloadFullImage)
 
         self.singleMetaInDic = singleMetaInDic
+        self.displayThumbnailAndMeta()
+
+    def setSingleMetaInDic(self, singleMetaInDic):
+        self.singleMetaInDic = singleMetaInDic
+        #self.imgDownloader = ImgDownloader()
+
+    def displayThumbnailAndMeta(self):
 
         urlThumbnail = self.singleMetaInDic[u'properties'][u'thumbnail']
-        img_abspath = ImgDownloader.downloadThumbnail(urlThumbnail)
+        imgAbspath = ImgDownloader.downloadThumbnail(urlThumbnail)
         scene = QGraphicsScene()
-        scene.addPixmap(QPixmap(img_abspath))
+        scene.addPixmap(QPixmap(imgAbspath))
         self.graphicsView.setScene(scene)
         self.graphicsView.show()
 
@@ -72,6 +75,13 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         self.lbTest01.setText(str(self.singleMetaInDic))
 
     def downloadFullImage(self):
-        urlFullImage = self.singleMetaInDic["uuid"]
-        ImgDownloader.downloadFullImage(urlFullImage)
-        #show message in progress, use background task with multithread?
+        urlFullImage = self.singleMetaInDic[u'uuid']
+        imgFileName = urlFullImage.split('/')[-1]
+        defaultDir = os.path.join(os.path.expanduser('~'), 'oam_images')
+        imgAbsPath = os.path.join(defaultDir, imgFileName)
+        print(str(imgAbsPath))
+        if not os.path.exists(defaultDir):
+            os.makedirs(defaultDir)
+        imgAbsPath = QtGui.QFileDialog.getSaveFileName(self, 'Save file', imgAbsPath, "GeoTiff")
+        print(str(imgAbsPath))
+        ImgDownloader.downloadFullImage(urlFullImage, imgAbsPath)

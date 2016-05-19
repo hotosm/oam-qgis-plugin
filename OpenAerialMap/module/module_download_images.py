@@ -32,18 +32,18 @@ class ImgDownloader:
 
     @staticmethod
     def downloadThumbnail(urlThumbnail):
-        img_dir_abspath = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'temp')
+        imgDirAbspath = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'temp')
         print(urlThumbnail)
-        img_file_name = urlThumbnail.split('/')[-1]
-        img_abspath = os.path.join(img_dir_abspath, img_file_name)
-        print (img_abspath)
-        #make a buffer - make sure if the image is already downloaded in the folder, first of all
-        f = open(img_abspath,'wb')
-        f.write(urllib.urlopen(urlThumbnail).read())
-        f.close()
-        return img_abspath
+        imgFileName = urlThumbnail.split('/')[-1]
+        imgAbspath = os.path.join(imgDirAbspath, imgFileName)
+        print(imgAbspath)
+        if not os.path.exists(imgAbspath):
+            f = open(imgAbspath,'wb')
+            f.write(urllib.urlopen(urlThumbnail).read())
+            f.close()
+        return imgAbspath
 
     @staticmethod
-    def downloadFullImage(urlFullImage):
-        #use urlib and download full image
-        print("Download full image from " + urlFullImage)
+    def downloadFullImage(urlFullImage, imgAbsPath):
+        print(str(urlFullImage) + ' ' + str(imgAbsPath))
+        #shoule we create thread?

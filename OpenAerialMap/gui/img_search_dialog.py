@@ -47,18 +47,22 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         self.iface = iface
         self.setupUi(self)
 
+        # initialize GUI
+        self.initGui()
+
         # event handling
+        self.pushButtonSearch.clicked.connect(self.startSearch)
+        self.pushButtonBrowseLatest.clicked.connect(self.browseLatest)
+        self.pushButtonBrowseLocation.clicked.connect(self.browseLocation)
+        self.connect(self.listWidget, QtCore.SIGNAL("itemClicked(QListWidgetItem *)"), self.browseThumbnailAndMeta);
+
         #self.buttonBox.clicked.connect(lambda: self.test(self.buttonBox))
         self.connect(self.buttonBox, QtCore.SIGNAL('accepted()'), self.execOk)
         self.connect(self.buttonBox, QtCore.SIGNAL('rejected()'), self.execCancel)
 
-        self.pushButtonSearch.clicked.connect(self.startSearch)
-        self.pushButtonBrowseLatest.clicked.connect(self.browseLatest)
-        self.pushButtonBrowseLocation.clicked.connect(self.browseLocation)
-
-        self.connect(self.listWidget, QtCore.SIGNAL("itemClicked(QListWidgetItem *)"), self.browseThumbnailAndMeta);
-
-        self.initGui()
+        #add objects for catalog access
+        self.oamCatalogAccess = OAMCatalogAccess("https://oam-catalog.herokuapp.com")
+        self.imgBrowser = None
 
     def test(self, *argv):
         print(str(argv))
@@ -73,21 +77,10 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         self.lineEditLocation.setText("")
         self.dateEditAcquisitionFrom.setDate(QDate.currentDate().addMonths(-3))
         self.dateEditAcquisitionTo.setDate(QDate.currentDate())
-        self.lineEditResolution.setText("")
+        self.lineEditResolutionFrom.setText("")
+        self.lineEditResolutionTo.setText("")
 
-        self.imgBrowser = ImgBrowser(self.iface)
-
-    def startSearch(self):
-        hostUrl = "https://oam-catalog.herokuapp.com"
-        action = "meta"
-        dictQueries = {}
-        dictQueries['location'] = self.lineEditLocation.text()
-        dictQueries['dateAcquisitionFrom'] = self.dateEditAcquisitionFrom.date().toString(Qt.ISODate)
-        dictQueries['dateAcquisitionTo'] = self.dateEditAcquisitionTo.date().toString(Qt.ISODate)
-        dictQueries['resolution'] = self.lineEditResolution.text()
-
-        oamCatalogAccess = OAMCatalogAccess(hostUrl, action, dictQueries)
-        metadataInList = oamCatalogAccess.getMetadataInList()
+    def refreshListWidget(self, metadataInList):
 
         self.listWidget.clear()
 
@@ -97,22 +90,59 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
             item.setData(Qt.UserRole, singleMetaInDict)
             self.listWidget.addItem(item)
 
+    def startSearch(self):
+        action = "meta"
+        dictQueries = {}
+        #temporarily disable this part
+        #dictQueries['location'] = self.lineEditLocation.text()
+        dictQueries['acquisition_from'] = self.dateEditAcquisitionFrom.date().toString(Qt.ISODate)
+        dictQueries['acquisition_to'] = self.dateEditAcquisitionTo.date().toString(Qt.ISODate)
+        dictQueries['gsd_from'] = self.lineEditResolutionFrom.text()
+        dictQueries['gsd_to'] = self.lineEditResolutionTo.text()
+
+        self.oamCatalogAccess.setAction(action)
+        self.oamCatalogAccess.setDictQueries(dictQueries)
+        metadataInList = self.oamCatalogAccess.getMetadataInList()
+
+        self.refreshListWidget(metadataInList)
+
+    #change the name to search latest, or trigger the img_browser?
+    #probably input the number of images?
+    def browseLatest(self):
+        print("Browse latest imagery...")
+
+        action = "meta"
+        dictQueries = {}
+        dictQueries['sort'] = "desc"
+        dictQueries['order_by'] = "acquisition_end"
+        #isn't it better to make a textbox to accept the number of images displayed?
+        dictQueries['limit'] = 3
+
+        self.oamCatalogAccess.setAction(action)
+        self.oamCatalogAccess.setDictQueries(dictQueries)
+        metadataInList = self.oamCatalogAccess.getMetadataInList()
+
+        self.refreshListWidget(metadataInList)
+
+    def browseLocation(self):
+        print("Browse location of loaded layer...")
+
     def browseThumbnailAndMeta(self, item):
         singleMetaInDict = item.data(Qt.UserRole)
         print(str(singleMetaInDict))
 
         if type(singleMetaInDict) is dict:
+
+            if self.imgBrowser == None:
+                self.imgBrowser = ImgBrowser(self.iface, singleMetaInDict)
+            else:
+                self.imgBrowser.setSingleMetaInDic(singleMetaInDict)
+
             if not self.imgBrowser.isVisible():
                 self.imgBrowser.show()
 
-            self.imgBrowser.setThumbnailAndMeta(singleMetaInDict)
+            self.imgBrowser.displayThumbnailAndMeta()
             self.imgBrowser.activateWindow()
-
-    def browseLatest(self):
-        print("Browse latest imagery...")
-
-    def browseLocation(self):
-        print("Browse location of loaded layer...")
 
     def execOk(self):
         print("OK")
