@@ -28,7 +28,7 @@ from PyQt4 import QtGui, uic
 from PyQt4.Qt import *
 from PyQt4 import QtCore
 
-from module.module_download_images import ImgDownloader
+from module.module_download_images import (ThumbnailManager, DownloadProgressWindow)
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_browser.ui'))
@@ -65,7 +65,7 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
     def displayThumbnailAndMeta(self):
 
         urlThumbnail = self.singleMetaInDic[u'properties'][u'thumbnail']
-        imgAbspath = ImgDownloader.downloadThumbnail(urlThumbnail)
+        imgAbspath = ThumbnailManager.downloadThumbnail(urlThumbnail)
         scene = QGraphicsScene()
         scene.addPixmap(QPixmap(imgAbspath))
         self.graphicsView.setScene(scene)
@@ -84,4 +84,7 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
             os.makedirs(defaultDir)
         imgAbsPath = QtGui.QFileDialog.getSaveFileName(self, 'Save file', imgAbsPath, "GeoTiff")
         print(str(imgAbsPath))
-        ImgDownloader.downloadFullImage(urlFullImage, imgAbsPath)
+
+        self.d = DownloadProgressWindow()
+        self.d.startDownload(urlFullImage, imgAbsPath)
+        #ImgDownloader.downloadFullImage(urlFullImage, imgAbsPath)
