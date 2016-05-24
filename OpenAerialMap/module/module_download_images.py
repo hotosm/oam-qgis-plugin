@@ -22,11 +22,11 @@
  ***************************************************************************/
 """
 import sys, os, time
-import urllib, urllib2
+import urllib2
 import json
 from PyQt4 import QtCore
 from PyQt4.QtGui import *
-from PyQt4.QtCore import QObject, QThread, pyqtSignal
+from PyQt4.QtCore import QThread, pyqtSignal
 
 
 class ThumbnailManager:
@@ -35,137 +35,171 @@ class ThumbnailManager:
         pass
 
     @staticmethod
-    def downloadThumbnail(urlThumbnail):
+    def downloadThumbnail(urlThumbnail, prefix):
         imgDirAbspath = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'temp')
         print(urlThumbnail)
+        # Concatenate fileName with id to avoid duplicate filename
         imgFileName = urlThumbnail.split('/')[-1]
+        imgFileName = prefix + imgFileName
         imgAbspath = os.path.join(imgDirAbspath, imgFileName)
         print(imgAbspath)
         if not os.path.exists(imgAbspath):
-            f = open(imgAbspath,'wb')
-            f.write(urllib2.urlopen(urlThumbnail).read())
-            f.close()
+            try:
+                f = open(imgAbspath,'wb')
+                f.write(urllib2.urlopen(urlThumbnail).read())
+                f.close()
+            except Exception as e:
+                print(str(e))
         return imgAbspath
 
-
 class DownloadProgressWindow(QWidget):
+
+    MAX_NUM_DOWNLOADS = 3
+    MAX_WINDOW_HEIGHT_PER_PROGRESS_BAR = 50
+    POSITION_WINDOW_FROM_RIGHT = 10
+    POSITION_WINDOW_FROM_BOTTOM = 50
+
     def __init__(self, parent=None):
         QWidget.__init__(self)
         #self.setGeometry(300, 300, 280, 280)
         self.setWindowTitle('Download Progress')
-
         self.vLayout = QVBoxLayout(self)
-        self.hLayout = QHBoxLayout(self)
-        self.vLayout.addLayout(self.hLayout)
 
-        self.qLabel = QLabel()
-        self.progressBar = QProgressBar()
-        self.cancelButton = QPushButton('Cancel')
-        self.hLayout.addWidget(self.qLabel)
-        self.hLayout.addWidget(self.progressBar)
-        self.hLayout.addWidget(self.cancelButton)
+        self.activeId = -1
 
-        self.cancelButton.clicked.connect(self.cancelDownload)
-
-        self.setMaximumHeight(60)
+    def setWindowPosition(self):
+        # This part need to be modified...
+        maxHeight = int(DownloadProgressWindow.MAX_WINDOW_HEIGHT_PER_PROGRESS_BAR * len(self.hLayouts))
+        self.setMaximumHeight(maxHeight)
         screenShape = QDesktopWidget().screenGeometry()
         width, height = screenShape.width(), screenShape.height()
         winW, winH = self.frameGeometry().width(), self.frameGeometry().height()
-        left = width - (winW + 10)
-        top = height - (winH + 50)
+        left = width - (winW + DownloadProgressWindow.POSITION_WINDOW_FROM_RIGHT)
+        top = height - (winH + DownloadProgressWindow.POSITION_WINDOW_FROM_BOTTOM)
+        print('WinWidth: ' + str(winW) + ' WinHeight: ' + str(winH) + ' maxHeight: ' + str(maxHeight))
         self.move(left,top)
         self.show()
         self.activateWindow()
 
-        self.url = None
-        self.fileAbsPath = None
+    def closeEvent(self, closeEvent):
+        for eachTread in self.dwThreads:
+            eachTread.stop()
+            eachTread.quit()
 
+        self.clearLayout(self.vLayout)
+        self.activeId = -1
+
+    def clearLayout(self, layout):
+        if layout is not None:
+            while layout.count():
+                item = layout.takeAt(0)
+                widget = item.widget()
+                if widget is not None:
+                    widget.deleteLater()
+                else:
+                    self.clearLayout(item.layout())
 
     def startDownload(self, url=None, fileAbsPath=None):
-        self.url = url
-        self.fileAbsPath = fileAbsPath
 
-        fileName = os.path.basename(self.fileAbsPath)
-        self.qLabel.setText(fileName)
+        self.activeId +=1
 
-        self.dwThread = DownloadWorker(self.url, self.fileAbsPath)
-        self.dwThread.started.connect(self.downloadStarted)
-        self.dwThread.valueChanged.connect(self.updateProgressBar)
-        self.dwThread.finished.connect(self.downloadFinished)
-        self.dwThread.error.connect(self.displayError)
-        self.dwThread.start()
-        #self.dwThread.run()
-        #self.dwThread.wait()
-        #self.dwThread.terminate()
-
-        #self.thread = QThread()
-        #self.dw.moveToThread(self.thread)
-        #self.thread.started.connect(self.dw.run)
-        #self.thread.start()
-        #self.thread.wait()
-        #self.thread.terminate()
-
-    def cancelDownload(self):
-        self.dwThread.stop()
-
-    def downloadStarted(self, hasStarted):
-        #print('Download Start: ' + str(hasStarted))
-        pass
-
-    def updateProgressBar(self,valueChanged):
-        #print(str(valueChanged))
-        self.progressBar.setValue(valueChanged)
-
-    def downloadFinished(self, result):
-        #self.thread.quit()
-        self.dwThread.quit()
-        #print('Result: ' + result)
-        if result == 'success':
-            self.qLabel.setText("Successfully completed.")
-        elif result == 'cancelled':
-            self.qLabel.setText("Download cancelled.")
+        if self.activeId > DownloadProgressWindow.MAX_NUM_DOWNLOADS -1:
+            qMsgBox = QMessageBox()
+            qMsgBox.setWindowTitle('Message')
+            qMsgBox.setText("The maximum numbers of images for downloading is \
+presently set to 3.\nIf you need to download more, please finish \
+the current uploading tasks first, and try download again.")
+            qMsgBox.exec_()
         else:
-            self.qLabel.setText("Unexpected incident occurred.")
+            # Initialize the lists
+            if self.activeId == 0:
+                self.hLayouts = []
+                self.qLabels = []
+                self.progressBars = []
+                self.cancelButtons = []
+                self.dwThreads = []
 
-    def displayError(self, errMsg):
+            # Create horizontal layouts and add to the vertical layout
+            self.hLayouts.append(QHBoxLayout())
+            self.vLayout.addLayout(self.hLayouts[self.activeId])
+
+            # Create labes, progressbars, and cancel buttons, and add to hLayouts
+            self.qLabels.append(QLabel())
+
+            self.progressBars.append(QProgressBar())
+            self.cancelButtons.append(QPushButton('Cancel'))
+            self.hLayouts[self.activeId].addWidget(self.qLabels[self.activeId])
+            self.hLayouts[self.activeId].addWidget(self.progressBars[self.activeId])
+            self.hLayouts[self.activeId].addWidget(self.cancelButtons[self.activeId])
+
+            # Set the file names to labels
+            fileName = os.path.basename(fileAbsPath)
+            self.qLabels[self.activeId].setText(fileName)
+
+            # add event listener and handlers to cancel buttons
+            threadIndex = self.activeId
+            self.cancelButtons[self.activeId].clicked.connect(lambda: self.cancelDownload(threadIndex))
+
+            self.dwThreads.append(DownloadWorker(url, fileAbsPath, threadIndex))
+            self.dwThreads[self.activeId].started.connect(self.downloadStarted)
+            self.dwThreads[self.activeId].valueChanged.connect(self.updateProgressBar)
+            self.dwThreads[self.activeId].finished.connect(self.downloadFinished)
+            self.dwThreads[self.activeId].error.connect(self.displayError)
+            self.dwThreads[self.activeId].start()
+            #self.dwThread.run()
+            #self.dwThread.wait()
+            #self.dwThread.terminate()
+
+            self.setWindowPosition()
+
+    def cancelDownload(self, btnIndex):
+        print('Index: ' + str(btnIndex))
+        self.dwThreads[btnIndex].stop()
+
+    def downloadStarted(self, hasStarted, index):
+        print('Index: ' + str(index))
+        #pass
+
+    def updateProgressBar(self,valueChanged, index):
+        #print(str(valueChanged))
+        self.progressBars[index].setValue(valueChanged)
+
+    def downloadFinished(self, result, index):
+        #self.thread.quit()
+        self.dwThreads[index].quit()
+        #print('Result: ' + result)
+        try: #make sure if the labels still exist
+            if result == 'success':
+                self.qLabels[index].setText("Successfully completed.")
+            elif result == 'cancelled':
+                self.qLabels[index].setText("Download cancelled.")
+            else:
+                self.qLabels[index].setText("Unexpected incident occurred.")
+        except:
+            pass
+
+    def displayError(self, errMsg, index):
         #print(str(errMsg))
-        self.qLabel.setText("Error: " + str(errMsg))
+        self.qLabels[index].setText("Error: " + str(errMsg))
 
-#class DownloadWorker(QObject):
+
 class DownloadWorker(QThread):
 
-    started = pyqtSignal(bool)
-    valueChanged = pyqtSignal(int)
-    finished = pyqtSignal(str)
-    error = pyqtSignal(Exception)
+    started = pyqtSignal(bool, int)
+    valueChanged = pyqtSignal(int, int)
+    finished = pyqtSignal(str, int)
+    error = pyqtSignal(Exception, int)
 
-    def __init__(self, url, fileAbsPath, parent=None):
-        #QObject.__init__(self)
+    def __init__(self, url, fileAbsPath, index, parent=None):
         QThread.__init__(self)
         self.url = url
         self.fileAbsPath = fileAbsPath
+        self.index = index
         self.isRunning = True
         #self.delay = 0.02
     def run(self):
-        """
-        count = 0
-        while count <= 100 and self.isRunning == True:
-            try:
-                time.sleep(self.delay)
-                self.valueChanged.emit(count)
-                #print(str(count))
-                count+=1
-            except Exception as e:
-                self.isRunning = False
-                self.error.emit(e)
-
-        if self.isRunning == True:
-            self.finished.emit('success')
-        else:
-            self.finished.emit('cancelled')
-        """
         try:
-            self.started.emit(True)
+            self.started.emit(True, self.index)
             u = urllib2.urlopen(self.url)
             f = open(self.fileAbsPath, 'wb')
             meta = u.info()
@@ -180,17 +214,17 @@ class DownloadWorker(QThread):
                 fileSizeDownloaded += len(buffer)
                 f.write(buffer)
                 p = float(fileSizeDownloaded) / fileSize
-                self.valueChanged.emit(int(p*100))
+                self.valueChanged.emit(int(p*100), self.index)
             f.close()
 
         except Exception as e:
-            self.error.emit(e)
-            self.finished.emit('failed')
+            self.error.emit(e, self.index)
+            self.finished.emit('failed', self.index)
 
         if self.isRunning == True:
-            self.finished.emit('success')
+            self.finished.emit('success', self.index)
         else:
-            self.finished.emit('cancelled')
+            self.finished.emit('cancelled', self.index)
 
     def stop(self):
         self.isRunning = False

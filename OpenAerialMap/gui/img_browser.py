@@ -35,6 +35,9 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
 
 class ImgBrowser(QtGui.QDialog, FORM_CLASS):
 
+    POSITION_WINDOW_FROM_RIGHT = 50
+    POSITION_WINDOW_FROM_TOP = 100
+
     def __init__(self, iface, singleMetaInDic, parent=None):
         """Constructor."""
         super(ImgBrowser, self).__init__(parent)
@@ -49,14 +52,16 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         screenShape = QtGui.QDesktopWidget().screenGeometry()
         width, height = screenShape.width(), screenShape.height()
         winW, winH = self.frameGeometry().width(), self.frameGeometry().height()
-        left = width - (winW + 50)
-        top = 100
+        left = width - (winW + ImgBrowser.POSITION_WINDOW_FROM_RIGHT)
+        top = ImgBrowser.POSITION_WINDOW_FROM_TOP
         self.move(left,top)
 
         self.connect(self.pushButtonDownload, QtCore.SIGNAL("clicked()"), self.downloadFullImage)
 
         self.singleMetaInDic = singleMetaInDic
         self.displayThumbnailAndMeta()
+
+        self.downloadProgressWindow = None
 
     def setSingleMetaInDic(self, singleMetaInDic):
         self.singleMetaInDic = singleMetaInDic
@@ -65,7 +70,9 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
     def displayThumbnailAndMeta(self):
 
         urlThumbnail = self.singleMetaInDic[u'properties'][u'thumbnail']
-        imgAbspath = ThumbnailManager.downloadThumbnail(urlThumbnail)
+        imageId = self.singleMetaInDic[u'_id']
+        prefix = str(imageId) + '_'
+        imgAbspath = ThumbnailManager.downloadThumbnail(urlThumbnail, prefix)
         scene = QGraphicsScene()
         scene.addPixmap(QPixmap(imgAbspath))
         self.graphicsView.setScene(scene)
@@ -79,12 +86,19 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         imgFileName = urlFullImage.split('/')[-1]
         defaultDir = os.path.join(os.path.expanduser('~'), 'oam_images')
         imgAbsPath = os.path.join(defaultDir, imgFileName)
-        print(str(imgAbsPath))
         if not os.path.exists(defaultDir):
             os.makedirs(defaultDir)
-        imgAbsPath = QtGui.QFileDialog.getSaveFileName(self, 'Save file', imgAbsPath, "GeoTiff")
-        print(str(imgAbsPath))
 
-        self.d = DownloadProgressWindow()
-        self.d.startDownload(urlFullImage, imgAbsPath)
-        #ImgDownloader.downloadFullImage(urlFullImage, imgAbsPath)
+        fdlg = QtGui.QFileDialog()
+        fdlg.setAcceptMode(QFileDialog.AcceptSave)
+        fdlg.selectFile(imgAbsPath)
+        fdlg.setFilter("GEOTiff")
+
+        if fdlg.exec_():
+            print(str(imgAbsPath))
+            if self.downloadProgressWindow == None:
+                self.downloadProgressWindow = DownloadProgressWindow()
+
+            self.downloadProgressWindow.startDownload(urlFullImage, imgAbsPath)
+        else:
+            print("Cancelled.")
