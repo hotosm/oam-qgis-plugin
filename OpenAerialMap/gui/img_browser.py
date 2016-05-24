@@ -28,14 +28,17 @@ from PyQt4 import QtGui, uic
 from PyQt4.Qt import *
 from PyQt4 import QtCore
 
-from module.module_download_images import ImgDownloader
+from module.module_download_images import (ThumbnailManager, DownloadProgressWindow)
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_browser.ui'))
 
 class ImgBrowser(QtGui.QDialog, FORM_CLASS):
 
-    def __init__(self, iface, parent=None):
+    POSITION_WINDOW_FROM_RIGHT = 50
+    POSITION_WINDOW_FROM_TOP = 100
+
+    def __init__(self, iface, singleMetaInDic, parent=None):
         """Constructor."""
         super(ImgBrowser, self).__init__(parent)
         # Set up the user interface from Designer.
@@ -49,22 +52,29 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         screenShape = QtGui.QDesktopWidget().screenGeometry()
         width, height = screenShape.width(), screenShape.height()
         winW, winH = self.frameGeometry().width(), self.frameGeometry().height()
-        left = width - (winW + 50)
-        top = 100
+        left = width - (winW + ImgBrowser.POSITION_WINDOW_FROM_RIGHT)
+        top = ImgBrowser.POSITION_WINDOW_FROM_TOP
         self.move(left,top)
 
-        self.connect(self.pushButtonDownload, QtCore.SIGNAL("clicked()"),self.downloadFullImage)
-
-        self.singleMetaInDic = None
-
-    def setThumbnailAndMeta(self,singleMetaInDic):
+        self.connect(self.pushButtonDownload, QtCore.SIGNAL("clicked()"), self.downloadFullImage)
 
         self.singleMetaInDic = singleMetaInDic
+        self.displayThumbnailAndMeta()
+
+        self.downloadProgressWindow = None
+
+    def setSingleMetaInDic(self, singleMetaInDic):
+        self.singleMetaInDic = singleMetaInDic
+        #self.imgDownloader = ImgDownloader()
+
+    def displayThumbnailAndMeta(self):
 
         urlThumbnail = self.singleMetaInDic[u'properties'][u'thumbnail']
-        img_abspath = ImgDownloader.downloadThumbnail(urlThumbnail)
+        imageId = self.singleMetaInDic[u'_id']
+        prefix = str(imageId) + '_'
+        imgAbspath = ThumbnailManager.downloadThumbnail(urlThumbnail, prefix)
         scene = QGraphicsScene()
-        scene.addPixmap(QPixmap(img_abspath))
+        scene.addPixmap(QPixmap(imgAbspath))
         self.graphicsView.setScene(scene)
         self.graphicsView.show()
 
@@ -72,6 +82,23 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         self.lbTest01.setText(str(self.singleMetaInDic))
 
     def downloadFullImage(self):
-        urlFullImage = self.singleMetaInDic["uuid"]
-        ImgDownloader.downloadFullImage(urlFullImage)
-        #show message in progress, use background task with multithread?
+        urlFullImage = self.singleMetaInDic[u'uuid']
+        imgFileName = urlFullImage.split('/')[-1]
+        defaultDir = os.path.join(os.path.expanduser('~'), 'oam_images')
+        imgAbsPath = os.path.join(defaultDir, imgFileName)
+        if not os.path.exists(defaultDir):
+            os.makedirs(defaultDir)
+
+        fdlg = QtGui.QFileDialog()
+        fdlg.setAcceptMode(QFileDialog.AcceptSave)
+        fdlg.selectFile(imgAbsPath)
+        fdlg.setFilter("GEOTiff")
+
+        if fdlg.exec_():
+            print(str(imgAbsPath))
+            if self.downloadProgressWindow == None:
+                self.downloadProgressWindow = DownloadProgressWindow()
+
+            self.downloadProgressWindow.startDownload(urlFullImage, imgAbsPath)
+        else:
+            print("Cancelled.")
