@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>622</width>
-    <height>405</height>
+    <height>436</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>370</x>
-     <y>360</y>
+     <y>400</y>
      <width>176</width>
      <height>27</height>
     </rect>
@@ -35,7 +35,7 @@
      <x>340</x>
      <y>60</y>
      <width>261</width>
-     <height>161</height>
+     <height>201</height>
     </rect>
    </property>
    <layout class="QFormLayout" name="formLayout">
@@ -89,13 +89,23 @@
       </property>
      </widget>
     </item>
+    <item row="5" column="0">
+     <widget class="QLabel" name="label_7">
+      <property name="text">
+       <string>Numbers of images</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QLineEdit" name="lineEditNumImages"/>
+    </item>
    </layout>
   </widget>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>340</x>
-     <y>230</y>
+     <y>270</y>
      <width>261</width>
      <height>121</height>
     </rect>
@@ -109,9 +119,9 @@
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButtonBrowseLatest">
+     <widget class="QPushButton" name="pushButtonSearchLatest">
       <property name="text">
-       <string>Browse latest imagery</string>
+       <string>Search latest imagery</string>
       </property>
      </widget>
     </item>
@@ -130,7 +140,7 @@
      <x>20</x>
      <y>60</y>
      <width>301</width>
-     <height>291</height>
+     <height>331</height>
     </rect>
    </property>
   </widget>

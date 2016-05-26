@@ -52,13 +52,17 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
 
         # event handling
         self.pushButtonSearch.clicked.connect(self.startSearch)
-        self.pushButtonBrowseLatest.clicked.connect(self.browseLatest)
+        self.pushButtonSearchLatest.clicked.connect(self.searchLatest)
         self.pushButtonBrowseLocation.clicked.connect(self.browseLocation)
         self.connect(self.listWidget, QtCore.SIGNAL("itemClicked(QListWidgetItem *)"), self.browseThumbnailAndMeta);
 
         #self.buttonBox.clicked.connect(lambda: self.test(self.buttonBox))
         self.connect(self.buttonBox, QtCore.SIGNAL('accepted()'), self.execOk)
         self.connect(self.buttonBox, QtCore.SIGNAL('rejected()'), self.execCancel)
+
+        #disable some GUIs
+        self.lineEditLocation.setEnabled(False)
+        self.pushButtonBrowseLocation.setEnabled(False)
 
         #add objects for catalog access
         self.oamCatalogAccess = OAMCatalogAccess("https://oam-catalog.herokuapp.com")
@@ -79,6 +83,7 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         self.dateEditAcquisitionTo.setDate(QDate.currentDate())
         self.lineEditResolutionFrom.setText("")
         self.lineEditResolutionTo.setText("")
+        self.lineEditNumImages.setText("20")
 
     def refreshListWidget(self, metadataInList):
 
@@ -93,36 +98,56 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
     def startSearch(self):
         action = "meta"
         dictQueries = {}
-        #temporarily disable this part
-        #dictQueries['location'] = self.lineEditLocation.text()
-        dictQueries['acquisition_from'] = self.dateEditAcquisitionFrom.date().toString(Qt.ISODate)
-        dictQueries['acquisition_to'] = self.dateEditAcquisitionTo.date().toString(Qt.ISODate)
-        dictQueries['gsd_from'] = self.lineEditResolutionFrom.text()
-        dictQueries['gsd_to'] = self.lineEditResolutionTo.text()
 
-        self.oamCatalogAccess.setAction(action)
-        self.oamCatalogAccess.setDictQueries(dictQueries)
-        metadataInList = self.oamCatalogAccess.getMetadataInList()
+        try:
+            #temporarily disable this part
+            #dictQueries['location'] = self.lineEditLocation.text()
+            dictQueries['acquisition_from'] = self.dateEditAcquisitionFrom.date().toString(Qt.ISODate)
+            dictQueries['acquisition_to'] = self.dateEditAcquisitionTo.date().toString(Qt.ISODate)
+            if self.lineEditResolutionFrom.text() != '' and self.lineEditResolutionFrom.text() != None:
+                dictQueries['gsd_from'] = float(self.lineEditResolutionFrom.text())
+            if self.lineEditResolutionTo.text() != '' and self.lineEditResolutionTo.text() != None:
+                dictQueries['gsd_to'] = float(self.lineEditResolutionTo.text())
+            if self.lineEditNumImages.text() != '' and self.lineEditNumImages.text() != None:
+                dictQueries['limit'] = int(self.lineEditNumImages.text())
 
-        self.refreshListWidget(metadataInList)
+            self.oamCatalogAccess.setAction(action)
+            self.oamCatalogAccess.setDictQueries(dictQueries)
+            metadataInList = self.oamCatalogAccess.getMetadataInList()
 
-    #change the name to search latest, or trigger the img_browser?
-    #probably input the number of images?
-    def browseLatest(self):
-        print("Browse latest imagery...")
+            self.refreshListWidget(metadataInList)
 
+        except Exception as e:
+            qMsgBox = QMessageBox()
+            qMsgBox.setWindowTitle('Message')
+            qMsgBox.setText("Please make sure if you entered valid data, and try again.")
+            qMsgBox.exec_()
+
+    def searchLatest(self):
         action = "meta"
         dictQueries = {}
-        dictQueries['sort'] = "desc"
-        dictQueries['order_by'] = "acquisition_end"
-        #isn't it better to make a textbox to accept the number of images displayed?
-        dictQueries['limit'] = 3
 
-        self.oamCatalogAccess.setAction(action)
-        self.oamCatalogAccess.setDictQueries(dictQueries)
-        metadataInList = self.oamCatalogAccess.getMetadataInList()
+        try:
+            dictQueries['sort'] = "desc"
+            dictQueries['order_by'] = "acquisition_end"
+            if self.lineEditResolutionFrom.text() != '' and self.lineEditResolutionFrom.text() != None:
+                dictQueries['gsd_from'] = float(self.lineEditResolutionFrom.text())
+            if self.lineEditResolutionTo.text() != '' and self.lineEditResolutionTo.text() != None:
+                dictQueries['gsd_to'] = float(self.lineEditResolutionTo.text())
+            if self.lineEditNumImages.text() != '' and self.lineEditNumImages.text() != None:
+                dictQueries['limit'] = int(self.lineEditNumImages.text())
 
-        self.refreshListWidget(metadataInList)
+            self.oamCatalogAccess.setAction(action)
+            self.oamCatalogAccess.setDictQueries(dictQueries)
+            metadataInList = self.oamCatalogAccess.getMetadataInList()
+
+            self.refreshListWidget(metadataInList)
+
+        except Exception as e:
+            qMsgBox = QMessageBox()
+            qMsgBox.setWindowTitle('Message')
+            qMsgBox.setText("Please make sure if you entered valid data, and try again.")
+            qMsgBox.exec_()
 
     def browseLocation(self):
         print("Browse location of loaded layer...")

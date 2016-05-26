@@ -358,20 +358,23 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
                 if self.reproject_check_box.isChecked():
                     self.bar1.clearWidgets()
+                    # this message doesn't show up without opening python console
+                    # need to identify the reason
                     self.bar1.pushMessage(
                         'INFO',
-                        'Reprojecting files: %sth image out of %s is being processed...'\
-                         % (str(count+1), str(num_selected_layers)),
+                        'Reprojecting files: %sth image out of %s is being processed...' % (str(count+1), str(num_selected_layers)),
                         level=QgsMessageBar.INFO)
+                    # Isn't it better to use thread?
                     file_abspath = reproject(file_abspath)
                 else:
                     self.bar1.clearWidgets()
                     self.bar1.pushMessage(
                         'INFO',
-                        '%sth image out of %s is processed.'\
-                         % (str(count+1), str(num_selected_layers)),
+                        '%sth image out of %s is processed.' % (str(count+1), str(num_selected_layers)),
                         level=QgsMessageBar.INFO)
 
+                # Isn't it better to use thread?
+                # probably no need to make list in this part
                 metaHdlrs.append(MetadataHandler(metaInputInDic, file_abspath))
                 metaHdlrs[count].createMetaForUpload()
                 str_meta = str(json.dumps(metaHdlrs[count].getMetaForUpload()))

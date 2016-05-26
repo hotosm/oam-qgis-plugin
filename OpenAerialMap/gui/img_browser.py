@@ -74,7 +74,8 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         prefix = str(imageId) + '_'
         imgAbspath = ThumbnailManager.downloadThumbnail(urlThumbnail, prefix)
         scene = QGraphicsScene()
-        scene.addPixmap(QPixmap(imgAbspath))
+        item = scene.addPixmap(QPixmap(imgAbspath))
+        self.graphicsView.fitInView(scene.sceneRect(), Qt.KeepAspectRatio)
         self.graphicsView.setScene(scene)
         self.graphicsView.show()
 
