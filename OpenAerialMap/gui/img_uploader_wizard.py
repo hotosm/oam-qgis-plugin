@@ -131,18 +131,21 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
     # handlers for navigation
     def nextPage(self):
         if self.currentId() == 1:
-            print "Page ID: " + str(self.currentId())
+            #print "Page ID: " + str(self.currentId())
+            pass
         elif self.currentId() == 2:
-            print "Page ID: " + str(self.currentId())
+            #print "Page ID: " + str(self.currentId())
             self.loadMetadataReviewBox()
         else:
             pass
 
     def previousPage(self):
         if self.currentId() == 0:
-            print "Page ID: " + str(self.currentId())
+            #print "Page ID: " + str(self.currentId())
+            pass
         elif self.currentId() == 1:
-            print "Page ID: " + str(self.currentId())
+            #print "Page ID: " + str(self.currentId())
+            pass
         else:
             pass
 
@@ -332,72 +335,98 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.reproject_check_box.setCheckState(0)
 
     def saveMetadata(self):
+        flag = False
+        if self.reproject_check_box.isChecked():
+            qMsgBox = QMessageBox()
+            qMsgBox.setWindowTitle("Confirmation")
+            qMsgBox.setText("You checked the reprojection option, which can require significant \
+amount of time. Are you sure to continue?")
+            qMsgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+            #qMsgBox.setDefaultButton(QMessageBox.Cancel)
 
-        # get metadata from GUI, and store them in a dictionary
-        metaInputInDic = {}
-        metaInputInDic['title'] = self.title_edit.text()
-        metaInputInDic['platform'] = self.platform_combo_box.currentIndex()
-        metaInputInDic['sensor'] = self.sensor_edit.text()
-        metaInputInDic['acquisition_start'] = self.sense_start_edit.dateTime().toString(Qt.ISODate)
-        metaInputInDic['acquisition_end'] = self.sense_end_edit.dateTime().toString(Qt.ISODate)
-        metaInputInDic['provider'] = self.provider_edit.text()
-        metaInputInDic['contact'] =  self.contact_edit.text()
-        metaInputInDic['properties'] =  self.tags_edit.text() #change name later?
-        metaInputInDic['uuid'] = self.website_edit.text() #change name later?
-
-        # declare list for MetadataHandler object
-        metaHdlrs = []
-        num_selected_layers = 0
-        count = 0
-
-        selected_layers = self.added_sources_list_widget.selectedItems()
-        if selected_layers:
-            num_selected_layers = len(selected_layers)
-            for each_layer in selected_layers:
-                file_abspath = each_layer.data(Qt.UserRole)
-
-                if self.reproject_check_box.isChecked():
-                    self.bar1.clearWidgets()
-                    # this message doesn't show up without opening python console
-                    # need to identify the reason
-                    self.bar1.pushMessage(
-                        'INFO',
-                        'Reprojecting files: %sth image out of %s is being processed...' % (str(count+1), str(num_selected_layers)),
-                        level=QgsMessageBar.INFO)
-                    # Isn't it better to use thread?
-                    file_abspath = reproject(file_abspath)
-                else:
-                    self.bar1.clearWidgets()
-                    self.bar1.pushMessage(
-                        'INFO',
-                        '%sth image out of %s is processed.' % (str(count+1), str(num_selected_layers)),
-                        level=QgsMessageBar.INFO)
-
-                # Isn't it better to use thread?
-                # probably no need to make list in this part
-                metaHdlrs.append(MetadataHandler(metaInputInDic, file_abspath))
-                metaHdlrs[count].createMetaForUpload()
-                str_meta = str(json.dumps(metaHdlrs[count].getMetaForUpload()))
-                print str_meta
-                json_file_abspath = os.path.splitext(file_abspath)[0] + '.json'
-                print json_file_abspath
-                f = open(json_file_abspath,'w')
-                f.write(str_meta)
-                f.close()
-                count += 1
-
-            self.bar1.clearWidgets()
-            self.bar1.pushMessage(
-                'INFO',
-                'Metadata for the selected sources were saved',
-                level=QgsMessageBar.INFO)
-
+            if qMsgBox.exec_() == QMessageBox.Ok:
+                flag = True
         else:
-            self.bar1.clearWidgets()
-            self.bar1.pushMessage(
-                'WARNING',
-                'One or more source imagery should be selected to have the metadata saved',
-                level=QgsMessageBar.WARNING)
+            flag = True
+
+        if flag:
+            # get metadata from GUI, and store them in a dictionary
+            metaInputInDic = {}
+            metaInputInDic['title'] = self.title_edit.text()
+            metaInputInDic['platform'] = self.platform_combo_box.currentIndex()
+            metaInputInDic['sensor'] = self.sensor_edit.text()
+            metaInputInDic['acquisition_start'] = self.sense_start_edit.dateTime().toString(Qt.ISODate)
+            metaInputInDic['acquisition_end'] = self.sense_end_edit.dateTime().toString(Qt.ISODate)
+            metaInputInDic['provider'] = self.provider_edit.text()
+            metaInputInDic['contact'] =  self.contact_edit.text()
+            metaInputInDic['properties'] =  self.tags_edit.text() #change name later?
+            metaInputInDic['uuid'] = self.website_edit.text() #change name later?
+
+            # declare list for MetadataHandler object
+            metaHdlrs = []
+            num_selected_layers = 0
+            count = 0
+
+            """Open python console. I haven't indentified the exact reason, but
+            messagebar doesn't work properly without opening python console
+            and some print statements"""
+            pluginMenu = self.iface.pluginMenu()
+            #print(repr(pluginMenu))
+            for action in pluginMenu.actions():
+                if 'Python Console' in action.text():
+                    action.trigger()
+
+            selected_layers = self.added_sources_list_widget.selectedItems()
+            if selected_layers:
+                num_selected_layers = len(selected_layers)
+                for each_layer in selected_layers:
+                    file_abspath = each_layer.data(Qt.UserRole)
+
+                    if self.reproject_check_box.isChecked():
+                        self.bar1.clearWidgets()
+                        # this message doesn't show up without opening python console
+                        # need to identify the reason
+                        self.bar1.pushMessage(
+                            'INFO',
+                            'Reprojecting files: %sth image out of %s is being processed...'\
+                             % (str(count+1), str(num_selected_layers)),
+                            level=QgsMessageBar.INFO)
+                        # Isn't it better to use thread?
+                        print('Reprojecting {0}'.format(str(os.path.basename(file_abspath))))
+                        file_abspath = reproject(file_abspath)
+                    else:
+                        self.bar1.clearWidgets()
+                        self.bar1.pushMessage(
+                            'INFO',
+                            '%sth image out of %s is processed.'\
+                             % (str(count+1), str(num_selected_layers)),
+                            level=QgsMessageBar.INFO)
+
+                    # Isn't it better to use thread?
+                    # probably no need to make list in this part
+                    metaHdlrs.append(MetadataHandler(metaInputInDic, file_abspath))
+                    metaHdlrs[count].createMetaForUpload()
+                    str_meta = str(json.dumps(metaHdlrs[count].getMetaForUpload()))
+                    #print str_meta
+                    json_file_abspath = os.path.splitext(file_abspath)[0] + '.json'
+                    #print json_file_abspath
+                    f = open(json_file_abspath,'w')
+                    f.write(str_meta)
+                    f.close()
+                    count += 1
+
+                self.bar1.clearWidgets()
+                self.bar1.pushMessage(
+                    'INFO',
+                    'Metadata for the selected sources were saved',
+                    level=QgsMessageBar.INFO)
+
+            else:
+                self.bar1.clearWidgets()
+                self.bar1.pushMessage(
+                    'WARNING',
+                    'One or more source imagery should be selected to have the metadata saved',
+                    level=QgsMessageBar.WARNING)
 
     def loadSavedMetadata(self):
 
