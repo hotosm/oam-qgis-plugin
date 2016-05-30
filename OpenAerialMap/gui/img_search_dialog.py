@@ -79,7 +79,7 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         self.listWidget.addItem(item)
 
         self.lineEditLocation.setText("")
-        self.dateEditAcquisitionFrom.setDate(QDate.currentDate().addMonths(-3))
+        self.dateEditAcquisitionFrom.setDate(QDate.currentDate().addMonths(-6))
         self.dateEditAcquisitionTo.setDate(QDate.currentDate())
         self.lineEditResolutionFrom.setText("")
         self.lineEditResolutionTo.setText("")

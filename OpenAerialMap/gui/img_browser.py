@@ -23,6 +23,7 @@
 """
 
 import os, sys
+import json
 
 from PyQt4 import QtGui, uic
 from PyQt4.Qt import *
@@ -57,6 +58,7 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         self.move(left,top)
 
         self.connect(self.pushButtonDownload, QtCore.SIGNAL("clicked()"), self.downloadFullImage)
+        self.checkBoxSaveMeta.setChecked(True)
 
         self.singleMetaInDic = singleMetaInDic
         self.displayThumbnailAndMeta()
@@ -79,8 +81,18 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         self.graphicsView.setScene(scene)
         self.graphicsView.show()
 
+        strMeta = ''
+        strMeta += 'TITLE:\t\t\t{0}\n'.format(str(self.singleMetaInDic[u'title']))
+        strMeta += 'PLATFORM:\t\t{0}\n'.format(str(self.singleMetaInDic[u'platform']))
+        strMeta += 'ACQUISITION START:\t{0}\n'.format(str(self.singleMetaInDic[u'acquisition_start']))
+        strMeta += 'ACQUISITION END:\t{0}\n'.format(str(self.singleMetaInDic[u'acquisition_end']))
+        strMeta += 'GSD:\t\t\t{0}\n'.format(str(self.singleMetaInDic[u'gsd']))
+        strMeta += 'PROVIDER:\t\t{0}\n'.format(str(self.singleMetaInDic[u'provider']))
+        strMeta += 'FILE SIZE:\t\t{0}\n'.format(str(self.singleMetaInDic[u'file_size']))
+
+        print(strMeta)
         self.lbTest01.setWordWrap(True)
-        self.lbTest01.setText(str(self.singleMetaInDic))
+        self.lbTest01.setText(strMeta)
 
     def downloadFullImage(self):
         urlFullImage = self.singleMetaInDic[u'uuid']
@@ -96,10 +108,16 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         fdlg.setFilter("GEOTiff")
 
         if fdlg.exec_():
-            print(str(imgAbsPath))
+            #print(str(imgAbsPath))
+            #excepton handling here?
             if self.downloadProgressWindow == None:
                 self.downloadProgressWindow = DownloadProgressWindow()
 
             self.downloadProgressWindow.startDownload(urlFullImage, imgAbsPath)
-        else:
-            print("Cancelled.")
+
+            if self.checkBoxSaveMeta.isChecked():
+                metaAbsPath = os.path.splitext(imgAbsPath)[0]+'.json'
+                f = open(metaAbsPath, 'w')
+                jMetadata = json.dumps(self.singleMetaInDic)
+                f.write(str(jMetadata))
+                f.close()

@@ -124,6 +124,11 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.reload_button.hide()
         self.reload_button.clicked.connect(self.loadSavedMetadata)
 
+        # temporarily disable notify_oam_check and trigger_tiling_check
+        self.notify_oam_check.setEnabled(False)
+        self.trigger_tiling_check.setEnabled(False)
+
+
         # Upload tab connections (wizard page 3)
         self.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)
         self.customButtonClicked.connect(self.startUpload)
@@ -471,10 +476,17 @@ amount of time. Are you sure to continue?")
         instead of 'True', Python style.
         Maybe we can use integer values (0 or 1), instead of using string.
         """
+
+        """
         if str(self.settings.value('NOTIFY_OAM')).lower() == 'true':
             self.notify_oam_check.setCheckState(2)
         if str(self.settings.value('TRIGGER_OAM_TS')).lower() == 'true':
             self.trigger_tiling_check.setCheckState(2)
+        """
+
+        # This part is for temporal use.
+        self.notify_oam_check.setCheckState(0)
+        self.trigger_tiling_check.setCheckState(0)
 
         self.settings.endGroup()
 
@@ -489,7 +501,7 @@ amount of time. Are you sure to continue?")
             else:
                 json_file_abspath = os.path.splitext(file_abspath)[0]+'.json'
 
-            print str(json_file_abspath)
+            #print str(json_file_abspath)
             json_file_abspaths.append(json_file_abspath)
 
         temp = QTemporaryFile()
