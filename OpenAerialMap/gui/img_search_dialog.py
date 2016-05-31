@@ -120,7 +120,7 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         except Exception as e:
             qMsgBox = QMessageBox()
             qMsgBox.setWindowTitle('Message')
-            qMsgBox.setText("Please make sure if you entered valid data, and try again.")
+            qMsgBox.setText("Please make sure if you entered valid data / internet connection, and try again.")
             qMsgBox.exec_()
 
     def searchLatest(self):
@@ -146,7 +146,7 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         except Exception as e:
             qMsgBox = QMessageBox()
             qMsgBox.setWindowTitle('Message')
-            qMsgBox.setText("Please make sure if you entered valid data, and try again.")
+            qMsgBox.setText("Please make sure if you entered valid data / internet connection, and try again.")
             qMsgBox.exec_()
 
     def browseLocation(self):

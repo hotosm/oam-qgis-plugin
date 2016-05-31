@@ -23,7 +23,7 @@
 """
 import os, sys
 import pycurl
-import urllib
+#import urllib
 import json
 from StringIO import StringIO
 

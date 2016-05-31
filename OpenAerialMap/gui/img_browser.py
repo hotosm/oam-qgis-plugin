@@ -29,7 +29,9 @@ from PyQt4 import QtGui, uic
 from PyQt4.Qt import *
 from PyQt4 import QtCore
 
-from module.module_download_images import (ThumbnailManager, DownloadProgressWindow)
+from module.module_download_images import (ThumbnailManager,
+                                           DownloadProgressWindow,
+                                           ImgMetaDownloader)
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_browser.ui'))
@@ -70,7 +72,6 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         #self.imgDownloader = ImgDownloader()
 
     def displayThumbnailAndMeta(self):
-
         urlThumbnail = self.singleMetaInDic[u'properties'][u'thumbnail']
         imageId = self.singleMetaInDic[u'_id']
         prefix = str(imageId) + '_'
@@ -90,7 +91,8 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         strMeta += 'PROVIDER:\t\t{0}\n'.format(str(self.singleMetaInDic[u'provider']))
         strMeta += 'FILE SIZE:\t\t{0}\n'.format(str(self.singleMetaInDic[u'file_size']))
 
-        print(strMeta)
+        print(str(self.singleMetaInDic))
+        #print(strMeta)
         self.lbTest01.setWordWrap(True)
         self.lbTest01.setText(strMeta)
 
@@ -108,7 +110,6 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         fdlg.setFilter("GEOTiff")
 
         if fdlg.exec_():
-            #print(str(imgAbsPath))
             #excepton handling here?
             if self.downloadProgressWindow == None:
                 self.downloadProgressWindow = DownloadProgressWindow()
@@ -116,8 +117,8 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
             self.downloadProgressWindow.startDownload(urlFullImage, imgAbsPath)
 
             if self.checkBoxSaveMeta.isChecked():
-                metaAbsPath = os.path.splitext(imgAbsPath)[0]+'.json'
-                f = open(metaAbsPath, 'w')
-                jMetadata = json.dumps(self.singleMetaInDic)
-                f.write(str(jMetadata))
-                f.close()
+                urlImgMeta = self.singleMetaInDic[u'meta_uri']
+                imgMetaFilename = urlImgMeta.split('/')[-1]
+                imgMetaAbsPath = os.path.join(os.path.dirname(imgAbsPath), imgMetaFilename)
+                r = ImgMetaDownloader.downloadImgMeta(urlImgMeta, imgMetaAbsPath)
+                print(str(r))

@@ -52,6 +52,21 @@ class ThumbnailManager:
                 print(str(e))
         return imgAbspath
 
+class ImgMetaDownloader:
+    def __init__(self, parent=None):
+        pass
+
+    @staticmethod
+    def downloadImgMeta(urlImgMeta, imgMetaAbsPath):
+        try:
+            f = open(imgMetaAbsPath,'w')
+            f.write(urllib2.urlopen(urlImgMeta).read())
+            f.close()
+        except Exception as e:
+            print(str(e))
+
+        return True
+
 class DownloadProgressWindow(QWidget):
 
     MAX_NUM_DOWNLOADS = 3
