@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>793</width>
-    <height>484</height>
+    <height>513</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -359,28 +359,58 @@
         <property name="verticalSpacing">
          <number>2</number>
         </property>
+        <item row="0" column="0">
+         <spacer name="verticalSpacer_10">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>10</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
         <item row="1" column="0">
+         <widget class="QLabel" name="base_uuid_label">
+          <property name="text">
+           <string>Base UUID:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="base_uuid_edit">
+          <property name="toolTip">
+           <string>Website of the data provider</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
          <widget class="QLabel" name="title_label">
           <property name="text">
            <string>Title:</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="1">
+        <item row="2" column="1">
          <widget class="QLineEdit" name="title_edit">
           <property name="toolTip">
            <string>Human friendly title of the image</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="0">
+        <item row="3" column="0">
          <widget class="QLabel" name="platform_label">
           <property name="text">
            <string>Platform:</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="1">
+        <item row="3" column="1">
          <widget class="QComboBox" name="platform_combo_box">
           <item>
            <property name="text">
@@ -409,80 +439,66 @@
           </item>
          </widget>
         </item>
-        <item row="3" column="0">
+        <item row="4" column="0">
          <widget class="QLabel" name="sensor_label">
           <property name="text">
            <string>Sensor:</string>
           </property>
          </widget>
         </item>
-        <item row="3" column="1">
+        <item row="4" column="1">
          <widget class="QLineEdit" name="sensor_edit">
           <property name="toolTip">
            <string>Image aquisition device (eg. camera, radar, etc)</string>
           </property>
          </widget>
         </item>
-        <item row="4" column="0">
+        <item row="5" column="0">
          <widget class="QLabel" name="sense_start_label">
           <property name="text">
            <string>Sense start</string>
           </property>
          </widget>
         </item>
-        <item row="4" column="1">
+        <item row="5" column="1">
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
            <widget class="QDateTimeEdit" name="sense_start_edit"/>
           </item>
          </layout>
         </item>
-        <item row="6" column="0">
+        <item row="7" column="0">
          <widget class="QLabel" name="sense_end_label">
           <property name="text">
            <string>Sense end</string>
           </property>
          </widget>
         </item>
-        <item row="6" column="1">
+        <item row="7" column="1">
          <widget class="QDateTimeEdit" name="sense_end_edit"/>
         </item>
-        <item row="7" column="0">
-         <widget class="QLabel" name="tags_label">
-          <property name="text">
-           <string>Tags:</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="1">
-         <widget class="QLineEdit" name="tags_edit">
-          <property name="toolTip">
-           <string>Free tags separated by comma</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="0">
+        <item row="9" column="0">
          <widget class="QLabel" name="provider_label">
           <property name="text">
            <string>Provider:</string>
           </property>
          </widget>
         </item>
-        <item row="8" column="1">
+        <item row="9" column="1">
          <widget class="QLineEdit" name="provider_edit">
           <property name="toolTip">
            <string>Provider/owner of the OIN bucket</string>
           </property>
          </widget>
         </item>
-        <item row="9" column="0">
+        <item row="10" column="0">
          <widget class="QLabel" name="contact_label">
           <property name="text">
            <string>Contact:</string>
           </property>
          </widget>
         </item>
-        <item row="9" column="1">
+        <item row="10" column="1">
          <widget class="QLineEdit" name="contact_edit">
           <property name="toolTip">
            <string>Name and email address of the data provider</string>
@@ -492,62 +508,43 @@
           </property>
          </widget>
         </item>
-        <item row="10" column="0">
-         <widget class="QLabel" name="website_label">
-          <property name="text">
-           <string>Website:</string>
-          </property>
-         </widget>
+        <item row="11" column="1">
+         <widget class="QLineEdit" name="website_edit"/>
         </item>
-        <item row="10" column="1">
-         <widget class="QLineEdit" name="website_edit">
+        <item row="12" column="1">
+         <widget class="QLineEdit" name="tags_edit">
           <property name="toolTip">
-           <string>Website of the data provider</string>
+           <string>Free tags separated by comma</string>
           </property>
          </widget>
         </item>
-        <item row="14" column="0" colspan="2">
-         <widget class="QCheckBox" name="reproject_check_box">
-          <property name="text">
-           <string>Reproject to EPSG:3857</string>
-          </property>
-         </widget>
-        </item>
-        <item row="12" column="0" colspan="2">
+        <item row="13" column="0" colspan="2">
          <widget class="QCheckBox" name="license_check_box">
           <property name="text">
            <string>Licensed under CC-BY 4.0 and allow tracing in OSM</string>
           </property>
          </widget>
         </item>
-        <item row="11" column="0">
-         <spacer name="verticalSpacer_8">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
+        <item row="15" column="0" colspan="2">
+         <widget class="QCheckBox" name="reproject_check_box">
+          <property name="text">
+           <string>Reproject to EPSG:3857</string>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
+         </widget>
         </item>
-        <item row="0" column="0">
-         <spacer name="verticalSpacer_10">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
+        <item row="12" column="0">
+         <widget class="QLabel" name="tags_label">
+          <property name="text">
+           <string>Tags:</string>
           </property>
-          <property name="sizeType">
-           <enum>QSizePolicy::Fixed</enum>
+         </widget>
+        </item>
+        <item row="11" column="0">
+         <widget class="QLabel" name="website_label">
+          <property name="text">
+           <string>Website:</string>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>10</height>
-           </size>
-          </property>
-         </spacer>
+         </widget>
         </item>
        </layout>
       </item>

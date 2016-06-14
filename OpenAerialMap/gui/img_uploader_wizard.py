@@ -83,6 +83,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         self.setButtonText(QtGui.QWizard.CustomButton1, self.tr("&Start upload"));
         self.setOption(QtGui.QWizard.HaveCustomButton1, True);
+        self.button(QWizard.CustomButton1).setVisible(False)
 
         self.settings = settings
 
@@ -128,10 +129,15 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.notify_oam_check.setEnabled(False)
         self.trigger_tiling_check.setEnabled(False)
 
+        # temporarily disable textEdit for website and tags
+        # probably make extEdit for thumbnail later
+        self.website_edit.setEnabled(False)
+        self.tags_edit.setEnabled(False)
 
         # Upload tab connections (wizard page 3)
         self.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)
         self.customButtonClicked.connect(self.startUpload)
+        #self.button(QWizard.CustomButton1).clicked.connect(self.startUpload)
 
     # handlers for navigation
     def nextPage(self):
@@ -141,6 +147,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         elif self.currentId() == 2:
             #print "Page ID: " + str(self.currentId())
             self.loadMetadataReviewBox()
+            self.button(QWizard.CustomButton1).setVisible(True)
         else:
             pass
 
@@ -150,7 +157,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             pass
         elif self.currentId() == 1:
             #print "Page ID: " + str(self.currentId())
-            pass
+            self.button(QWizard.CustomButton1).setVisible(False)
         else:
             pass
 
@@ -273,6 +280,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
     # load default values
     def loadMetadataSettings(self):
         self.settings.beginGroup("Metadata")
+        self.base_uuid_edit.setText(self.settings.value('BASE_UUID'))
         self.title_edit.setText(self.settings.value('TITLE'))
         if self.settings.value('PLATFORM') == None:
             self.platform_combo_box.setCurrentIndex(0)
@@ -293,30 +301,18 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.sense_end_edit.setTime(
             QDateTime.fromString(self.settings.value('SENSE_END'),
             Qt.ISODate).time())
-
-        self.tags_edit.setText(self.settings.value('TAGS'))
-        self.tags_edit.setCursorPosition(0)
         self.provider_edit.setText(self.settings.value('PROVIDER'))
         self.provider_edit.setCursorPosition(0)
         self.contact_edit.setText(self.settings.value('CONTACT'))
         self.contact_edit.setCursorPosition(0)
-        self.website_edit.setText(self.settings.value('WEBSITE'))
-        self.website_edit.setCursorPosition(0)
-
-        """
-        Boolean values are converted into string and lower case for
-        'if' statement, since PyQt sometimes returns 'true', just like C++,
-        instead of 'True', Python style.
-        Maybe we can use integer values (0 or 1), instead of using string.
-        """
-        if str(self.settings.value('LICENSE')).lower() == 'true':
-            self.license_check_box.setCheckState(2)
-        if str(self.settings.value('REPROJECT')).lower() == 'true':
-            self.reproject_check_box.setCheckState(2)
-
+        #self.website_edit.setText(self.settings.value('WEBSITE'))
+        #self.website_edit.setCursorPosition(0)
+        #self.tags_edit.setText(self.settings.value('TAGS'))
+        #self.tags_edit.setCursorPosition(0)
         self.settings.endGroup()
 
     def cleanMetadataSettings(self):
+        self.base_uuid_edit.setText('')
         self.title_edit.setText('')
         self.platform_combo_box.setCurrentIndex(0)
         self.sensor_edit.setText('')
@@ -355,27 +351,8 @@ amount of time. Are you sure to continue?")
             flag = True
 
         if flag:
-            # get metadata from GUI, and store them in a dictionary
-            metaInputInDict = {}
-            metaInputInDict['title'] = self.title_edit.text()
-            metaInputInDict['platform'] = self.platform_combo_box.currentIndex()
-            metaInputInDict['acquisition_start'] = self.sense_start_edit.dateTime().toString(Qt.ISODate)
-            metaInputInDict['acquisition_end'] = self.sense_end_edit.dateTime().toString(Qt.ISODate)
-            metaInputInDict['provider'] = self.provider_edit.text()
-            metaInputInDict['contact'] =  self.contact_edit.text()
-            metaInputInDict['tags'] =  self.tags_edit.text() #change name into properties later?
-            metaInputInDict['uuid'] = self.website_edit.text() #change name later?
-
-            properties = {}
-            properties['sensor'] = self.sensor_edit.text()
-            properties['thumbnail'] = "url of thumbnail"
-            metaInputInDict['properties'] = properties
-
-
-            # declare list for MetadataHandler object
             num_selected_layers = 0
             count = 0
-
             """Open python console. I haven't indentified the exact reason, but
             messagebar doesn't work properly without opening python console
             and some print statements"""
@@ -411,7 +388,28 @@ amount of time. Are you sure to continue?")
                              % (str(count+1), str(num_selected_layers)),
                             level=QgsMessageBar.INFO)
 
-                    # Isn't it better to use thread?
+                    # get metadata from GUI, and store them in a dictionary
+                    metaInputInDict = {}
+                    temp_filename = file_abspath.split('/')[-1]
+                    strUuid = '{0}{1}'.format(self.base_uuid_edit.text(), temp_filename)
+                    metaInputInDict['uuid'] = strUuid
+                    metaInputInDict['title'] = self.title_edit.text()
+                    metaInputInDict['platform'] = self.platform_combo_box.currentText()
+                    metaInputInDict['acquisition_start'] = self.sense_start_edit.dateTime().toString(Qt.ISODate)
+                    metaInputInDict['acquisition_end'] = self.sense_end_edit.dateTime().toString(Qt.ISODate)
+                    metaInputInDict['provider'] = self.provider_edit.text()
+                    metaInputInDict['contact'] = self.contact_edit.text()
+                    # temporarily disable two keys (website and tags)
+                    #metaInputInDict['website'] = self.website_edit.text()
+                    #metaInputInDict['tags'] = self.tags_edit.text()
+
+                    properties = {}
+                    properties['sensor'] = self.sensor_edit.text()
+                    """need to implement thumbnail creation, etc."""
+                    properties['thumbnail'] = "currently not available"
+                    metaInputInDict['properties'] = properties
+
+                    # extract metadata from GeoTiff, and merge with the metadata from textbox
                     imgMetaHdlr = ImgMetadataHandler(file_abspath)
                     imgMetaHdlr.extractMetaInImagery()
                     metaForUpload = dict(imgMetaHdlr.getMetaInImagery().items() + metaInputInDict.items())
@@ -480,6 +478,10 @@ amount of time. Are you sure to continue?")
         instead of 'True', Python style.
         Maybe we can use integer values (0 or 1), instead of using string.
         """
+        if str(self.settings.value('LICENSE')).lower() == 'true':
+            self.license_check_box.setCheckState(2)
+        if str(self.settings.value('REPROJECT')).lower() == 'true':
+            self.reproject_check_box.setCheckState(2)
 
         """
         if str(self.settings.value('NOTIFY_OAM')).lower() == 'true':
@@ -524,9 +526,6 @@ amount of time. Are you sure to continue?")
         self.review_metadata_box.setText(stream.readAll())
 
     def startUploadPreprocessing(self):
-
-        """Probably it is better to let the users to confirm all the metadata and
-        reprojected files are saved before starting upload."""
 
         """don't know why this message doesn't show up..."""
         self.bar2.clearWidgets()

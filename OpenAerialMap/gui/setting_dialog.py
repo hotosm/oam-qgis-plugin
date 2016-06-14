@@ -80,6 +80,7 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
 
     def saveMetadataSettings(self):
         self.settings.beginGroup("Metadata")
+        self.settings.setValue('BASE_UUID', self.base_uuid_edit.text())
         self.settings.setValue('TITLE', self.title_edit.text())
         self.settings.setValue('PLATFORM', self.platform_combo_box.currentIndex())
         self.settings.setValue('SENSOR', self.sensor_edit.text())
@@ -87,19 +88,19 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
             self.sense_start_edit.dateTime().toString(Qt.ISODate))
         self.settings.setValue('SENSE_END',
             self.sense_end_edit.dateTime().toString(Qt.ISODate))
-        self.settings.setValue('TAGS', self.tags_edit.text())
         self.settings.setValue('PROVIDER', self.provider_edit.text())
         self.settings.setValue('CONTACT', self.contact_edit.text())
         self.settings.setValue('WEBSITE', self.website_edit.text())
-
-        """probably need to reorganize this part"""
-        self.settings.setValue('LICENSE', self.license_check_box.isChecked())
-        self.settings.setValue('REPROJECT', self.reproject_check_box.isChecked())
+        self.settings.setValue('TAGS', self.tags_edit.text())
         self.settings.endGroup()
 
     def saveOptionsSettings(self):
 
         self.settings.beginGroup("Options")
+        self.settings.setValue('LICENSE',
+            self.license_check_box.isChecked())
+        self.settings.setValue('REPROJECT',
+            self.reproject_check_box.isChecked())
         self.settings.setValue('NOTIFY_OAM',
             self.notify_oam_check.isChecked())
         self.settings.setValue('TRIGGER_OAM_TS',
@@ -119,6 +120,7 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
 
     def loadMetadataSettings(self):
         self.settings.beginGroup("Metadata")
+        self.base_uuid_edit.setText(self.settings.value('BASE_UUID'))
         self.title_edit.setText(self.settings.value('TITLE'))
         if self.settings.value('PLATFORM') == None:
             self.title_edit.setCursorPosition(0)
@@ -142,29 +144,14 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
             QDateTime.fromString(
             self.settings.value('SENSE_END'),
             Qt.ISODate).time())
-
-        self.tags_edit.setText(self.settings.value('TAGS'))
-        self.tags_edit.setCursorPosition(0)
         self.provider_edit.setText(self.settings.value('PROVIDER'))
         self.provider_edit.setCursorPosition(0)
         self.contact_edit.setText(self.settings.value('CONTACT'))
         self.contact_edit.setCursorPosition(0)
         self.website_edit.setText(self.settings.value('WEBSITE'))
         self.website_edit.setCursorPosition(0)
-
-        """
-        Boolean values are converted into string and lower case for
-        'if' statement, since PyQt sometimes returns 'true', just like C++,
-        instead of 'True', Python style.
-        Maybe we can use integer values (0 or 1), instead of using string.
-        """
-        print str(self.settings.value('LICENSE'))
-        print str(self.settings.value('REPROJECT'))
-
-        if str(self.settings.value('LICENSE')).lower() == 'true':
-            self.license_check_box.setCheckState(2)
-        if str(self.settings.value('REPROJECT')).lower() == 'true':
-            self.reproject_check_box.setCheckState(2)
+        self.tags_edit.setText(self.settings.value('TAGS'))
+        self.tags_edit.setCursorPosition(0)
         self.settings.endGroup()
 
     def loadOptionsSettings(self):
@@ -176,8 +163,16 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
         instead of 'True', Python style.
         Maybe we can use integer values (0 or 1), instead of using string.
         """
-        print str(self.settings.value('NOTIFY_OAM'))
-        print str(self.settings.value('TRIGGER_OAM_TS'))
+        #print str(self.settings.value('LICENSE'))
+        #print str(self.settings.value('REPROJECT'))
+
+        if str(self.settings.value('LICENSE')).lower() == 'true':
+            self.license_check_box.setCheckState(2)
+        if str(self.settings.value('REPROJECT')).lower() == 'true':
+            self.reproject_check_box.setCheckState(2)
+
+        #print str(self.settings.value('NOTIFY_OAM'))
+        #print str(self.settings.value('TRIGGER_OAM_TS'))
 
         if str(self.settings.value('NOTIFY_OAM')).lower() == 'true':
             self.notify_oam_check.setCheckState(2)

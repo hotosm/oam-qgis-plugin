@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>391</width>
-    <height>619</height>
+    <width>727</width>
+    <height>367</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>580</y>
+     <x>460</x>
+     <y>320</y>
      <width>176</width>
      <height>27</height>
     </rect>
@@ -34,8 +34,8 @@
     <rect>
      <x>10</x>
      <y>5</y>
-     <width>366</width>
-     <height>291</height>
+     <width>351</width>
+     <height>351</height>
     </rect>
    </property>
    <property name="title">
@@ -44,10 +44,10 @@
    <widget class="QWidget" name="formLayoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>25</y>
+      <x>0</x>
+      <y>20</y>
       <width>341</width>
-      <height>271</height>
+      <height>319</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout_1">
@@ -57,28 +57,28 @@
      <property name="verticalSpacing">
       <number>2</number>
      </property>
-     <item row="0" column="0">
+     <item row="1" column="0">
       <widget class="QLabel" name="title_label">
        <property name="text">
         <string>Title:</string>
        </property>
       </widget>
      </item>
-     <item row="0" column="1">
+     <item row="1" column="1">
       <widget class="QLineEdit" name="title_edit">
        <property name="toolTip">
         <string>Human friendly title of the image</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
+     <item row="2" column="0">
       <widget class="QLabel" name="platform_label">
        <property name="text">
         <string>Platform:</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
+     <item row="2" column="1">
       <widget class="QComboBox" name="platform_combo_box">
        <item>
         <property name="text">
@@ -107,80 +107,66 @@
        </item>
       </widget>
      </item>
-     <item row="2" column="0">
+     <item row="3" column="0">
       <widget class="QLabel" name="sensor_label">
        <property name="text">
         <string>Sensor:</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="1">
+     <item row="3" column="1">
       <widget class="QLineEdit" name="sensor_edit">
        <property name="toolTip">
         <string>Image aquisition device (eg. camera, radar, etc)</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
+     <item row="4" column="0">
       <widget class="QLabel" name="sense_start_label">
        <property name="text">
         <string>Sense start</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
+     <item row="4" column="1">
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
         <widget class="QDateTimeEdit" name="sense_start_edit"/>
        </item>
       </layout>
      </item>
-     <item row="5" column="0">
+     <item row="6" column="0">
       <widget class="QLabel" name="sense_end_label">
        <property name="text">
         <string>Sense end</string>
        </property>
       </widget>
      </item>
-     <item row="5" column="1">
+     <item row="6" column="1">
       <widget class="QDateTimeEdit" name="sense_end_edit"/>
      </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="tags_label">
-       <property name="text">
-        <string>Tags:</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="1">
-      <widget class="QLineEdit" name="tags_edit">
-       <property name="toolTip">
-        <string>Free tags separated by comma</string>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="0">
+     <item row="8" column="0">
       <widget class="QLabel" name="provider_label">
        <property name="text">
         <string>Provider:</string>
        </property>
       </widget>
      </item>
-     <item row="7" column="1">
+     <item row="8" column="1">
       <widget class="QLineEdit" name="provider_edit">
        <property name="toolTip">
         <string>Provider/owner of the OIN bucket</string>
        </property>
       </widget>
      </item>
-     <item row="8" column="0">
+     <item row="9" column="0">
       <widget class="QLabel" name="contact_label">
        <property name="text">
         <string>Contact:</string>
        </property>
       </widget>
      </item>
-     <item row="8" column="1">
+     <item row="9" column="1">
       <widget class="QLineEdit" name="contact_edit">
        <property name="toolTip">
         <string>Name and email address of the data provider</string>
@@ -190,17 +176,41 @@
        </property>
       </widget>
      </item>
-     <item row="9" column="0">
-      <widget class="QLabel" name="website_label">
+     <item row="0" column="0">
+      <widget class="QLabel" name="base_uuid_label">
        <property name="text">
-        <string>Website:</string>
+        <string>Base UUID:</string>
        </property>
       </widget>
      </item>
-     <item row="9" column="1">
-      <widget class="QLineEdit" name="website_edit">
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="base_uuid_edit">
        <property name="toolTip">
         <string>Website of the data provider</string>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="1">
+      <widget class="QLineEdit" name="tags_edit">
+       <property name="toolTip">
+        <string>Free tags separated by comma</string>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="0">
+      <widget class="QLabel" name="tags_label">
+       <property name="text">
+        <string>Tags:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="1">
+      <widget class="QLineEdit" name="website_edit"/>
+     </item>
+     <item row="10" column="0">
+      <widget class="QLabel" name="website_label">
+       <property name="text">
+        <string>Website:</string>
        </property>
       </widget>
      </item>
@@ -210,10 +220,10 @@
   <widget class="QGroupBox" name="groupBox_2">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>295</y>
+     <x>360</x>
+     <y>10</y>
      <width>351</width>
-     <height>161</height>
+     <height>141</height>
     </rect>
    </property>
    <property name="title">
@@ -263,8 +273,8 @@
   <widget class="QGroupBox" name="groupBox_3">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>425</y>
+     <x>360</x>
+     <y>160</y>
      <width>356</width>
      <height>161</height>
     </rect>
@@ -275,7 +285,7 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>15</x>
+      <x>10</x>
       <y>20</y>
       <width>341</width>
       <height>122</height>
