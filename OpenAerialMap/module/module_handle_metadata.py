@@ -26,9 +26,8 @@ import os, sys
 from osgeo import gdal, osr, ogr
 from ast import literal_eval
 import json
-from module.module_gdal_utilities import gdal_info_report_corner
 
-class MetadataHandler():
+class MetadataHandler:
 
     def __init__(self, metaInput, imgFileAbspath):
         self.metaInput = metaInput
@@ -41,6 +40,9 @@ class MetadataHandler():
 
     def getMetaForUpload(self):
         return self.metaForUpload
+
+    def getMetaInImagery(self):
+        return self.metaInImagery
 
     def createMetaForUpload(self):
         self.extractMetaInImagery()
@@ -86,61 +88,61 @@ class MetadataHandler():
         #self.metaInImagery['projection'] = str(spatialRefProj)
 
     def extractBBox(self):
-        # probably need to convert parentheses into bracket later
-        upper_left = gdal_info_report_corner(
+        listBBoxNodes = []
+        listBBoxNodes.append(self.affineGeoTransform(
+        self.gdalDataset, 0.0, 0.0)[0])
+        listBBoxNodes.append(self.affineGeoTransform(
+        self.gdalDataset, 0.0, 0.0)[1])
+        listBBoxNodes.append(self.affineGeoTransform(
+            self.gdalDataset,
+            self.gdalDataset.RasterXSize,
+            self.gdalDataset.RasterYSize )[0])
+        listBBoxNodes.append(self.affineGeoTransform(
+            self.gdalDataset,
+            self.gdalDataset.RasterXSize,
+            self.gdalDataset.RasterYSize )[1])
+        self.metaInImagery['bbox'] = str(listBBoxNodes)
+
+    def extractFootprint(self):
+        """Temporarily use bbox values"""
+        node1 = self.affineGeoTransform(
             self.gdalDataset,0.0,0.0 )
-        lower_left = gdal_info_report_corner(
+        node2 = self.affineGeoTransform(
             self.gdalDataset,0.0,
             self.gdalDataset.RasterYSize)
-        upper_right = gdal_info_report_corner(
+        node3 = self.affineGeoTransform(
             self.gdalDataset,
             self.gdalDataset.RasterXSize,0.0 )
-        lower_right = gdal_info_report_corner(
+        node4 = self.affineGeoTransform(
             self.gdalDataset,
             self.gdalDataset.RasterXSize,
             self.gdalDataset.RasterYSize )
-        center = gdal_info_report_corner(
-            self.gdalDataset,
-            self.gdalDataset.RasterXSize/2.0,
-            self.gdalDataset.RasterYSize/2.0 )
-
-        if "_EPSG3857" in self.imgFileAbspath:
-
-            try:
-                target = osr.SpatialReference()
-                target.ImportFromEPSG(3857)
-                transform = osr.CoordinateTransformation(self.spatialRef,target)
-
-                point = ogr.CreateGeometryFromWkt(
-                    "POINT (%f %f)" % (upper_left[0],upper_left[1]))
-                point.Transform(transform)
-                upper_left = json.loads(point.ExportToJson())['coordinates']
-
-                point = ogr.CreateGeometryFromWkt(
-                    "POINT (%f %f)" % (lower_left[0],lower_left[1]))
-                point.Transform(transform)
-                lower_left = json.loads(point.ExportToJson())['coordinates']
-
-                point = ogr.CreateGeometryFromWkt(
-                    "POINT (%f %f)" % (upper_right[0],upper_right[1]))
-                point.Transform(transform)
-                upper_right = json.loads(point.ExportToJson())['coordinates']
-
-                point = ogr.CreateGeometryFromWkt(
-                    "POINT (%f %f)" % (lower_right[0],lower_right[1]))
-                point.Transform(transform)
-                lower_right = json.loads(point.ExportToJson())['coordinates']
-
-            except (RuntimeError, TypeError, NameError) as error:
-                print error
-            except:
-                print "Unexpected error:", sys.exc_info()[0]
-
-        self.metaInImagery['bbox'] = (
-            upper_left,lower_left,upper_right,lower_right)
-
-    def extractFootprint(self):
-        self.metaInImagery['footprint'] = "xxxxx"
+        self.metaInImagery['footprint'] = 'POLYGON' + \
+            str((node1, node2, node3, node4, node1))
 
     def extractGsd(self):
-        self.metaInImagery['gsd'] = "xxxxx"
+        print("Message: " + repr(self.gdalDataset))
+
+        geotransform = self.gdalDataset.GetGeoTransform()
+        if not geotransform is None:
+            gsdAvg = (abs(geotransform[1]) + abs(geotransform[5]))/2
+            self.metaInImagery['gsd'] = str(gsdAvg)
+        else:
+            self.metaInImagery['gsd'] = "n.a."
+
+    def affineGeoTransform(self, hDataset, x, y):
+
+        geoTransform = hDataset.GetGeoTransform(can_return_null = True)
+        if geoTransform is not None:
+            geoX = geoTransform[0] + geoTransform[1] * x + geoTransform[2] * y
+            geoY = geoTransform[3] + geoTransform[4] * x + geoTransform[5] * y
+        else:
+            print "BBOX might be wrong. Transformation coefficient " + \
+                "could not be fetched from raster"
+            return (x,y)
+
+        # Report the georeferenced coordinates
+        if abs(geoX) < 181 and abs(geoY) < 91:
+            return literal_eval(("(%12.7f,%12.7f) " % (geoX, geoY )))
+        else:
+            return literal_eval(("(%12.3f,%12.3f) " % (geoX, geoY )))

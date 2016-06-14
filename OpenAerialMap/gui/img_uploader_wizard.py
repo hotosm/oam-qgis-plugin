@@ -359,13 +359,18 @@ amount of time. Are you sure to continue?")
             metaInputInDic = {}
             metaInputInDic['title'] = self.title_edit.text()
             metaInputInDic['platform'] = self.platform_combo_box.currentIndex()
-            metaInputInDic['sensor'] = self.sensor_edit.text()
             metaInputInDic['acquisition_start'] = self.sense_start_edit.dateTime().toString(Qt.ISODate)
             metaInputInDic['acquisition_end'] = self.sense_end_edit.dateTime().toString(Qt.ISODate)
             metaInputInDic['provider'] = self.provider_edit.text()
             metaInputInDic['contact'] =  self.contact_edit.text()
-            metaInputInDic['properties'] =  self.tags_edit.text() #change name later?
+            metaInputInDic['tags'] =  self.tags_edit.text() #change name into properties later?
             metaInputInDic['uuid'] = self.website_edit.text() #change name later?
+
+            properties = {}
+            properties['sensor'] = self.sensor_edit.text()
+            properties['thumbnail'] = "url of thumbnail"
+            metaInputInDic['properties'] = properties
+
 
             # declare list for MetadataHandler object
             metaHdlrs = []
