@@ -25,31 +25,19 @@
 import os, sys
 from osgeo import gdal, osr, ogr
 from ast import literal_eval
-import json
 
-class MetadataHandler:
+class ImgMetadataHandler:
 
-    def __init__(self, metaInput, imgFileAbspath):
-        self.metaInput = metaInput
+    def __init__(self, imgFileAbspath):
         self.imgFileAbspath = imgFileAbspath
         self.metaInImagery = {}
-        self.metaForUpload = {}
 
         self.gdalDataset = None
+        self.projInfo = None
         self.spatialRef = None
-
-    def getMetaForUpload(self):
-        return self.metaForUpload
 
     def getMetaInImagery(self):
         return self.metaInImagery
-
-    def createMetaForUpload(self):
-        self.extractMetaInImagery()
-        # self.extractMetadata()
-        self.metaForUpload = dict(self.metaInput.items() +
-            self.metaInImagery.items())
-        return True
 
     def openGdalDataset(self):
         self.gdalDataset = gdal.Open(self.imgFileAbspath, gdal.GA_ReadOnly)
@@ -76,18 +64,21 @@ class MetadataHandler:
 
     def extractProjName(self):
         # extract projection in WKT format
-        projInfo = self.gdalDataset.GetProjection()
-        self.metaInImagery['projection'] = str(projInfo)
+        self.projInfo = self.gdalDataset.GetProjection()
+        self.metaInImagery['projection'] = str(self.projInfo)
 
         # create an spatial reference object for bbox extraction
-        self.spatialRef = osr.SpatialReference()
-        self.spatialRef.ImportFromWkt(projInfo)
-
+        #self.spatialRef = osr.SpatialReference()
+        #self.spatialRef.ImportFromWkt(self.projInfo)
         # Export to Proj4 format
         #spatialRefProj = self.spatialRef.ExportToProj4()
         #self.metaInImagery['projection'] = str(spatialRefProj)
 
     def extractBBox(self):
+
+        self.spatialRef = osr.SpatialReference()
+        self.spatialRef.ImportFromWkt(self.projInfo)
+
         listBBoxNodes = []
         listBBoxNodes.append(self.affineGeoTransform(
         self.gdalDataset, 0.0, 0.0)[0])

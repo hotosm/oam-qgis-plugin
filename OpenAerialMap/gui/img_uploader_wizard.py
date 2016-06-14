@@ -40,7 +40,7 @@ import traceback
 import requests, json
 from ast import literal_eval
 
-from module.module_handle_metadata import MetadataHandler
+from module.module_handle_metadata import ImgMetadataHandler
 from module.module_access_s3 import S3Manager
 from module.module_gdal_utilities import reproject, convert_to_tif
 from module.module_validate_files import validate_layer, validate_file
@@ -356,24 +356,23 @@ amount of time. Are you sure to continue?")
 
         if flag:
             # get metadata from GUI, and store them in a dictionary
-            metaInputInDic = {}
-            metaInputInDic['title'] = self.title_edit.text()
-            metaInputInDic['platform'] = self.platform_combo_box.currentIndex()
-            metaInputInDic['acquisition_start'] = self.sense_start_edit.dateTime().toString(Qt.ISODate)
-            metaInputInDic['acquisition_end'] = self.sense_end_edit.dateTime().toString(Qt.ISODate)
-            metaInputInDic['provider'] = self.provider_edit.text()
-            metaInputInDic['contact'] =  self.contact_edit.text()
-            metaInputInDic['tags'] =  self.tags_edit.text() #change name into properties later?
-            metaInputInDic['uuid'] = self.website_edit.text() #change name later?
+            metaInputInDict = {}
+            metaInputInDict['title'] = self.title_edit.text()
+            metaInputInDict['platform'] = self.platform_combo_box.currentIndex()
+            metaInputInDict['acquisition_start'] = self.sense_start_edit.dateTime().toString(Qt.ISODate)
+            metaInputInDict['acquisition_end'] = self.sense_end_edit.dateTime().toString(Qt.ISODate)
+            metaInputInDict['provider'] = self.provider_edit.text()
+            metaInputInDict['contact'] =  self.contact_edit.text()
+            metaInputInDict['tags'] =  self.tags_edit.text() #change name into properties later?
+            metaInputInDict['uuid'] = self.website_edit.text() #change name later?
 
             properties = {}
             properties['sensor'] = self.sensor_edit.text()
             properties['thumbnail'] = "url of thumbnail"
-            metaInputInDic['properties'] = properties
+            metaInputInDict['properties'] = properties
 
 
             # declare list for MetadataHandler object
-            metaHdlrs = []
             num_selected_layers = 0
             count = 0
 
@@ -413,15 +412,15 @@ amount of time. Are you sure to continue?")
                             level=QgsMessageBar.INFO)
 
                     # Isn't it better to use thread?
-                    # probably no need to make list in this part
-                    metaHdlrs.append(MetadataHandler(metaInputInDic, file_abspath))
-                    metaHdlrs[count].createMetaForUpload()
-                    str_meta = str(json.dumps(metaHdlrs[count].getMetaForUpload()))
-                    #print str_meta
+                    imgMetaHdlr = ImgMetadataHandler(file_abspath)
+                    imgMetaHdlr.extractMetaInImagery()
+                    metaForUpload = dict(imgMetaHdlr.getMetaInImagery().items() + metaInputInDict.items())
+                    strMetaForUpload = str(json.dumps(metaForUpload))
+
                     json_file_abspath = os.path.splitext(file_abspath)[0] + '.json'
                     #print json_file_abspath
                     f = open(json_file_abspath,'w')
-                    f.write(str_meta)
+                    f.write(strMetaForUpload)
                     f.close()
                     count += 1
 
