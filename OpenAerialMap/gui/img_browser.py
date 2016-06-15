@@ -114,6 +114,7 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
             if self.downloadProgressWindow == None:
                 self.downloadProgressWindow = DownloadProgressWindow()
 
+            # add checkbox to ask if this process add the image as raster layer
             self.downloadProgressWindow.startDownload(urlFullImage, imgAbsPath)
 
             if self.checkBoxSaveMeta.isChecked():

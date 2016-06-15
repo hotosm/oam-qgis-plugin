@@ -380,6 +380,11 @@ amount of time. Are you sure to continue?")
                         # Isn't it better to use thread?
                         print('Reprojecting {0}'.format(str(os.path.basename(file_abspath))))
                         file_abspath = reproject(file_abspath)
+
+                        """ add the reprojected raster image layer and
+                        update the the listwidget and select (highlight) it.
+                        probably, it is better to create a class for reprojection """
+
                     else:
                         self.bar1.clearWidgets()
                         self.bar1.pushMessage(
@@ -387,6 +392,9 @@ amount of time. Are you sure to continue?")
                             '%sth image out of %s is processed.'\
                              % (str(count+1), str(num_selected_layers)),
                             level=QgsMessageBar.INFO)
+
+                    """ probably need to insert the codes to create and insert
+                    the detailed footprint layer here"""
 
                     # get metadata from GUI, and store them in a dictionary
                     metaInputInDict = {}

@@ -186,6 +186,7 @@ the current uploading tasks first, and try download again.")
         try: #make sure if the labels still exist
             if result == 'success':
                 self.qLabels[index].setText("Successfully completed.")
+                # add the downloaded image as a raster layer
             elif result == 'cancelled':
                 self.qLabels[index].setText("Download cancelled.")
             else:
