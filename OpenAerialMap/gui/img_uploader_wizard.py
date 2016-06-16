@@ -176,10 +176,11 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         all_layers = self.iface.mapCanvas().layers()
         for layer in all_layers:
             if not self.layers_list_widget.findItems(layer.name(),Qt.MatchExactly):
-                item = QListWidgetItem()
-                item.setText(layer.name())
-                item.setData(Qt.UserRole, layer.dataProvider().dataSourceUri())
-                self.layers_list_widget.addItem(item)
+                if not self.sources_list_widget.findItems(layer.name(),Qt.MatchExactly):
+                    item = QListWidgetItem()
+                    item.setText(layer.name())
+                    item.setData(Qt.UserRole, layer.dataProvider().dataSourceUri())
+                    self.layers_list_widget.addItem(item)
 
     def selectFile(self):
         selected_file = QFileDialog.getOpenFileName(
@@ -379,11 +380,14 @@ amount of time. Are you sure to continue?")
                             level=QgsMessageBar.INFO)
                         # Isn't it better to use thread?
                         print('Reprojecting {0}'.format(str(os.path.basename(file_abspath))))
+
+                        """ probably, it is better to create a class for reprojection """
                         file_abspath = reproject(file_abspath)
 
-                        """ add the reprojected raster image layer and
-                        update the the listwidget and select (highlight) it.
-                        probably, it is better to create a class for reprojection """
+                        print('Add the image as a raster layer...')
+                        original_file_name = each_layer.text()
+                        reprojected_file_name = '(EPSG3857) ' + original_file_name
+                        self.iface.addRasterLayer(file_abspath, reprojected_file_name)
 
                     else:
                         self.bar1.clearWidgets()
@@ -429,6 +433,23 @@ amount of time. Are you sure to continue?")
                     f.write(strMetaForUpload)
                     f.close()
                     count += 1
+
+                    # refresh the list widget and selected items, if reprojection is done
+                    if self.reproject_check_box.isChecked():
+                        print('update the listWidget to reflect the change...')
+
+                        items_for_remove = self.added_sources_list_widget.findItems(original_file_name, Qt.MatchExactly)
+                        self.added_sources_list_widget.takeItem(self.added_sources_list_widget.row(items_for_remove[0]))
+
+                        items_for_remove = self.sources_list_widget.findItems(original_file_name, Qt.MatchExactly)
+                        self.sources_list_widget.takeItem(self.sources_list_widget.row(items_for_remove[0]))
+                        #self.layers_list_widget.addItem(items_for_remove[0])
+
+                        self.loadLayers()
+                        items_to_add = self.layers_list_widget.findItems(reprojected_file_name, Qt.MatchExactly)
+                        items_to_add[0].setSelected(True)
+                        self.addSources()
+
 
                 self.bar1.clearWidgets()
                 self.bar1.pushMessage(
@@ -479,7 +500,6 @@ amount of time. Are you sure to continue?")
 
     def loadOptionsSettings(self):
         self.settings.beginGroup("Options")
-
         """
         Boolean values are converted into string and lower case for
         'if' statement, since PyQt sometimes returns 'true', just like C++,
@@ -490,30 +510,26 @@ amount of time. Are you sure to continue?")
             self.license_check_box.setCheckState(2)
         if str(self.settings.value('REPROJECT')).lower() == 'true':
             self.reproject_check_box.setCheckState(2)
-
         """
         if str(self.settings.value('NOTIFY_OAM')).lower() == 'true':
             self.notify_oam_check.setCheckState(2)
         if str(self.settings.value('TRIGGER_OAM_TS')).lower() == 'true':
             self.trigger_tiling_check.setCheckState(2)
         """
-
         # This part is for temporal use.
         self.notify_oam_check.setCheckState(0)
         self.trigger_tiling_check.setCheckState(0)
-
         self.settings.endGroup()
-
 
     def loadMetadataReviewBox(self):
         json_file_abspaths = []
         for index in xrange(self.sources_list_widget.count()):
             file_abspath = str(self.sources_list_widget.item(index).data(Qt.UserRole))
             json_file_abspath = ''
-            if self.reproject_check_box.isChecked():
-                json_file_abspath = os.path.splitext(file_abspath)[0]+'_EPSG3857.json'
-            else:
-                json_file_abspath = os.path.splitext(file_abspath)[0]+'.json'
+            #if self.reproject_check_box.isChecked():
+            #    json_file_abspath = os.path.splitext(file_abspath)[0]+'_EPSG3857.json'
+            #else:
+            json_file_abspath = os.path.splitext(file_abspath)[0]+'.json'
 
             #print str(json_file_abspath)
             json_file_abspaths.append(json_file_abspath)
@@ -543,14 +559,17 @@ amount of time. Are you sure to continue?")
             level=QgsMessageBar.INFO)
 
         for index in xrange(self.sources_list_widget.count()):
-            upload_filename = str(self.sources_list_widget.item(index).data(Qt.UserRole))
-
+            #upload_filename = str(self.sources_list_widget.item(index).data(Qt.UserRole))
+            upload_filename = str(self.added_sources_list_widget.item(index).data(Qt.UserRole))
+            """
             if self.reproject_check_box.isChecked():
                 upload_filename = reproject(upload_filename)
                 QgsMessageLog.logMessage(
                     'Created reprojected file: %s' % upload_filename,
                     'OAM',
                     level=QgsMessageLog.INFO)
+            """
+
             """
             if not (imghdr.what(upload_filename) == 'tiff'):
                 upload_filename = self.convert_to_tif(upload_filename)

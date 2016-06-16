@@ -40,6 +40,7 @@ class ImgMetadataHandler:
         return self.metaInImagery
 
     def openGdalDataset(self):
+        print('Open GDAL Dataset...')
         self.gdalDataset = gdal.Open(self.imgFileAbspath, gdal.GA_ReadOnly)
         if self.gdalDataset:
             return True
@@ -50,6 +51,7 @@ class ImgMetadataHandler:
         self.gdalDataset = None
 
     def extractMetaInImagery(self):
+        print('Extracting metadata from Imagery...')
         # is it better to use exception handling?
         self.metaInImagery['file_size'] = os.stat(self.imgFileAbspath).st_size
         if self.openGdalDataset():
@@ -112,7 +114,7 @@ class ImgMetadataHandler:
             str((node1, node2, node3, node4, node1))
 
     def extractGsd(self):
-        print("Message: " + repr(self.gdalDataset))
+        #print("Message: " + repr(self.gdalDataset))
 
         geotransform = self.gdalDataset.GetGeoTransform()
         if not geotransform is None:

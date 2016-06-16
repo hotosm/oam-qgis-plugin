@@ -112,14 +112,18 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         if fdlg.exec_():
             #excepton handling here?
             if self.downloadProgressWindow == None:
-                self.downloadProgressWindow = DownloadProgressWindow()
+                self.downloadProgressWindow = DownloadProgressWindow(self.iface)
 
-            # add checkbox to ask if this process add the image as raster layer
-            self.downloadProgressWindow.startDownload(urlFullImage, imgAbsPath)
+            if self.checkBoxAddLayer.isChecked():
+                addLayer = True
+            else:
+                addLayer = False
+
+            self.downloadProgressWindow.startDownload(urlFullImage, imgAbsPath, addLayer)
 
             if self.checkBoxSaveMeta.isChecked():
                 urlImgMeta = self.singleMetaInDic[u'meta_uri']
                 imgMetaFilename = urlImgMeta.split('/')[-1]
                 imgMetaAbsPath = os.path.join(os.path.dirname(imgAbsPath), imgMetaFilename)
                 r = ImgMetaDownloader.downloadImgMeta(urlImgMeta, imgMetaAbsPath)
-                print(str(r))
+                #print(str(r))

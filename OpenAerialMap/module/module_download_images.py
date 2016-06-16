@@ -74,8 +74,9 @@ class DownloadProgressWindow(QWidget):
     POSITION_WINDOW_FROM_RIGHT = 10
     POSITION_WINDOW_FROM_BOTTOM = 50
 
-    def __init__(self, parent=None):
+    def __init__(self, iface, parent=None):
         QWidget.__init__(self)
+        self.iface = iface
         #self.setGeometry(300, 300, 280, 280)
         self.setWindowTitle('Download Progress')
         self.vLayout = QVBoxLayout(self)
@@ -114,7 +115,7 @@ class DownloadProgressWindow(QWidget):
                 else:
                     self.clearLayout(item.layout())
 
-    def startDownload(self, url=None, fileAbsPath=None):
+    def startDownload(self, url=None, fileAbsPath=None, addLayer=True):
 
         self.activeId +=1
 
@@ -155,7 +156,7 @@ the current uploading tasks first, and try download again.")
             threadIndex = self.activeId
             self.cancelButtons[self.activeId].clicked.connect(lambda: self.cancelDownload(threadIndex))
 
-            self.dwThreads.append(DownloadWorker(url, fileAbsPath, threadIndex))
+            self.dwThreads.append(DownloadWorker(url, fileAbsPath, addLayer, threadIndex))
             self.dwThreads[self.activeId].started.connect(self.downloadStarted)
             self.dwThreads[self.activeId].valueChanged.connect(self.updateProgressBar)
             self.dwThreads[self.activeId].finished.connect(self.downloadFinished)
@@ -185,8 +186,12 @@ the current uploading tasks first, and try download again.")
         #print('Result: ' + result)
         try: #make sure if the labels still exist
             if result == 'success':
-                self.qLabels[index].setText("Successfully completed.")
+                self.qLabels[index].setText("Successfully downloaded.")
                 # add the downloaded image as a raster layer
+                if self.dwThreads[index].addLayer:
+                    layerAbsPath = self.dwThreads[index].fileAbsPath
+                    layerName = str(os.path.basename(layerAbsPath))
+                    self.iface.addRasterLayer(layerAbsPath, layerName)
             elif result == 'cancelled':
                 self.qLabels[index].setText("Download cancelled.")
             else:
@@ -206,10 +211,11 @@ class DownloadWorker(QThread):
     finished = pyqtSignal(str, int)
     error = pyqtSignal(Exception, int)
 
-    def __init__(self, url, fileAbsPath, index, parent=None):
+    def __init__(self, url, fileAbsPath, addLayer, index, parent=None):
         QThread.__init__(self)
         self.url = url
         self.fileAbsPath = fileAbsPath
+        self.addLayer = addLayer
         self.index = index
         self.isRunning = True
         #self.delay = 0.02
