@@ -153,10 +153,12 @@ the current uploading tasks first, and try download again.")
             self.qLabels[self.activeId].setText(fileName)
 
             # add event listener and handlers to cancel buttons
-            threadIndex = self.activeId
-            self.cancelButtons[self.activeId].clicked.connect(lambda: self.cancelDownload(threadIndex))
+            #threadIndex = self.activeId
+            #self.cancelButtons[self.activeId].clicked.connect(lambda: self.cancelDownload(threadIndex))
+            self.cancelButtons[self.activeId].clicked.connect(self.cancelDownload)
 
-            self.dwThreads.append(DownloadWorker(url, fileAbsPath, addLayer, threadIndex))
+            #self.dwThreads.append(DownloadWorker(url, fileAbsPath, addLayer, threadIndex))
+            self.dwThreads.append(DownloadWorker(url, fileAbsPath, addLayer, self.activeId))
             self.dwThreads[self.activeId].started.connect(self.downloadStarted)
             self.dwThreads[self.activeId].valueChanged.connect(self.updateProgressBar)
             self.dwThreads[self.activeId].finished.connect(self.downloadFinished)
@@ -168,9 +170,12 @@ the current uploading tasks first, and try download again.")
 
             self.setWindowPosition()
 
-    def cancelDownload(self, btnIndex):
-        print('Index: ' + str(btnIndex))
-        self.dwThreads[btnIndex].stop()
+    #def cancelDownload(self, btnIndex):
+    def cancelDownload(self):
+        for index in range(0, len(self.cancelButtons)):
+            if self.cancelButtons[index] == self.sender():
+                #print(str(index))
+                self.dwThreads[index].stop()
 
     def downloadStarted(self, hasStarted, index):
         print('Index: ' + str(index))

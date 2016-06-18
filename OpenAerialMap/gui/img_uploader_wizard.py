@@ -94,7 +94,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         #self.upload_file_abspaths = []
 
         # implement this part later!
-        self.s3UpPrgWins = []
+        #self.s3UpPrgWins = []
         self.s3UpPrgWin = None
 
         # Initialize layers and default settings
@@ -148,9 +148,11 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
     def nextPage(self):
         if self.currentId() == 1:
             #print "Page ID: " + str(self.currentId())
+            #self.bar1.clearWidgets()
             pass
         elif self.currentId() == 2:
             #print "Page ID: " + str(self.currentId())
+            #self.bar2.clearWidgets()
             self.loadMetadataReviewBox()
             self.button(QWizard.CustomButton1).setVisible(True)
         else:
@@ -159,9 +161,11 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
     def previousPage(self):
         if self.currentId() == 0:
             #print "Page ID: " + str(self.currentId())
+            #self.bar0.clearWidgets()
             pass
         elif self.currentId() == 1:
             #print "Page ID: " + str(self.currentId())
+            #self.bar1.clearWidgets()
             self.button(QWizard.CustomButton1).setVisible(False)
         else:
             pass
