@@ -171,12 +171,12 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             pass
 
     def finishWizard(self):
-        print "finish wizard button was clicked."
-        if self.s3UpPrgWin != None:
-            self.s3UpPrgWin.cancelAllUploads()
+        #print "finish wizard button was clicked."
+        pass
 
     def cancelWizard(self):
-        print "cancel wizard button was clicked."
+        #print "cancel wizard button was clicked."
+        # need to display QMessageBox
         if self.s3UpPrgWin != None:
             self.s3UpPrgWin.cancelAllUploads()
 
@@ -633,22 +633,20 @@ amount of time. Are you sure to continue?")
             bucket_key = str(self.key_id_edit.text())
             bucket_secret = str(self.secret_key_edit.text())
 
-            # make list for progress window
-            self.s3UpPrgWin = S3UploadProgressWindow(
-                                    bucket_key,
-                                    bucket_secret,
-                                    bucket_name,
-                                    upload_options)
-                                    #self.upload_options)
+            if self.s3UpPrgWin == None:
+                self.s3UpPrgWin = S3UploadProgressWindow(
+                                        bucket_key,
+                                        bucket_secret,
+                                        bucket_name,
+                                        upload_options) # move this upload_options to startUpload
+                                        #self.upload_options)
 
-            self.s3UpPrgWin.finished.connect(self.updateMsgBar)
-            self.totalNumSuccess = 0
-            self.totalNumCancel = 0
-            self.totalNumFail = 0
+                self.s3UpPrgWin.finished.connect(self.finishUpload)
 
             #self.s3UploadProgressWindow.startUpload(self.upload_filenames)
             #self.s3UpPrgWin.startUpload(self.upload_file_abspaths)
             self.s3UpPrgWin.startUpload(upload_file_abspaths)
+            self.button(QWizard.FinishButton).setVisible(False)
             #print(self.isTopLevel())
 
             """
@@ -679,9 +677,10 @@ amount of time. Are you sure to continue?")
                     level=QgsMessageLog.CRITICAL)
             """
 
-    def updateMsgBar(self, numSuccess, numCancel, numFail):
-        self.totalNumSuccess += numSuccess
-        self.totalNumCancel += numCancel
-        self.totalNumFail += numFail
-        print('------------------------')
-        print('Success:{0} Cancel:{1} Fail:{2}'.format(self.totalNumSuccess, self.totalNumCancel, self.totalNumFail))
+    def finishUpload(self, numSuccess, numCancelled, numFailed):
+        self.button(QWizard.FinishButton).setVisible(True)
+        print('')
+        print('------------------------------------------------')
+        print('Success:{0} Cancel:{1} Fail:{2}'.format(numSuccess, numCancelled, numFailed))
+        print('------------------------------------------------')
+        print('')

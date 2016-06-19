@@ -48,9 +48,9 @@ from PyQt4.QtCore import QThread, pyqtSignal
 
 class S3UploadProgressWindow(QWidget):
 
-    MAX_WINDOW_WIDTH = 600
+    #MAX_WINDOW_WIDTH = 600
     MAX_WINDOW_HEIGHT_PER_PROGRESS_BAR = 50
-    POSITION_WINDOW_FROM_RIGHT = 0
+    POSITION_WINDOW_FROM_RIGHT = 10
     POSITION_WINDOW_FROM_BOTTOM = 50
 
     #progress = pyqtSignal(int, int)
@@ -68,8 +68,12 @@ class S3UploadProgressWindow(QWidget):
         self.bucketName = bucketName
         self.uploadOptions = uploadOptions
 
-        #self.numTotal = 0
-        #self.numFinished = 0
+        self.activeId = 0
+
+        self.numTotal = 0
+        self.numSuccess = 0
+        self.numCancelled = 0
+        self.numFailed = 0
 
         self.hLayouts = []
         self.qLabels = []
@@ -81,7 +85,7 @@ class S3UploadProgressWindow(QWidget):
     def setWindowPosition(self):
         # This part need to be modified...
         maxHeight = int(S3UploadProgressWindow.MAX_WINDOW_HEIGHT_PER_PROGRESS_BAR * len(self.hLayouts))
-        self.setMaximumWidth(S3UploadProgressWindow.MAX_WINDOW_WIDTH)
+        #self.setMaximumWidth(S3UploadProgressWindow.MAX_WINDOW_WIDTH)
         self.setMaximumHeight(maxHeight)
         screenShape = QDesktopWidget().screenGeometry()
         width, height = screenShape.width(), screenShape.height()
@@ -93,15 +97,15 @@ class S3UploadProgressWindow(QWidget):
         print('Left: ' + str(left) + ' Top: ' + str(top))
         print('')
         self.move(left,top)
-        self.show()
         self.activateWindow()
 
     def startUpload(self, uploadFileAbspaths):
         #print(str(uploadFileAbspaths))
         #for i in range(0, len(uploadFileAbspaths)):
         #    self.progress.emit(i, len(uploadFileAbspaths))
+        #print(str(self.activeId))
 
-        for i in range(0, len(uploadFileAbspaths)):
+        for i in range(self.activeId, self.activeId + len(uploadFileAbspaths)):
 
             # Create horizontal layouts and add to the vertical layout
             self.hLayouts.append(QHBoxLayout())
@@ -116,15 +120,16 @@ class S3UploadProgressWindow(QWidget):
             self.hLayouts[i].addWidget(self.cancelButtons[i])
 
             # Set the file names to labels
-            fileName = os.path.basename(uploadFileAbspaths[i])
+            indexFileAbsPath = i-self.activeId
+            fileName = os.path.basename(uploadFileAbspaths[indexFileAbsPath])
             self.qLabels[i].setText(fileName)
 
-            self.uwThreads.append(S3UploadWorker(uploadFileAbspaths[i], 'aaaaa', self.uploadOptions, i))
+            self.uwThreads.append(S3UploadWorker(uploadFileAbspaths[indexFileAbsPath], 'aaaaa', self.uploadOptions, i))
 
-            self.cancelButtons[i].clicked.connect(self.cancelDownload)
-            self.uwThreads[i].started.connect(self.downloadStarted)
+            self.cancelButtons[i].clicked.connect(self.cancelUpload)
+            self.uwThreads[i].started.connect(self.uploadStarted)
             self.uwThreads[i].valueChanged.connect(self.updateProgressBar)
-            self.uwThreads[i].finished.connect(self.downloadFinished)
+            self.uwThreads[i].finished.connect(self.uploadFinished)
             self.uwThreads[i].error.connect(self.displayError)
 
             self.uwThreads[i].start()
@@ -133,6 +138,10 @@ class S3UploadProgressWindow(QWidget):
             #self.uwThread.terminate()
 
 
+        self.activeId += len(uploadFileAbspaths)
+        self.numTotal += len(uploadFileAbspaths)
+
+        self.show()
         self.setWindowPosition()
 
     def closeEvent(self, closeEvent):
@@ -140,14 +149,34 @@ class S3UploadProgressWindow(QWidget):
             eachTread.stop()
             eachTread.quit()
 
-    def cancelDownload(self):
+        self.clearLayout(self.vLayout)
+        self.numTotal = 0
+        self.numSuccess = 0
+        self.numCancelled = 0
+        self.numFailed = 0
+
+    def clearLayout(self, layout):
+        if layout is not None:
+            while layout.count():
+                item = layout.takeAt(0)
+                widget = item.widget()
+                if widget is not None:
+                    widget.deleteLater()
+                else:
+                    self.clearLayout(item.layout())
+
+    def cancelUpload(self):
         #print(str(self.sender()))
         for index in range(0, len(self.cancelButtons)):
             if self.cancelButtons[index] == self.sender():
                 #print(str(index))
                 self.uwThreads[index].stop()
 
-    def downloadStarted(self, hasStarted, index):
+    def cancelAllUploads(self):
+        for eachTread in self.uwThreads:
+            eachTread.stop()
+
+    def uploadStarted(self, hasStarted, index):
         #print('Index: ' + str(index))
         pass
 
@@ -155,22 +184,25 @@ class S3UploadProgressWindow(QWidget):
         #print(str(valueChanged))
         self.progressBars[index].setValue(valueChanged)
 
-    def downloadFinished(self, result, index):
+    def uploadFinished(self, result, index):
         #self.thread.quit()
         self.uwThreads[index].quit()
         #print('Result: ' + result)
         try: #make sure if the labels still exist
             if result == 'success':
-                self.qLabels[index].setText("Successfully downloaded.")
-                self.finished.emit(1,0,0)
+                self.qLabels[index].setText("Successfully uploaded.")
+                self.numSuccess += 1
             elif result == 'cancelled':
-                self.qLabels[index].setText("Download cancelled.")
-                self.finished.emit(0,1,0)
+                self.qLabels[index].setText("Upload cancelled.")
+                self.numCancelled += 1
             else:
                 self.qLabels[index].setText("Unexpected incident occurred.")
-                self.finished.emit(0,0,1)
+                self.numFailed += 1
         except:
             pass
+
+        if (self.numSuccess + self.numCancelled + self.numFailed) == self.numTotal:
+            self.finished.emit(self.numSuccess, self.numCancelled, self.numFailed)
 
     def displayError(self, errMsg, index):
         pass
@@ -186,7 +218,7 @@ class S3UploadWorker(QThread):
     finished = pyqtSignal(str, int)
     error = pyqtSignal(Exception, int)
 
-    def __init__(self, fileAbsPath, bucket, uploadOptions, index, delay=0.08):
+    def __init__(self, fileAbsPath, bucket, uploadOptions, index, delay=0.10):
         QThread.__init__(self)
         #self.fileAbsPath = fileAbsPath
         #self.bucket = bucket
