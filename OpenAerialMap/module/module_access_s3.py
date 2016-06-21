@@ -22,8 +22,6 @@
  ***************************************************************************/
 """
 """
-import os, sys
-
 from PyQt4 import QtGui
 from PyQt4.Qt import *
 from PyQt4.QtCore import QThread, Qt #,QObject
@@ -32,10 +30,6 @@ import json, time, math, imghdr, tempfile
 from qgis.gui import QgsMessageBar
 from qgis.core import QgsMapLayer, QgsMessageLog
 
-import boto
-from boto.s3.connection import S3Connection, S3ResponseError
-from boto.s3.key import Key
-from filechunkio import FileChunkIO
 import traceback
 import requests, json
 from ast import literal_eval
@@ -45,6 +39,11 @@ from PyQt4 import QtCore
 # modify this part?
 from PyQt4.QtGui import *
 from PyQt4.QtCore import QThread, pyqtSignal
+
+import boto
+from boto.s3.connection import S3Connection, S3ResponseError
+from boto.s3.key import Key
+from filechunkio import FileChunkIO
 
 class S3UploadProgressWindow(QWidget):
 
@@ -58,15 +57,10 @@ class S3UploadProgressWindow(QWidget):
     finished = pyqtSignal(int, int, int)
     #error = pyqtSignal(Exception, basestring)
 
-    def __init__(self, bucketKey, bucketSecret, bucketName, uploadOptions):
+    def __init__(self):
         QWidget.__init__(self)
         self.setWindowTitle('Upload Progress')
         self.vLayout = QVBoxLayout(self)
-
-        self.bucketKey = bucketKey
-        self.bucketSecret = bucketSecret
-        self.bucketName = bucketName
-        self.uploadOptions = uploadOptions
 
         self.activeId = 0
 
@@ -99,50 +93,60 @@ class S3UploadProgressWindow(QWidget):
         self.move(left,top)
         self.activateWindow()
 
-    def startUpload(self, uploadFileAbspaths):
+    def startUpload(self, bucketKey, bucketSecret, bucketName, uploadOptions, uploadFileAbspaths):
         #print(str(uploadFileAbspaths))
         #for i in range(0, len(uploadFileAbspaths)):
         #    self.progress.emit(i, len(uploadFileAbspaths))
         #print(str(self.activeId))
 
-        for i in range(self.activeId, self.activeId + len(uploadFileAbspaths)):
+        """ probably need to use try-except """
+        conn = None
+        bucket = None
+        conn = S3Connection(bucketKey, bucketSecret)
+        bucket = conn.get_bucket(bucketName)
 
-            # Create horizontal layouts and add to the vertical layout
-            self.hLayouts.append(QHBoxLayout())
-            self.vLayout.addLayout(self.hLayouts[i])
+        if bucket != None:
+            for i in range(self.activeId, self.activeId + len(uploadFileAbspaths)):
 
-            # Create labes, progressbars, and cancel buttons, and add to hLayouts
-            self.qLabels.append(QLabel())
-            self.progressBars.append(QProgressBar())
-            self.cancelButtons.append(QPushButton('Cancel'))
-            self.hLayouts[i].addWidget(self.qLabels[i])
-            self.hLayouts[i].addWidget(self.progressBars[i])
-            self.hLayouts[i].addWidget(self.cancelButtons[i])
+                # Create horizontal layouts and add to the vertical layout
+                self.hLayouts.append(QHBoxLayout())
+                self.vLayout.addLayout(self.hLayouts[i])
 
-            # Set the file names to labels
-            indexFileAbsPath = i-self.activeId
-            fileName = os.path.basename(uploadFileAbspaths[indexFileAbsPath])
-            self.qLabels[i].setText(fileName)
+                # Create labes, progressbars, and cancel buttons, and add to hLayouts
+                self.qLabels.append(QLabel())
+                self.progressBars.append(QProgressBar())
+                self.cancelButtons.append(QPushButton('Cancel'))
+                self.hLayouts[i].addWidget(self.qLabels[i])
+                self.hLayouts[i].addWidget(self.progressBars[i])
+                self.hLayouts[i].addWidget(self.cancelButtons[i])
 
-            self.uwThreads.append(S3UploadWorker(uploadFileAbspaths[indexFileAbsPath], 'aaaaa', self.uploadOptions, i))
+                # Set the file names to labels
+                indexFileAbsPath = i-self.activeId
+                fileName = os.path.basename(uploadFileAbspaths[indexFileAbsPath])
+                self.qLabels[i].setText(fileName)
 
-            self.cancelButtons[i].clicked.connect(self.cancelUpload)
-            self.uwThreads[i].started.connect(self.uploadStarted)
-            self.uwThreads[i].valueChanged.connect(self.updateProgressBar)
-            self.uwThreads[i].finished.connect(self.uploadFinished)
-            self.uwThreads[i].error.connect(self.displayError)
+                s3UpWorker = S3UploadWorker(bucket, uploadOptions, uploadFileAbspaths[indexFileAbsPath], i)
+                self.uwThreads.append(s3UpWorker)
 
-            self.uwThreads[i].start()
-            #self.uwThread.run()
-            #self.uwThread.wait()
-            #self.uwThread.terminate()
+                self.cancelButtons[i].clicked.connect(self.cancelUpload)
+                self.uwThreads[i].started.connect(self.uploadStarted)
+                self.uwThreads[i].valueChanged.connect(self.updateProgressBar)
+                self.uwThreads[i].finished.connect(self.uploadFinished)
+                self.uwThreads[i].error.connect(self.displayError)
+
+                self.uwThreads[i].start()
+                #self.uwThread.run()
+                #self.uwThread.wait()
+                #self.uwThread.terminate()
 
 
-        self.activeId += len(uploadFileAbspaths)
-        self.numTotal += len(uploadFileAbspaths)
+            self.activeId += len(uploadFileAbspaths)
+            self.numTotal += len(uploadFileAbspaths)
 
-        self.show()
-        self.setWindowPosition()
+            self.show()
+            self.setWindowPosition()
+        else:
+            pass
 
     def closeEvent(self, closeEvent):
         for eachTread in self.uwThreads:
@@ -218,18 +222,27 @@ class S3UploadWorker(QThread):
     finished = pyqtSignal(str, int)
     error = pyqtSignal(Exception, int)
 
-    def __init__(self, fileAbsPath, bucket, uploadOptions, index, delay=0.10):
+    #def __init__(self, fileAbsPath, bucket, uploadOptions, index, delay=0.10):
+    def __init__(self, bucket, uploadOptions, fileAbsPath, index, delay=0.10):
         QThread.__init__(self)
-        #self.fileAbsPath = fileAbsPath
-        #self.bucket = bucket
-        #self.uploadOptions = uploadOptions
+        self.bucket = bucket
+        self.uploadOptions = uploadOptions
+        self.fileAbsPath = fileAbsPath
         self.index = index
-        #self.killed = False
         self.isRunning = True
 
         self.delay = delay
 
+        """
+        print(str(self.bucket))
+        print(str(self.uploadOptions))
+        print(str(self.fileAbsPath))
+        print(str(self.index))
+        print(str(self.isRunning))
+        """
+
     def run(self):
+
         #self.started.emit(True)
         count = 0
         while count <= 100 and self.isRunning == True:

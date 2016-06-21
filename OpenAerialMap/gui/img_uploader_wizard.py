@@ -634,18 +634,17 @@ amount of time. Are you sure to continue?")
             bucket_secret = str(self.secret_key_edit.text())
 
             if self.s3UpPrgWin == None:
-                self.s3UpPrgWin = S3UploadProgressWindow(
-                                        bucket_key,
-                                        bucket_secret,
-                                        bucket_name,
-                                        upload_options) # move this upload_options to startUpload
-                                        #self.upload_options)
-
+                self.s3UpPrgWin = S3UploadProgressWindow()
                 self.s3UpPrgWin.finished.connect(self.finishUpload)
 
             #self.s3UploadProgressWindow.startUpload(self.upload_filenames)
             #self.s3UpPrgWin.startUpload(self.upload_file_abspaths)
-            self.s3UpPrgWin.startUpload(upload_file_abspaths)
+            self.s3UpPrgWin.startUpload(bucket_key,
+                                        bucket_secret,
+                                        bucket_name,
+                                        upload_options,
+                                        upload_file_abspaths)
+
             self.button(QWizard.FinishButton).setVisible(False)
             #print(self.isTopLevel())
 
