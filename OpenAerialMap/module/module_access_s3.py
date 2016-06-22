@@ -34,7 +34,7 @@ import traceback
 import requests, json
 from ast import literal_eval
 """
-import sys, os, time
+import sys, os, time, math
 from PyQt4 import QtCore
 # modify this part?
 from PyQt4.QtGui import *
@@ -94,10 +94,6 @@ class S3UploadProgressWindow(QWidget):
         self.activateWindow()
 
     def startUpload(self, bucketKey, bucketSecret, bucketName, uploadOptions, uploadFileAbspaths):
-        #print(str(uploadFileAbspaths))
-        #for i in range(0, len(uploadFileAbspaths)):
-        #    self.progress.emit(i, len(uploadFileAbspaths))
-        #print(str(self.activeId))
 
         """ probably need to use try-except """
         conn = None
@@ -105,8 +101,10 @@ class S3UploadProgressWindow(QWidget):
         conn = S3Connection(bucketKey, bucketSecret)
         bucket = conn.get_bucket(bucketName)
 
+        numFileAbsPaths = len(uploadFileAbspaths)
+
         if bucket != None:
-            for i in range(self.activeId, self.activeId + len(uploadFileAbspaths)):
+            for i in range(self.activeId, self.activeId + numFileAbsPaths):
 
                 # Create horizontal layouts and add to the vertical layout
                 self.hLayouts.append(QHBoxLayout())
@@ -140,8 +138,8 @@ class S3UploadProgressWindow(QWidget):
                 #self.uwThread.terminate()
 
 
-            self.activeId += len(uploadFileAbspaths)
-            self.numTotal += len(uploadFileAbspaths)
+            self.activeId += numFileAbsPaths
+            self.numTotal += numFileAbsPaths
 
             self.show()
             self.setWindowPosition()
@@ -208,21 +206,25 @@ class S3UploadProgressWindow(QWidget):
         if (self.numSuccess + self.numCancelled + self.numFailed) == self.numTotal:
             self.finished.emit(self.numSuccess, self.numCancelled, self.numFailed)
 
-    def displayError(self, errMsg, index):
-        pass
-        #print(str(errMsg))
-        #self.qLabels[index].setText("Error: " + str(errMsg))
+        """
+        self.threads[index].quit()
+        self.threads[index].wait()
+        self.threads[index].deleteLater()
+        self.threads[index].terminate()
+        """
+
+    def displayError(self, exception, index):
+        # need to test this part later
+        self.qLabels[index].setText("Error: " + str(exception))
 
 
 class S3UploadWorker(QThread):
 
     started = pyqtSignal(bool)
-    #valueChanged = pyqtSignal(float, int)
     valueChanged = pyqtSignal(int, int)
     finished = pyqtSignal(str, int)
     error = pyqtSignal(Exception, int)
 
-    #def __init__(self, fileAbsPath, bucket, uploadOptions, index, delay=0.10):
     def __init__(self, bucket, uploadOptions, fileAbsPath, index, delay=0.10):
         QThread.__init__(self)
         self.bucket = bucket
@@ -233,16 +235,61 @@ class S3UploadWorker(QThread):
 
         self.delay = delay
 
+    def uploadMetadata(self):
+
+        #metaFileAbsPath = os.path.splitext(self.fileAbsPath)[0]  + '.tif_meta.json'
+        metaFileAbsPath = self.fileAbsPath + '_meta.json'
+        keyForMetaUp = Key(self.bucket)
+        metaFileName = os.path.basename(metaFileAbsPath)
+        keyForMetaUp.key = metaFileName
+        try:
+            keyForMetaUp.set_contents_from_filename(metaFileAbsPath)
+        except Exception as e:
+            self.error.emit(e, self.index)
+            self.finished.emit('failed', self.index)
+
+    def uploadImageFile(self):
+
+        fileSize = os.stat(self.fileAbsPath).st_size
+        keyName = os.path.basename(self.fileAbsPath)  # make unique id later
+        mp = self.bucket.initiate_multipart_upload(keyName)
+
+        chunkSize = 5242880
+        chunkCount = int(math.ceil(fileSize/float(chunkSize)))
+
+        try:
+            i = 0
+            while self.isRunning and i < chunkCount:
+            #for i in range(chunkCount):
+                offset = chunkSize * i
+                bytes = min(chunkSize, fileSize-offset)
+                with FileChunkIO(self.fileAbsPath, 'r', offset=offset, bytes=bytes) as fp:
+                    mp.upload_part_from_file(fp, part_num=i+1)
+                i += 1
+                #emit progress here
+                progress = i / float(chunkCount)  * 100
+                self.valueChanged.emit(progress, self.index)
+
+        except Exception as e:
+            self.error.emit(e, self.index)
+            self.finished.emit('failed', self.index)
+
+        if self.isRunning == True:
+            mp.complete_upload()
+            self.finished.emit('success', self.index)
+        else:
+            self.finished.emit('cancelled', self.index)
+
         """
-        print(str(self.bucket))
-        print(str(self.uploadOptions))
-        print(str(self.fileAbsPath))
-        print(str(self.index))
-        print(str(self.isRunning))
+        if "notify_oam" in self.uploadOptions:
+            self.notifyOAM()
+        if "trigger_tiling" in self.uploadOptions:
+            self.triggerTileService()
         """
 
     def run(self):
 
+        """
         #self.started.emit(True)
         count = 0
         while count <= 100 and self.isRunning == True:
@@ -261,147 +308,9 @@ class S3UploadWorker(QThread):
         else:
             self.finished.emit('cancelled', self.index)
 
-        #self.uploadMetadata()
-        #self.uploadImageFile()
+        """
+        self.uploadMetadata()
+        self.uploadImageFile()
 
     def stop(self):
         self.isRunning = False
-
-
-"""
-class S3UploadWorker(QThread):
-
-    finished = pyqtSignal(bool, int)
-    error = pyqtSignal(Exception, basestring)
-    progress = pyqtSignal(float, int)
-
-    def __init__(self, fileAbsPath, bucket, options, index):
-        QThread.__init__(self)
-        self.fileAbsPath = fileAbsPath
-        self.bucket = bucket
-        self.killed = False
-        self.options = options
-        self.index = index
-
-    def sendMetadata(self):
-        jsonfile = os.path.splitext(self.fileAbsPath)[0]+'.json'
-        try:
-            k = Key(self.bucket)
-            k.key = os.path.basename(jsonfile)
-            k.set_contents_from_filename(jsonfile)
-            QgsMessageLog.logMessage(
-                'Sent %s\n' % jsonfile,
-                'OAM',
-                level=QgsMessageLog.INFO)
-        except:
-            QgsMessageLog.logMessage(
-                'Could not send %s\n' % jsonfile,
-                'OAM',
-                level=QgsMessageLog.CRITICAL)
-
-    def sendImageFiles(self):
-
-        success = False
-
-        try:
-            file_size = os.stat(self.fileAbsPath).st_size
-            chunk_size = 5242880
-            chunk_count = int(math.ceil(file_size / float(chunk_size)))
-            progress_count = 0
-
-            multipart = self.bucket.initiate_multipart_upload(os.path.basename(self.fileAbsPath))
-
-            QgsMessageLog.logMessage(
-                'Preparing to send %s chunks in total\n' % chunk_count,
-                'OAM',
-                level=QgsMessageLog.INFO)
-
-            for i in range(chunk_count):
-
-                if self.killed is True:
-                    # kill request received, exit loop early
-                    break
-
-                offset = chunk_size * i
-                # bytes are set to never exceed the original file size.
-                bytes = min(chunk_size, file_size - offset)
-                with FileChunkIO(self.fileAbsPath, 'r', offset=offset, bytes=bytes) as fp:
-                    multipart.upload_part_from_file(fp, part_num=i + 1)
-                progress_count += 1
-                QgsMessageLog.logMessage(
-                    'Sent chunk #%d\n' % progress_count,
-                    'OAM',
-                    level=QgsMessageLog.INFO)
-                self.progress.emit(progress_count / float(chunk_count)*100, self.index)
-                QgsMessageLog.logMessage(
-                    'Progress = %f' % (progress_count / float(chunk_count)),
-                    'OAM',
-                    level=QgsMessageLog.INFO)
-
-            if self.killed is False:
-
-                multipart.complete_upload()
-                self.progress.emit(100, self.index)
-                success = True
-
-                # need to modify this part?
-                if "notify_oam" in self.options:
-                    self.notifyOAM()
-                if "trigger_tiling" in self.options:
-                    self.triggerTileService()
-
-        except Exception, e:
-            # forward the exception upstream (or try to...)
-            # chunk size smaller than 5MB can cause an error, server does not expect it
-            self.error.emit(e, traceback.format_exc())
-
-        self.finished.emit(success, self.index)
-
-    #for option
-    def notifyOAM(self):
-
-        '''Just a stub method, not needed at the moment
-        because indexing happens every 10 mins'''
-        QgsMessageLog.logMessage(
-            'AOM notified of new resource',
-            'OAM',
-            level=QgsMessageLog.INFO)
-
-    #for options
-    def triggerTileService(self):
-        url = "http://hotosm-oam-server-stub.herokuapp.com/tile"
-        h = {'content-type':'application/json'}
-        uri = "s3://%s/%s" % (self.bucket.name,os.path.basename(self.fileAbsPath))
-        QgsMessageLog.logMessage(
-            'Imagery uri %s\n' % uri,
-            'OAM',
-            level=QgsMessageLog.INFO)
-        d = json.dumps({'sources':[uri]})
-        p = requests.post(url,headers=h,data=d)
-        post_dict = json.loads(p.text)
-        QgsMessageLog.logMessage(
-            'Post response: %s' % post_dict,
-            'OAM',
-            level=QgsMessageLog.INFO)
-
-        if u'id' in post_dict.keys():
-            ts_id = post_dict[u'id']
-            time = post_dict[u'queued_at']
-            QgsMessageLog.logMessage(
-                'Tile service #%s triggered on %s\n' % (ts_id,time),
-                'OAM',
-                level=QgsMessageLog.INFO)
-        else:
-            QgsMessageLog.logMessage(
-                'Tile service could not be created\n',
-                'OAM',
-                level=QgsMessageLog.CRITICAL)
-        return(0)
-
-    def run(self):
-        self.sendMetadata()
-        self.sendImageFiles()
-
-    def kill(self):
-        self.killed = True
-"""

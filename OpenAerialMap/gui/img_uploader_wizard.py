@@ -436,7 +436,8 @@ amount of time. Are you sure to continue?")
                     metaForUpload = dict(imgMetaHdlr.getMetaInImagery().items() + metaInputInDict.items())
                     strMetaForUpload = str(json.dumps(metaForUpload))
 
-                    json_file_abspath = os.path.splitext(file_abspath)[0] + '.json'
+                    #json_file_abspath = os.path.splitext(file_abspath)[0] + '.tif_meta.json'
+                    json_file_abspath = file_abspath + '_meta.json'
                     #print json_file_abspath
                     f = open(json_file_abspath,'w')
                     f.write(strMetaForUpload)
@@ -538,7 +539,8 @@ amount of time. Are you sure to continue?")
             #if self.reproject_check_box.isChecked():
             #    json_file_abspath = os.path.splitext(file_abspath)[0]+'_EPSG3857.json'
             #else:
-            json_file_abspath = os.path.splitext(file_abspath)[0]+'.json'
+            #json_file_abspath = os.path.splitext(file_abspath)[0]+'.tif_meta.json'
+            json_file_abspath = file_abspath + '_meta.json'
 
             #print str(json_file_abspath)
             json_file_abspaths.append(json_file_abspath)
@@ -678,8 +680,26 @@ amount of time. Are you sure to continue?")
 
     def finishUpload(self, numSuccess, numCancelled, numFailed):
         self.button(QWizard.FinishButton).setVisible(True)
+
+        # Probably, it is better to change this part into log file.
         print('')
         print('------------------------------------------------')
         print('Success:{0} Cancel:{1} Fail:{2}'.format(numSuccess, numCancelled, numFailed))
         print('------------------------------------------------')
         print('')
+
+        # refresh the list widget and selected items, if reprojection is done
+        # probably need to make updateUpload function with signal from uploader
+        """
+        items_for_remove = self.added_sources_list_widget.findItems(original_file_name, Qt.MatchExactly)
+        self.added_sources_list_widget.takeItem(self.added_sources_list_widget.row(items_for_remove[0]))
+
+        items_for_remove = self.sources_list_widget.findItems(original_file_name, Qt.MatchExactly)
+        self.sources_list_widget.takeItem(self.sources_list_widget.row(items_for_remove[0]))
+        #self.layers_list_widget.addItem(items_for_remove[0])
+
+        self.loadLayers()
+        items_to_add = self.layers_list_widget.findItems(reprojected_file_name, Qt.MatchExactly)
+        items_to_add[0].setSelected(True)
+        self.addSources()
+        """
