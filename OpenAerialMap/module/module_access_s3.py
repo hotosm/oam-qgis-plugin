@@ -21,442 +21,298 @@
  *                                                                         *
  ***************************************************************************/
 """
-import os, sys
-
-from PyQt4 import QtGui
-from PyQt4.Qt import *
-from PyQt4.QtCore import QThread, Qt
+"""
 import json, time, math, imghdr, tempfile
-
 from qgis.gui import QgsMessageBar
 from qgis.core import QgsMapLayer, QgsMessageLog
+import traceback
+import requests, json
+from ast import literal_eval
+"""
+import sys, os, time, math
+from PyQt4 import QtCore
+from PyQt4.QtGui import *      # modify this part?
+from PyQt4.QtCore import QThread, pyqtSignal
 
 import boto
 from boto.s3.connection import S3Connection, S3ResponseError
 from boto.s3.key import Key
 from filechunkio import FileChunkIO
-import traceback
-import requests, json
-from ast import literal_eval
 
-class S3Manager(S3Connection):
+class S3UploadProgressWindow(QWidget):
 
-    def __init__(self,
-                 access_key_id,
-                 secret_access_key,
-                 bucket_name,
-                 filenames,
-                 upload_options,
-                 wizard_page,
-                 parent=None):
+    #MAX_WINDOW_WIDTH = 600
+    MAX_WINDOW_HEIGHT_PER_PROGRESS_BAR = 50
+    POSITION_WINDOW_FROM_RIGHT = 10
+    POSITION_WINDOW_FROM_BOTTOM = 50
 
-        S3Connection.__init__(self, access_key_id, secret_access_key)
-        self.upload_options = upload_options
-        self.bucket_name = bucket_name
-        self.bucket = None
-        self.filenames = filenames
-        self.s3Uploaders = []
-        self.threads = []
+    started = pyqtSignal(bool)
+    startConfirmed = pyqtSignal(str)
+    #progress = pyqtSignal(str)
+    finished = pyqtSignal(int, int, int)
+    #error = pyqtSignal(Exception, basestring)
 
-        self.count_uploaded_images = 0
-        self.num_uploading_images = 0
+    def __init__(self):
+        QWidget.__init__(self)
+        self.setWindowTitle('Upload Progress')
+        self.vLayout = QVBoxLayout(self)
 
-        #For GUI (messages and progress bars)
-        self.wizard_page = wizard_page
+        self.activeId = 0
 
-        self.uploader_widget = QtGui.QWidget()
-        self.uploader_widget.setWindowTitle("Upload Progress Bars")
-        self.uploader_widget.setWindowFlags(Qt.WindowStaysOnTopHint)
+        self.numTotal = 0
+        self.numSuccess = 0
+        self.numCancelled = 0
+        self.numFailed = 0
 
-        self.uploader_v_box = QtGui.QVBoxLayout()
-        self.uploader_widget.setLayout(self.uploader_v_box)
+        self.hLayouts = []
+        self.qLabels = []
+        self.progressBars = []
+        self.cancelButtons = []
+        self.uwThreads = []
 
-        self.msg_bar_main = None
-        self.msg_bar_main_content = None
-        self.cancel_button_main = None
 
-        self.msg_bars = []
-        self.msg_bars_content = []
-        self.progress_bars = []
-        self.cancel_buttons = []
-
-    def getBucket(self):
-
-        for trial in xrange(3):
-            if self.bucket: break
-            try:
-                self.bucket = super(S3Manager,self).get_bucket(self.bucket_name)
-                QgsMessageLog.logMessage(
-                    'Connection established' % trial,
-                    'OAM',
-                    level=QgsMessageLog.INFO)
-            except:
-                if trial == 2:
-                   QgsMessageLog.logMessage(
-                    'Failed to connect after 3 attempts',
-                    'OAM',
-                    level=QgsMessageLog.CRITICAL)
-
-        return self.bucket
-
-        """for testing purpose"""
-        """
-        rsKeys = []
-        for key in self.bucket.list():
-            rsKeys.append(repr(key))
-        return rsKeys
-        """
-
-    #functions for threading purpose
-    def uploadFiles(self):
-
-        """ Testing purpose only """
-        if "notify_oam" in self.upload_options:
-            print "notify_oam"
-        if "trigger_tiling" in self.upload_options:
-            print "trigger_tiling"
-
-        # configure the msg_bar_main (including Cancel button and its container)
-        self.msg_bar_main = QgsMessageBar()
-        self.msg_bar_main.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
-        self.wizard_page.layout().addWidget(self.msg_bar_main)
-
-        self.msg_bar_main_content = self.msg_bar_main.createMessage('Performing upload...', )
-        self.cancel_button_main = QPushButton()
-        self.cancel_button_main.setText('Cancel')
-        self.cancel_button_main.clicked.connect(self.cancelAllUploads)
-        self.msg_bar_main_content.layout().addWidget(self.cancel_button_main)
-        self.msg_bar_main.clearWidgets()
-        self.msg_bar_main.pushWidget(self.msg_bar_main_content, level=QgsMessageBar.INFO)
-
-        self.num_uploading_images = len(self.filenames)
-
-        for i in range(0, self.num_uploading_images):
-            filename = self.filenames[i]
-
-            # create a new S3Uploader instance
-            self.s3Uploaders.append(S3Uploader(filename, self.bucket, self.upload_options, i))
-
-            try:
-                # start the worker in a new thread
-                self.threads.append(QThread())
-                self.s3Uploaders[i].moveToThread(self.threads[i])
-                self.s3Uploaders[i].finished.connect(self.finishUpload)
-                self.s3Uploaders[i].error.connect(self.displayUploadError)
-                self.threads[i].started.connect(self.s3Uploaders[i].run)
-                self.threads[i].start()
-
-                print repr(self.threads[i])
-
-                # configure the msg_bars for progress bar
-                self.msg_bars.append(QgsMessageBar())
-                self.msg_bars[i].setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
-                #self.wizard_page.layout().addWidget(self.msg_bars[i])
-                self.uploader_v_box.addWidget(self.msg_bars[i])
-
-                #set the texts of uploading files
-                file_basename = str(os.path.basename(str(filename)))
-                self.msg_bars_content.append(self.msg_bars[i].createMessage(file_basename, ))
-                self.msg_bars[i].clearWidgets()
-                self.msg_bars[i].pushWidget(self.msg_bars_content[i], level=QgsMessageBar.INFO)
-
-                #add progress bars in the message bar
-                self.progress_bars.append(QProgressBar())
-                self.progress_bars[i].setAlignment(Qt.AlignLeft|Qt.AlignVCenter)
-                self.msg_bars_content[i].layout().addWidget(self.progress_bars[i])
-                self.s3Uploaders[i].progress.connect(self.updateProgressBar)
-
-                #set cancel button in the message bar for each upload file
-                """
-                self.cancel_buttons.append(QPushButton())
-                self.cancel_buttons[i].setText('Cancel')
-                self.cancel_buttons[i].clicked.connect(self.cancelAllUploads)
-                self.msg_bars_content[i].layout().addWidget(self.cancel_buttons[i])
-                #self.cancel_buttons[i].clicked.connect(self.cancelUpload)
-                """
-
-            except Exception, e:
-                return repr(e)
-
-        #Display upload progress bars in a separate widget
-        self.uploader_widget.show()
-        screenShape = QtGui.QDesktopWidget().screenGeometry()
+    def setWindowPosition(self):
+        # This part need to be modified...
+        maxHeight = int(S3UploadProgressWindow.MAX_WINDOW_HEIGHT_PER_PROGRESS_BAR * len(self.hLayouts))
+        #self.setMaximumWidth(S3UploadProgressWindow.MAX_WINDOW_WIDTH)
+        self.setMaximumHeight(maxHeight)
+        screenShape = QDesktopWidget().screenGeometry()
         width, height = screenShape.width(), screenShape.height()
-        winW, winH = self.uploader_widget.frameGeometry().width(), self.uploader_widget.frameGeometry().height()
-        left = width - (winW + 10)
-        top = height - (winH + 50)
-        self.uploader_widget.move(left,top)
-        #self.uploader_widget.activateWindow()
-        return True
+        winW, winH = self.frameGeometry().width(), self.frameGeometry().height()
+        left = width - (winW + S3UploadProgressWindow.POSITION_WINDOW_FROM_RIGHT)
+        top = height - (winH + S3UploadProgressWindow.POSITION_WINDOW_FROM_BOTTOM)
+        print('ScreenW: ' + str(width) + ' ScreenH:' + str(height))
+        print('WinWidth: ' + str(winW) + ' WinHeight: ' + str(winH) + ' maxHeight: ' + str(maxHeight))
+        print('Left: ' + str(left) + ' Top: ' + str(top))
+        print('')
+        self.move(left,top)
+        self.activateWindow()
 
-    def updateProgressBar(self, progress_value, index):
-        print "Progress: " + str(progress_value) + ", index: " + str(index)
-        if self.progress_bars[index] != None:
-            self.progress_bars[index].setValue(progress_value)
+    def startUpload(self, bucketKey, bucketSecret, bucketName, uploadOptions, uploadFileAbspaths):
+
+        # probably need to set timeout
+        conn = None
+        bucket = None
+        try:
+            conn = S3Connection(bucketKey, bucketSecret)
+            bucket = conn.get_bucket(bucketName)
+        except Exception as e:
+            self.started.emit(False)
+
+        numFileAbsPaths = len(uploadFileAbspaths)
+
+        if bucket != None:
+            self.started.emit(True)
+            for i in range(self.activeId, self.activeId + numFileAbsPaths):
+
+                # Create horizontal layouts and add to the vertical layout
+                self.hLayouts.append(QHBoxLayout())
+                self.vLayout.addLayout(self.hLayouts[i])
+
+                # Create labes, progressbars, and cancel buttons, and add to hLayouts
+                self.qLabels.append(QLabel())
+                self.progressBars.append(QProgressBar())
+                self.cancelButtons.append(QPushButton('Cancel'))
+                self.hLayouts[i].addWidget(self.qLabels[i])
+                self.hLayouts[i].addWidget(self.progressBars[i])
+                self.hLayouts[i].addWidget(self.cancelButtons[i])
+
+                # Set the file names to labels
+                indexFileAbsPath = i-self.activeId
+                fileName = os.path.basename(uploadFileAbspaths[indexFileAbsPath])
+                self.qLabels[i].setText(fileName)
+
+                s3UpWorker = S3UploadWorker(bucket, uploadOptions, uploadFileAbspaths[indexFileAbsPath], i)
+                self.uwThreads.append(s3UpWorker)
+
+                self.cancelButtons[i].clicked.connect(self.cancelUpload)
+                self.uwThreads[i].started.connect(self.uploadStarted)
+                self.uwThreads[i].valueChanged.connect(self.updateProgressBar)
+                self.uwThreads[i].finished.connect(self.uploadFinished)
+                self.uwThreads[i].error.connect(self.displayError)
+
+                self.uwThreads[i].start()
+                #self.uwThread.run()
+                #self.uwThread.wait()
+                #self.uwThread.terminate()
+
+
+            self.activeId += numFileAbsPaths
+            self.numTotal += numFileAbsPaths
+
+            self.show()
+            self.setWindowPosition()
+        else:
+            self.started.emit(False)
+
+    def closeEvent(self, closeEvent):
+        for eachTread in self.uwThreads:
+            eachTread.stop()
+            eachTread.quit()
+
+        self.clearLayout(self.vLayout)
+        self.numTotal = 0
+        self.numSuccess = 0
+        self.numCancelled = 0
+        self.numFailed = 0
+
+    def clearLayout(self, layout):
+        if layout is not None:
+            while layout.count():
+                item = layout.takeAt(0)
+                widget = item.widget()
+                if widget is not None:
+                    widget.deleteLater()
+                else:
+                    self.clearLayout(item.layout())
+
+    def cancelUpload(self):
+        #print(str(self.sender()))
+        for index in range(0, len(self.cancelButtons)):
+            if self.cancelButtons[index] == self.sender():
+                #print(str(index))
+                self.uwThreads[index].stop()
 
     def cancelAllUploads(self):
+        for eachTread in self.uwThreads:
+            eachTread.stop()
 
-        self.msg_bar_main.clearWidgets()
-        self.msg_bar_main.pushMessage(
-            'WARNING',
-            'Canceling upload...',
-            level=QgsMessageBar.WARNING)
+    def uploadStarted(self, hasStarted, index):
+        #print('Index: ' + str(index))
+        self.startConfirmed.emit(self.uwThreads[index].fileAbsPath)
 
-        try:
-            for i in range(0, self.num_uploading_images):
-                # Is it better to use destructor?
-                self.s3Uploaders[i].kill()
-                self.progress_bars[i] = None
-                #self.cancel_buttons[i] = None
-                #self.threads[i] = None
+    def updateProgressBar(self, valueChanged, index):
+        #print(str(valueChanged))
+        self.progressBars[index].setValue(valueChanged)
 
+    def uploadFinished(self, result, index):
+        #print('Result: ' + result)
+        try: #make sure if the labels still exist
+            if result == 'success':
+                self.qLabels[index].setText("Successfully uploaded.")
+                self.numSuccess += 1
+                #self.progress.emit(self.uwThreads[index].fileAbsPath)
+            elif result == 'cancelled':
+                self.qLabels[index].setText("Upload cancelled.")
+                self.numCancelled += 1
+            else:
+                self.qLabels[index].setText("Unexpected incident occurred.")
+                self.numFailed += 1
         except:
-            print "Error: problem occurred to kill uploaders"
+            pass
 
-    def cancelUpload(self, index):
+        self.uwThreads[index].quit()
 
-        print "Cancel button was clicked!"
+        if (self.numSuccess + self.numCancelled + self.numFailed) == self.numTotal:
+            self.finished.emit(self.numSuccess, self.numCancelled, self.numFailed)
 
         """
-        try:
-            #is it better to use destructor?
-            self.s3Uploaders[index].kill()
-            self.progress_bars[index] = None
-            self.cancel_buttons[index] = None
-            #self.threads[index] = None
-        except:
-            print "Error: problem occurred to kill uploader"
-        """
-
-    def finishUpload(self, success, index):
-        # clean up the s3Uploader and thread
-        try:
-            self.s3Uploaders[index].deleteLater()
-        except:
-            QgsMessageLog.logMessage(
-                'Exception on deleting uploader\n',
-                'OAM',
-                level=QgsMessageLog.CRITICAL)
         self.threads[index].quit()
         self.threads[index].wait()
-        try:
-            self.threads[index].deleteLater()
-        except:
-            QgsMessageLog.logMessage(
-                'Exception on deleting thread\n',
-                'OAM',
-                level=QgsMessageLog.CRITICAL)
+        self.threads[index].deleteLater()
+        self.threads[index].terminate()
+        """
 
-        # remove widget from message bar
-        #self.msg_bar_main.popWidget(self.messageBar)
-
-        if success:
-            self.count_uploaded_images += 1
-            #print str(self.count_uploaded_images)
-
-            # report the result
-            if self.count_uploaded_images < self.num_uploading_images:
-                self.msg_bar_main_content.setText(
-                    ''
-                    + str(self.count_uploaded_images)
-                    + ' image out of '
-                    + str(self.num_uploading_images)
-                    + ' were uploaded.')
-                QgsMessageLog.logMessage(
-                    'Upload succeeded ('
-                    + str(self.count_uploaded_images)
-                    + ' out of '
-                    + str(self.num_uploading_images) + ')' ,
-                    'OAM',
-                    level=QgsMessageLog.INFO)
-            else:
-                self.msg_bar_main.pushMessage(
-                    'INFO',
-                    'Upload was successfully completed.',
-                    level=QgsMessageBar.INFO)
-                QgsMessageLog.logMessage(
-                    'Upload succeeded',
-                    'OAM',
-                    level=QgsMessageLog.INFO)
-        else:
-            # notify the user that something went wrong
-            self.msg_bar_main.pushMessage(
-                'CRITICAL',
-                'Upload was interrupted',
-                level=QgsMessageBar.CRITICAL)
-            QgsMessageLog.logMessage(
-                'Upload was interrupted',
-                'OAM',
-                level=QgsMessageLog.CRITICAL)
-
-    def displayUploadError(self, e, exception_string):
-
-        self.msg_bar_main.pushMessage(
-            'CRITICAL',
-            'Uploader thread raised an exception:\n'.format(exception_string),
-            level=QgsMessageBar.CRITICAL)
-
-        QgsMessageLog.logMessage(
-            'Uploader thread raised an exception:\n'.format(exception_string),
-            'OAM',
-            level=QgsMessageLog.CRITICAL)
-
-    #Testing purpose only
-    def test(self):
-        strResult = "Test: " + \
-                    repr(self.upload_options) + \
-                    repr(self.bucket_name) + \
-                    repr(self.bucket) + \
-                    repr(self.filenames)
-        return strResult
-
-    #Testing purpose only
-    def getAllKeys(self):
-        rsKeys = []
-        try:
-            myBucket = super(S3Manager,self).get_bucket(self.bucket_name)
-            #convert botoList into normal python list
-            for key in myBucket.list():
-                rsKeys.append(repr(key))
-        except:
-            rsKeys = None
-
-        return rsKeys
+    def displayError(self, exception, index):
+        # need to test this part later
+        self.qLabels[index].setText("Error: " + str(exception))
 
 
-class S3Uploader(QObject):
-    '''Handle uploads in a separate thread'''
+class S3UploadWorker(QThread):
 
-    finished = pyqtSignal(bool, int)
-    error = pyqtSignal(Exception, basestring)
-    progress = pyqtSignal(float, int)
+    started = pyqtSignal(bool, int)
+    valueChanged = pyqtSignal(int, int)
+    finished = pyqtSignal(str, int)
+    error = pyqtSignal(Exception, int)
 
-    def __init__(self, filename, bucket, options, index):
-        QObject.__init__(self)
-        self.filename = filename
+    def __init__(self, bucket, uploadOptions, fileAbsPath, index, delay=0.10):
+        QThread.__init__(self)
         self.bucket = bucket
-        self.killed = False
-        self.options = options
+        self.uploadOptions = uploadOptions
+        self.fileAbsPath = fileAbsPath
         self.index = index
+        self.isRunning = True
 
-    def sendMetadata(self):
-        jsonfile = os.path.splitext(self.filename)[0]+'.json'
+        self.delay = delay
+
+    def uploadMetadata(self):
+
+        #metaFileAbsPath = os.path.splitext(self.fileAbsPath)[0]  + '.tif_meta.json'
+        metaFileAbsPath = self.fileAbsPath + '_meta.json'
+        keyForMetaUp = Key(self.bucket)
+        metaFileName = os.path.basename(metaFileAbsPath)
+        keyForMetaUp.key = metaFileName
         try:
-            k = Key(self.bucket)
-            k.key = os.path.basename(jsonfile)
-            k.set_contents_from_filename(jsonfile)
-            QgsMessageLog.logMessage(
-                'Sent %s\n' % jsonfile,
-                'OAM',
-                level=QgsMessageLog.INFO)
-        except:
-            QgsMessageLog.logMessage(
-                'Could not send %s\n' % jsonfile,
-                'OAM',
-                level=QgsMessageLog.CRITICAL)
+            keyForMetaUp.set_contents_from_filename(metaFileAbsPath)
+        except Exception as e:
+            self.error.emit(e, self.index)
+            self.finished.emit('failed', self.index)
 
-    def sendImageFiles(self):
+    def uploadImageFile(self):
 
-        success = False
+        fileSize = os.stat(self.fileAbsPath).st_size
+        keyName = os.path.basename(self.fileAbsPath)  # make unique id later
+        mp = self.bucket.initiate_multipart_upload(keyName)
 
+        chunkSize = 5242880
+        chunkCount = int(math.ceil(fileSize/float(chunkSize)))
+
+        self.started.emit(True, self.index)
+        
         try:
-            file_size = os.stat(self.filename).st_size
-            chunk_size = 5242880
-            chunk_count = int(math.ceil(file_size / float(chunk_size)))
-            progress_count = 0
+            i = 0
+            while self.isRunning and i < chunkCount:
+            #for i in range(chunkCount):
+                offset = chunkSize * i
+                bytes = min(chunkSize, fileSize-offset)
+                with FileChunkIO(self.fileAbsPath, 'r', offset=offset, bytes=bytes) as fp:
+                    mp.upload_part_from_file(fp, part_num=i+1)
+                i += 1
+                #emit progress here
+                progress = i / float(chunkCount)  * 100
+                self.valueChanged.emit(progress, self.index)
 
-            multipart = self.bucket.initiate_multipart_upload(os.path.basename(self.filename))
+        except Exception as e:
+            self.error.emit(e, self.index)
+            self.finished.emit('failed', self.index)
 
-            QgsMessageLog.logMessage(
-                'Preparing to send %s chunks in total\n' % chunk_count,
-                'OAM',
-                level=QgsMessageLog.INFO)
-
-            for i in range(chunk_count):
-
-                if self.killed is True:
-                    # kill request received, exit loop early
-                    break
-
-                offset = chunk_size * i
-                # bytes are set to never exceed the original file size.
-                bytes = min(chunk_size, file_size - offset)
-                with FileChunkIO(self.filename, 'r', offset=offset, bytes=bytes) as fp:
-                    multipart.upload_part_from_file(fp, part_num=i + 1)
-                progress_count += 1
-                QgsMessageLog.logMessage(
-                    'Sent chunk #%d\n' % progress_count,
-                    'OAM',
-                    level=QgsMessageLog.INFO)
-                self.progress.emit(progress_count / float(chunk_count)*100, self.index)
-                QgsMessageLog.logMessage(
-                    'Progress = %f' % (progress_count / float(chunk_count)),
-                    'OAM',
-                    level=QgsMessageLog.INFO)
-
-            if self.killed is False:
-
-                multipart.complete_upload()
-                self.progress.emit(100, self.index)
-                success = True
-
-                # need to modify this part?
-                if "notify_oam" in self.options:
-                    self.notifyOAM()
-                if "trigger_tiling" in self.options:
-                    self.triggerTileService()
-
-        except Exception, e:
-            # forward the exception upstream (or try to...)
-            # chunk size smaller than 5MB can cause an error, server does not expect it
-            self.error.emit(e, traceback.format_exc())
-
-        self.finished.emit(success, self.index)
-
-    #for option
-    def notifyOAM(self):
-
-        '''Just a stub method, not needed at the moment
-        because indexing happens every 10 mins'''
-        QgsMessageLog.logMessage(
-            'AOM notified of new resource',
-            'OAM',
-            level=QgsMessageLog.INFO)
-
-    #for options
-    def triggerTileService(self):
-        url = "http://hotosm-oam-server-stub.herokuapp.com/tile"
-        h = {'content-type':'application/json'}
-        uri = "s3://%s/%s" % (self.bucket.name,os.path.basename(self.filename))
-        QgsMessageLog.logMessage(
-            'Imagery uri %s\n' % uri,
-            'OAM',
-            level=QgsMessageLog.INFO)
-        d = json.dumps({'sources':[uri]})
-        p = requests.post(url,headers=h,data=d)
-        post_dict = json.loads(p.text)
-        QgsMessageLog.logMessage(
-            'Post response: %s' % post_dict,
-            'OAM',
-            level=QgsMessageLog.INFO)
-
-        if u'id' in post_dict.keys():
-            ts_id = post_dict[u'id']
-            time = post_dict[u'queued_at']
-            QgsMessageLog.logMessage(
-                'Tile service #%s triggered on %s\n' % (ts_id,time),
-                'OAM',
-                level=QgsMessageLog.INFO)
+        if self.isRunning == True:
+            mp.complete_upload()
+            self.finished.emit('success', self.index)
         else:
-            QgsMessageLog.logMessage(
-                'Tile service could not be created\n',
-                'OAM',
-                level=QgsMessageLog.CRITICAL)
-        return(0)
+            self.finished.emit('cancelled', self.index)
+
+        """
+        if "notify_oam" in self.uploadOptions:
+            self.notifyOAM()
+        if "trigger_tiling" in self.uploadOptions:
+            self.triggerTileService()
+        """
 
     def run(self):
-        self.sendMetadata()
-        self.sendImageFiles()
 
-    def kill(self):
-        self.killed = True
+        """
+        #self.started.emit(True)
+        count = 0
+        while count <= 100 and self.isRunning == True:
+            try:
+                time.sleep(self.delay)
+                self.valueChanged.emit(count, self.index)
+                #print(str(count))
+                count+=1
+            except Exception as e:
+                self.isRunning = False
+                self.finished.emit('failed', self.index)
+                self.error.emit(e, self.index)
+
+        if self.isRunning == True:
+            self.finished.emit('success', self.index)
+        else:
+            self.finished.emit('cancelled', self.index)
+
+        """
+        self.uploadMetadata()
+        self.uploadImageFile()
+
+    def stop(self):
+        self.isRunning = False
