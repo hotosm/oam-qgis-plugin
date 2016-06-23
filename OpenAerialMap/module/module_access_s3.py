@@ -52,8 +52,8 @@ class S3UploadProgressWindow(QWidget):
     POSITION_WINDOW_FROM_RIGHT = 10
     POSITION_WINDOW_FROM_BOTTOM = 50
 
-    #progress = pyqtSignal(int, int)
-    # count success cancel failed
+    started = pyqtSignal(bool)
+    progress = pyqtSignal(str)
     finished = pyqtSignal(int, int, int)
     #error = pyqtSignal(Exception, basestring)
 
@@ -95,15 +95,19 @@ class S3UploadProgressWindow(QWidget):
 
     def startUpload(self, bucketKey, bucketSecret, bucketName, uploadOptions, uploadFileAbspaths):
 
-        """ probably need to use try-except """
+        # probably need to set timeout
         conn = None
         bucket = None
-        conn = S3Connection(bucketKey, bucketSecret)
-        bucket = conn.get_bucket(bucketName)
+        try:
+            conn = S3Connection(bucketKey, bucketSecret)
+            bucket = conn.get_bucket(bucketName)
+        except Exception as e:
+            self.started.emit(False)
 
         numFileAbsPaths = len(uploadFileAbspaths)
 
         if bucket != None:
+            self.started.emit(True)
             for i in range(self.activeId, self.activeId + numFileAbsPaths):
 
                 # Create horizontal layouts and add to the vertical layout
@@ -144,7 +148,7 @@ class S3UploadProgressWindow(QWidget):
             self.show()
             self.setWindowPosition()
         else:
-            pass
+            self.started.emit(False)
 
     def closeEvent(self, closeEvent):
         for eachTread in self.uwThreads:
@@ -187,13 +191,12 @@ class S3UploadProgressWindow(QWidget):
         self.progressBars[index].setValue(valueChanged)
 
     def uploadFinished(self, result, index):
-        #self.thread.quit()
-        self.uwThreads[index].quit()
         #print('Result: ' + result)
         try: #make sure if the labels still exist
             if result == 'success':
                 self.qLabels[index].setText("Successfully uploaded.")
                 self.numSuccess += 1
+                self.progress.emit(self.uwThreads[index].fileAbsPath)
             elif result == 'cancelled':
                 self.qLabels[index].setText("Upload cancelled.")
                 self.numCancelled += 1
@@ -202,6 +205,8 @@ class S3UploadProgressWindow(QWidget):
                 self.numFailed += 1
         except:
             pass
+
+        self.uwThreads[index].quit()
 
         if (self.numSuccess + self.numCancelled + self.numFailed) == self.numTotal:
             self.finished.emit(self.numSuccess, self.numCancelled, self.numFailed)

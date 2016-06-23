@@ -637,6 +637,8 @@ amount of time. Are you sure to continue?")
 
             if self.s3UpPrgWin == None:
                 self.s3UpPrgWin = S3UploadProgressWindow()
+                self.s3UpPrgWin.started.connect(self.displayConnectionResult)
+                self.s3UpPrgWin.progress.connect(self.updateProgress)
                 self.s3UpPrgWin.finished.connect(self.finishUpload)
 
             #self.s3UploadProgressWindow.startUpload(self.upload_filenames)
@@ -678,8 +680,28 @@ amount of time. Are you sure to continue?")
                     level=QgsMessageLog.CRITICAL)
             """
 
+    def displayConnectionResult(self, didStart):
+        if didStart:
+            self.bar2.clearWidgets()
+            self.bar2.pushMessage(
+                'INFO',
+                'Uploading imagery and metadata...',
+                level=QgsMessageBar.INFO)
+        else:
+            self.bar2.clearWidgets()
+            self.bar2.pushMessage(
+                'CRITICAL',
+                'Connection to S3 server failed.',
+                level=QgsMessageBar.CRITICAL)
+
     def finishUpload(self, numSuccess, numCancelled, numFailed):
         self.button(QWizard.FinishButton).setVisible(True)
+
+        self.bar2.clearWidgets()
+        self.bar2.pushMessage(
+            'Upload Result',
+            'Success:{0} Cancel:{1} Fail:{2}'.format(numSuccess, numCancelled, numFailed),
+            level=QgsMessageBar.INFO)
 
         # Probably, it is better to change this part into log file.
         print('')
@@ -688,18 +710,24 @@ amount of time. Are you sure to continue?")
         print('------------------------------------------------')
         print('')
 
-        # refresh the list widget and selected items, if reprojection is done
-        # probably need to make updateUpload function with signal from uploader
-        """
-        items_for_remove = self.added_sources_list_widget.findItems(original_file_name, Qt.MatchExactly)
-        self.added_sources_list_widget.takeItem(self.added_sources_list_widget.row(items_for_remove[0]))
+    def updateProgress(self, fileAbsPath):
+        #print('fileAbsPath: ' + fileAbsPath)
 
-        items_for_remove = self.sources_list_widget.findItems(original_file_name, Qt.MatchExactly)
-        self.sources_list_widget.takeItem(self.sources_list_widget.row(items_for_remove[0]))
-        #self.layers_list_widget.addItem(items_for_remove[0])
+        #print(str(self.added_sources_list_widget.count()))
+        for index in xrange(0, self.added_sources_list_widget.count()):
+            refFileAbsPath = str(self.added_sources_list_widget.item(index).data(Qt.UserRole))
+            #print('refFileAbsPath: ' + refFileAbsPath)
+            if fileAbsPath == refFileAbsPath:
+                self.added_sources_list_widget.takeItem(index)
+                break
 
+        #print(str(self.sources_list_widget.count()))
+        for index in xrange(0, self.sources_list_widget.count()):
+            refFileAbsPath = str(self.sources_list_widget.item(index).data(Qt.UserRole))
+            #print('refFileAbsPath: ' + refFileAbsPath)
+            if fileAbsPath == refFileAbsPath:
+                self.sources_list_widget.takeItem(index)
+                break
+
+        self.loadMetadataReviewBox()
         self.loadLayers()
-        items_to_add = self.layers_list_widget.findItems(reprojected_file_name, Qt.MatchExactly)
-        items_to_add[0].setSelected(True)
-        self.addSources()
-        """
