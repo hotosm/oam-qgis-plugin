@@ -22,22 +22,16 @@
  ***************************************************************************/
 """
 """
-from PyQt4 import QtGui
-from PyQt4.Qt import *
-from PyQt4.QtCore import QThread, Qt #,QObject
 import json, time, math, imghdr, tempfile
-
 from qgis.gui import QgsMessageBar
 from qgis.core import QgsMapLayer, QgsMessageLog
-
 import traceback
 import requests, json
 from ast import literal_eval
 """
 import sys, os, time, math
 from PyQt4 import QtCore
-# modify this part?
-from PyQt4.QtGui import *
+from PyQt4.QtGui import *      # modify this part?
 from PyQt4.QtCore import QThread, pyqtSignal
 
 import boto
@@ -53,7 +47,8 @@ class S3UploadProgressWindow(QWidget):
     POSITION_WINDOW_FROM_BOTTOM = 50
 
     started = pyqtSignal(bool)
-    progress = pyqtSignal(str)
+    startConfirmed = pyqtSignal(str)
+    #progress = pyqtSignal(str)
     finished = pyqtSignal(int, int, int)
     #error = pyqtSignal(Exception, basestring)
 
@@ -184,7 +179,7 @@ class S3UploadProgressWindow(QWidget):
 
     def uploadStarted(self, hasStarted, index):
         #print('Index: ' + str(index))
-        pass
+        self.startConfirmed.emit(self.uwThreads[index].fileAbsPath)
 
     def updateProgressBar(self, valueChanged, index):
         #print(str(valueChanged))
@@ -196,7 +191,7 @@ class S3UploadProgressWindow(QWidget):
             if result == 'success':
                 self.qLabels[index].setText("Successfully uploaded.")
                 self.numSuccess += 1
-                self.progress.emit(self.uwThreads[index].fileAbsPath)
+                #self.progress.emit(self.uwThreads[index].fileAbsPath)
             elif result == 'cancelled':
                 self.qLabels[index].setText("Upload cancelled.")
                 self.numCancelled += 1
@@ -225,7 +220,7 @@ class S3UploadProgressWindow(QWidget):
 
 class S3UploadWorker(QThread):
 
-    started = pyqtSignal(bool)
+    started = pyqtSignal(bool, int)
     valueChanged = pyqtSignal(int, int)
     finished = pyqtSignal(str, int)
     error = pyqtSignal(Exception, int)
@@ -262,6 +257,8 @@ class S3UploadWorker(QThread):
         chunkSize = 5242880
         chunkCount = int(math.ceil(fileSize/float(chunkSize)))
 
+        self.started.emit(True, self.index)
+        
         try:
             i = 0
             while self.isRunning and i < chunkCount:

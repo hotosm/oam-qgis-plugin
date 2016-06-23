@@ -93,8 +93,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         #self.upload_filenames = []
         #self.upload_file_abspaths = []
 
-        # implement this part later!
-        #self.s3UpPrgWins = []
         self.s3UpPrgWin = None
 
         # Initialize layers and default settings
@@ -135,7 +133,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.trigger_tiling_check.setEnabled(False)
 
         # temporarily disable textEdit for website and tags
-        # probably make extEdit for thumbnail later
+        # probably make textEdit for thumbnail later
         self.website_edit.setEnabled(False)
         self.tags_edit.setEnabled(False)
 
@@ -406,8 +404,15 @@ amount of time. Are you sure to continue?")
                              % (str(count+1), str(num_selected_layers)),
                             level=QgsMessageBar.INFO)
 
+
+                    """ probably need to convert the non-tiff file into tiff file"""
+                    #if not (imghdr.what(upload_filename) == 'tiff'):
+                    #    upload_filename = self.convert_to_tif(upload_filename)
+
+
                     """ probably need to insert the codes to create and insert
                     the detailed footprint layer here"""
+
 
                     # get metadata from GUI, and store them in a dictionary
                     metaInputInDict = {}
@@ -560,34 +565,6 @@ amount of time. Are you sure to continue?")
         stream = QTextStream(temp)
         self.review_metadata_box.setText(stream.readAll())
 
-    """
-    def startUploadPreprocessing(self):
-
-        self.bar2.clearWidgets()
-        self.bar2.pushMessage(
-            'INFO',
-            'Preprocessing....',
-            level=QgsMessageBar.INFO)
-
-        for index in xrange(self.sources_list_widget.count()):
-            #upload_filename = str(self.sources_list_widget.item(index).data(Qt.UserRole))
-            upload_file_abspath = str(self.added_sources_list_widget.item(index).data(Qt.UserRole))
-
-            if self.reproject_check_box.isChecked():
-                upload_filename = reproject(upload_filename)
-                QgsMessageLog.logMessage(
-                    'Created reprojected file: %s' % upload_filename,
-                    'OAM',
-                    level=QgsMessageLog.INFO)
-            if not (imghdr.what(upload_filename) == 'tiff'):
-                upload_filename = self.convert_to_tif(upload_filename)
-                QgsMessageLog.logMessage(
-                    'Converted file to tiff: %s' % upload_filename,
-                    'OAM',
-                    level=QgsMessageLog.INFO)
-            #self.upload_filenames.append(upload_filename)
-            self.upload_file_abspaths.append(upload_file_abspath)
-    """
 
     #event handler for upload button
     def startUpload(self):
@@ -610,10 +587,8 @@ amount of time. Are you sure to continue?")
                 'Please check the lisence term.',
                 level=QgsMessageBar.WARNING)
         else:
-            #self.startUploadPreprocessing()
             for index in xrange(self.sources_list_widget.count()):
                 upload_file_abspath = str(self.added_sources_list_widget.item(index).data(Qt.UserRole))
-                #self.upload_file_abspaths.append(upload_file_abspath)
                 upload_file_abspaths.append(upload_file_abspath)
 
             # get login information for bucket
@@ -638,11 +613,10 @@ amount of time. Are you sure to continue?")
             if self.s3UpPrgWin == None:
                 self.s3UpPrgWin = S3UploadProgressWindow()
                 self.s3UpPrgWin.started.connect(self.displayConnectionResult)
-                self.s3UpPrgWin.progress.connect(self.updateProgress)
+                #self.s3UpPrgWin.progress.connect(self.updateProgress)
+                self.s3UpPrgWin.startConfirmed.connect(self.updateListWidgets)
                 self.s3UpPrgWin.finished.connect(self.finishUpload)
 
-            #self.s3UploadProgressWindow.startUpload(self.upload_filenames)
-            #self.s3UpPrgWin.startUpload(self.upload_file_abspaths)
             self.s3UpPrgWin.startUpload(bucket_key,
                                         bucket_secret,
                                         bucket_name,
@@ -652,33 +626,6 @@ amount of time. Are you sure to continue?")
             self.button(QWizard.FinishButton).setVisible(False)
             #print(self.isTopLevel())
 
-            """
-            #create S3Manager Object and start upload
-            self.s3Mgr = S3Manager( bucket_key,
-                                    bucket_secret,
-                                    bucket_name,
-                                    self.upload_file_abspaths,
-                                    self.upload_options,
-                                    self.page(2) )
-
-            if self.s3Mgr.getBucket():
-                self.bar2.clearWidgets()
-                #msg = repr(self.s3Mgr.getAllKeys())
-                #msg = repr(self.s3Mgr.test())
-                #print msg
-                result = repr(self.s3Mgr.uploadFiles())
-                print result
-            else:
-                self.bar2.clearWidgets()
-                self.bar2.pushMessage(
-                    'CRITICAL',
-                    'No connection to the server',
-                    level=QgsMessageBar.CRITICAL)
-                QgsMessageLog.logMessage(
-                    'No connection to the server\n',
-                    'OAM',
-                    level=QgsMessageLog.CRITICAL)
-            """
 
     def displayConnectionResult(self, didStart):
         if didStart:
@@ -694,23 +641,8 @@ amount of time. Are you sure to continue?")
                 'Connection to S3 server failed.',
                 level=QgsMessageBar.CRITICAL)
 
-    def finishUpload(self, numSuccess, numCancelled, numFailed):
-        self.button(QWizard.FinishButton).setVisible(True)
 
-        self.bar2.clearWidgets()
-        self.bar2.pushMessage(
-            'Upload Result',
-            'Success:{0} Cancel:{1} Fail:{2}'.format(numSuccess, numCancelled, numFailed),
-            level=QgsMessageBar.INFO)
-
-        # Probably, it is better to change this part into log file.
-        print('')
-        print('------------------------------------------------')
-        print('Success:{0} Cancel:{1} Fail:{2}'.format(numSuccess, numCancelled, numFailed))
-        print('------------------------------------------------')
-        print('')
-
-    def updateProgress(self, fileAbsPath):
+    def updateListWidgets(self, fileAbsPath):
         #print('fileAbsPath: ' + fileAbsPath)
 
         #print(str(self.added_sources_list_widget.count()))
@@ -731,3 +663,20 @@ amount of time. Are you sure to continue?")
 
         self.loadMetadataReviewBox()
         self.loadLayers()
+
+
+    def finishUpload(self, numSuccess, numCancelled, numFailed):
+        self.button(QWizard.FinishButton).setVisible(True)
+
+        self.bar2.clearWidgets()
+        self.bar2.pushMessage(
+            'Upload Result',
+            'Success:{0} Cancel:{1} Fail:{2}'.format(numSuccess, numCancelled, numFailed),
+            level=QgsMessageBar.INFO)
+
+        # Probably, it is better to change this part into log file.
+        print('')
+        print('------------------------------------------------')
+        print('Success:{0} Cancel:{1} Fail:{2}'.format(numSuccess, numCancelled, numFailed))
+        print('------------------------------------------------')
+        print('')
