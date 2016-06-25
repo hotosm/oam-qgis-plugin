@@ -63,6 +63,7 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         #disable some GUIs
         self.lineEditLocation.setEnabled(False)
         self.pushButtonBrowseLocation.setEnabled(False)
+        self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(False)
 
         #add objects for catalog access
         self.oamCatalogAccess = OAMCatalogAccess("https://oam-catalog.herokuapp.com")
@@ -170,7 +171,9 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
             self.imgBrowser.activateWindow()
 
     def execOk(self):
+        # save the setting to QSetting and close the dialog.
         print("OK")
 
     def execCancel(self):
-        print("Canceled")
+        #print("Canceled")
+        self.close()
