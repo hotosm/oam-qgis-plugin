@@ -47,8 +47,8 @@ PY_FILES = \
 	oam_main.py \
 
 # removed 'module' while it is non-functional
-#PY_FOLDERS = module gui icon ext_libs
-PY_FOLDERS = gui icon module temp
+PY_FOLDERS = gui icon module  temp ext_libs
+#PY_FOLDERS = gui icon module temp
 
 #please modify the 'clean' section of this Makefile
 #UI_FILES = oam_client_dialog_base.ui
@@ -164,6 +164,11 @@ upload: zip
 	@echo "Uploading plugin to QGIS Plugin repo."
 	@echo "-------------------------------------"
 	$(PLUGIN_UPLOAD) $(PLUGINNAME).zip
+
+compile_for_upload:
+	@echo "------------------------------------------------"
+	@echo "Compiling a plugin for uploading..."
+	@echo "------------------------------------------------"
 
 transup:
 	@echo
