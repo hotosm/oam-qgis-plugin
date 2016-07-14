@@ -91,7 +91,7 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         strMeta += 'PROVIDER:\t\t{0}\n'.format(str(self.singleMetaInDic[u'provider']))
         strMeta += 'FILE SIZE:\t\t{0}\n'.format(str(self.singleMetaInDic[u'file_size']))
 
-        print(str(self.singleMetaInDic))
+        #print(str(self.singleMetaInDic))
         #print(strMeta)
         self.lbTest01.setWordWrap(True)
         self.lbTest01.setText(strMeta)

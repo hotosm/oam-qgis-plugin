@@ -22,8 +22,8 @@
  ***************************************************************************/
 """
 import os, sys
-import pycurl
-#import urllib
+#import pycurl
+import urllib2
 import json
 from StringIO import StringIO
 
@@ -49,7 +49,7 @@ class OAMCatalogAccess:
         return metadataInList
 
     def downloadMetadata(self):
-        print(str(self.dictQueries))
+        #print(str(self.dictQueries))
 
         self.endPoint = self.hostUrl
 
@@ -73,8 +73,14 @@ class OAMCatalogAccess:
 
 
 
-        print(str(self.endPoint))
+        #print(str(self.endPoint))
 
+        strBuffer = StringIO()
+        strBuffer.write(urllib2.urlopen(self.endPoint).read())
+        jMetadata = strBuffer.getvalue()
+        return jMetadata
+
+        """
         strBuffer = StringIO()
         c = pycurl.Curl()
         c.setopt(c.URL, self.endPoint)
@@ -83,6 +89,7 @@ class OAMCatalogAccess:
         c.close()
         jMetadata = strBuffer.getvalue()
         return jMetadata
+        """
 
     def uploadMetaData(self):
         #access to self.hostUrl and upload metadata

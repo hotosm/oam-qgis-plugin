@@ -155,7 +155,7 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
 
     def browseThumbnailAndMeta(self, item):
         singleMetaInDict = item.data(Qt.UserRole)
-        print(str(singleMetaInDict))
+        #print(str(singleMetaInDict))
 
         if type(singleMetaInDict) is dict:
 
