@@ -370,6 +370,8 @@ amount of time. Are you sure to continue?")
                 if 'Python Console' in action.text():
                     action.trigger()
 
+            self.activateWindow()
+
             selected_layers = self.added_sources_list_widget.selectedItems()
             if selected_layers:
                 num_selected_layers = len(selected_layers)
@@ -403,11 +405,6 @@ amount of time. Are you sure to continue?")
                             '%sth image out of %s is processed.'\
                              % (str(count+1), str(num_selected_layers)),
                             level=QgsMessageBar.INFO)
-
-
-                    """ probably need to convert the non-tiff file into tiff file"""
-                    #if not (imghdr.what(upload_filename) == 'tiff'):
-                    #    upload_filename = self.convert_to_tif(upload_filename)
 
 
                     """ probably need to insert the codes to create and insert
