@@ -44,6 +44,7 @@ from module.module_handle_metadata import ImgMetadataHandler
 from module.module_access_s3 import S3UploadProgressWindow #, S3Manager
 from module.module_gdal_utilities import reproject, convert_to_tif
 from module.module_validate_files import validate_layer, validate_file
+from module.module_os_command import CommandWindow
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_uploader_wizard.ui'))
@@ -346,12 +347,34 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
     def saveMetadata(self):
 
-        num_selected_layers = 0
-        count = 0
-
         selected_layers = self.added_sources_list_widget.selectedItems()
-        if selected_layers:
-            if self.reproject_check_box.isChecked():
+        if not selected_layers:
+            self.bar1.clearWidgets()
+            self.bar1.pushMessage(
+                'WARNING',
+                'One or more source imagery should be selected to have the metadata saved',
+                level=QgsMessageBar.WARNING)
+        else:
+            if not self.reproject_check_box.isChecked():
+
+                self.bar1.clearWidgets()
+                self.bar1.pushMessage(
+                    'INFO',
+                    'Metadata extraction is being processed...',
+                    level=QgsMessageBar.INFO)
+
+                #num_selected_layers = len(selected_layers)
+                for each_layer in selected_layers:
+                    file_abspath = each_layer.data(Qt.UserRole)
+                    #print("file name: " + str(file_abspath))
+                    self.exportMetaAsTextFile(file_abspath)
+
+                self.bar1.clearWidgets()
+                self.bar1.pushMessage(
+                    'INFO',
+                    'Metadata for the selected sources were saved',
+                    level=QgsMessageBar.INFO)
+            else:
                 qMsgBox = QMessageBox()
                 qMsgBox.setWindowTitle("Confirmation")
                 qMsgBox.setText("You checked the reprojection option, which can require significant amount of time. Are you sure to continue?")
@@ -359,70 +382,90 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 #qMsgBox.setDefaultButton(QMessageBox.Cancel)
 
                 if qMsgBox.exec_() == QMessageBox.Ok:
-                    num_selected_layers = len(selected_layers)
+                    self.bar1.clearWidgets()
+                    self.bar1.pushMessage(
+                        'INFO',
+                        'Reprojection is being processed...',
+                        level=QgsMessageBar.INFO)
+
+                    #num_selected_layers = len(selected_layers)
+                    self.cmdWindows = []
+                    self.numCmdWindows = len(selected_layers)
+                    self.numFinished = 0
+                    index = 0
                     for each_layer in selected_layers:
                         file_abspath = each_layer.data(Qt.UserRole)
-                        print("reproject: " + str(file_abspath))
+
+                        if not "EPSG3857" in file_abspath:
+                            reprojected_file_abspath = os.path.splitext(file_abspath)[0]+'_EPSG3857.tif'
+                        cmd = "gdalwarp -of GTiff -overwrite -t_srs epsg:3857 %s %s" % (file_abspath, reprojected_file_abspath)
+
+                        self.cmdWindows.append(CommandWindow('Reprojection', cmd, index))
+                        self.cmdWindows[index].finished.connect(self.updateReprojProgress)
+                        #self.cmdWindows[index].cancelled.connect(self.cancelSingleReprojProcess)
+                        self.cmdWindows[index].show()
+                        self.cmdWindows[index].move(20+index*20, 20+index*20)
+                        self.cmdWindows[index].startCommandThread()
+                        self.cmdWindows[index].activateWindow()
+
                         # get the metadata values from textEdit and send them into thread
                         #create thread object for reprojection
                         #add event handler to the thread (signal-slot, invoke exportMetaAsTextFile, quit, etc.)
                         #start thread
-            else:
-                num_selected_layers = len(selected_layers)
-                for each_layer in selected_layers:
-                    file_abspath = each_layer.data(Qt.UserRole)
-                    print("file name: " + str(file_abspath))
-                    # invoke exportMetaAsTextFile
+                        index += 1
 
-        else:
+
+    def cancelSingleReprojProcess(self, index):
+        #print("Reprojection was cancelled. Index: {0}".format(str(index)))
+        pass
+
+    def updateReprojProgress(self, index):
+        #print(str(index))
+        self.numFinished += 1
+        if self.numFinished < self.numCmdWindows:
             self.bar1.clearWidgets()
-            self.bar1.pushMessage(
-                'WARNING',
-                'One or more source imagery should be selected to have the metadata saved',
-                level=QgsMessageBar.WARNING)
-
-
-
-        """
-
-        if self.reproject_check_box.isChecked():
-            self.bar1.clearWidgets()
-            # this message doesn't show up without opening python console
-            # need to identify the reason
             self.bar1.pushMessage(
                 'INFO',
                 'Reprojecting files: %sth image out of %s is being processed...'\
-                 % (str(count+1), str(num_selected_layers)),
+                 % (str(self.numFinished+1), str(self.numCmdWindows)),
                 level=QgsMessageBar.INFO)
-            # Isn't it better to use thread?
-            print('Reprojecting {0}'.format(str(os.path.basename(file_abspath))))
-
-            # probably, it is better to create a class for reprojection
-            file_abspath = reproject(file_abspath)
-
-            print('Add the image as a raster layer...')
+        else:
+            """
+            #print('Add the image as a raster layer...')
             original_file_name = each_layer.text()
             reprojected_file_name = '(EPSG3857) ' + original_file_name
             self.iface.addRasterLayer(file_abspath, reprojected_file_name)
+            """
 
-        else:
+            """
+            # refresh the list widget and selected items, if reprojection is done
+            items_for_remove = self.added_sources_list_widget.findItems(original_file_name, Qt.MatchExactly)
+            self.added_sources_list_widget.takeItem(self.added_sources_list_widget.row(items_for_remove[0]))
+
+            items_for_remove = self.sources_list_widget.findItems(original_file_name, Qt.MatchExactly)
+            self.sources_list_widget.takeItem(self.sources_list_widget.row(items_for_remove[0]))
+            #self.layers_list_widget.addItem(items_for_remove[0])
+
+            self.loadLayers()
+            items_to_add = self.layers_list_widget.findItems(reprojected_file_name, Qt.MatchExactly)
+            items_to_add[0].setSelected(True)
+            self.addSources()
+            """
+
             self.bar1.clearWidgets()
             self.bar1.pushMessage(
                 'INFO',
-                '%sth image out of %s is processed.'\
-                 % (str(count+1), str(num_selected_layers)),
+                'Metadata for the selected sources were saved',
                 level=QgsMessageBar.INFO)
 
-        """
 
     def createFootPrint(self):
         # probably need to insert the codes to create and insert
         # the detailed footprint layer here
         pass
 
-    def exportMetaAsTextFile(self):
+    def exportMetaAsTextFile(self, file_abspath):
 
-        """
         # get metadata from GUI, and store them in a dictionary
         metaInputInDict = {}
         temp_filename = file_abspath.split('/')[-1]
@@ -456,33 +499,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         f = open(json_file_abspath,'w')
         f.write(strMetaForUpload)
         f.close()
-        count += 1
 
-        # refresh the list widget and selected items, if reprojection is done
-        if self.reproject_check_box.isChecked():
-            print('update the listWidget to reflect the change...')
-
-            items_for_remove = self.added_sources_list_widget.findItems(original_file_name, Qt.MatchExactly)
-            self.added_sources_list_widget.takeItem(self.added_sources_list_widget.row(items_for_remove[0]))
-
-            items_for_remove = self.sources_list_widget.findItems(original_file_name, Qt.MatchExactly)
-            self.sources_list_widget.takeItem(self.sources_list_widget.row(items_for_remove[0]))
-            #self.layers_list_widget.addItem(items_for_remove[0])
-
-            self.loadLayers()
-            items_to_add = self.layers_list_widget.findItems(reprojected_file_name, Qt.MatchExactly)
-            items_to_add[0].setSelected(True)
-            self.addSources()
-
-
-        self.bar1.clearWidgets()
-        self.bar1.pushMessage(
-            'INFO',
-            'Metadata for the selected sources were saved',
-            level=QgsMessageBar.INFO)
-        """
-        pass
-
+        return(True)
 
     def loadSavedMetadata(self):
 
@@ -679,9 +697,11 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             'Success:{0} Cancel:{1} Fail:{2}'.format(numSuccess, numCancelled, numFailed),
             level=QgsMessageBar.INFO)
 
+        """
         # Probably, it is better to change this part into log file.
         print('')
         print('------------------------------------------------')
         print('Success:{0} Cancel:{1} Fail:{2}'.format(numSuccess, numCancelled, numFailed))
         print('------------------------------------------------')
         print('')
+        """
