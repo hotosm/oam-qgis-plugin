@@ -27,6 +27,36 @@ from osgeo import gdal, osr, ogr
 from ast import literal_eval
 from qgis.core import QgsMessageLog
 
+from module.module_command_window import CommandWindow
+
+class ReprojectionCmdWindow(CommandWindow):
+
+    def __init__(self, title, strCmd, fileAbsPath, reprojectedFileAbsPath, index, layerName):
+        self.fileAbsPath = fileAbsPath
+        self.reprojectedFileAbsPath = reprojectedFileAbsPath
+        self.strCmdCompleted = strCmd + ' ' + str(fileAbsPath) + ' ' + str(reprojectedFileAbsPath)
+
+        CommandWindow.__init__(self, title, self.strCmdCompleted, index, parent=None)
+
+        self.layerName = layerName
+        self.reprojectedLayerName = '(EPSG3857) ' + self.layerName
+
+    #def show(self):
+    #    super(CommandWindow, self).show()
+
+    def getFileAbsPath(self):
+        return str(self.fileAbsPath)
+
+    def getReprojectedFileAbsPath(self):
+        return str(self.reprojectedFileAbsPath)
+
+    def getLayerName(self):
+        return str(self.layerName)
+
+    def getReprojectedLayerName(self):
+        return str(self.reprojectedLayerName)
+
+
 def reproject(file_abspath):
     """make sure if we need to -overwrite option"""
     # to avoid repetition of "EPSG3857" in filename:

@@ -28,7 +28,7 @@ from PyQt4 import QtGui, uic
 from PyQt4.Qt import *
 
 from qgis.gui import QgsMessageBar
-from qgis.core import QgsMapLayer, QgsMessageLog
+from qgis.core import QgsMapLayer, QgsMessageLog #, QgsRasterLayer
 from osgeo import gdal, osr, ogr
 import json, time, math, imghdr, tempfile
 
@@ -42,9 +42,9 @@ from ast import literal_eval
 
 from module.module_handle_metadata import ImgMetadataHandler
 from module.module_access_s3 import S3UploadProgressWindow #, S3Manager
-from module.module_gdal_utilities import reproject, convert_to_tif
+from module.module_gdal_utilities import reproject, convert_to_tif, ReprojectionCmdWindow
 from module.module_validate_files import validate_layer, validate_file
-from module.module_os_command import CommandWindow
+#from module.module_command_window import CommandWindow
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_uploader_wizard.ui'))
@@ -382,82 +382,107 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 #qMsgBox.setDefaultButton(QMessageBox.Cancel)
 
                 if qMsgBox.exec_() == QMessageBox.Ok:
-                    self.bar1.clearWidgets()
-                    self.bar1.pushMessage(
-                        'INFO',
-                        'Reprojection is being processed...',
-                        level=QgsMessageBar.INFO)
+                    """Open python console. I haven't indentified the exact reason, but
+                    messagebar doesn't work properly without opening python console
+                    and some print statements"""
+                    pluginMenu = self.iface.pluginMenu()
+                    #print(repr(pluginMenu))
+                    for action in pluginMenu.actions():
+                        #print(action.text())
+                        if 'Python Console' in action.text():
+                            action.trigger()
 
                     #num_selected_layers = len(selected_layers)
-                    self.cmdWindows = []
-                    self.numCmdWindows = len(selected_layers)
-                    self.numFinished = 0
+                    self.reprojectionCmdWindows = []
+                    self.numReprojectionCmdWindows = len(selected_layers)
+                    self.numReprojectionFinished = 0
                     index = 0
                     for each_layer in selected_layers:
                         file_abspath = each_layer.data(Qt.UserRole)
 
                         if not "EPSG3857" in file_abspath:
+
                             reprojected_file_abspath = os.path.splitext(file_abspath)[0]+'_EPSG3857.tif'
-                        cmd = "gdalwarp -of GTiff -overwrite -t_srs epsg:3857 %s %s" % (file_abspath, reprojected_file_abspath)
+                            layerName = each_layer.text()
 
-                        self.cmdWindows.append(CommandWindow('Reprojection', cmd, index))
-                        self.cmdWindows[index].finished.connect(self.updateReprojProgress)
-                        #self.cmdWindows[index].cancelled.connect(self.cancelSingleReprojProcess)
-                        self.cmdWindows[index].show()
-                        self.cmdWindows[index].move(20+index*20, 20+index*20)
-                        self.cmdWindows[index].startCommandThread()
-                        self.cmdWindows[index].activateWindow()
+                            #cmd = "gdalwarp -of GTiff -overwrite -t_srs epsg:3857 %s %s" % (file_abspath, reprojected_file_abspath)
+                            cmd = "gdalwarp -of GTiff -overwrite -t_srs epsg:3857"
 
-                        # get the metadata values from textEdit and send them into thread
-                        #create thread object for reprojection
-                        #add event handler to the thread (signal-slot, invoke exportMetaAsTextFile, quit, etc.)
-                        #start thread
-                        index += 1
+                            #self.reprojectionCmdWindows.append(CommandWindow('Reprojection', cmd, index))
+                            #self.reprojectionCmdWindows.append(ReprojectionCmdWindow('Reprojection', cmd, index))
+                            self.reprojectionCmdWindows.append(ReprojectionCmdWindow('Reprojection', cmd, file_abspath, reprojected_file_abspath, index, layerName))
+                            self.reprojectionCmdWindows[index].finished.connect(self.updateReprojectionProgress)
+                            #self.reprojectionCmdWindows[index].cancelled.connect(self.cancelSingleReprojectionProcess)
+                            self.reprojectionCmdWindows[index].show()
+                            self.reprojectionCmdWindows[index].move(20+index*20, 20+index*20)
+                            self.reprojectionCmdWindows[index].startCommandThread()
+                            self.reprojectionCmdWindows[index].activateWindow()
 
+                            self.bar1.clearWidgets()
+                            self.bar1.pushMessage(
+                                'INFO',
+                                'Reprojecting files: %sth image out of %s is being processed...'\
+                                 % (str(self.numReprojectionFinished+1), str(self.numReprojectionCmdWindows)),
+                                level=QgsMessageBar.INFO)
 
-    def cancelSingleReprojProcess(self, index):
+                            index += 1
+
+                        else:
+                            self.bar1.clearWidgets()
+                            self.bar1.pushMessage(
+                                'WARNING',
+                                'Suffix _EPSG3857 is already included in one (some) of the selected files...',
+                                level=QgsMessageBar.WARNING)
+                            #break
+
+    def cancelSingleReprojectionProcess(self, index):
         #print("Reprojection was cancelled. Index: {0}".format(str(index)))
         pass
 
-    def updateReprojProgress(self, index):
-        #print(str(index))
-        self.numFinished += 1
-        if self.numFinished < self.numCmdWindows:
+    def updateReprojectionProgress(self, index):
+
+        self.activateWindow()
+        
+        reprojectedFileAbsPath = self.reprojectionCmdWindows[index].getReprojectedFileAbsPath()
+        reprojectedLayerName = self.reprojectionCmdWindows[index].getReprojectedLayerName()
+        fileAbsPath = self.reprojectionCmdWindows[index].getFileAbsPath()
+        layerName = self.reprojectionCmdWindows[index].getLayerName()
+        #print(str(reprojectedFileAbsPath) + ' ' + str(reprojectedLayerName))
+        #print(str(fileAbsPath) + ' ' + str(layerName))
+
+        self.iface.addRasterLayer(reprojectedFileAbsPath, reprojectedLayerName)
+        self.exportMetaAsTextFile(reprojectedFileAbsPath)
+
+        items_for_remove = self.added_sources_list_widget.findItems(layerName, Qt.MatchExactly)
+        self.added_sources_list_widget.takeItem(self.added_sources_list_widget.row(items_for_remove[0]))
+
+        items_for_remove = self.sources_list_widget.findItems(layerName, Qt.MatchExactly)
+        self.sources_list_widget.takeItem(self.sources_list_widget.row(items_for_remove[0]))
+        #self.layers_list_widget.addItem(items_for_remove[0])
+
+        self.loadLayers()
+
+        items_to_add = self.layers_list_widget.findItems(reprojectedLayerName, Qt.MatchExactly)
+        """ consider the use of callback function here. """
+        print('Select the reprojected layer for upload: ' + str(items_to_add))
+        items_to_add[0].setSelected(True)
+        self.addSources()
+
+        self.numReprojectionFinished += 1
+
+        if self.numReprojectionFinished < self.numReprojectionCmdWindows:
             self.bar1.clearWidgets()
             self.bar1.pushMessage(
                 'INFO',
                 'Reprojecting files: %sth image out of %s is being processed...'\
-                 % (str(self.numFinished+1), str(self.numCmdWindows)),
+                 % (str(self.numReprojectionFinished+1), str(self.numReprojectionCmdWindows)),
                 level=QgsMessageBar.INFO)
         else:
-            """
-            #print('Add the image as a raster layer...')
-            original_file_name = each_layer.text()
-            reprojected_file_name = '(EPSG3857) ' + original_file_name
-            self.iface.addRasterLayer(file_abspath, reprojected_file_name)
-            """
-
-            """
-            # refresh the list widget and selected items, if reprojection is done
-            items_for_remove = self.added_sources_list_widget.findItems(original_file_name, Qt.MatchExactly)
-            self.added_sources_list_widget.takeItem(self.added_sources_list_widget.row(items_for_remove[0]))
-
-            items_for_remove = self.sources_list_widget.findItems(original_file_name, Qt.MatchExactly)
-            self.sources_list_widget.takeItem(self.sources_list_widget.row(items_for_remove[0]))
-            #self.layers_list_widget.addItem(items_for_remove[0])
-
-            self.loadLayers()
-            items_to_add = self.layers_list_widget.findItems(reprojected_file_name, Qt.MatchExactly)
-            items_to_add[0].setSelected(True)
-            self.addSources()
-            """
-
             self.bar1.clearWidgets()
             self.bar1.pushMessage(
                 'INFO',
                 'Metadata for the selected sources were saved',
                 level=QgsMessageBar.INFO)
-
 
     def createFootPrint(self):
         # probably need to insert the codes to create and insert
