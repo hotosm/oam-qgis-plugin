@@ -28,7 +28,7 @@ from PyQt4 import QtGui, uic
 from PyQt4.Qt import *
 
 from qgis.gui import QgsMessageBar
-from qgis.core import QgsMapLayer, QgsMessageLog #, QgsRasterLayer
+from qgis.core import QgsMapLayer, QgsMessageLog #, QgsRasterLayer, QgsMapLayerRegistry
 from osgeo import gdal, osr, ogr
 import json, time, math, imghdr, tempfile
 
@@ -42,7 +42,7 @@ from ast import literal_eval
 
 from module.module_handle_metadata import ImgMetadataHandler
 from module.module_access_s3 import S3UploadProgressWindow #, S3Manager
-from module.module_gdal_utilities import reproject, convert_to_tif, ReprojectionCmdWindow
+from module.module_gdal_utilities import ReprojectionCmdWindow #, reproject, convert_to_tif
 from module.module_validate_files import validate_layer, validate_file
 #from module.module_command_window import CommandWindow
 
@@ -382,21 +382,29 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 #qMsgBox.setDefaultButton(QMessageBox.Cancel)
 
                 if qMsgBox.exec_() == QMessageBox.Ok:
-                    """Open python console. I haven't indentified the exact reason, but
-                    messagebar doesn't work properly without opening python console
-                    and some print statements"""
+                    """Open python console"""
+                    """
                     pluginMenu = self.iface.pluginMenu()
                     #print(repr(pluginMenu))
                     for action in pluginMenu.actions():
                         #print(action.text())
                         if 'Python Console' in action.text():
                             action.trigger()
+                    """
 
                     #num_selected_layers = len(selected_layers)
                     self.reprojectionCmdWindows = []
                     self.numReprojectionCmdWindows = len(selected_layers)
                     self.numReprojectionFinished = 0
                     index = 0
+
+                    self.bar1.clearWidgets()
+                    self.bar1.pushMessage(
+                        'INFO',
+                        'Reprojecting files: %sth image out of %s is being processed...'\
+                         % (str(self.numReprojectionFinished+1), str(self.numReprojectionCmdWindows)),
+                        level=QgsMessageBar.INFO)
+
                     for each_layer in selected_layers:
                         file_abspath = each_layer.data(Qt.UserRole)
 
@@ -418,13 +426,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                             self.reprojectionCmdWindows[index].startCommandThread()
                             self.reprojectionCmdWindows[index].activateWindow()
 
-                            self.bar1.clearWidgets()
-                            self.bar1.pushMessage(
-                                'INFO',
-                                'Reprojecting files: %sth image out of %s is being processed...'\
-                                 % (str(self.numReprojectionFinished+1), str(self.numReprojectionCmdWindows)),
-                                level=QgsMessageBar.INFO)
-
                             index += 1
 
                         else:
@@ -441,17 +442,30 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
     def updateReprojectionProgress(self, index):
 
-        self.activateWindow()
-        
+        """ consider the use of callback function here. """
         reprojectedFileAbsPath = self.reprojectionCmdWindows[index].getReprojectedFileAbsPath()
         reprojectedLayerName = self.reprojectionCmdWindows[index].getReprojectedLayerName()
         fileAbsPath = self.reprojectionCmdWindows[index].getFileAbsPath()
         layerName = self.reprojectionCmdWindows[index].getLayerName()
-        #print(str(reprojectedFileAbsPath) + ' ' + str(reprojectedLayerName))
-        #print(str(fileAbsPath) + ' ' + str(layerName))
+        #print('Reprojection completed for:')
+        #print('File Path:  {0}'.format(fileAbsPath))
+        #print('Layer Name: {0}'.format(layerName))
+
+        """
+        #rlayer = QgsRasterLayer(reprojectedFileAbsPath, reprojectedLayerName)
+        #QgsMapLayerRegistry.instance().addMapLayer(rlayer)
+        #print(str(rlayer.isValid()))
+        """
 
         self.iface.addRasterLayer(reprojectedFileAbsPath, reprojectedLayerName)
+        #print('Insert reprojected raster layer. Layer name:')
+        #print('File Path:  {0}'.format(reprojectedFileAbsPath))
+        #print('Layer Name: {0}'.format(reprojectedLayerName))
+
         self.exportMetaAsTextFile(reprojectedFileAbsPath)
+        #print('Export Metadata into text file...')
+
+        #self.activateWindow()
 
         items_for_remove = self.added_sources_list_widget.findItems(layerName, Qt.MatchExactly)
         self.added_sources_list_widget.takeItem(self.added_sources_list_widget.row(items_for_remove[0]))
@@ -460,13 +474,13 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.sources_list_widget.takeItem(self.sources_list_widget.row(items_for_remove[0]))
         #self.layers_list_widget.addItem(items_for_remove[0])
 
-        self.loadLayers()
+        item = QListWidgetItem()
+        item.setText(reprojectedLayerName)
+        item.setData(Qt.UserRole, reprojectedFileAbsPath)
+        self.sources_list_widget.addItem(item)
+        self.added_sources_list_widget.addItem(item.clone())
 
-        items_to_add = self.layers_list_widget.findItems(reprojectedLayerName, Qt.MatchExactly)
-        """ consider the use of callback function here. """
-        print('Select the reprojected layer for upload: ' + str(items_to_add))
-        items_to_add[0].setSelected(True)
-        self.addSources()
+        self.loadLayers()
 
         self.numReprojectionFinished += 1
 
@@ -483,6 +497,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 'INFO',
                 'Metadata for the selected sources were saved',
                 level=QgsMessageBar.INFO)
+
 
     def createFootPrint(self):
         # probably need to insert the codes to create and insert

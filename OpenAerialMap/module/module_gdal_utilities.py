@@ -25,7 +25,7 @@
 import os, sys
 from osgeo import gdal, osr, ogr
 from ast import literal_eval
-from qgis.core import QgsMessageLog
+from qgis.core import QgsMessageLog #, QgsRasterLayer, QgsMapLayerRegistry
 
 from module.module_command_window import CommandWindow
 
@@ -41,8 +41,14 @@ class ReprojectionCmdWindow(CommandWindow):
         self.layerName = layerName
         self.reprojectedLayerName = '(EPSG3857) ' + self.layerName
 
-    #def show(self):
-    #    super(CommandWindow, self).show()
+    """
+    #override function
+    def finishTask(self, result):
+        super(ReprojectionCmdWindow, self).finishTask(result)
+        rlayer = QgsRasterLayer(self.reprojectedFileAbsPath, self.reprojectedLayerName)
+        QgsMapLayerRegistry.instance().addMapLayer(rlayer)
+        #print(str(rlayer.isValid()))
+    """
 
     def getFileAbsPath(self):
         return str(self.fileAbsPath)
@@ -56,9 +62,9 @@ class ReprojectionCmdWindow(CommandWindow):
     def getReprojectedLayerName(self):
         return str(self.reprojectedLayerName)
 
-
+"""
 def reproject(file_abspath):
-    """make sure if we need to -overwrite option"""
+    #make sure if we need to -overwrite option
     # to avoid repetition of "EPSG3857" in filename:
     if not "EPSG3857" in file_abspath:
         reprojected_file_abspath = os.path.splitext(file_abspath)[0]+'_EPSG3857.tif'
@@ -70,10 +76,9 @@ def reproject(file_abspath):
         'OAM',
         level=QgsMessageLog.INFO)
     return reprojected_file_abspath
+"""
 
-
-"""Probably this function is not necessary, since reproject function
-    automatically convert the non-tiff file into tiff file."""
+"""
 def convert_to_tif(file_abspath):
     if not ".tif" in file_abspath:
         converted_file_abspath = os.path.splitext(file_abspath)[0]+".tif"
@@ -87,7 +92,7 @@ def convert_to_tif(file_abspath):
         'OAM',
         level=QgsMessageLog.INFO)
     return converted_file_abspath
-
+"""
 
 def gdal_info_report_corner(hDataset, x, y):
     """gdal_info_report_corner: extracted and adapted
