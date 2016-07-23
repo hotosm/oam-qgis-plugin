@@ -40,7 +40,7 @@ class ImgMetadataHandler:
         return self.metaInImagery
 
     def openGdalDataset(self):
-        print('Open GDAL Dataset...')
+        #print('Open GDAL Dataset...')
         self.gdalDataset = gdal.Open(self.imgFileAbspath, gdal.GA_ReadOnly)
         if self.gdalDataset:
             return True
@@ -51,7 +51,7 @@ class ImgMetadataHandler:
         self.gdalDataset = None
 
     def extractMetaInImagery(self):
-        print('Extracting metadata from Imagery...')
+        #print('Extracting metadata from Imagery...')
         # is it better to use exception handling?
         self.metaInImagery['file_size'] = os.stat(self.imgFileAbspath).st_size
         if self.openGdalDataset():
