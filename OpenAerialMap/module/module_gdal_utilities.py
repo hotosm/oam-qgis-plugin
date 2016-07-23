@@ -25,7 +25,7 @@
 import os, sys
 from osgeo import gdal, osr, ogr
 from ast import literal_eval
-from qgis.core import QgsMessageLog #, QgsRasterLayer, QgsMapLayerRegistry
+from qgis.core import QgsMessageLog
 
 from module.module_command_window import CommandWindow
 
@@ -40,15 +40,6 @@ class ReprojectionCmdWindow(CommandWindow):
 
         self.layerName = layerName
         self.reprojectedLayerName = '(EPSG3857) ' + self.layerName
-
-    """
-    #override function
-    def finishTask(self, result):
-        super(ReprojectionCmdWindow, self).finishTask(result)
-        rlayer = QgsRasterLayer(self.reprojectedFileAbsPath, self.reprojectedLayerName)
-        QgsMapLayerRegistry.instance().addMapLayer(rlayer)
-        #print(str(rlayer.isValid()))
-    """
 
     def getFileAbsPath(self):
         return str(self.fileAbsPath)

@@ -41,8 +41,8 @@ import requests, json
 from ast import literal_eval
 
 from module.module_handle_metadata import ImgMetadataHandler
-from module.module_access_s3 import S3UploadProgressWindow #, S3Manager
-from module.module_gdal_utilities import ReprojectionCmdWindow #, reproject, convert_to_tif
+from module.module_access_s3 import S3UploadProgressWindow
+from module.module_gdal_utilities import ReprojectionCmdWindow 
 from module.module_validate_files import validate_layer, validate_file
 #from module.module_command_window import CommandWindow
 
@@ -417,7 +417,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                             cmd = "gdalwarp -of GTiff -overwrite -t_srs epsg:3857"
 
                             #self.reprojectionCmdWindows.append(CommandWindow('Reprojection', cmd, index))
-                            #self.reprojectionCmdWindows.append(ReprojectionCmdWindow('Reprojection', cmd, index))
                             self.reprojectionCmdWindows.append(ReprojectionCmdWindow('Reprojection', cmd, file_abspath, reprojected_file_abspath, index, layerName))
                             self.reprojectionCmdWindows[index].finished.connect(self.updateReprojectionProgress)
                             #self.reprojectionCmdWindows[index].cancelled.connect(self.cancelSingleReprojectionProcess)
