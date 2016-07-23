@@ -47,13 +47,12 @@ PY_FILES = \
 	oam_main.py \
 
 # removed 'module' while it is non-functional
-PY_FOLDERS = gui icon module  temp ext_libs
-#PY_FOLDERS = gui icon module temp
+PY_FOLDERS = gui icon module temp ext_libs i18n
 
 #please modify the 'clean' section of this Makefile
 #UI_FILES = oam_client_dialog_base.ui
 
-EXTRAS = metadata.txt oam-qgis-plugin.conf.sample ABOUT INSTALL LICENSE
+EXTRAS = metadata.txt oam-qgis-plugin.conf.sample ABOUT INSTALL LICENSE resources.qrc
 
 COMPILED_RESOURCE_FILES = resources_rc.py
 
@@ -64,7 +63,7 @@ PEP8EXCLUDE=pydev,resources_rc.py,conf.py,third_party,ui
 # Normally you would not need to edit below here
 #################################################
 
-#HELP = help/build/html
+HELP = help/build/html
 
 PLUGIN_UPLOAD = $(c)/plugin_upload.py
 
@@ -100,8 +99,8 @@ test: compile transcompile
 	@echo "e.g. source run-env-linux.sh <path to qgis install>; make test"
 	@echo "----------------------"
 
-#deploy: compile doc transcompile
-deploy: compile
+#deploy: doc transcompile compile
+deploy: doc compile
 	@echo
 	@echo "------------------------------------------"
 	@echo "Deploying plugin to your .qgis2 directory."
@@ -114,8 +113,8 @@ deploy: compile
 	cp -vrf $(PY_FOLDERS) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)/
 	cp -vf $(COMPILED_RESOURCE_FILES) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
 	cp -vf $(EXTRAS) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
-	cp -vfr i18n $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
-#	cp -vfr $(HELP) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)/help
+#	cp -vfr i18n $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
+	cp -vfr $(HELP) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)/help
 
 # The dclean target removes compiled python files from plugin directory
 # also deletes any .git entry
@@ -208,6 +207,13 @@ doc:
 	@echo "Building documentation using sphinx."
 	@echo "------------------------------------"
 	cd help; make html
+
+docclean:
+	@echo
+	@echo "------------------------------------"
+	@echo "Removing the build directory in help directory."
+	@echo "------------------------------------"
+	rm -vRf help/build
 
 pylint:
 	@echo
