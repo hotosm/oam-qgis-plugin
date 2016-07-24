@@ -4,3 +4,4 @@ Makefile export-ignore
 pb_tool.cfg export-ignore
 plugin_upload.py export-ignore
 pylintrc export-ignore
+.gitattributes export-ignore
