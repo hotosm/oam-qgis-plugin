@@ -115,6 +115,7 @@ deploy: doc compile
 	cp -vf $(EXTRAS) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
 #	cp -vfr i18n $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)
 	cp -vfr $(HELP) $(HOME)/$(QGISDIR)/python/plugins/$(PLUGINNAME)/help
+# need to modify the statement for .qrc files
 
 # The dclean target removes compiled python files from plugin directory
 # also deletes any .git entry
@@ -164,10 +165,15 @@ upload: zip
 	@echo "-------------------------------------"
 	$(PLUGIN_UPLOAD) $(PLUGINNAME).zip
 
-compile_for_upload:
+package_master:
 	@echo "------------------------------------------------"
 	@echo "Compiling a plugin for uploading..."
 	@echo "------------------------------------------------"
+	rm -f $(PLUGINNAME).zip
+	git archive -o $(PLUGINNAME).zip master
+	pyrcc4 -o resources_rc.py resources.qrc
+	zip -u $(PLUGINNAME).zip resources_rc.py
+	echo "Created package: $(PLUGINNAME).zip"
 
 transup:
 	@echo
