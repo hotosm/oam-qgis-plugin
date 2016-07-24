@@ -1,0 +1,6 @@
+OpenAerialMap/scripts export-ignore
+OpenAerialMap/test export-ignore
+OpenAerialMap/Makefile export-ignore
+OpenAerialMap/pb_tool.cfg export-ignore
+OpenAerialMap/plugin_upload.py export-ignore
+OpenAerialMap/pylintrc export-ignore

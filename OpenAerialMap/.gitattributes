@@ -1,6 +1,0 @@
-scripts export-ignore
-test export-ignore
-Makefile export-ignore
-pb_tool.cfg export-ignore
-plugin_upload.py export-ignore
-pylintrc export-ignore
