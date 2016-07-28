@@ -3,10 +3,10 @@ import os, sys
 def main(argv):
     if argv[1] == 'package':
         print("")
-        print("------------------------------------------")
+        print("---------------------------------------------------")
         print("Under construction...")
         #print("Compiling a plugin for uploading...")
-        print("------------------------------------------")
+        print("---------------------------------------------------")
         print("")
         #insert codes for installation here
     else:
