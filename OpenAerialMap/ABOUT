@@ -1,14 +1,26 @@
-The OpenAerialMap QGIS plugin allows QGIS users to communicates with OAM
-services, acting basically as a desktop client for OAM. Through this plugin
-users will be able to upload imagery to OAM, trigger the creation of tile
-services, search and download imagery from the catalog.
+About Open Aerial Map QGIS Plugin
 
-The plugin released version is experimental. We need help from the community
-to test and help evolving the code.
+OpenAerialMap QGIS plugin allows QGIS users to communicate with various OAM
+services, acting as a desktop client for OAM. Through this plugin,
+users can upload, search, and download imagery, as well as create and edit
+the OIN-conformed metadata in a simple way.
+It also supports some raster image processing such as reprojection and
+file format conversion, as well as triggering the creation of tile services.
 
-The current implementation has the following dialogs:
+The current implementation consists of following three dialogs:
 
-1) Upload wizard: step-by-step guide for an upload request.
+1) Upload wizard: create, modify, and upload imagery and metada (tile
+service is still under construction).
+2) Imagery search dialog: search, browse, and download imagery.
+3) Settings dialog: edit user settings such as the default
+imagery metadata and upload options.
+
+This plugin is currently experimental. We always appreciate your feeedback to
+improve the code.
+
+
+Move this part to help file?
+Step-by-step guide for an upload request.
 
 * Step 1: Selection of imagery to be uploaded among layers currently loaded on
 the QGIS map canvas or any local file. After adding imagery, the user can
@@ -23,9 +35,3 @@ under CC-BY 4.0 and allow tracing in OSM.
 * Step 3: Review of final metadata info, select if the OAM catalog should be
 imediately notified of the new resource and if a tile service should be
 created, choose the upload destination and finally perform the upload.
-
-2) Search imagery: search/browse and download imagery (currently just a stub
-dialog).
-
-3) Edit settings: a means to change user settings regarding the default
-imagery metadata and upload options.

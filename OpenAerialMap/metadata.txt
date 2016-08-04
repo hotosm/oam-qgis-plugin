@@ -1,7 +1,7 @@
-# This file contains metadata for your plugin. Since 
-# version 2.0 of QGIS this is the proper way to supply 
-# information about a plugin. The old method of 
-# embedding metadata in __init__.py will 
+# This file contains metadata for your plugin. Since
+# version 2.0 of QGIS this is the proper way to supply
+# information about a plugin. The old method of
+# embedding metadata in __init__.py will
 # is no longer supported since version 2.0.
 
 # This file should be included when you package your plugin.# Mandatory items:
@@ -9,11 +9,12 @@
 [general]
 name=Open Aerial Map (OAM)
 qgisMinimumVersion=2.0
-description=This plugin can be used as an OAM client to upload, search and download imagery to/from the OAM catalog.
-about=Through the 'Upload wizard' the user is guided in order to create a metadata json file for each source, which is mandatory for OAM imagery. Some information is also extracted directly from the imagery files, and the user has a chance to review all metadata before performing the upload. Default settings can be stored and changed through the 'Edit settings' dialog, and loaded at the convenience of the user. In the currente implementation, the 'Search imagery' dialog is a stub, to be implemented in future versions
-version=0.1-alpha.1
-author=Tassia Camoes Araujo
+description=Open Aerial Map (OAM) client to upload, search, and download imagery and metadata
+about=OpenAerialMap QGIS plugin allows QGIS users to communicate with various OAM services, acting as a desktop client for OAM. Through this plugin, users can upload, search, and download imagery, as well as create and edit OIN-conformed metadata in a simple way. It also supports some raster image processing such as reprojection and file format conversion, as well as triggering the creation of tile services.
+version=git-master
+author=Tassia Camoes Araujo, Yoji Uno
 email=tassia@acaia.ca
+
 
 # End of mandatory metadata
 
@@ -29,10 +30,9 @@ homepage=https://github.com/hotosm/oam-qgis-plugin
 tracker=https://github.com/hotosm/oam-qgis-plugin/issues
 repository=https://github.com/hotosm/oam-qgis-plugin
 category=Plugins
-icon=icon.png
+icon=icon/icon.png
 # experimental flag
 experimental=True
 
 # deprecated flag (applies to the whole plugin, not just a single version)
 deprecated=False
-

@@ -1,10 +1,14 @@
 ## oam-qgis-plugin
 
-QGIS plugin to upload data to and access data from OpenAerialMap. The upload module and settings handling work, but the browser/catalog tab is still a non-functional module.
+QGIS plugin to upload and download data to/from OpenAerialMap. The plugin cosists of following functionalities:  
+1) Create, edit OIN conformed metadata from imagery and user input  
+2) Upload imagery and metadata, using AWS-S3 bucket  
+3) Search, browse, and download imagery and metadata through OAM catalog  
+4) Support simple raster image processing, such as reprojection and file format conversion, as well as trigger the creation of tile service (currently under development)
 
 Contact sysadmin@hotosm.org to request an access key if you want to upload to the HOT OIN upload bucket.
 
-## Install
+## Install from package
 
 A package containing all the needed dependencies is available at the [QGIS repository](https://plugins.qgis.org/plugins/OpenAerialMap/).
 
@@ -12,37 +16,51 @@ It can be installed through the QGIS menu "Plugins" -> "Manage and Install Plugi
 
 Alternatively, the plugin can be downloaded directly from the [repository](https://plugins.qgis.org/plugins/OpenAerialMap/version/0.1-alpha.2/download/), followed by:
 
-* Unpacking the file OpenAerialMap-0.1-alpha.1.tar.gz
+* Unpacking the file OpenAerialMap-0.1-alpha.2.zip
 * Placing the resulting directory in QGIS plugins directory
 * Activating the plugin through QGIS menu ("Plugins" -> "Manage and Install Plugins")
 
-After activation of the plugin one should see the OAM icons at the QGIS action bar:
+After activation of the plugin one should see the OAM icons at the QGIS action bar.
 
-## Build
+## Build from source code
 
-Builds, tests and feedbacks are very much appreciated by the development team. The plugin depends on the following python libraries that are not installed by default with QGIS:
+###### Dependencies:
+* [Sphinx](http://www.sphinx-doc.org/en/stable/install.html) - To create help file, Sphinx documentation generator is being used in this plugin. To install Sphinx, please refer to the OS specific instructions at the website. (NOTE: As of July 2016, document generation is supported only in Linux environment. Threfore, users of other operating systems can ignore the dependency of Sphinx.)
+* [Python](https://www.python.org/) - Installation of Sphinx requires python. If your operating system doesn't have python installed, please refer to the instruction at the website. Version 2.7 is presently being used for this plugin development.
+* pyrcc4 - To compile Qt4 resource files into python code, pyrcc4 command must be used. Please refer to the OS specific instructions below for its installation or setting path.
 
-* [Boto](https://pypi.python.org/pypi/boto) - Amazon Web Services Library
-* [FileChunkIO](https://pypi.python.org/pypi/filechunkio/) - represents a chunk of an OS-level file containing bytes data
-* [python-pyproj](https://pypi.python.org/pypi/pyproj/) - Python interface to PROJ.4 library (>=1.9.4-1) 
+###### Linux
+1. Install pyrcc4:  
+The easiest way to install pyrcc4 is probably to use package manager.
+If using ubuntu 14.04 or its comatible distributions, following command should work:  
+&nbsp;&nbsp;&nbsp;&nbsp;apt-get install pyqt4-dev-tools  
+For the other distributions, please use the online resourece to get the information.
 
-If you have python-pip installed, all dependecies can be installed with the command:
-
-$ pip install filechunkio boto pyproj
-
-If you use UNIX, check first if your distribution provides corresponding packages. 
-
-After installing dependencies you can proceed to get the plugin code and deploy:
-
-$ git clone https://github.com/hotosm/oam-qgis-plugin.git 
-
-$ cd oam-qgis-plugin/OpenAerialMap/ 
-
+2. Download the repository and deploy the code to the plugin directory:  
+$ git clone https://github.com/hotosm/oam-qgis-plugin.git  
+$ cd oam-qgis-plugin/OpenAerialMap/  
 $ make deploy
 
-Then activate the plugin through QGIS menu "Plugins" -> "Manage and Install Plugins". You should see OAM icons in your menu at this point.
+###### Windows
+1. Set the path to pyrcc4.exe:  
+To execute the make.bat file in MS-Windows, you need to set the path to pyrcc4.exe. Probably, the easiest way to set the path is to use OSGeo4W Shell. (If you open the shell, the path to the file should be automatically set.) However, you can also manually set the path from normal command prompt.
 
-After any change in the code you need to run 'make deploy' again. You also need to restart QGIS to reload the new compiled code. A handy alternative is to use the "Plugin Reloader" plugin to reload and live test your changes on the code. 
+  1. Find the pyrcc4.exe file in the QGIS folder:  
+  Ex. For the version 2.14.4 (Essen), C:\Program Files\QGIS 2.14.4\bin\ or C:\Program Files\QGIS Essen\bin\
+
+  2. Set the path, using set command:  
+  Ex. For the example above, execute SET PATH=%PATH%;C:\Program Files\QGIS 2.14.4\bin or C:\Program Files\QGIS Essen\bin
+
+2. Download the repository and deploy the code to the plugin directory:  
+$ git clone https://github.com/hotosm/oam-qgis-plugin.git  
+$ cd oam-qgis-plugin\OpenAerialMap\windows\  
+$ make.bat deploy
+
+## Activate or reload deployed plugin
+
+You can activate the deployed plugin through QGIS menu "Plugins" -> "Manage and Install Plugins". You should see OAM icons in your menu at this point.
+
+After any change in the code you need to run 'make deploy' again. You also need to restart QGIS to reload the new compiled code. A handy alternative is to use the "Plugin Reloader" plugin to reload and live test your changes on the code. If necessary, you can also use 'make derase' command to erase the deployed folder completely.
 
 ## Required features
 
@@ -62,14 +80,14 @@ During the plugin planning phase, those were the identified required features
 
 ## Development guidelines
 
-1. Use of qtcreator for:
+1. Use of Qt4 Designer for:
   1. GUI layout/development
   2. defining most of the common signals/slots for the GUI components
 2. Do not change any generated code directly but create a subclass and then
 override/extend it, to keep our code and the automatically generated code
 separated
 3. Use QgisPluginCreator that has some basics setup (eg. internationalzation support)
-4. Package any external python modules as part of the plugin
+4. Package any external python modules as a part of the plugin
 
 ## Timeline
 
