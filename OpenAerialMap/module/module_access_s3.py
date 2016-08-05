@@ -39,6 +39,7 @@ from boto.s3.connection import S3Connection, S3ResponseError
 from boto.s3.key import Key
 from filechunkio import FileChunkIO
 
+
 class S3UploadProgressWindow(QWidget):
 
     #MAX_WINDOW_WIDTH = 600
@@ -70,7 +71,6 @@ class S3UploadProgressWindow(QWidget):
         self.cancelButtons = []
         self.uwThreads = []
 
-
     def setWindowPosition(self):
         # This part need to be modified...
         maxHeight = int(S3UploadProgressWindow.MAX_WINDOW_HEIGHT_PER_PROGRESS_BAR * len(self.hLayouts))
@@ -85,7 +85,7 @@ class S3UploadProgressWindow(QWidget):
         print('WinWidth: ' + str(winW) + ' WinHeight: ' + str(winH) + ' maxHeight: ' + str(maxHeight))
         print('Left: ' + str(left) + ' Top: ' + str(top))
         print('')
-        self.move(left,top)
+        self.move(left, top)
         self.activateWindow()
 
     def startUpload(self, bucketKey, bucketSecret, bucketName, uploadOptions, uploadFileAbspaths):
@@ -101,7 +101,7 @@ class S3UploadProgressWindow(QWidget):
 
         numFileAbsPaths = len(uploadFileAbspaths)
 
-        if bucket != None:
+        if bucket is not None:
             self.started.emit(True)
             for i in range(self.activeId, self.activeId + numFileAbsPaths):
 
@@ -118,7 +118,7 @@ class S3UploadProgressWindow(QWidget):
                 self.hLayouts[i].addWidget(self.cancelButtons[i])
 
                 # Set the file names to labels
-                indexFileAbsPath = i-self.activeId
+                indexFileAbsPath = i - self.activeId
                 fileName = os.path.basename(uploadFileAbspaths[indexFileAbsPath])
                 self.qLabels[i].setText(fileName)
 
@@ -135,7 +135,6 @@ class S3UploadProgressWindow(QWidget):
                 #self.uwThread.run()
                 #self.uwThread.wait()
                 #self.uwThread.terminate()
-
 
             self.activeId += numFileAbsPaths
             self.numTotal += numFileAbsPaths
@@ -187,7 +186,7 @@ class S3UploadProgressWindow(QWidget):
 
     def uploadFinished(self, result, index):
         #print('Result: ' + result)
-        try: #make sure if the labels still exist
+        try:  # make sure if the labels still exist
             if result == 'success':
                 self.qLabels[index].setText("Successfully uploaded.")
                 self.numSuccess += 1
@@ -255,28 +254,28 @@ class S3UploadWorker(QThread):
         mp = self.bucket.initiate_multipart_upload(keyName)
 
         chunkSize = 5242880
-        chunkCount = int(math.ceil(fileSize/float(chunkSize)))
+        chunkCount = int(math.ceil(fileSize / float(chunkSize)))
 
         self.started.emit(True, self.index)
-        
+
         try:
             i = 0
-            while self.isRunning and i < chunkCount:
             #for i in range(chunkCount):
+            while self.isRunning and i < chunkCount:
                 offset = chunkSize * i
-                bytes = min(chunkSize, fileSize-offset)
+                bytes = min(chunkSize, fileSize - offset)
                 with FileChunkIO(self.fileAbsPath, 'r', offset=offset, bytes=bytes) as fp:
-                    mp.upload_part_from_file(fp, part_num=i+1)
+                    mp.upload_part_from_file(fp, part_num=i + 1)
                 i += 1
                 #emit progress here
-                progress = i / float(chunkCount)  * 100
+                progress = i / float(chunkCount) * 100
                 self.valueChanged.emit(progress, self.index)
 
         except Exception as e:
             self.error.emit(e, self.index)
             self.finished.emit('failed', self.index)
 
-        if self.isRunning == True:
+        if self.isRunning is True:
             mp.complete_upload()
             self.finished.emit('success', self.index)
         else:

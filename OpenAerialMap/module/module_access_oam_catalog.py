@@ -27,6 +27,7 @@ import urllib2
 import json
 from StringIO import StringIO
 
+
 class OAMCatalogAccess:
 
     def __init__(self, hostUrl, action=None, dictQueries=None, parent=None):
@@ -53,7 +54,7 @@ class OAMCatalogAccess:
 
         self.endPoint = self.hostUrl
 
-        if self.action != None and self.action != '':
+        if self.action is not None and self.action != '':
             self.endPoint += '/' + self.action
 
             """make sure how to handle location"""
@@ -63,15 +64,13 @@ class OAMCatalogAccess:
             count = 0
             for key in self.dictQueries:
                 print(str(key) + " " + str(self.dictQueries[key]))
-                if self.dictQueries[key] != None and self.dictQueries[key] != '':
+                if self.dictQueries[key] is not None and self.dictQueries[key] != '':
                     if count == 0:
                         self.endPoint += '?'
                     else:
                         self.endPoint += '&'
                     self.endPoint += str(key) + "=" + str(self.dictQueries[key])
                     count += 1
-
-
 
         #print(str(self.endPoint))
 

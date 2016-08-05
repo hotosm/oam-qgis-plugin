@@ -26,6 +26,7 @@ import os, sys
 from osgeo import gdal, osr, ogr
 from ast import literal_eval
 
+
 class ImgMetadataHandler:
 
     def __init__(self, imgFileAbspath):
@@ -89,27 +90,27 @@ class ImgMetadataHandler:
         listBBoxNodes.append(self.affineGeoTransform(
             self.gdalDataset,
             self.gdalDataset.RasterXSize,
-            self.gdalDataset.RasterYSize )[0])
+            self.gdalDataset.RasterYSize)[0])
         listBBoxNodes.append(self.affineGeoTransform(
             self.gdalDataset,
             self.gdalDataset.RasterXSize,
-            self.gdalDataset.RasterYSize )[1])
+            self.gdalDataset.RasterYSize)[1])
         self.metaInImagery['bbox'] = str(listBBoxNodes)
 
     def extractFootprint(self):
         """Temporarily use bbox values"""
         node1 = self.affineGeoTransform(
-            self.gdalDataset,0.0,0.0 )
+            self.gdalDataset, 0.0, 0.0)
         node2 = self.affineGeoTransform(
-            self.gdalDataset,0.0,
+            self.gdalDataset, 0.0,
             self.gdalDataset.RasterYSize)
         node3 = self.affineGeoTransform(
             self.gdalDataset,
-            self.gdalDataset.RasterXSize,0.0 )
+            self.gdalDataset.RasterXSize, 0.0)
         node4 = self.affineGeoTransform(
             self.gdalDataset,
             self.gdalDataset.RasterXSize,
-            self.gdalDataset.RasterYSize )
+            self.gdalDataset.RasterYSize)
         self.metaInImagery['footprint'] = 'POLYGON' + \
             str((node1, node2, node3, node4, node1))
 
@@ -117,25 +118,25 @@ class ImgMetadataHandler:
         #print("Message: " + repr(self.gdalDataset))
 
         geotransform = self.gdalDataset.GetGeoTransform()
-        if not geotransform is None:
-            gsdAvg = (abs(geotransform[1]) + abs(geotransform[5]))/2
+        if geotransform is not None:
+            gsdAvg = (abs(geotransform[1]) + abs(geotransform[5])) / 2
             self.metaInImagery['gsd'] = str(gsdAvg)
         else:
             self.metaInImagery['gsd'] = "n.a."
 
     def affineGeoTransform(self, hDataset, x, y):
 
-        geoTransform = hDataset.GetGeoTransform(can_return_null = True)
+        geoTransform = hDataset.GetGeoTransform(can_return_null=True)
         if geoTransform is not None:
             geoX = geoTransform[0] + geoTransform[1] * x + geoTransform[2] * y
             geoY = geoTransform[3] + geoTransform[4] * x + geoTransform[5] * y
         else:
             print "BBOX might be wrong. Transformation coefficient " + \
                 "could not be fetched from raster"
-            return (x,y)
+            return (x, y)
 
         # Report the georeferenced coordinates
         if abs(geoX) < 181 and abs(geoY) < 91:
-            return literal_eval(("(%12.7f,%12.7f) " % (geoX, geoY )))
+            return literal_eval(("(%12.7f, %12.7f) " % (geoX, geoY)))
         else:
-            return literal_eval(("(%12.3f,%12.3f) " % (geoX, geoY )))
+            return literal_eval(("(%12.3f, %12.3f) " % (geoX, geoY)))

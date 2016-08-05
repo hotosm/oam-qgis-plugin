@@ -21,7 +21,7 @@ class CommandWindow(QWidget):
         # create objects
         self.label = QLabel(self.tr('Executing the command:\n' + self.strCmd))
         self.label.setFixedWidth(640)
-        self.label.setWordWrap(True);
+        self.label.setWordWrap(True)
         self.te = QTextEdit()
 
         # layout
@@ -55,6 +55,7 @@ class CommandWindow(QWidget):
         #print(eMsg)
         pass
 
+
 class CommandWorker(QThread):
 
     message = pyqtSignal(str)
@@ -73,7 +74,7 @@ class CommandWorker(QThread):
             while self.isRunning:
                 out = p.stdout.read(1)
                 #out = p.stderr.read(1)
-                if out == '' and p.poll() != None:
+                if out == '' and p.poll() is not None:
                     break
                 #sys.stdout.write(out)
                 #print(str(out))

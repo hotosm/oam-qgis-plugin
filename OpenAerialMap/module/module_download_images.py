@@ -45,12 +45,13 @@ class ThumbnailManager:
         print(imgAbspath)
         if not os.path.exists(imgAbspath):
             try:
-                f = open(imgAbspath,'wb')
+                f = open(imgAbspath, 'wb')
                 f.write(urllib2.urlopen(urlThumbnail).read())
                 f.close()
             except Exception as e:
                 print(str(e))
         return imgAbspath
+
 
 class ImgMetaDownloader:
     def __init__(self, parent=None):
@@ -59,13 +60,14 @@ class ImgMetaDownloader:
     @staticmethod
     def downloadImgMeta(urlImgMeta, imgMetaAbsPath):
         try:
-            f = open(imgMetaAbsPath,'w')
+            f = open(imgMetaAbsPath, 'w')
             f.write(urllib2.urlopen(urlImgMeta).read())
             f.close()
         except Exception as e:
             print(str(e))
 
         return True
+
 
 class DownloadProgressWindow(QWidget):
 
@@ -98,7 +100,7 @@ class DownloadProgressWindow(QWidget):
         print('WinWidth: ' + str(winW) + ' WinHeight: ' + str(winH) + ' MaxHeight: ' + str(maxHeight))
         print('Left: ' + str(left) + ' Top: ' + str(top))
         print('')
-        self.move(left,top)
+        self.move(left, top)
         self.activateWindow()
 
     def closeEvent(self, closeEvent):
@@ -121,9 +123,9 @@ class DownloadProgressWindow(QWidget):
 
     def startDownload(self, url=None, fileAbsPath=None, addLayer=True):
 
-        self.activeId +=1
+        self.activeId += 1
 
-        if self.activeId > DownloadProgressWindow.MAX_NUM_DOWNLOADS -1:
+        if self.activeId > DownloadProgressWindow.MAX_NUM_DOWNLOADS - 1:
             qMsgBox = QMessageBox()
             qMsgBox.setWindowTitle('Message')
             qMsgBox.setText("The maximum numbers of images for downloading is \
@@ -186,7 +188,7 @@ the current uploading tasks first, and try download again.")
         #print('Index: ' + str(index))
         pass
 
-    def updateProgressBar(self,valueChanged, index):
+    def updateProgressBar(self, valueChanged, index):
         #print(str(valueChanged))
         self.progressBars[index].setValue(valueChanged)
 
@@ -194,7 +196,7 @@ the current uploading tasks first, and try download again.")
         #self.thread.quit()
         self.dwThreads[index].quit()
         #print('Result: ' + result)
-        try: #make sure if the labels still exist
+        try:  # make sure if the labels still exist
             if result == 'success':
                 self.qLabels[index].setText("Successfully downloaded.")
                 # add the downloaded image as a raster layer
@@ -229,6 +231,7 @@ class DownloadWorker(QThread):
         self.index = index
         self.isRunning = True
         #self.delay = 0.02
+
     def run(self):
         try:
             self.started.emit(True, self.index)
@@ -238,22 +241,22 @@ class DownloadWorker(QThread):
             fileSize = int(meta.getheaders("Content-Length")[0])
             #print("Downloading: {0} Bytes: {1}".format(str(self.url), str(fileSize)))
             fileSizeDownloaded = 0
-            blockSize = 8192 #make sure if this block size is apropriate
+            blockSize = 8192  # make sure if this block size is apropriate
             while True:
                 buffer = u.read(blockSize)
-                if not buffer or self.isRunning == False:
+                if not buffer or self.isRunning is False:
                     break
                 fileSizeDownloaded += len(buffer)
                 f.write(buffer)
                 p = float(fileSizeDownloaded) / fileSize
-                self.valueChanged.emit(int(p*100), self.index)
+                self.valueChanged.emit(int(p * 100), self.index)
             f.close()
 
         except Exception as e:
             self.error.emit(e, self.index)
             self.finished.emit('failed', self.index)
 
-        if self.isRunning == True:
+        if self.isRunning is True:
             self.finished.emit('success', self.index)
         else:
             self.finished.emit('cancelled', self.index)
