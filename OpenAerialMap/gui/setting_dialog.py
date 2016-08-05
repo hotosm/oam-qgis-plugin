@@ -33,6 +33,7 @@ import time
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/setting_dialog.ui'))
 
+
 class SettingDialog(QtGui.QDialog, FORM_CLASS):
 
     def __init__(self, iface, settings, parent=None):
@@ -48,20 +49,20 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
 
         self.settings = settings
 
-        #register event handlers
+        # register event handlers
         self.buttonBox.button(QtGui.QDialogButtonBox.Cancel).clicked.connect(self.cancel)
         self.buttonBox.button(QtGui.QDialogButtonBox.Save).clicked.connect(self.saveSettings)
 
-        #set the calendars
+        # set the calendars
         self.sense_start_edit.setCalendarPopup(1)
         self.sense_start_edit.setDisplayFormat('dd.MM.yyyy HH:mm')
         self.sense_end_edit.setCalendarPopup(1)
         self.sense_end_edit.setDisplayFormat('dd.MM.yyyy HH:mm')
 
-        #event handler for bucket name input
+        # event handler for bucket name input
         self.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)
 
-        #initialize
+        # initialize
         self.loadSettings()
 
     def loadSettings(self):
@@ -75,7 +76,7 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
         self.saveOptionsSettings()
 
     def cancel(self):
-        #close the Dialog
+        # close the Dialog
         pass
 
     def saveMetadataSettings(self):
@@ -122,7 +123,7 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
         self.settings.beginGroup("Metadata")
         self.base_uuid_edit.setText(self.settings.value('BASE_UUID'))
         self.title_edit.setText(self.settings.value('TITLE'))
-        if self.settings.value('PLATFORM') == None:
+        if self.settings.value('PLATFORM') is None:
             self.title_edit.setCursorPosition(0)
         else:
             self.platform_combo_box.setCurrentIndex(
@@ -163,16 +164,16 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
         instead of 'True', Python style.
         Maybe we can use integer values (0 or 1), instead of using string.
         """
-        #print str(self.settings.value('LICENSE'))
-        #print str(self.settings.value('REPROJECT'))
+        # print str(self.settings.value('LICENSE'))
+        # print str(self.settings.value('REPROJECT'))
 
         if str(self.settings.value('LICENSE')).lower() == 'true':
             self.license_check_box.setCheckState(2)
         if str(self.settings.value('REPROJECT')).lower() == 'true':
             self.reproject_check_box.setCheckState(2)
 
-        #print str(self.settings.value('NOTIFY_OAM'))
-        #print str(self.settings.value('TRIGGER_OAM_TS'))
+        # print str(self.settings.value('NOTIFY_OAM'))
+        # print str(self.settings.value('TRIGGER_OAM_TS'))
 
         if str(self.settings.value('NOTIFY_OAM')).lower() == 'true':
             self.notify_oam_check.setCheckState(2)
@@ -183,7 +184,7 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
     def loadStorageSettings(self):
         self.settings.beginGroup("Storage")
         bucket = self.settings.value('S3_BUCKET_NAME')
-        storage_index = self.storage_combo_box.findText(bucket,Qt.MatchExactly)
+        storage_index = self.storage_combo_box.findText(bucket, Qt.MatchExactly)
         if not storage_index == -1:
             self.storage_combo_box.setCurrentIndex(storage_index)
         else:

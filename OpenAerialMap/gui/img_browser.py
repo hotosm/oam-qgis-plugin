@@ -36,6 +36,7 @@ from module.module_download_images import (ThumbnailManager,
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_browser.ui'))
 
+
 class ImgBrowser(QtGui.QDialog, FORM_CLASS):
 
     POSITION_WINDOW_FROM_RIGHT = 50
@@ -57,7 +58,7 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         winW, winH = self.frameGeometry().width(), self.frameGeometry().height()
         left = width - (winW + ImgBrowser.POSITION_WINDOW_FROM_RIGHT)
         top = ImgBrowser.POSITION_WINDOW_FROM_TOP
-        self.move(left,top)
+        self.move(left, top)
 
         self.connect(self.pushButtonDownload, QtCore.SIGNAL("clicked()"), self.downloadFullImage)
         self.checkBoxSaveMeta.setChecked(True)
@@ -69,7 +70,7 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
 
     def setSingleMetaInDic(self, singleMetaInDic):
         self.singleMetaInDic = singleMetaInDic
-        #self.imgDownloader = ImgDownloader()
+        # self.imgDownloader = ImgDownloader()
 
     def displayThumbnailAndMeta(self):
         urlThumbnail = self.singleMetaInDic[u'properties'][u'thumbnail']
@@ -91,8 +92,8 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         strMeta += 'PROVIDER:\t\t{0}\n'.format(str(self.singleMetaInDic[u'provider']))
         strMeta += 'FILE SIZE:\t\t{0}\n'.format(str(self.singleMetaInDic[u'file_size']))
 
-        #print(str(self.singleMetaInDic))
-        #print(strMeta)
+        # print(str(self.singleMetaInDic))
+        # print(strMeta)
         self.lbTest01.setWordWrap(True)
         self.lbTest01.setText(strMeta)
 
@@ -110,8 +111,8 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         fdlg.setFilter("GEOTiff")
 
         if fdlg.exec_():
-            #excepton handling here?
-            if self.downloadProgressWindow == None:
+            # excepton handling here?
+            if self.downloadProgressWindow is None:
                 self.downloadProgressWindow = DownloadProgressWindow(self.iface)
 
             if self.checkBoxAddLayer.isChecked():
@@ -126,4 +127,4 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
                 imgMetaFilename = urlImgMeta.split('/')[-1]
                 imgMetaAbsPath = os.path.join(os.path.dirname(imgAbsPath), imgMetaFilename)
                 r = ImgMetaDownloader.downloadImgMeta(urlImgMeta, imgMetaAbsPath)
-                #print(str(r))
+                # print(str(r))

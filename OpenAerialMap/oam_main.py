@@ -37,9 +37,10 @@ from gui.img_uploader_wizard import ImgUploaderWizard
 from gui.img_search_dialog import ImgSearchDialog
 from gui.setting_dialog import SettingDialog
 
-#from gui.backuped_img_uploader_wizard import BackupedImgUploaderWizard
+# from gui.backuped_img_uploader_wizard import BackupedImgUploaderWizard
 
 import os
+
 
 class OpenAerialMap:
     """QGIS Plugin Implementation."""
@@ -77,10 +78,10 @@ class OpenAerialMap:
         self.actions = []
 
         # need to send this setting object to setting dialog.
-        self.settings = QSettings('QGIS','oam-qgis-plugin')
+        self.settings = QSettings('QGIS', 'oam-qgis-plugin')
 
-        #Testing purpose only
-        #self.settings.remove('')
+        # Testing purpose only
+        # self.settings.remove('')
 
         """this part is only for testImgUploader() function"""
         """Please delete these statements when we delete the testImgUploader() function"""

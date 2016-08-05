@@ -34,6 +34,7 @@ from module.module_access_oam_catalog import OAMCatalogAccess
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_search_dialog.ui'))
 
+
 class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
 
     def __init__(self, iface, parent=None):
@@ -54,18 +55,18 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         self.pushButtonSearch.clicked.connect(self.startSearch)
         self.pushButtonSearchLatest.clicked.connect(self.searchLatest)
         self.pushButtonBrowseLocation.clicked.connect(self.browseLocation)
-        self.connect(self.listWidget, QtCore.SIGNAL("itemClicked(QListWidgetItem *)"), self.browseThumbnailAndMeta);
+        self.connect(self.listWidget, QtCore.SIGNAL("itemClicked(QListWidgetItem *)"), self.browseThumbnailAndMeta)
 
-        #self.buttonBox.clicked.connect(lambda: self.test(self.buttonBox))
+        # self.buttonBox.clicked.connect(lambda: self.test(self.buttonBox))
         self.connect(self.buttonBox, QtCore.SIGNAL('accepted()'), self.execOk)
         self.connect(self.buttonBox, QtCore.SIGNAL('rejected()'), self.execCancel)
 
-        #disable some GUIs
+        # disable some GUIs
         self.lineEditLocation.setEnabled(False)
         self.pushButtonBrowseLocation.setEnabled(False)
         self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(False)
 
-        #add objects for catalog access
+        # add objects for catalog access
         self.oamCatalogAccess = OAMCatalogAccess("https://oam-catalog.herokuapp.com")
         self.imgBrowser = None
 
@@ -101,15 +102,15 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         dictQueries = {}
 
         try:
-            #temporarily disable this part
-            #dictQueries['location'] = self.lineEditLocation.text()
+            # temporarily disable this part
+            # dictQueries['location'] = self.lineEditLocation.text()
             dictQueries['acquisition_from'] = self.dateEditAcquisitionFrom.date().toString(Qt.ISODate)
             dictQueries['acquisition_to'] = self.dateEditAcquisitionTo.date().toString(Qt.ISODate)
-            if self.lineEditResolutionFrom.text() != '' and self.lineEditResolutionFrom.text() != None:
+            if self.lineEditResolutionFrom.text() != '' and self.lineEditResolutionFrom.text() is not None:
                 dictQueries['gsd_from'] = float(self.lineEditResolutionFrom.text())
-            if self.lineEditResolutionTo.text() != '' and self.lineEditResolutionTo.text() != None:
+            if self.lineEditResolutionTo.text() != '' and self.lineEditResolutionTo.text() is not None:
                 dictQueries['gsd_to'] = float(self.lineEditResolutionTo.text())
-            if self.lineEditNumImages.text() != '' and self.lineEditNumImages.text() != None:
+            if self.lineEditNumImages.text() != '' and self.lineEditNumImages.text() is not None:
                 dictQueries['limit'] = int(self.lineEditNumImages.text())
 
             self.oamCatalogAccess.setAction(action)
@@ -131,11 +132,11 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         try:
             dictQueries['sort'] = "desc"
             dictQueries['order_by'] = "acquisition_end"
-            if self.lineEditResolutionFrom.text() != '' and self.lineEditResolutionFrom.text() != None:
+            if self.lineEditResolutionFrom.text() != '' and self.lineEditResolutionFrom.text() is not None:
                 dictQueries['gsd_from'] = float(self.lineEditResolutionFrom.text())
-            if self.lineEditResolutionTo.text() != '' and self.lineEditResolutionTo.text() != None:
+            if self.lineEditResolutionTo.text() != '' and self.lineEditResolutionTo.text() is not None:
                 dictQueries['gsd_to'] = float(self.lineEditResolutionTo.text())
-            if self.lineEditNumImages.text() != '' and self.lineEditNumImages.text() != None:
+            if self.lineEditNumImages.text() != '' and self.lineEditNumImages.text() is not None:
                 dictQueries['limit'] = int(self.lineEditNumImages.text())
 
             self.oamCatalogAccess.setAction(action)
@@ -155,11 +156,11 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
 
     def browseThumbnailAndMeta(self, item):
         singleMetaInDict = item.data(Qt.UserRole)
-        #print(str(singleMetaInDict))
+        # print(str(singleMetaInDict))
 
         if type(singleMetaInDict) is dict:
 
-            if self.imgBrowser == None:
+            if self.imgBrowser is None:
                 self.imgBrowser = ImgBrowser(self.iface, singleMetaInDict)
             else:
                 self.imgBrowser.setSingleMetaInDic(singleMetaInDict)
@@ -175,5 +176,5 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         print("OK")
 
     def execCancel(self):
-        #print("Canceled")
+        # print("Canceled")
         self.close()
