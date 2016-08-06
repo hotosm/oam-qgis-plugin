@@ -11,10 +11,14 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   about
+   help_img_search_browse
+   help_img_uploader
+   help_settings
+
 Indices and tables
 ==================
 
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-

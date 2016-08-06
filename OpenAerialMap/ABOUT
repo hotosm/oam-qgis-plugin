@@ -17,21 +17,3 @@ imagery metadata and upload options.
 
 This plugin is currently experimental. We always appreciate your feeedback to
 improve the code.
-
-
-Move this part to help file?
-Step-by-step guide for an upload request.
-
-* Step 1: Selection of imagery to be uploaded among layers currently loaded on
-the QGIS map canvas or any local file. After adding imagery, the user can
-change the order in which the upload will be performed.
-
-* Step 2: Input of information that will compose the metadata sent to OAM
-catalog, along with some auto-extracted data from the imagery files
-(projection, bbox, file size). At this moment users can specify if the imagery
-should be reprojected to EPSG:3857 or not. Finally, accept to release the image
-under CC-BY 4.0 and allow tracing in OSM.
-
-* Step 3: Review of final metadata info, select if the OAM catalog should be
-imediately notified of the new resource and if a tile service should be
-created, choose the upload destination and finally perform the upload.

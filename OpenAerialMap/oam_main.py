@@ -39,7 +39,8 @@ from gui.setting_dialog import SettingDialog
 
 # from gui.backuped_img_uploader_wizard import BackupedImgUploaderWizard
 
-import os
+import os, sys
+import webbrowser
 
 
 class OpenAerialMap:
@@ -192,12 +193,12 @@ class OpenAerialMap:
         self.settingDialog = SettingDialog(self.iface, self.settings)
         self.settingDialog.show()
 
-    """
-    def displayBackupedUploaderWizard(self):
+    def displayHelp(self):
 
-        self.backupedImgUploaderWizard = BackupedImgUploaderWizard(self.iface, self.settings)
-        self.backupedImgUploaderWizard.show()
-    """
+        currentAbsPath = os.path.abspath(__file__)
+        helpAbsPath = os.path.join(os.path.dirname(currentAbsPath), 'help/index.html')
+        url = 'file://' + str(helpAbsPath)
+        webbrowser.open_new(url)
 
     def initGui(self):
 
@@ -212,6 +213,7 @@ class OpenAerialMap:
         icon_path_img_wizard = ':/plugins/OpenAerialMap/icon/icon.png'
         icon_path_search_tool = ':/plugins/OpenAerialMap/icon/search_icon.png'
         icon_path_setting_dialog = ':/plugins/OpenAerialMap/icon/settings_icon.png'
+        icon_path_help = ':/plugins/OpenAerialMap/icon/help_icon.png'
 
         self.add_action(
             icon_path_img_wizard,
@@ -231,13 +233,11 @@ class OpenAerialMap:
             callback=self.displaySettingDialog,
             parent=self.iface.mainWindow())
 
-        """
         self.add_action(
-            icon_path_img_wizard,
-            text=self.tr(u'Upload Imagery (Backuped)'),
-            callback=self.displayBackupedUploaderWizard,
+            icon_path_help,
+            text=self.tr(u'OAM Help'),
+            callback=self.displayHelp,
             parent=self.iface.mainWindow())
-        """
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
@@ -252,5 +252,6 @@ class OpenAerialMap:
         def displayImgUploaderWizard(self):
         def displaySearchTool(self):
         def displaySettingDialog(self):
+        def displayHelp(self):
         """
         pass

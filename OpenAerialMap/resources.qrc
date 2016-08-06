@@ -8,4 +8,7 @@
     <qresource prefix="/plugins/OpenAerialMap" >
         <file>icon/settings_icon.png</file>
     </qresource>
+    <qresource prefix="/plugins/OpenAerialMap" >
+        <file>icon/help_icon.png</file>
+    </qresource>
 </RCC>
