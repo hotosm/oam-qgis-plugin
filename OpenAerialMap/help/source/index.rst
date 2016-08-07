@@ -12,9 +12,10 @@ Contents:
    :maxdepth: 2
 
    about
-   help_img_search_browse
    help_img_uploader
+   help_img_search_browse
    help_settings
+   codes
 
 Indices and tables
 ==================
