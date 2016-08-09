@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 """
 /***************************************************************************
- OpenAerialMapDialog
+ OpenAerialMap
                                  A QGIS plugin
  This plugin can be used as an OAM client to browse, search, download and
  upload imagery from/to the OAM catalog.
-                             -------------------
-        begin                : 2015-07-01
-        git sha              : $Format:%H$
-        copyright            : (C) 2015 by Humanitarian OpenStreetMap Team (HOT)
-        email                : tassia@acaia.ca  / yoji.salut@gmail.com
+                            -------------------
+        begin               : 2015-07-01
+        copyright           : (C) 2015 by Humanitarian OpenStreetMap Team (HOT)
+        email               : tassia@acaia.ca / yoji.salut@gmail.com
+        git sha             : $Format:%H$
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,6 +20,7 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+ This script initializes the plugin, making it known to QGIS.
 """
 
 import os, sys
@@ -28,7 +29,8 @@ from PyQt4 import QtGui, uic
 from PyQt4.Qt import *
 
 from qgis.gui import QgsMessageBar
-from qgis.core import QgsMapLayer, QgsMessageLog  # , QgsRasterLayer, QgsMapLayerRegistry
+from qgis.core import QgsMapLayer, QgsMessageLog
+# from qgis.core import QgsRasterLayer, QgsMapLayerRegistry
 from osgeo import gdal, osr, ogr
 import json, time, math, imghdr, tempfile
 
@@ -82,7 +84,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.bar2.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         self.page(2).layout().addWidget(self.bar2)
 
-        self.setButtonText(QtGui.QWizard.CustomButton1, self.tr("&Start upload"))
+        self.setButtonText(QtGui.QWizard.CustomButton1,
+                    self.tr("&Start upload"))
         self.setOption(QtGui.QWizard.HaveCustomButton1, True)
         self.button(QWizard.CustomButton1).setVisible(False)
 
@@ -183,11 +186,14 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
     def loadLayers(self):
         all_layers = self.iface.mapCanvas().layers()
         for layer in all_layers:
-            if not self.layers_list_widget.findItems(layer.name(), Qt.MatchExactly):
-                if not self.sources_list_widget.findItems(layer.name(), Qt.MatchExactly):
+            if not self.layers_list_widget.findItems(
+                        layer.name(), Qt.MatchExactly):
+                if not self.sources_list_widget.findItems(
+                            layer.name(), Qt.MatchExactly):
                     item = QListWidgetItem()
                     item.setText(layer.name())
-                    item.setData(Qt.UserRole, layer.dataProvider().dataSourceUri())
+                    item.setData(
+                        Qt.UserRole, layer.dataProvider().dataSourceUri())
                     self.layers_list_widget.addItem(item)
 
     def selectFile(self):
@@ -211,7 +217,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             if filename:
                 result_val = validate_file(filename)
                 if result_val["val"]:
-                    if not self.sources_list_widget.findItems(filename, Qt.MatchExactly):
+                    if not self.sources_list_widget.findItems(
+                                    filename, Qt.MatchExactly):
                         item = QListWidgetItem()
                         item.setText(os.path.basename(filename))
                         item.setData(Qt.UserRole, filename)
@@ -222,14 +229,22 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 else:
                     msg = result_val["msg"]
                     self.bar0.clearWidgets()
-                    self.bar0.pushMessage("CRITICAL", msg, level=QgsMessageBar.CRITICAL)
-                    QgsMessageLog.logMessage("CRITICAL", msg, level=QgsMessageLog.INFO)
+                    self.bar0.pushMessage(
+                        "CRITICAL",
+                        msg,
+                        level=QgsMessageBar.CRITICAL)
+                    QgsMessageLog.logMessage(
+                        "CRITICAL",
+                        msg,
+                        level=QgsMessageLog.INFO)
 
             if selected_layers:
                 for item in selected_layers:
                     if validate_layer(item.text(), self.iface):
-                        if not self.sources_list_widget.findItems(item.text(), Qt.MatchExactly):
-                            self.layers_list_widget.takeItem(self.layers_list_widget.row(item))
+                        if not self.sources_list_widget.findItems(
+                                        item.text(), Qt.MatchExactly):
+                            self.layers_list_widget.takeItem(
+                                self.layers_list_widget.row(item))
                             self.sources_list_widget.addItem(item)
                             self.added_sources_list_widget.addItem(item.clone())
                             added = True
@@ -251,14 +266,18 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         added_sources = self.added_sources_list_widget.selectedItems()
         if selected_sources:
             for item in selected_sources:
-                self.sources_list_widget.takeItem(self.sources_list_widget.row(item))
-                added_item = self.added_sources_list_widget.findItems(item.text(), Qt.MatchExactly)
+                self.sources_list_widget.takeItem(
+                    self.sources_list_widget.row(item))
+                added_item = self.added_sources_list_widget.findItems(
+                    item.text(), Qt.MatchExactly)
                 if added_item:
-                    self.added_sources_list_widget.takeItem(self.added_sources_list_widget.row(added_item[0]))
+                    self.added_sources_list_widget.takeItem(
+                        self.added_sources_list_widget.row(added_item[0]))
                 all_layers = self.iface.mapCanvas().layers()
                 for layer in all_layers:
                     if item.text() == layer.name():
-                        if not self.layers_list_widget.findItems(item.text(), Qt.MatchExactly):
+                        if not self.layers_list_widget.findItems(
+                                        item.text(), Qt.MatchExactly):
                             self.layers_list_widget.addItem(item)
         else:
             self.bar0.clearWidgets()
@@ -351,7 +370,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.bar1.clearWidgets()
             self.bar1.pushMessage(
                 'WARNING',
-                'One or more source imagery should be selected to have the metadata saved',
+                'One or more source imagery should be selected to have ' +
+                'the metadata saved',
                 level=QgsMessageBar.WARNING)
         else:
             if not self.reproject_check_box.isChecked():
@@ -376,7 +396,9 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             else:
                 qMsgBox = QMessageBox()
                 qMsgBox.setWindowTitle("Confirmation")
-                qMsgBox.setText("You checked the reprojection option, which can require significant amount of time. Are you sure to continue?")
+                qMsgBox.setText("You checked the reprojection option, " +
+                            "which can require significant amount of time. " +
+                            "Are you sure to continue?")
                 qMsgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
                 # qMsgBox.setDefaultButton(QMessageBox.Cancel)
 
@@ -401,7 +423,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                     self.bar1.pushMessage(
                         'INFO',
                         'Reprojecting files: %sth image out of %s is being processed...'\
-                         % (str(self.numReprojectionFinished + 1), str(self.numReprojectionCmdWindows)),
+                         % (str(self.numReprojectionFinished + 1),
+                         str(self.numReprojectionCmdWindows)),
                         level=QgsMessageBar.INFO)
 
                     for each_layer in selected_layers:
@@ -487,7 +510,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.bar1.pushMessage(
                 'INFO',
                 'Reprojecting files: %sth image out of %s is being processed...'\
-                 % (str(self.numReprojectionFinished + 1), str(self.numReprojectionCmdWindows)),
+                 % (str(self.numReprojectionFinished + 1),
+                    str(self.numReprojectionCmdWindows)),
                 level=QgsMessageBar.INFO)
         else:
             self.bar1.clearWidgets()
@@ -527,7 +551,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         # extract metadata from GeoTiff, and merge with the metadata from textbox
         imgMetaHdlr = ImgMetadataHandler(file_abspath)
         imgMetaHdlr.extractMetaInImagery()
-        metaForUpload = dict(imgMetaHdlr.getMetaInImagery().items() + metaInputInDict.items())
+        metaForUpload = dict(
+            imgMetaHdlr.getMetaInImagery().items() + metaInputInDict.items())
         strMetaForUpload = str(json.dumps(metaForUpload))
 
         # json_file_abspath = os.path.splitext(file_abspath)[0] + '.tif_meta.json'
@@ -542,11 +567,13 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
     def loadSavedMetadata(self):
 
         qMsgBox = QMessageBox()
-        qMsgBox.setText('Under construction:\nMessage from loadSavedMetadata function.')
+        qMsgBox.setText('Under construction:\nMessage from ' +
+                        'loadSavedMetadata function.')
         qMsgBox.exec_()
 
     # event handling for wizard page 3
-    # please also see startUpload function for event handling of Start Upload button
+    # please also see startUpload function
+    # for event handling of Start Upload button
     def enableSpecify(self):
         if self.storage_combo_box.currentIndex() == 1:
             self.specify_label.setEnabled(1)
@@ -559,17 +586,20 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
     def loadStorageSettings(self):
         self.settings.beginGroup("Storage")
         bucket = self.settings.value('S3_BUCKET_NAME')
-        storage_index = self.storage_combo_box.findText(bucket, Qt.MatchExactly)
+        storage_index = self.storage_combo_box.findText(
+                                    bucket, Qt.MatchExactly)
         if not storage_index == -1:
             self.storage_combo_box.setCurrentIndex(storage_index)
         else:
-            self.storage_combo_box.setCurrentIndex(self.storage_combo_box.findText(self.tr('other...')))
+            self.storage_combo_box.setCurrentIndex(
+                self.storage_combo_box.findText(self.tr('other...')))
             self.specify_label.setEnabled(1)
             self.specify_edit.setEnabled(1)
             self.specify_edit.setText(self.settings.value('S3_BUCKET_NAME'))
         self.key_id_edit.setText(self.settings.value('AWS_ACCESS_KEY_ID'))
         self.key_id_edit.setCursorPosition(0)
-        self.secret_key_edit.setText(self.settings.value('AWS_SECRET_ACCESS_KEY'))
+        self.secret_key_edit.setText(
+            self.settings.value('AWS_SECRET_ACCESS_KEY'))
         self.secret_key_edit.setCursorPosition(0)
         self.settings.endGroup()
 
@@ -599,14 +629,10 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
     def loadMetadataReviewBox(self):
         json_file_abspaths = []
         for index in xrange(self.sources_list_widget.count()):
-            file_abspath = str(self.sources_list_widget.item(index).data(Qt.UserRole))
+            file_abspath = str(
+                self.sources_list_widget.item(index).data(Qt.UserRole))
             json_file_abspath = ''
-            # if self.reproject_check_box.isChecked():
-            #    json_file_abspath = os.path.splitext(file_abspath)[0]+'_EPSG3857.json'
-            # else:
-            # json_file_abspath = os.path.splitext(file_abspath)[0]+'.tif_meta.json'
             json_file_abspath = file_abspath + '_meta.json'
-
             # print str(json_file_abspath)
             json_file_abspaths.append(json_file_abspath)
 
@@ -647,7 +673,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 level=QgsMessageBar.WARNING)
         else:
             for index in xrange(self.sources_list_widget.count()):
-                upload_file_abspath = str(self.added_sources_list_widget.item(index).data(Qt.UserRole))
+                upload_file_abspath = str(
+                    self.added_sources_list_widget.item(index).data(Qt.UserRole))
                 upload_file_abspaths.append(upload_file_abspath)
 
             # get login information for bucket
@@ -704,7 +731,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         # print(str(self.added_sources_list_widget.count()))
         for index in xrange(0, self.added_sources_list_widget.count()):
-            refFileAbsPath = str(self.added_sources_list_widget.item(index).data(Qt.UserRole))
+            refFileAbsPath = str(
+                self.added_sources_list_widget.item(index).data(Qt.UserRole))
             # print('refFileAbsPath: ' + refFileAbsPath)
             if fileAbsPath == refFileAbsPath:
                 self.added_sources_list_widget.takeItem(index)
@@ -712,7 +740,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         # print(str(self.sources_list_widget.count()))
         for index in xrange(0, self.sources_list_widget.count()):
-            refFileAbsPath = str(self.sources_list_widget.item(index).data(Qt.UserRole))
+            refFileAbsPath = str(
+                self.sources_list_widget.item(index).data(Qt.UserRole))
             # print('refFileAbsPath: ' + refFileAbsPath)
             if fileAbsPath == refFileAbsPath:
                 self.sources_list_widget.takeItem(index)
@@ -727,14 +756,16 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.bar2.clearWidgets()
         self.bar2.pushMessage(
             'Upload Result',
-            'Success:{0} Cancel:{1} Fail:{2}'.format(numSuccess, numCancelled, numFailed),
+            'Success:{0} Cancel:{1} Fail:{2}'.format(
+                    numSuccess, numCancelled, numFailed),
             level=QgsMessageBar.INFO)
 
         """
         # Probably, it is better to change this part into log file.
         print('')
         print('------------------------------------------------')
-        print('Success:{0} Cancel:{1} Fail:{2}'.format(numSuccess, numCancelled, numFailed))
+        print('Success:{0} Cancel:{1} Fail:{2}'.format(
+                    numSuccess, numCancelled, numFailed))
         print('------------------------------------------------')
         print('')
         """

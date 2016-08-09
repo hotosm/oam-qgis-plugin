@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 """
 /***************************************************************************
- OpenAerialMapDialog
+ OpenAerialMap
                                  A QGIS plugin
  This plugin can be used as an OAM client to browse, search, download and
  upload imagery from/to the OAM catalog.
-                             -------------------
-        begin                : 2015-07-01
-        git sha              : $Format:%H$
-        copyright            : (C) 2015 by Humanitarian OpenStreetMap Team (HOT)
-        email                : tassia@acaia.ca  / yoji.salut@gmail.com
+                            -------------------
+        begin               : 2015-07-01
+        copyright           : (C) 2015 by Humanitarian OpenStreetMap Team (HOT)
+        email               : tassia@acaia.ca / yoji.salut@gmail.com
+        git sha             : $Format:%H$
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,7 +20,9 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+ This script initializes the plugin, making it known to QGIS.
 """
+
 import sys, os, time
 import urllib2
 import json
@@ -36,7 +38,8 @@ class ThumbnailManager:
 
     @staticmethod
     def downloadThumbnail(urlThumbnail, prefix):
-        imgDirAbspath = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'temp')
+        imgDirAbspath = os.path.join(
+            os.path.dirname(os.path.dirname(__file__)), 'temp')
         print(urlThumbnail)
         # Concatenate fileName with id to avoid duplicate filename
         imgFileName = urlThumbnail.split('/')[-1]
@@ -88,7 +91,8 @@ class DownloadProgressWindow(QWidget):
 
     def setWindowPosition(self):
         # This part need to be modified...
-        maxHeight = int(DownloadProgressWindow.MAX_WINDOW_HEIGHT_PER_PROGRESS_BAR * len(self.hLayouts))
+        maxHeight = int(
+            DownloadProgressWindow.MAX_WINDOW_HEIGHT_PER_PROGRESS_BAR * len(self.hLayouts))
         #self.setMaximumWidth(S3UploadProgressWindow.MAX_WINDOW_WIDTH)
         self.setMaximumHeight(maxHeight)
         screenShape = QDesktopWidget().screenGeometry()
@@ -97,7 +101,9 @@ class DownloadProgressWindow(QWidget):
         left = width - (winW + DownloadProgressWindow.POSITION_WINDOW_FROM_RIGHT)
         top = height - (winH + DownloadProgressWindow.POSITION_WINDOW_FROM_BOTTOM)
         print('ScreenW: ' + str(width) + ' ScreenH:' + str(height))
-        print('WinWidth: ' + str(winW) + ' WinHeight: ' + str(winH) + ' MaxHeight: ' + str(maxHeight))
+        print('WinWidth: ' + str(winW) +
+            ' WinHeight: ' + str(winH) +
+            ' MaxHeight: ' + str(maxHeight))
         print('Left: ' + str(left) + ' Top: ' + str(top))
         print('')
         self.move(left, top)
@@ -128,9 +134,10 @@ class DownloadProgressWindow(QWidget):
         if self.activeId > DownloadProgressWindow.MAX_NUM_DOWNLOADS - 1:
             qMsgBox = QMessageBox()
             qMsgBox.setWindowTitle('Message')
-            qMsgBox.setText("The maximum numbers of images for downloading is \
-presently set to 3.\nIf you need to download more, please finish \
-the current uploading tasks first, and try download again.")
+            qMsgBox.setText("The maximum numbers of images for " +
+                "downloading is presently set to 3.\n" +
+                "If you need to download more, please finish the current " +
+                "uploading tasks first, and try download again.")
             qMsgBox.exec_()
         else:
             # Initialize the lists
@@ -145,14 +152,18 @@ the current uploading tasks first, and try download again.")
             self.hLayouts.append(QHBoxLayout())
             self.vLayout.addLayout(self.hLayouts[self.activeId])
 
-            # Create labes, progressbars, and cancel buttons, and add to hLayouts
+            # Create labes, progressbars, and cancel buttons,
+            # and add to hLayouts
             self.qLabels.append(QLabel())
 
             self.progressBars.append(QProgressBar())
             self.cancelButtons.append(QPushButton('Cancel'))
-            self.hLayouts[self.activeId].addWidget(self.qLabels[self.activeId])
-            self.hLayouts[self.activeId].addWidget(self.progressBars[self.activeId])
-            self.hLayouts[self.activeId].addWidget(self.cancelButtons[self.activeId])
+            self.hLayouts[self.activeId].addWidget(
+                self.qLabels[self.activeId])
+            self.hLayouts[self.activeId].addWidget(
+                self.progressBars[self.activeId])
+            self.hLayouts[self.activeId].addWidget(
+                self.cancelButtons[self.activeId])
 
             # Set the file names to labels
             fileName = os.path.basename(fileAbsPath)
@@ -160,15 +171,23 @@ the current uploading tasks first, and try download again.")
 
             # add event listener and handlers to cancel buttons
             #threadIndex = self.activeId
-            #self.cancelButtons[self.activeId].clicked.connect(lambda: self.cancelDownload(threadIndex))
-            self.cancelButtons[self.activeId].clicked.connect(self.cancelDownload)
+            #self.cancelButtons[self.activeId].clicked.connect(
+            # lambda: self.cancelDownload(threadIndex))
+            self.cancelButtons[self.activeId].clicked.connect(
+                self.cancelDownload)
 
-            #self.dwThreads.append(DownloadWorker(url, fileAbsPath, addLayer, threadIndex))
-            self.dwThreads.append(DownloadWorker(url, fileAbsPath, addLayer, self.activeId))
-            self.dwThreads[self.activeId].started.connect(self.downloadStarted)
-            self.dwThreads[self.activeId].valueChanged.connect(self.updateProgressBar)
-            self.dwThreads[self.activeId].finished.connect(self.downloadFinished)
-            self.dwThreads[self.activeId].error.connect(self.displayError)
+            #self.dwThreads.append(DownloadWorker(
+            #      url, fileAbsPath, addLayer, threadIndex))
+            self.dwThreads.append(DownloadWorker(url,
+                fileAbsPath, addLayer, self.activeId))
+            self.dwThreads[self.activeId].started.connect(
+                self.downloadStarted)
+            self.dwThreads[self.activeId].valueChanged.connect(
+                self.updateProgressBar)
+            self.dwThreads[self.activeId].finished.connect(
+                self.downloadFinished)
+            self.dwThreads[self.activeId].error.connect(
+                self.displayError)
             self.dwThreads[self.activeId].start()
             #self.dwThread.run()
             #self.dwThread.wait()
@@ -239,7 +258,8 @@ class DownloadWorker(QThread):
             f = open(self.fileAbsPath, 'wb')
             meta = u.info()
             fileSize = int(meta.getheaders("Content-Length")[0])
-            #print("Downloading: {0} Bytes: {1}".format(str(self.url), str(fileSize)))
+            #print("Downloading: {0} Bytes: {1}".format(
+            #                   str(self.url), str(fileSize)))
             fileSizeDownloaded = 0
             blockSize = 8192  # make sure if this block size is apropriate
             while True:

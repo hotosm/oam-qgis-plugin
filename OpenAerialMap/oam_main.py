@@ -5,11 +5,11 @@
                                  A QGIS plugin
  This plugin can be used as an OAM client to browse, search, download and
  upload imagery from/to the OAM catalog.
-                              -------------------
-        begin                : 2015-07-01
-        git sha              : $Format:%H$
-        copyright            : (C) 2015 by Humanitarian OpenStreetMap Team (HOT)
-        email                : tassia@acaia.ca / yoji.salut@gmail.com
+                            -------------------
+        begin               : 2015-07-01
+        copyright           : (C) 2015 by Humanitarian OpenStreetMap Team (HOT)
+        email               : tassia@acaia.ca / yoji.salut@gmail.com
+        git sha             : $Format:%H$
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,14 +20,16 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+ This script initializes the plugin, making it known to QGIS.
 """
+
 # Qt classes
 from PyQt4.Qt import *
 from PyQt4.QtCore import (QSettings, QTranslator, qVersion, QCoreApplication,
                           pyqtSignal, QObject, QThread)
 from PyQt4.QtGui import (QAction, QIcon, QMessageBox, QFileDialog,
-                         QListWidgetItem, QSizePolicy, QGridLayout, QPushButton,
-                         QProgressBar)
+                         QListWidgetItem, QSizePolicy, QGridLayout,
+                         QPushButton, QProgressBar)
 
 # icon images
 import resources_rc
@@ -85,7 +87,8 @@ class OpenAerialMap:
         # self.settings.remove('')
 
         """this part is only for testImgUploader() function"""
-        """Please delete these statements when we delete the testImgUploader() function"""
+        """Please delete these statements when we delete the
+            testImgUploader() function"""
         self.currentImgSettings = self.settings
         self.currentImgMetadata = {}
 
@@ -196,7 +199,9 @@ class OpenAerialMap:
     def displayHelp(self):
 
         currentAbsPath = os.path.abspath(__file__)
-        helpAbsPath = os.path.join(os.path.dirname(currentAbsPath), 'help/index.html')
+        helpAbsPath = os.path.join(
+            os.path.dirname(currentAbsPath),
+            'help/index.html')
         url = 'file://' + str(helpAbsPath)
         webbrowser.open_new(url)
 

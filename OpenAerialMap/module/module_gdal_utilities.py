@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 """
 /***************************************************************************
- OpenAerialMapDialog
+ OpenAerialMap
                                  A QGIS plugin
  This plugin can be used as an OAM client to browse, search, download and
  upload imagery from/to the OAM catalog.
-                             -------------------
-        begin                : 2015-07-01
-        git sha              : $Format:%H$
-        copyright            : (C) 2015 by Humanitarian OpenStreetMap Team (HOT)
-        email                : tassia@acaia.ca  / yoji.salut@gmail.com
+                            -------------------
+        begin               : 2015-07-01
+        copyright           : (C) 2015 by Humanitarian OpenStreetMap Team (HOT)
+        email               : tassia@acaia.ca / yoji.salut@gmail.com
+        git sha             : $Format:%H$
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,6 +20,7 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+ This script initializes the plugin, making it known to QGIS.
 """
 
 import os, sys
@@ -32,12 +33,17 @@ from module.module_command_window import CommandWindow
 
 class ReprojectionCmdWindow(CommandWindow):
 
-    def __init__(self, title, strCmd, fileAbsPath, reprojectedFileAbsPath, index, layerName):
+    def __init__(self, title, strCmd, fileAbsPath,
+            reprojectedFileAbsPath, index, layerName):
         self.fileAbsPath = fileAbsPath
         self.reprojectedFileAbsPath = reprojectedFileAbsPath
-        self.strCmdCompleted = strCmd + ' ' + str(fileAbsPath) + ' ' + str(reprojectedFileAbsPath)
+        self.strCmdCompleted = (
+            strCmd + ' ' +
+            str(fileAbsPath) + ' ' +
+            str(reprojectedFileAbsPath))
 
-        CommandWindow.__init__(self, title, self.strCmdCompleted, index, parent=None)
+        CommandWindow.__init__(self, title,
+            self.strCmdCompleted, index, parent=None)
 
         self.layerName = layerName
         self.reprojectedLayerName = '(EPSG3857) ' + self.layerName
@@ -59,7 +65,8 @@ def reproject(file_abspath):
     #make sure if we need to -overwrite option
     # to avoid repetition of "EPSG3857" in filename:
     if not "EPSG3857" in file_abspath:
-        reprojected_file_abspath = os.path.splitext(file_abspath)[0]+'_EPSG3857.tif'
+        reprojected_file_abspath = os.path.splitext(
+            file_abspath)[0]+'_EPSG3857.tif'
     os.system("gdalwarp -of GTiff -t_srs epsg:3857 %s %s"
         % (file_abspath, reprojected_file_abspath))
 
@@ -73,10 +80,12 @@ def reproject(file_abspath):
 """
 def convert_to_tif(file_abspath):
     if not ".tif" in file_abspath:
-        converted_file_abspath = os.path.splitext(file_abspath)[0]+".tif"
+        converted_file_abspath = os.path.splitext(
+            file_abspath)[0]+".tif"
     src_ds = gdal.Open(file_abspath)
     conversion_driver = gdal.GetDriverByName("GTiff")
-    converted_ds = conversion_driver.CreateCopy(converted_file_abspath, src_ds, 0)
+    converted_ds = conversion_driver.CreateCopy(
+        converted_file_abspath, src_ds, 0)
     src_ds = None
     converted_ds = None
     QgsMessageLog.logMessage(

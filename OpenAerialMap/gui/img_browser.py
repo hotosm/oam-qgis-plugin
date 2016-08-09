@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 """
 /***************************************************************************
- OpenAerialMapDialog
+ OpenAerialMap
                                  A QGIS plugin
  This plugin can be used as an OAM client to browse, search, download and
  upload imagery from/to the OAM catalog.
-                             -------------------
-        begin                : 2015-07-01
-        git sha              : $Format:%H$
-        copyright            : (C) 2015 by Humanitarian OpenStreetMap Team (HOT)
-        email                : tassia@acaia.ca  / yoji.salut@gmail.com
+                            -------------------
+        begin               : 2015-07-01
+        copyright           : (C) 2015 by Humanitarian OpenStreetMap Team (HOT)
+        email               : tassia@acaia.ca / yoji.salut@gmail.com
+        git sha             : $Format:%H$
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,6 +20,7 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+ This script initializes the plugin, making it known to QGIS.
 """
 
 import os, sys
@@ -60,7 +61,9 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         top = ImgBrowser.POSITION_WINDOW_FROM_TOP
         self.move(left, top)
 
-        self.connect(self.pushButtonDownload, QtCore.SIGNAL("clicked()"), self.downloadFullImage)
+        self.connect(self.pushButtonDownload,
+                    QtCore.SIGNAL("clicked()"),
+                    self.downloadFullImage)
         self.checkBoxSaveMeta.setChecked(True)
 
         self.singleMetaInDic = singleMetaInDic
@@ -84,13 +87,20 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         self.graphicsView.show()
 
         strMeta = ''
-        strMeta += 'TITLE:\t\t\t{0}\n'.format(str(self.singleMetaInDic[u'title']))
-        strMeta += 'PLATFORM:\t\t{0}\n'.format(str(self.singleMetaInDic[u'platform']))
-        strMeta += 'ACQUISITION START:\t{0}\n'.format(str(self.singleMetaInDic[u'acquisition_start']))
-        strMeta += 'ACQUISITION END:\t{0}\n'.format(str(self.singleMetaInDic[u'acquisition_end']))
-        strMeta += 'GSD:\t\t\t{0}\n'.format(str(self.singleMetaInDic[u'gsd']))
-        strMeta += 'PROVIDER:\t\t{0}\n'.format(str(self.singleMetaInDic[u'provider']))
-        strMeta += 'FILE SIZE:\t\t{0}\n'.format(str(self.singleMetaInDic[u'file_size']))
+        strMeta += 'TITLE:\t\t\t{0}\n'.format(
+            str(self.singleMetaInDic[u'title']))
+        strMeta += 'PLATFORM:\t\t{0}\n'.format(
+            str(self.singleMetaInDic[u'platform']))
+        strMeta += 'ACQUISITION START:\t{0}\n'.format(
+            str(self.singleMetaInDic[u'acquisition_start']))
+        strMeta += 'ACQUISITION END:\t{0}\n'.format(
+            str(self.singleMetaInDic[u'acquisition_end']))
+        strMeta += 'GSD:\t\t\t{0}\n'.format(
+            str(self.singleMetaInDic[u'gsd']))
+        strMeta += 'PROVIDER:\t\t{0}\n'.format(
+            str(self.singleMetaInDic[u'provider']))
+        strMeta += 'FILE SIZE:\t\t{0}\n'.format(
+            str(self.singleMetaInDic[u'file_size']))
 
         # print(str(self.singleMetaInDic))
         # print(strMeta)
@@ -120,11 +130,16 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
             else:
                 addLayer = False
 
-            self.downloadProgressWindow.startDownload(urlFullImage, imgAbsPath, addLayer)
+            self.downloadProgressWindow.startDownload(
+                urlFullImage, imgAbsPath, addLayer)
 
             if self.checkBoxSaveMeta.isChecked():
                 urlImgMeta = self.singleMetaInDic[u'meta_uri']
                 imgMetaFilename = urlImgMeta.split('/')[-1]
-                imgMetaAbsPath = os.path.join(os.path.dirname(imgAbsPath), imgMetaFilename)
-                r = ImgMetaDownloader.downloadImgMeta(urlImgMeta, imgMetaAbsPath)
+                imgMetaAbsPath = os.path.join(
+                    os.path.dirname(imgAbsPath),
+                    imgMetaFilename)
+                r = ImgMetaDownloader.downloadImgMeta(
+                    urlImgMeta,
+                    imgMetaAbsPath)
                 # print(str(r))

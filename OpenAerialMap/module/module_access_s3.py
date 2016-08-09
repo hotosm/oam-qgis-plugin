@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 """
 /***************************************************************************
- OpenAerialMapDialog
+ OpenAerialMap
                                  A QGIS plugin
  This plugin can be used as an OAM client to browse, search, download and
  upload imagery from/to the OAM catalog.
-                             -------------------
-        begin                : 2015-07-01
-        git sha              : $Format:%H$
-        copyright            : (C) 2015 by Humanitarian OpenStreetMap Team (HOT)
-        email                : tassia@acaia.ca  / yoji.salut@gmail.com
+                            -------------------
+        begin               : 2015-07-01
+        copyright           : (C) 2015 by Humanitarian OpenStreetMap Team (HOT)
+        email               : tassia@acaia.ca / yoji.salut@gmail.com
+        git sha             : $Format:%H$
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,7 +20,9 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+ This script initializes the plugin, making it known to QGIS.
 """
+
 """
 import json, time, math, imghdr, tempfile
 from qgis.gui import QgsMessageBar
@@ -29,6 +31,7 @@ import traceback
 import requests, json
 from ast import literal_eval
 """
+
 import sys, os, time, math
 from PyQt4 import QtCore
 from PyQt4.QtGui import *      # modify this part?
@@ -73,7 +76,8 @@ class S3UploadProgressWindow(QWidget):
 
     def setWindowPosition(self):
         # This part need to be modified...
-        maxHeight = int(S3UploadProgressWindow.MAX_WINDOW_HEIGHT_PER_PROGRESS_BAR * len(self.hLayouts))
+        maxHeight = int(
+            S3UploadProgressWindow.MAX_WINDOW_HEIGHT_PER_PROGRESS_BAR * len(self.hLayouts))
         #self.setMaximumWidth(S3UploadProgressWindow.MAX_WINDOW_WIDTH)
         self.setMaximumHeight(maxHeight)
         screenShape = QDesktopWidget().screenGeometry()
@@ -82,13 +86,20 @@ class S3UploadProgressWindow(QWidget):
         left = width - (winW + S3UploadProgressWindow.POSITION_WINDOW_FROM_RIGHT)
         top = height - (winH + S3UploadProgressWindow.POSITION_WINDOW_FROM_BOTTOM)
         print('ScreenW: ' + str(width) + ' ScreenH:' + str(height))
-        print('WinWidth: ' + str(winW) + ' WinHeight: ' + str(winH) + ' maxHeight: ' + str(maxHeight))
+        print('WinWidth: ' + str(winW) +
+            ' WinHeight: ' + str(winH) +
+            ' maxHeight: ' + str(maxHeight))
         print('Left: ' + str(left) + ' Top: ' + str(top))
         print('')
         self.move(left, top)
         self.activateWindow()
 
-    def startUpload(self, bucketKey, bucketSecret, bucketName, uploadOptions, uploadFileAbspaths):
+    def startUpload(self,
+                bucketKey,
+                bucketSecret,
+                bucketName,
+                uploadOptions,
+                uploadFileAbspaths):
 
         # probably need to set timeout
         conn = None
@@ -109,7 +120,8 @@ class S3UploadProgressWindow(QWidget):
                 self.hLayouts.append(QHBoxLayout())
                 self.vLayout.addLayout(self.hLayouts[i])
 
-                # Create labes, progressbars, and cancel buttons, and add to hLayouts
+                # Create labes, progressbars,
+                # and cancel buttons, and add to hLayouts
                 self.qLabels.append(QLabel())
                 self.progressBars.append(QProgressBar())
                 self.cancelButtons.append(QPushButton('Cancel'))
@@ -119,10 +131,15 @@ class S3UploadProgressWindow(QWidget):
 
                 # Set the file names to labels
                 indexFileAbsPath = i - self.activeId
-                fileName = os.path.basename(uploadFileAbspaths[indexFileAbsPath])
+                fileName = os.path.basename(
+                    uploadFileAbspaths[indexFileAbsPath])
                 self.qLabels[i].setText(fileName)
 
-                s3UpWorker = S3UploadWorker(bucket, uploadOptions, uploadFileAbspaths[indexFileAbsPath], i)
+                s3UpWorker = S3UploadWorker(
+                            bucket,
+                            uploadOptions,
+                            uploadFileAbspaths[indexFileAbsPath],
+                            i)
                 self.uwThreads.append(s3UpWorker)
 
                 self.cancelButtons[i].clicked.connect(self.cancelUpload)
@@ -202,8 +219,13 @@ class S3UploadProgressWindow(QWidget):
 
         self.uwThreads[index].quit()
 
-        if (self.numSuccess + self.numCancelled + self.numFailed) == self.numTotal:
-            self.finished.emit(self.numSuccess, self.numCancelled, self.numFailed)
+        if (self.numSuccess +
+            self.numCancelled +
+            self.numFailed) == self.numTotal:
+
+            self.finished.emit(self.numSuccess,
+                            self.numCancelled,
+                            self.numFailed)
 
         """
         self.threads[index].quit()
@@ -224,7 +246,8 @@ class S3UploadWorker(QThread):
     finished = pyqtSignal(str, int)
     error = pyqtSignal(Exception, int)
 
-    def __init__(self, bucket, uploadOptions, fileAbsPath, index, delay=0.10):
+    def __init__(self, bucket, uploadOptions,
+                    fileAbsPath, index, delay=0.10):
         QThread.__init__(self)
         self.bucket = bucket
         self.uploadOptions = uploadOptions
@@ -236,7 +259,6 @@ class S3UploadWorker(QThread):
 
     def uploadMetadata(self):
 
-        #metaFileAbsPath = os.path.splitext(self.fileAbsPath)[0]  + '.tif_meta.json'
         metaFileAbsPath = self.fileAbsPath + '_meta.json'
         keyForMetaUp = Key(self.bucket)
         metaFileName = os.path.basename(metaFileAbsPath)
@@ -264,7 +286,10 @@ class S3UploadWorker(QThread):
             while self.isRunning and i < chunkCount:
                 offset = chunkSize * i
                 bytes = min(chunkSize, fileSize - offset)
-                with FileChunkIO(self.fileAbsPath, 'r', offset=offset, bytes=bytes) as fp:
+                with FileChunkIO(self.fileAbsPath,
+                                'r',
+                                offset=offset,
+                                bytes=bytes) as fp:
                     mp.upload_part_from_file(fp, part_num=i + 1)
                 i += 1
                 #emit progress here

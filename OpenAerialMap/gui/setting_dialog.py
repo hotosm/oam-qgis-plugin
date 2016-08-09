@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 """
 /***************************************************************************
- OpenAerialMapDialog
+ OpenAerialMap
                                  A QGIS plugin
  This plugin can be used as an OAM client to browse, search, download and
  upload imagery from/to the OAM catalog.
-                             -------------------
-        begin                : 2015-07-01
-        git sha              : $Format:%H$
-        copyright            : (C) 2015 by Humanitarian OpenStreetMap Team (HOT)
-        email                : tassia@acaia.ca  / yoji.salut@gmail.com
+                            -------------------
+        begin               : 2015-07-01
+        copyright           : (C) 2015 by Humanitarian OpenStreetMap Team (HOT)
+        email               : tassia@acaia.ca / yoji.salut@gmail.com
+        git sha             : $Format:%H$
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,6 +20,7 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+ This script initializes the plugin, making it known to QGIS.
 """
 
 import os, sys
@@ -40,8 +41,9 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
         """Constructor."""
         super(SettingDialog, self).__init__(parent)
         # Set up the user interface from Designer.
-        # After setupUI you can access any designer object by doi, self.settingsng
-        # self.<objectname>, and you can use autoconnect slots - see
+        # After setupUI you can access any designer object by doi,
+        # self.settingsng self.<objectname>, and you can use autoconnect
+        # slots - see
         # http://qt-project.org/doc/qt-4.8/designer-using-a-ui-file.html
         # #widgets-and-dialogs-with-auto-connect
         self.iface = iface
@@ -50,8 +52,10 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
         self.settings = settings
 
         # register event handlers
-        self.buttonBox.button(QtGui.QDialogButtonBox.Cancel).clicked.connect(self.cancel)
-        self.buttonBox.button(QtGui.QDialogButtonBox.Save).clicked.connect(self.saveSettings)
+        self.buttonBox.button(
+            QtGui.QDialogButtonBox.Cancel).clicked.connect(self.cancel)
+        self.buttonBox.button(
+            QtGui.QDialogButtonBox.Save).clicked.connect(self.saveSettings)
 
         # set the calendars
         self.sense_start_edit.setCalendarPopup(1)
@@ -83,7 +87,8 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
         self.settings.beginGroup("Metadata")
         self.settings.setValue('BASE_UUID', self.base_uuid_edit.text())
         self.settings.setValue('TITLE', self.title_edit.text())
-        self.settings.setValue('PLATFORM', self.platform_combo_box.currentIndex())
+        self.settings.setValue('PLATFORM',
+            self.platform_combo_box.currentIndex())
         self.settings.setValue('SENSOR', self.sensor_edit.text())
         self.settings.setValue('SENSE_START',
             self.sense_start_edit.dateTime().toString(Qt.ISODate))
@@ -112,11 +117,15 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
 
         self.settings.beginGroup("Storage")
         if self.storage_combo_box.currentIndex() == 0:
-            self.settings.setValue('S3_BUCKET_NAME', 'oam-qgis-plugin-test')
+            self.settings.setValue('S3_BUCKET_NAME',
+                'oam-qgis-plugin-test')
         else:
-            self.settings.setValue('S3_BUCKET_NAME', self.specify_edit.text())
-        self.settings.setValue('AWS_ACCESS_KEY_ID', self.key_id_edit.text())
-        self.settings.setValue('AWS_SECRET_ACCESS_KEY', self.secret_key_edit.text())
+            self.settings.setValue('S3_BUCKET_NAME',
+                self.specify_edit.text())
+        self.settings.setValue('AWS_ACCESS_KEY_ID',
+            self.key_id_edit.text())
+        self.settings.setValue('AWS_SECRET_ACCESS_KEY',
+            self.secret_key_edit.text())
         self.settings.endGroup()
 
     def loadMetadataSettings(self):

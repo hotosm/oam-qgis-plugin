@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 """
 /***************************************************************************
- OpenAerialMapDialog
+ OpenAerialMap
                                  A QGIS plugin
  This plugin can be used as an OAM client to browse, search, download and
  upload imagery from/to the OAM catalog.
-                             -------------------
-        begin                : 2015-07-01
-        git sha              : $Format:%H$
-        copyright            : (C) 2015 by Humanitarian OpenStreetMap Team (HOT)
-        email                : tassia@acaia.ca  / yoji.salut@gmail.com
+                            -------------------
+        begin               : 2015-07-01
+        copyright           : (C) 2015 by Humanitarian OpenStreetMap Team (HOT)
+        email               : tassia@acaia.ca / yoji.salut@gmail.com
+        git sha             : $Format:%H$
  ***************************************************************************/
 
 /***************************************************************************
@@ -20,6 +20,7 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
+ This script initializes the plugin, making it known to QGIS.
 """
 
 import os, sys
@@ -55,11 +56,17 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         self.pushButtonSearch.clicked.connect(self.startSearch)
         self.pushButtonSearchLatest.clicked.connect(self.searchLatest)
         self.pushButtonBrowseLocation.clicked.connect(self.browseLocation)
-        self.connect(self.listWidget, QtCore.SIGNAL("itemClicked(QListWidgetItem *)"), self.browseThumbnailAndMeta)
+        self.connect(self.listWidget, QtCore.SIGNAL(
+            "itemClicked(QListWidgetItem *)"),
+            self.browseThumbnailAndMeta)
 
         # self.buttonBox.clicked.connect(lambda: self.test(self.buttonBox))
-        self.connect(self.buttonBox, QtCore.SIGNAL('accepted()'), self.execOk)
-        self.connect(self.buttonBox, QtCore.SIGNAL('rejected()'), self.execCancel)
+        self.connect(self.buttonBox,
+            QtCore.SIGNAL('accepted()'),
+            self.execOk)
+        self.connect(self.buttonBox,
+            QtCore.SIGNAL('rejected()'),
+            self.execCancel)
 
         # disable some GUIs
         self.lineEditLocation.setEnabled(False)
@@ -67,7 +74,8 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(False)
 
         # add objects for catalog access
-        self.oamCatalogAccess = OAMCatalogAccess("https://oam-catalog.herokuapp.com")
+        self.oamCatalogAccess = OAMCatalogAccess(
+                "https://oam-catalog.herokuapp.com")
         self.imgBrowser = None
 
     def test(self, *argv):
@@ -122,7 +130,8 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         except Exception as e:
             qMsgBox = QMessageBox()
             qMsgBox.setWindowTitle('Message')
-            qMsgBox.setText("Please make sure if you entered valid data / internet connection, and try again.")
+            qMsgBox.setText("Please make sure if you entered " +
+                "valid data / internet connection, and try again.")
             qMsgBox.exec_()
 
     def searchLatest(self):
@@ -148,7 +157,8 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         except Exception as e:
             qMsgBox = QMessageBox()
             qMsgBox.setWindowTitle('Message')
-            qMsgBox.setText("Please make sure if you entered valid data / internet connection, and try again.")
+            qMsgBox.setText("Please make sure if you entered " +
+                "valid data / internet connection, and try again.")
             qMsgBox.exec_()
 
     def browseLocation(self):
