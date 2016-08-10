@@ -47,7 +47,6 @@ from module.module_handle_metadata import ImgMetadataHandler
 from module.module_access_s3 import S3UploadProgressWindow
 from module.module_gdal_utilities import ReprojectionCmdWindow
 from module.module_validate_files import validate_layer, validate_file
-# from module.module_command_window import CommandWindow
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_uploader_wizard.ui'))
@@ -423,28 +422,37 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                     self.bar1.clearWidgets()
                     self.bar1.pushMessage(
                         'INFO',
-                        'Reprojecting files: %sth image out of %s is being processed...'\
-                         % (str(self.numReprojectionFinished + 1),
-                         str(self.numReprojectionCmdWindows)),
+                        'Reprojecting files: {0}th image '.format(
+                            self.numReprojectionFinished + 1) +
+                        'out of {0} is being processed...'.format(
+                            self.numReprojectionCmdWindows),
                         level=QgsMessageBar.INFO)
 
                     for each_layer in selected_layers:
                         file_abspath = each_layer.data(Qt.UserRole)
 
-                        if not "EPSG3857" in file_abspath:
+                        if "EPSG3857" not in file_abspath:
 
-                            reprojected_file_abspath = os.path.splitext(file_abspath)[0] + '_EPSG3857.tif'
+                            reprojected_file_abspath = os.path.splitext(
+                                file_abspath)[0] + '_EPSG3857.tif'
                             layerName = each_layer.text()
 
-                            # cmd = "gdalwarp -of GTiff -overwrite -t_srs epsg:3857 %s %s" % (file_abspath, reprojected_file_abspath)
                             cmd = "gdalwarp -of GTiff -overwrite -t_srs epsg:3857"
 
-                            # self.reprojectionCmdWindows.append(CommandWindow('Reprojection', cmd, index))
-                            self.reprojectionCmdWindows.append(ReprojectionCmdWindow('Reprojection', cmd, file_abspath, reprojected_file_abspath, index, layerName))
-                            self.reprojectionCmdWindows[index].finished.connect(self.updateReprojectionProgress)
-                            # self.reprojectionCmdWindows[index].cancelled.connect(self.cancelSingleReprojectionProcess)
+                            self.reprojectionCmdWindows.append(
+                                ReprojectionCmdWindow('Reprojection',
+                                                        cmd,
+                                                        file_abspath,
+                                                        reprojected_file_abspath,
+                                                        index,
+                                                        layerName))
+                            self.reprojectionCmdWindows[index].finished.connect(
+                                self.updateReprojectionProgress)
+                            # self.reprojectionCmdWindows[index].cancelled.connect(
+                            #    self.cancelSingleReprojectionProcess)
                             self.reprojectionCmdWindows[index].show()
-                            self.reprojectionCmdWindows[index].move(20 + index * 20, 20 + index * 20)
+                            self.reprojectionCmdWindows[index].move(
+                                20 + index * 20, 20 + index * 20)
                             self.reprojectionCmdWindows[index].startCommandThread()
                             self.reprojectionCmdWindows[index].activateWindow()
 
@@ -454,7 +462,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                             self.bar1.clearWidgets()
                             self.bar1.pushMessage(
                                 'WARNING',
-                                'Suffix _EPSG3857 is already included in one (some) of the selected files...',
+                                'Suffix _EPSG3857 is already included in ' +
+                                'one (some) of the selected files...',
                                 level=QgsMessageBar.WARNING)
                             # break
 
@@ -465,21 +474,27 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
     def updateReprojectionProgress(self, index):
 
         """ consider the use of callback function here. """
-        reprojectedFileAbsPath = self.reprojectionCmdWindows[index].getReprojectedFileAbsPath()
-        reprojectedLayerName = self.reprojectionCmdWindows[index].getReprojectedLayerName()
-        fileAbsPath = self.reprojectionCmdWindows[index].getFileAbsPath()
-        layerName = self.reprojectionCmdWindows[index].getLayerName()
+        reprojectedFileAbsPath = self.reprojectionCmdWindows[
+            index].getReprojectedFileAbsPath()
+        reprojectedLayerName = self.reprojectionCmdWindows[
+            index].getReprojectedLayerName()
+        fileAbsPath = self.reprojectionCmdWindows[
+            index].getFileAbsPath()
+        layerName = self.reprojectionCmdWindows[
+            index].getLayerName()
         # print('Reprojection completed for:')
         # print('File Path:  {0}'.format(fileAbsPath))
         # print('Layer Name: {0}'.format(layerName))
 
         """
-        # rlayer = QgsRasterLayer(reprojectedFileAbsPath, reprojectedLayerName)
+        # rlayer = QgsRasterLayer(reprojectedFileAbsPath,
+        #    reprojectedLayerName)
         # QgsMapLayerRegistry.instance().addMapLayer(rlayer)
         # print(str(rlayer.isValid()))
         """
 
-        self.iface.addRasterLayer(reprojectedFileAbsPath, reprojectedLayerName)
+        self.iface.addRasterLayer(
+            reprojectedFileAbsPath, reprojectedLayerName)
         # print('Insert reprojected raster layer. Layer name:')
         # print('File Path:  {0}'.format(reprojectedFileAbsPath))
         # print('Layer Name: {0}'.format(reprojectedLayerName))
@@ -489,11 +504,15 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         # self.activateWindow()
 
-        items_for_remove = self.added_sources_list_widget.findItems(layerName, Qt.MatchExactly)
-        self.added_sources_list_widget.takeItem(self.added_sources_list_widget.row(items_for_remove[0]))
+        items_for_remove = self.added_sources_list_widget.findItems(
+            layerName, Qt.MatchExactly)
+        self.added_sources_list_widget.takeItem(
+            self.added_sources_list_widget.row(items_for_remove[0]))
 
-        items_for_remove = self.sources_list_widget.findItems(layerName, Qt.MatchExactly)
-        self.sources_list_widget.takeItem(self.sources_list_widget.row(items_for_remove[0]))
+        items_for_remove = self.sources_list_widget.findItems(
+            layerName, Qt.MatchExactly)
+        self.sources_list_widget.takeItem(
+            self.sources_list_widget.row(items_for_remove[0]))
         # self.layers_list_widget.addItem(items_for_remove[0])
 
         item = QListWidgetItem()
@@ -510,9 +529,10 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.bar1.clearWidgets()
             self.bar1.pushMessage(
                 'INFO',
-                'Reprojecting files: %sth image out of %s is being processed...'\
-                 % (str(self.numReprojectionFinished + 1),
-                    str(self.numReprojectionCmdWindows)),
+                'Reprojecting files: {0}th image '.format(
+                    self.numReprojectionFinished + 1) +
+                'out of {0} is being processed...'.format(
+                    self.numReprojectionCmdWindows),
                 level=QgsMessageBar.INFO)
         else:
             self.bar1.clearWidgets()
@@ -534,10 +554,14 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         strUuid = '{0}{1}'.format(self.base_uuid_edit.text(), temp_filename)
         metaInputInDict['uuid'] = strUuid
         metaInputInDict['title'] = self.title_edit.text()
-        metaInputInDict['platform'] = self.platform_combo_box.currentText()
-        metaInputInDict['acquisition_start'] = self.sense_start_edit.dateTime().toString(Qt.ISODate)
-        metaInputInDict['acquisition_end'] = self.sense_end_edit.dateTime().toString(Qt.ISODate)
-        metaInputInDict['provider'] = self.provider_edit.text()
+        metaInputInDict['platform'
+            ] = self.platform_combo_box.currentText()
+        metaInputInDict['acquisition_start'
+            ] = self.sense_start_edit.dateTime().toString(Qt.ISODate)
+        metaInputInDict['acquisition_end'
+            ] = self.sense_end_edit.dateTime().toString(Qt.ISODate)
+        metaInputInDict['provider'
+            ] = self.provider_edit.text()
         metaInputInDict['contact'] = self.contact_edit.text()
         # temporarily disable two keys (website and tags)
         # metaInputInDict['website'] = self.website_edit.text()
@@ -549,14 +573,14 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         properties['thumbnail'] = "currently not available"
         metaInputInDict['properties'] = properties
 
-        # extract metadata from GeoTiff, and merge with the metadata from textbox
+        # extract metadata from GeoTiff,
+        # and merge with the metadata from textbox
         imgMetaHdlr = ImgMetadataHandler(file_abspath)
         imgMetaHdlr.extractMetaInImagery()
         metaForUpload = dict(
             imgMetaHdlr.getMetaInImagery().items() + metaInputInDict.items())
         strMetaForUpload = str(json.dumps(metaForUpload))
 
-        # json_file_abspath = os.path.splitext(file_abspath)[0] + '.tif_meta.json'
         json_file_abspath = file_abspath + '_meta.json'
         # print json_file_abspath
         f = open(json_file_abspath, 'w')

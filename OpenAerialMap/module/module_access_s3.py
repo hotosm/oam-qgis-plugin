@@ -23,16 +23,11 @@
  This script initializes the plugin, making it known to QGIS.
 """
 
-"""
-import json, time, math, imghdr, tempfile
-from qgis.gui import QgsMessageBar
-from qgis.core import QgsMapLayer, QgsMessageLog
-import traceback
-import requests, json
-from ast import literal_eval
-"""
-
 import sys, os, time, math
+# import imghdr, tempfile, requests, json
+# import traceback
+# from ast import literal_eval
+
 from PyQt4 import QtCore
 from PyQt4.QtGui import *      # modify this part?
 from PyQt4.QtCore import QThread, pyqtSignal

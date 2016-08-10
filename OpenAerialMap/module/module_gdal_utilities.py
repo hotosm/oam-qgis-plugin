@@ -60,7 +60,7 @@ class ReprojectionCmdWindow(CommandWindow):
     def getReprojectedLayerName(self):
         return str(self.reprojectedLayerName)
 
-"""
+"""this function is not in use"""
 def reproject(file_abspath):
     #make sure if we need to -overwrite option
     # to avoid repetition of "EPSG3857" in filename:
@@ -75,9 +75,9 @@ def reproject(file_abspath):
         'OAM',
         level=QgsMessageLog.INFO)
     return reprojected_file_abspath
-"""
 
-"""
+
+"""this function is not in use"""
 def convert_to_tif(file_abspath):
     if not ".tif" in file_abspath:
         converted_file_abspath = os.path.splitext(
@@ -93,7 +93,6 @@ def convert_to_tif(file_abspath):
         'OAM',
         level=QgsMessageLog.INFO)
     return converted_file_abspath
-"""
 
 
 def gdal_info_report_corner(hDataset, x, y):

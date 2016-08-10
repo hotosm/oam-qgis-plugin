@@ -1,15 +1,18 @@
 Installation Guide
 
-## Download package
+## Install from package
 
-An experimental package containing all the needed dependencies is available
-at http://acaia.ca/~tassia/OpenAerialMap-0.1alpha1.tar.gz
+A package containing all the needed dependencies is available at the [QGIS repository](https://plugins.qgis.org/plugins/OpenAerialMap/).
 
-After performing the following steps you should see OAM icons in QGIS action bar:
+It can be installed through the QGIS menu "Plugins" -> "Manage and Install Plugins". Make sure that the option "Show also experimental plugins" is checked, at the Settings tab, otherwise the OAM plugin will not be shown among the available ones.
 
-* Unpack the file OpenAerialMap-0.1-alpha.1.tar.gz
-* Place the resulting directory in QGIS plugins directory
-* Activate the plugin through QGIS menu (Plugins -> Manage and Install Plugins)
+Alternatively, the plugin can be downloaded directly from the [repository](https://plugins.qgis.org/plugins/OpenAerialMap/version/0.1-alpha.2/download/), followed by:
+
+* Unpacking the file OpenAerialMap-0.1-alpha.2.zip
+* Placing the resulting directory in QGIS plugins directory
+* Activating the plugin through QGIS menu ("Plugins" -> "Manage and Install Plugins")
+
+After activation of the plugin one should see the OAM icons at the QGIS action bar.
 
 ## Build from source code
 
