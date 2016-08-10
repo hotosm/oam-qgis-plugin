@@ -97,15 +97,18 @@ class DownloadProgressWindow(QWidget):
         self.setMaximumHeight(maxHeight)
         screenShape = QDesktopWidget().screenGeometry()
         width, height = screenShape.width(), screenShape.height()
-        winW, winH = self.frameGeometry().width(), self.frameGeometry().height()
-        left = width - (winW + DownloadProgressWindow.POSITION_WINDOW_FROM_RIGHT)
-        top = height - (winH + DownloadProgressWindow.POSITION_WINDOW_FROM_BOTTOM)
-        print('ScreenW: ' + str(width) + ' ScreenH:' + str(height))
-        print('WinWidth: ' + str(winW) +
-            ' WinHeight: ' + str(winH) +
-            ' MaxHeight: ' + str(maxHeight))
-        print('Left: ' + str(left) + ' Top: ' + str(top))
-        print('')
+        winW, winH = (self.frameGeometry().width(),
+                    self.frameGeometry().height())
+        left = width - (
+            winW + DownloadProgressWindow.POSITION_WINDOW_FROM_RIGHT)
+        top = height - (
+            winH + DownloadProgressWindow.POSITION_WINDOW_FROM_BOTTOM)
+        # print('ScreenW: ' + str(width) + ' ScreenH:' + str(height))
+        # print('WinWidth: ' + str(winW) +
+        #     ' WinHeight: ' + str(winH) +
+        #     ' MaxHeight: ' + str(maxHeight))
+        # print('Left: ' + str(left) + ' Top: ' + str(top))
+        # print('')
         self.move(left, top)
         self.activateWindow()
 

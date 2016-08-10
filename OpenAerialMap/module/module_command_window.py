@@ -95,7 +95,9 @@ class CommandWorker(QThread):
     def run(self):
 
         try:
-            p = subprocess.Popen(self.strCmd, shell=True, stdout=subprocess.PIPE)
+            p = subprocess.Popen(self.strCmd,
+                                shell=True,
+                                stdout=subprocess.PIPE)
             while self.isRunning:
                 out = p.stdout.read(1)
                 #out = p.stderr.read(1)

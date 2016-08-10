@@ -77,9 +77,12 @@ class S3UploadProgressWindow(QWidget):
         self.setMaximumHeight(maxHeight)
         screenShape = QDesktopWidget().screenGeometry()
         width, height = screenShape.width(), screenShape.height()
-        winW, winH = self.frameGeometry().width(), self.frameGeometry().height()
-        left = width - (winW + S3UploadProgressWindow.POSITION_WINDOW_FROM_RIGHT)
-        top = height - (winH + S3UploadProgressWindow.POSITION_WINDOW_FROM_BOTTOM)
+        winW, winH = (self.frameGeometry().width(),
+                      self.frameGeometry().height())
+        left = width - (
+            winW + S3UploadProgressWindow.POSITION_WINDOW_FROM_RIGHT)
+        top = height - (
+            winH + S3UploadProgressWindow.POSITION_WINDOW_FROM_BOTTOM)
         print('ScreenW: ' + str(width) + ' ScreenH:' + str(height))
         print('WinWidth: ' + str(winW) +
             ' WinHeight: ' + str(winH) +
@@ -214,13 +217,12 @@ class S3UploadProgressWindow(QWidget):
 
         self.uwThreads[index].quit()
 
-        if (self.numSuccess +
-            self.numCancelled +
-            self.numFailed) == self.numTotal:
+        if (self.numSuccess + self.numCancelled +
+                    self.numFailed) == self.numTotal:
 
             self.finished.emit(self.numSuccess,
-                            self.numCancelled,
-                            self.numFailed)
+                               self.numCancelled,
+                               self.numFailed)
 
         """
         self.threads[index].quit()

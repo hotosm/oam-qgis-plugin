@@ -66,7 +66,8 @@ class OAMCatalogAccess:
             count = 0
             for key in self.dictQueries:
                 print(str(key) + " " + str(self.dictQueries[key]))
-                if self.dictQueries[key] is not None and self.dictQueries[key] != '':
+                if (self.dictQueries[key] is not None and
+                        self.dictQueries[key] != ''):
                     if count == 0:
                         self.endPoint += '?'
                     else:

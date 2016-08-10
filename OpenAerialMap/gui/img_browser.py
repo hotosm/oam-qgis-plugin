@@ -57,7 +57,8 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
 
         screenShape = QtGui.QDesktopWidget().screenGeometry()
         width, height = screenShape.width(), screenShape.height()
-        winW, winH = self.frameGeometry().width(), self.frameGeometry().height()
+        winW, winH = (self.frameGeometry().width(),
+                      self.frameGeometry().height())
         left = width - (winW + ImgBrowser.POSITION_WINDOW_FROM_RIGHT)
         top = ImgBrowser.POSITION_WINDOW_FROM_TOP
         self.move(left, top)

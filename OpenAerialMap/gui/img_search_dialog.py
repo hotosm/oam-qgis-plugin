@@ -112,13 +112,20 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         try:
             # temporarily disable this part
             # dictQueries['location'] = self.lineEditLocation.text()
-            dictQueries['acquisition_from'] = self.dateEditAcquisitionFrom.date().toString(Qt.ISODate)
-            dictQueries['acquisition_to'] = self.dateEditAcquisitionTo.date().toString(Qt.ISODate)
-            if self.lineEditResolutionFrom.text() != '' and self.lineEditResolutionFrom.text() is not None:
-                dictQueries['gsd_from'] = float(self.lineEditResolutionFrom.text())
-            if self.lineEditResolutionTo.text() != '' and self.lineEditResolutionTo.text() is not None:
-                dictQueries['gsd_to'] = float(self.lineEditResolutionTo.text())
-            if self.lineEditNumImages.text() != '' and self.lineEditNumImages.text() is not None:
+            dictQueries['acquisition_from'
+                ] = self.dateEditAcquisitionFrom.date().toString(Qt.ISODate)
+            dictQueries['acquisition_to'
+                ] = self.dateEditAcquisitionTo.date().toString(Qt.ISODate)
+            if (self.lineEditResolutionFrom.text() != '' and
+                    self.lineEditResolutionFrom.text() is not None):
+                dictQueries['gsd_from'
+                    ] = float(self.lineEditResolutionFrom.text())
+            if (self.lineEditResolutionTo.text() != '' and
+                    self.lineEditResolutionTo.text() is not None):
+                dictQueries['gsd_to'
+                    ] = float(self.lineEditResolutionTo.text())
+            if (self.lineEditNumImages.text() != '' and
+                    self.lineEditNumImages.text() is not None):
                 dictQueries['limit'] = int(self.lineEditNumImages.text())
 
             self.oamCatalogAccess.setAction(action)
@@ -141,11 +148,16 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         try:
             dictQueries['sort'] = "desc"
             dictQueries['order_by'] = "acquisition_end"
-            if self.lineEditResolutionFrom.text() != '' and self.lineEditResolutionFrom.text() is not None:
-                dictQueries['gsd_from'] = float(self.lineEditResolutionFrom.text())
-            if self.lineEditResolutionTo.text() != '' and self.lineEditResolutionTo.text() is not None:
-                dictQueries['gsd_to'] = float(self.lineEditResolutionTo.text())
-            if self.lineEditNumImages.text() != '' and self.lineEditNumImages.text() is not None:
+            if (self.lineEditResolutionFrom.text() != '' and
+                    self.lineEditResolutionFrom.text() is not None):
+                dictQueries['gsd_from'] = float(
+                    self.lineEditResolutionFrom.text())
+            if (self.lineEditResolutionTo.text() != '' and
+                    self.lineEditResolutionTo.text() is not None):
+                dictQueries['gsd_to'] = float(
+                    self.lineEditResolutionTo.text())
+            if (self.lineEditNumImages.text() != '' and
+                    self.lineEditNumImages.text() is not None):
                 dictQueries['limit'] = int(self.lineEditNumImages.text())
 
             self.oamCatalogAccess.setAction(action)

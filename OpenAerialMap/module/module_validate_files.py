@@ -76,7 +76,8 @@ def validate_file(file_abspath):
                         (raster.RasterXSize, 0.0),
                         (raster.RasterXSize, raster.RasterYSize)]
             for point in xy_points:
-                if point == gdal_info_report_corner(raster, point[0], point[1]):
+                if point == gdal_info_report_corner(
+                                raster, point[0], point[1]):
                     rs["val"] = False
                     rs["msg"] = "BBOX of the file %s does not have a valid data" % file_abspath
     return rs

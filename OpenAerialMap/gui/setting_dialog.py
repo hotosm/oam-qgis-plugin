@@ -193,7 +193,8 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
     def loadStorageSettings(self):
         self.settings.beginGroup("Storage")
         bucket = self.settings.value('S3_BUCKET_NAME')
-        storage_index = self.storage_combo_box.findText(bucket, Qt.MatchExactly)
+        storage_index = self.storage_combo_box.findText(
+            bucket, Qt.MatchExactly)
         if not storage_index == -1:
             self.storage_combo_box.setCurrentIndex(storage_index)
         else:

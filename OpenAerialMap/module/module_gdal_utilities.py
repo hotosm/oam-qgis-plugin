@@ -60,13 +60,14 @@ class ReprojectionCmdWindow(CommandWindow):
     def getReprojectedLayerName(self):
         return str(self.reprojectedLayerName)
 
-"""this function is not in use"""
+
+# this function is not in use
 def reproject(file_abspath):
     #make sure if we need to -overwrite option
     # to avoid repetition of "EPSG3857" in filename:
-    if not "EPSG3857" in file_abspath:
+    if "EPSG3857" not in file_abspath:
         reprojected_file_abspath = os.path.splitext(
-            file_abspath)[0]+'_EPSG3857.tif'
+            file_abspath)[0] + '_EPSG3857.tif'
     os.system("gdalwarp -of GTiff -t_srs epsg:3857 %s %s"
         % (file_abspath, reprojected_file_abspath))
 
@@ -77,11 +78,11 @@ def reproject(file_abspath):
     return reprojected_file_abspath
 
 
-"""this function is not in use"""
+# this function is not in use
 def convert_to_tif(file_abspath):
-    if not ".tif" in file_abspath:
+    if ".tif" not in file_abspath:
         converted_file_abspath = os.path.splitext(
-            file_abspath)[0]+".tif"
+            file_abspath)[0] + ".tif"
     src_ds = gdal.Open(file_abspath)
     conversion_driver = gdal.GetDriverByName("GTiff")
     converted_ds = conversion_driver.CreateCopy(
@@ -102,8 +103,12 @@ def gdal_info_report_corner(hDataset, x, y):
     # Transform the point into georeferenced coordinates
     adfGeoTransform = hDataset.GetGeoTransform(can_return_null=True)
     if adfGeoTransform is not None:
-        dfGeoX = adfGeoTransform[0] + adfGeoTransform[1] * x + adfGeoTransform[2] * y
-        dfGeoY = adfGeoTransform[3] + adfGeoTransform[4] * x + adfGeoTransform[5] * y
+        dfGeoX = (adfGeoTransform[0] +
+                adfGeoTransform[1] * x +
+                adfGeoTransform[2] * y)
+        dfGeoY = (adfGeoTransform[3] +
+                adfGeoTransform[4] * x +
+                adfGeoTransform[5] * y)
     else:
         print "BBOX might be wrong. Transformation coefficient " + \
             "could not be fetched from raster"

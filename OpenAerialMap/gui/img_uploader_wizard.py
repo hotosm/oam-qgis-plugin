@@ -440,21 +440,26 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                             cmd = "gdalwarp -of GTiff -overwrite -t_srs epsg:3857"
 
                             self.reprojectionCmdWindows.append(
-                                ReprojectionCmdWindow('Reprojection',
-                                                        cmd,
-                                                        file_abspath,
-                                                        reprojected_file_abspath,
-                                                        index,
-                                                        layerName))
-                            self.reprojectionCmdWindows[index].finished.connect(
-                                self.updateReprojectionProgress)
-                            # self.reprojectionCmdWindows[index].cancelled.connect(
+                                ReprojectionCmdWindow(
+                                            'Reprojection',
+                                            cmd,
+                                            file_abspath,
+                                            reprojected_file_abspath,
+                                            index,
+                                            layerName))
+                            self.reprojectionCmdWindows[index
+                                ].finished.connect(
+                                    self.updateReprojectionProgress)
+                            # self.reprojectionCmdWindows[
+                            #    index].cancelled.connect(
                             #    self.cancelSingleReprojectionProcess)
                             self.reprojectionCmdWindows[index].show()
                             self.reprojectionCmdWindows[index].move(
                                 20 + index * 20, 20 + index * 20)
-                            self.reprojectionCmdWindows[index].startCommandThread()
-                            self.reprojectionCmdWindows[index].activateWindow()
+                            self.reprojectionCmdWindows[
+                                index].startCommandThread()
+                            self.reprojectionCmdWindows[
+                                index].activateWindow()
 
                             index += 1
 
