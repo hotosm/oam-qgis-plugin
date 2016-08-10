@@ -6,6 +6,7 @@ OpenAerialMap/.noseids
 OpenAerialMap/help/build/
 OpenAerialMap/i18n/*.qm
 OpenAerialMap/gui/uic4/
+OpenAerialMap/gui/*.pyc
 OpenAerialMap/*.pyc
 OpenAerialMap/resources_rc.py
 OpenAerialMap/OpenAerialMap.zip

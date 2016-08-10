@@ -27,8 +27,9 @@ import os, sys
 import json
 
 from PyQt4 import QtGui, uic
-from PyQt4.Qt import *
 from PyQt4 import QtCore
+from PyQt4.Qt import *
+# from PyQt4.Qt import QGraphicsScene, QPixmap
 
 from module.module_download_images import (ThumbnailManager,
                                            DownloadProgressWindow,

@@ -26,21 +26,22 @@
 import os, sys
 
 from PyQt4 import QtGui, uic
+# from PyQt4 import QtCore
 from PyQt4.Qt import *
 
 from qgis.gui import QgsMessageBar
 from qgis.core import QgsMapLayer, QgsMessageLog
 # from qgis.core import QgsRasterLayer, QgsMapLayerRegistry
-from osgeo import gdal, osr, ogr
+# from osgeo import gdal, osr, ogr
 import json, time, math, imghdr, tempfile
 
 # Modules needed for upload
-from boto.s3.connection import S3Connection, S3ResponseError
-from boto.s3.key import Key
-from filechunkio import FileChunkIO
+# from boto.s3.connection import S3Connection, S3ResponseError
+# from boto.s3.key import Key
+# from filechunkio import FileChunkIO
 import traceback
-import requests, json
-from ast import literal_eval
+# import requests #, json
+# from ast import literal_eval
 
 from module.module_handle_metadata import ImgMetadataHandler
 from module.module_access_s3 import S3UploadProgressWindow

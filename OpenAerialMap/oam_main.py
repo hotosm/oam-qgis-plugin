@@ -24,12 +24,12 @@
 """
 
 # Qt classes
-from PyQt4.Qt import *
-from PyQt4.QtCore import (QSettings, QTranslator, qVersion, QCoreApplication,
-                          pyqtSignal, QObject, QThread)
-from PyQt4.QtGui import (QAction, QIcon, QMessageBox, QFileDialog,
-                         QListWidgetItem, QSizePolicy, QGridLayout,
-                         QPushButton, QProgressBar)
+# from PyQt4.QtCore import *
+# from PyQt4.QtGui import *
+# from qgis.core import *
+
+from PyQt4.QtCore import (QSettings, QTranslator, qVersion, QCoreApplication)
+from PyQt4.QtGui import (QAction, QIcon)
 
 # icon images
 import resources_rc
@@ -38,8 +38,6 @@ import resources_rc
 from gui.img_uploader_wizard import ImgUploaderWizard
 from gui.img_search_dialog import ImgSearchDialog
 from gui.setting_dialog import SettingDialog
-
-# from gui.backuped_img_uploader_wizard import BackupedImgUploaderWizard
 
 import os, sys
 import webbrowser
@@ -247,7 +245,8 @@ class OpenAerialMap:
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
         for action in self.actions:
-            self.iface.removePluginMenu(self.tr(u'&Open Aerial Map (OAM)'), action)
+            self.iface.removePluginMenu(
+                self.tr(u'&Open Aerial Map (OAM)'), action)
             self.iface.removeToolBarIcon(action)
         del self.toolbar
 

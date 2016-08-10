@@ -26,8 +26,8 @@
 import os, sys
 
 from PyQt4 import QtGui, uic
-from PyQt4.Qt import *
 from PyQt4 import QtCore
+from PyQt4.Qt import *
 
 from img_browser import ImgBrowser
 from module.module_access_oam_catalog import OAMCatalogAccess
