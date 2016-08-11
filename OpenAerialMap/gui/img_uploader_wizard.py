@@ -85,7 +85,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.page(2).layout().addWidget(self.bar2)
 
         self.setButtonText(QtGui.QWizard.CustomButton1,
-                    self.tr("&Start upload"))
+                           self.tr("&Start upload"))
         self.setOption(QtGui.QWizard.HaveCustomButton1, True)
         self.button(QWizard.CustomButton1).setVisible(False)
 
@@ -187,9 +187,9 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         all_layers = self.iface.mapCanvas().layers()
         for layer in all_layers:
             if not self.layers_list_widget.findItems(
-                        layer.name(), Qt.MatchExactly):
+                layer.name(), Qt.MatchExactly):
                 if not self.sources_list_widget.findItems(
-                            layer.name(), Qt.MatchExactly):
+                    layer.name(), Qt.MatchExactly):
                     item = QListWidgetItem()
                     item.setText(layer.name())
                     item.setData(
@@ -218,7 +218,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 result_val = validate_file(filename)
                 if result_val["val"]:
                     if not self.sources_list_widget.findItems(
-                                    filename, Qt.MatchExactly):
+                        filename, Qt.MatchExactly):
                         item = QListWidgetItem()
                         item.setText(os.path.basename(filename))
                         item.setData(Qt.UserRole, filename)
@@ -242,7 +242,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 for item in selected_layers:
                     if validate_layer(item.text(), self.iface):
                         if not self.sources_list_widget.findItems(
-                                        item.text(), Qt.MatchExactly):
+                            item.text(), Qt.MatchExactly):
                             self.layers_list_widget.takeItem(
                                 self.layers_list_widget.row(item))
                             self.sources_list_widget.addItem(item)
@@ -277,7 +277,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 for layer in all_layers:
                     if item.text() == layer.name():
                         if not self.layers_list_widget.findItems(
-                                        item.text(), Qt.MatchExactly):
+                            item.text(), Qt.MatchExactly):
                             self.layers_list_widget.addItem(item)
         else:
             self.bar0.clearWidgets()
@@ -318,17 +318,17 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.sensor_edit.setText(self.settings.value('SENSOR'))
         self.sensor_edit.setCursorPosition(0)
         self.sense_start_edit.setDate(QDateTime.fromString(
-            self.settings.value('SENSE_START'),
-            Qt.ISODate).date())
+                                      self.settings.value('SENSE_START'),
+                                      Qt.ISODate).date())
         self.sense_start_edit.setTime(
             QDateTime.fromString(self.settings.value('SENSE_START'),
-            Qt.ISODate).time())
+                                 Qt.ISODate).time())
         self.sense_end_edit.setDate(
             QDateTime.fromString(self.settings.value('SENSE_END'),
-            Qt.ISODate).date())
+                                 Qt.ISODate).date())
         self.sense_end_edit.setTime(
             QDateTime.fromString(self.settings.value('SENSE_END'),
-            Qt.ISODate).time())
+                                 Qt.ISODate).time())
         self.provider_edit.setText(self.settings.value('PROVIDER'))
         self.provider_edit.setCursorPosition(0)
         self.contact_edit.setText(self.settings.value('CONTACT'))
@@ -345,17 +345,14 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.platform_combo_box.setCurrentIndex(0)
         self.sensor_edit.setText('')
         self.sense_start_edit.setDate(
-            QDateTime().fromString('1970-01-01T00:00:00',
-            Qt.ISODate).date())
+            QDateTime().fromString('1970-01-01T00:00:00', Qt.ISODate).date())
         self.sense_start_edit.setTime(
-            QDateTime().fromString('1970-01-01T00:00:00',
-            Qt.ISODate).time())
+            QDateTime().fromString('1970-01-01T00:00:00', Qt.ISODate).time())
         self.sense_end_edit.setDate(
             QDateTime().fromString('1970-01-01T00:00:00',
-            Qt.ISODate).date())
+                                   Qt.ISODate).date())
         self.sense_end_edit.setTime(
-            QDateTime().fromString('1970-01-01T00:00:00',
-            Qt.ISODate).time())
+            QDateTime().fromString('1970-01-01T00:00:00', Qt.ISODate).time())
         self.tags_edit.setText('')
         self.provider_edit.setText('')
         self.contact_edit.setText('')
@@ -397,8 +394,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 qMsgBox = QMessageBox()
                 qMsgBox.setWindowTitle("Confirmation")
                 qMsgBox.setText("You checked the reprojection option, " +
-                            "which can require significant amount of time. " +
-                            "Are you sure to continue?")
+                                "which can require significant amount " +
+                                "of time. Are you sure to continue?")
                 qMsgBox.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
                 # qMsgBox.setDefaultButton(QMessageBox.Cancel)
 
@@ -423,9 +420,11 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                     self.bar1.pushMessage(
                         'INFO',
                         'Reprojecting files: {0}th image '.format(
-                            self.numReprojectionFinished + 1) +
+                            self.numReprojectionFinished + 1
+                        ) +
                         'out of {0} is being processed...'.format(
-                            self.numReprojectionCmdWindows),
+                            self.numReprojectionCmdWindows
+                        ),
                         level=QgsMessageBar.INFO)
 
                     for each_layer in selected_layers:
@@ -440,16 +439,14 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                             cmd = "gdalwarp -of GTiff -overwrite -t_srs epsg:3857"
 
                             self.reprojectionCmdWindows.append(
-                                ReprojectionCmdWindow(
-                                            'Reprojection',
-                                            cmd,
-                                            file_abspath,
-                                            reprojected_file_abspath,
-                                            index,
-                                            layerName))
-                            self.reprojectionCmdWindows[index
-                                ].finished.connect(
-                                    self.updateReprojectionProgress)
+                                ReprojectionCmdWindow('Reprojection',
+                                                      cmd,
+                                                      file_abspath,
+                                                      reprojected_file_abspath,
+                                                      index,
+                                                      layerName))
+                            self.reprojectionCmdWindows[index].finished.connect(
+                                self.updateReprojectionProgress)
                             # self.reprojectionCmdWindows[
                             #    index].cancelled.connect(
                             #    self.cancelSingleReprojectionProcess)
@@ -559,14 +556,14 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         strUuid = '{0}{1}'.format(self.base_uuid_edit.text(), temp_filename)
         metaInputInDict['uuid'] = strUuid
         metaInputInDict['title'] = self.title_edit.text()
-        metaInputInDict['platform'
-            ] = self.platform_combo_box.currentText()
-        metaInputInDict['acquisition_start'
-            ] = self.sense_start_edit.dateTime().toString(Qt.ISODate)
-        metaInputInDict['acquisition_end'
-            ] = self.sense_end_edit.dateTime().toString(Qt.ISODate)
-        metaInputInDict['provider'
-            ] = self.provider_edit.text()
+        metaInputInDict['platform'] = \
+            self.platform_combo_box.currentText()
+        metaInputInDict['acquisition_start'] = \
+            self.sense_start_edit.dateTime().toString(Qt.ISODate)
+        metaInputInDict['acquisition_end'] = \
+            self.sense_end_edit.dateTime().toString(Qt.ISODate)
+        metaInputInDict['provider'] = \
+            self.provider_edit.text()
         metaInputInDict['contact'] = self.contact_edit.text()
         # temporarily disable two keys (website and tags)
         # metaInputInDict['website'] = self.website_edit.text()
@@ -617,7 +614,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.settings.beginGroup("Storage")
         bucket = self.settings.value('S3_BUCKET_NAME')
         storage_index = self.storage_combo_box.findText(
-                                    bucket, Qt.MatchExactly)
+            bucket, Qt.MatchExactly)
         if not storage_index == -1:
             self.storage_combo_box.setCurrentIndex(storage_index)
         else:
@@ -674,7 +671,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                     temp.write(infile.read() + '\n\n')
             else:
                 temp.write('%s was not found. Please save it in advance.\n\n'
-                    % str(json_file_abspath))
+                           % str(json_file_abspath))
         temp.flush()
         temp.seek(0)
 
@@ -787,7 +784,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.bar2.pushMessage(
             'Upload Result',
             'Success:{0} Cancel:{1} Fail:{2}'.format(
-                    numSuccess, numCancelled, numFailed),
+                numSuccess, numCancelled, numFailed),
             level=QgsMessageBar.INFO)
 
         """

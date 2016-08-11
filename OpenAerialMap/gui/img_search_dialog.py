@@ -62,11 +62,11 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
 
         # self.buttonBox.clicked.connect(lambda: self.test(self.buttonBox))
         self.connect(self.buttonBox,
-            QtCore.SIGNAL('accepted()'),
-            self.execOk)
+                     QtCore.SIGNAL('accepted()'),
+                     self.execOk)
         self.connect(self.buttonBox,
-            QtCore.SIGNAL('rejected()'),
-            self.execCancel)
+                     QtCore.SIGNAL('rejected()'),
+                     self.execCancel)
 
         # disable some GUIs
         self.lineEditLocation.setEnabled(False)
@@ -75,7 +75,7 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
 
         # add objects for catalog access
         self.oamCatalogAccess = OAMCatalogAccess(
-                "https://oam-catalog.herokuapp.com")
+            "https://oam-catalog.herokuapp.com")
         self.imgBrowser = None
 
     def test(self, *argv):
@@ -112,18 +112,18 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         try:
             # temporarily disable this part
             # dictQueries['location'] = self.lineEditLocation.text()
-            dictQueries['acquisition_from'
-                ] = self.dateEditAcquisitionFrom.date().toString(Qt.ISODate)
-            dictQueries['acquisition_to'
-                ] = self.dateEditAcquisitionTo.date().toString(Qt.ISODate)
+            dictQueries['acquisition_from'] = \
+                self.dateEditAcquisitionFrom.date().toString(Qt.ISODate)
+            dictQueries['acquisition_to'] = \
+                self.dateEditAcquisitionTo.date().toString(Qt.ISODate)
             if (self.lineEditResolutionFrom.text() != '' and
                     self.lineEditResolutionFrom.text() is not None):
-                dictQueries['gsd_from'
-                    ] = float(self.lineEditResolutionFrom.text())
+                dictQueries['gsd_from'] = \
+                    float(self.lineEditResolutionFrom.text())
             if (self.lineEditResolutionTo.text() != '' and
                     self.lineEditResolutionTo.text() is not None):
-                dictQueries['gsd_to'
-                    ] = float(self.lineEditResolutionTo.text())
+                dictQueries['gsd_to'] = \
+                    float(self.lineEditResolutionTo.text())
             if (self.lineEditNumImages.text() != '' and
                     self.lineEditNumImages.text() is not None):
                 dictQueries['limit'] = int(self.lineEditNumImages.text())
@@ -137,8 +137,8 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         except Exception as e:
             qMsgBox = QMessageBox()
             qMsgBox.setWindowTitle('Message')
-            qMsgBox.setText("Please make sure if you entered " +
-                "valid data / internet connection, and try again.")
+            qMsgBox.setText("Please make sure if you entered valid data" +
+                            "/internet connection, and try again.")
             qMsgBox.exec_()
 
     def searchLatest(self):
@@ -170,7 +170,7 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
             qMsgBox = QMessageBox()
             qMsgBox.setWindowTitle('Message')
             qMsgBox.setText("Please make sure if you entered " +
-                "valid data / internet connection, and try again.")
+                            "valid data/internet connection, and try again.")
             qMsgBox.exec_()
 
     def browseLocation(self):

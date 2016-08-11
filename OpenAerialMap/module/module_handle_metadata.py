@@ -42,7 +42,7 @@ class ImgMetadataHandler:
         return self.metaInImagery
 
     def openGdalDataset(self):
-        #print('Open GDAL Dataset...')
+        # print('Open GDAL Dataset...')
         self.gdalDataset = gdal.Open(self.imgFileAbspath, gdal.GA_ReadOnly)
         if self.gdalDataset:
             return True
@@ -53,7 +53,7 @@ class ImgMetadataHandler:
         self.gdalDataset = None
 
     def extractMetaInImagery(self):
-        #print('Extracting metadata from Imagery...')
+        # print('Extracting metadata from Imagery...')
         # is it better to use exception handling?
         self.metaInImagery['file_size'] = os.stat(self.imgFileAbspath).st_size
         if self.openGdalDataset():
@@ -72,11 +72,11 @@ class ImgMetadataHandler:
         self.metaInImagery['projection'] = str(self.projInfo)
 
         # create an spatial reference object for bbox extraction
-        #self.spatialRef = osr.SpatialReference()
-        #self.spatialRef.ImportFromWkt(self.projInfo)
+        # self.spatialRef = osr.SpatialReference()
+        # self.spatialRef.ImportFromWkt(self.projInfo)
         # Export to Proj4 format
-        #spatialRefProj = self.spatialRef.ExportToProj4()
-        #self.metaInImagery['projection'] = str(spatialRefProj)
+        # spatialRefProj = self.spatialRef.ExportToProj4()
+        # self.metaInImagery['projection'] = str(spatialRefProj)
 
     def extractBBox(self):
 
@@ -84,10 +84,10 @@ class ImgMetadataHandler:
         self.spatialRef.ImportFromWkt(self.projInfo)
 
         listBBoxNodes = []
-        listBBoxNodes.append(self.affineGeoTransform(
-        self.gdalDataset, 0.0, 0.0)[0])
-        listBBoxNodes.append(self.affineGeoTransform(
-        self.gdalDataset, 0.0, 0.0)[1])
+        listBBoxNodes.append(
+            self.affineGeoTransform(self.gdalDataset, 0.0, 0.0)[0])
+        listBBoxNodes.append(
+            self.affineGeoTransform(self.gdalDataset, 0.0, 0.0)[1])
         listBBoxNodes.append(self.affineGeoTransform(
             self.gdalDataset,
             self.gdalDataset.RasterXSize,
@@ -116,7 +116,7 @@ class ImgMetadataHandler:
             str((node1, node2, node3, node4, node1))
 
     def extractGsd(self):
-        #print("Message: " + repr(self.gdalDataset))
+        # print("Message: " + repr(self.gdalDataset))
 
         geotransform = self.gdalDataset.GetGeoTransform()
         if geotransform is not None:

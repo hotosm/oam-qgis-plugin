@@ -74,7 +74,7 @@ class ImgMetaDownloader:
 
 class DownloadProgressWindow(QWidget):
 
-    #MAX_WINDOW_WIDTH = 600
+    # MAX_WINDOW_WIDTH = 600
     MAX_NUM_DOWNLOADS = 3
     MAX_WINDOW_HEIGHT_PER_PROGRESS_BAR = 50
     POSITION_WINDOW_FROM_RIGHT = 10
@@ -83,7 +83,7 @@ class DownloadProgressWindow(QWidget):
     def __init__(self, iface, parent=None):
         QWidget.__init__(self)
         self.iface = iface
-        #self.setGeometry(300, 300, 280, 280)
+        # self.setGeometry(300, 300, 280, 280)
         self.setWindowTitle('Download Progress')
         self.vLayout = QVBoxLayout(self)
 
@@ -93,12 +93,12 @@ class DownloadProgressWindow(QWidget):
         # This part need to be modified...
         maxHeight = int(
             DownloadProgressWindow.MAX_WINDOW_HEIGHT_PER_PROGRESS_BAR * len(self.hLayouts))
-        #self.setMaximumWidth(S3UploadProgressWindow.MAX_WINDOW_WIDTH)
+        # self.setMaximumWidth(S3UploadProgressWindow.MAX_WINDOW_WIDTH)
         self.setMaximumHeight(maxHeight)
         screenShape = QDesktopWidget().screenGeometry()
         width, height = screenShape.width(), screenShape.height()
         winW, winH = (self.frameGeometry().width(),
-                    self.frameGeometry().height())
+                      self.frameGeometry().height())
         left = width - (
             winW + DownloadProgressWindow.POSITION_WINDOW_FROM_RIGHT)
         top = height - (
@@ -137,10 +137,10 @@ class DownloadProgressWindow(QWidget):
         if self.activeId > DownloadProgressWindow.MAX_NUM_DOWNLOADS - 1:
             qMsgBox = QMessageBox()
             qMsgBox.setWindowTitle('Message')
-            qMsgBox.setText("The maximum numbers of images for " +
-                "downloading is presently set to 3.\n" +
-                "If you need to download more, please finish the current " +
-                "uploading tasks first, and try download again.")
+            qMsgBox.setText("The maximum numbers of images for downloading " +
+                            "is presently set to 3.\nIf you need to " +
+                            "download more, please finish the current " +
+                            "uploading tasks first, and try download again.")
             qMsgBox.exec_()
         else:
             # Initialize the lists
@@ -173,16 +173,18 @@ class DownloadProgressWindow(QWidget):
             self.qLabels[self.activeId].setText(fileName)
 
             # add event listener and handlers to cancel buttons
-            #threadIndex = self.activeId
-            #self.cancelButtons[self.activeId].clicked.connect(
-            # lambda: self.cancelDownload(threadIndex))
+            # threadIndex = self.activeId
+            # self.cancelButtons[self.activeId].clicked.connect(
+            #  lambda: self.cancelDownload(threadIndex))
             self.cancelButtons[self.activeId].clicked.connect(
                 self.cancelDownload)
 
-            #self.dwThreads.append(DownloadWorker(
-            #      url, fileAbsPath, addLayer, threadIndex))
+            # self.dwThreads.append(DownloadWorker(
+            #       url, fileAbsPath, addLayer, threadIndex))
             self.dwThreads.append(DownloadWorker(url,
-                fileAbsPath, addLayer, self.activeId))
+                                  fileAbsPath,
+                                  addLayer,
+                                  self.activeId))
             self.dwThreads[self.activeId].started.connect(
                 self.downloadStarted)
             self.dwThreads[self.activeId].valueChanged.connect(
@@ -192,32 +194,32 @@ class DownloadProgressWindow(QWidget):
             self.dwThreads[self.activeId].error.connect(
                 self.displayError)
             self.dwThreads[self.activeId].start()
-            #self.dwThread.run()
-            #self.dwThread.wait()
-            #self.dwThread.terminate()
+            # self.dwThread.run()
+            # self.dwThread.wait()
+            # self.dwThread.terminate()
 
             self.show()
             self.setWindowPosition()
 
-    #def cancelDownload(self, btnIndex):
+    # def cancelDownload(self, btnIndex):
     def cancelDownload(self):
         for index in range(0, len(self.cancelButtons)):
             if self.cancelButtons[index] == self.sender():
-                #print(str(index))
+                # print(str(index))
                 self.dwThreads[index].stop()
 
     def downloadStarted(self, hasStarted, index):
-        #print('Index: ' + str(index))
+        # print('Index: ' + str(index))
         pass
 
     def updateProgressBar(self, valueChanged, index):
-        #print(str(valueChanged))
+        # print(str(valueChanged))
         self.progressBars[index].setValue(valueChanged)
 
     def downloadFinished(self, result, index):
-        #self.thread.quit()
+        # self.thread.quit()
         self.dwThreads[index].quit()
-        #print('Result: ' + result)
+        # print('Result: ' + result)
         try:  # make sure if the labels still exist
             if result == 'success':
                 self.qLabels[index].setText("Successfully downloaded.")
@@ -234,7 +236,7 @@ class DownloadProgressWindow(QWidget):
             pass
 
     def displayError(self, errMsg, index):
-        #print(str(errMsg))
+        # print(str(errMsg))
         self.qLabels[index].setText("Error: " + str(errMsg))
 
 
@@ -252,7 +254,7 @@ class DownloadWorker(QThread):
         self.addLayer = addLayer
         self.index = index
         self.isRunning = True
-        #self.delay = 0.02
+        # self.delay = 0.02
 
     def run(self):
         try:
@@ -261,8 +263,8 @@ class DownloadWorker(QThread):
             f = open(self.fileAbsPath, 'wb')
             meta = u.info()
             fileSize = int(meta.getheaders("Content-Length")[0])
-            #print("Downloading: {0} Bytes: {1}".format(
-            #                   str(self.url), str(fileSize)))
+            # print("Downloading: {0} Bytes: {1}".format(
+            #                    str(self.url), str(fileSize)))
             fileSizeDownloaded = 0
             blockSize = 8192  # make sure if this block size is apropriate
             while True:

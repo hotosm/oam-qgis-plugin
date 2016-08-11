@@ -57,12 +57,12 @@ class CommandWindow(QWidget):
 
     def closeEvent(self, closeEvent):
         self.cmdThread.stop()
-        #self.cancelled.emit(self.index)
+        # self.cancelled.emit(self.index)
 
     def startCommandThread(self):
         self.cmdThread = CommandWorker(self.strCmd)
         self.cmdThread.start()
-        #self.cmdThread.run()
+        # self.cmdThread.run()
         self.cmdThread.message.connect(self.updateTextEdit)
         self.cmdThread.finished.connect(self.finishTask)
         self.cmdThread.error.connect(self.displayErrorMessage)
@@ -71,13 +71,13 @@ class CommandWindow(QWidget):
         self.te.insertPlainText(c)
 
     def finishTask(self, result):
-        #print(str(result))
+        # print(str(result))
         self.cmdThread.exit()
         self.finished.emit(self.index)
         self.close()
 
     def displayErrorMessage(self, eMsg):
-        #print(eMsg)
+        # print(eMsg)
         pass
 
 
@@ -96,15 +96,15 @@ class CommandWorker(QThread):
 
         try:
             p = subprocess.Popen(self.strCmd,
-                                shell=True,
-                                stdout=subprocess.PIPE)
+                                 shell=True,
+                                 stdout=subprocess.PIPE)
             while self.isRunning:
                 out = p.stdout.read(1)
-                #out = p.stderr.read(1)
+                # out = p.stderr.read(1)
                 if out == '' and p.poll() is not None:
                     break
-                #sys.stdout.write(out)
-                #print(str(out))
+                # sys.stdout.write(out)
+                # print(str(out))
                 self.message.emit(str(out))
                 p.stdout.flush()
         except Exception as e:

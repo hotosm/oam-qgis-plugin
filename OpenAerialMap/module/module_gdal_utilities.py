@@ -33,17 +33,24 @@ from module.module_command_window import CommandWindow
 
 class ReprojectionCmdWindow(CommandWindow):
 
-    def __init__(self, title, strCmd, fileAbsPath,
-            reprojectedFileAbsPath, index, layerName):
+    def __init__(self,
+                 title,
+                 strCmd,
+                 fileAbsPath,
+                 reprojectedFileAbsPath,
+                 index,
+                 layerName):
         self.fileAbsPath = fileAbsPath
         self.reprojectedFileAbsPath = reprojectedFileAbsPath
-        self.strCmdCompleted = (
-            strCmd + ' ' +
-            str(fileAbsPath) + ' ' +
-            str(reprojectedFileAbsPath))
+        self.strCmdCompleted = (strCmd + ' ' +
+                                str(fileAbsPath) + ' ' +
+                                str(reprojectedFileAbsPath))
 
-        CommandWindow.__init__(self, title,
-            self.strCmdCompleted, index, parent=None)
+        CommandWindow.__init__(self,
+                               title,
+                               self.strCmdCompleted,
+                               index,
+                               parent=None)
 
         self.layerName = layerName
         self.reprojectedLayerName = '(EPSG3857) ' + self.layerName
@@ -63,13 +70,13 @@ class ReprojectionCmdWindow(CommandWindow):
 
 # this function is not in use
 def reproject(file_abspath):
-    #make sure if we need to -overwrite option
+    # make sure if we need to -overwrite option
     # to avoid repetition of "EPSG3857" in filename:
     if "EPSG3857" not in file_abspath:
         reprojected_file_abspath = os.path.splitext(
             file_abspath)[0] + '_EPSG3857.tif'
     os.system("gdalwarp -of GTiff -t_srs epsg:3857 %s %s"
-        % (file_abspath, reprojected_file_abspath))
+              % (file_abspath, reprojected_file_abspath))
 
     QgsMessageLog.logMessage(
         'Reprojected to EPSG:3857',
@@ -104,11 +111,11 @@ def gdal_info_report_corner(hDataset, x, y):
     adfGeoTransform = hDataset.GetGeoTransform(can_return_null=True)
     if adfGeoTransform is not None:
         dfGeoX = (adfGeoTransform[0] +
-                adfGeoTransform[1] * x +
-                adfGeoTransform[2] * y)
+                  adfGeoTransform[1] * x +
+                  adfGeoTransform[2] * y)
         dfGeoY = (adfGeoTransform[3] +
-                adfGeoTransform[4] * x +
-                adfGeoTransform[5] * y)
+                  adfGeoTransform[4] * x +
+                  adfGeoTransform[5] * y)
     else:
         print "BBOX might be wrong. Transformation coefficient " + \
             "could not be fetched from raster"

@@ -24,7 +24,7 @@
 """
 
 import os, sys
-#import pycurl
+# import pycurl
 import urllib2
 import json
 from StringIO import StringIO
@@ -33,7 +33,7 @@ from StringIO import StringIO
 class OAMCatalogAccess:
 
     def __init__(self, hostUrl, action=None, dictQueries=None, parent=None):
-        #probably need to make a textbox for editing hostUrl later
+        # probably need to make a textbox for editing hostUrl later
         self.hostUrl = hostUrl
         self.action = action
         self.dictQueries = dictQueries
@@ -52,7 +52,7 @@ class OAMCatalogAccess:
         return metadataInList
 
     def downloadMetadata(self):
-        #print(str(self.dictQueries))
+        # print(str(self.dictQueries))
 
         self.endPoint = self.hostUrl
 
@@ -60,8 +60,8 @@ class OAMCatalogAccess:
             self.endPoint += '/' + self.action
 
             """make sure how to handle location"""
-            #if self.dictQueries.get('location') != '':
-            #    pass
+            # if self.dictQueries.get('location') != '':
+            #     pass
 
             count = 0
             for key in self.dictQueries:
@@ -75,7 +75,7 @@ class OAMCatalogAccess:
                     self.endPoint += str(key) + "=" + str(self.dictQueries[key])
                     count += 1
 
-        #print(str(self.endPoint))
+        # print(str(self.endPoint))
 
         strBuffer = StringIO()
         strBuffer.write(urllib2.urlopen(self.endPoint).read())
@@ -94,6 +94,6 @@ class OAMCatalogAccess:
         """
 
     def uploadMetaData(self):
-        #access to self.hostUrl and upload metadata
-        #invoked form uploader wizard in the future
+        # access to self.hostUrl and upload metadata
+        # invoked form uploader wizard in the future
         print("Under construction")

@@ -40,16 +40,16 @@ from filechunkio import FileChunkIO
 
 class S3UploadProgressWindow(QWidget):
 
-    #MAX_WINDOW_WIDTH = 600
+    # MAX_WINDOW_WIDTH = 600
     MAX_WINDOW_HEIGHT_PER_PROGRESS_BAR = 50
     POSITION_WINDOW_FROM_RIGHT = 10
     POSITION_WINDOW_FROM_BOTTOM = 50
 
     started = pyqtSignal(bool)
     startConfirmed = pyqtSignal(str)
-    #progress = pyqtSignal(str)
+    # progress = pyqtSignal(str)
     finished = pyqtSignal(int, int, int)
-    #error = pyqtSignal(Exception, basestring)
+    # error = pyqtSignal(Exception, basestring)
 
     def __init__(self):
         QWidget.__init__(self)
@@ -73,7 +73,7 @@ class S3UploadProgressWindow(QWidget):
         # This part need to be modified...
         maxHeight = int(
             S3UploadProgressWindow.MAX_WINDOW_HEIGHT_PER_PROGRESS_BAR * len(self.hLayouts))
-        #self.setMaximumWidth(S3UploadProgressWindow.MAX_WINDOW_WIDTH)
+        # self.setMaximumWidth(S3UploadProgressWindow.MAX_WINDOW_WIDTH)
         self.setMaximumHeight(maxHeight)
         screenShape = QDesktopWidget().screenGeometry()
         width, height = screenShape.width(), screenShape.height()
@@ -83,21 +83,21 @@ class S3UploadProgressWindow(QWidget):
             winW + S3UploadProgressWindow.POSITION_WINDOW_FROM_RIGHT)
         top = height - (
             winH + S3UploadProgressWindow.POSITION_WINDOW_FROM_BOTTOM)
-        print('ScreenW: ' + str(width) + ' ScreenH:' + str(height))
-        print('WinWidth: ' + str(winW) +
-            ' WinHeight: ' + str(winH) +
-            ' maxHeight: ' + str(maxHeight))
-        print('Left: ' + str(left) + ' Top: ' + str(top))
-        print('')
+        # print('ScreenW: ' + str(width) + ' ScreenH:' + str(height))
+        # print('WinWidth: ' + str(winW) +
+        #       ' WinHeight: ' + str(winH) +
+        #       ' maxHeight: ' + str(maxHeight))
+        # print('Left: ' + str(left) + ' Top: ' + str(top))
+        # print('')
         self.move(left, top)
         self.activateWindow()
 
     def startUpload(self,
-                bucketKey,
-                bucketSecret,
-                bucketName,
-                uploadOptions,
-                uploadFileAbspaths):
+                    bucketKey,
+                    bucketSecret,
+                    bucketName,
+                    uploadOptions,
+                    uploadFileAbspaths):
 
         # probably need to set timeout
         conn = None
@@ -134,10 +134,10 @@ class S3UploadProgressWindow(QWidget):
                 self.qLabels[i].setText(fileName)
 
                 s3UpWorker = S3UploadWorker(
-                            bucket,
-                            uploadOptions,
-                            uploadFileAbspaths[indexFileAbsPath],
-                            i)
+                    bucket,
+                    uploadOptions,
+                    uploadFileAbspaths[indexFileAbsPath],
+                    i)
                 self.uwThreads.append(s3UpWorker)
 
                 self.cancelButtons[i].clicked.connect(self.cancelUpload)
@@ -147,9 +147,9 @@ class S3UploadProgressWindow(QWidget):
                 self.uwThreads[i].error.connect(self.displayError)
 
                 self.uwThreads[i].start()
-                #self.uwThread.run()
-                #self.uwThread.wait()
-                #self.uwThread.terminate()
+                # self.uwThread.run()
+                # self.uwThread.wait()
+                # self.uwThread.terminate()
 
             self.activeId += numFileAbsPaths
             self.numTotal += numFileAbsPaths
@@ -181,10 +181,10 @@ class S3UploadProgressWindow(QWidget):
                     self.clearLayout(item.layout())
 
     def cancelUpload(self):
-        #print(str(self.sender()))
+        # print(str(self.sender()))
         for index in range(0, len(self.cancelButtons)):
             if self.cancelButtons[index] == self.sender():
-                #print(str(index))
+                # print(str(index))
                 self.uwThreads[index].stop()
 
     def cancelAllUploads(self):
@@ -192,20 +192,20 @@ class S3UploadProgressWindow(QWidget):
             eachTread.stop()
 
     def uploadStarted(self, hasStarted, index):
-        #print('Index: ' + str(index))
+        # print('Index: ' + str(index))
         self.startConfirmed.emit(self.uwThreads[index].fileAbsPath)
 
     def updateProgressBar(self, valueChanged, index):
-        #print(str(valueChanged))
+        # print(str(valueChanged))
         self.progressBars[index].setValue(valueChanged)
 
     def uploadFinished(self, result, index):
-        #print('Result: ' + result)
+        # print('Result: ' + result)
         try:  # make sure if the labels still exist
             if result == 'success':
                 self.qLabels[index].setText("Successfully uploaded.")
                 self.numSuccess += 1
-                #self.progress.emit(self.uwThreads[index].fileAbsPath)
+                # self.progress.emit(self.uwThreads[index].fileAbsPath)
             elif result == 'cancelled':
                 self.qLabels[index].setText("Upload cancelled.")
                 self.numCancelled += 1
@@ -243,8 +243,12 @@ class S3UploadWorker(QThread):
     finished = pyqtSignal(str, int)
     error = pyqtSignal(Exception, int)
 
-    def __init__(self, bucket, uploadOptions,
-                    fileAbsPath, index, delay=0.10):
+    def __init__(self,
+                 bucket,
+                 uploadOptions,
+                 fileAbsPath,
+                 index,
+                 delay=0.10):
         QThread.__init__(self)
         self.bucket = bucket
         self.uploadOptions = uploadOptions
@@ -279,17 +283,17 @@ class S3UploadWorker(QThread):
 
         try:
             i = 0
-            #for i in range(chunkCount):
+            # for i in range(chunkCount):
             while self.isRunning and i < chunkCount:
                 offset = chunkSize * i
                 bytes = min(chunkSize, fileSize - offset)
                 with FileChunkIO(self.fileAbsPath,
-                                'r',
-                                offset=offset,
-                                bytes=bytes) as fp:
+                                 'r',
+                                 offset=offset,
+                                 bytes=bytes) as fp:
                     mp.upload_part_from_file(fp, part_num=i + 1)
                 i += 1
-                #emit progress here
+                # emit progress here
                 progress = i / float(chunkCount) * 100
                 self.valueChanged.emit(progress, self.index)
 

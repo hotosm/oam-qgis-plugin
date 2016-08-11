@@ -88,7 +88,7 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
         self.settings.setValue('BASE_UUID', self.base_uuid_edit.text())
         self.settings.setValue('TITLE', self.title_edit.text())
         self.settings.setValue('PLATFORM',
-            self.platform_combo_box.currentIndex())
+                               self.platform_combo_box.currentIndex())
         self.settings.setValue('SENSOR', self.sensor_edit.text())
         self.settings.setValue('SENSE_START',
             self.sense_start_edit.dateTime().toString(Qt.ISODate))
@@ -104,28 +104,30 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
 
         self.settings.beginGroup("Options")
         self.settings.setValue('LICENSE',
-            self.license_check_box.isChecked())
+                               self.license_check_box.isChecked())
         self.settings.setValue('REPROJECT',
-            self.reproject_check_box.isChecked())
+                               self.reproject_check_box.isChecked())
         self.settings.setValue('NOTIFY_OAM',
-            self.notify_oam_check.isChecked())
+                               self.notify_oam_check.isChecked())
         self.settings.setValue('TRIGGER_OAM_TS',
-            self.trigger_tiling_check.isChecked())
+                               self.trigger_tiling_check.isChecked())
         self.settings.endGroup()
 
     def saveStorageSettings(self):
 
         self.settings.beginGroup("Storage")
+
         if self.storage_combo_box.currentIndex() == 0:
             self.settings.setValue('S3_BUCKET_NAME',
-                'oam-qgis-plugin-test')
+                                   'oam-qgis-plugin-test')
         else:
             self.settings.setValue('S3_BUCKET_NAME',
-                self.specify_edit.text())
+                                   self.specify_edit.text())
+
         self.settings.setValue('AWS_ACCESS_KEY_ID',
-            self.key_id_edit.text())
+                               self.key_id_edit.text())
         self.settings.setValue('AWS_SECRET_ACCESS_KEY',
-            self.secret_key_edit.text())
+                               self.secret_key_edit.text())
         self.settings.endGroup()
 
     def loadMetadataSettings(self):
@@ -142,16 +144,13 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
         self.sense_start_edit.setDate(QDateTime.fromString(
             self.settings.value('SENSE_START'),
             Qt.ISODate).date())
-        self.sense_start_edit.setTime(
-            QDateTime.fromString(
+        self.sense_start_edit.setTime(QDateTime.fromString(
             self.settings.value('SENSE_START'),
             Qt.ISODate).time())
-        self.sense_end_edit.setDate(
-            QDateTime.fromString(
+        self.sense_end_edit.setDate(QDateTime.fromString(
             self.settings.value('SENSE_END'),
             Qt.ISODate).date())
-        self.sense_end_edit.setTime(
-            QDateTime.fromString(
+        self.sense_end_edit.setTime(QDateTime.fromString(
             self.settings.value('SENSE_END'),
             Qt.ISODate).time())
         self.provider_edit.setText(self.settings.value('PROVIDER'))

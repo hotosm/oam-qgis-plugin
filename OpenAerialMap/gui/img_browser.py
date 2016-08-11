@@ -64,8 +64,8 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         self.move(left, top)
 
         self.connect(self.pushButtonDownload,
-                    QtCore.SIGNAL("clicked()"),
-                    self.downloadFullImage)
+                     QtCore.SIGNAL("clicked()"),
+                     self.downloadFullImage)
         self.checkBoxSaveMeta.setChecked(True)
 
         self.singleMetaInDic = singleMetaInDic
