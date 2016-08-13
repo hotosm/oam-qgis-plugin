@@ -132,16 +132,15 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.reload_button.hide()
         self.reload_button.clicked.connect(self.loadSavedMetadata)
 
-        # temporarily disable notify_oam_check and trigger_tiling_check
-        self.notify_oam_check.setEnabled(False)
-        self.trigger_tiling_check.setEnabled(False)
-
         # temporarily disable textEdit for website and tags
         # probably make textEdit for thumbnail later
         self.website_edit.setEnabled(False)
+        self.website_label.setEnabled(False)
         self.tags_edit.setEnabled(False)
-        self.convert_format_check_box.setEnabled(False)
+        self.tags_label.setEnabled(False)
 
+        # temporarily disable convert_format_check_box and combobox
+        self.convert_format_check_box.setEnabled(False)
         self.format_combo_box.addItem('n.a.')
         self.format_combo_box.setEnabled(False)
 
@@ -149,6 +148,19 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)
         self.customButtonClicked.connect(self.startUpload)
         # self.button(QWizard.CustomButton1).clicked.connect(self.startUpload)
+
+        # temporarily disable notify_oam_check and trigger_tiling_check
+        self.notify_oam_check.setEnabled(False)
+        self.btn_request_token.setEnabled(False)
+        self.token_edit.setEnabled(False)
+        self.token_label.setEnabled(False)
+        self.uploader_name_edit.setEnabled(False)
+        self.uploader_name_label.setEnabled(False)
+        self.uploader_email_edit.setEnabled(False)
+        self.uploader_email_label.setEnabled(False)
+
+        self.trigger_tiling_check.setEnabled(False)
+
 
     # handlers for navigation
     def nextPage(self):

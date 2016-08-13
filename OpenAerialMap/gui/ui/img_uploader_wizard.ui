@@ -699,13 +699,6 @@
          </layout>
         </item>
         <item>
-         <widget class="QCheckBox" name="license_check_box">
-          <property name="text">
-           <string>Licensed under CC-BY 4.0 and allow tracing in OSM</string>
-          </property>
-         </widget>
-        </item>
-        <item>
          <widget class="QCheckBox" name="notify_oam_check">
           <property name="text">
            <string>Notify OAM of new upload</string>
@@ -713,9 +706,60 @@
          </widget>
         </item>
         <item>
+         <layout class="QFormLayout" name="formLayout_3">
+          <property name="fieldGrowthPolicy">
+           <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+          </property>
+          <item row="1" column="0">
+           <widget class="QLabel" name="token_label">
+            <property name="text">
+             <string>Token</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="token_edit"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="uploader_name_label">
+            <property name="text">
+             <string>Uploader Name</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="uploader_name_edit"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="uploader_email_label">
+            <property name="text">
+             <string>Uploader Email</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="uploader_email_edit"/>
+          </item>
+          <item row="0" column="1">
+           <widget class="QPushButton" name="btn_request_token">
+            <property name="text">
+             <string>Request a token</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
          <widget class="QCheckBox" name="trigger_tiling_check">
           <property name="text">
            <string>Trigger OAM tile service</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="license_check_box">
+          <property name="text">
+           <string>Licensed under CC-BY 4.0 and allow tracing in OSM</string>
           </property>
          </widget>
         </item>
