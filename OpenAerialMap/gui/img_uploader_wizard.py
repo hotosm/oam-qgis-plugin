@@ -140,6 +140,10 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         # probably make textEdit for thumbnail later
         self.website_edit.setEnabled(False)
         self.tags_edit.setEnabled(False)
+        self.convert_format_check_box.setEnabled(False)
+
+        self.format_combo_box.addItem('n.a.')
+        self.format_combo_box.setEnabled(False)
 
         # Upload tab connections (wizard page 3)
         self.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>793</width>
-    <height>513</height>
+    <width>823</width>
+    <height>528</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -518,13 +518,6 @@
           </property>
          </widget>
         </item>
-        <item row="13" column="0" colspan="2">
-         <widget class="QCheckBox" name="license_check_box">
-          <property name="text">
-           <string>Licensed under CC-BY 4.0 and allow tracing in OSM</string>
-          </property>
-         </widget>
-        </item>
         <item row="15" column="0" colspan="2">
          <widget class="QCheckBox" name="reproject_check_box">
           <property name="text">
@@ -545,6 +538,16 @@
            <string>Website:</string>
           </property>
          </widget>
+        </item>
+        <item row="16" column="0">
+         <widget class="QCheckBox" name="convert_format_check_box">
+          <property name="text">
+           <string>Convert file format</string>
+          </property>
+         </widget>
+        </item>
+        <item row="16" column="1">
+         <widget class="QComboBox" name="format_combo_box"/>
         </item>
        </layout>
       </item>
@@ -694,6 +697,13 @@
            </widget>
           </item>
          </layout>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="license_check_box">
+          <property name="text">
+           <string>Licensed under CC-BY 4.0 and allow tracing in OSM</string>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QCheckBox" name="notify_oam_check">
