@@ -55,6 +55,9 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         self.iface = iface
         self.setupUi(self)
 
+        self.setWindowFlags(Qt.WindowCloseButtonHint |
+                            Qt.WindowMinimizeButtonHint)
+
         screenShape = QtGui.QDesktopWidget().screenGeometry()
         width, height = screenShape.width(), screenShape.height()
         winW, winH = (self.frameGeometry().width(),

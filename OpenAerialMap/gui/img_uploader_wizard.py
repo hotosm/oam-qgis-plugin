@@ -65,6 +65,9 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.iface = iface
         self.setupUi(self)
 
+        self.setWindowFlags(Qt.WindowCloseButtonHint |
+                            Qt.WindowMinimizeButtonHint)
+
         # Message bars need to be attached to pages, since the wizard object
         # does not have a layout. It doesn't work to attach the same bar
         # object to all pages (it is only shown in the last one). The only way
@@ -149,16 +152,11 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.customButtonClicked.connect(self.startUpload)
         # self.button(QWizard.CustomButton1).clicked.connect(self.startUpload)
 
+        self.toggleTokenRequestForm()
+        self.notify_oam_check.stateChanged.connect(self.toggleTokenRequestForm)
+
         # temporarily disable notify_oam_check and trigger_tiling_check
         self.notify_oam_check.setEnabled(False)
-        self.btn_request_token.setEnabled(False)
-        self.token_edit.setEnabled(False)
-        self.token_label.setEnabled(False)
-        self.uploader_name_edit.setEnabled(False)
-        self.uploader_name_label.setEnabled(False)
-        self.uploader_email_edit.setEnabled(False)
-        self.uploader_email_label.setEnabled(False)
-
         self.trigger_tiling_check.setEnabled(False)
 
 
@@ -626,6 +624,20 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.specify_edit.setText('')
             self.specify_edit.setEnabled(0)
 
+    def toggleTokenRequestForm(self):
+
+        state = False
+        if self.notify_oam_check.isChecked():
+            state = True
+
+        self.btn_request_token.setEnabled(state)
+        self.token_edit.setEnabled(state)
+        self.token_label.setEnabled(state)
+        self.uploader_name_edit.setEnabled(state)
+        self.uploader_name_label.setEnabled(state)
+        self.uploader_email_edit.setEnabled(state)
+        self.uploader_email_label.setEnabled(state)
+
     def loadStorageSettings(self):
         self.settings.beginGroup("Storage")
         bucket = self.settings.value('S3_BUCKET_NAME')
@@ -658,12 +670,11 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.license_check_box.setCheckState(2)
         if str(self.settings.value('REPROJECT')).lower() == 'true':
             self.reproject_check_box.setCheckState(2)
-        """
         if str(self.settings.value('NOTIFY_OAM')).lower() == 'true':
             self.notify_oam_check.setCheckState(2)
         if str(self.settings.value('TRIGGER_OAM_TS')).lower() == 'true':
             self.trigger_tiling_check.setCheckState(2)
-        """
+
         # This part is for temporal use.
         self.notify_oam_check.setCheckState(0)
         self.trigger_tiling_check.setCheckState(0)

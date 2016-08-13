@@ -49,6 +49,9 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
         self.iface = iface
         self.setupUi(self)
 
+        self.setWindowFlags(Qt.WindowCloseButtonHint |
+                            Qt.WindowMinimizeButtonHint)
+
         self.settings = settings
 
         # register event handlers
