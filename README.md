@@ -11,7 +11,8 @@ Contact sysadmin@hotosm.org to request an access key if you want to upload to th
 ## Install from package
 
 ###### Use of plugin manager
-A package containing all the needed dependencies can be installed through QGIS Plugin Manager. To install from plugin manager:  
+A package containing all the needed dependencies can be installed through QGIS Plugin Manager.  
+To install from plugin manager:  
 1. Click the menu "Plugins" -> "Manage and Install Plugins".  
 2. Enter 'Open Aerial Map' in search box.  
 
@@ -19,7 +20,7 @@ Note: Make sure that "Show also experimental plugins" is checked at the Settings
 
 ###### Download from plugin repository
 Alternatively, you can directly download from  [repository](https://plugins.qgis.org/plugins/OpenAerialMap/).  
-To install:
+To install:  
 1. Unpack the dowloaded file 'OpenAerialMap-xxxx.zip'.  
 2. Place the extracted files/folder in QGIS plugins directory.  
 3. Activate the plugin through QGIS menu ("Plugins" -> "Manage and Install Plugins").  
