@@ -207,8 +207,9 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                     item = QListWidgetItem()
                     item.setText(layer.name())
                     item.setData(
-                        Qt.UserRole, layer.dataProvider().dataSourceUri())
+                        Qt.UserRole, os.path.abspath(layer.dataProvider().dataSourceUri()))
                     self.layers_list_widget.addItem(item)
+                    print(item.data(Qt.UserRole))
 
     def selectFile(self):
         selected_file = QFileDialog.getOpenFileName(
@@ -235,7 +236,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                         filename, Qt.MatchExactly):
                         item = QListWidgetItem()
                         item.setText(os.path.basename(filename))
-                        item.setData(Qt.UserRole, filename)
+                        item.setData(Qt.UserRole, os.path.abspath(filename))
+                        print(item.data(Qt.UserRole))
                         self.sources_list_widget.addItem(item)
                         self.added_sources_list_widget.addItem(item.clone())
                         self.source_file_edit.setText('')
@@ -533,7 +535,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         item = QListWidgetItem()
         item.setText(reprojectedLayerName)
-        item.setData(Qt.UserRole, reprojectedFileAbsPath)
+        item.setData(Qt.UserRole, os.path.abspath(reprojectedFileAbsPath))
         self.sources_list_widget.addItem(item)
         self.added_sources_list_widget.addItem(item.clone())
 
