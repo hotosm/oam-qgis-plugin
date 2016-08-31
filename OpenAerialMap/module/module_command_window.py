@@ -108,8 +108,11 @@ class CommandWorker(QThread):
                 self.message.emit(str(out))
                 p.stdout.flush()
         except Exception as e:
-            self.error.emit(str(e))
-            self.isRunning = False
+            if '6' in str(e):
+                p = subprocess.call(self.strCmd)
+            else:
+                self.error.emit(str(e))
+                self.isRunning = False
 
         if self.isRunning:
             self.finished.emit('success')

@@ -209,7 +209,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                     item.setData(
                         Qt.UserRole, os.path.abspath(layer.dataProvider().dataSourceUri()))
                     self.layers_list_widget.addItem(item)
-                    print(item.data(Qt.UserRole))
+                    # print(item.data(Qt.UserRole))
 
     def selectFile(self):
         selected_file = QFileDialog.getOpenFileName(
