@@ -78,7 +78,10 @@ class CommandWindow(QWidget):
 
     def displayErrorMessage(self, eMsg):
         # print(eMsg)
-        pass
+        qMsgBox = QMessageBox()
+        qMsgBox.setWindowTitle('Message')
+        qMsgBox.setText("Error: " + eMsg)
+        qMsgBox.exec_()
 
 
 class CommandWorker(QThread):
