@@ -98,8 +98,8 @@ class CommandWorker(QThread):
     def run(self):
 
         try:
-            print(os.name)
-            print(sys.platform)
+            # print(os.name)
+            # print(sys.platform)
 
             if sys.platform == 'win32':
                 import win32con
