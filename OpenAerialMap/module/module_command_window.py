@@ -98,9 +98,21 @@ class CommandWorker(QThread):
     def run(self):
 
         try:
-            p = subprocess.Popen(self.strCmd,
-                                 shell=True,
-                                 stdout=subprocess.PIPE)
+            print(os.name)
+            print(sys.platform)
+
+            if sys.platform == 'win32':
+                import win32con
+                p = subprocess.Popen(self.strCmd,
+                                     stdin=subprocess.PIPE,
+                                     stdout=subprocess.PIPE,
+                                     stderr=subprocess.PIPE,
+                                     creationflags=win32con.CREATE_NO_WINDOW)
+            else:
+                p = subprocess.Popen(self.strCmd,
+                                     shell=True,
+                                     stdout=subprocess.PIPE)
+
             while self.isRunning:
                 out = p.stdout.read(1)
                 # out = p.stderr.read(1)
