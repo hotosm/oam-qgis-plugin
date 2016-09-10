@@ -35,22 +35,23 @@ class ReprojectionCmdWindow(CommandWindow):
 
     def __init__(self,
                  title,
-                 strCmd,
+                 cmdInList,
                  fileAbsPath,
                  reprojectedFileAbsPath,
                  index,
                  layerName):
-        self.fileAbsPath = fileAbsPath
-        self.reprojectedFileAbsPath = reprojectedFileAbsPath
-        self.strCmdCompleted = (strCmd + ' ' +
-                                str(fileAbsPath) + ' ' +
-                                str(reprojectedFileAbsPath))
+
+        cmdInList.append(fileAbsPath)
+        cmdInList.append(reprojectedFileAbsPath)
 
         CommandWindow.__init__(self,
                                title,
-                               self.strCmdCompleted,
+                               cmdInList,
                                index,
                                parent=None)
+
+        self.fileAbsPath = fileAbsPath
+        self.reprojectedFileAbsPath = reprojectedFileAbsPath
 
         self.layerName = layerName
         self.reprojectedLayerName = '(EPSG3857) ' + self.layerName

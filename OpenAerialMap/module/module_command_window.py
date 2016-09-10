@@ -37,11 +37,15 @@ class CommandWindow(QWidget):
     finished = pyqtSignal(int)
     cancelled = pyqtSignal(int)
 
-    def __init__(self, title, strCmd, index, parent=None):
+    def __init__(self, title, cmdInList, index, parent=None):
         QWidget.__init__(self, parent=None)
         self.setWindowTitle(title)
-        self.strCmd = strCmd
+        self.cmdInList = cmdInList
         self.index = index
+
+        self.strCmd = ''
+        for elementCmd in cmdInList:
+            self.strCmd += elementCmd + ' '
 
         # create objects
         self.label = QLabel(self.tr('Executing the command:\n' + self.strCmd))
@@ -60,7 +64,7 @@ class CommandWindow(QWidget):
         # self.cancelled.emit(self.index)
 
     def startCommandThread(self):
-        self.cmdThread = CommandWorker(self.strCmd)
+        self.cmdThread = CommandWorker(self.cmdInList)
         self.cmdThread.start()
         # self.cmdThread.run()
         self.cmdThread.message.connect(self.updateTextEdit)
@@ -90,9 +94,9 @@ class CommandWorker(QThread):
     finished = pyqtSignal(str)
     error = pyqtSignal(str)
 
-    def __init__(self, strCmd, parent=None):
+    def __init__(self, cmdInList, parent=None):
         QThread.__init__(self, parent=None)
-        self.strCmd = strCmd
+        self.cmdInList = cmdInList
         self.isRunning = True
 
     def run(self):
@@ -103,15 +107,25 @@ class CommandWorker(QThread):
 
             if sys.platform == 'win32':
                 import win32con
-                p = subprocess.Popen(self.strCmd,
+                p = subprocess.Popen(self.cmdInList,
                                      stdin=subprocess.PIPE,
                                      stdout=subprocess.PIPE,
                                      stderr=subprocess.PIPE,
                                      creationflags=win32con.CREATE_NO_WINDOW)
             else:
+                """
                 p = subprocess.Popen(self.strCmd,
-                                     shell=True,
-                                     stdout=subprocess.PIPE)
+                                     stdin=subprocess.PIPE,
+                                     stdout=subprocess.PIPE,
+                                     stderr=subprocess.PIPE,
+                                     shell=True)
+                """
+
+                p = subprocess.Popen(self.cmdInList,
+                                     stdin=subprocess.PIPE,
+                                     stdout=subprocess.PIPE,
+                                     stderr=subprocess.PIPE)
+
 
             while self.isRunning:
                 out = p.stdout.read(1)
@@ -122,9 +136,10 @@ class CommandWorker(QThread):
                 # print(str(out))
                 self.message.emit(str(out))
                 p.stdout.flush()
+
         except Exception as e:
             if '6' in str(e):
-                p = subprocess.call(self.strCmd)
+                p = subprocess.call(self.cmdInList)
             else:
                 self.error.emit(str(e))
                 self.isRunning = False

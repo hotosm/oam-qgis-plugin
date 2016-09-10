@@ -452,11 +452,14 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                                 file_abspath)[0] + '_EPSG3857.tif'
                             layerName = each_layer.text()
 
-                            cmd = "gdalwarp -of GTiff -overwrite -t_srs epsg:3857"
+                            #cmd = "gdalwarp -of GTiff -overwrite -t_srs epsg:3857"
+
+                            cmdInList = ["gdalwarp", "-of", "GTiff", "-overwrite", "-t_srs", "epsg:3857"]
 
                             self.reprojectionCmdWindows.append(
                                 ReprojectionCmdWindow('Reprojection',
-                                                      cmd,
+                                                      cmdInList,
+                            #                          cmd,
                                                       file_abspath,
                                                       reprojected_file_abspath,
                                                       index,
