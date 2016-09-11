@@ -35,6 +35,46 @@ class ReprojectionCmdWindow(CommandWindow):
 
     def __init__(self,
                  title,
+                 cmd,
+                 optionsInList,
+                 fileAbsPath,
+                 reprojectedFileAbsPath,
+                 index,
+                 layerName):
+
+        optionsInList.append(fileAbsPath)
+        optionsInList.append(reprojectedFileAbsPath)
+
+        CommandWindow.__init__(self,
+                               title,
+                               cmd,
+                               optionsInList,
+                               index,
+                               parent=None)
+
+        self.fileAbsPath = fileAbsPath
+        self.reprojectedFileAbsPath = reprojectedFileAbsPath
+
+        self.layerName = layerName
+        self.reprojectedLayerName = '(EPSG3857) ' + self.layerName
+
+    def getFileAbsPath(self):
+        return str(self.fileAbsPath)
+
+    def getReprojectedFileAbsPath(self):
+        return str(self.reprojectedFileAbsPath)
+
+    def getLayerName(self):
+        return str(self.layerName)
+
+    def getReprojectedLayerName(self):
+        return str(self.reprojectedLayerName)
+
+
+class BackupReprojectionCmdWindow(CommandWindow):
+
+    def __init__(self,
+                 title,
                  cmdInList,
                  fileAbsPath,
                  reprojectedFileAbsPath,
