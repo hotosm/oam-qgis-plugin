@@ -28,7 +28,10 @@
 # from PyQt4.QtGui import *
 # from qgis.core import *
 
-from PyQt4.QtCore import (QSettings, QTranslator, qVersion, QCoreApplication)
+from PyQt4.QtCore import (QSettings,
+                          QTranslator,
+                          qVersion,
+                          QCoreApplication)
 from PyQt4.QtGui import (QAction, QIcon)
 
 # icon images
@@ -39,9 +42,11 @@ from gui.img_uploader_wizard import ImgUploaderWizard
 from gui.img_search_dialog import ImgSearchDialog
 from gui.setting_dialog import SettingDialog
 
+# set os-specific environment
+from set_env import SetEnvironment
+
 import os, sys
 import webbrowser
-
 
 class OpenAerialMap:
     """QGIS Plugin Implementation."""
@@ -203,6 +208,9 @@ class OpenAerialMap:
         webbrowser.open_new(url)
 
     def initGui(self):
+
+        """Set OS-specific environment."""
+        SetEnvironment.setEnvironment()
 
         """Create the menu and toolbar inside the QGIS GUI."""
 

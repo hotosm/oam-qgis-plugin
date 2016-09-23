@@ -45,6 +45,7 @@ PLUGINNAME = OpenAerialMap
 PY_FILES = \
 	__init__.py \
 	oam_main.py \
+	set_env.py \
 
 # removed 'module' while it is non-functional
 PY_FOLDERS = gui icon module temp ext_libs i18n

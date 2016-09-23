@@ -21,7 +21,7 @@ class CommandWindow(QWidget):
         self.optionsInList = optionsInList
         self.index = index
 
-        self.strCmd = cmd
+        self.strCmd = str(cmd) + ' '
         for eachOption in optionsInList:
             self.strCmd += eachOption + ' '
 
