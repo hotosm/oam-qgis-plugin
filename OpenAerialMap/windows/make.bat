@@ -11,7 +11,8 @@ SET OAM_PLUGIN_DIR=%HOMEPATH%\.qgis2\python\plugins\%PLUGIN_NAME%
 
 SET FOLDERS=ext_libs gui icon module temp i18n
 SET TARGET_FILES=__init__.py ABOUT INSTALL LICENSE metadata.txt oam_main.py^
-                oam-qgis-plugin.conf.sample resources.qrc resources_rc.py
+                oam-qgis-plugin.conf.sample resources.qrc set_env.py^
+                resources_rc.py
 
 REM Set the build folder for help files
 SET HELP=help\build\html
