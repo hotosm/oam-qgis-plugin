@@ -25,7 +25,7 @@
 
 import os, sys
 from qgis.core import *
-from osgeo import gdal #, ogr, osr
+from osgeo import gdal
 from PyQt4.QtCore import QDir
 
 
@@ -37,11 +37,10 @@ class SetEnvironment:
 
             # QgsApplication.prefixPath() contains the path to qgis executable (i.e. .../Qgis.app/MacOS)
             # get the path to Qgis application folder
-            # get the path to Qgis bin folder
-            # get the path to the GDAL framework within the Qgis application folder (Qgis standalone only)
             qgis_app = u"%s/.." % QgsApplication.prefixPath()
             qgis_app = QDir(qgis_app).absolutePath()
-            # qgis_bin = u"%s/bin" % QgsApplication.prefixPath()
+
+            # get the path to the GDAL framework within the Qgis application folder (Qgis standalone only)
             qgis_standalone_gdal_path = u"%s/Frameworks/GDAL.framework" % qgis_app
 
             # get the path to the GDAL framework when installed as external framework
@@ -55,15 +54,6 @@ class SetEnvironment:
                 os.environ['PATH'] = os.environ['PATH'] + ':' +  gdal_base_path
 
         elif sys.platform == 'linux2':
-
-            # gdal_versionsplit = unicode(Version(gdal.VersionInfo("RELEASE_NAME"))).split('.')
-            # gdal_base_path = u"/Library/Frameworks/GDAL.framework/Versions/%s.%s/Programs" % (gdal_versionsplit[0], gdal_versionsplit[1])
-            # os.environ['PATH'] = os.environ['PATH'] + ':' +  gdal_base_path
-
-            # qgis_app = u"%s/.." % QgsApplication.prefixPath()
-            # qgis_app = QDir(qgis_app).absolutePath()
-            # qgis_standalone_gdal_path = u"%s/Frameworks/GDAL.framework" % qgis_app
-            # os.environ['PATH'] = os.environ['PATH'] + ':' +  qgis_standalone_gdal_path
             pass
 
         elif sys.platform == 'win32':
