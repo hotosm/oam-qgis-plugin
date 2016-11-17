@@ -72,9 +72,16 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
                      self.execCancel)
 
         # disable some GUIs
+        self.label_2.setEnabled(False)
         self.lineEditLocation.setEnabled(False)
         self.pushButtonBrowseLocation.setEnabled(False)
         self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(False)
+
+        # hide some GUIs
+        self.label_2.hide()
+        self.lineEditLocation.hide()
+        self.pushButtonBrowseLocation.hide()
+        self.buttonBox.button(QDialogButtonBox.Ok).hide()
 
         # add objects for catalog access
         self.oamCatalogAccess = OAMCatalogAccess(

@@ -242,7 +242,7 @@
      <item>
       <widget class="QCheckBox" name="license_check_box">
        <property name="text">
-        <string>In accordance with OAM free license terms</string>
+        <string>Accept OAM free license terms</string>
        </property>
       </widget>
      </item>
