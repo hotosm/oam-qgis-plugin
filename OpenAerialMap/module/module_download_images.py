@@ -75,7 +75,7 @@ class ImgMetaDownloader:
 class DownloadProgressWindow(QWidget):
 
     # MAX_WINDOW_WIDTH = 600
-    MAX_NUM_DOWNLOADS = 3
+    MAX_NUM_DOWNLOADS = 5
     MAX_WINDOW_HEIGHT_PER_PROGRESS_BAR = 50
     POSITION_WINDOW_FROM_RIGHT = 10
     POSITION_WINDOW_FROM_BOTTOM = 50
@@ -137,10 +137,12 @@ class DownloadProgressWindow(QWidget):
         if self.activeId > DownloadProgressWindow.MAX_NUM_DOWNLOADS - 1:
             qMsgBox = QMessageBox()
             qMsgBox.setWindowTitle('Message')
-            qMsgBox.setText("The maximum numbers of images for downloading " +
-                            "is presently set to 3.\nIf you need to " +
-                            "download more, please finish the current " +
-                            "uploading tasks first, and try download again.")
+            msg = "The maximum numbers of images for downloading " \
+                  "is presently set to {0}.\nIf you need to " \
+                  "download more, please finish the current " \
+                  "uploading tasks first, and try download again" \
+                  ".".format(DownloadProgressWindow.MAX_NUM_DOWNLOADS)
+            qMsgBox.setText(msg)
             qMsgBox.exec_()
         else:
             # Initialize the lists
