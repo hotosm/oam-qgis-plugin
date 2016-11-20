@@ -136,12 +136,14 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.reload_button.hide()
         self.reload_button.clicked.connect(self.loadSavedMetadata)
 
+        """
         # temporarily disable textEdit for website and tags
         # probably make textEdit for thumbnail later
         self.website_edit.setEnabled(False)
         self.website_label.setEnabled(False)
         self.tags_edit.setEnabled(False)
         self.tags_label.setEnabled(False)
+        """
 
         # temporarily disable convert_format_check_box and combobox
         self.convert_format_check_box.setEnabled(False)
@@ -370,10 +372,10 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                                    Qt.ISODate).date())
         self.sense_end_edit.setTime(
             QDateTime().fromString('1970-01-01T00:00:00', Qt.ISODate).time())
-        self.tags_edit.setText('')
         self.provider_edit.setText('')
         self.contact_edit.setText('')
-        self.website_edit.setText('')
+        # self.website_edit.setText('')
+        # self.tags_edit.setText('')
         self.license_check_box.setCheckState(0)
         self.reproject_check_box.setCheckState(0)
 
@@ -474,7 +476,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                             self.reprojectionCmdWindows[index].show()
                             self.reprojectionCmdWindows[index].move(
                                 20 + index * 20, 20 + index * 20)
-                            #self.reprojectionCmdWindows[
+                            # self.reprojectionCmdWindows[
                             #    index].startCommandThread()
                             self.reprojectionCmdWindows[index].run()
                             self.reprojectionCmdWindows[index].activateWindow()
@@ -510,7 +512,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         # print('Layer Name: {0}'.format(layerName))
 
         # create thumbnail
-        #ThumbnailCreation.createThumbnail(reprojectedFileAbsPath)
+        # ThumbnailCreation.createThumbnail(reprojectedFileAbsPath)
 
         """
         # rlayer = QgsRasterLayer(reprojectedFileAbsPath,
