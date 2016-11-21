@@ -327,6 +327,41 @@ class S3UploadWorker(QThread):
             self.triggerTileService()
         """
 
+    def notifyOAM(self):
+        pass
+
+    # need to modify this part
+    def triggerTilingService(self):
+        url = "http://hotosm-oam-server-stub.herokuapp.com/tile"
+        h = {'content-type':'application/json'}
+        uri = "s3://%s/%s" % (self.bucket.name,os.path.basename(self.filename))
+        QgsMessageLog.logMessage(
+            'Imagery uri %s\n' % uri,
+            'OAM',
+            level=QgsMessageLog.INFO)
+        d = json.dumps({'sources':[uri]})
+        p = requests.post(url,headers=h,data=d)
+        post_dict = json.loads(p.text)
+        QgsMessageLog.logMessage(
+            'Post response: %s' % post_dict,
+            'OAM',
+            level=QgsMessageLog.INFO)
+
+        if u'id' in post_dict.keys():
+            ts_id = post_dict[u'id']
+            time = post_dict[u'queued_at']
+            QgsMessageLog.logMessage(
+                'Tile service #%s triggered on %s\n' % (ts_id,time),
+                'OAM',
+                level=QgsMessageLog.INFO)
+        else:
+            QgsMessageLog.logMessage(
+                'Tile service could not be created\n',
+                'OAM',
+                level=QgsMessageLog.CRITICAL)
+        return(0)
+
+
     def run(self):
 
         """
@@ -352,6 +387,8 @@ class S3UploadWorker(QThread):
         self.uploadMetadata()
         self.uploadThumbnail()
         self.uploadImageFile()
+        # self.notifyOAM()
+        # self.triggerTilingService()
 
     def stop(self):
         self.isRunning = False
