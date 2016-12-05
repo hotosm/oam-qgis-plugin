@@ -210,7 +210,7 @@ class OpenAerialMap:
     def initGui(self):
 
         """Set OS-specific environment."""
-        SetEnvironment.setEnvironment()
+        SetEnvironment.setPaths()
 
         """Create the menu and toolbar inside the QGIS GUI."""
 

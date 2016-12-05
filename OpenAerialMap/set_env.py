@@ -24,6 +24,7 @@
 """
 
 import os, sys
+
 from qgis.core import *
 from osgeo import gdal
 from PyQt4.QtCore import QDir
@@ -32,7 +33,29 @@ from PyQt4.QtCore import QDir
 class SetEnvironment:
 
     @staticmethod
-    def setEnvironment():
+    def setPip():
+        pass
+        # subprocess.call('python',['./ext_libs/get-pip.py'])
+        # process = QtCore.QProcess()
+        # process.start('python',['./ext_libs/get-pip.py'])
+
+    @staticmethod
+    def setSetuptools():
+        pass
+        # pip.main(['install','setuptools'])
+
+    @staticmethod
+    def setGoogleDriveAPI():
+        pass
+        # pip.main(['install','--upgrade','google-api-python-client'])
+
+    @staticmethod
+    def setDropBoxAPI():
+        pass
+        # pip.main(['install','dropbox'])
+
+    @staticmethod
+    def setPaths():
         if sys.platform == 'darwin':
 
             # QgsApplication.prefixPath() contains the path to qgis executable (i.e. .../Qgis.app/MacOS)
