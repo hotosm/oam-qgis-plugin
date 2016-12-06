@@ -825,40 +825,54 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
                 upload_file_abspaths.append(upload_file_abspath)
 
-            # get login information for bucket
-            bucket_name = None
-            bucket_key = None
-            bucket_secret = None
+            if self.storage_type_combo_box.currentIndex() == 0:
 
-            #if self.storage_combo_box.currentIndex() == 0:
-            #    bucket_name = 'oam-qgis-plugin-test'
-            #else:
-            bucket_name = str(self.aws_bucket_name_edit.text())
-            if not bucket_name:
-                self.bar2.clearWidgets()
-                self.bar2.pushMessage(
-                    'WARNING',
-                    'The bucket for upload must be provided',
-                    level=QgsMessageBar.WARNING)
+                # get login information for bucket
+                bucket_name = None
+                bucket_key = None
+                bucket_secret = None
 
-            bucket_key = str(self.aws_key_id_edit.text())
-            bucket_secret = str(self.aws_secret_key_edit.text())
+                #if self.storage_combo_box.currentIndex() == 0:
+                #    bucket_name = 'oam-qgis-plugin-test'
+                #else:
+                bucket_name = str(self.aws_bucket_name_edit.text())
+                if not bucket_name:
+                    self.bar2.clearWidgets()
+                    self.bar2.pushMessage(
+                        'WARNING',
+                        'The bucket for upload must be provided',
+                        level=QgsMessageBar.WARNING)
 
-            if self.s3UpPrgWin is None:
-                self.s3UpPrgWin = S3UploadProgressWindow()
-                self.s3UpPrgWin.started.connect(self.displayConnectionResult)
-                # self.s3UpPrgWin.progress.connect(self.updateProgress)
-                self.s3UpPrgWin.startConfirmed.connect(self.updateListWidgets)
-                self.s3UpPrgWin.finished.connect(self.finishUpload)
+                bucket_key = str(self.aws_key_id_edit.text())
+                bucket_secret = str(self.aws_secret_key_edit.text())
 
-            self.s3UpPrgWin.startUpload(bucket_key,
-                                        bucket_secret,
-                                        bucket_name,
-                                        upload_options,
-                                        upload_file_abspaths)
+                if self.s3UpPrgWin is None:
+                    self.s3UpPrgWin = S3UploadProgressWindow()
+                    self.s3UpPrgWin.started.connect(self.displayConnectionResult)
+                    # self.s3UpPrgWin.progress.connect(self.updateProgress)
+                    self.s3UpPrgWin.startConfirmed.connect(self.updateListWidgets)
+                    self.s3UpPrgWin.finished.connect(self.finishUpload)
 
-            self.button(QWizard.FinishButton).setVisible(False)
-            # print(self.isTopLevel())
+                self.s3UpPrgWin.startUpload(bucket_key,
+                                            bucket_secret,
+                                            bucket_name,
+                                            upload_options,
+                                            upload_file_abspaths)
+
+                self.button(QWizard.FinishButton).setVisible(False)
+                # print(self.isTopLevel())
+
+            elif self.storage_type_combo_box.currentIndex() == 1:
+                qMsgBox = QMessageBox()
+                qMsgBox.setText('Under construction:\nMessage from ' +
+                                'Google drive module.')
+                qMsgBox.exec_()
+
+            elif self.storage_type_combo_box.currentIndex() == 2:
+                qMsgBox = QMessageBox()
+                qMsgBox.setText('Under construction:\nMessage from ' +
+                                'Dropbox module.')
+                qMsgBox.exec_()
 
     def displayConnectionResult(self, didStart):
         if didStart:
