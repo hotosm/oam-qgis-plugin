@@ -108,6 +108,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.loadMetadataSettings()
         self.loadStorageSettings()
         self.loadOptionsSettings()
+        self.setStorageType()
 
         # register event handlers
         self.button(QWizard.BackButton).clicked.connect(self.previousPage)
@@ -152,7 +153,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         # Upload tab connections (wizard page 3)
         # self.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)
-        self.storage_type_combo_box.currentIndexChanged.connect(self.changeStorageType)
+        self.storage_type_combo_box.currentIndexChanged.connect(self.setStorageType)
         self.customButtonClicked.connect(self.startUpload)
         # self.button(QWizard.CustomButton1).clicked.connect(self.startUpload)
 
@@ -638,8 +639,59 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.specify_edit.setEnabled(0)
     """
 
-    def changeStorageType(self):
-        pass
+
+    """ need to simplify this part later """
+    def setAWSS3Edit(self):
+            self.aws_bucket_name_edit.setVisible(True)
+            self.aws_bucket_name_label.setVisible(True)
+            self.aws_key_id_edit.setVisible(True)
+            self.aws_key_id_label.setVisible(True)
+            self.aws_secret_key_edit.setVisible(True)
+            self.aws_secret_key_label.setVisible(True)
+            self.google_client_secret_file_edit.setVisible(False)
+            self.google_client_secret_file_label.setVisible(False)
+            self.google_application_name_edit.setVisible(False)
+            self.google_application_name_label.setVisible(False)
+            self.dropbox_access_token_edit.setVisible(False)
+            self.dropbox_access_token_label.setVisible(False)
+
+    def setGoogleDriveEdit(self):
+            self.aws_bucket_name_edit.setVisible(False)
+            self.aws_bucket_name_label.setVisible(False)
+            self.aws_key_id_edit.setVisible(False)
+            self.aws_key_id_label.setVisible(False)
+            self.aws_secret_key_edit.setVisible(False)
+            self.aws_secret_key_label.setVisible(False)
+            self.google_client_secret_file_edit.setVisible(True)
+            self.google_client_secret_file_label.setVisible(True)
+            self.google_application_name_edit.setVisible(True)
+            self.google_application_name_label.setVisible(True)
+            self.dropbox_access_token_edit.setVisible(False)
+            self.dropbox_access_token_label.setVisible(False)
+
+    def setDroboxEdit(self):
+            self.aws_bucket_name_edit.setVisible(False)
+            self.aws_bucket_name_label.setVisible(False)
+            self.aws_key_id_edit.setVisible(False)
+            self.aws_key_id_label.setVisible(False)
+            self.aws_secret_key_edit.setVisible(False)
+            self.aws_secret_key_label.setVisible(False)
+            self.google_client_secret_file_edit.setVisible(False)
+            self.google_client_secret_file_label.setVisible(False)
+            self.google_application_name_edit.setVisible(False)
+            self.google_application_name_label.setVisible(False)
+            self.dropbox_access_token_edit.setVisible(True)
+            self.dropbox_access_token_label.setVisible(True)
+
+    def setStorageType(self):
+        if self.storage_type_combo_box.currentIndex() == 0:
+            self.setAWSS3Edit()
+
+        elif self.storage_type_combo_box.currentIndex() == 1:
+            self.setGoogleDriveEdit()
+
+        elif self.storage_type_combo_box.currentIndex() == 2:
+            self.setDroboxEdit()
 
     def toggleTokenRequestForm(self):
 
@@ -671,6 +723,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.specify_edit.setText(self.settings.value('S3_BUCKET_NAME'))
         """
 
+        self.storage_type_combo_box.setCurrentIndex(
+            int(self.settings.value('DEFAULT_STORAGE')))
         self.aws_bucket_name_edit.setText(
             self.settings.value('AWS_BUCKET_NAME'))
         self.aws_bucket_name_edit.setCursorPosition(0)
@@ -680,8 +734,17 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.aws_secret_key_edit.setText(
             self.settings.value('AWS_SECRET_ACCESS_KEY'))
         self.aws_secret_key_edit.setCursorPosition(0)
-        self.storage_type_combo_box.setCurrentIndex(
-            int(self.settings.value('DEFAULT_STORAGE')))
+
+        self.google_client_secret_file_edit.setText(
+            self.settings.value('GOOGLE_CLIENT_SECRET_FILE'))
+        self.google_client_secret_file_edit.setCursorPosition(0)
+        self.google_application_name_edit.setText(
+            self.settings.value('GOOGLE_APPLICATION_NAME'))
+        self.google_application_name_edit.setCursorPosition(0)
+
+        self.dropbox_access_token_edit.setText(
+            self.settings.value('DROPBOX_ACCESS_TOKEN'))
+        self.dropbox_access_token_edit.setCursorPosition(0)
 
         self.settings.endGroup()
 
