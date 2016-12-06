@@ -67,7 +67,7 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
         self.sense_end_edit.setDisplayFormat('dd.MM.yyyy HH:mm')
 
         # event handler for bucket name input
-        self.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)
+        # self.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)
 
         # initialize
         self.loadSettings()
@@ -112,25 +112,36 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
                                self.reproject_check_box.isChecked())
         self.settings.setValue('NOTIFY_OAM',
                                self.notify_oam_check.isChecked())
-        self.settings.setValue('TRIGGER_OAM_TS',
-                               self.trigger_tiling_check.isChecked())
+        #self.settings.setValue('TRIGGER_OAM_TS',
+        #                       self.trigger_tiling_check.isChecked())
         self.settings.endGroup()
 
     def saveStorageSettings(self):
 
         self.settings.beginGroup("Storage")
 
-        if self.storage_combo_box.currentIndex() == 0:
-            self.settings.setValue('S3_BUCKET_NAME',
-                                   'oam-qgis-plugin-test')
-        else:
-            self.settings.setValue('S3_BUCKET_NAME',
-                                   self.specify_edit.text())
+        #if self.storage_combo_box.currentIndex() == 0:
+        #    self.settings.setValue('S3_BUCKET_NAME',
+        #                           'oam-qgis-plugin-test')
+        #else:
+        #    self.settings.setValue('S3_BUCKET_NAME',
+        #                           self.specify_edit.text())
 
+        self.settings.setValue('AWS_BUCKET_NAME',
+                               self.aws_bucket_name_edit.text())
         self.settings.setValue('AWS_ACCESS_KEY_ID',
-                               self.key_id_edit.text())
+                               self.aws_key_id_edit.text())
         self.settings.setValue('AWS_SECRET_ACCESS_KEY',
-                               self.secret_key_edit.text())
+                               self.aws_secret_key_edit.text())
+        self.settings.setValue('GOOGLE_CLIENT_SECRET_FILE',
+                               self.google_client_secret_file_edit.text())
+        self.settings.setValue('GOOGLE_APPLICATION_NAME',
+                               self.google_application_name_edit.text())
+        self.settings.setValue('DROPBOX_ACCESS_TOKEN',
+                               self.dropbox_access_token_edit.text())
+        self.settings.setValue('DEFAULT_STORAGE',
+                               self.default_storage_combo_box.currentIndex())
+
         self.settings.endGroup()
 
     def loadMetadataSettings(self):
@@ -188,13 +199,14 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
 
         if str(self.settings.value('NOTIFY_OAM')).lower() == 'true':
             self.notify_oam_check.setCheckState(2)
-        if str(self.settings.value('TRIGGER_OAM_TS')).lower() == 'true':
-            self.trigger_tiling_check.setCheckState(2)
+        #if str(self.settings.value('TRIGGER_OAM_TS')).lower() == 'true':
+        #    self.trigger_tiling_check.setCheckState(2)
 
         self.settings.endGroup()
 
     def loadStorageSettings(self):
         self.settings.beginGroup("Storage")
+        """
         bucket = self.settings.value('S3_BUCKET_NAME')
         storage_index = self.storage_combo_box.findText(
             bucket, Qt.MatchExactly)
@@ -207,19 +219,39 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
             self.specify_edit.setEnabled(1)
             self.specify_edit.setText(
                 self.settings.value('S3_BUCKET_NAME'))
-        self.key_id_edit.setText(
+        """
+        self.aws_bucket_name_edit.setText(
+            self.settings.value('AWS_BUCKET_NAME'))
+        self.aws_bucket_name_edit.setCursorPosition(0)
+        self.aws_key_id_edit.setText(
             self.settings.value('AWS_ACCESS_KEY_ID'))
-        self.key_id_edit.setCursorPosition(0)
-        self.secret_key_edit.setText(
+        self.aws_key_id_edit.setCursorPosition(0)
+        self.aws_secret_key_edit.setText(
             self.settings.value('AWS_SECRET_ACCESS_KEY'))
-        self.secret_key_edit.setCursorPosition(0)
+        self.aws_secret_key_edit.setCursorPosition(0)
+
+        self.google_client_secret_file_edit.setText(
+            self.settings.value('GOOGLE_CLIENT_SECRET_FILE'))
+        self.google_application_name_edit.setText(
+            self.settings.value('GOOGLE_APPLICATION_NAME'))
+        self.dropbox_access_token_edit.setText(
+            self.settings.value('DROPBOX_ACCESS_TOKEN'))
+
+        if self.settings.value('DEFAULT_STORAGE'):
+            self.default_storage_combo_box.setCurrentIndex(
+                int(self.settings.value('DEFAULT_STORAGE')))
+        else:
+            self.default_storage_combo_box.setCurrentIndex(0)
+
         self.settings.endGroup()
 
-    def enableSpecify(self):
-        if self.storage_combo_box.currentIndex() == 1:
-            self.specify_label.setEnabled(1)
-            self.specify_edit.setEnabled(1)
-        else:
-            self.specify_label.setEnabled(0)
-            self.specify_edit.setText('')
-            self.specify_edit.setEnabled(0)
+        """
+        def enableSpecify(self):
+            if self.storage_combo_box.currentIndex() == 1:
+                self.specify_label.setEnabled(1)
+                self.specify_edit.setEnabled(1)
+            else:
+                self.specify_label.setEnabled(0)
+                self.specify_edit.setText('')
+                self.specify_edit.setEnabled(0)
+        """

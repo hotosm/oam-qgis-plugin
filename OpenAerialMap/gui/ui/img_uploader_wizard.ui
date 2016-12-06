@@ -707,54 +707,59 @@
          </spacer>
         </item>
         <item>
-         <layout class="QFormLayout" name="formLayout_2">
+         <widget class="QLabel" name="storage_type_label">
+          <property name="text">
+           <string>Storage Type</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="storage_type_combo_box">
+          <property name="editable">
+           <bool>false</bool>
+          </property>
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <item>
+           <property name="text">
+            <string>AWS S3</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Google Drive</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Dropbox</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <layout class="QFormLayout" name="formLayoutStorageType">
           <property name="fieldGrowthPolicy">
            <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
           </property>
           <property name="verticalSpacing">
            <number>2</number>
           </property>
-          <item row="0" column="0">
-           <widget class="QLabel" name="storage_label">
-            <property name="text">
-             <string>AWS Bucket</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QComboBox" name="storage_combo_box">
-            <property name="editable">
-             <bool>false</bool>
-            </property>
-            <property name="currentIndex">
-             <number>0</number>
-            </property>
-            <item>
-             <property name="text">
-              <string>oam-qgis-plugin-test</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>other...</string>
-             </property>
-            </item>
-           </widget>
-          </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="specify_label">
+           <widget class="QLabel" name="aws_bucket_name_label">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="text">
-             <string>   Specify</string>
+             <string>Bucket name</string>
             </property>
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="specify_edit">
+           <widget class="QLineEdit" name="aws_bucket_name_edit">
             <property name="enabled">
-             <bool>false</bool>
+             <bool>true</bool>
             </property>
             <property name="toolTip">
              <string>Bucket name which is not listed above </string>
@@ -765,7 +770,7 @@
            </widget>
           </item>
           <item row="2" column="0">
-           <widget class="QLabel" name="key_id_label">
+           <widget class="QLabel" name="aws_key_id_label">
             <property name="styleSheet">
              <string notr="true"/>
             </property>
@@ -775,14 +780,14 @@
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QLineEdit" name="key_id_edit">
+           <widget class="QLineEdit" name="aws_key_id_edit">
             <property name="toolTip">
              <string>AWS access key id</string>
             </property>
            </widget>
           </item>
           <item row="3" column="0">
-           <widget class="QLabel" name="secret_key_label">
+           <widget class="QLabel" name="aws_secret_key_label">
             <property name="styleSheet">
              <string notr="true"/>
             </property>
@@ -792,7 +797,7 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QLineEdit" name="secret_key_edit">
+           <widget class="QLineEdit" name="aws_secret_key_edit">
             <property name="toolTip">
              <string>AWS secret access key</string>
             </property>
@@ -808,7 +813,7 @@
          </widget>
         </item>
         <item>
-         <layout class="QFormLayout" name="formLayout_3">
+         <layout class="QFormLayout" name="formLayoutOamTokenRequest">
           <property name="fieldGrowthPolicy">
            <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
           </property>
@@ -850,13 +855,6 @@
            </widget>
           </item>
          </layout>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="trigger_tiling_check">
-          <property name="text">
-           <string>Trigger OAM tile service</string>
-          </property>
-         </widget>
         </item>
         <item>
          <widget class="QCheckBox" name="license_check_box">

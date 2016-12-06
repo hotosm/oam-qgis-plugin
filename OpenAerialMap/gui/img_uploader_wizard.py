@@ -151,7 +151,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.format_combo_box.setEnabled(False)
 
         # Upload tab connections (wizard page 3)
-        self.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)
+        # self.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)
+        self.storage_type_combo_box.currentIndexChanged.connect(self.changeStorageType)
         self.customButtonClicked.connect(self.startUpload)
         # self.button(QWizard.CustomButton1).clicked.connect(self.startUpload)
 
@@ -160,7 +161,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         # temporarily disable notify_oam_check and trigger_tiling_check
         self.notify_oam_check.setEnabled(False)
-        self.trigger_tiling_check.setEnabled(False)
+        # self.trigger_tiling_check.setEnabled(False)
 
 
     # handlers for navigation
@@ -626,6 +627,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
     # event handling for wizard page 3
     # please also see startUpload function
     # for event handling of Start Upload button
+    """
     def enableSpecify(self):
         if self.storage_combo_box.currentIndex() == 1:
             self.specify_label.setEnabled(1)
@@ -634,6 +636,10 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.specify_label.setEnabled(0)
             self.specify_edit.setText('')
             self.specify_edit.setEnabled(0)
+    """
+
+    def changeStorageType(self):
+        pass
 
     def toggleTokenRequestForm(self):
 
@@ -651,7 +657,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
     def loadStorageSettings(self):
         self.settings.beginGroup("Storage")
-        bucket = self.settings.value('S3_BUCKET_NAME')
+        """
+        bucket = self.settings.value('AWS_BUCKET_NAME')
         storage_index = self.storage_combo_box.findText(
             bucket, Qt.MatchExactly)
         if not storage_index == -1:
@@ -662,11 +669,20 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.specify_label.setEnabled(1)
             self.specify_edit.setEnabled(1)
             self.specify_edit.setText(self.settings.value('S3_BUCKET_NAME'))
-        self.key_id_edit.setText(self.settings.value('AWS_ACCESS_KEY_ID'))
-        self.key_id_edit.setCursorPosition(0)
-        self.secret_key_edit.setText(
+        """
+
+        self.aws_bucket_name_edit.setText(
+            self.settings.value('AWS_BUCKET_NAME'))
+        self.aws_bucket_name_edit.setCursorPosition(0)
+        self.aws_key_id_edit.setText(
+            self.settings.value('AWS_ACCESS_KEY_ID'))
+        self.aws_key_id_edit.setCursorPosition(0)
+        self.aws_secret_key_edit.setText(
             self.settings.value('AWS_SECRET_ACCESS_KEY'))
-        self.secret_key_edit.setCursorPosition(0)
+        self.aws_secret_key_edit.setCursorPosition(0)
+        self.storage_type_combo_box.setCurrentIndex(
+            int(self.settings.value('DEFAULT_STORAGE')))
+
         self.settings.endGroup()
 
     def loadOptionsSettings(self):
@@ -683,12 +699,12 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.reproject_check_box.setCheckState(2)
         if str(self.settings.value('NOTIFY_OAM')).lower() == 'true':
             self.notify_oam_check.setCheckState(2)
-        if str(self.settings.value('TRIGGER_OAM_TS')).lower() == 'true':
-            self.trigger_tiling_check.setCheckState(2)
+        # if str(self.settings.value('TRIGGER_OAM_TS')).lower() == 'true':
+        #     self.trigger_tiling_check.setCheckState(2)
 
         # This part is for temporal use.
         self.notify_oam_check.setCheckState(0)
-        self.trigger_tiling_check.setCheckState(0)
+        # self.trigger_tiling_check.setCheckState(0)
         self.settings.endGroup()
 
     def loadMetadataReviewBox(self):
@@ -726,9 +742,9 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         if self.notify_oam_check.isChecked():
             # self.upload_options.append("notify_oam")
             upload_options.append("notify_oam")
-        if self.trigger_tiling_check.isChecked():
+        #if self.trigger_tiling_check.isChecked():
             # self.upload_options.append("trigger_tiling")
-            upload_options.append("trigger_tiling")
+            # upload_options.append("trigger_tiling")
 
         if not self.license_check_box.isChecked():
             self.bar2.clearWidgets()
@@ -751,19 +767,19 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             bucket_key = None
             bucket_secret = None
 
-            if self.storage_combo_box.currentIndex() == 0:
-                bucket_name = 'oam-qgis-plugin-test'
-            else:
-                bucket_name = str(self.specify_edit.text())
-                if not bucket_name:
-                    self.bar2.clearWidgets()
-                    self.bar2.pushMessage(
-                        'WARNING',
-                        'The bucket for upload must be provided',
-                        level=QgsMessageBar.WARNING)
+            #if self.storage_combo_box.currentIndex() == 0:
+            #    bucket_name = 'oam-qgis-plugin-test'
+            #else:
+            bucket_name = str(self.aws_bucket_name_edit.text())
+            if not bucket_name:
+                self.bar2.clearWidgets()
+                self.bar2.pushMessage(
+                    'WARNING',
+                    'The bucket for upload must be provided',
+                    level=QgsMessageBar.WARNING)
 
-            bucket_key = str(self.key_id_edit.text())
-            bucket_secret = str(self.secret_key_edit.text())
+            bucket_key = str(self.aws_key_id_edit.text())
+            bucket_secret = str(self.aws_secret_key_edit.text())
 
             if self.s3UpPrgWin is None:
                 self.s3UpPrgWin = S3UploadProgressWindow()
