@@ -49,6 +49,8 @@ from module.module_gdal_utilities import ReprojectionCmdWindow
 from module.module_validate_files import validate_layer, validate_file
 from module.module_img_utilities import ThumbnailCreation
 
+from upload_progress_window import UploadProgressWindow
+
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_uploader_wizard.ui'))
 
@@ -101,7 +103,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         # self.upload_filenames = []
         # self.upload_file_abspaths = []
 
-        self.s3UpPrgWin = None
+        # self.s3UpPrgWin = None
+        self.upPrgWin = None
 
         # Initialize layers and default settings
         self.loadLayers()
@@ -819,11 +822,16 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             for index in xrange(self.sources_list_widget.count()):
                 upload_file_abspath = str(
                     self.added_sources_list_widget.item(index).data(Qt.UserRole))
-
                 # create thumbnail
                 ThumbnailCreation.createThumbnail(upload_file_abspath)
-
                 upload_file_abspaths.append(upload_file_abspath)
+
+            if self.upPrgWin is None:
+                self.upPrgWin = UploadProgressWindow()
+                self.upPrgWin.connected.connect(self.displayConnectionResult)
+                # self.upPrgWin.progress.connect(self.updateProgress)
+                self.upPrgWin.started.connect(self.updateListWidgets)
+                self.upPrgWin.finished.connect(self.finishUpload)
 
             if self.storage_type_combo_box.currentIndex() == 0:
 
@@ -836,31 +844,40 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 #    bucket_name = 'oam-qgis-plugin-test'
                 #else:
                 bucket_name = str(self.aws_bucket_name_edit.text())
-                if not bucket_name:
-                    self.bar2.clearWidgets()
-                    self.bar2.pushMessage(
-                        'WARNING',
-                        'The bucket for upload must be provided',
-                        level=QgsMessageBar.WARNING)
+                #if not bucket_name:
+                #    self.bar2.clearWidgets()
+                #    self.bar2.pushMessage(
+                #        'WARNING',
+                #        'The bucket for upload must be provided',
+                #        level=QgsMessageBar.WARNING)
 
                 bucket_key = str(self.aws_key_id_edit.text())
                 bucket_secret = str(self.aws_secret_key_edit.text())
 
+                """
                 if self.s3UpPrgWin is None:
-                    self.s3UpPrgWin = S3UploadProgressWindow()
+                    self.s3UpPrgWin = UploadProgressWindow()
+                    # self.s3UpPrgWin = S3UploadProgressWindow()
                     self.s3UpPrgWin.started.connect(self.displayConnectionResult)
                     # self.s3UpPrgWin.progress.connect(self.updateProgress)
                     self.s3UpPrgWin.startConfirmed.connect(self.updateListWidgets)
                     self.s3UpPrgWin.finished.connect(self.finishUpload)
+                """
 
+                """
                 self.s3UpPrgWin.startUpload(bucket_key,
                                             bucket_secret,
                                             bucket_name,
                                             upload_options,
                                             upload_file_abspaths)
 
-                self.button(QWizard.FinishButton).setVisible(False)
-                # print(self.isTopLevel())
+                """
+                self.upPrgWin.startUpload('aws',
+                                            upload_file_abspaths,
+                                            upload_options,
+                                            awsBucketKey=bucket_key,
+                                            awsBucketSecret=bucket_secret,
+                                            awsBucketName=bucket_name)
 
             elif self.storage_type_combo_box.currentIndex() == 1:
                 qMsgBox = QMessageBox()
@@ -873,6 +890,9 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 qMsgBox.setText('Under construction:\nMessage from ' +
                                 'Dropbox module.')
                 qMsgBox.exec_()
+
+            self.button(QWizard.FinishButton).setVisible(False)
+            # print(self.isTopLevel())
 
     def displayConnectionResult(self, didStart):
         if didStart:
