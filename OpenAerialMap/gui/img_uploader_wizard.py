@@ -201,8 +201,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
     def cancelWizard(self):
         # print "cancel wizard button was clicked."
         # need to display QMessageBox
-        if self.s3UpPrgWin is not None:
-            self.s3UpPrgWin.cancelAllUploads()
+        if self.upPrgWin is not None:
+            self.upPrgWin.cancelAllUploads()
 
     # event handling for wizard page 1
     def loadLayers(self):
