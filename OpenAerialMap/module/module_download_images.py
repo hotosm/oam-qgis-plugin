@@ -93,7 +93,7 @@ class DownloadProgressWindow(QWidget):
         # This part need to be modified...
         maxHeight = int(
             DownloadProgressWindow.MAX_WINDOW_HEIGHT_PER_PROGRESS_BAR * len(self.hLayouts))
-        # self.setMaximumWidth(S3UploadProgressWindow.MAX_WINDOW_WIDTH)
+        # self.setMaximumWidth(DownloadProgressWindow.MAX_WINDOW_WIDTH)
         self.setMaximumHeight(maxHeight)
         screenShape = QDesktopWidget().screenGeometry()
         width, height = screenShape.width(), screenShape.height()

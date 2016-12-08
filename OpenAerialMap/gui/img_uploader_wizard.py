@@ -49,6 +49,8 @@ from module.module_gdal_utilities import ReprojectionCmdWindow
 from module.module_validate_files import validate_layer, validate_file
 from module.module_img_utilities import ThumbnailCreation
 
+from upload_progress_window import UploadProgressWindow
+
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_uploader_wizard.ui'))
 
@@ -101,13 +103,15 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         # self.upload_filenames = []
         # self.upload_file_abspaths = []
 
-        self.s3UpPrgWin = None
+        # self.s3UpPrgWin = None
+        self.upPrgWin = None
 
         # Initialize layers and default settings
         self.loadLayers()
         self.loadMetadataSettings()
         self.loadStorageSettings()
         self.loadOptionsSettings()
+        self.setStorageType()
 
         # register event handlers
         self.button(QWizard.BackButton).clicked.connect(self.previousPage)
@@ -151,7 +155,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.format_combo_box.setEnabled(False)
 
         # Upload tab connections (wizard page 3)
-        self.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)
+        # self.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)
+        self.storage_type_combo_box.currentIndexChanged.connect(self.setStorageType)
         self.customButtonClicked.connect(self.startUpload)
         # self.button(QWizard.CustomButton1).clicked.connect(self.startUpload)
 
@@ -160,7 +165,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         # temporarily disable notify_oam_check and trigger_tiling_check
         self.notify_oam_check.setEnabled(False)
-        self.trigger_tiling_check.setEnabled(False)
+        # self.trigger_tiling_check.setEnabled(False)
 
 
     # handlers for navigation
@@ -196,8 +201,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
     def cancelWizard(self):
         # print "cancel wizard button was clicked."
         # need to display QMessageBox
-        if self.s3UpPrgWin is not None:
-            self.s3UpPrgWin.cancelAllUploads()
+        if self.upPrgWin is not None:
+            self.upPrgWin.cancelAllUploads()
 
     # event handling for wizard page 1
     def loadLayers(self):
@@ -626,6 +631,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
     # event handling for wizard page 3
     # please also see startUpload function
     # for event handling of Start Upload button
+    """
     def enableSpecify(self):
         if self.storage_combo_box.currentIndex() == 1:
             self.specify_label.setEnabled(1)
@@ -634,6 +640,61 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.specify_label.setEnabled(0)
             self.specify_edit.setText('')
             self.specify_edit.setEnabled(0)
+    """
+
+
+    """ need to simplify this part later """
+    def setAWSS3Edit(self):
+            self.aws_bucket_name_edit.setVisible(True)
+            self.aws_bucket_name_label.setVisible(True)
+            self.aws_key_id_edit.setVisible(True)
+            self.aws_key_id_label.setVisible(True)
+            self.aws_secret_key_edit.setVisible(True)
+            self.aws_secret_key_label.setVisible(True)
+            self.google_client_secret_file_edit.setVisible(False)
+            self.google_client_secret_file_label.setVisible(False)
+            self.google_application_name_edit.setVisible(False)
+            self.google_application_name_label.setVisible(False)
+            self.dropbox_access_token_edit.setVisible(False)
+            self.dropbox_access_token_label.setVisible(False)
+
+    def setGoogleDriveEdit(self):
+            self.aws_bucket_name_edit.setVisible(False)
+            self.aws_bucket_name_label.setVisible(False)
+            self.aws_key_id_edit.setVisible(False)
+            self.aws_key_id_label.setVisible(False)
+            self.aws_secret_key_edit.setVisible(False)
+            self.aws_secret_key_label.setVisible(False)
+            self.google_client_secret_file_edit.setVisible(True)
+            self.google_client_secret_file_label.setVisible(True)
+            self.google_application_name_edit.setVisible(True)
+            self.google_application_name_label.setVisible(True)
+            self.dropbox_access_token_edit.setVisible(False)
+            self.dropbox_access_token_label.setVisible(False)
+
+    def setDroboxEdit(self):
+            self.aws_bucket_name_edit.setVisible(False)
+            self.aws_bucket_name_label.setVisible(False)
+            self.aws_key_id_edit.setVisible(False)
+            self.aws_key_id_label.setVisible(False)
+            self.aws_secret_key_edit.setVisible(False)
+            self.aws_secret_key_label.setVisible(False)
+            self.google_client_secret_file_edit.setVisible(False)
+            self.google_client_secret_file_label.setVisible(False)
+            self.google_application_name_edit.setVisible(False)
+            self.google_application_name_label.setVisible(False)
+            self.dropbox_access_token_edit.setVisible(True)
+            self.dropbox_access_token_label.setVisible(True)
+
+    def setStorageType(self):
+        if self.storage_type_combo_box.currentIndex() == 0:
+            self.setAWSS3Edit()
+
+        elif self.storage_type_combo_box.currentIndex() == 1:
+            self.setGoogleDriveEdit()
+
+        elif self.storage_type_combo_box.currentIndex() == 2:
+            self.setDroboxEdit()
 
     def toggleTokenRequestForm(self):
 
@@ -651,7 +712,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
     def loadStorageSettings(self):
         self.settings.beginGroup("Storage")
-        bucket = self.settings.value('S3_BUCKET_NAME')
+        """
+        bucket = self.settings.value('AWS_BUCKET_NAME')
         storage_index = self.storage_combo_box.findText(
             bucket, Qt.MatchExactly)
         if not storage_index == -1:
@@ -662,11 +724,31 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.specify_label.setEnabled(1)
             self.specify_edit.setEnabled(1)
             self.specify_edit.setText(self.settings.value('S3_BUCKET_NAME'))
-        self.key_id_edit.setText(self.settings.value('AWS_ACCESS_KEY_ID'))
-        self.key_id_edit.setCursorPosition(0)
-        self.secret_key_edit.setText(
+        """
+
+        self.storage_type_combo_box.setCurrentIndex(
+            int(self.settings.value('DEFAULT_STORAGE')))
+        self.aws_bucket_name_edit.setText(
+            self.settings.value('AWS_BUCKET_NAME'))
+        self.aws_bucket_name_edit.setCursorPosition(0)
+        self.aws_key_id_edit.setText(
+            self.settings.value('AWS_ACCESS_KEY_ID'))
+        self.aws_key_id_edit.setCursorPosition(0)
+        self.aws_secret_key_edit.setText(
             self.settings.value('AWS_SECRET_ACCESS_KEY'))
-        self.secret_key_edit.setCursorPosition(0)
+        self.aws_secret_key_edit.setCursorPosition(0)
+
+        self.google_client_secret_file_edit.setText(
+            self.settings.value('GOOGLE_CLIENT_SECRET_FILE'))
+        self.google_client_secret_file_edit.setCursorPosition(0)
+        self.google_application_name_edit.setText(
+            self.settings.value('GOOGLE_APPLICATION_NAME'))
+        self.google_application_name_edit.setCursorPosition(0)
+
+        self.dropbox_access_token_edit.setText(
+            self.settings.value('DROPBOX_ACCESS_TOKEN'))
+        self.dropbox_access_token_edit.setCursorPosition(0)
+
         self.settings.endGroup()
 
     def loadOptionsSettings(self):
@@ -683,12 +765,12 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.reproject_check_box.setCheckState(2)
         if str(self.settings.value('NOTIFY_OAM')).lower() == 'true':
             self.notify_oam_check.setCheckState(2)
-        if str(self.settings.value('TRIGGER_OAM_TS')).lower() == 'true':
-            self.trigger_tiling_check.setCheckState(2)
+        # if str(self.settings.value('TRIGGER_OAM_TS')).lower() == 'true':
+        #     self.trigger_tiling_check.setCheckState(2)
 
         # This part is for temporal use.
         self.notify_oam_check.setCheckState(0)
-        self.trigger_tiling_check.setCheckState(0)
+        # self.trigger_tiling_check.setCheckState(0)
         self.settings.endGroup()
 
     def loadMetadataReviewBox(self):
@@ -726,9 +808,9 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         if self.notify_oam_check.isChecked():
             # self.upload_options.append("notify_oam")
             upload_options.append("notify_oam")
-        if self.trigger_tiling_check.isChecked():
+        #if self.trigger_tiling_check.isChecked():
             # self.upload_options.append("trigger_tiling")
-            upload_options.append("trigger_tiling")
+            # upload_options.append("trigger_tiling")
 
         if not self.license_check_box.isChecked():
             self.bar2.clearWidgets()
@@ -740,43 +822,74 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             for index in xrange(self.sources_list_widget.count()):
                 upload_file_abspath = str(
                     self.added_sources_list_widget.item(index).data(Qt.UserRole))
-
                 # create thumbnail
                 ThumbnailCreation.createThumbnail(upload_file_abspath)
-
                 upload_file_abspaths.append(upload_file_abspath)
 
-            # get login information for bucket
-            bucket_name = None
-            bucket_key = None
-            bucket_secret = None
+            if self.upPrgWin is None:
+                self.upPrgWin = UploadProgressWindow()
+                self.upPrgWin.connected.connect(self.displayConnectionResult)
+                # self.upPrgWin.progress.connect(self.updateProgress)
+                self.upPrgWin.started.connect(self.updateListWidgets)
+                self.upPrgWin.finished.connect(self.finishUpload)
 
-            if self.storage_combo_box.currentIndex() == 0:
-                bucket_name = 'oam-qgis-plugin-test'
-            else:
-                bucket_name = str(self.specify_edit.text())
-                if not bucket_name:
-                    self.bar2.clearWidgets()
-                    self.bar2.pushMessage(
-                        'WARNING',
-                        'The bucket for upload must be provided',
-                        level=QgsMessageBar.WARNING)
+            if self.storage_type_combo_box.currentIndex() == 0:
 
-            bucket_key = str(self.key_id_edit.text())
-            bucket_secret = str(self.secret_key_edit.text())
+                # get login information for bucket
+                bucket_name = None
+                bucket_key = None
+                bucket_secret = None
 
-            if self.s3UpPrgWin is None:
-                self.s3UpPrgWin = S3UploadProgressWindow()
-                self.s3UpPrgWin.started.connect(self.displayConnectionResult)
-                # self.s3UpPrgWin.progress.connect(self.updateProgress)
-                self.s3UpPrgWin.startConfirmed.connect(self.updateListWidgets)
-                self.s3UpPrgWin.finished.connect(self.finishUpload)
+                #if self.storage_combo_box.currentIndex() == 0:
+                #    bucket_name = 'oam-qgis-plugin-test'
+                #else:
+                bucket_name = str(self.aws_bucket_name_edit.text())
+                #if not bucket_name:
+                #    self.bar2.clearWidgets()
+                #    self.bar2.pushMessage(
+                #        'WARNING',
+                #        'The bucket for upload must be provided',
+                #        level=QgsMessageBar.WARNING)
 
-            self.s3UpPrgWin.startUpload(bucket_key,
-                                        bucket_secret,
-                                        bucket_name,
-                                        upload_options,
-                                        upload_file_abspaths)
+                bucket_key = str(self.aws_key_id_edit.text())
+                bucket_secret = str(self.aws_secret_key_edit.text())
+
+                """
+                if self.s3UpPrgWin is None:
+                    self.s3UpPrgWin = UploadProgressWindow()
+                    # self.s3UpPrgWin = S3UploadProgressWindow()
+                    self.s3UpPrgWin.started.connect(self.displayConnectionResult)
+                    # self.s3UpPrgWin.progress.connect(self.updateProgress)
+                    self.s3UpPrgWin.startConfirmed.connect(self.updateListWidgets)
+                    self.s3UpPrgWin.finished.connect(self.finishUpload)
+                """
+
+                """
+                self.s3UpPrgWin.startUpload(bucket_key,
+                                            bucket_secret,
+                                            bucket_name,
+                                            upload_options,
+                                            upload_file_abspaths)
+
+                """
+                self.upPrgWin.startUpload('aws',
+                                            upload_file_abspaths,
+                                            upload_options,
+                                            awsBucketKey=bucket_key,
+                                            awsBucketSecret=bucket_secret,
+                                            awsBucketName=bucket_name)
+
+            elif self.storage_type_combo_box.currentIndex() == 1:
+                qMsgBox = QMessageBox()
+                qMsgBox.setText('Under construction:\nMessage from ' +
+                                'Google drive module.')
+                qMsgBox.exec_()
+
+            elif self.storage_type_combo_box.currentIndex() == 2:
+                qMsgBox = QMessageBox()
+                qMsgBox.setText('Under construction:\nMessage from ' +
+                                'Dropbox module.')
+                qMsgBox.exec_()
 
             self.button(QWizard.FinishButton).setVisible(False)
             # print(self.isTopLevel())
