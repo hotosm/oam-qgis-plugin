@@ -726,8 +726,12 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.specify_edit.setText(self.settings.value('S3_BUCKET_NAME'))
         """
 
-        self.storage_type_combo_box.setCurrentIndex(
-            int(self.settings.value('DEFAULT_STORAGE')))
+        if self.settings.value('DEFAULT_STORAGE') != None:
+            self.storage_type_combo_box.setCurrentIndex(
+                int(self.settings.value('DEFAULT_STORAGE')))
+        else:
+            self.storage_type_combo_box.setCurrentIndex(0)
+
         self.aws_bucket_name_edit.setText(
             self.settings.value('AWS_BUCKET_NAME'))
         self.aws_bucket_name_edit.setCursorPosition(0)
