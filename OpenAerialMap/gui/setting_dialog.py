@@ -72,6 +72,20 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
         # initialize
         self.loadSettings()
 
+        # temporarily disable convert_format_check_box and combobox
+        self.notify_oam_check.setCheckState(0)
+        self.google_client_secret_file_edit.setText('n.a.')
+        self.google_application_name_edit.setText('n.a.')
+        self.dropbox_access_token_edit.setText('n.a.')
+        self.default_storage_combo_box.setCurrentIndex(0)
+
+        self.notify_oam_check.setEnabled(False)
+        self.google_client_secret_file_edit.setEnabled(False)
+        self.google_application_name_edit.setEnabled(False)
+        self.dropbox_access_token_edit.setEnabled(False)
+        self.default_storage_combo_box.setEnabled(0)
+
+
     def loadSettings(self):
         self.loadMetadataSettings()
         self.loadStorageSettings()

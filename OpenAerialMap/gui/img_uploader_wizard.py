@@ -710,6 +710,11 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.uploader_email_edit.setEnabled(state)
         self.uploader_email_label.setEnabled(state)
 
+        # temporarily disable textboxes
+        self.token_edit.setText('n.a.')
+        self.uploader_name_edit.setText('n.a.')
+        self.uploader_email_edit.setText('n.a.')
+
     def loadStorageSettings(self):
         self.settings.beginGroup("Storage")
         """
@@ -755,6 +760,10 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         self.settings.endGroup()
 
+        # temporarily disable combobox
+        self.storage_type_combo_box.setCurrentIndex(0)
+        self.storage_type_combo_box.setEnabled(False)
+
     def loadOptionsSettings(self):
         self.settings.beginGroup("Options")
         """
@@ -772,10 +781,12 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         # if str(self.settings.value('TRIGGER_OAM_TS')).lower() == 'true':
         #     self.trigger_tiling_check.setCheckState(2)
 
-        # This part is for temporal use.
-        self.notify_oam_check.setCheckState(0)
-        # self.trigger_tiling_check.setCheckState(0)
         self.settings.endGroup()
+
+        # temporarily disable notify_oam_check box
+        self.notify_oam_check.setCheckState(0)
+        self.notify_oam_check.setEnabled(False)
+        # self.trigger_tiling_check.setCheckState(0)
 
     def loadMetadataReviewBox(self):
         json_file_abspaths = []
