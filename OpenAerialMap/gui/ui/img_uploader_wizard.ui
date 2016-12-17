@@ -415,7 +415,7 @@
         <item row="3" column="0">
          <widget class="QLabel" name="base_uuid_label">
           <property name="text">
-           <string>Base UUID:</string>
+           <string>Base URL:</string>
           </property>
          </widget>
         </item>

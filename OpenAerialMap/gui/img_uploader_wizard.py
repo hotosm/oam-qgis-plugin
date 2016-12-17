@@ -44,12 +44,12 @@ import traceback
 # from ast import literal_eval
 
 from module.module_handle_metadata import ImgMetadataHandler
-from module.module_access_s3 import S3UploadProgressWindow
+# from module.module_access_s3 import S3UploadProgressWindow
+from upload_progress_window import UploadProgressWindow
 from module.module_gdal_utilities import ReprojectionCmdWindow
 from module.module_validate_files import validate_layer, validate_file
 from module.module_img_utilities import ThumbnailCreation
 
-from upload_progress_window import UploadProgressWindow
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_uploader_wizard.ui'))
@@ -583,7 +583,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         # get metadata from GUI, and store them in a dictionary
         metaInputInDict = {}
-        temp_filename = file_abspath.split('/')[-1]
+        #temp_filename = file_abspath.split('/')[-1]
+        temp_filename = os.path.basename(file_abspath)
         strUuid = '{0}{1}'.format(self.base_uuid_edit.text(), temp_filename)
         metaInputInDict['uuid'] = strUuid
         metaInputInDict['title'] = self.title_edit.text()

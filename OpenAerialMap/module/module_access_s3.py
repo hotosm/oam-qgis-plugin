@@ -32,12 +32,12 @@ from PyQt4 import QtCore
 from PyQt4.QtGui import *      # modify this part?
 from PyQt4.QtCore import QThread, pyqtSignal
 
-import boto
-from boto.s3.connection import S3Connection, S3ResponseError
+#import boto
+#from boto.s3.connection import S3Connection, S3ResponseError
 from boto.s3.key import Key
 from filechunkio import FileChunkIO
 
-
+"""
 class S3UploadProgressWindow(QWidget):
 
     # MAX_WINDOW_WIDTH = 600
@@ -224,17 +224,15 @@ class S3UploadProgressWindow(QWidget):
                                self.numCancelled,
                                self.numFailed)
 
-        """
-        self.threads[index].quit()
-        self.threads[index].wait()
-        self.threads[index].deleteLater()
-        self.threads[index].terminate()
-        """
+        #self.threads[index].quit()
+        #self.threads[index].wait()
+        #self.threads[index].deleteLater()
+        #self.threads[index].terminate()
 
     def displayError(self, exception, index):
         # need to test this part later
         self.qLabels[index].setText("Error: " + str(exception))
-
+"""
 
 class S3UploadWorker(QThread):
 
