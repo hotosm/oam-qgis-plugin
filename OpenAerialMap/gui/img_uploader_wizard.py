@@ -570,7 +570,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         # get metadata from GUI, and store them in a dictionary
         metaInputInDict = {}
-        temp_filename = file_abspath.split('/')[-1]
+        # temp_filename = file_abspath.split('/')[-1]
+        temp_filename = os.path.basename(file_abspath)
         strUuid = '{0}{1}'.format(self.base_uuid_edit.text(), temp_filename)
         metaInputInDict['uuid'] = strUuid
         metaInputInDict['title'] = self.title_edit.text()
