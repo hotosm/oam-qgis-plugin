@@ -86,6 +86,11 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         # add objects for catalog access
         self.oamCatalogAccess = OAMCatalogAccess(
             "https://oam-catalog.herokuapp.com")
+            
+        # url for test
+        #self.oamCatalogAccess = OAMCatalogAccess(
+        #    "http://localhost:4000")
+
         self.imgBrowser = None
 
     def test(self, *argv):
