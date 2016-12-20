@@ -38,7 +38,7 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
 
 class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
 
-    def __init__(self, iface, parent=None):
+    def __init__(self, iface, settings, parent=None):
         """Constructor."""
         super(ImgSearchDialog, self).__init__(parent)
         # Set up the user interface from Designer.
@@ -48,6 +48,8 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         # #widgets-and-dialogs-with-auto-connect
         self.iface = iface
         self.setupUi(self)
+
+        self.settings = settings
 
         self.setWindowFlags(Qt.WindowCloseButtonHint |
                             Qt.WindowMinimizeButtonHint)
@@ -84,12 +86,19 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         self.buttonBox.button(QDialogButtonBox.Ok).hide()
 
         # add objects for catalog access
-        self.oamCatalogAccess = OAMCatalogAccess(
-            "https://oam-catalog.herokuapp.com")
-            
-        # url for test
-        #self.oamCatalogAccess = OAMCatalogAccess(
-        #    "http://localhost:4000")
+        self.settings.beginGroup("Storage")
+
+        if self.settings.value('CATALOG_URL') is None or \
+            str(self.settings.value('CATALOG_URL')) == '':
+            self.catalogUrl = "https://oam-catalog.herokuapp.com"
+        else:
+            self.catalogUrl = str(self.settings.value('CATALOG_URL'))
+
+        self.settings.endGroup()
+
+        self.oamCatalogAccess = OAMCatalogAccess(self.catalogUrl)
+        catalogUrlLabel = self.catalog_url_label.text() + self.catalogUrl
+        self.catalog_url_label.setText(catalogUrlLabel)
 
         self.imgBrowser = None
 

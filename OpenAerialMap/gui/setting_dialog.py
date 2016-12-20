@@ -69,6 +69,9 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
         # event handler for bucket name input
         # self.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)
 
+        self.hot_oam_catalog_check_box.stateChanged.connect(
+            self.toggleHotOamCatalog)
+
         # initialize
         self.loadSettings()
 
@@ -155,6 +158,11 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
                                self.dropbox_access_token_edit.text())
         self.settings.setValue('DEFAULT_STORAGE',
                                self.default_storage_combo_box.currentIndex())
+
+        self.settings.setValue('HOT_OAM_CATALOG',
+                               self.hot_oam_catalog_check_box.isChecked())
+        self.settings.setValue('CATALOG_URL',
+                               self.catalog_url_edit.text())
 
         self.settings.endGroup()
 
@@ -257,15 +265,30 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
         else:
             self.default_storage_combo_box.setCurrentIndex(0)
 
+        if self.settings.value('HOT_OAM_CATALOG') is None or \
+            str(self.settings.value('HOT_OAM_CATALOG')).lower() == 'true':
+            self.hot_oam_catalog_check_box.setCheckState(2)
+        else:
+            self.hot_oam_catalog_check_box.setCheckState(0)
+            self.catalog_url_edit.setText(self.settings.value('CATALOG_URL'))
+
         self.settings.endGroup()
 
-        """
-        def enableSpecify(self):
-            if self.storage_combo_box.currentIndex() == 1:
-                self.specify_label.setEnabled(1)
-                self.specify_edit.setEnabled(1)
-            else:
-                self.specify_label.setEnabled(0)
-                self.specify_edit.setText('')
-                self.specify_edit.setEnabled(0)
-        """
+    def toggleHotOamCatalog(self):
+        if self.hot_oam_catalog_check_box.isChecked():
+            self.catalog_url_edit.setText('https://oam-catalog.herokuapp.com')
+            self.catalog_url_edit.setEnabled(False)
+        else:
+            self.catalog_url_edit.setEnabled(True)
+            self.catalog_url_edit.setText('')
+
+    """
+    def enableSpecify(self):
+        if self.storage_combo_box.currentIndex() == 1:
+            self.specify_label.setEnabled(1)
+            self.specify_edit.setEnabled(1)
+        else:
+            self.specify_label.setEnabled(0)
+            self.specify_edit.setText('')
+            self.specify_edit.setEnabled(0)
+    """
