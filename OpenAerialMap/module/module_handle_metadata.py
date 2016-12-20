@@ -96,7 +96,7 @@ class ImgMetadataHandler:
             self.gdalDataset,
             self.gdalDataset.RasterXSize,
             self.gdalDataset.RasterYSize)[1])
-        self.metaInImagery['bbox'] = str(listBBoxNodes)
+        self.metaInImagery['bbox'] = listBBoxNodes
 
     def extractFootprint(self):
         """Temporarily use bbox values"""
