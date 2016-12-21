@@ -112,8 +112,33 @@ class ImgMetadataHandler:
             self.gdalDataset,
             self.gdalDataset.RasterXSize,
             self.gdalDataset.RasterYSize)
-        self.metaInImagery['footprint'] = 'POLYGON' + \
-            str((node1, node2, node3, node4, node1))
+
+        # self.metaInImagery['footprint'] = 'POLYGON' + \
+        #     str((node1, node2, node3, node4, node1))
+        self.metaInImagery['footprint'] = \
+            'POLYGON(({} {},{} {},{} {},{} {},{} {}))'.format(
+                node1[0], node1[1],
+                node2[0], node2[1],
+                node4[0], node4[1],
+                node3[0], node3[1],
+                node1[0], node1[1])
+
+        """
+        # Create ring
+        ring = ogr.Geometry(ogr.wkbLinearRing)
+        ring.AddPoint(node1)
+        ring.AddPoint(node2)
+        ring.AddPoint(node3)
+        ring.AddPoint(node4)
+        ring.AddPoint(node1)
+
+        # Create polygon
+        poly = ogr.Geometry(ogr.wkbPolygon)
+        poly.AddGeometry(ring)
+
+        self.metaInImagery['footprint'] = poly.ExportToWkt()
+        # print poly.ExportToWkt()
+        """
 
     def extractGsd(self):
         # print("Message: " + repr(self.gdalDataset))
