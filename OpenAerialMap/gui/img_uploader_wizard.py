@@ -47,6 +47,7 @@ from module.module_handle_metadata import ImgMetadataHandler
 from module.module_access_s3 import S3UploadProgressWindow
 from module.module_gdal_utilities import ReprojectionCmdWindow
 from module.module_validate_files import validate_layer, validate_file
+from module.module_img_utilities import ThumbnailCreation
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_uploader_wizard.ui'))
@@ -596,7 +597,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         properties = {}
         properties['sensor'] = self.sensor_edit.text()
         # need to implement thumbnail creation, etc.
-        properties['thumbnail'] = "currently not available"
+        properties['thumbnail'] = strUuid + ".thumb.png"
         metaInputInDict['properties'] = properties
 
         # extract metadata from GeoTiff,
@@ -739,6 +740,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             for index in xrange(self.sources_list_widget.count()):
                 upload_file_abspath = str(
                     self.added_sources_list_widget.item(index).data(Qt.UserRole))
+                # create thumbnail
+                ThumbnailCreation.createThumbnail(upload_file_abspath)
                 upload_file_abspaths.append(upload_file_abspath)
 
             # get login information for bucket

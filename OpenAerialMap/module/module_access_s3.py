@@ -270,6 +270,19 @@ class S3UploadWorker(QThread):
             self.error.emit(e, self.index)
             self.finished.emit('failed', self.index)
 
+    def uploadThumbnail(self):
+
+        thumbnailFileAbsPath = self.fileAbsPath + '.thumb.png'
+        if os.path.exists(thumbnailFileAbsPath):
+            keyForMetaUp = Key(self.bucket)
+            thumbnailFileName = os.path.basename(thumbnailFileAbsPath)
+            keyForMetaUp.key = thumbnailFileName
+            try:
+                keyForMetaUp.set_contents_from_filename(thumbnailFileAbsPath)
+            except Exception as e:
+                self.error.emit(e, self.index)
+                self.finished.emit('failed', self.index)
+
     def uploadImageFile(self):
 
         fileSize = os.stat(self.fileAbsPath).st_size
@@ -337,6 +350,7 @@ class S3UploadWorker(QThread):
 
         """
         self.uploadMetadata()
+        self.uploadThumbnail()
         self.uploadImageFile()
 
     def stop(self):
