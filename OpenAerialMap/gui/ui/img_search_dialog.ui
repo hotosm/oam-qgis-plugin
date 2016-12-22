@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>636</width>
-    <height>453</height>
+    <height>458</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>380</x>
-     <y>410</y>
+     <y>420</y>
      <width>176</width>
      <height>27</height>
     </rect>
@@ -33,7 +33,7 @@
    <property name="geometry">
     <rect>
      <x>360</x>
-     <y>60</y>
+     <y>70</y>
      <width>261</width>
      <height>201</height>
     </rect>
@@ -105,7 +105,7 @@
    <property name="geometry">
     <rect>
      <x>360</x>
-     <y>280</y>
+     <y>290</y>
      <width>261</width>
      <height>121</height>
     </rect>
@@ -138,7 +138,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>60</y>
+     <y>70</y>
      <width>321</width>
      <height>341</height>
     </rect>
@@ -148,13 +148,32 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>30</y>
+     <y>20</y>
      <width>331</width>
      <height>16</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="text">
     <string>Select the imagery you want to download</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="catalog_url_label">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>40</y>
+     <width>601</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Catalog URL: </string>
    </property>
   </widget>
  </widget>

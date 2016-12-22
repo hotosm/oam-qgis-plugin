@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>727</width>
-    <height>367</height>
+    <height>409</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>460</x>
-     <y>320</y>
+     <y>370</y>
      <width>176</width>
      <height>27</height>
     </rect>
@@ -33,7 +33,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>5</y>
+     <y>10</y>
      <width>351</width>
      <height>351</height>
     </rect>
@@ -45,7 +45,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>20</y>
+      <y>30</y>
       <width>341</width>
       <height>319</height>
      </rect>
@@ -179,7 +179,7 @@
      <item row="0" column="0">
       <widget class="QLabel" name="base_uuid_label">
        <property name="text">
-        <string>Base UUID:</string>
+        <string>Base URL:</string>
        </property>
       </widget>
      </item>
@@ -274,7 +274,7 @@
    <property name="geometry">
     <rect>
      <x>360</x>
-     <y>160</y>
+     <y>150</y>
      <width>356</width>
      <height>161</height>
     </rect>
@@ -384,6 +384,44 @@
      </item>
     </layout>
    </widget>
+  </widget>
+  <widget class="QWidget" name="formLayoutWidget_3">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>320</y>
+     <width>331</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <layout class="QFormLayout" name="formLayout">
+    <property name="fieldGrowthPolicy">
+     <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+    </property>
+    <item row="0" column="0">
+     <widget class="QLabel" name="catalog_url_label">
+      <property name="text">
+       <string>Catalog URL</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="catalog_url_edit"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QCheckBox" name="hot_oam_catalog_check_box">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>300</y>
+     <width>161</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Use HOT OAM Catalog</string>
+   </property>
   </widget>
  </widget>
  <resources/>

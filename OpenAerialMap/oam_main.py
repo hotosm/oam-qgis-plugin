@@ -190,7 +190,7 @@ class OpenAerialMap:
 
     def displaySearchTool(self):
 
-        self.imgSearchDialog = ImgSearchDialog(self.iface)
+        self.imgSearchDialog = ImgSearchDialog(self.iface, self.settings)
         self.imgSearchDialog.show()
 
     def displaySettingDialog(self):
