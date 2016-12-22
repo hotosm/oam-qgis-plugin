@@ -137,8 +137,10 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         # temporarily disable textEdit for website and tags
         # probably make textEdit for thumbnail later
+        self.website_edit.setText('n.a.')
         self.website_edit.setEnabled(False)
         self.website_label.setEnabled(False)
+        self.tags_edit.setText('n.a.')
         self.tags_edit.setEnabled(False)
         self.tags_label.setEnabled(False)
 
@@ -159,6 +161,9 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.notify_oam_check.setEnabled(False)
         self.trigger_tiling_check.setEnabled(False)
 
+        self.token_edit.setText('n.a.')
+        self.uploader_name_edit.setText('n.a.')
+        self.uploader_email_edit.setText('n.a.')
 
     # handlers for navigation
     def nextPage(self):
@@ -369,10 +374,10 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                                    Qt.ISODate).date())
         self.sense_end_edit.setTime(
             QDateTime().fromString('1970-01-01T00:00:00', Qt.ISODate).time())
-        self.tags_edit.setText('')
         self.provider_edit.setText('')
         self.contact_edit.setText('')
-        self.website_edit.setText('')
+        # self.website_edit.setText('')
+        # self.tags_edit.setText('')
         self.license_check_box.setCheckState(0)
         self.reproject_check_box.setCheckState(0)
 

@@ -72,6 +72,12 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
         # initialize
         self.loadSettings()
 
+        # temporarily disable some controls
+        self.website_edit.setText('n.a.')
+        self.website_edit.setEnabled(False)
+        self.tags_edit.setText('n.a.')
+        self.tags_edit.setEnabled(False)
+
     def loadSettings(self):
         self.loadMetadataSettings()
         self.loadStorageSettings()

@@ -72,9 +72,13 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
                      self.execCancel)
 
         # disable some GUIs
+        self.lineEditLocation.setText('n.a.')
         self.lineEditLocation.setEnabled(False)
-        self.pushButtonBrowseLocation.setEnabled(False)
-        self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(False)
+        # self.pushButtonBrowseLocation.setEnabled(False)
+        self.pushButtonBrowseLocation.hide()
+
+        self.buttonBox.button(QDialogButtonBox.Ok).setText('Close')
+        self.buttonBox.button(QDialogButtonBox.Cancel).setEnabled(False)
 
         # add objects for catalog access
         self.oamCatalogAccess = OAMCatalogAccess(
@@ -198,7 +202,7 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
 
     def execOk(self):
         # save the setting to QSetting and close the dialog.
-        print("OK")
+        self.close()
 
     def execCancel(self):
         # print("Canceled")
