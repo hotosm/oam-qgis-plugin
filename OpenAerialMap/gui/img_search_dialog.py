@@ -24,6 +24,7 @@
 """
 
 import os, sys
+import json
 
 from PyQt4 import QtGui, uic
 from PyQt4 import QtCore
@@ -79,9 +80,6 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         # self.pushButtonBrowseLocation.setEnabled(False)
         self.pushButtonBrowseLocation.hide()
 
-        self.buttonBox.button(QDialogButtonBox.Ok).setText('Close')
-        self.buttonBox.button(QDialogButtonBox.Cancel).setEnabled(False)
-
         # add objects for catalog access
         # self.oamCatalogAccess = OAMCatalogAccess(
         #    "https://oam-catalog.herokuapp.com")
@@ -101,11 +99,58 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         catalogUrlLabel = self.catalog_url_label.text() + self.catalogUrl
         self.catalog_url_label.setText(catalogUrlLabel)
 
-
         self.imgBrowser = None
 
     def test(self, *argv):
         print(str(argv))
+
+    def createQueriesSettings(self):
+        # self.settings.setValue('LOCATION', '')
+        self.settings.setValue('ACQUISITION_FROM',
+            QDate.currentDate().addMonths(-12).toString(Qt.ISODate))
+        self.settings.setValue('ACQUISITION_TO',
+            QDate.currentDate().toString(Qt.ISODate))
+        self.settings.setValue('GSD_FROM', '')
+        self.settings.setValue('GSD_TO', '')
+        self.settings.setValue('LIMIT', 20)
+
+    def loadQueriesSettings(self):
+        self.settings.beginGroup("ImageSearch")
+        # self.lineEditLocation.setText(
+        #    self.settings.value('LOCATION'))
+        self.dateEditAcquisitionFrom.setDate(QDate.fromString(
+            self.settings.value('ACQUISITION_FROM'), Qt.ISODate))
+        self.dateEditAcquisitionTo.setDate(QDate.fromString(
+            self.settings.value('ACQUISITION_TO'), Qt.ISODate))
+        self.lineEditResolutionFrom.setText(
+            str(self.settings.value('GSD_FROM')))
+        self.lineEditResolutionTo.setText(
+            str(self.settings.value('GSD_TO')))
+        self.lineEditNumImages.setText(
+            str(self.settings.value('LIMIT')))
+        self.settings.endGroup()
+
+    def saveQueriesSettings(self):
+        self.settings.beginGroup("ImageSearch")
+        # self.settings.setValue('LOCATION',
+        #     self.lineEditLocation.text())
+        self.settings.setValue('ACQUISITION_FROM',
+            self.dateEditAcquisitionFrom.date().toString(Qt.ISODate))
+        self.settings.setValue('ACQUISITION_TO',
+            self.dateEditAcquisitionTo.date().toString(Qt.ISODate))
+        if (self.lineEditResolutionFrom.text() != ''
+            and self.lineEditResolutionFrom.text() is not None):
+            self.settings.setValue('GSD_FROM',
+                float(self.lineEditResolutionFrom.text()))
+        if (self.lineEditResolutionTo.text() != ''
+            and self.lineEditResolutionTo.text() is not None):
+            self.settings.setValue('GSD_TO',
+                float(self.lineEditResolutionTo.text()))
+        if (self.lineEditNumImages.text() != ''
+            and self.lineEditNumImages.text() is not None):
+            self.settings.setValue('LIMIT',
+                int(self.lineEditNumImages.text()))
+        self.settings.endGroup()
 
     def initGui(self):
 
@@ -114,12 +159,14 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         item.setData(Qt.UserRole, "Sample Data")
         self.listWidget.addItem(item)
 
-        self.lineEditLocation.setText("")
-        self.dateEditAcquisitionFrom.setDate(QDate.currentDate().addMonths(-6))
-        self.dateEditAcquisitionTo.setDate(QDate.currentDate())
-        self.lineEditResolutionFrom.setText("")
-        self.lineEditResolutionTo.setText("")
-        self.lineEditNumImages.setText("20")
+        # load default queries
+        self.settings.beginGroup("ImageSearch")
+        if self.settings.value('ACQUISITION_FROM') is None:
+            print('create new queries settings')
+            self.createQueriesSettings()
+        self.settings.endGroup()
+
+        self.loadQueriesSettings()
 
     def refreshListWidget(self, metadataInList):
 
@@ -220,9 +267,9 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
             self.imgBrowser.activateWindow()
 
     def execOk(self):
-        # save the setting to QSetting and close the dialog.
+        # save self.defaultQueriesInDict into self.settings
+        self.saveQueriesSettings()
         self.close()
 
     def execCancel(self):
-        # print("Canceled")
         self.close()
