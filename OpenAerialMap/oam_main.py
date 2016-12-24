@@ -41,7 +41,6 @@ import resources_rc
 from gui.img_uploader_wizard import ImgUploaderWizard
 from gui.img_search_dialog import ImgSearchDialog
 from gui.setting_dialog import SettingDialog
-# from gui.integrated_img_browser import IntegratedImgBrowser
 
 # set os-specific environment
 from set_env import SetEnvironment
@@ -208,12 +207,8 @@ class OpenAerialMap:
         url = 'file://' + str(helpAbsPath)
         webbrowser.open_new(url)
 
-    def displayIntegratedImgBrowser(self):
+    def displayTestWidget(self):
         pass
-        """
-        self.integratedImgBrowser = IntegratedImgBrowser(self.iface)
-        self.integratedImgBrowser.show()
-        """
 
     def initGui(self):
 
@@ -256,14 +251,6 @@ class OpenAerialMap:
             text=self.tr(u'OAM Help'),
             callback=self.displayHelp,
             parent=self.iface.mainWindow())
-
-        """
-        self.add_action(
-            icon_path_setting_dialog,
-            text=self.tr(u'Search and Browse Imagery'),
-            callback=self.displayIntegratedImgBrowser,
-            parent=self.iface.mainWindow())
-        """
 
     def unload(self):
         """Removes the plugin menu item and icon from QGIS GUI."""
