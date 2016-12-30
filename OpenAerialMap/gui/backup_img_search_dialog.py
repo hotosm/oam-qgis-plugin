@@ -58,13 +58,10 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         # initialize GUI
         self.initGui()
 
-        # self.buttonBox.button(QDialogButtonBox.Ok).setText('Save')
-
         # event handling
         self.pushButtonSearch.clicked.connect(self.startSearch)
-        # self.returnPressed.connect(self.startSearch)
         self.pushButtonSearchLatest.clicked.connect(self.searchLatest)
-        # self.pushButtonBrowseLocation.clicked.connect(self.browseLocation)
+        self.pushButtonBrowseLocation.clicked.connect(self.browseLocation)
         self.connect(self.listWidget, QtCore.SIGNAL(
             "itemClicked(QListWidgetItem *)"),
             self.browseThumbnailAndMeta)
@@ -80,12 +77,8 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         # disable some GUIs
         self.lineEditLocation.setText('n.a.')
         self.lineEditLocation.setEnabled(False)
-        self.labelLocation.setEnabled(False)
-        self.checkBoxLocation.setEnabled(False)
         # self.pushButtonBrowseLocation.setEnabled(False)
-
-        # self.pushButtonBrowseLocation.hide()
-        self.pushButtonSearch.hide()
+        self.pushButtonBrowseLocation.hide()
 
         # add objects for catalog access
         # self.oamCatalogAccess = OAMCatalogAccess(
@@ -108,24 +101,10 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
 
         self.imgBrowser = None
 
-
-    def closeEvent(self, evnt):
-        pass
-
-    def keyPressEvent(self, e):
-        if e.key() == QtCore.Qt.Key_Return:
-            self.startSearch()
-
     def test(self, *argv):
         print(str(argv))
 
     def createQueriesSettings(self):
-        # self.settings.setValue('CHECKBOX_LOCATION', True)
-        self.settings.setValue('CHECKBOX_ACQUISITION_FROM', True)
-        self.settings.setValue('CHECKBOX_ACQUISITION_TO', True)
-        self.settings.setValue('CHECKBOX_GSD_FROM', True)
-        self.settings.setValue('CHECKBOX_GSD_TO', True)
-
         # self.settings.setValue('LOCATION', '')
         self.settings.setValue('ACQUISITION_FROM',
             QDate.currentDate().addMonths(-12).toString(Qt.ISODate))
@@ -134,35 +113,11 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         self.settings.setValue('GSD_FROM', '')
         self.settings.setValue('GSD_TO', '')
         self.settings.setValue('LIMIT', 20)
-        self.settings.setValue('ORDER_BY', 0)
-        self.settings.setValue('SORT', 'desc')
 
     def loadQueriesSettings(self):
         self.settings.beginGroup("ImageSearch")
-
-        # if str(self.settings.value('CHECKBOX_LOCATION')).lower() == 'true':
-        #     self.checkBoxLocation.setCheckState(2)
-        # else:
-        #     self.checkBoxLocation.setCheckState(0)
-        if str(self.settings.value('CHECKBOX_ACQUISITION_FROM')).lower() == 'true':
-            self.checkBoxAcquisitionFrom.setCheckState(2)
-        else:
-            self.checkBoxAcquisitionFrom.setCheckState(0)
-        if str(self.settings.value('CHECKBOX_ACQUISITION_TO')).lower() == 'true':
-            self.checkBoxAcquisitionTo.setCheckState(2)
-        else:
-            self.checkBoxAcquisitionTo.setCheckState(0)
-        if str(self.settings.value('CHECKBOX_GSD_FROM')).lower() == 'true':
-            self.checkBoxResolutionFrom.setCheckState(2)
-        else:
-            self.checkBoxResolutionFrom.setCheckState(0)
-        if str(self.settings.value('CHECKBOX_GSD_TO')).lower() == 'true':
-            self.checkBoxResolutionTo.setCheckState(2)
-        else:
-            self.checkBoxResolutionTo.setCheckState(0)
-
-        self.lineEditLocation.setText(
-            self.settings.value('LOCATION'))
+        # self.lineEditLocation.setText(
+        #    self.settings.value('LOCATION'))
         self.dateEditAcquisitionFrom.setDate(QDate.fromString(
             self.settings.value('ACQUISITION_FROM'), Qt.ISODate))
         self.dateEditAcquisitionTo.setDate(QDate.fromString(
@@ -173,29 +128,10 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
             str(self.settings.value('GSD_TO')))
         self.lineEditNumImages.setText(
             str(self.settings.value('LIMIT')))
-        self.comboBoxOrderBy.setCurrentIndex(
-            int(self.settings.value('ORDER_BY')))
-        if self.settings.value('SORT') == 'desc':
-            self.radioButtonDesc.setChecked(True)
-        else:
-            self.radioButtonAsc.setChecked(True)
-
         self.settings.endGroup()
 
     def saveQueriesSettings(self):
         self.settings.beginGroup("ImageSearch")
-
-        # self.settings.setValue('CHECKBOX_LOCATION',
-        #     self.checkBoxLocation.isChecked())
-        self.settings.setValue('CHECKBOX_ACQUISITION_FROM',
-            self.checkBoxAcquisitionFrom.isChecked())
-        self.settings.setValue('CHECKBOX_ACQUISITION_TO',
-            self.checkBoxAcquisitionTo.isChecked())
-        self.settings.setValue('CHECKBOX_GSD_FROM',
-            self.checkBoxResolutionFrom.isChecked())
-        self.settings.setValue('CHECKBOX_GSD_TO',
-            self.checkBoxResolutionTo.isChecked())
-
         # self.settings.setValue('LOCATION',
         #     self.lineEditLocation.text())
         self.settings.setValue('ACQUISITION_FROM',
@@ -214,13 +150,6 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
             and self.lineEditNumImages.text() is not None):
             self.settings.setValue('LIMIT',
                 int(self.lineEditNumImages.text()))
-        self.settings.setValue('ORDER_BY',
-            self.comboBoxOrderBy.currentIndex())
-        if self.radioButtonDesc.isChecked():
-            self.settings.setValue('SORT', 'desc')
-        else:
-            self.settings.setValue('SORT', 'asc')
-
         self.settings.endGroup()
 
     def initGui(self):
@@ -254,45 +183,23 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         dictQueries = {}
 
         try:
-            # if self.checkboxLocation.isChecked():
-            #     dictQueries['location'] = self.lineEditLocation.text()
-
-            if self.checkBoxAcquisitionFrom.isChecked():
-                dictQueries['acquisition_from'] = \
-                    self.dateEditAcquisitionFrom.date().toString(Qt.ISODate)
-
-            if self.checkBoxAcquisitionTo.isChecked():
-                dictQueries['acquisition_to'] = \
-                    self.dateEditAcquisitionTo.date().toString(Qt.ISODate)
-
-            if self.checkBoxResolutionFrom.isChecked():
-                if (self.lineEditResolutionFrom.text() != '' and
-                        self.lineEditResolutionFrom.text() is not None):
-                    dictQueries['gsd_from'] = \
-                        float(self.lineEditResolutionFrom.text())
-
-            if self.checkBoxResolutionTo.isChecked():
-                if (self.lineEditResolutionTo.text() != '' and
-                        self.lineEditResolutionTo.text() is not None):
-                    dictQueries['gsd_to'] = \
-                        float(self.lineEditResolutionTo.text())
-
+            # temporarily disable this part
+            # dictQueries['location'] = self.lineEditLocation.text()
+            dictQueries['acquisition_from'] = \
+                self.dateEditAcquisitionFrom.date().toString(Qt.ISODate)
+            dictQueries['acquisition_to'] = \
+                self.dateEditAcquisitionTo.date().toString(Qt.ISODate)
+            if (self.lineEditResolutionFrom.text() != '' and
+                    self.lineEditResolutionFrom.text() is not None):
+                dictQueries['gsd_from'] = \
+                    float(self.lineEditResolutionFrom.text())
+            if (self.lineEditResolutionTo.text() != '' and
+                    self.lineEditResolutionTo.text() is not None):
+                dictQueries['gsd_to'] = \
+                    float(self.lineEditResolutionTo.text())
             if (self.lineEditNumImages.text() != '' and
                     self.lineEditNumImages.text() is not None):
                 dictQueries['limit'] = int(self.lineEditNumImages.text())
-
-            if self.comboBoxOrderBy.currentText() == 'Acquisition Date':
-                dictQueries['order_by'] = "acquisition_end"
-            elif self.comboBoxOrderBy.currentText() == 'GSD':
-                dictQueries['order_by'] = "gsd"
-
-            print(self.comboBoxOrderBy.currentText())
-
-
-            if self.radioButtonAsc.isChecked():
-                dictQueries['sort'] = "asc"
-            elif self.radioButtonDesc.isChecked():
-                dictQueries['sort'] = "desc"
 
             self.oamCatalogAccess.setAction(action)
             self.oamCatalogAccess.setDictQueries(dictQueries)
@@ -339,8 +246,8 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
                             "valid data/internet connection, and try again.")
             qMsgBox.exec_()
 
-    # def browseLocation(self):
-    #     print("Browse location of loaded layer...")
+    def browseLocation(self):
+        print("Browse location of loaded layer...")
 
     def browseThumbnailAndMeta(self, item):
         singleMetaInDict = item.data(Qt.UserRole)

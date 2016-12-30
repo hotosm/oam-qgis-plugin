@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>636</width>
-    <height>470</height>
+    <width>719</width>
+    <height>505</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>430</y>
+     <x>450</x>
+     <y>460</y>
      <width>176</width>
      <height>27</height>
     </rect>
@@ -29,122 +29,17 @@
     <bool>false</bool>
    </property>
   </widget>
-  <widget class="QWidget" name="layoutWidget_2">
-   <property name="geometry">
-    <rect>
-     <x>360</x>
-     <y>70</y>
-     <width>261</width>
-     <height>201</height>
-    </rect>
-   </property>
-   <layout class="QFormLayout" name="formLayout">
-    <item row="0" column="0">
-     <widget class="QLabel" name="label_2">
-      <property name="text">
-       <string>Location</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="lineEditLocation"/>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="label_3">
-      <property name="text">
-       <string>Acquisition Date From</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="label_4">
-      <property name="text">
-       <string>Acquisition Date To</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QLabel" name="label_5">
-      <property name="text">
-       <string>Resolution From</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QDateEdit" name="dateEditAcquisitionFrom"/>
-    </item>
-    <item row="2" column="1">
-     <widget class="QDateEdit" name="dateEditAcquisitionTo"/>
-    </item>
-    <item row="3" column="1">
-     <widget class="QLineEdit" name="lineEditResolutionFrom"/>
-    </item>
-    <item row="4" column="1">
-     <widget class="QLineEdit" name="lineEditResolutionTo"/>
-    </item>
-    <item row="4" column="0">
-     <widget class="QLabel" name="label_6">
-      <property name="text">
-       <string>Resolution To</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="0">
-     <widget class="QLabel" name="label_7">
-      <property name="text">
-       <string>Numbers of images</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="1">
-     <widget class="QLineEdit" name="lineEditNumImages"/>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>360</x>
-     <y>290</y>
-     <width>261</width>
-     <height>121</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QPushButton" name="pushButtonSearch">
-      <property name="text">
-       <string>Search</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="pushButtonSearchLatest">
-      <property name="text">
-       <string>Search latest imagery</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="pushButtonBrowseLocation">
-      <property name="text">
-       <string>Browse location of loaded layer</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
   <widget class="QListWidget" name="listWidget">
    <property name="geometry">
     <rect>
      <x>20</x>
      <y>70</y>
-     <width>321</width>
-     <height>351</height>
+     <width>341</width>
+     <height>371</height>
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="title_img_search_label">
+  <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -175,6 +70,196 @@
    <property name="text">
     <string>Catalog URL: </string>
    </property>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>70</y>
+     <width>320</width>
+     <height>283</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <property name="leftMargin">
+     <number>6</number>
+    </property>
+    <property name="topMargin">
+     <number>6</number>
+    </property>
+    <property name="rightMargin">
+     <number>6</number>
+    </property>
+    <property name="bottomMargin">
+     <number>16</number>
+    </property>
+    <item>
+     <layout class="QGridLayout" name="gridLayout">
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <property name="horizontalSpacing">
+       <number>6</number>
+      </property>
+      <item row="6" column="2">
+       <widget class="QComboBox" name="comboBoxOrderBy">
+        <item>
+         <property name="text">
+          <string>Acquisition Date</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>GSD</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="QLineEdit" name="lineEditResolutionTo"/>
+      </item>
+      <item row="0" column="0">
+       <widget class="QCheckBox" name="checkBoxLocation">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLineEdit" name="lineEditLocation"/>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLabel" name="labelNumImages">
+        <property name="text">
+         <string>Numbers of images</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QDateEdit" name="dateEditAcquisitionFrom"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="checkBoxAcquisitionFrom">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLabel" name="labelAcquisitionTo">
+        <property name="text">
+         <string>Acquisition Date To</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="labelLocation">
+        <property name="text">
+         <string>Location</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="labelAcauisitionFrom">
+        <property name="text">
+         <string>Acquisition Date From</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QDateEdit" name="dateEditAcquisitionTo"/>
+      </item>
+      <item row="3" column="2">
+       <widget class="QLineEdit" name="lineEditResolutionFrom"/>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLabel" name="labelResolutionFrom">
+        <property name="text">
+         <string>Resolution From</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLabel" name="labelResoultionTo">
+        <property name="text">
+         <string>Resolution To</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="2">
+       <widget class="QLineEdit" name="lineEditNumImages"/>
+      </item>
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="checkBoxAcquisitionTo">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QCheckBox" name="checkBoxResolutionFrom">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QCheckBox" name="checkBoxResolutionTo">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLabel" name="labelOrderBy">
+        <property name="text">
+         <string>Order By</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QRadioButton" name="radioButtonAsc">
+        <property name="text">
+         <string>Ascending</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="2">
+       <widget class="QRadioButton" name="radioButtonDesc">
+        <property name="text">
+         <string>Descending</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>360</y>
+     <width>311</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QPushButton" name="pushButtonSearch">
+      <property name="text">
+       <string>Search</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButtonSearchLatest">
+      <property name="text">
+       <string>Search latest imagery</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>
