@@ -63,7 +63,7 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         # event handling
         self.pushButtonSearch.clicked.connect(self.startSearch)
         # self.returnPressed.connect(self.startSearch)
-        self.pushButtonSearchLatest.clicked.connect(self.searchLatest)
+        # self.pushButtonSearchLatest.clicked.connect(self.searchLatest)
         # self.pushButtonBrowseLocation.clicked.connect(self.browseLocation)
         self.connect(self.listWidget, QtCore.SIGNAL(
             "itemClicked(QListWidgetItem *)"),
@@ -85,7 +85,7 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         # self.pushButtonBrowseLocation.setEnabled(False)
 
         # self.pushButtonBrowseLocation.hide()
-        self.pushButtonSearch.hide()
+        self.pushButtonSearchLatest.hide()
 
         # add objects for catalog access
         # self.oamCatalogAccess = OAMCatalogAccess(
