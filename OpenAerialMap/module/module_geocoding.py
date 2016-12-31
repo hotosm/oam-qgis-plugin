@@ -23,38 +23,17 @@
  This script initializes the plugin, making it known to QGIS.
 """
 
-import sys
-import os
+import os, sys
+from geopy.geocoders import Nominatim
 
-path_root = os.path.join(os.path.dirname(__file__))
-sys.path.append(path_root)
+def nominatim_search(addressIn):
 
-# path to external libs
-path_boto = os.path.join(
-    os.path.dirname(__file__),
-    'ext_libs/boto-2.38.0')
-path_filechunkio = os.path.join(
-    os.path.dirname(__file__),
-    'ext_libs/filechunkio-1.6')
-path_requests = os.path.join(
-    os.path.dirname(__file__),
-    'ext_libs/requests-2.7.0')
-path_geopy = os.path.join(
-    os.path.dirname(__file__),
-    'ext_libs/geopy-1.11.0')
-
-sys.path.append(path_boto)
-sys.path.append(path_filechunkio)
-sys.path.append(path_requests)
-sys.path.append(path_geopy)
-
-
-# noinspection PyPep8Naming
-def classFactory(iface):  # pylint: disable=invalid-name
-    """Load OpenAerialMap class from file OpenAerialMap.
-
-    :param iface: A QGIS interface instance.
-    :type iface: QgsInterface
-    """
-    from .oam_main import OpenAerialMap
-    return OpenAerialMap(iface)
+    geolocator = Nominatim()
+    location = geolocator.geocode(addressIn)
+    if location is not None:
+        # print('boundingbox: {}'.format(location.raw['boundingbox']))
+        bbox = location.raw['boundingbox']
+        strBboxForOAM = '{},{},{},{}'.format(bbox[2], bbox[0], bbox[3], bbox[1])
+        return strBboxForOAM
+    else:
+        return 'failed'

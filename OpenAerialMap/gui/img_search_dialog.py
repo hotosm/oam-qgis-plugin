@@ -32,6 +32,8 @@ from PyQt4.Qt import *
 
 from img_browser import ImgBrowser
 from module.module_access_oam_catalog import OAMCatalogAccess
+from module.module_geocoding import nominatim_search
+
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_search_dialog.ui'))
@@ -78,10 +80,10 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
                      self.execCancel)
 
         # disable some GUIs
-        self.lineEditLocation.setText('n.a.')
-        self.lineEditLocation.setEnabled(False)
-        self.labelLocation.setEnabled(False)
-        self.checkBoxLocation.setEnabled(False)
+        # self.lineEditLocation.setText('n.a.')
+        # self.lineEditLocation.setEnabled(False)
+        # self.labelLocation.setEnabled(False)
+        # self.checkBoxLocation.setEnabled(False)
         # self.pushButtonBrowseLocation.setEnabled(False)
 
         # self.pushButtonBrowseLocation.hide()
@@ -254,8 +256,19 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         dictQueries = {}
 
         try:
-            # if self.checkboxLocation.isChecked():
-            #     dictQueries['location'] = self.lineEditLocation.text()
+            if self.checkBoxLocation.isChecked():
+                location = self.lineEditLocation.text()
+                strBboxForOAM = nominatim_search(location)
+                print(strBboxForOAM)
+                if strBboxForOAM != 'failed':
+                    dictQueries['bbox'] = strBboxForOAM
+                else:
+                    qMsgBox = QMessageBox()
+                    qMsgBox.setWindowTitle('Message')
+                    qMsgBox.setText("The 'location' won't be used as a " +
+                                    "query, because Geocoder could " +
+                                    "not find the location.")
+                    qMsgBox.exec_()
 
             if self.checkBoxAcquisitionFrom.isChecked():
                 dictQueries['acquisition_from'] = \
