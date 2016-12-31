@@ -32,6 +32,8 @@ from PyQt4.Qt import *
 
 from img_browser import ImgBrowser
 from module.module_access_oam_catalog import OAMCatalogAccess
+from module.module_geocoding import nominatim_search
+
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_search_dialog.ui'))
@@ -78,10 +80,10 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
                      self.execCancel)
 
         # disable some GUIs
-        self.lineEditLocation.setText('n.a.')
-        self.lineEditLocation.setEnabled(False)
-        self.labelLocation.setEnabled(False)
-        self.checkBoxLocation.setEnabled(False)
+        # self.lineEditLocation.setText('n.a.')
+        # self.lineEditLocation.setEnabled(False)
+        # self.labelLocation.setEnabled(False)
+        # self.checkBoxLocation.setEnabled(False)
         # self.pushButtonBrowseLocation.setEnabled(False)
 
         # self.pushButtonBrowseLocation.hide()
@@ -120,13 +122,13 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         print(str(argv))
 
     def createQueriesSettings(self):
-        # self.settings.setValue('CHECKBOX_LOCATION', True)
+        self.settings.setValue('CHECKBOX_LOCATION', True)
         self.settings.setValue('CHECKBOX_ACQUISITION_FROM', True)
         self.settings.setValue('CHECKBOX_ACQUISITION_TO', True)
         self.settings.setValue('CHECKBOX_GSD_FROM', True)
         self.settings.setValue('CHECKBOX_GSD_TO', True)
 
-        # self.settings.setValue('LOCATION', '')
+        self.settings.setValue('LOCATION', '')
         self.settings.setValue('ACQUISITION_FROM',
             QDate.currentDate().addMonths(-12).toString(Qt.ISODate))
         self.settings.setValue('ACQUISITION_TO',
@@ -140,10 +142,10 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
     def loadQueriesSettings(self):
         self.settings.beginGroup("ImageSearch")
 
-        # if str(self.settings.value('CHECKBOX_LOCATION')).lower() == 'true':
-        #     self.checkBoxLocation.setCheckState(2)
-        # else:
-        #     self.checkBoxLocation.setCheckState(0)
+        if str(self.settings.value('CHECKBOX_LOCATION')).lower() == 'true':
+            self.checkBoxLocation.setCheckState(2)
+        else:
+            self.checkBoxLocation.setCheckState(0)
         if str(self.settings.value('CHECKBOX_ACQUISITION_FROM')).lower() == 'true':
             self.checkBoxAcquisitionFrom.setCheckState(2)
         else:
@@ -185,8 +187,8 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
     def saveQueriesSettings(self):
         self.settings.beginGroup("ImageSearch")
 
-        # self.settings.setValue('CHECKBOX_LOCATION',
-        #     self.checkBoxLocation.isChecked())
+        self.settings.setValue('CHECKBOX_LOCATION',
+            self.checkBoxLocation.isChecked())
         self.settings.setValue('CHECKBOX_ACQUISITION_FROM',
             self.checkBoxAcquisitionFrom.isChecked())
         self.settings.setValue('CHECKBOX_ACQUISITION_TO',
@@ -196,8 +198,8 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         self.settings.setValue('CHECKBOX_GSD_TO',
             self.checkBoxResolutionTo.isChecked())
 
-        # self.settings.setValue('LOCATION',
-        #     self.lineEditLocation.text())
+        self.settings.setValue('LOCATION',
+            self.lineEditLocation.text())
         self.settings.setValue('ACQUISITION_FROM',
             self.dateEditAcquisitionFrom.date().toString(Qt.ISODate))
         self.settings.setValue('ACQUISITION_TO',
@@ -232,7 +234,7 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
 
         # load default queries
         self.settings.beginGroup("ImageSearch")
-        if self.settings.value('ACQUISITION_FROM') is None:
+        if self.settings.value('CHECKBOX_LOCATION') is None:
             print('create new queries settings')
             self.createQueriesSettings()
         self.settings.endGroup()
@@ -254,8 +256,19 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         dictQueries = {}
 
         try:
-            # if self.checkboxLocation.isChecked():
-            #     dictQueries['location'] = self.lineEditLocation.text()
+            if self.checkBoxLocation.isChecked():
+                location = self.lineEditLocation.text()
+                strBboxForOAM = nominatim_search(location)
+                print(strBboxForOAM)
+                if strBboxForOAM != 'failed':
+                    dictQueries['bbox'] = strBboxForOAM
+                else:
+                    qMsgBox = QMessageBox()
+                    qMsgBox.setWindowTitle('Message')
+                    qMsgBox.setText("The 'location' won't be used as a " +
+                                    "query, because Geocoder could " +
+                                    "not find the location.")
+                    qMsgBox.exec_()
 
             if self.checkBoxAcquisitionFrom.isChecked():
                 dictQueries['acquisition_from'] = \
