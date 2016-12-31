@@ -86,59 +86,42 @@ class ImgMetadataHandler:
         listBBoxNodes = []
         listBBoxNodes.append(
             self.affineGeoTransform(self.gdalDataset, 0.0, 0.0)[0])
-        listBBoxNodes.append(
-            self.affineGeoTransform(self.gdalDataset, 0.0, 0.0)[1])
-        listBBoxNodes.append(self.affineGeoTransform(
-            self.gdalDataset,
-            self.gdalDataset.RasterXSize,
-            self.gdalDataset.RasterYSize)[0])
         listBBoxNodes.append(self.affineGeoTransform(
             self.gdalDataset,
             self.gdalDataset.RasterXSize,
             self.gdalDataset.RasterYSize)[1])
+        listBBoxNodes.append(self.affineGeoTransform(
+            self.gdalDataset,
+            self.gdalDataset.RasterXSize,
+            self.gdalDataset.RasterYSize)[0])
+        listBBoxNodes.append(
+            self.affineGeoTransform(self.gdalDataset, 0.0, 0.0)[1])
         self.metaInImagery['bbox'] = listBBoxNodes
 
     def extractFootprint(self):
         """Temporarily use bbox values"""
         node1 = self.affineGeoTransform(
-            self.gdalDataset, 0.0, 0.0)
-        node2 = self.affineGeoTransform(
             self.gdalDataset, 0.0,
+            self.gdalDataset.RasterYSize)
+        node2 = self.affineGeoTransform(
+            self.gdalDataset,
+            self.gdalDataset.RasterXSize,
             self.gdalDataset.RasterYSize)
         node3 = self.affineGeoTransform(
             self.gdalDataset,
             self.gdalDataset.RasterXSize, 0.0)
         node4 = self.affineGeoTransform(
-            self.gdalDataset,
-            self.gdalDataset.RasterXSize,
-            self.gdalDataset.RasterYSize)
+            self.gdalDataset, 0.0, 0.0)
 
         # self.metaInImagery['footprint'] = 'POLYGON' + \
-        #     str((node1, node2, node3, node4, node1))
+        #    str((node1, node2, node3, node4, node1))
         self.metaInImagery['footprint'] = \
             'POLYGON(({} {},{} {},{} {},{} {},{} {}))'.format(
                 node1[0], node1[1],
                 node2[0], node2[1],
-                node4[0], node4[1],
                 node3[0], node3[1],
+                node4[0], node4[1],
                 node1[0], node1[1])
-
-        """
-        # Create ring
-        ring = ogr.Geometry(ogr.wkbLinearRing)
-        ring.AddPoint(node1)
-        ring.AddPoint(node2)
-        ring.AddPoint(node3)
-        ring.AddPoint(node4)
-        ring.AddPoint(node1)
-
-        # Create polygon
-        poly = ogr.Geometry(ogr.wkbPolygon)
-        poly.AddGeometry(ring)
-
-        self.metaInImagery['footprint'] = poly.ExportToWkt()
-        # print poly.ExportToWkt()
-        """
 
     def extractGsd(self):
         # print("Message: " + repr(self.gdalDataset))
