@@ -36,19 +36,6 @@
     <string>Download</string>
    </property>
   </widget>
-  <widget class="QLabel" name="lbTest01">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>320</y>
-     <width>381</width>
-     <height>151</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Test 01</string>
-   </property>
-  </widget>
   <widget class="QCheckBox" name="checkBoxSaveMeta">
    <property name="geometry">
     <rect>
@@ -74,6 +61,32 @@
    <property name="text">
     <string>Add as a layer</string>
    </property>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>9</x>
+     <y>300</y>
+     <width>411</width>
+     <height>181</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="lbTitle">
+      <property name="text">
+       <string>Title</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="lbDetails">
+      <property name="text">
+       <string>Details</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

@@ -91,26 +91,34 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         self.graphicsView.setScene(scene)
         self.graphicsView.show()
 
-        strMeta = ''
-        strMeta += 'TITLE:\t\t\t{0}\n'.format(
+        gsdForDisplay = float(int(self.singleMetaInDic[u'gsd'] * 100)) / 100
+        fileSizeInMb = float(self.singleMetaInDic[u'file_size']) / (1000 * 1000)
+        fileSizeInMb = float(int(fileSizeInMb * 100)) / 100
+        # fileSizeInMb = self.singleMetaInDic[u'file_size'] / (1024 * 1024)
+
+        strTitle = 'TITLE:\n{0}\n'.format(
             str(self.singleMetaInDic[u'title']))
-        strMeta += 'PLATFORM:\t\t{0}\n'.format(
+
+        strDetails = ''
+        strDetails += 'PLATFORM:\t\t{0}\n'.format(
             str(self.singleMetaInDic[u'platform']))
-        strMeta += 'ACQUISITION START:\t{0}\n'.format(
+        strDetails += 'ACQUISITION START:\t{0}\n'.format(
             str(self.singleMetaInDic[u'acquisition_start']))
-        strMeta += 'ACQUISITION END:\t{0}\n'.format(
+        strDetails += 'ACQUISITION END:\t{0}\n'.format(
             str(self.singleMetaInDic[u'acquisition_end']))
-        strMeta += 'GSD:\t\t\t{0}\n'.format(
-            str(self.singleMetaInDic[u'gsd']))
-        strMeta += 'PROVIDER:\t\t{0}\n'.format(
+        strDetails += 'GSD:\t\t\t{0} m\n'.format(
+            str(gsdForDisplay))
+        strDetails += 'PROVIDER:\t\t{0}\n'.format(
             str(self.singleMetaInDic[u'provider']))
-        strMeta += 'FILE SIZE:\t\t{0}\n'.format(
-            str(self.singleMetaInDic[u'file_size']))
+        strDetails += 'FILE SIZE:\t\t{0} MB\n'.format(
+            str(fileSizeInMb))
 
         # print(str(self.singleMetaInDic))
-        # print(strMeta)
-        self.lbTest01.setWordWrap(True)
-        self.lbTest01.setText(strMeta)
+        # print(strDetails)
+        self.lbTitle.setWordWrap(True)
+        self.lbTitle.setText(strTitle)
+        self.lbDetails.setWordWrap(True)
+        self.lbDetails.setText(strDetails)
 
     def downloadFullImage(self):
         urlFullImage = self.singleMetaInDic[u'uuid']
