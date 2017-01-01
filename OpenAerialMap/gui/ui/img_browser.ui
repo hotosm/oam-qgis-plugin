@@ -65,26 +65,114 @@
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>9</x>
-     <y>300</y>
-     <width>411</width>
-     <height>181</height>
+     <x>40</x>
+     <y>310</y>
+     <width>351</width>
+     <height>150</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QLabel" name="lbTitle">
       <property name="text">
-       <string>Title</string>
+       <string>TITLE:</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="lbDetails">
+     <widget class="QLabel" name="lbTitleText">
       <property name="text">
-       <string>Details</string>
+       <string>Title Text</string>
       </property>
      </widget>
+    </item>
+    <item>
+     <layout class="QFormLayout" name="formLayoutMetadata">
+      <item row="0" column="0">
+       <widget class="QLabel" name="lb0">
+        <property name="text">
+         <string>PLATFORM:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="lbText0">
+        <property name="text">
+         <string>lbText0</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="lb1">
+        <property name="text">
+         <string>ACQUISITION START:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="lbText1">
+        <property name="text">
+         <string>lbText1</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="lb2">
+        <property name="text">
+         <string>ACQUISITION END:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLabel" name="lbText2">
+        <property name="text">
+         <string>lbText2</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="lb3">
+        <property name="text">
+         <string>GSD:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLabel" name="lbText3">
+        <property name="text">
+         <string>lbText3</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="lb4">
+        <property name="text">
+         <string>PROVIDER:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLabel" name="lbText4">
+        <property name="text">
+         <string>lbText4</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="lb5">
+        <property name="text">
+         <string>FILE SIZE:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLabel" name="lbText5">
+        <property name="text">
+         <string>lbText5</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>

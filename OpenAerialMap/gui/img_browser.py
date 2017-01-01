@@ -91,11 +91,36 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         self.graphicsView.setScene(scene)
         self.graphicsView.show()
 
+        # print(str(self.singleMetaInDic))
+
         gsdForDisplay = float(int(self.singleMetaInDic[u'gsd'] * 100)) / 100
         fileSizeInMb = float(self.singleMetaInDic[u'file_size']) / (1000 * 1000)
         fileSizeInMb = float(int(fileSizeInMb * 100)) / 100
         # fileSizeInMb = self.singleMetaInDic[u'file_size'] / (1024 * 1024)
 
+        strTitle = str(self.singleMetaInDic[u'title'])
+        self.lbTitleText.setWordWrap(True)
+        self.lbTitleText.setText(strTitle)
+
+        strPlatform = str(self.singleMetaInDic[u'platform'])
+        strAcquisitionStart = str(self.singleMetaInDic[u'acquisition_start'])
+        strAcquisitionEnd = str(self.singleMetaInDic[u'acquisition_end'])
+        strGsdForDisplay = str(gsdForDisplay) + ' m'
+        strProvider = str(self.singleMetaInDic[u'provider'])
+        strFileSizeInMb = str(fileSizeInMb) + ' MB'
+
+        self.lbText0.setText(strPlatform)
+        self.lbText1.setText(strAcquisitionStart)
+        self.lbText2.setText(strAcquisitionEnd)
+        self.lbText3.setText(strGsdForDisplay)
+        self.lbText4.setText(strProvider)
+        self.lbText5.setText(strFileSizeInMb)
+
+        # print(self.formLayoutMetadata.formAlignment())
+        # self.formLayoutMetadata.setFormAlignment(Qt.AlignHCenter | Qt.AlignTop)
+        self.formLayoutMetadata.setLabelAlignment(Qt.AlignLeft)
+
+        """
         strTitle = 'TITLE:\n{0}\n'.format(
             str(self.singleMetaInDic[u'title']))
 
@@ -119,6 +144,7 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         self.lbTitle.setText(strTitle)
         self.lbDetails.setWordWrap(True)
         self.lbDetails.setText(strDetails)
+        """
 
     def downloadFullImage(self):
         urlFullImage = self.singleMetaInDic[u'uuid']
