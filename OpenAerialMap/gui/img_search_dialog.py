@@ -60,7 +60,7 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         # initialize GUI
         self.initGui()
 
-        # self.buttonBox.button(QDialogButtonBox.Ok).setText('Save')
+        self.buttonBox.button(QDialogButtonBox.Ok).setText('Save')
 
         # event handling
         self.pushButtonSearch.clicked.connect(self.startSearch)
