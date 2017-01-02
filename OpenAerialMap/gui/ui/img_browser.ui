@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>433</width>
-    <height>538</height>
+    <height>558</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,7 +27,7 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>490</y>
+     <y>510</y>
      <width>111</width>
      <height>31</height>
     </rect>
@@ -40,7 +40,7 @@
    <property name="geometry">
     <rect>
      <x>280</x>
-     <y>490</y>
+     <y>510</y>
      <width>111</width>
      <height>22</height>
     </rect>
@@ -53,7 +53,7 @@
    <property name="geometry">
     <rect>
      <x>280</x>
-     <y>510</y>
+     <y>530</y>
      <width>121</width>
      <height>22</height>
     </rect>
@@ -66,9 +66,9 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>310</y>
+     <y>300</y>
      <width>351</width>
-     <height>150</height>
+     <height>191</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">

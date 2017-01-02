@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>727</width>
-    <height>342</height>
+    <height>424</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>300</y>
+     <x>450</x>
+     <y>350</y>
      <width>176</width>
      <height>27</height>
     </rect>
@@ -33,7 +33,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>290</y>
+     <y>370</y>
      <width>341</width>
      <height>41</height>
     </rect>
@@ -58,7 +58,7 @@
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>270</y>
+     <y>350</y>
      <width>161</width>
      <height>22</height>
     </rect>
@@ -72,177 +72,6 @@
    <property name="text">
     <string>Use HOT OAM Catalog</string>
    </property>
-  </widget>
-  <widget class="QWidget" name="formLayoutWidget_2">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>30</y>
-     <width>341</width>
-     <height>231</height>
-    </rect>
-   </property>
-   <layout class="QFormLayout" name="formLayout_1">
-    <property name="fieldGrowthPolicy">
-     <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-    </property>
-    <property name="verticalSpacing">
-     <number>2</number>
-    </property>
-    <item row="1" column="0">
-     <widget class="QLabel" name="title_label">
-      <property name="text">
-       <string>Title:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLineEdit" name="title_edit">
-      <property name="toolTip">
-       <string>Human friendly title of the image</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="platform_label">
-      <property name="text">
-       <string>Platform:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QComboBox" name="platform_combo_box">
-      <item>
-       <property name="text">
-        <string>satellite</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>aircraft</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>UAV</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>balloon</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>kite</string>
-       </property>
-      </item>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QLabel" name="sensor_label">
-      <property name="text">
-       <string>Sensor:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QLineEdit" name="sensor_edit">
-      <property name="toolTip">
-       <string>Image aquisition device (eg. camera, radar, etc)</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="0">
-     <widget class="QLabel" name="sense_start_label">
-      <property name="text">
-       <string>Sense start</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="0">
-     <widget class="QLabel" name="sense_end_label">
-      <property name="text">
-       <string>Sense end</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="1">
-     <widget class="QDateTimeEdit" name="sense_end_edit"/>
-    </item>
-    <item row="8" column="0">
-     <widget class="QLabel" name="provider_label">
-      <property name="text">
-       <string>Provider:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="1">
-     <widget class="QLineEdit" name="provider_edit">
-      <property name="toolTip">
-       <string>Provider/owner of the OIN bucket</string>
-      </property>
-     </widget>
-    </item>
-    <item row="9" column="0">
-     <widget class="QLabel" name="contact_label">
-      <property name="text">
-       <string>Contact:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="9" column="1">
-     <widget class="QLineEdit" name="contact_edit">
-      <property name="toolTip">
-       <string>Name and email address of the data provider</string>
-      </property>
-      <property name="cursorPosition">
-       <number>0</number>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QLabel" name="base_uuid_label">
-      <property name="text">
-       <string>Base URL:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="base_uuid_edit">
-      <property name="toolTip">
-       <string>Website of the data provider</string>
-      </property>
-     </widget>
-    </item>
-    <item row="11" column="1">
-     <widget class="QLineEdit" name="tags_edit">
-      <property name="toolTip">
-       <string>Free tags separated by comma</string>
-      </property>
-     </widget>
-    </item>
-    <item row="11" column="0">
-     <widget class="QLabel" name="tags_label">
-      <property name="text">
-       <string>Tags:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="10" column="1">
-     <widget class="QLineEdit" name="website_edit"/>
-    </item>
-    <item row="10" column="0">
-     <widget class="QLabel" name="website_label">
-      <property name="text">
-       <string>Website:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="1">
-     <widget class="QDateTimeEdit" name="sense_start_edit"/>
-    </item>
-   </layout>
   </widget>
   <widget class="QLabel" name="lbMetadata">
    <property name="geometry">
@@ -328,7 +157,7 @@
      <x>370</x>
      <y>170</y>
      <width>341</width>
-     <height>111</height>
+     <height>122</height>
     </rect>
    </property>
    <layout class="QFormLayout" name="formLayout_2">
@@ -442,6 +271,171 @@
    <property name="text">
     <string>Storage</string>
    </property>
+  </widget>
+  <widget class="QWidget" name="formLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>30</y>
+     <width>341</width>
+     <height>311</height>
+    </rect>
+   </property>
+   <layout class="QFormLayout" name="formLayoutMetadata">
+    <item row="9" column="0">
+     <widget class="QLabel" name="tags_label">
+      <property name="text">
+       <string>Tags:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="1">
+     <widget class="QLineEdit" name="tags_edit">
+      <property name="toolTip">
+       <string>Free tags separated by comma</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="0">
+     <widget class="QLabel" name="website_label">
+      <property name="text">
+       <string>Website:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="1">
+     <widget class="QLineEdit" name="website_edit"/>
+    </item>
+    <item row="7" column="0">
+     <widget class="QLabel" name="contact_label">
+      <property name="text">
+       <string>Contact:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="1">
+     <widget class="QLineEdit" name="contact_edit">
+      <property name="toolTip">
+       <string>Name and email address of the data provider</string>
+      </property>
+      <property name="cursorPosition">
+       <number>0</number>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0">
+     <widget class="QLabel" name="provider_label">
+      <property name="text">
+       <string>Provider:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <widget class="QLineEdit" name="provider_edit">
+      <property name="toolTip">
+       <string>Provider/owner of the OIN bucket</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="0">
+     <widget class="QLabel" name="sense_end_label">
+      <property name="text">
+       <string>Sense end</string>
+      </property>
+     </widget>
+    </item>
+    <item row="5" column="1">
+     <widget class="QDateTimeEdit" name="sense_end_edit"/>
+    </item>
+    <item row="4" column="0">
+     <widget class="QLabel" name="sense_start_label">
+      <property name="text">
+       <string>Sense start</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="1">
+     <widget class="QDateTimeEdit" name="sense_start_edit"/>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="sensor_label">
+      <property name="text">
+       <string>Sensor:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLineEdit" name="sensor_edit">
+      <property name="toolTip">
+       <string>Image aquisition device (eg. camera, radar, etc)</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="platform_label">
+      <property name="text">
+       <string>Platform:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QComboBox" name="platform_combo_box">
+      <item>
+       <property name="text">
+        <string>satellite</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>aircraft</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>UAV</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>balloon</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>kite</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="title_label">
+      <property name="text">
+       <string>Title:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="title_edit">
+      <property name="toolTip">
+       <string>Human friendly title of the image</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QLabel" name="base_uuid_label">
+      <property name="text">
+       <string>Base URL:</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="base_uuid_edit">
+      <property name="toolTip">
+       <string>Website of the data provider</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>
