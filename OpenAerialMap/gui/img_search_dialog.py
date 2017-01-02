@@ -29,6 +29,7 @@ import json
 from PyQt4 import QtGui, uic
 from PyQt4 import QtCore
 from PyQt4.Qt import *
+from qgis.gui import QgsMessageBar
 
 from img_browser import ImgBrowser
 from module.module_access_oam_catalog import OAMCatalogAccess
@@ -60,7 +61,10 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         # initialize GUI
         self.initGui()
 
-        self.buttonBox.button(QDialogButtonBox.Ok).setText('Save')
+        # self.buttonBox.button(QDialogButtonBox.Ok).setText('Save')
+        self.bar = QgsMessageBar()
+        self.bar.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
+        self.verticalLayoutListWidget.layout().addWidget(self.bar)
 
         # event handling
         self.pushButtonSearch.clicked.connect(self.startSearch)
@@ -80,18 +84,8 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
                      self.execCancel)
 
         # disable some GUIs
-        # self.lineEditLocation.setText('n.a.')
-        # self.lineEditLocation.setEnabled(False)
-        # self.labelLocation.setEnabled(False)
-        # self.checkBoxLocation.setEnabled(False)
-        # self.pushButtonBrowseLocation.setEnabled(False)
-
         # self.pushButtonBrowseLocation.hide()
-        self.pushButtonSearchLatest.hide()
-
-        # add objects for catalog access
-        # self.oamCatalogAccess = OAMCatalogAccess(
-        #    "https://oam-catalog.herokuapp.com")
+        # self.pushButtonSearchLatest.hide()
 
         # add objects for catalog access
         self.settings.beginGroup("Storage")
@@ -320,6 +314,7 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
                             "/internet connection, and try again.")
             qMsgBox.exec_()
 
+    """ This function is not in use. """
     def searchLatest(self):
         action = "meta"
         dictQueries = {}
@@ -352,14 +347,23 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
                             "valid data/internet connection, and try again.")
             qMsgBox.exec_()
 
-    # def browseLocation(self):
-    #     print("Browse location of loaded layer...")
+    """ This function is not in use. """
+    def browseLocation(self):
+        print("Browse location of loaded layer...")
 
     def browseThumbnailAndMeta(self, item):
         singleMetaInDict = item.data(Qt.UserRole)
         # print(str(singleMetaInDict))
 
         if type(singleMetaInDict) is dict:
+
+            thumbResult = False
+
+            self.bar.clearWidgets()
+            self.bar.pushMessage(
+                'Downloading Thumbnail...',
+            level=QgsMessageBar.INFO,
+            duration=10)
 
             if self.imgBrowser is None:
                 self.imgBrowser = ImgBrowser(self.iface, singleMetaInDict)
@@ -369,8 +373,11 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
             if not self.imgBrowser.isVisible():
                 self.imgBrowser.show()
 
-            self.imgBrowser.displayThumbnailAndMeta()
+            thumbResult = self.imgBrowser.displayThumbnailAndMeta()
             self.imgBrowser.activateWindow()
+
+            if thumbResult == True:
+                self.bar.clearWidgets()
 
     def execOk(self):
         # save self.defaultQueriesInDict into self.settings

@@ -81,15 +81,19 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         # self.imgDownloader = ImgDownloader()
 
     def displayThumbnailAndMeta(self):
+        isDownloadSuccess = False
         urlThumbnail = self.singleMetaInDic[u'properties'][u'thumbnail']
         imageId = self.singleMetaInDic[u'_id']
         prefix = str(imageId) + '_'
         imgAbspath = ThumbnailManager.downloadThumbnail(urlThumbnail, prefix)
-        scene = QGraphicsScene()
-        item = scene.addPixmap(QPixmap(imgAbspath))
-        self.graphicsView.fitInView(scene.sceneRect(), Qt.KeepAspectRatio)
-        self.graphicsView.setScene(scene)
-        self.graphicsView.show()
+
+        if imgAbspath != 'failed':
+            isDownloadSuccess = True
+            scene = QGraphicsScene()
+            item = scene.addPixmap(QPixmap(imgAbspath))
+            self.graphicsView.fitInView(scene.sceneRect(), Qt.KeepAspectRatio)
+            self.graphicsView.setScene(scene)
+            self.graphicsView.show()
 
         # print(str(self.singleMetaInDic))
 
@@ -98,9 +102,10 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         fileSizeInMb = float(int(fileSizeInMb * 100)) / 100
         # fileSizeInMb = self.singleMetaInDic[u'file_size'] / (1024 * 1024)
 
-        strTitle = str(self.singleMetaInDic[u'title'])
-        self.lbTitleText.setWordWrap(True)
-        self.lbTitleText.setText(strTitle)
+        strTitle = 'TITLE:\n{0}\n'.format(
+            str(self.singleMetaInDic[u'title']))
+        self.lbTitle.setWordWrap(True)
+        self.lbTitle.setText(strTitle)
 
         strPlatform = str(self.singleMetaInDic[u'platform'])
         strAcquisitionStart = str(self.singleMetaInDic[u'acquisition_start'])
@@ -120,31 +125,7 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         # self.formLayoutMetadata.setFormAlignment(Qt.AlignHCenter | Qt.AlignTop)
         self.formLayoutMetadata.setLabelAlignment(Qt.AlignLeft)
 
-        """
-        strTitle = 'TITLE:\n{0}\n'.format(
-            str(self.singleMetaInDic[u'title']))
-
-        strDetails = ''
-        strDetails += 'PLATFORM:\t\t{0}\n'.format(
-            str(self.singleMetaInDic[u'platform']))
-        strDetails += 'ACQUISITION START:\t{0}\n'.format(
-            str(self.singleMetaInDic[u'acquisition_start']))
-        strDetails += 'ACQUISITION END:\t{0}\n'.format(
-            str(self.singleMetaInDic[u'acquisition_end']))
-        strDetails += 'GSD:\t\t\t{0} m\n'.format(
-            str(gsdForDisplay))
-        strDetails += 'PROVIDER:\t\t{0}\n'.format(
-            str(self.singleMetaInDic[u'provider']))
-        strDetails += 'FILE SIZE:\t\t{0} MB\n'.format(
-            str(fileSizeInMb))
-
-        # print(str(self.singleMetaInDic))
-        # print(strDetails)
-        self.lbTitle.setWordWrap(True)
-        self.lbTitle.setText(strTitle)
-        self.lbDetails.setWordWrap(True)
-        self.lbDetails.setText(strDetails)
-        """
+        return isDownloadSuccess
 
     def downloadFullImage(self):
         urlFullImage = self.singleMetaInDic[u'uuid']

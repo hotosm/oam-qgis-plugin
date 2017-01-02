@@ -40,19 +40,20 @@ class ThumbnailManager:
     def downloadThumbnail(urlThumbnail, prefix):
         imgDirAbspath = os.path.join(
             os.path.dirname(os.path.dirname(__file__)), 'temp')
-        print(urlThumbnail)
+        # print(urlThumbnail)
         # Concatenate fileName with id to avoid duplicate filename
         imgFileName = urlThumbnail.split('/')[-1]
         imgFileName = prefix + imgFileName
         imgAbspath = os.path.join(imgDirAbspath, imgFileName)
-        print(imgAbspath)
+        # print(imgAbspath)
         if not os.path.exists(imgAbspath):
             try:
                 f = open(imgAbspath, 'wb')
                 f.write(urllib2.urlopen(urlThumbnail).read())
                 f.close()
             except Exception as e:
-                print(str(e))
+                # print(str(e))
+                imgAbspath = 'failed'
         return imgAbspath
 
 
