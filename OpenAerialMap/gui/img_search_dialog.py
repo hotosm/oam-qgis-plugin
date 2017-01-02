@@ -352,18 +352,11 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         print("Browse location of loaded layer...")
 
     def browseThumbnailAndMeta(self, item):
+
         singleMetaInDict = item.data(Qt.UserRole)
         # print(str(singleMetaInDict))
 
         if type(singleMetaInDict) is dict:
-
-            thumbResult = False
-
-            self.bar.clearWidgets()
-            self.bar.pushMessage(
-                'Downloading Thumbnail...',
-            level=QgsMessageBar.INFO,
-            duration=10)
 
             if self.imgBrowser is None:
                 self.imgBrowser = ImgBrowser(self.iface, singleMetaInDict)
@@ -375,9 +368,6 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
 
             thumbResult = self.imgBrowser.displayThumbnailAndMeta()
             self.imgBrowser.activateWindow()
-
-            if thumbResult == True:
-                self.bar.clearWidgets()
 
     def execOk(self):
         # save self.defaultQueriesInDict into self.settings
