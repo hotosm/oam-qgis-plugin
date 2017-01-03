@@ -359,15 +359,31 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         if type(singleMetaInDict) is dict:
 
             if self.imgBrowser is None:
-                self.imgBrowser = ImgBrowser(self.iface, singleMetaInDict)
-            else:
-                self.imgBrowser.setSingleMetaInDic(singleMetaInDict)
+                self.imgBrowser = ImgBrowser(self.iface)
 
             if not self.imgBrowser.isVisible():
                 self.imgBrowser.show()
 
-            thumbResult = self.imgBrowser.displayThumbnailAndMeta()
             self.imgBrowser.activateWindow()
+
+            self.imgBrowser.setSingleMetaInDic(singleMetaInDict)
+            self.imgBrowser.displayMetadata()
+
+            self.bar.clearWidgets()
+            self.bar.pushMessage(
+                'INFO',
+                'Downloading thumbnail...',
+                level=QgsMessageBar.INFO,
+                duration=5)
+
+            if self.imgBrowser.displayThumbnail():
+                self.bar.clearWidgets()
+            else:
+                self.bar.clearWidgets()
+                self.bar.pushMessage(
+                    'Problem occured to download thumbnail.',
+                    level=QgsMessageBar.WARNING,
+                    duration=5)
 
     def execOk(self):
         # save self.defaultQueriesInDict into self.settings

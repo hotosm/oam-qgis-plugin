@@ -28,16 +28,20 @@ import urllib2
 import json
 from PyQt4 import QtCore
 from PyQt4.QtGui import *
-from PyQt4.QtCore import QThread, pyqtSignal
+from PyQt4.QtCore import QThread, pyqtSignal, QObject
 
 
-class ThumbnailManager:
+class ThumbnailManager(QObject):
+
+    start = pyqtSignal(bool)
+    statusChanged = pyqtSignal(int)
+    finihed = pyqtSignal(bool)
+    error = pyqtSignal(Exception)
 
     def __init__(self, parent=None):
-        pass
+        QObject.__init__(self)
 
-    @staticmethod
-    def downloadThumbnail(urlThumbnail, prefix):
+    def downloadThumbnail(self, urlThumbnail, prefix):
         imgDirAbspath = os.path.join(
             os.path.dirname(os.path.dirname(__file__)), 'temp')
         # print(urlThumbnail)
@@ -46,13 +50,18 @@ class ThumbnailManager:
         imgFileName = prefix + imgFileName
         imgAbspath = os.path.join(imgDirAbspath, imgFileName)
         # print(imgAbspath)
+        f = None
         if not os.path.exists(imgAbspath):
             try:
+                # check how to make this part synchronous
                 f = open(imgAbspath, 'wb')
-                f.write(urllib2.urlopen(urlThumbnail).read())
+                thumbBuffer = urllib2.urlopen(urlThumbnail).read()
+                f.write(thumbBuffer)
                 f.close()
             except Exception as e:
-                # print(str(e))
+                # print(str(e)) create log file later
+                f.close()
+                os.remove(imgAbspath)
                 imgAbspath = 'failed'
         return imgAbspath
 
