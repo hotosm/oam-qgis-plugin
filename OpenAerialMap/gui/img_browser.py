@@ -95,7 +95,7 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
             self.graphicsView.setScene(scene)
             self.graphicsView.show()
 
-        print(str(self.singleMetaInDic))
+        # print(str(self.singleMetaInDic))
 
         gsdForDisplay = float(int(self.singleMetaInDic[u'gsd'] * 100)) / 100
         fileSizeInMb = float(self.singleMetaInDic[u'file_size']) / (1000 * 1000)
