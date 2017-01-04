@@ -149,54 +149,6 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
 
         return isDownloadSuccess
 
-    """ This function is not in use. """
-    def displayThumbnailAndMeta(self):
-        isDownloadSuccess = False
-        urlThumbnail = self.singleMetaInDic[u'properties'][u'thumbnail']
-        imageId = self.singleMetaInDic[u'_id']
-        prefix = str(imageId) + '_'
-        imgAbspath = ThumbnailManager.downloadThumbnail(urlThumbnail, prefix)
-
-        if imgAbspath != 'failed':
-            isDownloadSuccess = True
-            scene = QGraphicsScene()
-            item = scene.addPixmap(QPixmap(imgAbspath))
-            self.graphicsView.fitInView(scene.sceneRect(), Qt.KeepAspectRatio)
-            self.graphicsView.setScene(scene)
-            self.graphicsView.show()
-
-        # print(str(self.singleMetaInDic))
-
-        gsdForDisplay = float(int(self.singleMetaInDic[u'gsd'] * 100)) / 100
-        fileSizeInMb = float(self.singleMetaInDic[u'file_size']) / (1000 * 1000)
-        fileSizeInMb = float(int(fileSizeInMb * 100)) / 100
-        # fileSizeInMb = self.singleMetaInDic[u'file_size'] / (1024 * 1024)
-
-        strTitle = 'TITLE:\n{0}\n'.format(
-            str(self.singleMetaInDic[u'title']))
-        self.lbTitle.setWordWrap(True)
-        self.lbTitle.setText(strTitle)
-
-        strPlatform = str(self.singleMetaInDic[u'platform'])
-        strAcquisitionStart = str(self.singleMetaInDic[u'acquisition_start'])
-        strAcquisitionEnd = str(self.singleMetaInDic[u'acquisition_end'])
-        strGsdForDisplay = str(gsdForDisplay) + ' m'
-        strProvider = str(self.singleMetaInDic[u'provider'])
-        strFileSizeInMb = str(fileSizeInMb) + ' MB'
-
-        self.lbText0.setText(strPlatform)
-        self.lbText1.setText(strAcquisitionStart)
-        self.lbText2.setText(strAcquisitionEnd)
-        self.lbText3.setText(strGsdForDisplay)
-        self.lbText4.setText(strProvider)
-        self.lbText5.setText(strFileSizeInMb)
-
-        # print(self.formLayoutMetadata.formAlignment())
-        # self.formLayoutMetadata.setFormAlignment(Qt.AlignHCenter | Qt.AlignTop)
-        self.formLayoutMetadata.setLabelAlignment(Qt.AlignLeft)
-
-        return isDownloadSuccess
-
     def downloadFullImage(self):
         urlFullImage = self.singleMetaInDic[u'uuid']
         imgFileName = urlFullImage.split('/')[-1]

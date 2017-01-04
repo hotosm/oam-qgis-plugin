@@ -42,6 +42,7 @@ class ThumbnailManager(QObject):
         QObject.__init__(self)
 
     def downloadThumbnail(self, urlThumbnail, prefix):
+        self.statusChanged.emit(0)
         imgDirAbspath = os.path.join(
             os.path.dirname(os.path.dirname(__file__)), 'temp')
         # print(urlThumbnail)
@@ -58,11 +59,13 @@ class ThumbnailManager(QObject):
                 thumbBuffer = urllib2.urlopen(urlThumbnail).read()
                 f.write(thumbBuffer)
                 f.close()
+                self.statusChanged.emit(1)
             except Exception as e:
                 # print(str(e)) create log file later
                 f.close()
                 os.remove(imgAbspath)
                 imgAbspath = 'failed'
+                self.statusChanged.emit(2)
         return imgAbspath
 
 
