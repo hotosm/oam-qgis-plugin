@@ -7,8 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>719</width>
-    <height>505</height>
+    <height>511</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <weight>50</weight>
+    <bold>false</bold>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Download Imagery</string>
@@ -17,7 +23,7 @@
    <property name="geometry">
     <rect>
      <x>450</x>
-     <y>460</y>
+     <y>470</y>
      <width>176</width>
      <height>27</height>
     </rect>
@@ -27,16 +33,6 @@
    </property>
    <property name="centerButtons">
     <bool>false</bool>
-   </property>
-  </widget>
-  <widget class="QListWidget" name="listWidget">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>70</y>
-     <width>341</width>
-     <height>371</height>
-    </rect>
    </property>
   </widget>
   <widget class="QLabel" name="label">
@@ -77,25 +73,37 @@
      <x>380</x>
      <y>70</y>
      <width>320</width>
-     <height>283</height>
+     <height>291</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_2">
+   <layout class="QVBoxLayout" name="verticalLayoutQueries">
+    <property name="spacing">
+     <number>3</number>
+    </property>
     <property name="leftMargin">
-     <number>6</number>
+     <number>3</number>
     </property>
     <property name="topMargin">
-     <number>6</number>
+     <number>3</number>
     </property>
     <property name="rightMargin">
-     <number>6</number>
+     <number>3</number>
     </property>
     <property name="bottomMargin">
-     <number>16</number>
+     <number>3</number>
     </property>
     <item>
      <layout class="QGridLayout" name="gridLayout">
-      <property name="margin">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
        <number>0</number>
       </property>
       <property name="horizontalSpacing">
@@ -238,26 +246,57 @@
   <widget class="QWidget" name="verticalLayoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>360</y>
-     <width>311</width>
-     <height>80</height>
+     <x>390</x>
+     <y>370</y>
+     <width>301</width>
+     <height>71</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="verticalLayoutSearch">
     <item>
      <widget class="QPushButton" name="pushButtonSearch">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>35</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>Search</string>
       </property>
      </widget>
     </item>
+   </layout>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget_3">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>70</y>
+     <width>351</width>
+     <height>371</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayoutListWidget">
+    <property name="leftMargin">
+     <number>3</number>
+    </property>
+    <property name="topMargin">
+     <number>3</number>
+    </property>
+    <property name="rightMargin">
+     <number>3</number>
+    </property>
+    <property name="bottomMargin">
+     <number>3</number>
+    </property>
     <item>
-     <widget class="QPushButton" name="pushButtonSearchLatest">
-      <property name="text">
-       <string>Search latest imagery</string>
-      </property>
-     </widget>
+     <widget class="QListWidget" name="listWidget"/>
     </item>
    </layout>
   </widget>

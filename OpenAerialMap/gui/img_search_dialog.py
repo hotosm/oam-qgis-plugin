@@ -29,6 +29,7 @@ import json
 from PyQt4 import QtGui, uic
 from PyQt4 import QtCore
 from PyQt4.Qt import *
+from qgis.gui import QgsMessageBar
 
 from img_browser import ImgBrowser
 from module.module_access_oam_catalog import OAMCatalogAccess
@@ -61,6 +62,9 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         self.initGui()
 
         # self.buttonBox.button(QDialogButtonBox.Ok).setText('Save')
+        self.bar = QgsMessageBar()
+        self.bar.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
+        self.verticalLayoutListWidget.layout().addWidget(self.bar)
 
         # event handling
         self.pushButtonSearch.clicked.connect(self.startSearch)
@@ -80,18 +84,8 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
                      self.execCancel)
 
         # disable some GUIs
-        # self.lineEditLocation.setText('n.a.')
-        # self.lineEditLocation.setEnabled(False)
-        # self.labelLocation.setEnabled(False)
-        # self.checkBoxLocation.setEnabled(False)
-        # self.pushButtonBrowseLocation.setEnabled(False)
-
         # self.pushButtonBrowseLocation.hide()
-        self.pushButtonSearchLatest.hide()
-
-        # add objects for catalog access
-        # self.oamCatalogAccess = OAMCatalogAccess(
-        #    "https://oam-catalog.herokuapp.com")
+        # self.pushButtonSearchLatest.hide()
 
         # add objects for catalog access
         self.settings.beginGroup("Storage")
@@ -320,6 +314,8 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
                             "/internet connection, and try again.")
             qMsgBox.exec_()
 
+    """ This function is not in use. """
+    """
     def searchLatest(self):
         action = "meta"
         dictQueries = {}
@@ -351,26 +347,70 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
             qMsgBox.setText("Please make sure if you entered " +
                             "valid data/internet connection, and try again.")
             qMsgBox.exec_()
+    """
 
-    # def browseLocation(self):
-    #     print("Browse location of loaded layer...")
+    """ This function is not in use. """
+    """
+    def browseLocation(self):
+        print("Browse location of loaded layer...")
+    """
 
     def browseThumbnailAndMeta(self, item):
+
         singleMetaInDict = item.data(Qt.UserRole)
         # print(str(singleMetaInDict))
 
         if type(singleMetaInDict) is dict:
 
             if self.imgBrowser is None:
-                self.imgBrowser = ImgBrowser(self.iface, singleMetaInDict)
-            else:
-                self.imgBrowser.setSingleMetaInDic(singleMetaInDict)
+                self.imgBrowser = ImgBrowser(self.iface)
+                # self.imgBrowser.thumbnailManager.statusChanged.connect(
+                #     self.changeThumbnailStatus)
 
             if not self.imgBrowser.isVisible():
                 self.imgBrowser.show()
 
-            self.imgBrowser.displayThumbnailAndMeta()
             self.imgBrowser.activateWindow()
+
+            self.imgBrowser.setSingleMetaInDic(singleMetaInDict)
+            self.imgBrowser.displayMetadata()
+
+            self.bar.clearWidgets()
+            self.bar.pushMessage(
+                'INFO',
+                'Downloading thumbnail...',
+                level=QgsMessageBar.INFO,
+                duration=5)
+
+            if self.imgBrowser.displayThumbnail():
+                self.bar.clearWidgets()
+            else:
+                self.bar.clearWidgets()
+                self.bar.pushMessage(
+                    'Problem occured to download thumbnail.',
+                    level=QgsMessageBar.WARNING,
+                    duration=5)
+
+    """ This function is not in use. """
+    """
+    def changeThumbnailStatus(self, status):
+        # print(str(status))
+        if status == 0:
+            self.bar.clearWidgets()
+            self.bar.pushMessage(
+                'INFO',
+                'Downloading thumbnail...',
+                level=QgsMessageBar.INFO,
+                duration=5)
+        if status == 1:
+            self.bar.clearWidgets()
+        if status == 2:
+            self.bar.clearWidgets()
+            self.bar.pushMessage(
+                'Problem occured to download thumbnail.',
+                level=QgsMessageBar.WARNING,
+                duration=5)
+    """
 
     def execOk(self):
         # save self.defaultQueriesInDict into self.settings

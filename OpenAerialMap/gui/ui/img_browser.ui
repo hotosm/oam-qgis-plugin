@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>433</width>
-    <height>538</height>
+    <height>558</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,7 +27,7 @@
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>490</y>
+     <y>510</y>
      <width>111</width>
      <height>31</height>
     </rect>
@@ -40,7 +40,7 @@
    <property name="geometry">
     <rect>
      <x>280</x>
-     <y>490</y>
+     <y>510</y>
      <width>111</width>
      <height>22</height>
     </rect>
@@ -53,7 +53,7 @@
    <property name="geometry">
     <rect>
      <x>280</x>
-     <y>510</y>
+     <y>530</y>
      <width>121</width>
      <height>22</height>
     </rect>
@@ -65,26 +65,113 @@
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>9</x>
+     <x>40</x>
      <y>300</y>
-     <width>411</width>
-     <height>181</height>
+     <width>351</width>
+     <height>191</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QLabel" name="lbTitle">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>60</height>
+       </size>
+      </property>
       <property name="text">
-       <string>Title</string>
+       <string>TITLE:</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="lbDetails">
-      <property name="text">
-       <string>Details</string>
-      </property>
-     </widget>
+     <layout class="QFormLayout" name="formLayoutMetadata">
+      <item row="0" column="0">
+       <widget class="QLabel" name="lb0">
+        <property name="text">
+         <string>PLATFORM:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="lbText0">
+        <property name="text">
+         <string>lbText0</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="lb1">
+        <property name="text">
+         <string>ACQUISITION START:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="lbText1">
+        <property name="text">
+         <string>lbText1</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="lb2">
+        <property name="text">
+         <string>ACQUISITION END:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLabel" name="lbText2">
+        <property name="text">
+         <string>lbText2</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="lb3">
+        <property name="text">
+         <string>GSD:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLabel" name="lbText3">
+        <property name="text">
+         <string>lbText3</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="lb4">
+        <property name="text">
+         <string>PROVIDER:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLabel" name="lbText4">
+        <property name="text">
+         <string>lbText4</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="lb5">
+        <property name="text">
+         <string>FILE SIZE:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLabel" name="lbText5">
+        <property name="text">
+         <string>lbText5</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
