@@ -80,6 +80,7 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
                      self.downloadFullImage)
         self.checkBoxSaveMeta.setChecked(True)
 
+        self.singleMetaInDic = None
         self.thumbnailManager = ThumbnailManager()
 
         self.downloadProgressWindow = None

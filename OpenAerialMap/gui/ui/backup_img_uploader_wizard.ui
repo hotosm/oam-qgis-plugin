@@ -7,13 +7,8 @@
     <x>0</x>
     <y>0</y>
     <width>823</width>
-    <height>534</height>
+    <height>523</height>
    </rect>
-  </property>
-  <property name="font">
-   <font>
-    <pointsize>9</pointsize>
-   </font>
   </property>
   <property name="windowTitle">
    <string>Upload Imagery</string>
@@ -362,7 +357,7 @@
          <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
         </property>
         <property name="verticalSpacing">
-         <number>6</number>
+         <number>2</number>
         </property>
         <item row="0" column="0">
          <spacer name="verticalSpacer_10">
@@ -466,7 +461,11 @@
          </widget>
         </item>
         <item row="5" column="1">
-         <widget class="QDateTimeEdit" name="sense_start_edit"/>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QDateTimeEdit" name="sense_start_edit"/>
+          </item>
+         </layout>
         </item>
         <item row="7" column="0">
          <widget class="QLabel" name="sense_end_label">
@@ -509,14 +508,10 @@
           </property>
          </widget>
         </item>
-        <item row="11" column="0">
-         <widget class="QLabel" name="tags_label">
-          <property name="text">
-           <string>Tags:</string>
-          </property>
-         </widget>
-        </item>
         <item row="11" column="1">
+         <widget class="QLineEdit" name="website_edit"/>
+        </item>
+        <item row="12" column="1">
          <widget class="QLineEdit" name="tags_edit">
           <property name="toolTip">
            <string>Free tags separated by comma</string>
@@ -527,6 +522,20 @@
          <widget class="QCheckBox" name="reproject_check_box">
           <property name="text">
            <string>Reproject to EPSG:3857</string>
+          </property>
+         </widget>
+        </item>
+        <item row="12" column="0">
+         <widget class="QLabel" name="tags_label">
+          <property name="text">
+           <string>Tags:</string>
+          </property>
+         </widget>
+        </item>
+        <item row="11" column="0">
+         <widget class="QLabel" name="website_label">
+          <property name="text">
+           <string>Website:</string>
           </property>
          </widget>
         </item>
@@ -580,14 +589,17 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_11">
         <item>
-         <spacer name="verticalSpacer_7">
+         <spacer name="verticalSpacer_9">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Fixed</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
             <width>20</width>
-            <height>40</height>
+            <height>13</height>
            </size>
           </property>
          </spacer>
@@ -598,7 +610,7 @@
            <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
           </property>
           <property name="verticalSpacing">
-           <number>6</number>
+           <number>2</number>
           </property>
           <item row="0" column="0">
            <widget class="QLabel" name="storage_label">
@@ -687,17 +699,62 @@
          </layout>
         </item>
         <item>
-         <spacer name="verticalSpacer_9">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
+         <widget class="QCheckBox" name="notify_oam_check">
+          <property name="text">
+           <string>Notify OAM of new upload</string>
           </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
+         </widget>
+        </item>
+        <item>
+         <layout class="QFormLayout" name="formLayout_3">
+          <property name="fieldGrowthPolicy">
+           <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
           </property>
-         </spacer>
+          <item row="1" column="0">
+           <widget class="QLabel" name="token_label">
+            <property name="text">
+             <string>Token</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="token_edit"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="uploader_name_label">
+            <property name="text">
+             <string>Uploader Name</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="uploader_name_edit"/>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="uploader_email_label">
+            <property name="text">
+             <string>Uploader Email</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="uploader_email_edit"/>
+          </item>
+          <item row="0" column="1">
+           <widget class="QPushButton" name="btn_request_token">
+            <property name="text">
+             <string>Request a token</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="trigger_tiling_check">
+          <property name="text">
+           <string>Trigger OAM tile service</string>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QCheckBox" name="license_check_box">
@@ -707,33 +764,7 @@
          </widget>
         </item>
         <item>
-         <spacer name="verticalSpacer_11">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnStartUpload">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>30</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>Start Upload</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="verticalSpacer_8">
+         <spacer name="verticalSpacer_7">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>

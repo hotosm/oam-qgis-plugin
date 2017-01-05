@@ -88,10 +88,10 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.bar2.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         self.page(2).layout().addWidget(self.bar2)
 
-        self.setButtonText(QtGui.QWizard.CustomButton1,
-                           self.tr("&Start upload"))
-        self.setOption(QtGui.QWizard.HaveCustomButton1, True)
-        self.button(QWizard.CustomButton1).setVisible(False)
+        # self.setButtonText(QtGui.QWizard.CustomButton1,
+        #                    self.tr("&Start upload"))
+        # self.setOption(QtGui.QWizard.HaveCustomButton1, True)
+        # self.button(QWizard.CustomButton1).setVisible(False)
 
         self.settings = settings
 
@@ -138,9 +138,9 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         # temporarily disable textEdit for website and tags
         # probably make textEdit for thumbnail later
-        self.website_edit.setText('n.a.')
-        self.website_edit.setEnabled(False)
-        self.website_label.setEnabled(False)
+        # self.website_edit.setText('n.a.')
+        # self.website_edit.setEnabled(False)
+        # self.website_label.setEnabled(False)
         self.tags_edit.setText('n.a.')
         self.tags_edit.setEnabled(False)
         self.tags_label.setEnabled(False)
@@ -152,19 +152,20 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         # Upload tab connections (wizard page 3)
         self.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)
-        self.customButtonClicked.connect(self.startUpload)
+        self.btnStartUpload.clicked.connect(self.startUpload)
+        # self.customButtonClicked.connect(self.startUpload)
         # self.button(QWizard.CustomButton1).clicked.connect(self.startUpload)
 
-        self.toggleTokenRequestForm()
-        self.notify_oam_check.stateChanged.connect(self.toggleTokenRequestForm)
+        # self.toggleTokenRequestForm()
+        # self.notify_oam_check.stateChanged.connect(self.toggleTokenRequestForm)
 
         # temporarily disable notify_oam_check and trigger_tiling_check
-        self.notify_oam_check.setEnabled(False)
-        self.trigger_tiling_check.setEnabled(False)
+        # self.notify_oam_check.setEnabled(False)
+        # self.trigger_tiling_check.setEnabled(False)
 
-        self.token_edit.setText('n.a.')
-        self.uploader_name_edit.setText('n.a.')
-        self.uploader_email_edit.setText('n.a.')
+        # self.token_edit.setText('n.a.')
+        # self.uploader_name_edit.setText('n.a.')
+        # self.uploader_email_edit.setText('n.a.')
 
     # handlers for navigation
     def nextPage(self):
@@ -176,7 +177,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             # print "Page ID: " + str(self.currentId())
             # self.bar2.clearWidgets()
             self.loadMetadataReviewBox()
-            self.button(QWizard.CustomButton1).setVisible(True)
+            # self.button(QWizard.CustomButton1).setVisible(True)
         else:
             pass
 
@@ -188,7 +189,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         elif self.currentId() == 1:
             # print "Page ID: " + str(self.currentId())
             # self.bar1.clearWidgets()
-            self.button(QWizard.CustomButton1).setVisible(False)
+            # self.button(QWizard.CustomButton1).setVisible(False)
+            pass
         else:
             pass
 
@@ -635,6 +637,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.specify_edit.setText('')
             self.specify_edit.setEnabled(0)
 
+    """"
     def toggleTokenRequestForm(self):
 
         state = False
@@ -648,6 +651,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.uploader_name_label.setEnabled(state)
         self.uploader_email_edit.setEnabled(state)
         self.uploader_email_label.setEnabled(state)
+    """
 
     def loadStorageSettings(self):
         self.settings.beginGroup("Storage")
@@ -681,14 +685,14 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.license_check_box.setCheckState(2)
         if str(self.settings.value('REPROJECT')).lower() == 'true':
             self.reproject_check_box.setCheckState(2)
-        if str(self.settings.value('NOTIFY_OAM')).lower() == 'true':
-            self.notify_oam_check.setCheckState(2)
-        if str(self.settings.value('TRIGGER_OAM_TS')).lower() == 'true':
-            self.trigger_tiling_check.setCheckState(2)
+        # if str(self.settings.value('NOTIFY_OAM')).lower() == 'true':
+        #     self.notify_oam_check.setCheckState(2)
+        # if str(self.settings.value('TRIGGER_OAM_TS')).lower() == 'true':
+        #     self.trigger_tiling_check.setCheckState(2)
 
         # This part is for temporal use.
-        self.notify_oam_check.setCheckState(0)
-        self.trigger_tiling_check.setCheckState(0)
+        # self.notify_oam_check.setCheckState(0)
+        # self.trigger_tiling_check.setCheckState(0)
         self.settings.endGroup()
 
     def loadMetadataReviewBox(self):
@@ -723,12 +727,12 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         upload_file_abspaths = []
 
         # get the information of upload options
-        if self.notify_oam_check.isChecked():
+        # if self.notify_oam_check.isChecked():
             # self.upload_options.append("notify_oam")
-            upload_options.append("notify_oam")
-        if self.trigger_tiling_check.isChecked():
+            # upload_options.append("notify_oam")
+        # if self.trigger_tiling_check.isChecked():
             # self.upload_options.append("trigger_tiling")
-            upload_options.append("trigger_tiling")
+            # upload_options.append("trigger_tiling")
 
         if not self.license_check_box.isChecked():
             self.bar2.clearWidgets()
