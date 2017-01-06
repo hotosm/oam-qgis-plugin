@@ -10,6 +10,11 @@
     <height>558</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>9</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Image Browser</string>
   </property>
@@ -72,6 +77,18 @@
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="leftMargin">
+     <number>2</number>
+    </property>
+    <property name="topMargin">
+     <number>2</number>
+    </property>
+    <property name="rightMargin">
+     <number>2</number>
+    </property>
+    <property name="bottomMargin">
+     <number>2</number>
+    </property>
     <item>
      <widget class="QLabel" name="lbTitle">
       <property name="maximumSize">
@@ -87,6 +104,18 @@
     </item>
     <item>
      <layout class="QFormLayout" name="formLayoutMetadata">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
       <item row="0" column="0">
        <widget class="QLabel" name="lb0">
         <property name="text">
