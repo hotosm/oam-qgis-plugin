@@ -75,17 +75,9 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
         self.loadSettings()
 
         # temporarily disable some controls
-        # self.website_edit.setText('n.a.')
-        # self.website_edit.setEnabled(False)
-        # self.website_label.setEnabled(False)
         self.tags_edit.setText('n.a.')
         self.tags_edit.setEnabled(False)
         self.tags_label.setEnabled(False)
-
-        # self.notify_oam_check.setCheckState(0)
-        # self.notify_oam_check.setEnabled(False)
-        # self.trigger_tiling_check.setCheckState(0)
-        # self.trigger_tiling_check.setEnabled(False)
 
     def loadSettings(self):
         self.loadMetadataSettings()
@@ -114,7 +106,6 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
             self.sense_end_edit.dateTime().toString(Qt.ISODate))
         self.settings.setValue('PROVIDER', self.provider_edit.text())
         self.settings.setValue('CONTACT', self.contact_edit.text())
-        # self.settings.setValue('WEBSITE', self.website_edit.text())
         self.settings.setValue('TAGS', self.tags_edit.text())
         self.settings.endGroup()
 
@@ -125,10 +116,6 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
                                self.license_check_box.isChecked())
         self.settings.setValue('REPROJECT',
                                self.reproject_check_box.isChecked())
-        # self.settings.setValue('NOTIFY_OAM',
-        #                        self.notify_oam_check.isChecked())
-        # self.settings.setValue('TRIGGER_OAM_TS',
-        #                        self.trigger_tiling_check.isChecked())
         self.settings.endGroup()
 
     def saveStorageSettings(self):
@@ -181,8 +168,6 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
         self.provider_edit.setCursorPosition(0)
         self.contact_edit.setText(self.settings.value('CONTACT'))
         self.contact_edit.setCursorPosition(0)
-        # self.website_edit.setText(self.settings.value('WEBSITE'))
-        # self.website_edit.setCursorPosition(0)
         self.tags_edit.setText(self.settings.value('TAGS'))
         self.tags_edit.setCursorPosition(0)
         self.settings.endGroup()
@@ -200,10 +185,6 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
             self.license_check_box.setCheckState(2)
         if str(self.settings.value('REPROJECT')).lower() == 'true':
             self.reproject_check_box.setCheckState(2)
-        # if str(self.settings.value('NOTIFY_OAM')).lower() == 'true':
-        #     self.notify_oam_check.setCheckState(2)
-        # if str(self.settings.value('TRIGGER_OAM_TS')).lower() == 'true':
-        #     self.trigger_tiling_check.setCheckState(2)
         self.settings.endGroup()
 
     def loadStorageSettings(self):

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>761</width>
-    <height>382</height>
+    <height>426</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -28,7 +28,7 @@
    <property name="geometry">
     <rect>
      <x>480</x>
-     <y>340</y>
+     <y>380</y>
      <width>161</width>
      <height>27</height>
     </rect>
@@ -46,20 +46,11 @@
      <x>390</x>
      <y>20</y>
      <width>341</width>
-     <height>301</height>
+     <height>327</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
-    <property name="leftMargin">
-     <number>2</number>
-    </property>
-    <property name="topMargin">
-     <number>2</number>
-    </property>
-    <property name="rightMargin">
-     <number>2</number>
-    </property>
-    <property name="bottomMargin">
+    <property name="margin">
      <number>2</number>
     </property>
     <item>
@@ -291,8 +282,8 @@
       <property name="font">
        <font>
         <pointsize>9</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
+        <weight>50</weight>
+        <bold>false</bold>
        </font>
       </property>
       <property name="text">
@@ -343,30 +334,21 @@
     </item>
    </layout>
   </widget>
-  <widget class="QWidget" name="verticalLayoutWidget">
+  <widget class="QWidget" name="verticalLayoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>29</x>
      <y>20</y>
      <width>331</width>
-     <height>301</height>
+     <height>338</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayoutMetadata">
-    <property name="leftMargin">
-     <number>2</number>
-    </property>
-    <property name="topMargin">
-     <number>2</number>
-    </property>
-    <property name="rightMargin">
-     <number>2</number>
-    </property>
-    <property name="bottomMargin">
+    <property name="margin">
      <number>2</number>
     </property>
     <item>
-     <spacer name="verticalSpacer_2">
+     <spacer name="verticalSpacer">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
       </property>
@@ -394,8 +376,8 @@
     </item>
     <item>
      <layout class="QFormLayout" name="formLayoutMetadata">
-      <property name="verticalSpacing">
-       <number>6</number>
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
       </property>
       <item row="0" column="0">
        <widget class="QLabel" name="base_uuid_label">
@@ -497,18 +479,6 @@
         </item>
        </widget>
       </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="sensor_label">
-        <property name="font">
-         <font>
-          <pointsize>9</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Sensor:</string>
-        </property>
-       </widget>
-      </item>
       <item row="3" column="1">
        <widget class="QLineEdit" name="sensor_edit">
         <property name="font">
@@ -521,15 +491,15 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="sense_start_label">
+      <item row="3" column="0">
+       <widget class="QLabel" name="sensor_label">
         <property name="font">
          <font>
           <pointsize>9</pointsize>
          </font>
         </property>
         <property name="text">
-         <string>Sense start</string>
+         <string>Sensor:</string>
         </property>
        </widget>
       </item>
@@ -539,6 +509,18 @@
          <font>
           <pointsize>9</pointsize>
          </font>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="sense_start_label">
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Sense start</string>
         </property>
        </widget>
       </item>
@@ -641,7 +623,7 @@
      </layout>
     </item>
     <item>
-     <spacer name="verticalSpacer">
+     <spacer name="verticalSpacer_2">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
       </property>

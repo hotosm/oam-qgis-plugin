@@ -88,18 +88,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.bar2.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         self.page(2).layout().addWidget(self.bar2)
 
-        # self.setButtonText(QtGui.QWizard.CustomButton1,
-        #                    self.tr("&Start upload"))
-        # self.setOption(QtGui.QWizard.HaveCustomButton1, True)
-        # self.button(QWizard.CustomButton1).setVisible(False)
-
         self.settings = settings
-
-        # Initialize the object for S3Manager and upload options and filenames
-        # self.s3Mgr = None
-        # self.upload_options = []
-        # self.upload_filenames = []
-        # self.upload_file_abspaths = []
 
         self.s3UpPrgWin = None
 
@@ -136,11 +125,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.reload_button.hide()
         self.reload_button.clicked.connect(self.loadSavedMetadata)
 
-        # temporarily disable textEdit for website and tags
+        # temporarily disable textEdit for tags
         # probably make textEdit for thumbnail later
-        # self.website_edit.setText('n.a.')
-        # self.website_edit.setEnabled(False)
-        # self.website_label.setEnabled(False)
         self.tags_edit.setText('n.a.')
         self.tags_edit.setEnabled(False)
         self.tags_label.setEnabled(False)
@@ -153,8 +139,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         # Upload tab connections (wizard page 3)
         self.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)
         self.btnStartUpload.clicked.connect(self.startUpload)
-        # self.customButtonClicked.connect(self.startUpload)
-        # self.button(QWizard.CustomButton1).clicked.connect(self.startUpload)
 
         # self.toggleTokenRequestForm()
         # self.notify_oam_check.stateChanged.connect(self.toggleTokenRequestForm)
@@ -177,7 +161,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             # print "Page ID: " + str(self.currentId())
             # self.bar2.clearWidgets()
             self.loadMetadataReviewBox()
-            # self.button(QWizard.CustomButton1).setVisible(True)
         else:
             pass
 
@@ -189,7 +172,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         elif self.currentId() == 1:
             # print "Page ID: " + str(self.currentId())
             # self.bar1.clearWidgets()
-            # self.button(QWizard.CustomButton1).setVisible(False)
             pass
         else:
             pass
@@ -357,8 +339,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.provider_edit.setCursorPosition(0)
         self.contact_edit.setText(self.settings.value('CONTACT'))
         self.contact_edit.setCursorPosition(0)
-        # self.website_edit.setText(self.settings.value('WEBSITE'))
-        # self.website_edit.setCursorPosition(0)
         # self.tags_edit.setText(self.settings.value('TAGS'))
         # self.tags_edit.setCursorPosition(0)
         self.settings.endGroup()
@@ -379,7 +359,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             QDateTime().fromString('1970-01-01T00:00:00', Qt.ISODate).time())
         self.provider_edit.setText('')
         self.contact_edit.setText('')
-        # self.website_edit.setText('')
         # self.tags_edit.setText('')
         self.license_check_box.setCheckState(0)
         self.reproject_check_box.setCheckState(0)
@@ -578,7 +557,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         # get metadata from GUI, and store them in a dictionary
         metaInputInDict = {}
-        # temp_filename = file_abspath.split('/')[-1]
         temp_filename = os.path.basename(file_abspath)
         strUuid = '{0}{1}'.format(self.base_uuid_edit.text(), temp_filename)
         metaInputInDict['uuid'] = strUuid
@@ -592,8 +570,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         metaInputInDict['provider'] = \
             self.provider_edit.text()
         metaInputInDict['contact'] = self.contact_edit.text()
-        # temporarily disable two keys (website and tags)
-        # metaInputInDict['website'] = self.website_edit.text()
+        # temporarily disable the key for tags
         # metaInputInDict['tags'] = self.tags_edit.text()
 
         properties = {}
@@ -637,6 +614,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.specify_edit.setText('')
             self.specify_edit.setEnabled(0)
 
+    """ This function is not in use. """
     """"
     def toggleTokenRequestForm(self):
 
@@ -685,14 +663,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.license_check_box.setCheckState(2)
         if str(self.settings.value('REPROJECT')).lower() == 'true':
             self.reproject_check_box.setCheckState(2)
-        # if str(self.settings.value('NOTIFY_OAM')).lower() == 'true':
-        #     self.notify_oam_check.setCheckState(2)
-        # if str(self.settings.value('TRIGGER_OAM_TS')).lower() == 'true':
-        #     self.trigger_tiling_check.setCheckState(2)
 
-        # This part is for temporal use.
-        # self.notify_oam_check.setCheckState(0)
-        # self.trigger_tiling_check.setCheckState(0)
         self.settings.endGroup()
 
     def loadMetadataReviewBox(self):
@@ -725,14 +696,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         upload_options = []
         upload_file_abspaths = []
-
-        # get the information of upload options
-        # if self.notify_oam_check.isChecked():
-            # self.upload_options.append("notify_oam")
-            # upload_options.append("notify_oam")
-        # if self.trigger_tiling_check.isChecked():
-            # self.upload_options.append("trigger_tiling")
-            # upload_options.append("trigger_tiling")
 
         if not self.license_check_box.isChecked():
             self.bar2.clearWidgets()
@@ -830,13 +793,3 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             'Success:{0} Cancel:{1} Fail:{2}'.format(
                 numSuccess, numCancelled, numFailed),
             level=QgsMessageBar.INFO)
-
-        """
-        # Probably, it is better to change this part into log file.
-        print('')
-        print('------------------------------------------------')
-        print('Success:{0} Cancel:{1} Fail:{2}'.format(
-                    numSuccess, numCancelled, numFailed))
-        print('------------------------------------------------')
-        print('')
-        """

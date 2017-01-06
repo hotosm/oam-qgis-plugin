@@ -320,12 +320,6 @@ class S3UploadWorker(QThread):
         else:
             self.finished.emit('cancelled', self.index)
 
-        """
-        if "notify_oam" in self.uploadOptions:
-            self.notifyOAM()
-        if "trigger_tiling" in self.uploadOptions:
-            self.triggerTileService()
-        """
 
     def run(self):
 
