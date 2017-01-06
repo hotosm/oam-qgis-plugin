@@ -308,15 +308,14 @@ class S3UploadWorker(QThread):
                 progress = i / float(chunkCount) * 100
                 self.valueChanged.emit(progress, self.index)
 
+            if self.isRunning is True:
+                mp.complete_upload()
+                self.finished.emit('success', self.index)
+            else:
+                self.finished.emit('cancelled', self.index)
+
         except Exception as e:
             self.error.emit(e, self.index)
-            self.finished.emit('failed', self.index)
-
-        if self.isRunning is True:
-            mp.complete_upload()
-            self.finished.emit('success', self.index)
-        else:
-            self.finished.emit('cancelled', self.index)
 
         """
         if "notify_oam" in self.uploadOptions:

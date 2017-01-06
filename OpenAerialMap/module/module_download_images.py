@@ -292,14 +292,13 @@ class DownloadWorker(QThread):
                 self.valueChanged.emit(int(p * 100), self.index)
             f.close()
 
+            if self.isRunning is True:
+                self.finished.emit('success', self.index)
+            else:
+                self.finished.emit('cancelled', self.index)
+
         except Exception as e:
             self.error.emit(e, self.index)
-            self.finished.emit('failed', self.index)
-
-        if self.isRunning is True:
-            self.finished.emit('success', self.index)
-        else:
-            self.finished.emit('cancelled', self.index)
 
     def stop(self):
         self.isRunning = False
