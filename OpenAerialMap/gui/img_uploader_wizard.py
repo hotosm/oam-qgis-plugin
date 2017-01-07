@@ -121,20 +121,20 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.clean_button.clicked.connect(self.cleanMetadataSettings)
         self.save_button.clicked.connect(self.saveMetadata)
 
-        # Temporarily hide the reload button
-        self.reload_button.hide()
-        self.reload_button.clicked.connect(self.loadSavedMetadata)
-
-        # temporarily disable textEdit for tags
+        # temporarily disable/hide textEdit for tags
         # probably make textEdit for thumbnail later
         self.tags_edit.setText('n.a.')
         self.tags_edit.setEnabled(False)
         self.tags_label.setEnabled(False)
+        self.tags_edit.hide()
+        self.tags_label.hide()
 
-        # temporarily disable convert_format_check_box and combobox
+        # temporarily disable/hide convert_format_check_box and combobox
         self.convert_format_check_box.setEnabled(False)
         self.format_combo_box.addItem('n.a.')
         self.format_combo_box.setEnabled(False)
+        self.convert_format_check_box.hide()
+        self.format_combo_box.hide()
 
         # Upload tab connections (wizard page 3)
         self.storage_combo_box.currentIndexChanged.connect(self.enableSpecify)

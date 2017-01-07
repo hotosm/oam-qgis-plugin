@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>761</width>
-    <height>426</height>
+    <height>407</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -28,7 +28,7 @@
    <property name="geometry">
     <rect>
      <x>480</x>
-     <y>380</y>
+     <y>360</y>
      <width>161</width>
      <height>27</height>
     </rect>
@@ -44,13 +44,22 @@
    <property name="geometry">
     <rect>
      <x>390</x>
-     <y>20</y>
-     <width>341</width>
-     <height>327</height>
+     <y>0</y>
+     <width>331</width>
+     <height>331</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
-    <property name="margin">
+    <property name="leftMargin">
+     <number>2</number>
+    </property>
+    <property name="topMargin">
+     <number>2</number>
+    </property>
+    <property name="rightMargin">
+     <number>2</number>
+    </property>
+    <property name="bottomMargin">
      <number>2</number>
     </property>
     <item>
@@ -337,14 +346,23 @@
   <widget class="QWidget" name="verticalLayoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>29</x>
-     <y>20</y>
-     <width>331</width>
+     <x>39</x>
+     <y>0</y>
+     <width>321</width>
      <height>338</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayoutMetadata">
-    <property name="margin">
+    <property name="leftMargin">
+     <number>2</number>
+    </property>
+    <property name="topMargin">
+     <number>2</number>
+    </property>
+    <property name="rightMargin">
+     <number>2</number>
+    </property>
+    <property name="bottomMargin">
      <number>2</number>
     </property>
     <item>
@@ -636,6 +654,19 @@
      </spacer>
     </item>
    </layout>
+  </widget>
+  <widget class="Line" name="line">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>330</y>
+     <width>701</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
   </widget>
  </widget>
  <resources/>
