@@ -33,9 +33,7 @@ from PyQt4.QtCore import QThread, pyqtSignal, QObject
 
 class ThumbnailManager(QObject):
 
-    start = pyqtSignal(bool)
     statusChanged = pyqtSignal(int)
-    finihed = pyqtSignal(bool)
     error = pyqtSignal(Exception)
 
     def __init__(self, parent=None):
@@ -51,21 +49,21 @@ class ThumbnailManager(QObject):
         imgFileName = prefix + imgFileName
         imgAbspath = os.path.join(imgDirAbspath, imgFileName)
         # print(imgAbspath)
-        f = None
         if not os.path.exists(imgAbspath):
             try:
-                # check how to make this part synchronous
+                response = urllib2.urlopen(urlThumbnail)
+                chunkSize = 1024 * 16
                 f = open(imgAbspath, 'wb')
-                thumbBuffer = urllib2.urlopen(urlThumbnail).read()
-                f.write(thumbBuffer)
+                while True:
+                    chunk = response.read(chunkSize)
+                    if not chunk:
+                        break
+                    f.write(chunk)
                 f.close()
                 self.statusChanged.emit(1)
             except Exception as e:
-                # print(str(e)) create log file later
-                f.close()
-                os.remove(imgAbspath)
                 imgAbspath = 'failed'
-                self.statusChanged.emit(2)
+                self.error.emit(e)
         return imgAbspath
 
 

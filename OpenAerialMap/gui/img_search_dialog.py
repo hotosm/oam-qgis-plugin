@@ -357,6 +357,13 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
 
     def browseThumbnailAndMeta(self, item):
 
+        self.bar.clearWidgets()
+        self.bar.pushMessage(
+            'INFO',
+            'Downloading thumbnail...',
+            level=QgsMessageBar.INFO,
+            duration=8)
+
         singleMetaInDict = item.data(Qt.UserRole)
         # print(str(singleMetaInDict))
 
@@ -364,8 +371,10 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
 
             if self.imgBrowser is None:
                 self.imgBrowser = ImgBrowser(self.iface)
-                # self.imgBrowser.thumbnailManager.statusChanged.connect(
-                #     self.changeThumbnailStatus)
+                self.imgBrowser.thumbnailManager.statusChanged.connect(
+                    self.changeThumbnailStatus)
+                self.imgBrowser.thumbnailManager.error.connect(
+                    self.displayThumnailDownloadError)
 
             if not self.imgBrowser.isVisible():
                 self.imgBrowser.show()
@@ -374,43 +383,21 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
 
             self.imgBrowser.setSingleMetaInDic(singleMetaInDict)
             self.imgBrowser.displayMetadata()
+            self.imgBrowser.displayThumbnail()
 
-            self.bar.clearWidgets()
-            self.bar.pushMessage(
-                'INFO',
-                'Downloading thumbnail...',
-                level=QgsMessageBar.INFO,
-                duration=5)
-
-            if self.imgBrowser.displayThumbnail():
-                self.bar.clearWidgets()
-            else:
-                self.bar.clearWidgets()
-                self.bar.pushMessage(
-                    'Problem occured to download thumbnail.',
-                    level=QgsMessageBar.WARNING,
-                    duration=5)
-
-    """ This function is not in use. """
-    """
     def changeThumbnailStatus(self, status):
         # print(str(status))
         if status == 0:
-            self.bar.clearWidgets()
-            self.bar.pushMessage(
-                'INFO',
-                'Downloading thumbnail...',
-                level=QgsMessageBar.INFO,
-                duration=5)
+            pass
         if status == 1:
             self.bar.clearWidgets()
-        if status == 2:
-            self.bar.clearWidgets()
-            self.bar.pushMessage(
-                'Problem occured to download thumbnail.',
-                level=QgsMessageBar.WARNING,
-                duration=5)
-    """
+
+    def displayThumnailDownloadError(self, e):
+        self.bar.clearWidgets()
+        self.bar.pushMessage(
+            'Failed to download thumbnail.\n{}'.format(str(e)),
+            level=QgsMessageBar.WARNING,
+            duration=8)
 
     def execOk(self):
         # save self.defaultQueriesInDict into self.settings
