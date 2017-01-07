@@ -104,7 +104,7 @@ class DownloadProgressWindow(QWidget):
         # This part need to be modified...
         maxHeight = int(
             DownloadProgressWindow.MAX_WINDOW_HEIGHT_PER_PROGRESS_BAR * len(self.hLayouts))
-        # self.setMaximumWidth(S3UploadProgressWindow.MAX_WINDOW_WIDTH)
+        # self.setMaximumWidth(DownloadProgressWindow.MAX_WINDOW_WIDTH)
         self.setMaximumHeight(maxHeight)
         screenShape = QDesktopWidget().screenGeometry()
         width, height = screenShape.width(), screenShape.height()
@@ -148,10 +148,12 @@ class DownloadProgressWindow(QWidget):
         if self.activeId > DownloadProgressWindow.MAX_NUM_DOWNLOADS - 1:
             qMsgBox = QMessageBox()
             qMsgBox.setWindowTitle('Message')
-            qMsgBox.setText("The maximum numbers of images for downloading " +
-                            "is presently set to 3.\nIf you need to " +
-                            "download more, please finish the current " +
-                            "uploading tasks first, and try download again.")
+            msg = "The maximum numbers of images for downloading " \
+                  "is presently set to {0}.\nIf you need to " \
+                  "download more, please finish the current " \
+                  "uploading tasks first, and try download again" \
+                  ".".format(DownloadProgressWindow.MAX_NUM_DOWNLOADS)
+            qMsgBox.setText(msg)
             qMsgBox.exec_()
         else:
             # Initialize the lists
