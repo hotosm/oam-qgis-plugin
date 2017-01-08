@@ -357,13 +357,6 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
 
     def browseThumbnailAndMeta(self, item):
 
-        self.bar.clearWidgets()
-        self.bar.pushMessage(
-            'INFO',
-            'Downloading thumbnail...',
-            level=QgsMessageBar.INFO,
-            duration=8)
-
         singleMetaInDict = item.data(Qt.UserRole)
         # print(str(singleMetaInDict))
 
@@ -376,19 +369,27 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
                 self.imgBrowser.thumbnailManager.error.connect(
                     self.displayThumnailDownloadError)
 
+            self.imgBrowser.setSingleMetaInDic(singleMetaInDict)
+            self.imgBrowser.displayMetadata()
+            self.imgBrowser.displayThumbnail()
+
             if not self.imgBrowser.isVisible():
                 self.imgBrowser.show()
 
             self.imgBrowser.activateWindow()
 
-            self.imgBrowser.setSingleMetaInDic(singleMetaInDict)
-            self.imgBrowser.displayMetadata()
-            self.imgBrowser.displayThumbnail()
-
     def changeThumbnailStatus(self, status):
         # print(str(status))
         if status == 0:
             pass
+            """
+            self.bar.clearWidgets()
+            self.bar.pushMessage(
+                'INFO',
+                'Downloading thumbnail...',
+                level=QgsMessageBar.INFO,
+                duration=8)
+            """
         if status == 1:
             self.bar.clearWidgets()
 
