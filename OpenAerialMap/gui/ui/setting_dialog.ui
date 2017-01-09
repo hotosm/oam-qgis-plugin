@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>728</width>
-    <height>492</height>
+    <width>732</width>
+    <height>478</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>450</x>
-     <y>450</y>
+     <y>430</y>
      <width>176</width>
      <height>27</height>
     </rect>
@@ -29,246 +29,220 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Save</set>
    </property>
   </widget>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>330</y>
+     <x>20</x>
+     <y>10</y>
      <width>351</width>
-     <height>81</height>
+     <height>402</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QCheckBox" name="license_check_box">
-      <property name="text">
-       <string>Accept OAM free license terms</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QCheckBox" name="reproject_check_box">
-      <property name="text">
-       <string>Reproject to EPSG:3857</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QCheckBox" name="notify_oam_check">
-      <property name="text">
-       <string>Notify OAM of new upload</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="formLayoutWidget_2">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>40</y>
-     <width>348</width>
-     <height>251</height>
-    </rect>
-   </property>
-   <layout class="QFormLayout" name="formLayout_1">
-    <property name="fieldGrowthPolicy">
-     <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-    </property>
-    <property name="verticalSpacing">
+   <layout class="QVBoxLayout" name="verticalLayoutLeft">
+    <property name="margin">
      <number>2</number>
     </property>
-    <item row="0" column="0">
-     <widget class="QLabel" name="base_uuid_label">
+    <item>
+     <widget class="QLabel" name="metadata_label">
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
-       <string>Base URL:</string>
+       <string>Metadata</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="base_uuid_edit">
-      <property name="toolTip">
-       <string>Website of the data provider</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="title_label">
-      <property name="text">
-       <string>Title:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLineEdit" name="title_edit">
-      <property name="toolTip">
-       <string>Human friendly title of the image</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="platform_label">
-      <property name="text">
-       <string>Platform:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QComboBox" name="platform_combo_box">
-      <item>
-       <property name="text">
-        <string>satellite</string>
-       </property>
+    <item>
+     <layout class="QFormLayout" name="formLayoutOptions">
+      <item row="0" column="0">
+       <widget class="QLabel" name="base_uuid_label">
+        <property name="text">
+         <string>Base URL:</string>
+        </property>
+       </widget>
       </item>
-      <item>
-       <property name="text">
-        <string>aircraft</string>
-       </property>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="base_uuid_edit">
+        <property name="toolTip">
+         <string>Website of the data provider</string>
+        </property>
+       </widget>
       </item>
-      <item>
-       <property name="text">
-        <string>UAV</string>
-       </property>
+      <item row="1" column="0">
+       <widget class="QLabel" name="title_label">
+        <property name="text">
+         <string>Title:</string>
+        </property>
+       </widget>
       </item>
-      <item>
-       <property name="text">
-        <string>balloon</string>
-       </property>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="title_edit">
+        <property name="toolTip">
+         <string>Human friendly title of the image</string>
+        </property>
+       </widget>
       </item>
-      <item>
-       <property name="text">
-        <string>kite</string>
-       </property>
+      <item row="2" column="0">
+       <widget class="QLabel" name="platform_label">
+        <property name="text">
+         <string>Platform:</string>
+        </property>
+       </widget>
       </item>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QLabel" name="sensor_label">
-      <property name="text">
-       <string>Sensor:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QLineEdit" name="sensor_edit">
-      <property name="toolTip">
-       <string>Image aquisition device (eg. camera, radar, etc)</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="0">
-     <widget class="QLabel" name="sense_start_label">
-      <property name="text">
-       <string>Sense start</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="1">
-     <layout class="QHBoxLayout" name="horizontalLayout_3">
-      <item>
+      <item row="2" column="1">
+       <widget class="QComboBox" name="platform_combo_box">
+        <item>
+         <property name="text">
+          <string>satellite</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>aircraft</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>UAV</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>balloon</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>kite</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="sensor_label">
+        <property name="text">
+         <string>Sensor:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="sensor_edit">
+        <property name="toolTip">
+         <string>Image aquisition device (eg. camera, radar, etc)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="sense_start_label">
+        <property name="text">
+         <string>Sense start</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
        <widget class="QDateTimeEdit" name="sense_start_edit"/>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="sense_end_label">
+        <property name="text">
+         <string>Sense end</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QDateTimeEdit" name="sense_end_edit"/>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="provider_label">
+        <property name="text">
+         <string>Provider:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLineEdit" name="provider_edit">
+        <property name="toolTip">
+         <string>Provider/owner of the OIN bucket</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="contact_label">
+        <property name="text">
+         <string>Contact:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QLineEdit" name="contact_edit">
+        <property name="toolTip">
+         <string>Name and email address of the data provider</string>
+        </property>
+        <property name="cursorPosition">
+         <number>0</number>
+        </property>
+       </widget>
       </item>
      </layout>
     </item>
-    <item row="6" column="0">
-     <widget class="QLabel" name="sense_end_label">
+    <item>
+     <widget class="QLabel" name="options_label">
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
-       <string>Sense end</string>
+       <string>Options</string>
       </property>
      </widget>
     </item>
-    <item row="6" column="1">
-     <widget class="QDateTimeEdit" name="sense_end_edit"/>
-    </item>
-    <item row="8" column="0">
-     <widget class="QLabel" name="provider_label">
-      <property name="text">
-       <string>Provider:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="1">
-     <widget class="QLineEdit" name="provider_edit">
-      <property name="toolTip">
-       <string>Provider/owner of the OIN bucket</string>
-      </property>
-     </widget>
-    </item>
-    <item row="9" column="0">
-     <widget class="QLabel" name="contact_label">
-      <property name="text">
-       <string>Contact:</string>
-      </property>
-     </widget>
-    </item>
-    <item row="9" column="1">
-     <widget class="QLineEdit" name="contact_edit">
-      <property name="toolTip">
-       <string>Name and email address of the data provider</string>
-      </property>
-      <property name="cursorPosition">
-       <number>0</number>
-      </property>
-     </widget>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QCheckBox" name="license_check_box">
+        <property name="text">
+         <string>Accept OAM free license terms</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="reproject_check_box">
+        <property name="text">
+         <string>Reproject to EPSG:3857</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="notify_oam_check">
+        <property name="text">
+         <string>Notify OAM of new upload</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
-  <widget class="QLabel" name="metadata_label">
+  <widget class="QWidget" name="verticalLayoutWidget_2">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>20</y>
-     <width>71</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Metadata</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="options_label">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>310</y>
-     <width>56</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Options</string>
-   </property>
-  </widget>
-  <widget class="QWidget" name="layoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>380</x>
-     <y>40</y>
+     <x>379</x>
+     <y>9</y>
      <width>331</width>
-     <height>241</height>
+     <height>385</height>
     </rect>
    </property>
-   <layout class="QFormLayout" name="formLayout_2">
-    <property name="fieldGrowthPolicy">
-     <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-    </property>
-    <property name="verticalSpacing">
+   <layout class="QVBoxLayout" name="verticalLayoutRight">
+    <property name="margin">
      <number>2</number>
     </property>
-    <item row="0" column="0">
-     <widget class="QLabel" name="aws_s3_label">
+    <item>
+     <widget class="QLabel" name="storage_label">
       <property name="font">
        <font>
         <weight>75</weight>
@@ -276,69 +250,171 @@
        </font>
       </property>
       <property name="text">
-       <string>AWS S3</string>
+       <string>Storage</string>
       </property>
      </widget>
     </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="aws_bucket_name_label">
-      <property name="enabled">
-       <bool>true</bool>
+    <item>
+     <layout class="QFormLayout" name="formLayoutStorage">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
       </property>
-      <property name="text">
-       <string>Bucket name</string>
+      <property name="verticalSpacing">
+       <number>2</number>
       </property>
-     </widget>
+      <item row="0" column="0">
+       <widget class="QLabel" name="aws_s3_label">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>AWS S3</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="aws_bucket_name_label">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>Bucket name</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="aws_bucket_name_edit">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="toolTip">
+         <string>Bucket name which is not listed above </string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="aws_key_id_label">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Key-id</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="aws_key_id_edit">
+        <property name="toolTip">
+         <string>AWS access key id</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="aws_secret_key_label">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Secret key</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="aws_secret_key_edit">
+        <property name="toolTip">
+         <string>AWS secret access key</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="google_drive_label">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Google Drive</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="google_client_secret_file_label">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>Client Secret File</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLineEdit" name="google_client_secret_file_edit">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="toolTip">
+         <string>Bucket name which is not listed above </string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="google_application_name_label">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Application Name</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLineEdit" name="google_application_name_edit">
+        <property name="toolTip">
+         <string>AWS access key id</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="dropbox_label">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Drop Box</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="0">
+       <widget class="QLabel" name="dropbox_access_token_label">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>Access Token</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1">
+       <widget class="QLineEdit" name="dropbox_access_token_edit"/>
+      </item>
+     </layout>
     </item>
-    <item row="1" column="1">
-     <widget class="QLineEdit" name="aws_bucket_name_edit">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="toolTip">
-       <string>Bucket name which is not listed above </string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="aws_key_id_label">
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string>Key-id</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QLineEdit" name="aws_key_id_edit">
-      <property name="toolTip">
-       <string>AWS access key id</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QLabel" name="aws_secret_key_label">
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string>Secret key</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="1">
-     <widget class="QLineEdit" name="aws_secret_key_edit">
-      <property name="toolTip">
-       <string>AWS secret access key</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="0">
-     <widget class="QLabel" name="google_drive_label">
+    <item>
+     <widget class="QLabel" name="default_storage_type_label">
       <property name="font">
        <font>
         <weight>75</weight>
@@ -346,187 +422,61 @@
        </font>
       </property>
       <property name="text">
-       <string>Google Drive</string>
+       <string>Default StorageType</string>
       </property>
      </widget>
     </item>
-    <item row="5" column="0">
-     <widget class="QLabel" name="google_client_secret_file_label">
-      <property name="enabled">
-       <bool>true</bool>
+    <item>
+     <layout class="QFormLayout" name="formLayoutStorageType">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
       </property>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="default_storage_combo_box">
+        <item>
+         <property name="text">
+          <string>AWS S3</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Google Drive</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Dropbox</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="hot_oam_catalog_check_box">
       <property name="text">
-       <string>Client Secret File</string>
+       <string>Use HOT OAM Catalog</string>
       </property>
      </widget>
     </item>
-    <item row="5" column="1">
-     <widget class="QLineEdit" name="google_client_secret_file_edit">
-      <property name="enabled">
-       <bool>true</bool>
+    <item>
+     <layout class="QFormLayout" name="formLayoutCatalog">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
       </property>
-      <property name="toolTip">
-       <string>Bucket name which is not listed above </string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="0">
-     <widget class="QLabel" name="google_application_name_label">
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string>Application Name</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="1">
-     <widget class="QLineEdit" name="google_application_name_edit">
-      <property name="toolTip">
-       <string>AWS access key id</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="0">
-     <widget class="QLabel" name="dropbox_label">
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Drop Box</string>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="0">
-     <widget class="QLabel" name="dropbox_access_token_label">
-      <property name="enabled">
-       <bool>true</bool>
-      </property>
-      <property name="text">
-       <string>Access Token</string>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="1">
-     <widget class="QLineEdit" name="dropbox_access_token_edit"/>
+      <item row="0" column="0">
+       <widget class="QLabel" name="catalog_url_label">
+        <property name="text">
+         <string>Catalog URL</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="catalog_url_edit"/>
+      </item>
+     </layout>
     </item>
    </layout>
-  </widget>
-  <widget class="QLabel" name="storage_label">
-   <property name="geometry">
-    <rect>
-     <x>380</x>
-     <y>20</y>
-     <width>56</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Storage</string>
-   </property>
-  </widget>
-  <widget class="QWidget" name="formLayoutWidget">
-   <property name="geometry">
-    <rect>
-     <x>380</x>
-     <y>310</y>
-     <width>331</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <layout class="QFormLayout" name="formLayout_3">
-    <property name="fieldGrowthPolicy">
-     <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-    </property>
-    <item row="0" column="1">
-     <widget class="QComboBox" name="default_storage_combo_box">
-      <item>
-       <property name="text">
-        <string>AWS S3</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Google Drive</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Dropbox</string>
-       </property>
-      </item>
-     </widget>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QLabel" name="default_storage_type_label">
-   <property name="geometry">
-    <rect>
-     <x>380</x>
-     <y>280</y>
-     <width>131</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <weight>75</weight>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Default StorageType</string>
-   </property>
-  </widget>
-  <widget class="QWidget" name="formLayoutWidget_3">
-   <property name="geometry">
-    <rect>
-     <x>380</x>
-     <y>400</y>
-     <width>331</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <layout class="QFormLayout" name="formLayout">
-    <property name="fieldGrowthPolicy">
-     <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-    </property>
-    <item row="0" column="0">
-     <widget class="QLabel" name="catalog_url_label">
-      <property name="text">
-       <string>Catalog URL</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="catalog_url_edit"/>
-    </item>
-   </layout>
-  </widget>
-  <widget class="QCheckBox" name="hot_oam_catalog_check_box">
-   <property name="geometry">
-    <rect>
-     <x>380</x>
-     <y>370</y>
-     <width>161</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Use HOT OAM Catalog</string>
-   </property>
   </widget>
  </widget>
  <resources/>
