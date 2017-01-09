@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>732</width>
-    <height>478</height>
+    <height>479</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -56,7 +56,10 @@
      </widget>
     </item>
     <item>
-     <layout class="QFormLayout" name="formLayoutOptions">
+     <layout class="QFormLayout" name="formLayoutMetadata">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+      </property>
       <item row="0" column="0">
        <widget class="QLabel" name="base_uuid_label">
         <property name="text">
@@ -202,7 +205,7 @@
      </widget>
     </item>
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <layout class="QVBoxLayout" name="verticalLayoutOptions">
       <item>
        <widget class="QCheckBox" name="license_check_box">
         <property name="text">
