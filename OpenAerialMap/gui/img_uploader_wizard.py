@@ -870,24 +870,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 bucket_key = str(self.aws_key_id_edit.text())
                 bucket_secret = str(self.aws_secret_key_edit.text())
 
-                """
-                if self.s3UpPrgWin is None:
-                    self.s3UpPrgWin = UploadProgressWindow()
-                    # self.s3UpPrgWin = S3UploadProgressWindow()
-                    self.s3UpPrgWin.started.connect(self.displayConnectionResult)
-                    # self.s3UpPrgWin.progress.connect(self.updateProgress)
-                    self.s3UpPrgWin.startConfirmed.connect(self.updateListWidgets)
-                    self.s3UpPrgWin.finished.connect(self.finishUpload)
-                """
-
-                """
-                self.s3UpPrgWin.startUpload(bucket_key,
-                                            bucket_secret,
-                                            bucket_name,
-                                            upload_options,
-                                            upload_file_abspaths)
-
-                """
                 self.upPrgWin.startUpload('aws',
                                             upload_file_abspaths,
                                             upload_options,
@@ -957,13 +939,3 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             'Success:{0} Cancel:{1} Fail:{2}'.format(
                 numSuccess, numCancelled, numFailed),
             level=QgsMessageBar.INFO)
-
-        """
-        # Probably, it is better to change this part into log file.
-        print('')
-        print('------------------------------------------------')
-        print('Success:{0} Cancel:{1} Fail:{2}'.format(
-                    numSuccess, numCancelled, numFailed))
-        print('------------------------------------------------')
-        print('')
-        """
