@@ -181,6 +181,9 @@ class DownloadProgressWindow(QWidget):
             self.hLayouts[self.activeId].addWidget(
                 self.cancelButtons[self.activeId])
 
+            self.progressBars[self.activeId].setFixedWidth(120)
+            self.cancelButtons[self.activeId].setFixedWidth(65)
+
             # Set the file names to labels
             fileName = os.path.basename(fileAbsPath)
             self.qLabels[self.activeId].setText(fileName)
