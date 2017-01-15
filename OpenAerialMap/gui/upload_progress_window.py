@@ -161,6 +161,9 @@ class UploadProgressWindow(QWidget):
                 self.hLayouts[i].addWidget(self.progressBars[i])
                 self.hLayouts[i].addWidget(self.cancelButtons[i])
 
+                self.progressBars[i].setFixedWidth(120)
+                self.cancelButtons[i].setFixedWidth(65)
+
                 # Set the file names to labels
                 indexFileAbsPath = i - self.activeId
                 fileName = os.path.basename(
