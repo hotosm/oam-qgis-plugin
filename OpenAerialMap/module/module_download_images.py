@@ -29,6 +29,7 @@ import json
 from PyQt4 import QtCore
 from PyQt4.QtGui import *
 from PyQt4.QtCore import QThread, pyqtSignal, QObject
+from PyQt4.Qt import *
 
 
 class ThumbnailManager(QObject):
@@ -175,11 +176,11 @@ class DownloadProgressWindow(QWidget):
             self.progressBars.append(QProgressBar())
             self.cancelButtons.append(QPushButton('Cancel'))
             self.hLayouts[self.activeId].addWidget(
-                self.qLabels[self.activeId])
+                self.qLabels[self.activeId], Qt.AlignLeft)
             self.hLayouts[self.activeId].addWidget(
-                self.progressBars[self.activeId])
+                self.progressBars[self.activeId], Qt.AlignRight)
             self.hLayouts[self.activeId].addWidget(
-                self.cancelButtons[self.activeId])
+                self.cancelButtons[self.activeId], Qt.AlignRight)
 
             self.progressBars[self.activeId].setFixedWidth(120)
             self.cancelButtons[self.activeId].setFixedWidth(65)

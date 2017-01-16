@@ -31,11 +31,13 @@ import sys, os, time, math
 from PyQt4 import QtCore
 from PyQt4.QtGui import *      # modify this part?
 from PyQt4.QtCore import QThread, pyqtSignal
+from PyQt4.Qt import *
 
 from module.module_access_s3 import S3UploadWorker
 
 import boto
 from boto.s3.connection import S3Connection, S3ResponseError
+
 
 class UploadProgressWindow(QWidget):
 
@@ -157,9 +159,9 @@ class UploadProgressWindow(QWidget):
                 self.qLabels.append(QLabel())
                 self.progressBars.append(QProgressBar())
                 self.cancelButtons.append(QPushButton('Cancel'))
-                self.hLayouts[i].addWidget(self.qLabels[i])
-                self.hLayouts[i].addWidget(self.progressBars[i])
-                self.hLayouts[i].addWidget(self.cancelButtons[i])
+                self.hLayouts[i].addWidget(self.qLabels[i], Qt.AlignLeft)
+                self.hLayouts[i].addWidget(self.progressBars[i], Qt.AlignRight)
+                self.hLayouts[i].addWidget(self.cancelButtons[i], Qt.AlignRight)
 
                 self.progressBars[i].setFixedWidth(120)
                 self.cancelButtons[i].setFixedWidth(65)
