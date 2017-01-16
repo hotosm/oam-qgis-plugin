@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>719</width>
+    <width>723</width>
     <height>511</height>
    </rect>
   </property>
@@ -73,7 +73,7 @@
     <rect>
      <x>380</x>
      <y>70</y>
-     <width>320</width>
+     <width>321</width>
      <height>371</height>
     </rect>
    </property>
@@ -81,16 +81,7 @@
     <property name="spacing">
      <number>3</number>
     </property>
-    <property name="leftMargin">
-     <number>3</number>
-    </property>
-    <property name="topMargin">
-     <number>3</number>
-    </property>
-    <property name="rightMargin">
-     <number>3</number>
-    </property>
-    <property name="bottomMargin">
+    <property name="margin">
      <number>3</number>
     </property>
     <item>
@@ -107,23 +98,52 @@
      </spacer>
     </item>
     <item>
-     <layout class="QGridLayout" name="gridLayout">
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <property name="horizontalSpacing">
-       <number>6</number>
-      </property>
-      <item row="6" column="2">
+     <layout class="QGridLayout" name="gridLayoutQueries">
+      <item row="0" column="0">
+       <widget class="QCheckBox" name="checkBoxLocation">
+        <property name="text">
+         <string>Location</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QDateEdit" name="dateEditAcquisitionFrom"/>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEditLocation"/>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="labelNumImages">
+        <property name="text">
+         <string>Numbers of images</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QCheckBox" name="checkBoxAcquisitionFrom">
+        <property name="text">
+         <string>Acquisition Date From</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="lineEditResolutionFrom"/>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="labelOrderBy">
+        <property name="text">
+         <string>Order By</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QCheckBox" name="checkBoxResolutionFrom">
+        <property name="text">
+         <string>Resolution From</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
        <widget class="QComboBox" name="comboBoxOrderBy">
         <item>
          <property name="text">
@@ -137,116 +157,37 @@
         </item>
        </widget>
       </item>
-      <item row="4" column="2">
-       <widget class="QLineEdit" name="lineEditResolutionTo"/>
-      </item>
-      <item row="0" column="0">
-       <widget class="QCheckBox" name="checkBoxLocation">
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QLineEdit" name="lineEditLocation"/>
-      </item>
-      <item row="5" column="1">
-       <widget class="QLabel" name="labelNumImages">
-        <property name="text">
-         <string>Numbers of images</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="QDateEdit" name="dateEditAcquisitionFrom"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QCheckBox" name="checkBoxAcquisitionFrom">
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLabel" name="labelAcquisitionTo">
+      <item row="2" column="0">
+       <widget class="QCheckBox" name="checkBoxAcquisitionTo">
         <property name="text">
          <string>Acquisition Date To</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
-       <widget class="QLabel" name="labelLocation">
-        <property name="text">
-         <string>Location</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLabel" name="labelAcauisitionFrom">
-        <property name="text">
-         <string>Acquisition Date From</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="2">
+      <item row="2" column="1">
        <widget class="QDateEdit" name="dateEditAcquisitionTo"/>
       </item>
-      <item row="3" column="2">
-       <widget class="QLineEdit" name="lineEditResolutionFrom"/>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLabel" name="labelResolutionFrom">
-        <property name="text">
-         <string>Resolution From</string>
-        </property>
-       </widget>
-      </item>
       <item row="4" column="1">
-       <widget class="QLabel" name="labelResoultionTo">
-        <property name="text">
-         <string>Resolution To</string>
-        </property>
-       </widget>
+       <widget class="QLineEdit" name="lineEditResolutionTo"/>
       </item>
-      <item row="5" column="2">
+      <item row="5" column="1">
        <widget class="QLineEdit" name="lineEditNumImages"/>
-      </item>
-      <item row="2" column="0">
-       <widget class="QCheckBox" name="checkBoxAcquisitionTo">
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QCheckBox" name="checkBoxResolutionFrom">
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
       </item>
       <item row="4" column="0">
        <widget class="QCheckBox" name="checkBoxResolutionTo">
         <property name="text">
-         <string/>
+         <string>Resoultion To</string>
         </property>
        </widget>
       </item>
-      <item row="6" column="1">
-       <widget class="QLabel" name="labelOrderBy">
-        <property name="text">
-         <string>Order By</string>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="1">
+      <item row="7" column="0">
        <widget class="QRadioButton" name="radioButtonAsc">
         <property name="text">
          <string>Ascending</string>
         </property>
        </widget>
       </item>
-      <item row="7" column="2">
+      <item row="7" column="1">
        <widget class="QRadioButton" name="radioButtonDesc">
         <property name="text">
          <string>Descending</string>
@@ -315,16 +256,7 @@
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayoutListWidget">
-    <property name="leftMargin">
-     <number>3</number>
-    </property>
-    <property name="topMargin">
-     <number>3</number>
-    </property>
-    <property name="rightMargin">
-     <number>3</number>
-    </property>
-    <property name="bottomMargin">
+    <property name="margin">
      <number>3</number>
     </property>
     <item>
