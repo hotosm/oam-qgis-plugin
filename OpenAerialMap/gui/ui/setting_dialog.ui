@@ -50,16 +50,7 @@
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
-    <property name="leftMargin">
-     <number>2</number>
-    </property>
-    <property name="topMargin">
-     <number>2</number>
-    </property>
-    <property name="rightMargin">
-     <number>2</number>
-    </property>
-    <property name="bottomMargin">
+    <property name="margin">
      <number>2</number>
     </property>
     <item>
@@ -257,7 +248,7 @@
        </font>
       </property>
       <property name="text">
-       <string>In accordance with OAM free license terms</string>
+       <string>Accept OAM free license terms</string>
       </property>
      </widget>
     </item>
@@ -353,16 +344,7 @@
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayoutMetadata">
-    <property name="leftMargin">
-     <number>2</number>
-    </property>
-    <property name="topMargin">
-     <number>2</number>
-    </property>
-    <property name="rightMargin">
-     <number>2</number>
-    </property>
-    <property name="bottomMargin">
+    <property name="margin">
      <number>2</number>
     </property>
     <item>
