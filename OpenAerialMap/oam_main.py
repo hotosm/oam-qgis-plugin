@@ -239,7 +239,7 @@ class OpenAerialMap:
 
         self.add_action(
             icon_path_setting_dialog,
-            text=self.tr(u'Edit Settings'),
+            text=self.tr(u'Edit Default Settings'),
             callback=self.displaySettingDialog,
             parent=self.iface.mainWindow())
 

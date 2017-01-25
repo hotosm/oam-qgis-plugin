@@ -25,6 +25,8 @@
 
 import os, sys
 import json
+from datetime import datetime
+from dateutil import parser
 
 from PyQt4 import QtGui, uic
 from PyQt4 import QtCore
@@ -100,9 +102,6 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         self.graphicsView.show()
 
     def displayMetadata(self):
-        from datetime import datetime
-        from dateutil import parser
-
         self.setDefaultGraphicsView()
         aquisitionStart = parser.parse(str(self.singleMetaInDic[u'acquisition_start']))
         strAcquisitionStart = aquisitionStart.strftime('%Y-%m-%d %H:%M (%Z)')
