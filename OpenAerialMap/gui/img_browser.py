@@ -25,6 +25,8 @@
 
 import os, sys
 import json
+from datetime import datetime
+from dateutil import parser
 
 from PyQt4 import QtGui, uic
 from PyQt4 import QtCore
@@ -101,6 +103,13 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
 
     def displayMetadata(self):
         self.setDefaultGraphicsView()
+        aquisitionStart = parser.parse(str(self.singleMetaInDic[u'acquisition_start']))
+        strAcquisitionStart = aquisitionStart.strftime('%Y-%m-%d %H:%M (%Z)')
+        # print(aquisitionStart.strftime('%Y-%m-%d %I:%M %p (%Z)'))
+        aquisitionEnd = parser.parse(str(self.singleMetaInDic[u'acquisition_end']))
+        strAcquisitionEnd = aquisitionEnd.strftime('%Y-%m-%d %H:%M (%Z)')
+        # print(aquisitionEnd.strftime('%Y-%m-%d %I:%M %p (%Z)'))
+
         gsdForDisplay = float(int(self.singleMetaInDic[u'gsd'] * 100)) / 100
         fileSizeInMb = float(self.singleMetaInDic[u'file_size']) / (1000 * 1000)
         fileSizeInMb = float(int(fileSizeInMb * 100)) / 100
@@ -112,8 +121,6 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         self.lbTitle.setText(strTitle)
 
         strPlatform = str(self.singleMetaInDic[u'platform'])
-        strAcquisitionStart = str(self.singleMetaInDic[u'acquisition_start'])
-        strAcquisitionEnd = str(self.singleMetaInDic[u'acquisition_end'])
         strGsdForDisplay = str(gsdForDisplay) + ' m'
         strProvider = str(self.singleMetaInDic[u'provider'])
         strFileSizeInMb = str(fileSizeInMb) + ' MB'
