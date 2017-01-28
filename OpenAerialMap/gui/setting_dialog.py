@@ -75,19 +75,32 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
         # initialize
         self.loadSettings()
 
-        # temporarily disable convert_format_check_box and combobox
+        # temporarily set fixed values for some controls, and disable these controls
         # self.notify_oam_check.setCheckState(0)
+        self.default_storage_combo_box.setCurrentIndex(0)
         self.google_client_secret_file_edit.setText('n.a.')
         self.google_application_name_edit.setText('n.a.')
         self.dropbox_access_token_edit.setText('n.a.')
-        self.default_storage_combo_box.setCurrentIndex(0)
+
+        self.meta_storage_check_box.setCheckState(2)
+        self.meta_bucket_name_edit.setText('same as storage')
+        self.meta_key_id_edit.setText('same as storage')
+        self.meta_secret_key_edit.setText('same as storage')
 
         # self.notify_oam_check.setEnabled(False)
+        self.default_storage_type_label.setEnabled(False)
+        self.default_storage_combo_box.setEnabled(False)
+        self.google_client_secret_file_label.setEnabled(False)
         self.google_client_secret_file_edit.setEnabled(False)
+        self.google_application_name_label.setEnabled(False)
         self.google_application_name_edit.setEnabled(False)
+        self.dropbox_access_token_label.setEnabled(False)
         self.dropbox_access_token_edit.setEnabled(False)
-        self.default_storage_combo_box.setEnabled(0)
 
+        self.meta_storage_check_box.setEnabled(False)
+        self.meta_bucket_name_edit.setEnabled(False)
+        self.meta_key_id_edit.setEnabled(False)
+        self.meta_secret_key_edit.setEnabled(False)
 
     def loadSettings(self):
         self.loadMetadataSettings()

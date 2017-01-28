@@ -487,12 +487,12 @@
        </font>
       </property>
       <property name="text">
-       <string>Metadata Storage</string>
+       <string>Metadata Storage (AWS S3)</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QCheckBox" name="metadata_storage_check_box">
+     <widget class="QCheckBox" name="meta_storage_check_box">
       <property name="text">
        <string>Same as Image Storage</string>
       </property>
