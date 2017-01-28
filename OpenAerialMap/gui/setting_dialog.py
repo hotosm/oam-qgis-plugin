@@ -129,8 +129,6 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
             self.sense_end_edit.dateTime().toString(Qt.ISODate))
         self.settings.setValue('PROVIDER', self.provider_edit.text())
         self.settings.setValue('CONTACT', self.contact_edit.text())
-        # self.settings.setValue('WEBSITE', self.website_edit.text())
-        # self.settings.setValue('TAGS', self.tags_edit.text())
         self.settings.endGroup()
 
     def saveOptionsSettings(self):
@@ -142,8 +140,6 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
                                self.reproject_check_box.isChecked())
         # self.settings.setValue('NOTIFY_OAM',
         #                        self.notify_oam_check.isChecked())
-        #self.settings.setValue('TRIGGER_OAM_TS',
-        #                       self.trigger_tiling_check.isChecked())
         self.settings.endGroup()
 
     def saveStorageSettings(self):
@@ -206,10 +202,6 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
         self.provider_edit.setCursorPosition(0)
         self.contact_edit.setText(self.settings.value('CONTACT'))
         self.contact_edit.setCursorPosition(0)
-        # self.website_edit.setText(self.settings.value('WEBSITE'))
-        # self.website_edit.setCursorPosition(0)
-        # self.tags_edit.setText(self.settings.value('TAGS'))
-        # self.tags_edit.setCursorPosition(0)
         self.settings.endGroup()
 
     def loadOptionsSettings(self):
@@ -221,21 +213,12 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
         instead of 'True', Python style.
         Maybe we can use integer values (0 or 1), instead of using string.
         """
-        # print str(self.settings.value('LICENSE'))
-        # print str(self.settings.value('REPROJECT'))
-
         if str(self.settings.value('LICENSE')).lower() == 'true':
             self.license_check_box.setCheckState(2)
         if str(self.settings.value('REPROJECT')).lower() == 'true':
             self.reproject_check_box.setCheckState(2)
-
-        # print str(self.settings.value('NOTIFY_OAM'))
-        # print str(self.settings.value('TRIGGER_OAM_TS'))
-
         # if str(self.settings.value('NOTIFY_OAM')).lower() == 'true':
         #     self.notify_oam_check.setCheckState(2)
-        #if str(self.settings.value('TRIGGER_OAM_TS')).lower() == 'true':
-        #    self.trigger_tiling_check.setCheckState(2)
 
         self.settings.endGroup()
 

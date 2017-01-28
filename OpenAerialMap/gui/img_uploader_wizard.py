@@ -26,25 +26,15 @@
 import os, sys
 
 from PyQt4 import QtGui, uic
-# from PyQt4 import QtCore
 from PyQt4.Qt import *
 
 from qgis.gui import QgsMessageBar
 from qgis.core import QgsMapLayer, QgsMessageLog
 # from qgis.core import QgsRasterLayer, QgsMapLayerRegistry
-# from osgeo import gdal, osr, ogr
 import json, time, math, imghdr, tempfile
-
-# Modules needed for upload
-# from boto.s3.connection import S3Connection, S3ResponseError
-# from boto.s3.key import Key
-# from filechunkio import FileChunkIO
 import traceback
-# import requests #, json
-# from ast import literal_eval
 
 from module.module_handle_metadata import ImgMetadataHandler
-# from module.module_access_s3 import S3UploadProgressWindow
 from upload_progress_window import UploadProgressWindow
 from module.module_gdal_utilities import ReprojectionCmdWindow
 from module.module_validate_files import validate_layer, validate_file
@@ -97,13 +87,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         self.settings = settings
 
-        # Initialize the object for S3Manager and upload options and filenames
-        # self.s3Mgr = None
-        # self.upload_options = []
-        # self.upload_filenames = []
-        # self.upload_file_abspaths = []
-
-        # self.s3UpPrgWin = None
+        # Initialize the upload progressbar
         self.upPrgWin = None
 
         # Initialize layers and default settings
@@ -140,15 +124,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.reload_button.hide()
         self.reload_button.clicked.connect(self.loadSavedMetadata)
 
-        """
-        # temporarily disable textEdit for website and tags
-        # probably make textEdit for thumbnail later
-        self.website_edit.setEnabled(False)
-        self.website_label.setEnabled(False)
-        self.tags_edit.setEnabled(False)
-        self.tags_label.setEnabled(False)
-        """
-
         # temporarily disable convert_format_check_box and combobox
         self.convert_format_check_box.setEnabled(False)
         self.format_combo_box.addItem('n.a.')
@@ -163,9 +138,8 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.toggleTokenRequestForm()
         self.notify_oam_check.stateChanged.connect(self.toggleTokenRequestForm)
 
-        # temporarily disable notify_oam_check and trigger_tiling_check
+        # temporarily disable trigger_tiling_check
         self.notify_oam_check.setEnabled(False)
-        # self.trigger_tiling_check.setEnabled(False)
 
 
     # handlers for navigation
@@ -357,10 +331,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         self.provider_edit.setCursorPosition(0)
         self.contact_edit.setText(self.settings.value('CONTACT'))
         self.contact_edit.setCursorPosition(0)
-        # self.website_edit.setText(self.settings.value('WEBSITE'))
-        # self.website_edit.setCursorPosition(0)
-        # self.tags_edit.setText(self.settings.value('TAGS'))
-        # self.tags_edit.setCursorPosition(0)
         self.settings.endGroup()
 
     def cleanMetadataSettings(self):
@@ -379,8 +349,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             QDateTime().fromString('1970-01-01T00:00:00', Qt.ISODate).time())
         self.provider_edit.setText('')
         self.contact_edit.setText('')
-        # self.website_edit.setText('')
-        # self.tags_edit.setText('')
         self.license_check_box.setCheckState(0)
         self.reproject_check_box.setCheckState(0)
 
@@ -407,8 +375,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 for each_layer in selected_layers:
                     file_abspath = each_layer.data(Qt.UserRole)
                     # print("file name: " + str(file_abspath))
-                    # create thumbnail
-                    # ThumbnailCreation.createThumbnail(file_abspath)
                     self.exportMetaAsTextFile(file_abspath)
 
                 self.bar1.clearWidgets()
@@ -516,9 +482,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         # print('File Path:  {0}'.format(fileAbsPath))
         # print('Layer Name: {0}'.format(layerName))
 
-        # create thumbnail
-        # ThumbnailCreation.createThumbnail(reprojectedFileAbsPath)
-
         """
         # rlayer = QgsRasterLayer(reprojectedFileAbsPath,
         #    reprojectedLayerName)
@@ -583,7 +546,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         # get metadata from GUI, and store them in a dictionary
         metaInputInDict = {}
-        #temp_filename = file_abspath.split('/')[-1]
         temp_filename = os.path.basename(file_abspath)
         strUuid = '{0}{1}'.format(self.base_uuid_edit.text(), temp_filename)
         metaInputInDict['uuid'] = strUuid
@@ -597,9 +559,6 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         metaInputInDict['provider'] = \
             self.provider_edit.text()
         metaInputInDict['contact'] = self.contact_edit.text()
-        # temporarily disable two keys (website and tags)
-        # metaInputInDict['website'] = self.website_edit.text()
-        # metaInputInDict['tags'] = self.tags_edit.text()
 
         properties = {}
         properties['sensor'] = self.sensor_edit.text()
@@ -779,15 +738,12 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.reproject_check_box.setCheckState(2)
         if str(self.settings.value('NOTIFY_OAM')).lower() == 'true':
             self.notify_oam_check.setCheckState(2)
-        # if str(self.settings.value('TRIGGER_OAM_TS')).lower() == 'true':
-        #     self.trigger_tiling_check.setCheckState(2)
 
         self.settings.endGroup()
 
         # temporarily disable notify_oam_check box
         self.notify_oam_check.setCheckState(0)
         self.notify_oam_check.setEnabled(False)
-        # self.trigger_tiling_check.setCheckState(0)
 
     def loadMetadataReviewBox(self):
         json_file_abspaths = []
@@ -822,11 +778,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
         # get the information of upload options
         if self.notify_oam_check.isChecked():
-            # self.upload_options.append("notify_oam")
             upload_options.append("notify_oam")
-        #if self.trigger_tiling_check.isChecked():
-            # self.upload_options.append("trigger_tiling")
-            # upload_options.append("trigger_tiling")
 
         if not self.license_check_box.isChecked():
             self.bar2.clearWidgets()

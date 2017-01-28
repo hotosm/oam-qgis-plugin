@@ -70,44 +70,6 @@ class ReprojectionCmdWindow(CommandWindow):
     def getReprojectedLayerName(self):
         return str(self.reprojectedLayerName)
 
-"""
-class BackupReprojectionCmdWindow(CommandWindow):
-
-    def __init__(self,
-                 title,
-                 cmdInList,
-                 fileAbsPath,
-                 reprojectedFileAbsPath,
-                 index,
-                 layerName):
-
-        cmdInList.append(fileAbsPath)
-        cmdInList.append(reprojectedFileAbsPath)
-
-        CommandWindow.__init__(self,
-                               title,
-                               cmdInList,
-                               index,
-                               parent=None)
-
-        self.fileAbsPath = fileAbsPath
-        self.reprojectedFileAbsPath = reprojectedFileAbsPath
-
-        self.layerName = layerName
-        self.reprojectedLayerName = '(EPSG3857) ' + self.layerName
-
-    def getFileAbsPath(self):
-        return str(self.fileAbsPath)
-
-    def getReprojectedFileAbsPath(self):
-        return str(self.reprojectedFileAbsPath)
-
-    def getLayerName(self):
-        return str(self.layerName)
-
-    def getReprojectedLayerName(self):
-        return str(self.reprojectedLayerName)
-"""
 
 # this function is not in use
 def reproject(file_abspath):
