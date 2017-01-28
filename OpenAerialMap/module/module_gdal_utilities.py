@@ -70,7 +70,7 @@ class ReprojectionCmdWindow(CommandWindow):
     def getReprojectedLayerName(self):
         return str(self.reprojectedLayerName)
 
-
+"""
 class BackupReprojectionCmdWindow(CommandWindow):
 
     def __init__(self,
@@ -107,7 +107,7 @@ class BackupReprojectionCmdWindow(CommandWindow):
 
     def getReprojectedLayerName(self):
         return str(self.reprojectedLayerName)
-
+"""
 
 # this function is not in use
 def reproject(file_abspath):
