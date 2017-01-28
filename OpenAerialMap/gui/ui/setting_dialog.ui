@@ -7,17 +7,17 @@
     <x>0</x>
     <y>0</y>
     <width>732</width>
-    <height>479</height>
+    <height>572</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Edit Settings</string>
+   <string>Edit Default Settings</string>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
      <x>450</x>
-     <y>430</y>
+     <y>530</y>
      <width>176</width>
      <height>27</height>
     </rect>
@@ -32,10 +32,10 @@
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>10</y>
-     <width>351</width>
-     <height>402</height>
+     <x>30</x>
+     <y>40</y>
+     <width>321</width>
+     <height>460</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayoutLeft">
@@ -220,32 +220,10 @@
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QCheckBox" name="notify_oam_check">
-        <property name="text">
-         <string>Notify OAM of new upload</string>
-        </property>
-       </widget>
-      </item>
      </layout>
     </item>
-   </layout>
-  </widget>
-  <widget class="QWidget" name="verticalLayoutWidget_2">
-   <property name="geometry">
-    <rect>
-     <x>379</x>
-     <y>9</y>
-     <width>331</width>
-     <height>385</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayoutRight">
-    <property name="margin">
-     <number>2</number>
-    </property>
     <item>
-     <widget class="QLabel" name="storage_label">
+     <widget class="QLabel" name="oam_catalog_label">
       <property name="font">
        <font>
         <weight>75</weight>
@@ -253,207 +231,9 @@
        </font>
       </property>
       <property name="text">
-       <string>Storage</string>
+       <string>OAM Catalog</string>
       </property>
      </widget>
-    </item>
-    <item>
-     <layout class="QFormLayout" name="formLayoutStorage">
-      <property name="fieldGrowthPolicy">
-       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-      </property>
-      <property name="verticalSpacing">
-       <number>2</number>
-      </property>
-      <item row="0" column="0">
-       <widget class="QLabel" name="aws_s3_label">
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>AWS S3</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="aws_bucket_name_label">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="text">
-         <string>Bucket name</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="aws_bucket_name_edit">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="toolTip">
-         <string>Bucket name which is not listed above </string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="aws_key_id_label">
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string>Key-id</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="aws_key_id_edit">
-        <property name="toolTip">
-         <string>AWS access key id</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="aws_secret_key_label">
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string>Secret key</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="aws_secret_key_edit">
-        <property name="toolTip">
-         <string>AWS secret access key</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="google_drive_label">
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Google Drive</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="google_client_secret_file_label">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="text">
-         <string>Client Secret File</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="1">
-       <widget class="QLineEdit" name="google_client_secret_file_edit">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="toolTip">
-         <string>Bucket name which is not listed above </string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="0">
-       <widget class="QLabel" name="google_application_name_label">
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string>Application Name</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="1">
-       <widget class="QLineEdit" name="google_application_name_edit">
-        <property name="toolTip">
-         <string>AWS access key id</string>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="0">
-       <widget class="QLabel" name="dropbox_label">
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Drop Box</string>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="0">
-       <widget class="QLabel" name="dropbox_access_token_label">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="text">
-         <string>Access Token</string>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="1">
-       <widget class="QLineEdit" name="dropbox_access_token_edit"/>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <widget class="QLabel" name="default_storage_type_label">
-      <property name="font">
-       <font>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="text">
-       <string>Default StorageType</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <layout class="QFormLayout" name="formLayoutStorageType">
-      <property name="fieldGrowthPolicy">
-       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-      </property>
-      <item row="0" column="1">
-       <widget class="QComboBox" name="default_storage_combo_box">
-        <item>
-         <property name="text">
-          <string>AWS S3</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Google Drive</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Dropbox</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-     </layout>
     </item>
     <item>
      <widget class="QCheckBox" name="hot_oam_catalog_check_box">
@@ -480,6 +260,305 @@
      </layout>
     </item>
    </layout>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>369</x>
+     <y>40</y>
+     <width>331</width>
+     <height>461</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayoutRight">
+    <property name="margin">
+     <number>2</number>
+    </property>
+    <item>
+     <widget class="QLabel" name="image_storage_label">
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Image Storage</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QFormLayout" name="formLayoutStorage">
+      <property name="fieldGrowthPolicy">
+       <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
+      </property>
+      <property name="verticalSpacing">
+       <number>2</number>
+      </property>
+      <item row="1" column="0">
+       <widget class="QLabel" name="aws_s3_label">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>AWS S3</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="aws_bucket_name_label">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>Bucket name</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="aws_bucket_name_edit">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="toolTip">
+         <string>Bucket name which is not listed above </string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="aws_key_id_label">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Key-id</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="aws_key_id_edit">
+        <property name="toolTip">
+         <string>AWS access key id</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="aws_secret_key_label">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Secret key</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLineEdit" name="aws_secret_key_edit">
+        <property name="toolTip">
+         <string>AWS secret access key</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="google_drive_label">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Google Drive</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="google_client_secret_file_label">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>Client Secret File</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLineEdit" name="google_client_secret_file_edit">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="toolTip">
+         <string>Bucket name which is not listed above </string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="google_application_name_label">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Application Name</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QLineEdit" name="google_application_name_edit">
+        <property name="toolTip">
+         <string>AWS access key id</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="0">
+       <widget class="QLabel" name="dropbox_label">
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Drop Box</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0">
+       <widget class="QLabel" name="dropbox_access_token_label">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>Access Token</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="1">
+       <widget class="QLineEdit" name="dropbox_access_token_edit"/>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="default_storage_type_label">
+        <property name="font">
+         <font>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Default StorageType</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="default_storage_combo_box">
+        <item>
+         <property name="text">
+          <string>AWS S3</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Google Drive</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Dropbox</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QLabel" name="metadata_storage_label">
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Metadata Storage</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QCheckBox" name="metadata_storage_check_box">
+      <property name="text">
+       <string>Same as Image Storage</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QFormLayout" name="formLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="meta_bucket_name_label">
+        <property name="text">
+         <string>Bucket Name</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="meta_bucket_name_edit"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="meta_key_id_label">
+        <property name="text">
+         <string>Key-id</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="meta_key_id_edit"/>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="meta_secret_key_label">
+        <property name="text">
+         <string>Secret Key</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="meta_secret_key_edit"/>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="Line" name="line">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>510</y>
+     <width>691</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
+  </widget>
+  <widget class="Line" name="line_2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>691</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="orientation">
+    <enum>Qt::Horizontal</enum>
+   </property>
   </widget>
  </widget>
  <resources/>
