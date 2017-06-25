@@ -115,14 +115,13 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         fileSizeInMb = float(int(fileSizeInMb * 100)) / 100
         # fileSizeInMb = self.singleMetaInDic[u'file_size'] / (1024 * 1024)
 
-        strTitle = 'TITLE:\n{0}\n'.format(
-            str(self.singleMetaInDic[u'title']))
+        strTitle = 'TITLE:\n' + self.singleMetaInDic[u'title'] + '\n'
         self.lbTitle.setWordWrap(True)
         self.lbTitle.setText(strTitle)
 
-        strPlatform = str(self.singleMetaInDic[u'platform'])
+        strPlatform = self.singleMetaInDic[u'platform']
         strGsdForDisplay = str(gsdForDisplay) + ' m'
-        strProvider = str(self.singleMetaInDic[u'provider'])
+        strProvider = self.singleMetaInDic[u'provider']
         strFileSizeInMb = str(fileSizeInMb) + ' MB'
 
         self.lbText0.setText(strPlatform)
