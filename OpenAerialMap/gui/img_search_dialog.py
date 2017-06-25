@@ -241,7 +241,7 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
 
         for singleMetaInDict in metadataInList:
             item = QListWidgetItem()
-            item.setText(str(singleMetaInDict['title']))
+            item.setText(singleMetaInDict[u'title'])
             item.setData(Qt.UserRole, singleMetaInDict)
             self.listWidget.addItem(item)
 
@@ -308,6 +308,7 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
             self.refreshListWidget(metadataInList)
 
         except Exception as e:
+            print(repr(e))
             qMsgBox = QMessageBox()
             qMsgBox.setWindowTitle('Message')
             qMsgBox.setText("Please make sure if you entered valid data" +
