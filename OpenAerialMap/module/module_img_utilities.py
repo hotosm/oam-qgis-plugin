@@ -1,4 +1,4 @@
-import Image
+from PIL import Image
 
 class ThumbnailCreation:
 
@@ -22,8 +22,7 @@ class ThumbnailCreation:
                 size = (int(w * resizeRatio), int(h * resizeRatio))
                 im.thumbnail(size)
                 im.save(outfile, "PNG")
-            except IOError:
-                print "cannot create thumbnail for", infile
-
+            except IOError as ioe:
+                print(ioe, infile)
 
         return outfile
