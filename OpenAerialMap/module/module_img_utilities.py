@@ -20,9 +20,10 @@ class ThumbnailCreation:
                 longer = w if w > h else h
                 resizeRatio = float(THUMBNAIL_PIX_NUM) / longer
                 size = (int(w * resizeRatio), int(h * resizeRatio))
-                im.thumbnail(size)
+                # im = im.thumbnail(size)
+                im = im.resize(size)
                 im.save(outfile, "PNG")
-            except IOError as ioe:
-                print(ioe, infile)
+            except Exception as e:
+                print(e, infile)
 
         return outfile
