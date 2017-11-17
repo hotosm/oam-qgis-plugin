@@ -222,7 +222,8 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
 
     def toggleHotOamCatalog(self):
         if self.hot_oam_catalog_check_box.isChecked():
-            self.catalog_url_edit.setText('https://oam-catalog.herokuapp.com')
+            # self.catalog_url_edit.setText('https://oam-catalog.herokuapp.com')
+            self.catalog_url_edit.setText('http://api.openaerialmap.org')
             self.catalog_url_edit.setEnabled(False)
         else:
             self.catalog_url_edit.setEnabled(True)

@@ -92,7 +92,8 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
 
         if self.settings.value('CATALOG_URL') is None or \
             str(self.settings.value('CATALOG_URL')) == '':
-            self.catalogUrl = "https://oam-catalog.herokuapp.com"
+            # self.catalogUrl = "https://oam-catalog.herokuapp.com"
+            self.catalogUrl = "http://api.openaerialmap.org"
         else:
             self.catalogUrl = str(self.settings.value('CATALOG_URL'))
 
