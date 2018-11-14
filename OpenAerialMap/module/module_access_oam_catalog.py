@@ -25,7 +25,8 @@
 
 import os, sys
 # import pycurl
-import urllib2
+# import urllib2
+import requests
 import json
 from StringIO import StringIO
 
@@ -77,11 +78,17 @@ class OAMCatalogAccess:
 
         # print(str(self.endPoint))
 
+        r = requests.get(str(self.endPoint))
+        jMetadata = r.text
+        return jMetadata
+
+        """
         hdr = {'User-Agent': 'Mozilla/5.0'}
         req = urllib2.Request(self.endPoint, headers=hdr)
         response = urllib2.urlopen(req)
         jMetadataInStr = response.read()
         return jMetadataInStr
+        """
 
         """
         strBuffer = StringIO()
