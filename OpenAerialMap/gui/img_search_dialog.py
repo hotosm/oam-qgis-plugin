@@ -371,6 +371,13 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
                 self.imgBrowser.thumbnailManager.error.connect(
                     self.displayThumnailDownloadError)
 
+                pos = self.pos()
+                print(pos.x())
+                print(pos.y())
+                pos.setX(pos.x() + 400)
+                pos.setY(pos.y() + 20)
+                self.imgBrowser.move(pos)
+
             self.imgBrowser.setSingleMetaInDic(singleMetaInDict)
             self.imgBrowser.displayMetadata()
             self.imgBrowser.displayThumbnail()

@@ -43,8 +43,8 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
 
 class ImgBrowser(QtGui.QDialog, FORM_CLASS):
 
-    POSITION_WINDOW_FROM_RIGHT = 50
-    POSITION_WINDOW_FROM_TOP = 100
+    # POSITION_WINDOW_FROM_RIGHT = 50
+    # POSITION_WINDOW_FROM_TOP = 100
 
     def __init__(self, iface, parent=None):
         """Constructor."""
@@ -60,6 +60,7 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         self.setWindowFlags(Qt.WindowCloseButtonHint |
                             Qt.WindowMinimizeButtonHint)
 
+        """
         screenShape = QtGui.QDesktopWidget().screenGeometry()
         width, height = screenShape.width(), screenShape.height()
         winW, winH = (self.frameGeometry().width(),
@@ -67,6 +68,7 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         left = width - (winW + ImgBrowser.POSITION_WINDOW_FROM_RIGHT)
         top = ImgBrowser.POSITION_WINDOW_FROM_TOP
         self.move(left, top)
+        """
 
         scene = QGraphicsScene()
         defaultImgAbsPath = os.path.join(
