@@ -164,13 +164,11 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         if not os.path.exists(defaultDir):
             os.makedirs(defaultDir)
 
-        fdlg = QtGui.QFileDialog()
-        fdlg.setAcceptMode(QFileDialog.AcceptSave)
-        fdlg.selectFile(imgAbsPath)
-        fdlg.setFilter("GEOTiff")
+        rSfn = QtGui.QFileDialog.getSaveFileName(
+            None, 'Save As', imgAbsPath, "TIF Files (*.tif)")
+        imgAbsPath = rSfn
 
-        if fdlg.exec_():
-            # excepton handling here?
+        if imgAbsPath != '':
             if self.downloadProgressWindow is None:
                 self.downloadProgressWindow = DownloadProgressWindow(self.iface)
 
@@ -184,10 +182,9 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
 
             if self.checkBoxSaveMeta.isChecked():
                 urlImgMeta = self.singleMetaInDic[u'meta_uri']
-                imgMetaFilename = urlImgMeta.split('/')[-1]
-                imgMetaAbsPath = os.path.join(
-                    os.path.dirname(imgAbsPath),
-                    imgMetaFilename)
+                posLastDots = imgAbsPath.rfind('.')
+                imgMetaAbsPath = imgAbsPath[0:posLastDots] + '_meta.json'
+
                 r = ImgMetaDownloader.downloadImgMeta(
                     urlImgMeta,
                     imgMetaAbsPath)
