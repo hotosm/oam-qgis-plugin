@@ -92,7 +92,8 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
 
         if self.settings.value('CATALOG_URL') is None or \
             str(self.settings.value('CATALOG_URL')) == '':
-            self.catalogUrl = "https://oam-catalog.herokuapp.com"
+            # self.catalogUrl = "https://oam-catalog.herokuapp.com"
+            self.catalogUrl = "http://api.openaerialmap.org"
         else:
             self.catalogUrl = str(self.settings.value('CATALOG_URL'))
 
@@ -369,6 +370,13 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
                     self.changeThumbnailStatus)
                 self.imgBrowser.thumbnailManager.error.connect(
                     self.displayThumnailDownloadError)
+
+                pos = self.pos()
+                print(pos.x())
+                print(pos.y())
+                pos.setX(pos.x() + 400)
+                pos.setY(pos.y() + 20)
+                self.imgBrowser.move(pos)
 
             self.imgBrowser.setSingleMetaInDic(singleMetaInDict)
             self.imgBrowser.displayMetadata()
