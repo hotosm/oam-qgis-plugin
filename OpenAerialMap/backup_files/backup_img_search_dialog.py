@@ -75,10 +75,6 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
             "itemClicked(QListWidgetItem *)"),
             self.browseThumbnailAndMeta)
 
-        self.pbSetDefault.clicked.connect(self.setDeafult)
-        self.pbLoadDefault.clicked.connect(self.loadDeafult)
-
-        """
         # self.buttonBox.clicked.connect(lambda: self.test(self.buttonBox))
         self.connect(self.buttonBox,
                      QtCore.SIGNAL('accepted()'),
@@ -86,7 +82,6 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
         self.connect(self.buttonBox,
                      QtCore.SIGNAL('rejected()'),
                      self.execCancel)
-        """
 
         # disable some GUIs
         # self.pushButtonBrowseLocation.hide()
@@ -414,10 +409,10 @@ class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
             level=QgsMessageBar.WARNING,
             duration=8)
 
-    def setDeafult(self):
-        # print('Set Default Queries')
+    def execOk(self):
+        # save self.defaultQueriesInDict into self.settings
         self.saveQueriesSettings()
+        self.close()
 
-    def loadDeafult(self):
-        # print('Load Default Queries')
-        self.loadQueriesSettings()
+    def execCancel(self):
+        self.close()

@@ -20,6 +20,22 @@
   <property name="windowTitle">
    <string>Search Imagery</string>
   </property>
+  <widget class="QDialogButtonBox" name="buttonBox">
+   <property name="geometry">
+    <rect>
+     <x>450</x>
+     <y>470</y>
+     <width>176</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="standardButtons">
+    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   </property>
+   <property name="centerButtons">
+    <bool>false</bool>
+   </property>
+  </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
@@ -247,32 +263,6 @@
      <widget class="QListWidget" name="listWidget"/>
     </item>
    </layout>
-  </widget>
-  <widget class="QPushButton" name="pbSetDefault">
-   <property name="geometry">
-    <rect>
-     <x>380</x>
-     <y>460</y>
-     <width>161</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Set Queries As Default</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pbLoadDefault">
-   <property name="geometry">
-    <rect>
-     <x>550</x>
-     <y>460</y>
-     <width>151</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Load Default Queries</string>
-   </property>
   </widget>
  </widget>
  <resources/>
