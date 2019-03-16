@@ -31,7 +31,6 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import QThread, pyqtSignal, QObject
 from PyQt4.Qt import *
 
-
 class ThumbnailManager(QObject):
 
     statusChanged = pyqtSignal(int)
@@ -89,8 +88,8 @@ class DownloadProgressWindow(QWidget):
     # MAX_WINDOW_WIDTH = 600
     MAX_NUM_DOWNLOADS = 20
     MAX_WINDOW_HEIGHT_PER_PROGRESS_BAR = 50
-    POSITION_WINDOW_FROM_RIGHT = 10
-    POSITION_WINDOW_FROM_BOTTOM = 50
+    POSITION_WINDOW_FROM_RIGHT = 20
+    POSITION_WINDOW_FROM_BOTTOM = 75
 
     def __init__(self, iface, parent=None):
         QWidget.__init__(self)
@@ -101,6 +100,55 @@ class DownloadProgressWindow(QWidget):
 
         self.activeId = -1
 
+    def initWindowPosition(self):
+        screenShape = QDesktopWidget().screenGeometry()
+        screenWidth = screenShape.width()
+        screenHeight = screenShape.height()
+
+        winWidth = self.frameGeometry().width()
+        winHeight = self.frameGeometry().height()
+
+        posLeft = screenWidth - (winWidth + self.POSITION_WINDOW_FROM_RIGHT)
+        posTop = screenHeight - (winHeight + self.POSITION_WINDOW_FROM_BOTTOM)
+        self.move(posLeft, posTop)
+
+        # print('Pos_X: {}'.format(posLeft))
+        # print('Pos_Y: {}'.format(posTop))
+        # print('Win Width: {}'.format(self.frameGeometry().width()))
+        # print('Win Height: {}'.format(self.frameGeometry().height()))
+
+    def adjustWindowPosition(self):
+        screenShape = QDesktopWidget().screenGeometry()
+        screenWidth = screenShape.width()
+        screenHeight = screenShape.height()
+
+        winWidth = self.frameGeometry().width()
+        winHeight = self.frameGeometry().height()
+
+        winRight = self.pos().x() + winWidth
+        winBottom = self.pos().y() + winHeight
+
+        posLeft = self.pos().x()
+        posTop = self.pos().y()
+
+        if winRight + self.POSITION_WINDOW_FROM_RIGHT >= screenWidth:
+            posLeft = screenWidth - (
+                winWidth + self.POSITION_WINDOW_FROM_RIGHT)
+            self.move(posLeft, self.pos().y())
+
+        if winBottom + self.POSITION_WINDOW_FROM_BOTTOM >= screenHeight:
+            posTop = screenHeight - (
+                winHeight + self.POSITION_WINDOW_FROM_BOTTOM)
+            self.move(self.pos().x(), posTop)
+
+        # print('ScreenW: ' + str(screenWidth) +
+        #       ' ScreenH:' + str(screenHeight))
+        # print('WinWidth: ' + str(winWidth) +
+        #       ' WinHeight: ' + str(winHeight))
+        # print('Left: ' + str(posLeft) + ' Top: ' + str(posTop))
+        # print('')
+
+    """
     def setWindowPosition(self):
         # This part need to be modified...
         maxHeight = int(
@@ -123,6 +171,7 @@ class DownloadProgressWindow(QWidget):
         # print('')
         self.move(left, top)
         self.activateWindow()
+    """
 
     def closeEvent(self, closeEvent):
         for eachTread in self.dwThreads:
@@ -182,6 +231,7 @@ class DownloadProgressWindow(QWidget):
             self.hLayouts[self.activeId].addWidget(
                 self.cancelButtons[self.activeId], Qt.AlignRight)
 
+            self.qLabels[self.activeId].setFixedWidth(220)
             self.progressBars[self.activeId].setFixedWidth(120)
             self.cancelButtons[self.activeId].setFixedWidth(65)
 
@@ -215,8 +265,15 @@ class DownloadProgressWindow(QWidget):
             # self.dwThread.wait()
             # self.dwThread.terminate()
 
-            self.show()
-            self.setWindowPosition()
+            # self.show()
+            # self.setWindowPosition()
+
+            if self.activeId == 0:
+                self.show()
+                self.initWindowPosition()
+            else:
+                self.activateWindow()
+                self.adjustWindowPosition()
 
     # def cancelDownload(self, btnIndex):
     def cancelDownload(self):
