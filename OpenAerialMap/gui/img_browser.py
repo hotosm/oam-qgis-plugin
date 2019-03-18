@@ -184,13 +184,15 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
 
             if self.checkBoxSaveMeta.isChecked():
                 urlImgMeta = self.singleMetaInDic[u'meta_uri']
-                posLastDots = imgAbsPath.rfind('.')
+                # posLastDots = imgAbsPath.rfind('.')
                 # imgMetaAbsPath = imgAbsPath[0:posLastDots] + '_meta.json'
 
-                if imgAbsPath[posLastDots:] != '.tif':
-                    imgMetaAbsPath = imgAbsPath + '_meta.json'
-                else:
-                    imgMetaAbsPath = imgAbsPath[0:posLastDots] + '_meta.json'
+                # if imgAbsPath[posLastDots:] != '.tif':
+                #     imgMetaAbsPath = imgAbsPath + '_meta.json'
+                # else:
+                #     imgMetaAbsPath = imgAbsPath[0:posLastDots] + '_meta.json'
+
+                imgMetaAbsPath = imgAbsPath + '_meta.json'
 
                 r = ImgMetaDownloader.downloadImgMeta(
                     urlImgMeta,
