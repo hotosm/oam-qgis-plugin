@@ -29,7 +29,7 @@ To install:
 ## Build from source code
 
 ###### Dependencies:
-* [Sphinx](http://www.sphinx-doc.org/en/stable/install.html) - To create help file, Sphinx documentation generator is being used in this plugin. To install Sphinx, please refer to the OS specific instructions at the website. (NOTE: As of July 2016, document generation is supported only in Linux environment. Threfore, users of other operating systems can ignore the dependency of Sphinx.)
+* [Sphinx](http://www.sphinx-doc.org/en/stable/install.html) - To create help file, Sphinx documentation generator is being used in this plugin. To install Sphinx, please refer to the OS specific instructions at the website. (NOTE: As of July 2016, document generation is supported only in Linux environment. Therefore, users of other operating systems can ignore the dependency of Sphinx.)
 * [Python](https://www.python.org/) - Installation of Sphinx requires python. If your operating system doesn't have python installed, please refer to the instruction at the website. Version 2.7 is presently being used for this plugin development.
 * pyrcc4 - To compile Qt4 resource files into python code, pyrcc4 command must be used. Please refer to the OS specific instructions below for its installation or setting path.
 

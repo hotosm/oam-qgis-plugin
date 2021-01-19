@@ -10,3 +10,4 @@ OpenAerialMap/gui/*.pyc
 OpenAerialMap/*.pyc
 OpenAerialMap/resources_rc.py
 OpenAerialMap/OpenAerialMap.zip
+.venv/
