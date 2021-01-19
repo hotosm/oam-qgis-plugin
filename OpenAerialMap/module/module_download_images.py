@@ -33,9 +33,9 @@ import sys, os, time
 import urllib.request, urllib.error, urllib.parse
 import json
 from qgis.PyQt import QtCore
-from PyQt4.QtGui import *
+from qgis.PyQt.QtGui import *
 from qgis.PyQt.QtCore import QThread, pyqtSignal, QObject
-from PyQt4.Qt import *
+from qgis.PyQt4.Qt import *
 
 class ThumbnailManager(QObject):
 

@@ -34,7 +34,7 @@ import sys, os, time, math
 from qgis.PyQt import QtCore
 from qgis.PyQt.QtGui import *      # modify this part?
 from qgis.PyQt.QtCore import QThread, pyqtSignal
-from PyQt4.Qt import *
+from qgis.PyQt.Qt import *
 
 from module.module_access_s3 import S3UploadWorker
 

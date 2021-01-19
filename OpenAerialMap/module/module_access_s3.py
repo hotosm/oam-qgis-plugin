@@ -29,7 +29,7 @@ import sys, os, time, math
 # from ast import literal_eval
 
 from qgis.PyQt import QtCore
-from PyQt4.QtGui import *      # modify this part?
+from qgis.PyQt.QtGui import *      # modify this part?
 from qgis.PyQt.QtCore import QThread, pyqtSignal
 
 #import boto

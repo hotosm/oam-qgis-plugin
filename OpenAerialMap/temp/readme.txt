@@ -1,1 +1,1 @@
-This folder is used as a cash for thumbnail image.
+This folder is used as a cache for thumbnail image.
