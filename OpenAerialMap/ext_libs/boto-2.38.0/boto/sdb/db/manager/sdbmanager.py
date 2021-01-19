@@ -1,3 +1,9 @@
+from future import standard_library
+standard_library.install_aliases()
+from builtins import map
+from builtins import str
+from builtins import next
+from builtins import object
 # Copyright (c) 2006,2007,2008 Mitch Garnaat http://garnaat.org/
 # Copyright (c) 2010 Chris Moyer http://coredumped.org/
 #
@@ -71,7 +77,7 @@ class SDBConverter(object):
                          str: (self.encode_string, self.decode_string),
                       }
         if six.PY2:
-            self.type_map[long] = (self.encode_long, self.decode_long)
+            self.type_map[int] = (self.encode_long, self.decode_long)
 
     def encode(self, item_type, value):
         try:
@@ -108,7 +114,7 @@ class SDBConverter(object):
         return self.encode_map(prop, values)
 
     def encode_map(self, prop, value):
-        import urllib
+        import urllib.request, urllib.parse, urllib.error
         if value is None:
             return None
         if not isinstance(value, dict):
@@ -120,7 +126,7 @@ class SDBConverter(object):
                 item_type = self.model_class
             encoded_value = self.encode(item_type, value[key])
             if encoded_value is not None:
-                new_value.append('%s:%s' % (urllib.quote(key), encoded_value))
+                new_value.append('%s:%s' % (urllib.parse.quote(key), encoded_value))
         return new_value
 
     def encode_prop(self, prop, value):
@@ -145,7 +151,7 @@ class SDBConverter(object):
                     except:
                         k = v
                     dec_val[k] = v
-            value = dec_val.values()
+            value = list(dec_val.values())
         return value
 
     def decode_map(self, prop, value):
@@ -160,11 +166,11 @@ class SDBConverter(object):
 
     def decode_map_element(self, item_type, value):
         """Decode a single element for a map"""
-        import urllib
+        import urllib.request, urllib.parse, urllib.error
         key = value
         if ":" in value:
             key, value = value.split(':', 1)
-            key = urllib.unquote(key)
+            key = urllib.parse.unquote(key)
         if self.model_class in item_type.mro():
             value = item_type(id=value)
         else:
@@ -316,7 +322,7 @@ class SDBConverter(object):
             # TODO: Handle tzinfo
             raise TimeDecodeError("Can't handle timezone aware objects: %r" % value)
         tmp = value.split('.')
-        arg = map(int, tmp[0].split(':'))
+        arg = list(map(int, tmp[0].split(':')))
         if len(tmp) == 2:
             arg.append(int(tmp[1]))
         return time(*arg)
@@ -389,7 +395,7 @@ class SDBConverter(object):
             # systems, however:
             arr = []
             for ch in value:
-                arr.append(six.unichr(ord(ch)))
+                arr.append(six.chr(ord(ch)))
             return u"".join(arr)
 
     def decode_string(self, value):
@@ -623,7 +629,7 @@ class SDBManager(object):
 
 
         type_query = "(`__type__` = '%s'" % cls.__name__
-        for subclass in self._get_all_decendents(cls).keys():
+        for subclass in list(self._get_all_decendents(cls).keys()):
             type_query += " or `__type__` = '%s'" % subclass
         type_query += ")"
         query_parts.append(type_query)

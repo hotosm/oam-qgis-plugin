@@ -1,3 +1,4 @@
+from builtins import object
 from binascii import hexlify, unhexlify
 from hashlib import md5, sha1, sha256
 

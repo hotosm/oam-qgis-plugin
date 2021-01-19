@@ -11,3 +11,6 @@ OpenAerialMap/*.pyc
 OpenAerialMap/resources_rc.py
 OpenAerialMap/OpenAerialMap.zip
 .venv/
+*.bak
+*.pyc
+__pycache__/

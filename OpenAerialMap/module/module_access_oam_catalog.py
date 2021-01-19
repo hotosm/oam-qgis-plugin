@@ -22,16 +22,21 @@
  ***************************************************************************/
  This script initializes the plugin, making it known to QGIS.
 """
+from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+from builtins import object
 
 import os, sys
 # import pycurl
 # import urllib2
 import requests
 import json
-from StringIO import StringIO
+from io import StringIO
 
 
-class OAMCatalogAccess:
+class OAMCatalogAccess(object):
 
     def __init__(self, hostUrl, action=None, dictQueries=None, parent=None):
         # probably need to make a textbox for editing hostUrl later

@@ -23,6 +23,9 @@
 """
 Tests for DynamoDB v2 high-level abstractions.
 """
+from builtins import next
+from builtins import str
+from builtins import range
 import os
 import time
 

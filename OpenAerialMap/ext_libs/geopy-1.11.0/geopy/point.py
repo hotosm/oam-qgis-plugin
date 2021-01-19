@@ -2,6 +2,8 @@
 """
 :class:`.Point` data structure.
 """
+from builtins import str
+from builtins import object
 
 import re
 from itertools import islice
@@ -263,7 +265,7 @@ class Point(object):
             except KeyError: # pragma: no cover
                 raise NotImplementedError(
                     'Bad distance unit specified, valid are: %r' %
-                    CONVERTERS.keys()
+                    list(CONVERTERS.keys())
                 )
         else:
             return distance

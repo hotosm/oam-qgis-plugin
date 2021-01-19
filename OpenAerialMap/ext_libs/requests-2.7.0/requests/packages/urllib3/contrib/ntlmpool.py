@@ -3,11 +3,13 @@ NTLM authenticating pool, contributed by erikcederstran
 
 Issue #10, see: http://code.google.com/p/urllib3/issues/detail?id=10
 """
+from future import standard_library
+standard_library.install_aliases()
 
 try:
     from http.client import HTTPSConnection
 except ImportError:
-    from httplib import HTTPSConnection
+    from http.client import HTTPSConnection
 from logging import getLogger
 from ntlm import ntlm
 

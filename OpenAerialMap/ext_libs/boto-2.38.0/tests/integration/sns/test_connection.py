@@ -1,3 +1,4 @@
+from builtins import object
 # Copyright (c) 2013 Amazon.com, Inc. or its affiliates.
 # All rights reserved.
 #

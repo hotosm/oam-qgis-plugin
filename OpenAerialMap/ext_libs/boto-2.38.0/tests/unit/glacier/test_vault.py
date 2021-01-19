@@ -1,3 +1,4 @@
+from builtins import object
 #!/usr/bin/env python
 # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.  All Rights Reserved
 #

@@ -22,11 +22,15 @@
  ***************************************************************************/
  This script initializes the plugin, making it known to QGIS.
 """
+from __future__ import print_function
+from __future__ import absolute_import
+from builtins import str
+from builtins import range
 
 import os, sys
 
-from PyQt4 import QtGui, uic
-from PyQt4.Qt import *
+from qgis.PyQt import QtGui, uic
+from qgis.PyQt.Qt import *
 
 from qgis.gui import QgsMessageBar
 from qgis.core import QgsMapLayer, QgsMessageLog
@@ -35,7 +39,7 @@ import json, time, math, imghdr, tempfile
 import traceback
 
 from module.module_handle_metadata import ImgMetadataHandler
-from upload_progress_window import UploadProgressWindow
+from .upload_progress_window import UploadProgressWindow
 from module.module_gdal_utilities import ReprojectionCmdWindow
 from module.module_validate_files import validate_layer, validate_file
 from module.module_img_utilities import ThumbnailCreation
@@ -194,7 +198,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                     # print(item.data(Qt.UserRole))
 
     def selectFile(self):
-        selected_file = QFileDialog.getOpenFileName(
+        selected_file, __ = QFileDialog.getOpenFileName(
             self,
             'Select imagery file',
             os.path.expanduser("~"))
@@ -570,7 +574,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         imgMetaHdlr = ImgMetadataHandler(file_abspath)
         imgMetaHdlr.extractMetaInImagery()
         metaForUpload = dict(
-            imgMetaHdlr.getMetaInImagery().items() + metaInputInDict.items())
+            list(imgMetaHdlr.getMetaInImagery().items()) + list(metaInputInDict.items()))
         strMetaForUpload = str(json.dumps(metaForUpload))
 
         json_file_abspath = file_abspath + '_meta.json'
@@ -747,7 +751,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
     def loadMetadataReviewBox(self):
         json_file_abspaths = []
-        for index in xrange(self.sources_list_widget.count()):
+        for index in range(self.sources_list_widget.count()):
             file_abspath = str(
                 self.sources_list_widget.item(index).data(Qt.UserRole))
             json_file_abspath = ''
@@ -787,7 +791,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 'Please check the lisence term.',
                 level=QgsMessageBar.WARNING)
         else:
-            for index in xrange(self.sources_list_widget.count()):
+            for index in range(self.sources_list_widget.count()):
                 upload_file_abspath = str(
                     self.added_sources_list_widget.item(index).data(Qt.UserRole))
                 # create thumbnail
@@ -862,7 +866,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         # print('fileAbsPath: ' + fileAbsPath)
 
         # print(str(self.added_sources_list_widget.count()))
-        for index in xrange(0, self.added_sources_list_widget.count()):
+        for index in range(0, self.added_sources_list_widget.count()):
             refFileAbsPath = str(
                 self.added_sources_list_widget.item(index).data(Qt.UserRole))
             # print('refFileAbsPath: ' + refFileAbsPath)
@@ -871,7 +875,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 break
 
         # print(str(self.sources_list_widget.count()))
-        for index in xrange(0, self.sources_list_widget.count()):
+        for index in range(0, self.sources_list_widget.count()):
             refFileAbsPath = str(
                 self.sources_list_widget.item(index).data(Qt.UserRole))
             # print('refFileAbsPath: ' + refFileAbsPath)

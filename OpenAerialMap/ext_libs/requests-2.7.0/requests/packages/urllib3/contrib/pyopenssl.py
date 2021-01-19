@@ -43,6 +43,9 @@ Module Variables
 .. _crime attack: https://en.wikipedia.org/wiki/CRIME_(security_exploit)
 
 '''
+from builtins import str
+from builtins import range
+from builtins import object
 
 try:
     from ndg.httpsclient.ssl_peer_verification import SUBJ_ALT_NAME_SUPPORT

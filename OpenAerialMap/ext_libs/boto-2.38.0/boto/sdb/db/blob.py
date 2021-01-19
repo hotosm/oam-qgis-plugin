@@ -1,3 +1,7 @@
+from future import standard_library
+standard_library.install_aliases()
+from builtins import next
+from builtins import object
 # Copyright (c) 2006,2007,2008 Mitch Garnaat http://garnaat.org/
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
@@ -31,7 +35,7 @@ class Blob(object):
 
     @property
     def file(self):
-        from StringIO import StringIO
+        from io import StringIO
         if self._file:
             f = self._file
         else:

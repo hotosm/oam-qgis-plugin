@@ -24,6 +24,10 @@
 Some utility functions to deal with mapping Amazon DynamoDB types to
 Python types and vice-versa.
 """
+from builtins import bytes
+from builtins import map
+from builtins import str
+from builtins import object
 import base64
 from decimal import (Decimal, DecimalException, Context,
                      Clamped, Overflow, Inexact, Underflow, Rounded)
@@ -63,8 +67,8 @@ def is_num(n, boolean_as_int=True):
 
 if six.PY2:
     def is_str(n):
-        return (isinstance(n, basestring) or
-                isinstance(n, type) and issubclass(n, basestring))
+        return (isinstance(n, str) or
+                isinstance(n, type) and issubclass(n, str))
 
     def is_binary(n):
         return isinstance(n, Binary)
@@ -116,11 +120,11 @@ def get_dynamodb_type(val, use_boolean=True):
     elif is_str(val):
         dynamodb_type = 'S'
     elif isinstance(val, (set, frozenset)):
-        if False not in map(is_num, val):
+        if False not in list(map(is_num, val)):
             dynamodb_type = 'NS'
-        elif False not in map(is_str, val):
+        elif False not in list(map(is_str, val)):
             dynamodb_type = 'SS'
-        elif False not in map(is_binary, val):
+        elif False not in list(map(is_binary, val)):
             dynamodb_type = 'BS'
     elif is_binary(val):
         dynamodb_type = 'B'
@@ -211,7 +215,7 @@ def item_object_hook(dct):
     This hook will transform Amazon DynamoDB JSON responses to something
     that maps directly to native Python types.
     """
-    if len(dct.keys()) > 1:
+    if len(list(dct.keys())) > 1:
         return dct
     if 'S' in dct:
         return dct['S']
@@ -286,7 +290,7 @@ class Dynamizer(object):
                 n = str(float_to_decimal(attr))
             else:
                 n = str(DYNAMODB_CONTEXT.create_decimal(attr))
-            if list(filter(lambda x: x in n, ('Infinity', 'NaN'))):
+            if list([x for x in ('Infinity', 'NaN') if x in n]):
                 raise TypeError('Infinity and NaN not supported')
             return n
         except (TypeError, DecimalException) as e:
@@ -322,7 +326,7 @@ class Dynamizer(object):
         return attr
 
     def _encode_m(self, attr):
-        return dict([(k, self.encode(v)) for k, v in attr.items()])
+        return dict([(k, self.encode(v)) for k, v in list(attr.items())])
 
     def _encode_l(self, attr):
         return [self.encode(i) for i in attr]
@@ -371,7 +375,7 @@ class Dynamizer(object):
         return attr
 
     def _decode_m(self, attr):
-        return dict([(k, self.decode(v)) for k, v in attr.items()])
+        return dict([(k, self.decode(v)) for k, v in list(attr.items())])
 
     def _decode_l(self, attr):
         return [self.decode(i) for i in attr]

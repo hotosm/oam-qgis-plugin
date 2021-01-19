@@ -1,6 +1,7 @@
+from __future__ import absolute_import
 from tests.mturk.support import unittest
 
-from common import MTurkCommon
+from .common import MTurkCommon
 from boto.mturk.connection import MTurkRequestError
 
 class TestDisableHITs(MTurkCommon):

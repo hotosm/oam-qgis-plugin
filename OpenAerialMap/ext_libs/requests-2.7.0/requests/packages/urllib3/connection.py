@@ -1,3 +1,6 @@
+from future import standard_library
+standard_library.install_aliases()
+from builtins import object
 import datetime
 import sys
 import socket
@@ -8,7 +11,7 @@ from .packages import six
 try:  # Python 3
     from http.client import HTTPConnection as _HTTPConnection, HTTPException
 except ImportError:
-    from httplib import HTTPConnection as _HTTPConnection, HTTPException
+    from http.client import HTTPConnection as _HTTPConnection, HTTPException
 
 
 class DummyConnection(object):

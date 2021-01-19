@@ -1,3 +1,5 @@
+from builtins import str
+from builtins import range
 # Copyright (c) 2010 Robert Mela
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
@@ -261,7 +263,7 @@ class TestLazyLoadMetadata(unittest.TestCase):
         self.set_normal_response([key_data, invalid_data, invalid_data])
         response = LazyLoadMetadata(url, num_retries)
         with self.assertRaises(ValueError):
-            response.values()[0]
+            list(response.values())[0]
 
     def test_user_data(self):
         self.set_normal_response(['foo'])

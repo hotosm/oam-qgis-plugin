@@ -1,3 +1,4 @@
+from builtins import object
 from boto.dynamodb2.types import STRING
 
 

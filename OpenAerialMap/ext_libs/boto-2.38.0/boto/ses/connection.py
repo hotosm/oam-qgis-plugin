@@ -1,3 +1,4 @@
+from builtins import range
 # Copyright (c) 2010 Mitch Garnaat http://garnaat.org/
 # Copyright (c) 2011 Harry Marr http://hmarr.com/
 #
@@ -91,7 +92,7 @@ class SESConnection(AWSAuthConnection):
         params = params or {}
         params['Action'] = action
 
-        for k, v in params.items():
+        for k, v in list(params.items()):
             if isinstance(v, six.text_type):  # UTF-8 encode only if it's Unicode
                 params[k] = v.encode('utf-8')
 

@@ -1,3 +1,4 @@
+from __future__ import print_function
 # Copyright (c) 2012-2014 Andy Davidoff http://www.disruptek.com/
 #
 # Permission is hereby granted, free of charge, to any person obtaining a

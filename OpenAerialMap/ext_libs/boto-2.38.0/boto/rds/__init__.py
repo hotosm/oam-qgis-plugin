@@ -1,3 +1,7 @@
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+from builtins import range
 # Copyright (c) 2009-2012 Mitch Garnaat http://garnaat.org/
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
@@ -20,7 +24,7 @@
 # IN THE SOFTWARE.
 #
 
-import urllib
+import urllib.request, urllib.parse, urllib.error
 from boto.connection import AWSQueryConnection
 from boto.rds.dbinstance import DBInstance
 from boto.rds.dbsecuritygroup import DBSecurityGroup
@@ -451,7 +455,7 @@ class RDSConnection(AWSQueryConnection):
             self.build_list_params(params, l, 'VpcSecurityGroupIds.member')
 
         # Remove any params set to None
-        for k, v in params.items():
+        for k, v in list(params.items()):
           if v is None: del(params[k])
 
         return self.get_object('CreateDBInstance', params, DBInstance)
@@ -990,7 +994,7 @@ class RDSConnection(AWSQueryConnection):
         if ec2_security_group_owner_id:
             params['EC2SecurityGroupOwnerId'] = ec2_security_group_owner_id
         if cidr_ip:
-            params['CIDRIP'] = urllib.quote(cidr_ip)
+            params['CIDRIP'] = urllib.parse.quote(cidr_ip)
         return self.get_object('AuthorizeDBSecurityGroupIngress', params,
                                DBSecurityGroup)
 

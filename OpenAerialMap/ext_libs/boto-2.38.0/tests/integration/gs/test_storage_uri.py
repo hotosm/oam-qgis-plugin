@@ -22,10 +22,14 @@
 # IN THE SOFTWARE.
 
 """Integration tests for StorageUri interface."""
+from future import standard_library
+standard_library.install_aliases()
+from builtins import hex
+from builtins import str
 
 import binascii
 import re
-import StringIO
+import io
 
 from boto import storage_uri
 from boto.exception import BotoClientError
@@ -112,14 +116,14 @@ class GSStorageUriTest(GSTestCase):
         self.assertEqual(k.generation, key_uri.generation)
         self.assertEquals(k.get_contents_as_string(), "data1")
 
-        key_uri.set_contents_from_stream(StringIO.StringIO("data2"))
+        key_uri.set_contents_from_stream(io.StringIO("data2"))
         self.assertRegexpMatches(str(key_uri.generation), r"[0-9]+")
         self.assertGreater(key_uri.generation, k.generation)
         k = b.get_key("obj")
         self.assertEqual(k.generation, key_uri.generation)
         self.assertEquals(k.get_contents_as_string(), "data2")
 
-        key_uri.set_contents_from_file(StringIO.StringIO("data3"))
+        key_uri.set_contents_from_file(io.StringIO("data3"))
         self.assertRegexpMatches(str(key_uri.generation), r"[0-9]+")
         self.assertGreater(key_uri.generation, k.generation)
         k = b.get_key("obj")

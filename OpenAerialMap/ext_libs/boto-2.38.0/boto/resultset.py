@@ -1,3 +1,4 @@
+from builtins import object
 # Copyright (c) 2006,2007 Mitch Garnaat http://garnaat.org/
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
@@ -147,7 +148,7 @@ class BooleanResult(object):
         else:
             return 'False'
 
-    def __nonzero__(self):
+    def __bool__(self):
         return self.status
 
     def startElement(self, name, attrs, connection):

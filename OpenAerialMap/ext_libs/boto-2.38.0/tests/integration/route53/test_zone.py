@@ -1,3 +1,4 @@
+from builtins import str
 # Copyright (c) 2011 Blue Pines Technologies LLC, Brad Carleton
 # www.bluepines.org
 # Copyright (c) 2012 42 Lines Inc., Jim Browne

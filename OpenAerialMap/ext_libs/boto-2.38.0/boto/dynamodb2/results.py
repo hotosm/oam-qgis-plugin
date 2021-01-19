@@ -1,3 +1,4 @@
+from builtins import object
 class ResultSet(object):
     """
     A class used to lazily handle page-to-page navigation through a set of

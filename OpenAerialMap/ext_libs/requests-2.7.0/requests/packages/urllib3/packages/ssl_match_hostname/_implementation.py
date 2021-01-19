@@ -1,4 +1,5 @@
 """The match_hostname() function from Python 3.3.3, essential when using SSL."""
+from builtins import map
 
 # Note: This file is under the PSF license as the code comes from the python
 # stdlib.   http://docs.python.org/3/license.html

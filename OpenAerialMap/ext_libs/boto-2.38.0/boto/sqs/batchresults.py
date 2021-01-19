@@ -23,6 +23,7 @@
 """
 A set of results returned by SendMessageBatch.
 """
+from builtins import object
 
 class ResultEntry(dict):
     """

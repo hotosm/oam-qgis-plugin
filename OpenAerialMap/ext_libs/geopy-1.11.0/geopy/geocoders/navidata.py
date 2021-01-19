@@ -1,6 +1,7 @@
 """
 :class:`.NaviData` is the NaviData.pl geocoder.
 """
+from builtins import str
 
 from geopy.compat import urlencode
 from geopy.location import Location

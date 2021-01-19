@@ -1,3 +1,8 @@
+from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+from builtins import object
 # Copyright 2010 Google Inc.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
@@ -19,7 +24,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 import errno
-import httplib
+import http.client
 import os
 import re
 import socket
@@ -92,7 +97,7 @@ class ResumableDownloadHandler(object):
 
     MIN_ETAG_LEN = 5
 
-    RETRYABLE_EXCEPTIONS = (httplib.HTTPException, IOError, socket.error,
+    RETRYABLE_EXCEPTIONS = (http.client.HTTPException, IOError, socket.error,
                             socket.gaierror)
 
     def __init__(self, tracker_file_name=None, num_retries=None):
@@ -341,7 +346,7 @@ class ResumableDownloadHandler(object):
             # which we can safely ignore.
             try:
                 key.close()
-            except httplib.IncompleteRead:
+            except http.client.IncompleteRead:
                 pass
 
             sleep_time_secs = 2**progress_less_iterations

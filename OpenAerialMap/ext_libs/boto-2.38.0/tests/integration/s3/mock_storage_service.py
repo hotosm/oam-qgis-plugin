@@ -25,6 +25,7 @@ ACL, Key, Bucket, Connection, and StorageUri. We implement a subset of
 the interfaces defined in the real boto classes, but don't handle most
 of the optional params (which we indicate with the constant "NOT_IMPL").
 """
+from builtins import object
 
 import copy
 import boto

@@ -22,6 +22,7 @@
 """
 Represents a VPC Peering Connection.
 """
+from builtins import object
 
 from boto.ec2.ec2object import TaggedEC2Object
 

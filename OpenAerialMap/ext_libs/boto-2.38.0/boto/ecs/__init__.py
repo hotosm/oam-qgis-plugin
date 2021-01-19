@@ -1,3 +1,5 @@
+from future import standard_library
+standard_library.install_aliases()
 # Copyright (c) 2010 Chris Moyer http://coredumped.org/
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
@@ -23,7 +25,7 @@ import boto
 from boto.connection import AWSQueryConnection, AWSAuthConnection
 from boto.exception import BotoServerError
 import time
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import xml.sax
 from boto.ecs.item import ItemSet
 from boto import handler

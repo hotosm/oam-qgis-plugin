@@ -22,6 +22,7 @@
 """
 Represents an DBSecurityGroup
 """
+from builtins import object
 from boto.ec2.securitygroup import SecurityGroup
 
 class DBSecurityGroup(object):

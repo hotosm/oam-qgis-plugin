@@ -1,3 +1,5 @@
+from builtins import str
+from builtins import object
 # Copyright (c) 2006-2012 Mitch Garnaat http://garnaat.org/
 # Copyright (c) 2011, Nexenta Systems Inc.
 # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.  All Rights Reserved
@@ -304,7 +306,7 @@ class Key(object):
             response_headers = self.resp.msg
             self.metadata = boto.utils.get_aws_metadata(response_headers,
                                                         provider)
-            for name, value in response_headers.items():
+            for name, value in list(response_headers.items()):
                 # To get correct size for Range GETs, use Content-Range
                 # header if one was returned. If not, use Content-Length
                 # header.

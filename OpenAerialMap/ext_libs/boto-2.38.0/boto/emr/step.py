@@ -1,3 +1,4 @@
+from builtins import object
 # Copyright (c) 2010 Spotify AB
 # Copyright (c) 2010-2011 Yelp
 #

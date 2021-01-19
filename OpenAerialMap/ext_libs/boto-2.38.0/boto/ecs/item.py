@@ -1,3 +1,4 @@
+from builtins import next
 # Copyright (c) 2010 Chris Moyer http://coredumped.org/
 #
 # Permission is hereby granted, free of charge, to any person obtaining a

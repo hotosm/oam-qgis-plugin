@@ -1,3 +1,4 @@
+from builtins import str
 import random
 import time
 from functools import partial

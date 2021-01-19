@@ -1,6 +1,7 @@
 """
 :class:`.YahooPlaceFinder` geocoder.
 """
+from builtins import str
 
 from functools import partial
 
@@ -60,12 +61,12 @@ class YahooPlaceFinder(Geocoder): # pylint: disable=W0223
             timeout=timeout, proxies=proxies, user_agent=user_agent
         )
         self.consumer_key = (
-            unicode(consumer_key)
+            str(consumer_key)
             if not py3k
             else str(consumer_key)
         )
         self.consumer_secret = (
-            unicode(consumer_secret)
+            str(consumer_secret)
             if not py3k
             else str(consumer_secret)
         )

@@ -23,6 +23,8 @@
 """
 Represents a connection to the EMR service
 """
+from builtins import str
+from builtins import zip
 import types
 
 import boto
@@ -383,7 +385,7 @@ class EmrConnection(AWSQueryConnection):
         if not isinstance(new_sizes, list):
             new_sizes = [new_sizes]
 
-        instance_groups = zip(instance_group_ids, new_sizes)
+        instance_groups = list(zip(instance_group_ids, new_sizes))
 
         params = {}
         for k, ig in enumerate(instance_groups):

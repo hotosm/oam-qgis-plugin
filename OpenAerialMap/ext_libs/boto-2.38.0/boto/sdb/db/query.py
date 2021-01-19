@@ -1,3 +1,5 @@
+from builtins import next
+from builtins import object
 from boto.compat import six
 # Copyright (c) 2006,2007,2008 Mitch Garnaat http://garnaat.org/
 #

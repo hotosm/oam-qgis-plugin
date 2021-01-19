@@ -1,3 +1,5 @@
+from builtins import zip
+from builtins import range
 # Copyright (c) 2010-2012 Mitch Garnaat http://garnaat.org/
 # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.  All Rights Reserved
 #
@@ -95,7 +97,7 @@ class SNSConnection(AWSQueryConnection):
       :param dictionary: dict - value of the serialized parameter
       :param name: name of the serialized parameter
       """
-      items = sorted(dictionary.items(), key=lambda x:x[0])
+      items = sorted(list(dictionary.items()), key=lambda x:x[0])
       for kv, index in zip(items, list(range(1, len(items)+1))):
         key, value = kv
         prefix = '%s.entry.%s' % (name, index)

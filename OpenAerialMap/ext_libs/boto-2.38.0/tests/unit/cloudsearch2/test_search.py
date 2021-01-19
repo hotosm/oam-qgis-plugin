@@ -1,3 +1,7 @@
+from __future__ import print_function
+from builtins import str
+from builtins import next
+from builtins import object
 #!/usr/bin env python
 from boto.cloudsearch2.domain import Domain
 from boto.cloudsearch2.layer1 import CloudSearchConnection
@@ -241,7 +245,7 @@ class CloudSearchSearchTest(CloudSearchSearchBaseTest):
 
         results = search.search(q='Test')
 
-        hits = list(map(lambda x: x['id'], results.docs))
+        hits = list([x['id'] for x in results.docs])
 
         # This relies on the default response which is fed into HTTPretty
         self.assertEqual(

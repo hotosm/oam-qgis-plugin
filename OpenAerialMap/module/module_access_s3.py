@@ -28,9 +28,9 @@ import sys, os, time, math
 # import traceback
 # from ast import literal_eval
 
-from PyQt4 import QtCore
+from qgis.PyQt import QtCore
 from PyQt4.QtGui import *      # modify this part?
-from PyQt4.QtCore import QThread, pyqtSignal
+from qgis.PyQt.QtCore import QThread, pyqtSignal
 
 #import boto
 #from boto.s3.connection import S3Connection, S3ResponseError
@@ -148,7 +148,7 @@ class S3UploadWorker(QThread):
             'OAM',
             level=QgsMessageLog.INFO)
 
-        if u'id' in post_dict.keys():
+        if u'id' in list(post_dict.keys()):
             ts_id = post_dict[u'id']
             time = post_dict[u'queued_at']
             QgsMessageLog.logMessage(

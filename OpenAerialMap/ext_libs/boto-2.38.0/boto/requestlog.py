@@ -1,7 +1,9 @@
+from future import standard_library
+standard_library.install_aliases()
 import sys
 from datetime import datetime
 from threading import Thread
-import Queue
+import queue
 
 from boto.utils import RequestHook
 from boto.compat import long_type
@@ -14,7 +16,7 @@ class RequestLogger(RequestHook):
     """
     def __init__(self, filename='/tmp/request_log.csv'):
         self.request_log_file = open(filename, 'w')
-        self.request_log_queue = Queue.Queue(100)
+        self.request_log_queue = queue.Queue(100)
         Thread(target=self._request_log_worker).start()
 
     def handle_request_data(self, request, response, error=False):

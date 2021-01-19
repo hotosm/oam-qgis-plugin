@@ -1,4 +1,6 @@
 """Classify responses from layer1 and strict type values."""
+from builtins import str
+from builtins import object
 from datetime import datetime
 from boto.compat import six
 

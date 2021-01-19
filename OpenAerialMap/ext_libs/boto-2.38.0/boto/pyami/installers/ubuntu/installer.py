@@ -1,3 +1,4 @@
+from builtins import str
 # Copyright (c) 2006,2007,2008 Mitch Garnaat http://garnaat.org/
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
@@ -43,7 +44,7 @@ class Installer(boto.pyami.installers.Installer):
             hour = str(random.randrange(24))
         fp = open('/etc/cron.d/%s' % name, "w")
         if env:
-            for key, value in env.items():
+            for key, value in list(env.items()):
                 fp.write('%s=%s\n' % (key, value))
         fp.write('%s %s %s %s %s %s %s\n' % (minute, hour, mday, month, wday, who, command))
         fp.close()

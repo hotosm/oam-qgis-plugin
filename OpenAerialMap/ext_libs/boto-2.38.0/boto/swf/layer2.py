@@ -1,4 +1,6 @@
 """Object-oriented interface to SWF wrapping boto.swf.layer1.Layer1"""
+from builtins import str
+from builtins import object
 
 import time
 from functools import wraps

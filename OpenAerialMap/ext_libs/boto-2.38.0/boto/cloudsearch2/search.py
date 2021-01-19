@@ -1,3 +1,4 @@
+from builtins import object
 # Copyright (c) 2014 Amazon.com, Inc. or its affiliates.
 # All Rights Reserved
 #
@@ -47,9 +48,9 @@ class SearchResults(object):
 
         self.facets = {}
         if 'facets' in attrs:
-            for (facet, values) in attrs['facets'].items():
+            for (facet, values) in list(attrs['facets'].items()):
                 if 'buckets' in values:
-                    self.facets[facet] = dict((k, v) for (k, v) in map(lambda x: (x['value'], x['count']), values.get('buckets', [])))
+                    self.facets[facet] = dict((k, v) for (k, v) in [(x['value'], x['count']) for x in values.get('buckets', [])])
 
         self.num_pages_needed = ceil(self.hits / self.query.real_size)
 

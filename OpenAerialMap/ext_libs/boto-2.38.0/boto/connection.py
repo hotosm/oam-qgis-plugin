@@ -42,6 +42,11 @@
 """
 Handles basic connections to AWS
 """
+from __future__ import print_function
+from builtins import zip
+from builtins import str
+from builtins import range
+from builtins import object
 from datetime import datetime
 import errno
 import os
@@ -252,7 +257,7 @@ class ConnectionPool(object):
         """
         Returns the number of connections in the pool.
         """
-        return sum(pool.size() for pool in self.host_to_pool.values())
+        return sum(pool.size() for pool in list(self.host_to_pool.values()))
 
     def get_http_connection(self, host, port, is_secure):
         """
@@ -291,7 +296,7 @@ class ConnectionPool(object):
             now = time.time()
             if self.last_clean_time + self.CLEAN_INTERVAL < now:
                 to_remove = []
-                for (host, pool) in self.host_to_pool.items():
+                for (host, pool) in list(self.host_to_pool.items()):
                     pool.clean()
                     if pool.size() == 0:
                         to_remove.append(host)
@@ -796,7 +801,7 @@ class AWSAuthConnection(object):
         sock.sendall("CONNECT %s HTTP/1.0\r\n" % host)
         sock.sendall("User-Agent: %s\r\n" % UserAgent)
         if self.proxy_user and self.proxy_pass:
-            for k, v in self.get_proxy_auth_header().items():
+            for k, v in list(self.get_proxy_auth_header().items()):
                 sock.sendall("%s: %s\r\n" % (k, v))
             # See discussion about this config option at
             # https://groups.google.com/forum/?fromgroups#!topic/boto-dev/teenFvOq2Cc

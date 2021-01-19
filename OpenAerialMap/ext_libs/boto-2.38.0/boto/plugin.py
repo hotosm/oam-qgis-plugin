@@ -35,6 +35,7 @@ class MyFancyAuth(AuthPlugin):
 
 The actual interface is duck typed.
 """
+from builtins import object
 
 import glob
 import imp

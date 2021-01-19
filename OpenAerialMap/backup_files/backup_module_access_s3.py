@@ -21,11 +21,14 @@
  *                                                                         *
  ***************************************************************************/
 """
+from __future__ import print_function
+from builtins import str
+from builtins import range
 import os, sys
 
-from PyQt4 import QtGui
+from qgis.PyQt import QtGui
 from PyQt4.Qt import *
-from PyQt4.QtCore import QThread, Qt
+from qgis.PyQt.QtCore import QThread, Qt
 import json, time, math, imghdr, tempfile
 
 from qgis.gui import QgsMessageBar
@@ -82,7 +85,7 @@ class S3Manager(S3Connection):
 
     def getBucket(self):
 
-        for trial in xrange(3):
+        for trial in range(3):
             if self.bucket: break
             try:
                 self.bucket = super(S3Manager,self).get_bucket(self.bucket_name)
@@ -112,9 +115,11 @@ class S3Manager(S3Connection):
 
         """ Testing purpose only """
         if "notify_oam" in self.upload_options:
-            print "notify_oam"
+            # fix_print_with_import
+            print("notify_oam")
         if "trigger_tiling" in self.upload_options:
-            print "trigger_tiling"
+            # fix_print_with_import
+            print("trigger_tiling")
 
         # configure the msg_bar_main (including Cancel button and its container)
         self.msg_bar_main = QgsMessageBar()
@@ -146,7 +151,8 @@ class S3Manager(S3Connection):
                 self.threads[i].started.connect(self.s3Uploaders[i].run)
                 self.threads[i].start()
 
-                print repr(self.threads[i])
+                # fix_print_with_import
+                print(repr(self.threads[i]))
 
                 # configure the msg_bars for progress bar
                 self.msg_bars.append(QgsMessageBar())
@@ -175,7 +181,7 @@ class S3Manager(S3Connection):
                 #self.cancel_buttons[i].clicked.connect(self.cancelUpload)
                 """
 
-            except Exception, e:
+            except Exception as e:
                 return repr(e)
 
         #Display upload progress bars in a separate widget
@@ -190,7 +196,8 @@ class S3Manager(S3Connection):
         return True
 
     def updateProgressBar(self, progress_value, index):
-        print "Progress: " + str(progress_value) + ", index: " + str(index)
+        # fix_print_with_import
+        print("Progress: " + str(progress_value) + ", index: " + str(index))
         if self.progress_bars[index] != None:
             self.progress_bars[index].setValue(progress_value)
 
@@ -211,11 +218,13 @@ class S3Manager(S3Connection):
                 #self.threads[i] = None
 
         except:
-            print "Error: problem occurred to kill uploaders"
+            # fix_print_with_import
+            print("Error: problem occurred to kill uploaders")
 
     def cancelUpload(self, index):
 
-        print "Cancel button was clicked!"
+        # fix_print_with_import
+        print("Cancel button was clicked!")
 
         """
         try:
@@ -328,7 +337,7 @@ class S3Uploader(QObject):
     '''Handle uploads in a separate thread'''
 
     finished = pyqtSignal(bool, int)
-    error = pyqtSignal(Exception, basestring)
+    error = pyqtSignal(Exception, str)
     progress = pyqtSignal(float, int)
 
     def __init__(self, filename, bucket, options, index):
@@ -406,7 +415,7 @@ class S3Uploader(QObject):
                 if "trigger_tiling" in self.options:
                     self.triggerTileService()
 
-        except Exception, e:
+        except Exception as e:
             # forward the exception upstream (or try to...)
             # chunk size smaller than 5MB can cause an error, server does not expect it
             self.error.emit(e, traceback.format_exc())
@@ -440,7 +449,7 @@ class S3Uploader(QObject):
             'OAM',
             level=QgsMessageLog.INFO)
 
-        if u'id' in post_dict.keys():
+        if u'id' in list(post_dict.keys()):
             ts_id = post_dict[u'id']
             time = post_dict[u'queued_at']
             QgsMessageLog.logMessage(

@@ -24,6 +24,7 @@
 """
 This module contains EMR response objects
 """
+from builtins import object
 
 from boto.resultset import ResultSet
 

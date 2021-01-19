@@ -2,6 +2,7 @@
 Tests for Layer1 of Simple Workflow
 
 """
+from builtins import str
 import time
 import uuid
 import json

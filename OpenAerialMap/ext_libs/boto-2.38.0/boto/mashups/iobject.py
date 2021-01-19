@@ -1,3 +1,6 @@
+from __future__ import print_function
+from builtins import input
+from builtins import object
 # Copyright (c) 2006,2007 Mitch Garnaat http://garnaat.org/
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
@@ -39,7 +42,7 @@ class IObject(object):
             n = 1
             choices = []
             for item in item_list:
-                if isinstance(item, basestring):
+                if isinstance(item, str):
                     print('[%d] %s' % (n, item))
                     choices.append(item)
                     n += 1
@@ -56,7 +59,7 @@ class IObject(object):
                             choices.append(obj)
                             n += 1
             if choices:
-                val = raw_input('%s[1-%d]: ' % (prompt, len(choices)))
+                val = eval(input('%s[1-%d]: ' % (prompt, len(choices))))
                 if val.startswith('/'):
                     search_str = val[1:]
                 else:
@@ -78,7 +81,7 @@ class IObject(object):
     def get_string(self, prompt, validation_fn=None):
         okay = False
         while not okay:
-            val = raw_input('%s: ' % prompt)
+            val = eval(input('%s: ' % prompt))
             if validation_fn:
                 okay = validation_fn(val)
                 if not okay:
@@ -91,7 +94,7 @@ class IObject(object):
         okay = False
         val = ''
         while not okay:
-            val = raw_input('%s: %s' % (prompt, val))
+            val = eval(input('%s: %s' % (prompt, val)))
             val = os.path.expanduser(val)
             if os.path.isfile(val):
                 okay = True

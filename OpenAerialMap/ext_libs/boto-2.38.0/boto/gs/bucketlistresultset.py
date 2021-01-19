@@ -1,3 +1,4 @@
+from builtins import object
 # Copyright 2012 Google Inc.
 # Copyright (c) 2006,2007 Mitch Garnaat http://garnaat.org/
 #

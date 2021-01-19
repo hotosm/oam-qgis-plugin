@@ -1,6 +1,7 @@
 """
 :class:`.ArcGIS` geocoder.
 """
+from builtins import str
 
 import json
 from time import time
@@ -227,7 +228,7 @@ class ArcGIS(Geocoder):  # pylint: disable=R0921,R0902,W0223
         token_request_arguments = "&".join([
             "%s=%s" % (key, val)
             for key, val
-            in token_request_arguments.items()
+            in list(token_request_arguments.items())
         ])
         url = "&".join((
             "?".join((self.auth_api, token_request_arguments)),

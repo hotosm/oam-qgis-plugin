@@ -1,3 +1,4 @@
+from builtins import str
 # Copyright (c) 2006-2012 Mitch Garnaat http://garnaat.org/
 # Copyright (c) 2010-2011, Eucalyptus Systems, Inc.
 # Copyright (c) 2011, Nexenta Systems Inc.

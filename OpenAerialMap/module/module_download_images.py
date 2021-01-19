@@ -22,13 +22,19 @@
  ***************************************************************************/
  This script initializes the plugin, making it known to QGIS.
 """
+from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+from builtins import range
+from builtins import object
 
 import sys, os, time
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import json
-from PyQt4 import QtCore
+from qgis.PyQt import QtCore
 from PyQt4.QtGui import *
-from PyQt4.QtCore import QThread, pyqtSignal, QObject
+from qgis.PyQt.QtCore import QThread, pyqtSignal, QObject
 from PyQt4.Qt import *
 
 class ThumbnailManager(QObject):
@@ -51,7 +57,7 @@ class ThumbnailManager(QObject):
         # print(imgAbspath)
         if not os.path.exists(imgAbspath):
             try:
-                response = urllib2.urlopen(urlThumbnail)
+                response = urllib.request.urlopen(urlThumbnail)
                 chunkSize = 1024 * 16
                 f = open(imgAbspath, 'wb')
                 while True:
@@ -67,7 +73,7 @@ class ThumbnailManager(QObject):
         return imgAbspath
 
 
-class ImgMetaDownloader:
+class ImgMetaDownloader(object):
     def __init__(self, parent=None):
         pass
 
@@ -75,7 +81,7 @@ class ImgMetaDownloader:
     def downloadImgMeta(urlImgMeta, imgMetaAbsPath):
         try:
             f = open(imgMetaAbsPath, 'w')
-            f.write(urllib2.urlopen(urlImgMeta).read())
+            f.write(urllib.request.urlopen(urlImgMeta).read())
             f.close()
         except Exception as e:
             print(str(e))
@@ -333,7 +339,7 @@ class DownloadWorker(QThread):
     def run(self):
         try:
             self.started.emit(True, self.index)
-            u = urllib2.urlopen(self.url)
+            u = urllib.request.urlopen(self.url)
             f = open(self.fileAbsPath, 'wb')
             meta = u.info()
             fileSize = int(meta.getheaders("Content-Length")[0])

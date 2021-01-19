@@ -60,7 +60,7 @@ def regions():
 
 def connect_to_region(region_name, **kw_params):
     for region in regions():
-        if 'host' in kw_params.keys():
+        if 'host' in list(kw_params.keys()):
             # Make sure the host specified is not nothing
             if kw_params['host'] not in ['', None]:
                 region.endpoint = kw_params['host']

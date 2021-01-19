@@ -1,3 +1,5 @@
+from builtins import zip
+from builtins import str
 #!/usr/bin/env python
 # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.  All Rights Reserved
 #
@@ -104,7 +106,7 @@ doc/2009-01-01/">
             self.assertEqual(result, amazon)
 
     def test_decorator_order(self):
-        for action, func in api_call_map.items():
+        for action, func in list(api_call_map.items()):
             func = getattr(self.service_connection, func)
             decs = [func.__name__]
             while func:
@@ -126,7 +128,7 @@ doc/2009-01-01/">
         # It starts empty, but the decorators should add to it as they're
         # applied. As of 2013/10/21, there were 52 calls (with more likely
         # to be added), so let's simply ensure there are enough there.
-        self.assertTrue(len(api_call_map.keys()) > 50)
+        self.assertTrue(len(list(api_call_map.keys())) > 50)
 
     def test_method_for(self):
         # First, ensure that the map is in "right enough" state.

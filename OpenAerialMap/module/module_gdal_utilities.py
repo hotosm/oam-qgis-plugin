@@ -22,6 +22,8 @@
  ***************************************************************************/
  This script initializes the plugin, making it known to QGIS.
 """
+from __future__ import print_function
+from builtins import str
 
 import os, sys
 from osgeo import gdal, osr, ogr
@@ -120,8 +122,9 @@ def gdal_info_report_corner(hDataset, x, y):
                   adfGeoTransform[4] * x +
                   adfGeoTransform[5] * y)
     else:
-        print "BBOX might be wrong. Transformation coefficient " + \
-            "could not be fetched from raster"
+        # fix_print_with_import
+        print("BBOX might be wrong. Transformation coefficient " + \
+            "could not be fetched from raster")
         return (x, y)
 
     # Report the georeferenced coordinates

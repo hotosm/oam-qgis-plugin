@@ -1,3 +1,8 @@
+from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+from builtins import object
 # Copyright 2010 Google Inc.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
@@ -19,13 +24,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 import errno
-import httplib
+import http.client
 import os
 import random
 import re
 import socket
 import time
-import urlparse
+import urllib.parse
 from hashlib import md5
 from boto import config, UserAgent
 from boto.connection import AWSAuthConnection
@@ -54,7 +59,7 @@ save the state needed to allow retrying later, in a separate process
 class ResumableUploadHandler(object):
 
     BUFFER_SIZE = 8192
-    RETRYABLE_EXCEPTIONS = (httplib.HTTPException, IOError, socket.error,
+    RETRYABLE_EXCEPTIONS = (http.client.HTTPException, IOError, socket.error,
                             socket.gaierror)
 
     # (start, end) response indicating server has nothing (upload protocol uses
@@ -139,7 +144,7 @@ class ResumableUploadHandler(object):
 
         Raises InvalidUriError if URI is syntactically invalid.
         """
-        parse_result = urlparse.urlparse(uri)
+        parse_result = urllib.parse.urlparse(uri)
         if (parse_result.scheme.lower() not in ['http', 'https'] or
             not parse_result.netloc):
             raise InvalidUriError('Invalid tracker URI (%s)' % uri)
@@ -237,8 +242,8 @@ class ResumableUploadHandler(object):
             # Parse 'bytes=<from>-<to>' range_spec.
             m = re.search('bytes=(\d+)-(\d+)', range_spec)
             if m:
-                server_start = long(m.group(1))
-                server_end = long(m.group(2))
+                server_start = int(m.group(1))
+                server_end = int(m.group(2))
                 got_valid_response = True
         else:
             # No Range header, which means the server does not yet have

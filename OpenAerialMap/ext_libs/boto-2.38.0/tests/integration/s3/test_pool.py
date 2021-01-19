@@ -24,6 +24,9 @@
 Some multi-threading tests of boto in a greenlet environment.
 """
 from __future__ import print_function
+from builtins import str
+from builtins import range
+from builtins import object
 
 import boto
 import time

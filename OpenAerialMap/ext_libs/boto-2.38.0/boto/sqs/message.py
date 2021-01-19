@@ -62,6 +62,7 @@ Message object to reflect the state represented in the message body parameter.
 The Message class must provide a get_body_encoded method that returns the current body of the message
 in the format in which it would be stored in SQS.
 """
+from builtins import object
 
 import base64
 
@@ -210,7 +211,7 @@ class MHMessage(Message):
 
     def encode(self, value):
         s = ''
-        for item in value.items():
+        for item in list(value.items()):
             s = s + '%s: %s\n' % (item[0], item[1])
         return s
 
@@ -228,13 +229,13 @@ class MHMessage(Message):
         self.set_body(self._body)
 
     def keys(self):
-        return self._body.keys()
+        return list(self._body.keys())
 
     def values(self):
-        return self._body.values()
+        return list(self._body.values())
 
     def items(self):
-        return self._body.items()
+        return list(self._body.items())
 
     def has_key(self, key):
         return key in self._body

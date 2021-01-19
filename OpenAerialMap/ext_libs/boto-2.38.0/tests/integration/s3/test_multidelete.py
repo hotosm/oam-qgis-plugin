@@ -25,6 +25,7 @@
 """
 Some unit tests for the S3 MultiDelete
 """
+from builtins import range
 
 import unittest
 import time

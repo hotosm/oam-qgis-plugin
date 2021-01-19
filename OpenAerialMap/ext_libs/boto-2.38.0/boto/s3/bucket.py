@@ -1,3 +1,6 @@
+from builtins import str
+from builtins import next
+from builtins import object
 # Copyright (c) 2006-2010 Mitch Garnaat http://garnaat.org/
 # Copyright (c) 2010, Eucalyptus Systems, Inc.
 # All rights reserved.
@@ -369,7 +372,7 @@ class Bucket(object):
         if initial_query_string:
             pairs.append(initial_query_string)
 
-        for key, value in sorted(params.items(), key=lambda x: x[0]):
+        for key, value in sorted(list(params.items()), key=lambda x: x[0]):
             if value is None:
                 continue
             key = key.replace('_', '-')

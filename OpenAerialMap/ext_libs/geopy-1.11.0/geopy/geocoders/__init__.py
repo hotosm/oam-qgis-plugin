@@ -158,6 +158,6 @@ def get_geocoder_for_service(service):
     except KeyError:
         raise GeocoderNotFound(
             "Unknown geocoder '%s'; options are: %s" %
-            (service, SERVICE_TO_GEOCODER.keys())
+            (service, list(SERVICE_TO_GEOCODER.keys()))
         )
 

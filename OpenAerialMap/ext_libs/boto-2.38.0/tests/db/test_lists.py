@@ -1,3 +1,5 @@
+from __future__ import print_function
+from builtins import object
 # Copyright (c) 2010 Chris Moyer http://coredumped.org/
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
@@ -90,7 +92,9 @@ class TestLists(object):
         t.put()
         self.objs.append(t)
         time.sleep(3)
-        print SimpleListModel.all().filter("strs !=", "Fizzle").get_query()
+        # fix_print_with_import
+        print(SimpleListModel.all().filter("strs !=", "Fizzle").get_query())
         for tt in SimpleListModel.all().filter("strs !=", "Fizzle"):
-            print tt.strs
+            # fix_print_with_import
+            print(tt.strs)
             assert("Fizzle" not in tt.strs)

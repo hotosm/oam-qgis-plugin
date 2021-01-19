@@ -1,3 +1,6 @@
+from builtins import filter
+from builtins import map
+from builtins import range
 #!/usr/bin/env python
 from boto.mws.connection import MWSConnection
 from boto.mws.response import (ResponseFactory, ResponseElement, Element,
@@ -34,10 +37,10 @@ class TestMWSResponse(AWSMockServiceTestCase):
         obj = self.check_issue(Test9Result, text)
         Item = obj._result.Item
         useful = lambda x: not x[0].startswith('_')
-        nest = dict(filter(useful, Item.Nest.__dict__.items()))
+        nest = dict(list(filter(useful, list(Item.Nest.__dict__.items()))))
         self.assertEqual(nest, dict(Zip='Zap', Zam='Zoo'))
         useful = lambda x: not x[0].startswith('_') and not x[0] == 'Nest'
-        item = dict(filter(useful, Item.__dict__.items()))
+        item = dict(list(filter(useful, list(Item.__dict__.items()))))
         self.assertEqual(item, dict(Foo='Bar', Bif='Bam', Zoom=None))
 
     def test_parsing_member_list_specification(self):
@@ -67,7 +70,7 @@ class TestMWSResponse(AWSMockServiceTestCase):
             list(range(4)),
         )
         self.assertSequenceEqual(
-            list(map(lambda x: list(map(int, x.Foo)), obj._result.Extra)),
+            list([list(map(int, x.Foo)) for x in obj._result.Extra]),
             [[4, 5], [], [6, 7]],
         )
 
@@ -121,7 +124,7 @@ class TestMWSResponse(AWSMockServiceTestCase):
         obj = self.check_issue(Test7Result, text)
         item = obj._result.Item
         self.assertEqual(len(item), 3)
-        nests = [z.Nest for z in filter(lambda x: x.Nest, item)]
+        nests = [z.Nest for z in [x for x in item if x.Nest]]
         self.assertSequenceEqual(
             [[y.Data for y in nest] for nest in nests],
             [[u'2', u'4', u'6'], [u'1', u'3', u'5']],

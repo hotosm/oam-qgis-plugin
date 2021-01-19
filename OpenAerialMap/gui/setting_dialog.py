@@ -22,11 +22,12 @@
  ***************************************************************************/
  This script initializes the plugin, making it known to QGIS.
 """
+from builtins import str
 
 import os, sys
 
-from PyQt4 import QtGui, uic
-from PyQt4.Qt import *
+from qgis.PyQt import QtGui, uic
+from qgis.PyQt.Qt import *
 
 from qgis.core import QgsMessageLog
 import time

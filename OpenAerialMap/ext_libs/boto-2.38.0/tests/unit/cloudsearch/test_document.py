@@ -128,7 +128,7 @@ class CloudSearchDocumentMultipleAddTest(CloudSearchDocumentTest):
         """Check that multiple documents are added correctly to AWS"""
         document = DocumentServiceConnection(
             endpoint="doc-demo-userdomain.us-east-1.cloudsearch.amazonaws.com")
-        for (key, obj) in self.objs.items():
+        for (key, obj) in list(self.objs.items()):
             document.add(key, obj['version'], obj['fields'])
         document.commit()
 
@@ -151,7 +151,7 @@ class CloudSearchDocumentMultipleAddTest(CloudSearchDocumentTest):
         """
         document = DocumentServiceConnection(
             endpoint="doc-demo-userdomain.us-east-1.cloudsearch.amazonaws.com")
-        for (key, obj) in self.objs.items():
+        for (key, obj) in list(self.objs.items()):
             document.add(key, obj['version'], obj['fields'])
         doc = document.commit()
 

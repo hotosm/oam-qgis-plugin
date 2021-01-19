@@ -22,16 +22,19 @@
  ***************************************************************************/
  This script initializes the plugin, making it known to QGIS.
 """
+from __future__ import print_function
+from __future__ import absolute_import
+from builtins import str
 
 import os, sys
 import json
 
-from PyQt4 import QtGui, uic
-from PyQt4 import QtCore
-from PyQt4.Qt import *
+from qgis.PyQt import QtGui, uic
+from qgis.PyQt import QtCore
+from qgis.PyQt.Qt import *
 from qgis.gui import QgsMessageBar
 
-from img_browser import ImgBrowser
+from .img_browser import ImgBrowser
 from module.module_access_oam_catalog import OAMCatalogAccess
 from module.module_geocoding import nominatim_search
 

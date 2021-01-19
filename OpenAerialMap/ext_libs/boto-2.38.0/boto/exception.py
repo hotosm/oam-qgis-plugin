@@ -24,17 +24,18 @@
 """
 Exception classes - Subclassing allows you to check for specific errors
 """
+from builtins import object
 import base64
 import xml.sax
 
 import boto
 
 from boto import handler
-from boto.compat import json, StandardError
+from boto.compat import json, Exception
 from boto.resultset import ResultSet
 
 
-class BotoClientError(StandardError):
+class BotoClientError(Exception):
     """
     General Boto Client error (error accessing AWS)
     """
@@ -49,7 +50,7 @@ class BotoClientError(StandardError):
         return 'BotoClientError: %s' % self.reason
 
 
-class SDBPersistenceError(StandardError):
+class SDBPersistenceError(Exception):
     pass
 
 
@@ -74,7 +75,7 @@ class GSPermissionsError(StoragePermissionsError):
     pass
 
 
-class BotoServerError(StandardError):
+class BotoServerError(Exception):
     def __init__(self, status, reason, body=None, *args):
         super(BotoServerError, self).__init__(status, reason, body, *args)
         self.status = status

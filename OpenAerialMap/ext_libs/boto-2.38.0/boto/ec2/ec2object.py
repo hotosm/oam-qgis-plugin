@@ -23,6 +23,7 @@
 """
 Represents an EC2 Object
 """
+from builtins import object
 from boto.ec2.tag import TagSet
 
 
@@ -138,7 +139,7 @@ class TaggedEC2Object(EC2Object):
             tags,
             dry_run=dry_run
         )
-        for key, value in tags.items():
+        for key, value in list(tags.items()):
             if key in self.tags:
                 if value is None or value == self.tags[key]:
                     del self.tags[key]

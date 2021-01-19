@@ -22,15 +22,16 @@
  ***************************************************************************/
  This script initializes the plugin, making it known to QGIS.
 """
+from builtins import str
 
 import os, sys
 import json
 from datetime import datetime
 from dateutil import parser
 
-from PyQt4 import QtGui, uic
-from PyQt4 import QtCore
-from PyQt4.Qt import *
+from qgis.PyQt import QtGui, uic
+from qgis.PyQt import QtCore
+from qgis.PyQt.Qt import *
 # from PyQt4.Qt import QGraphicsScene, QPixmap
 
 from module.module_download_images import (ThumbnailManager,

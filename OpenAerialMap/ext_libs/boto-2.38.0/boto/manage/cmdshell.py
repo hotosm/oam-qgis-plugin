@@ -24,6 +24,9 @@ to the servers that are represented by instance objects. The module has
 functions for running commands, managing files, and opening interactive
 shell sessions over those connections.
 """
+from __future__ import print_function
+from builtins import input
+from builtins import object
 from boto.mashups.interactive import interactive_shell
 import boto
 import os
@@ -89,7 +92,7 @@ class SSHClient(object):
             except paramiko.BadHostKeyException:
                 print("%s has an entry in ~/.ssh/known_hosts and it doesn't match" % self.server.hostname)
                 print('Edit that file to remove the entry and then hit return to try again')
-                raw_input('Hit Enter when ready')
+                eval(input('Hit Enter when ready'))
                 retry += 1
             except EOFError:
                 print('Unexpected Error from SSH Connection, retry in 5 seconds')

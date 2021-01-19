@@ -1,6 +1,7 @@
 """
 Helper class for creating decision responses.
 """
+from builtins import object
 
 
 class Layer1Decisions(object):

@@ -24,6 +24,7 @@
 """
 Represents an EC2 Elastic Block Storage Volume
 """
+from builtins import object
 from boto.resultset import ResultSet
 from boto.ec2.tag import Tag
 from boto.ec2.ec2object import TaggedEC2Object

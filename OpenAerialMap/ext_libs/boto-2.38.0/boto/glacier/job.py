@@ -1,3 +1,5 @@
+from builtins import range
+from builtins import object
 # -*- coding: utf-8 -*-
 # Copyright (c) 2012 Thomas Parslow http://almostobsolete.net/
 #

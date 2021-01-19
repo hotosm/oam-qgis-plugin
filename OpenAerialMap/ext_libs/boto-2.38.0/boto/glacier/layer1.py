@@ -1,3 +1,4 @@
+from builtins import str
 # -*- coding: utf-8 -*-
 # Copyright (c) 2012 Mitch Garnaat http://garnaat.org/
 # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.  All Rights Reserved

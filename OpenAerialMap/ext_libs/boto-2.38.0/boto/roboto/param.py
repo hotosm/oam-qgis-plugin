@@ -1,3 +1,4 @@
+from builtins import object
 # Copyright (c) 2010 Mitch Garnaat http://garnaat.org/
 # Copyright (c) 2010, Eucalyptus Systems, Inc.
 #
@@ -27,7 +28,7 @@ class Converter(object):
     @classmethod
     def convert_string(cls, param, value):
         # TODO: could do length validation, etc. here
-        if not isinstance(value, basestring):
+        if not isinstance(value, str):
             raise ValueError
         return value
 

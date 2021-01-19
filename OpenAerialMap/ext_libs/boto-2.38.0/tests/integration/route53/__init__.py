@@ -1,3 +1,4 @@
+from builtins import str
 # Copyright (c) 2012 Mitch Garnaat http://garnaat.org/
 # Copyright (c) 2014 Tellybug, Matt Millar
 #

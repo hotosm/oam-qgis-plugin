@@ -1,6 +1,8 @@
 """
 :class:`.GeoCoder` base object from which other geocoders are templated.
 """
+from builtins import str
+from builtins import object
 
 from ssl import SSLError
 from socket import timeout as SocketTimeout

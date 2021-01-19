@@ -1,3 +1,6 @@
+from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
 # Copyright (c) 2006,2007 Mitch Garnaat http://garnaat.org/
 # Copyright (c) 2011 Chris Moyer http://coredumped.org/
 #
@@ -211,11 +214,11 @@ class Config(ConfigParser):
         sdb = boto.connect_sdb()
         domain = sdb.lookup(domain_name)
         item = domain.get_item(item_name)
-        for section in item.keys():
+        for section in list(item.keys()):
             if not self.has_section(section):
                 self.add_section(section)
             d = json.loads(item[section])
-            for attr_name in d.keys():
+            for attr_name in list(d.keys()):
                 attr_value = d[attr_name]
                 if attr_value is None:
                     attr_value = 'None'

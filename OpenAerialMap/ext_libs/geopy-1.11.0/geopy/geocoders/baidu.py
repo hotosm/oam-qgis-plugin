@@ -63,7 +63,7 @@ class Baidu(Geocoder):
         """
         return "|".join(
             (":".join(item)
-             for item in components.items()
+             for item in list(components.items())
             )
         )
 

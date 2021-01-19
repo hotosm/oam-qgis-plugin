@@ -23,6 +23,8 @@
 Provides NotificationMessage and Event classes, with utility methods, for
 implementations of the Mechanical Turk Notification API.
 """
+from builtins import str
+from builtins import object
 
 import hmac
 try:

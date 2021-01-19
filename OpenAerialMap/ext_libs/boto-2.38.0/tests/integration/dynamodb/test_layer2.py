@@ -23,6 +23,7 @@
 """
 Tests for Layer2 of Amazon DynamoDB
 """
+from __future__ import print_function
 import time
 import uuid
 from decimal import Decimal

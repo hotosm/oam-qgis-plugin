@@ -22,6 +22,7 @@
 """
 Represents a Vpn Gateway
 """
+from builtins import object
 
 from boto.ec2.ec2object import TaggedEC2Object
 

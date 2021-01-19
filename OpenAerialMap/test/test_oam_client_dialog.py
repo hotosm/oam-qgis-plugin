@@ -7,6 +7,7 @@
      (at your option) any later version.
 
 """
+from __future__ import absolute_import
 
 __author__ = 'tassia@acaia.ca'
 __date__ = '2015-07-01'
@@ -14,11 +15,11 @@ __copyright__ = 'Copyright 2015, Humanitarian OpenStreetMap Team (HOT)'
 
 import unittest
 
-from PyQt4.QtGui import QDialogButtonBox, QDialog
+from qgis.PyQt.QtWidgets import QDialogButtonBox, QDialog
 
 from oam_client_dialog import OpenAerialMapDialog
 
-from utilities import get_qgis_app
+from .utilities import get_qgis_app
 QGIS_APP = get_qgis_app()
 
 

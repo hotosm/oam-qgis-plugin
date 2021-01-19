@@ -1,3 +1,4 @@
+from builtins import str
 # Copyright (c) 2006-2010 Mitch Garnaat http://garnaat.org/
 # Copyright (c) 2010, Eucalyptus Systems, Inc.
 # Copyright (c) 2011 Blue Pines Technologies LLC, Brad Carleton

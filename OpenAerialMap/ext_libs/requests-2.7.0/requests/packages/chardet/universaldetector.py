@@ -1,3 +1,4 @@
+from builtins import object
 ######################## BEGIN LICENSE BLOCK ########################
 # The Original Code is Mozilla Universal charset detector code.
 #
@@ -41,7 +42,7 @@ eEscAscii = 1
 eHighbyte = 2
 
 
-class UniversalDetector:
+class UniversalDetector(object):
     def __init__(self):
         self._highBitDetector = re.compile(b'[\x80-\xFF]')
         self._escDetector = re.compile(b'(\033|~{)')

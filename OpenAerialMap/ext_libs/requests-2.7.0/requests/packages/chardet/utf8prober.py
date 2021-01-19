@@ -1,3 +1,4 @@
+from builtins import range
 ######################## BEGIN LICENSE BLOCK ########################
 # The Original Code is mozilla.org code.
 #

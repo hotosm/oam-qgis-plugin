@@ -22,15 +22,18 @@
  ***************************************************************************/
  This script initializes the plugin, making it known to QGIS.
 """
+from __future__ import print_function
+from builtins import str
+from builtins import range
 
 import sys, os, time, math
 # import imghdr, tempfile, requests, json
 # import traceback
 # from ast import literal_eval
 
-from PyQt4 import QtCore
-from PyQt4.QtGui import *      # modify this part?
-from PyQt4.QtCore import QThread, pyqtSignal
+from qgis.PyQt import QtCore
+from qgis.PyQt.QtGui import *      # modify this part?
+from qgis.PyQt.QtCore import QThread, pyqtSignal
 from PyQt4.Qt import *
 
 from module.module_access_s3 import S3UploadWorker

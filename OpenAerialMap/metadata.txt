@@ -8,7 +8,7 @@
 
 [general]
 name=Open Aerial Map (OAM)
-qgisMinimumVersion=2.0
+qgisMinimumVersion=3.0
 description=Open Aerial Map (OAM) client to upload, search, and download imagery and metadata
 about=OpenAerialMap QGIS plugin allows QGIS users to communicate with various OAM services, acting as a desktop client for OAM. Through this plugin, users can upload, search, and download imagery, as well as create and edit OIN-conformed metadata in a simple way. It also supports some raster image processing such as reprojection and file format conversion, as well as triggering the creation of tile services.
 version=git-master

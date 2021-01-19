@@ -1,3 +1,4 @@
+from builtins import object
 # Copyright (c) 2006-2012 Mitch Garnaat http://garnaat.org/
 # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.
 # Copyright (c) 2010, Eucalyptus Systems, Inc.
@@ -395,7 +396,7 @@ class S3Connection(AWSAuthConnection):
         if version_id is not None:
             extra_qp.append("versionId=%s" % version_id)
         if response_headers:
-            for k, v in response_headers.items():
+            for k, v in list(response_headers.items()):
                 extra_qp.append("%s=%s" % (k, urllib.parse.quote(v)))
         if self.provider.security_token:
             headers['x-amz-security-token'] = self.provider.security_token
@@ -414,7 +415,7 @@ class S3Connection(AWSAuthConnection):
             query_part = ''
         if headers:
             hdr_prefix = self.provider.header_prefix
-            for k, v in headers.items():
+            for k, v in list(headers.items()):
                 if k.startswith(hdr_prefix):
                     # headers used for sig generation must be
                     # included in the url also.

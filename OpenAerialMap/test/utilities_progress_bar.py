@@ -5,8 +5,8 @@ emit signals, using PyQt singal.
 """
 
 import sys, os, time
-from PyQt4 import QtCore
-from PyQt4.QtCore import QThread, pyqtSignal
+from qgis.PyQt import QtCore
+from qgis.PyQt.QtCore import QThread, pyqtSignal
 
 class S3UploadWorker(QThread):
 
