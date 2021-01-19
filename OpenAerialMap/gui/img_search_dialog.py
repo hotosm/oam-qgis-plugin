@@ -29,7 +29,9 @@ from builtins import str
 import os, sys
 import json
 
-from qgis.PyQt import QtGui, uic
+from qgis.PyQt.QtGui import *
+from qgis.PyQt.QtWidgets import *
+from qgis.PyQt import uic
 from qgis.PyQt import QtCore
 from qgis.PyQt.Qt import *
 from qgis.gui import QgsMessageBar
@@ -43,7 +45,7 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_search_dialog.ui'))
 
 
-class ImgSearchDialog(QtGui.QDialog, FORM_CLASS):
+class ImgSearchDialog(QDialog, FORM_CLASS):
 
     def __init__(self, iface, settings, parent=None):
         """Constructor."""

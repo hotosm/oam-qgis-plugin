@@ -32,10 +32,11 @@ from builtins import object
 import sys, os, time
 import urllib.request, urllib.error, urllib.parse
 import json
-from qgis.PyQt import QtCore
+# from qgis.PyQt import QtCore
 from qgis.PyQt.QtGui import *
+from qgis.PyQt.QtWidgets import *
 from qgis.PyQt.QtCore import QThread, pyqtSignal, QObject
-from qgis.PyQt4.Qt import *
+from qgis.PyQt.Qt import *
 
 class ThumbnailManager(QObject):
 

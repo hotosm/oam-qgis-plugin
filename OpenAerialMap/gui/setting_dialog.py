@@ -26,7 +26,10 @@ from builtins import str
 
 import os, sys
 
-from qgis.PyQt import QtGui, uic
+from qgis.PyQt.QtGui import *
+from qgis.PyQt.QtWidgets import *
+from qgis.PyQt import uic
+from qgis.PyQt import QtCore
 from qgis.PyQt.Qt import *
 
 from qgis.core import QgsMessageLog
@@ -36,7 +39,7 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/setting_dialog.ui'))
 
 
-class SettingDialog(QtGui.QDialog, FORM_CLASS):
+class SettingDialog(QDialog, FORM_CLASS):
 
     def __init__(self, iface, settings, parent=None):
         """Constructor."""
@@ -57,9 +60,9 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
 
         # register event handlers
         self.buttonBox.button(
-            QtGui.QDialogButtonBox.Cancel).clicked.connect(self.cancel)
+            QDialogButtonBox.Cancel).clicked.connect(self.cancel)
         self.buttonBox.button(
-            QtGui.QDialogButtonBox.Save).clicked.connect(self.saveSettings)
+            QDialogButtonBox.Save).clicked.connect(self.saveSettings)
 
         # set the calendars
         self.sense_start_edit.setCalendarPopup(1)
