@@ -31,9 +31,9 @@ import json
 
 from qgis.PyQt.QtGui import *
 from qgis.PyQt.QtWidgets import *
-from qgis.PyQt import uic
-from qgis.PyQt import QtCore
-from qgis.PyQt.Qt import *
+from qgis.PyQt import uic, QtCore, Qt
+# from qgis.PyQt import QtCore
+# from qgis.PyQt.Qt import *            #would be nice to import specific modules
 from qgis.gui import QgsMessageBar
 
 from .img_browser import ImgBrowser

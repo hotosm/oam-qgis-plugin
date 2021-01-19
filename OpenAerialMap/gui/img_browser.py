@@ -29,9 +29,9 @@ import json
 from datetime import datetime
 from dateutil import parser
 
-from qgis.PyQt import QtGui, uic
+from qgis.PyQt import uic, Qt
 from qgis.PyQt import QtCore
-from qgis.PyQt.Qt import *
+from qgis.PyQt.QtGui import *
 from qgis.PyQt.QtWidgets import *
 # from PyQt4.Qt import QGraphicsScene, QPixmap
 

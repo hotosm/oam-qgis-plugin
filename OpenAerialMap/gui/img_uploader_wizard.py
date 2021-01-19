@@ -29,8 +29,9 @@ from builtins import range
 
 import os, sys
 
-from qgis.PyQt import QtWidgets, uic
-from qgis.PyQt.Qt import *
+from qgis.PyQt import Qt, uic
+from qgis.PyQt.QtWidgets import *
+
 
 from qgis.gui import QgsMessageBar
 from qgis.core import QgsMapLayer, QgsMessageLog
@@ -49,7 +50,7 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_uploader_wizard.ui'))
 
 
-class ImgUploaderWizard(QtWidgets.QWizard, FORM_CLASS):
+class ImgUploaderWizard(QWizard, FORM_CLASS):
 
     def __init__(self, iface, settings, parent=None):
         """Constructor."""
@@ -84,9 +85,9 @@ class ImgUploaderWizard(QtWidgets.QWizard, FORM_CLASS):
         self.bar2.setSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         self.page(2).layout().addWidget(self.bar2)
 
-        self.setButtonText(QtWidgets.QWizard.CustomButton1,
+        self.setButtonText(QWizard.CustomButton1,
                            self.tr("&Start upload"))
-        self.setOption(QtWidgets.QWizard.HaveCustomButton1, True)
+        self.setOption(QWizard.HaveCustomButton1, True)
         self.button(QWizard.CustomButton1).setVisible(False)
 
         self.settings = settings

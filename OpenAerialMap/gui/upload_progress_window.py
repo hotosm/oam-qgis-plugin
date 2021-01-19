@@ -31,8 +31,8 @@ import sys, os, time, math
 # import traceback
 # from ast import literal_eval
 
-from qgis.PyQt import QtCore
-from qgis.PyQt.QtGui import *      # modify this part?
+from qgis.PyQt.QtWidgets import *
+from qgis.PyQt.QtGui import *  # modify this part?
 from qgis.PyQt.QtCore import QThread, pyqtSignal
 from qgis.PyQt.Qt import *
 
