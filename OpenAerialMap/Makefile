@@ -177,7 +177,7 @@ package_master:
 	@echo "------------------------------------------------"
 	rm -f $(PLUGINNAME).zip
 	git archive -o $(PLUGINNAME).zip master
-	pyrcc4 -o resources_rc.py resources.qrc
+	pyrcc5 -o resources_rc.py resources.qrc
 	zip -u $(PLUGINNAME).zip resources_rc.py
 	echo "Created package: $(PLUGINNAME).zip"
 
