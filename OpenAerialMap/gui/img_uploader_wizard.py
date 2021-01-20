@@ -28,7 +28,9 @@ from builtins import str
 from builtins import range
 
 import os, sys
-from qgis.PyQt import Qt, uic, QtCore
+from qgis.PyQt import uic, Qt
+from qgis.PyQt.QtGui import *
+from qgis.PyQt.QtCore import *
 from qgis.PyQt.QtWidgets import *
 
 
