@@ -31,9 +31,9 @@ from builtins import object
 # from PyQt4.QtGui import *
 # from qgis.core import *
 
-from qgis.PyQt.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
+from qgis.PyQt.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, QUrl
 from qgis.PyQt.QtWidgets import QAction
-from qgis.PyQt.QtGui import QIcon
+from qgis.PyQt.QtGui import QIcon, QDesktopServices
 
 # icon images
 import resources_rc
@@ -205,9 +205,16 @@ class OpenAerialMap(object):
         currentAbsPath = os.path.abspath(__file__)
         helpAbsPath = os.path.join(
             os.path.dirname(currentAbsPath),
-            'help/index.html')
-        url = 'file://' + str(helpAbsPath)
-        webbrowser.open_new(url)
+            'help/build/html/index.html')
+        # url = 'file://' + str(helpAbsPath)
+        QDesktopServices.openUrl(QUrl.fromLocalFile(helpAbsPath))
+        # webbrowser.open_new(url)
+        """
+        def on_helpbtn_clicked(cls):
+        html_path = os.path.join(current_path, "..", "docs", "build", "html")
+        path = os.path.join(html_path, "index.html")
+        QtGui.QDesktopServices.openUrl(QtCore.QUrl.fromLocalFile(path))
+        """
 
     def displayTestWidget(self):
         pass
