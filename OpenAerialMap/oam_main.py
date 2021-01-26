@@ -49,6 +49,7 @@ from .set_env import SetEnvironment
 import os, sys
 import webbrowser
 
+
 class OpenAerialMap(object):
     """QGIS Plugin Implementation."""
 

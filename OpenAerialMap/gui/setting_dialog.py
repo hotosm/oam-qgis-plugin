@@ -28,7 +28,7 @@ import os, sys
 
 from qgis.PyQt.QtGui import *
 from qgis.PyQt.QtWidgets import *
-from qgis.PyQt import uic, Qt
+from qgis.PyQt import uic
 from qgis.PyQt import QtCore
 # from qgis.PyQt.Qt import *
 

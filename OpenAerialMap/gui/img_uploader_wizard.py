@@ -28,7 +28,7 @@ from builtins import str
 from builtins import range
 
 import os, sys
-from qgis.PyQt import uic, Qt
+from qgis.PyQt import uic
 from qgis.PyQt.QtGui import *
 from qgis.PyQt.QtCore import *
 from qgis.PyQt.QtWidgets import *
@@ -64,8 +64,7 @@ class ImgUploaderWizard(QWizard, FORM_CLASS):
         self.iface = iface
         self.setupUi(self)
 
-        self.setWindowFlags(QtCore.Qt.WindowCloseButtonHint |
-                            QtCore.Qt.WindowMinimizeButtonHint)
+        self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.WindowMinimizeButtonHint)
 
         # Message bars need to be attached to pages, since the wizard object
         # does not have a layout. It doesn't work to attach the same bar
