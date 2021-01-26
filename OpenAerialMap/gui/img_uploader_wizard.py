@@ -39,8 +39,8 @@ from qgis.PyQt import uic
 from qgis.PyQt.QtCore import *
 from qgis.PyQt.QtGui import *
 from qgis.PyQt.QtWidgets import *
-from qgis.core import QgsMessageLog, Qgis
 from qgis.gui import QgsMessageBar
+from qgis.core import QgsMessageLog, Qgis
 
 from .upload_progress_window import UploadProgressWindow
 
@@ -226,7 +226,7 @@ class ImgUploaderWizard(QWizard, FORM_CLASS):
                     msg = result_val["msg"]
                     self.bar0.clearWidgets()
                     self.bar0.pushMessage("CRITICAL", msg, Qgis.Critical)
-                    QgsMessageLog.logMessage("CRITICAL", msg, level=QgsMessageLog.INFO)
+                    QgsMessageLog.logMessage("CRITICAL", msg, level=Qgis.Critical)
 
             if selected_layers:
                 for item in selected_layers:
