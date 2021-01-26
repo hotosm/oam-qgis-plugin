@@ -33,7 +33,6 @@ from qgis.PyQt.QtGui import *
 from qgis.PyQt.QtCore import *
 from qgis.PyQt.QtWidgets import *
 
-
 from qgis.gui import QgsMessageBar
 from qgis.core import QgsMapLayer, QgsMessageLog
 # from qgis.core import QgsRasterLayer, QgsMapLayerRegistry
@@ -45,7 +44,6 @@ from .upload_progress_window import UploadProgressWindow
 from module.module_gdal_utilities import ReprojectionCmdWindow
 from module.module_validate_files import validate_layer, validate_file
 from module.module_img_utilities import ThumbnailCreation
-
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_uploader_wizard.ui'))
@@ -146,7 +144,6 @@ class ImgUploaderWizard(QWizard, FORM_CLASS):
         # temporarily disable trigger_tiling_check
         self.notify_oam_check.setEnabled(False)
 
-
     # handlers for navigation
     def nextPage(self):
         if self.currentId() == 1:
@@ -188,9 +185,9 @@ class ImgUploaderWizard(QWizard, FORM_CLASS):
         all_layers = self.iface.mapCanvas().layers()
         for layer in all_layers:
             if not self.layers_list_widget.findItems(
-                layer.name(), Qt.MatchExactly):
-                if not self.sources_list_widget.findItems(
                     layer.name(), Qt.MatchExactly):
+                if not self.sources_list_widget.findItems(
+                        layer.name(), Qt.MatchExactly):
                     item = QListWidgetItem()
                     item.setText(layer.name())
                     item.setData(
@@ -210,17 +207,14 @@ class ImgUploaderWizard(QWizard, FORM_CLASS):
         selected_layers = self.layers_list_widget.selectedItems()
         if not filename and not selected_layers:
             self.bar0.clearWidgets()
-            self.bar0.pushMessage(
-                'WARNING',
-                'Either a layer or file should be selected to be added',
-                level=QgsMessageBar.WARNING)
+            self.bar0.pushMessage('WARNING', 'Either a layer or file should be selected to be added', Qgis.Warning)
         else:
             added = False
             if filename:
                 result_val = validate_file(filename)
                 if result_val["val"]:
                     if not self.sources_list_widget.findItems(
-                        filename, Qt.MatchExactly):
+                            filename, Qt.MatchExactly):
                         item = QListWidgetItem()
                         item.setText(os.path.basename(filename))
                         item.setData(Qt.UserRole, os.path.abspath(filename))
@@ -232,20 +226,14 @@ class ImgUploaderWizard(QWizard, FORM_CLASS):
                 else:
                     msg = result_val["msg"]
                     self.bar0.clearWidgets()
-                    self.bar0.pushMessage(
-                        "CRITICAL",
-                        msg,
-                        level=QgsMessageBar.CRITICAL)
-                    QgsMessageLog.logMessage(
-                        "CRITICAL",
-                        msg,
-                        level=QgsMessageLog.INFO)
+                    self.bar0.pushMessage("CRITICAL", msg, Qgis.Critical)
+                    QgsMessageLog.logMessage("CRITICAL", msg, level=QgsMessageLog.INFO)
 
             if selected_layers:
                 for item in selected_layers:
                     if validate_layer(item.text(), self.iface):
                         if not self.sources_list_widget.findItems(
-                            item.text(), Qt.MatchExactly):
+                                item.text(), Qt.MatchExactly):
                             self.layers_list_widget.takeItem(
                                 self.layers_list_widget.row(item))
                             self.sources_list_widget.addItem(item)
@@ -253,16 +241,10 @@ class ImgUploaderWizard(QWizard, FORM_CLASS):
                             added = True
                     else:
                         self.bar0.clearWidgets()
-                        self.bar0.pushMessage(
-                            "CRITICAL",
-                            "Vector layers cannot be selected for upload",
-                            level=QgsMessageBar.CRITICAL)
+                        self.bar0.pushMessage("CRITICAL", "Vector layers cannot be selected for upload", Qgis.Critical)
             if added:
                 self.bar0.clearWidgets()
-                self.bar0.pushMessage(
-                    'INFO',
-                    'Source(s) added to the upload queue',
-                    level=QgsMessageBar.INFO)
+                self.bar0.pushMessage('INFO', 'Source(s) added to the upload queue', Qgis.Info)
 
     def removeSources(self):
         selected_sources = self.sources_list_widget.selectedItems()
@@ -280,14 +262,11 @@ class ImgUploaderWizard(QWizard, FORM_CLASS):
                 for layer in all_layers:
                     if item.text() == layer.name():
                         if not self.layers_list_widget.findItems(
-                            item.text(), Qt.MatchExactly):
+                                item.text(), Qt.MatchExactly):
                             self.layers_list_widget.addItem(item)
         else:
             self.bar0.clearWidgets()
-            self.bar0.pushMessage(
-                'WARNING',
-                'An imagery source must be selected to be removed',
-                level=QgsMessageBar.WARNING)
+            self.bar0.pushMessage('WARNING', 'An imagery source must be selected to be removed', Qgis.Warning)
 
     def upSource(self):
         selected_layers = self.sources_list_widget.selectedItems()
@@ -321,8 +300,8 @@ class ImgUploaderWizard(QWizard, FORM_CLASS):
         self.sensor_edit.setText(self.settings.value('SENSOR'))
         self.sensor_edit.setCursorPosition(0)
         self.sense_start_edit.setDate(QDateTime.fromString(
-                                      self.settings.value('SENSE_START'),
-                                      Qt.ISODate).date())
+            self.settings.value('SENSE_START'),
+            Qt.ISODate).date())
         self.sense_start_edit.setTime(
             QDateTime.fromString(self.settings.value('SENSE_START'),
                                  Qt.ISODate).time())
@@ -362,19 +341,13 @@ class ImgUploaderWizard(QWizard, FORM_CLASS):
         selected_layers = self.added_sources_list_widget.selectedItems()
         if not selected_layers:
             self.bar1.clearWidgets()
-            self.bar1.pushMessage(
-                'WARNING',
-                'One or more source imagery should be selected to have ' +
-                'the metadata saved',
-                level=QgsMessageBar.WARNING)
+            self.bar1.pushMessage('WARNING', 'One or more source imagery should be selected to have the metadata saved',
+                                  Qgis.Warning)
         else:
             if not self.reproject_check_box.isChecked():
 
                 self.bar1.clearWidgets()
-                self.bar1.pushMessage(
-                    'INFO',
-                    'Metadata extraction is being processed...',
-                    level=QgsMessageBar.INFO)
+                self.bar1.pushMessage('INFO', 'Metadata extraction is being processed...', Qgis.Info)
 
                 # num_selected_layers = len(selected_layers)
                 for each_layer in selected_layers:
@@ -383,10 +356,7 @@ class ImgUploaderWizard(QWizard, FORM_CLASS):
                     self.exportMetaAsTextFile(file_abspath)
 
                 self.bar1.clearWidgets()
-                self.bar1.pushMessage(
-                    'INFO',
-                    'Metadata for the selected sources were saved',
-                    level=QgsMessageBar.INFO)
+                self.bar1.pushMessage('INFO', 'Metadata for the selected sources were saved', Qgis.Info)
             else:
                 qMsgBox = QMessageBox()
                 qMsgBox.setWindowTitle("Confirmation")
@@ -414,15 +384,9 @@ class ImgUploaderWizard(QWizard, FORM_CLASS):
                     index = 0
 
                     self.bar1.clearWidgets()
-                    self.bar1.pushMessage(
-                        'INFO',
-                        'Reprojecting files: {0}th image '.format(
-                            self.numReprojectionFinished + 1
-                        ) +
-                        'out of {0} is being processed...'.format(
-                            self.numReprojectionCmdWindows
-                        ),
-                        level=QgsMessageBar.INFO)
+                    self.bar1.pushMessage('INFO', 'Reprojecting files: {0}th image '.format(
+                        self.numReprojectionFinished + 1) + 'out of {0} is being processed...'.format(
+                        self.numReprojectionCmdWindows), Qgis.Info)
 
                     for each_layer in selected_layers:
                         file_abspath = each_layer.data(Qt.UserRole)
@@ -461,11 +425,8 @@ class ImgUploaderWizard(QWizard, FORM_CLASS):
 
                         else:
                             self.bar1.clearWidgets()
-                            self.bar1.pushMessage(
-                                'WARNING',
-                                'Suffix _EPSG3857 is already included in ' +
-                                'one (some) of the selected files...',
-                                level=QgsMessageBar.WARNING)
+                            self.bar1.pushMessage('WARNING', 'Suffix _EPSG3857 is already included in ' +
+                                                  'one (some) of the selected files...', Qgis.Warning)
                             # break
 
     def cancelSingleReprojectionProcess(self, index):
@@ -528,19 +489,11 @@ class ImgUploaderWizard(QWizard, FORM_CLASS):
 
         if self.numReprojectionFinished < self.numReprojectionCmdWindows:
             self.bar1.clearWidgets()
-            self.bar1.pushMessage(
-                'INFO',
-                'Reprojecting files: {0}th image '.format(
-                    self.numReprojectionFinished + 1) +
-                'out of {0} is being processed...'.format(
-                    self.numReprojectionCmdWindows),
-                level=QgsMessageBar.INFO)
+            self.bar1.pushMessage('INFO', 'Reprojecting files: {0}th image '.format(self.numReprojectionFinished + 1) +
+                                  'out of {0} is being processed...'.format(self.numReprojectionCmdWindows), Qgis.Info)
         else:
             self.bar1.clearWidgets()
-            self.bar1.pushMessage(
-                'INFO',
-                'Metadata for the selected sources were saved',
-                level=QgsMessageBar.INFO)
+            self.bar1.pushMessage('INFO', 'Metadata for the selected sources were saved', Qgis.Info)
 
     def createFootPrint(self):
         # probably need to insert the codes to create and insert
@@ -584,7 +537,7 @@ class ImgUploaderWizard(QWizard, FORM_CLASS):
         f.write(strMetaForUpload)
         f.close()
 
-        return(True)
+        return (True)
 
     def loadSavedMetadata(self):
 
@@ -607,49 +560,49 @@ class ImgUploaderWizard(QWizard, FORM_CLASS):
             self.specify_edit.setEnabled(0)
     """
 
-
     """ need to simplify this part later """
+
     def setAWSS3Edit(self):
-            self.aws_bucket_name_edit.setVisible(True)
-            self.aws_bucket_name_label.setVisible(True)
-            self.aws_key_id_edit.setVisible(True)
-            self.aws_key_id_label.setVisible(True)
-            self.aws_secret_key_edit.setVisible(True)
-            self.aws_secret_key_label.setVisible(True)
-            self.google_client_secret_file_edit.setVisible(False)
-            self.google_client_secret_file_label.setVisible(False)
-            self.google_application_name_edit.setVisible(False)
-            self.google_application_name_label.setVisible(False)
-            self.dropbox_access_token_edit.setVisible(False)
-            self.dropbox_access_token_label.setVisible(False)
+        self.aws_bucket_name_edit.setVisible(True)
+        self.aws_bucket_name_label.setVisible(True)
+        self.aws_key_id_edit.setVisible(True)
+        self.aws_key_id_label.setVisible(True)
+        self.aws_secret_key_edit.setVisible(True)
+        self.aws_secret_key_label.setVisible(True)
+        self.google_client_secret_file_edit.setVisible(False)
+        self.google_client_secret_file_label.setVisible(False)
+        self.google_application_name_edit.setVisible(False)
+        self.google_application_name_label.setVisible(False)
+        self.dropbox_access_token_edit.setVisible(False)
+        self.dropbox_access_token_label.setVisible(False)
 
     def setGoogleDriveEdit(self):
-            self.aws_bucket_name_edit.setVisible(False)
-            self.aws_bucket_name_label.setVisible(False)
-            self.aws_key_id_edit.setVisible(False)
-            self.aws_key_id_label.setVisible(False)
-            self.aws_secret_key_edit.setVisible(False)
-            self.aws_secret_key_label.setVisible(False)
-            self.google_client_secret_file_edit.setVisible(True)
-            self.google_client_secret_file_label.setVisible(True)
-            self.google_application_name_edit.setVisible(True)
-            self.google_application_name_label.setVisible(True)
-            self.dropbox_access_token_edit.setVisible(False)
-            self.dropbox_access_token_label.setVisible(False)
+        self.aws_bucket_name_edit.setVisible(False)
+        self.aws_bucket_name_label.setVisible(False)
+        self.aws_key_id_edit.setVisible(False)
+        self.aws_key_id_label.setVisible(False)
+        self.aws_secret_key_edit.setVisible(False)
+        self.aws_secret_key_label.setVisible(False)
+        self.google_client_secret_file_edit.setVisible(True)
+        self.google_client_secret_file_label.setVisible(True)
+        self.google_application_name_edit.setVisible(True)
+        self.google_application_name_label.setVisible(True)
+        self.dropbox_access_token_edit.setVisible(False)
+        self.dropbox_access_token_label.setVisible(False)
 
     def setDroboxEdit(self):
-            self.aws_bucket_name_edit.setVisible(False)
-            self.aws_bucket_name_label.setVisible(False)
-            self.aws_key_id_edit.setVisible(False)
-            self.aws_key_id_label.setVisible(False)
-            self.aws_secret_key_edit.setVisible(False)
-            self.aws_secret_key_label.setVisible(False)
-            self.google_client_secret_file_edit.setVisible(False)
-            self.google_client_secret_file_label.setVisible(False)
-            self.google_application_name_edit.setVisible(False)
-            self.google_application_name_label.setVisible(False)
-            self.dropbox_access_token_edit.setVisible(True)
-            self.dropbox_access_token_label.setVisible(True)
+        self.aws_bucket_name_edit.setVisible(False)
+        self.aws_bucket_name_label.setVisible(False)
+        self.aws_key_id_edit.setVisible(False)
+        self.aws_key_id_label.setVisible(False)
+        self.aws_secret_key_edit.setVisible(False)
+        self.aws_secret_key_label.setVisible(False)
+        self.google_client_secret_file_edit.setVisible(False)
+        self.google_client_secret_file_label.setVisible(False)
+        self.google_application_name_edit.setVisible(False)
+        self.google_application_name_label.setVisible(False)
+        self.dropbox_access_token_edit.setVisible(True)
+        self.dropbox_access_token_label.setVisible(True)
 
     def setStorageType(self):
         if self.storage_type_combo_box.currentIndex() == 0:
@@ -787,10 +740,7 @@ class ImgUploaderWizard(QWizard, FORM_CLASS):
 
         if not self.license_check_box.isChecked():
             self.bar2.clearWidgets()
-            self.bar2.pushMessage(
-                'CRITICAL',
-                'Please check the lisence term.',
-                level=QgsMessageBar.WARNING)
+            self.bar2.pushMessage('CRITICAL', 'Please check the lisence term.', Qgis.Critical)
         else:
             for index in range(self.sources_list_widget.count()):
                 upload_file_abspath = str(
@@ -813,26 +763,26 @@ class ImgUploaderWizard(QWizard, FORM_CLASS):
                 bucket_key = None
                 bucket_secret = None
 
-                #if self.storage_combo_box.currentIndex() == 0:
+                # if self.storage_combo_box.currentIndex() == 0:
                 #    bucket_name = 'oam-qgis-plugin-test'
-                #else:
+                # else:
                 bucket_name = str(self.aws_bucket_name_edit.text())
-                #if not bucket_name:
+                # if not bucket_name:
                 #    self.bar2.clearWidgets()
                 #    self.bar2.pushMessage(
                 #        'WARNING',
                 #        'The bucket for upload must be provided',
-                #        level=QgsMessageBar.WARNING)
+                #        Qgis.Warning)
 
                 bucket_key = str(self.aws_key_id_edit.text())
                 bucket_secret = str(self.aws_secret_key_edit.text())
 
                 self.upPrgWin.startUpload('aws',
-                                            upload_file_abspaths,
-                                            upload_options,
-                                            awsBucketKey=bucket_key,
-                                            awsBucketSecret=bucket_secret,
-                                            awsBucketName=bucket_name)
+                                          upload_file_abspaths,
+                                          upload_options,
+                                          awsBucketKey=bucket_key,
+                                          awsBucketSecret=bucket_secret,
+                                          awsBucketName=bucket_name)
 
             elif self.storage_type_combo_box.currentIndex() == 1:
                 qMsgBox = QMessageBox()
@@ -852,16 +802,10 @@ class ImgUploaderWizard(QWizard, FORM_CLASS):
     def displayConnectionResult(self, didStart):
         if didStart:
             self.bar2.clearWidgets()
-            self.bar2.pushMessage(
-                'INFO',
-                'Uploading imagery and metadata...',
-                level=QgsMessageBar.INFO)
+            self.bar2.pushMessage('INFO', 'Uploading imagery and metadata...', Qgis.Info)
         else:
             self.bar2.clearWidgets()
-            self.bar2.pushMessage(
-                'CRITICAL',
-                'Connection to S3 server failed.',
-                level=QgsMessageBar.CRITICAL)
+            self.bar2.pushMessage('CRITICAL', 'Connection to S3 server failed.',Qgis.Critical)
 
     def updateListWidgets(self, fileAbsPath):
         # print('fileAbsPath: ' + fileAbsPath)
@@ -891,8 +835,5 @@ class ImgUploaderWizard(QWizard, FORM_CLASS):
         self.button(QWizard.FinishButton).setVisible(True)
 
         self.bar2.clearWidgets()
-        self.bar2.pushMessage(
-            'Upload Result',
-            'Success:{0} Cancel:{1} Fail:{2}'.format(
-                numSuccess, numCancelled, numFailed),
-            level=QgsMessageBar.INFO)
+        self.bar2.pushMessage('Upload Result', 'Success:{0} Cancel:{1} Fail:{2}'.format(numSuccess, numCancelled,
+                                                                                        numFailed), Qgis.Info)
