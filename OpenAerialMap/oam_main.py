@@ -206,15 +206,9 @@ class OpenAerialMap(object):
         helpAbsPath = os.path.join(
             os.path.dirname(currentAbsPath),
             'help/build/html/index.html')
-        # url = 'file://' + str(helpAbsPath)
-        QDesktopServices.openUrl(QUrl.fromLocalFile(helpAbsPath))
-        # webbrowser.open_new(url)
-        """
-        def on_helpbtn_clicked(cls):
-        html_path = os.path.join(current_path, "..", "docs", "build", "html")
-        path = os.path.join(html_path, "index.html")
-        QtGui.QDesktopServices.openUrl(QtCore.QUrl.fromLocalFile(path))
-        """
+        url = 'file://' + str(helpAbsPath)
+        # QDesktopServices.openUrl(QUrl.fromLocalFile(helpAbsPath))
+        webbrowser.open_new(url)
 
     def displayTestWidget(self):
         pass
