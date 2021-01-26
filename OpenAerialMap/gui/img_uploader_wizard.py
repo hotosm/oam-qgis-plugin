@@ -22,28 +22,27 @@
  ***************************************************************************/
  This script initializes the plugin, making it known to QGIS.
 """
-from __future__ import print_function
 from __future__ import absolute_import
-from builtins import str
-from builtins import range
+from __future__ import print_function
 
-import os, sys
-from qgis.PyQt import uic
-from qgis.PyQt.QtGui import *
-from qgis.PyQt.QtCore import *
-from qgis.PyQt.QtWidgets import *
-
-from qgis.gui import QgsMessageBar
-from qgis.core import QgsMapLayer, QgsMessageLog
 # from qgis.core import QgsRasterLayer, QgsMapLayerRegistry
-import json, time, math, imghdr, tempfile
-import traceback
+import json
+import os
+from builtins import range
+from builtins import str
 
-from module.module_handle_metadata import ImgMetadataHandler
-from .upload_progress_window import UploadProgressWindow
 from module.module_gdal_utilities import ReprojectionCmdWindow
-from module.module_validate_files import validate_layer, validate_file
+from module.module_handle_metadata import ImgMetadataHandler
 from module.module_img_utilities import ThumbnailCreation
+from module.module_validate_files import validate_layer, validate_file
+from qgis.PyQt import uic
+from qgis.PyQt.QtCore import *
+from qgis.PyQt.QtGui import *
+from qgis.PyQt.QtWidgets import *
+from qgis.core import QgsMessageLog, Qgis
+from qgis.gui import QgsMessageBar
+
+from .upload_progress_window import UploadProgressWindow
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_uploader_wizard.ui'))
