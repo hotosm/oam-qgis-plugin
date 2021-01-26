@@ -22,18 +22,15 @@
  ***************************************************************************/
  This script initializes the plugin, making it known to QGIS.
 """
+import os
 from builtins import str
 
-import os, sys
-
+from qgis.PyQt import uic
+from qgis.PyQt.QtCore import *
 from qgis.PyQt.QtGui import *
 from qgis.PyQt.QtWidgets import *
-from qgis.PyQt import uic
-from qgis.PyQt import QtCore
-# from qgis.PyQt.Qt import *
 
-from qgis.core import QgsMessageLog
-import time
+# from qgis.PyQt.Qt import *
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/setting_dialog.ui'))
