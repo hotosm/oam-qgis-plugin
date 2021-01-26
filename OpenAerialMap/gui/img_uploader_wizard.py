@@ -719,6 +719,7 @@ class ImgUploaderWizard(QWizard, FORM_CLASS):
                 with open(json_file_abspath) as infile:
                     temp.write(infile.read() + '\n\n')
             else:
+                #TODO: fix ERROR "write(self, Union[QByteArray, bytes, bytearray]): argument 1 has unexpected type 'str'"
                 temp.write('%s was not found. Please save it in advance.\n\n'
                            % str(json_file_abspath))
         temp.flush()
