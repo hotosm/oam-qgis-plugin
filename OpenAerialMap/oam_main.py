@@ -29,8 +29,8 @@ import webbrowser
 from builtins import object
 from builtins import str
 
-from qgis.PyQt.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
-from qgis.PyQt.QtGui import QIcon
+from qgis.PyQt.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, QUrl
+from qgis.PyQt.QtGui import QIcon, QDesktopServices
 from qgis.PyQt.QtWidgets import QAction
 
 from .gui.img_search_dialog import ImgSearchDialog
@@ -205,8 +205,8 @@ class OpenAerialMap(object):
             os.path.dirname(currentAbsPath),
             'help/build/html/index.html')
         url = 'file://' + str(helpAbsPath)
-        # QDesktopServices.openUrl(QUrl.fromLocalFile(helpAbsPath))
-        webbrowser.open_new(url)
+        QDesktopServices.openUrl(QUrl.fromLocalFile(helpAbsPath))
+        # webbrowser.open_new(url)
 
     def displayTestWidget(self):
         pass
