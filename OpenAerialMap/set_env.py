@@ -22,15 +22,15 @@
  ***************************************************************************/
  This script initializes the plugin, making it known to QGIS.
 """
-from builtins import str
+import os
+import sys
 from builtins import map
 from builtins import object
+from builtins import str
 
-import os, sys
-
-from qgis.core import *
 from osgeo import gdal
 from qgis.PyQt.QtCore import QDir
+from qgis.core import *
 
 
 class SetEnvironment(object):
