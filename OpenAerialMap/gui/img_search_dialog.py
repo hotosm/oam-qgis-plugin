@@ -74,7 +74,8 @@ class ImgSearchDialog(QDialog, FORM_CLASS):
         # self.returnPressed.connect(self.startSearch)
         # self.pushButtonSearchLatest.clicked.connect(self.searchLatest)
         # self.pushButtonBrowseLocation.clicked.connect(self.browseLocation)
-        self.connect(self.listWidget, QtCore.SIGNAL("itemClicked(QListWidgetItem *)"), self.browseThumbnailAndMeta)
+        # TODO: understand the purpose of the below signal call, seems to have no effect for widgets to load
+        # self.connect(self.listWidget, QtCore.SIGNAL("itemClicked(QListWidgetItem *)"), self.browseThumbnailAndMeta)
 
         self.pbSetDefault.clicked.connect(self.setDeafult)
         self.pbLoadDefault.clicked.connect(self.loadDeafult)
