@@ -317,8 +317,7 @@ class ImgSearchDialog(QDialog, FORM_CLASS):
             print(repr(e))
             qMsgBox = QMessageBox()
             qMsgBox.setWindowTitle('Message')
-            qMsgBox.setText("Please make sure if you entered valid data" +
-                            "/internet connection, and try again.")
+            qMsgBox.setText("Please make sure if you entered valid data/internet connection, and try again.")
             qMsgBox.exec_()
 
     """ This function is not in use. """
