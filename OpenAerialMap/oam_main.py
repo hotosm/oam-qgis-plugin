@@ -23,31 +23,29 @@
  This script initializes the plugin, making it known to QGIS.
 """
 from __future__ import absolute_import
-from builtins import str
+
+import os
+import webbrowser
 from builtins import object
+from builtins import str
+
+from qgis.PyQt.QtCore import QSettings, QTranslator, qVersion, QCoreApplication
+from qgis.PyQt.QtGui import QIcon
+from qgis.PyQt.QtWidgets import QAction
+
+from .gui.img_search_dialog import ImgSearchDialog
+# classes for GUI
+from .gui.img_uploader_wizard import ImgUploaderWizard
+from .gui.setting_dialog import SettingDialog
+# set os-specific environment
+from .set_env import SetEnvironment
+
 
 # Qt classes
 # from PyQt4.QtCore import *
 # from PyQt4.QtGui import *
 # from qgis.core import *
-
-from qgis.PyQt.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, QUrl
-from qgis.PyQt.QtWidgets import QAction
-from qgis.PyQt.QtGui import QIcon, QDesktopServices
-
 # icon images
-import resources_rc
-
-# classes for GUI
-from .gui.img_uploader_wizard import ImgUploaderWizard
-from .gui.img_search_dialog import ImgSearchDialog
-from .gui.setting_dialog import SettingDialog
-
-# set os-specific environment
-from .set_env import SetEnvironment
-
-import os, sys
-import webbrowser
 
 
 class OpenAerialMap(object):
