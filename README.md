@@ -126,7 +126,9 @@ Regular meetings are not being held at the moment, but please leave any comment 
 - [ ] Test using required features as indicated above.
 - [x] Test imagery query service from OAM catalog: throws jsonError`JSONDecodeError('Expecting value: line 1  column 1 (char 0)',)`
   
--[ ] Inspect api query params and headers for above response
+- [ ] Inspect api query params and headers for above response
 - [ ] add Date/Calendar widget for catalog query selection
-
+- [ ] Refactor backup_files to v3 api
+- [x] Refactor Widgets to qt5 api: No changes made using qtdesigner just refactoring imports to respective class 
+  module i.e `imports from QtGui module` to `QtWidgets module`
 
