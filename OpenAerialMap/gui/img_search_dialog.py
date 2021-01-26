@@ -22,24 +22,22 @@
  ***************************************************************************/
  This script initializes the plugin, making it known to QGIS.
 """
-from __future__ import print_function
 from __future__ import absolute_import
+from __future__ import print_function
+
+import os
 from builtins import str
 
-import os, sys
-import json
-
+from module.module_access_oam_catalog import OAMCatalogAccess
+from module.module_geocoding import nominatim_search
+from qgis.PyQt import uic, QtCore
+from qgis.PyQt.QtCore import *
 from qgis.PyQt.QtGui import *
 from qgis.PyQt.QtWidgets import *
-from qgis.PyQt import uic, QtCore, Qt
-# from qgis.PyQt import QtCore
 # from qgis.PyQt.Qt import *            #would be nice to import specific modules
 from qgis.gui import QgsMessageBar
 
 from .img_browser import ImgBrowser
-from module.module_access_oam_catalog import OAMCatalogAccess
-from module.module_geocoding import nominatim_search
-
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_search_dialog.ui'))
@@ -76,9 +74,7 @@ class ImgSearchDialog(QDialog, FORM_CLASS):
         # self.returnPressed.connect(self.startSearch)
         # self.pushButtonSearchLatest.clicked.connect(self.searchLatest)
         # self.pushButtonBrowseLocation.clicked.connect(self.browseLocation)
-        self.connect(self.listWidget, QtCore.SIGNAL(
-            "itemClicked(QListWidgetItem *)"),
-            self.browseThumbnailAndMeta)
+        self.connect(self.listWidget, QtCore.SIGNAL("itemClicked(QListWidgetItem *)"), self.browseThumbnailAndMeta)
 
         self.pbSetDefault.clicked.connect(self.setDeafult)
         self.pbLoadDefault.clicked.connect(self.loadDeafult)
@@ -101,7 +97,7 @@ class ImgSearchDialog(QDialog, FORM_CLASS):
         self.settings.beginGroup("Storage")
 
         if self.settings.value('CATALOG_URL') is None or \
-            str(self.settings.value('CATALOG_URL')) == '':
+                str(self.settings.value('CATALOG_URL')) == '':
             # self.catalogUrl = "https://oam-catalog.herokuapp.com"
             self.catalogUrl = "http://api.openaerialmap.org"
         else:
@@ -114,7 +110,6 @@ class ImgSearchDialog(QDialog, FORM_CLASS):
         self.catalog_url_label.setText(catalogUrlLabel)
 
         self.imgBrowser = None
-
 
     def closeEvent(self, evnt):
         pass
@@ -135,9 +130,9 @@ class ImgSearchDialog(QDialog, FORM_CLASS):
 
         self.settings.setValue('LOCATION', '')
         self.settings.setValue('ACQUISITION_FROM',
-            QDate.currentDate().addMonths(-12).toString(Qt.ISODate))
+                               QDate.currentDate().addMonths(-12).toString(Qt.ISODate))
         self.settings.setValue('ACQUISITION_TO',
-            QDate.currentDate().toString(Qt.ISODate))
+                               QDate.currentDate().toString(Qt.ISODate))
         self.settings.setValue('GSD_FROM', '')
         self.settings.setValue('GSD_TO', '')
         self.settings.setValue('LIMIT', 20)
@@ -193,36 +188,36 @@ class ImgSearchDialog(QDialog, FORM_CLASS):
         self.settings.beginGroup("ImageSearch")
 
         self.settings.setValue('CHECKBOX_LOCATION',
-            self.checkBoxLocation.isChecked())
+                               self.checkBoxLocation.isChecked())
         self.settings.setValue('CHECKBOX_ACQUISITION_FROM',
-            self.checkBoxAcquisitionFrom.isChecked())
+                               self.checkBoxAcquisitionFrom.isChecked())
         self.settings.setValue('CHECKBOX_ACQUISITION_TO',
-            self.checkBoxAcquisitionTo.isChecked())
+                               self.checkBoxAcquisitionTo.isChecked())
         self.settings.setValue('CHECKBOX_GSD_FROM',
-            self.checkBoxResolutionFrom.isChecked())
+                               self.checkBoxResolutionFrom.isChecked())
         self.settings.setValue('CHECKBOX_GSD_TO',
-            self.checkBoxResolutionTo.isChecked())
+                               self.checkBoxResolutionTo.isChecked())
 
         self.settings.setValue('LOCATION',
-            self.lineEditLocation.text())
+                               self.lineEditLocation.text())
         self.settings.setValue('ACQUISITION_FROM',
-            self.dateEditAcquisitionFrom.date().toString(Qt.ISODate))
+                               self.dateEditAcquisitionFrom.date().toString(Qt.ISODate))
         self.settings.setValue('ACQUISITION_TO',
-            self.dateEditAcquisitionTo.date().toString(Qt.ISODate))
+                               self.dateEditAcquisitionTo.date().toString(Qt.ISODate))
         if (self.lineEditResolutionFrom.text() != ''
-            and self.lineEditResolutionFrom.text() is not None):
+                and self.lineEditResolutionFrom.text() is not None):
             self.settings.setValue('GSD_FROM',
-                float(self.lineEditResolutionFrom.text()))
+                                   float(self.lineEditResolutionFrom.text()))
         if (self.lineEditResolutionTo.text() != ''
-            and self.lineEditResolutionTo.text() is not None):
+                and self.lineEditResolutionTo.text() is not None):
             self.settings.setValue('GSD_TO',
-                float(self.lineEditResolutionTo.text()))
+                                   float(self.lineEditResolutionTo.text()))
         if (self.lineEditNumImages.text() != ''
-            and self.lineEditNumImages.text() is not None):
+                and self.lineEditNumImages.text() is not None):
             self.settings.setValue('LIMIT',
-                int(self.lineEditNumImages.text()))
+                                   int(self.lineEditNumImages.text()))
         self.settings.setValue('ORDER_BY',
-            self.comboBoxOrderBy.currentIndex())
+                               self.comboBoxOrderBy.currentIndex())
         if self.radioButtonDesc.isChecked():
             self.settings.setValue('SORT', 'desc')
         else:
@@ -305,7 +300,6 @@ class ImgSearchDialog(QDialog, FORM_CLASS):
                 dictQueries['order_by'] = "gsd"
 
             print(self.comboBoxOrderBy.currentText())
-
 
             if self.radioButtonAsc.isChecked():
                 dictQueries['sort'] = "asc"
