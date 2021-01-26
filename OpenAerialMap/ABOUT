@@ -9,7 +9,7 @@ file format conversion, as well as triggering the creation of tile services.
 
 The current implementation consists of following three dialogs:
 
-1) Upload wizard: create, modify, and upload imagery and metada.
+1) Upload wizard: create, modify, and upload imagery and metadata.
 2) Imagery search dialog: search, browse, and download imagery.
 3) Settings dialog: edit user settings such as the default
 imagery metadata and upload options.
