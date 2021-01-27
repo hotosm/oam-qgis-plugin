@@ -37,13 +37,13 @@ To install:
 1. Install pyrcc5:  
 The easiest way to install `pyrcc5` is probably to use package manager.
 If using ubuntu 18.04 or its comatible distributions, following command should work:  
-```sh
+```shell
 $ sudo apt install pyqt5-dev-tools
 ```
 For the other distributions, please use the online resourece to get the information.
 
 2. Download the repository and deploy the code to the plugin directory:  
-```sh
+```shell
 $ git clone https://github.com/hotosm/oam-qgis-plugin.git  
 $ cd oam-qgis-plugin/OpenAerialMap/  
 $ make deploy
