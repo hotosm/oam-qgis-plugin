@@ -132,4 +132,5 @@ Regular meetings are not being held at the moment, but please leave any comment 
 - [ ] Refactor backup_files to v3 api
 - [x] Refactor Widgets to qt5 api: No changes made using qtdesigner just refactoring imports to respective class 
   module i.e `imports from QtGui module` to `QtWidgets module`
+- [ ] Icon not display in the toolbar 
 
