@@ -39,7 +39,7 @@ from .gui.img_uploader_wizard import ImgUploaderWizard
 from .gui.setting_dialog import SettingDialog
 # set os-specific environment
 from .set_env import SetEnvironment
-
+import resources_rc
 
 # Qt classes
 # from PyQt4.QtCore import *
