@@ -30,20 +30,21 @@ To install:
 
 ###### Dependencies:
 * [Sphinx](http://www.sphinx-doc.org/en/stable/install.html) - To create help file, Sphinx documentation generator is being used in this plugin. To install Sphinx, please refer to the OS specific instructions at the website. (NOTE: As of July 2016, document generation is supported only in Linux environment. Therefore, users of other operating systems can ignore the dependency of Sphinx.)
-* [Python](https://www.python.org/) - Installation of Sphinx requires python. If your operating system doesn't have python installed, please refer to the instruction at the website. Version 2.7 is presently being used for this plugin development.
-* pyrcc4 - To compile Qt4 resource files into python code, pyrcc4 command must be used. Please refer to the OS specific instructions below for its installation or setting path.
+* [Python](https://www.python.org/) - Installation of Sphinx requires python. If your operating system doesn't have python installed, please refer to the instruction at the website. Version 3.6 or above is presently being used for this plugin development.
+* pyrcc5 - To compile Qt5 resource files into python code, pyrcc5 command must be used. Please refer to the OS specific instructions below for its installation or setting path.
+* pyuic5 - Since there ui generated py files have beencustomized and modularized. Please avoid using the tool to generate `*.py` files ,  see **Developer guidelines instead**
 
 ###### Linux
 1. Install pyrcc5:  
 The easiest way to install `pyrcc5` is probably to use package manager.
 If using ubuntu 18.04 or its comatible distributions, following command should work:  
-```sh
+```shell
 $ sudo apt install pyqt5-dev-tools
 ```
 For the other distributions, please use the online resourece to get the information.
 
 2. Download the repository and deploy the code to the plugin directory:  
-```sh
+```shell
 $ git clone https://github.com/hotosm/oam-qgis-plugin.git  
 $ cd oam-qgis-plugin/OpenAerialMap/  
 $ make deploy
@@ -131,4 +132,7 @@ Regular meetings are not being held at the moment, but please leave any comment 
 - [ ] Refactor backup_files to v3 api
 - [x] Refactor Widgets to qt5 api: No changes made using qtdesigner just refactoring imports to respective class 
   module i.e `imports from QtGui module` to `QtWidgets module`
+- [ ] Icon not display in the toolbar 
+- [ ] Add github actions and pipeline workflow
+- [ ] PR and pipeline tests
 
