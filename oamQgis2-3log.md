@@ -1,21 +1,21 @@
 ```sh
-/home/geopro/.local/bin/qgis2to3 -w /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap
+/home/user/.local/bin/qgis2to3 -w /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap
 RefactoringTool: Skipping optional fixer: idioms
 RefactoringTool: Skipping optional fixer: ws_comma
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/make_package.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/oam_main.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/plugin_upload.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/set_env.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_backup_img_uploader_wizard.py
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/make_package.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/make_package.py	(refactored)
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/make_package.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/oam_main.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/plugin_upload.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/set_env.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_backup_img_uploader_wizard.py
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/make_package.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/make_package.py	(refactored)
 @@ -1,3 +1,4 @@
 +from __future__ import print_function
  import os, sys
  
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/oam_main.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/oam_main.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/oam_main.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/oam_main.py	(refactored)
 @@ -22,33 +22,34 @@
   ***************************************************************************/
   This script initializes the plugin, making it known to QGIS.
@@ -61,8 +61,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
      """QGIS Plugin Implementation."""
  
      def __init__(self, iface):
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/plugin_upload.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/plugin_upload.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/plugin_upload.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/plugin_upload.py	(refactored)
 @@ -4,10 +4,14 @@
          Authors: A. Pasotti, V. Picavet
          git sha              : $TemplateVCSFormat
@@ -153,8 +153,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          if res != "":
              options.username = res
          else:
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/set_env.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/set_env.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/set_env.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/set_env.py	(refactored)
 @@ -22,15 +22,18 @@
   ***************************************************************************/
   This script initializes the plugin, making it known to QGIS.
@@ -212,8 +212,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
          if len(nums) > 0:
              vers[0] = nums[0]
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_backup_img_uploader_wizard.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_backup_img_uploader_wizard.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_backup_img_uploader_wizard.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_backup_img_uploader_wizard.py	(refactored)
 @@ -21,10 +21,15 @@
   *                                                                         *
   ***************************************************************************/
@@ -236,9 +236,9 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
      def selectFile(self):
 -        selected_file = QFileDialog.getOpenFileName(
-+        selected_file, __ = QFileDialog.getOpenFileName(RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_img_search_dialog.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_img_uploader_wizard.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_module_access_s3.py
++        selected_file, __ = QFileDialog.getOpenFileName(RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_img_search_dialog.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_img_uploader_wizard.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_module_access_s3.py
 
              self,
              'Select imagery file',
@@ -321,8 +321,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              # forward the exception upstream (or try to...)
              # chunk size smaller than 5MB can cause an error, server does not expect it
              self.error.emit(e, traceback.format_exc())
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_img_search_dialog.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_img_search_dialog.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_img_search_dialog.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_img_search_dialog.py	(refactored)
 @@ -22,12 +22,14 @@
   ***************************************************************************/
   This script initializes the plugin, making it known to QGIS.
@@ -340,8 +340,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  from PyQt4.Qt import *
  from qgis.gui import QgsMessageBar
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_img_uploader_wizard.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_img_uploader_wizard.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_img_uploader_wizard.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_img_uploader_wizard.py	(refactored)
 @@ -21,10 +21,13 @@
   *                                                                         *
   ***************************************************************************/
@@ -411,8 +411,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              refFileAbsPath = str(self.sources_list_widget.item(index).data(Qt.UserRole))
              #print('refFileAbsPath: ' + refFileAbsPath)
              if fileAbsPath == refFileAbsPath:
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_module_access_s3.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_module_access_s3.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_module_access_s3.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_module_access_s3.py	(refactored)
 @@ -21,11 +21,14 @@
   *                                                                         *
   ***************************************************************************/
@@ -434,11 +434,11 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
      def getBucket(self):
  
--        for trial in xrange(3):RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_module_command_window.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/get-pip.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/setup.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/__init__.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/auth.py
+-        for trial in xrange(3):RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_module_command_window.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/get-pip.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/setup.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/__init__.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/auth.py
 
 +        for trial in range(3):
              if self.bucket: break
@@ -530,8 +530,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              ts_id = post_dict[u'id']
              time = post_dict[u'queued_at']
              QgsMessageLog.logMessage(
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_module_command_window.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_module_command_window.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_module_command_window.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_module_command_window.py	(refactored)
 @@ -22,14 +22,15 @@
   ***************************************************************************/
   This script initializes the plugin, making it known to QGIS.
@@ -550,22 +550,22 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  
  class CommandWindow(QWidget):
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/get-pip.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/get-pip.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/get-pip.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/get-pip.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import range
  #!/usr/bin/env python
  #
  # Hi There!
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/__init__.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/__init__.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/__init__.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/__init__.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2006-2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2010-2011, Eucalyptus Systems, Inc.
  # Copyright (c) 2011, Nexenta Systems Inc.
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/auth.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/auth.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/auth.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/auth.py	(refactored)
 @@ -25,6 +25,9 @@
  """
  Handles authentication required to AWS and GS
@@ -630,8 +630,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          keys.sort(cmp=lambda x, y: cmp(x.lower(), y.lower()))
          pairs = []
          for key in keys:
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/compat.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/compat.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/compat.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/compat.py	(refactored)
 @@ -1,3 +1,5 @@
 +from future import standard_library
 +standard_library.install_aliases()
@@ -647,27 +647,27 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
      long_type = int
      from configparser import ConfigParser
  else:
--    StandardError = StandardErrorRefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/compat.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/exception.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/handler.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/https_connection.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/jsonresponse.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/plugin.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/provider.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/regioninfo.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/requestlog.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/resultset.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/storage_uri.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/utils.py
+-    StandardError = StandardErrorRefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/compat.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/exception.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/handler.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/https_connection.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/jsonresponse.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/plugin.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/provider.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/regioninfo.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/requestlog.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/resultset.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/storage_uri.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/utils.py
 
 -    long_type = long
 -    from ConfigParser import SafeConfigParser as ConfigParser
 +    Exception = Exception
 +    long_type = int
 +    from configparser import SafeConfigParser as ConfigParser
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/connection.py	(refactored)
 @@ -42,6 +42,11 @@
  """
  Handles basic connections to AWS
@@ -707,8 +707,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
                  sock.sendall("%s: %s\r\n" % (k, v))
              # See discussion about this config option at
              # https://groups.google.com/forum/?fromgroups#!topic/boto-dev/teenFvOq2Cc
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/exception.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/exception.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/exception.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/exception.py	(refactored)
 @@ -24,17 +24,18 @@
  """
  Exception classes - Subclassing allows you to check for specific errors
@@ -748,15 +748,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
      def __init__(self, status, reason, body=None, *args):
          super(BotoServerError, self).__init__(status, reason, body, *args)
          self.status = status
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/handler.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/handler.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/handler.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/handler.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006,2007 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/plugin.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/plugin.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/plugin.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/plugin.py	(refactored)
 @@ -35,6 +35,7 @@
  
  The actual interface is duck typed.
@@ -765,8 +765,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  import glob
  import imp
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/provider.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/provider.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/provider.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/provider.py	(refactored)
 @@ -25,6 +25,8 @@
  """
  This class encapsulates the provider-specific header differences.
@@ -776,8 +776,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  import os
  from boto.compat import six
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/regioninfo.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/regioninfo.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/regioninfo.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/regioninfo.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006-2010 Mitch Garnaat http://garnaat.org/
@@ -801,8 +801,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          region_objs.append(
              region_cls(
                  name=region_name,
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/requestlog.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/requestlog.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/requestlog.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/requestlog.py	(refactored)
 @@ -1,7 +1,9 @@
 +from future import standard_library
 +standard_library.install_aliases()
@@ -823,8 +823,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          Thread(target=self._request_log_worker).start()
  
      def handle_request_data(self, request, response, error=False):
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/resultset.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/resultset.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/resultset.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/resultset.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006,2007 Mitch Garnaat http://garnaat.org/
@@ -839,16 +839,16 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          return self.status
  
      def startElement(self, name, attrs, connection):
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/storage_uri.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/storage_uri.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/storage_uri.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/storage_uri.py	(refactored)
 @@ -1,3 +1,5 @@
 +from builtins import str
 +from builtins import object
  # Copyright 2010 Google Inc.
  # Copyright (c) 2011, Nexenta Systems Inc.
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/utils.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/utils.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/utils.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/utils.py	(refactored)
 @@ -38,6 +38,9 @@
  """
  Some handy utility functions used by several classes.
@@ -861,21 +861,21 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  import time
 @@ -167,7 +170,7 @@
          provider = boto.provider.get_default()
-     metadata_prefix = provider.metadata_prefixRefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/awslambda/layer1.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/exception.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/response.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/wrapper.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudformation/connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudformation/stack.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudformation/template.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/__init__.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/distribution.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/identity.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/invalidation.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/logging.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/origin.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/signers.py
+     metadata_prefix = provider.metadata_prefixRefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/awslambda/layer1.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/exception.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/response.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/wrapper.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudformation/connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudformation/stack.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudformation/template.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/__init__.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/distribution.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/identity.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/invalidation.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/logging.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/origin.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/signers.py
 
      final_headers = headers.copy()
 -    for k in metadata.keys():
@@ -915,22 +915,22 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          if content.startswith(possible_type):
              rtype = mimetype
              break
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/awslambda/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/awslambda/layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/awslambda/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/awslambda/layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2015 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import zip
  # Copyright (c) 2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.
  # All Rights Reserved
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/response.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/response.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/response.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/response.py	(refactored)
 @@ -1,4 +1,6 @@
  """Classify responses from layer1 and strict type values."""
 +from builtins import str
@@ -938,38 +938,38 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  from datetime import datetime
  from boto.compat import six
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/wrapper.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/wrapper.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/wrapper.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/wrapper.py	(refactored)
 @@ -1,4 +1,5 @@
  """Wraps layer1 api methods and converts layer1 dict responses to objects."""
 +from builtins import object
  from boto.beanstalk.layer1 import Layer1
  import boto.beanstalk.response
  from boto.exception import BotoServerError
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudformation/connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudformation/connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudformation/connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudformation/connection.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2006-2009 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2014 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudformation/stack.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudformation/stack.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudformation/stack.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudformation/stack.py	(refactored)
 @@ -1,3 +1,5 @@
 +from builtins import str
 +from builtins import object
  from datetime import datetime
  
  from boto.resultset import ResultSet
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudformation/template.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudformation/template.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudformation/template.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudformation/template.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  from boto.resultset import ResultSet
  from boto.cloudformation.stack import Capability
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/__init__.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/__init__.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/__init__.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/__init__.py	(refactored)
 @@ -54,7 +54,7 @@
  
      def get_etag(self, response):
@@ -997,96 +997,96 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
                  uri += '&%s=%s' % (k, v)
          tags=[('InvalidationSummary', InvalidationSummary)]
          rs_class = InvalidationListResultSet
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/distribution.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/distribution.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/distribution.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/distribution.py	(refactored)
 @@ -1,3 +1,5 @@
 +from builtins import str
 +from builtins import object
  # Copyright (c) 2006-2009 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/identity.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/identity.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/identity.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/identity.py	(refactored)
 @@ -1,3 +1,5 @@
 +from builtins import str
 +from builtins import object
  # Copyright (c) 2006-2009 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/invalidation.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/invalidation.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/invalidation.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/invalidation.py	(refactored)
 @@ -1,3 +1,5 @@
 +from builtins import str
 +from builtins import object
  # Copyright (c) 2006-2010 Chris Moyer http://coredumped.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/logging.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/logging.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/logging.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/logging.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006-2009 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/origin.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/origin.py	(refactored)RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudhsm/layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/document.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/domain.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/layer2.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/search.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/sourceattribute.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/document.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/domain.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/layer2.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/search.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearchdomain/layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudtrail/layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/codedeploy/layer1.py
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/origin.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/origin.py	(refactored)RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudhsm/layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/document.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/domain.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/layer2.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/search.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/sourceattribute.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/document.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/domain.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/layer2.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/search.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearchdomain/layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudtrail/layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/codedeploy/layer1.py
 
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006-2010 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2010, Eucalyptus Systems, Inc.
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/signers.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/signers.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/signers.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/signers.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006-2009 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudhsm/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudhsm/layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudhsm/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudhsm/layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2015 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/document.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/document.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/document.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/document.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.
  # All Rights Reserved
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/domain.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/domain.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/domain.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/domain.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.
  # All Rights Reserved
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/layer2.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/layer2.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/layer2.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/layer2.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.
  # All Rights Reserved
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/search.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/search.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/search.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/search.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2012 Mitch Garnaat http://garnaat.org/
@@ -1104,29 +1104,29 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
          self.num_pages_needed = ceil(self.hits / self.query.real_size)
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/sourceattribute.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/sourceattribute.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/sourceattribute.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/sourceattribute.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 202 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.
  # All Rights Reserved
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/document.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/document.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/document.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/document.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2014 Amazon.com, Inc. or its affiliates. All Rights Reserved
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/domain.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/domain.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/domain.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/domain.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2014 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2014 Amazon.com, Inc. or its affiliates.  All Rights Reserved
@@ -1144,15 +1144,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
                      self.build_complex_param(params, label + '.' + k, v)
              elif isinstance(v, bool):
                  params['%s.%s' % (label, k)] = v and 'true' or 'false'
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/layer2.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/layer2.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/layer2.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/layer2.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.
  # All Rights Reserved
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/search.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/search.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/search.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/search.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2014 Amazon.com, Inc. or its affiliates.
@@ -1170,76 +1170,76 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
          self.num_pages_needed = ceil(self.hits / self.query.real_size)
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudtrail/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudtrail/layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudtrail/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudtrail/layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2015 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/codedeploy/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/codedeploy/layer1.py	(refactored)RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cognito/identity/layer1.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cognito/sync/layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/configservice/layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/datapipeline/layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/directconnect/layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/batch.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/condition.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/item.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/layer2.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/schema.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/table.py
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/codedeploy/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/codedeploy/layer1.py	(refactored)RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cognito/identity/layer1.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cognito/sync/layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/configservice/layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/datapipeline/layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/directconnect/layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/batch.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/condition.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/item.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/layer2.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/schema.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/table.py
 
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2015 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cognito/identity/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cognito/identity/layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cognito/identity/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cognito/identity/layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2014 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/configservice/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/configservice/layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/configservice/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/configservice/layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2015 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/datapipeline/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/datapipeline/layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/datapipeline/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/datapipeline/layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2013 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/directconnect/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/directconnect/layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/directconnect/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/directconnect/layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2013 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/batch.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/batch.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/batch.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/batch.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/condition.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/condition.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/condition.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/condition.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/item.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/item.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/item.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/item.py	(refactored)
 @@ -51,7 +51,7 @@
                  range_key = attrs.get(self._range_key_name, None)
              self[self._range_key_name] = range_key
@@ -1249,36 +1249,36 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              if key != self._hash_key_name and key != self._range_key_name:
                  self[key] = value
          self.consumed_units = 0
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/layer2.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/layer2.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/layer2.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/layer2.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2011 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2011 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/schema.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/schema.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/schema.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/schema.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2011 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2011 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/table.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/table.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/table.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/table.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/types.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/types.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/types.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/types.py	(refactored)
 @@ -24,6 +24,10 @@
  Some utility functions to deal with mapping Amazon DynamoDB types to
  Python types and vice-versa.
@@ -1342,12 +1342,12 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
 +        return dict([(k, self.encode(v)) for k, v in list(attr.items())])
  
      def _encode_l(self, attr):
-         return [self.encode(i) for i in attr]RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/types.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/fields.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/items.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/results.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/table.py
+         return [self.encode(i) for i in attr]RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/types.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/fields.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/items.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/results.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/table.py
 
 @@ -371,7 +375,7 @@
          return attr
@@ -1358,15 +1358,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
      def _decode_l(self, attr):
          return [self.decode(i) for i in attr]
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/fields.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/fields.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/fields.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/fields.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  from boto.dynamodb2.types import STRING
  
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/items.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/items.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/items.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/items.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  from copy import deepcopy
@@ -1442,22 +1442,22 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              if fieldname in final_data:
                  del final_data[fieldname]
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2014 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/results.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/results.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/results.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/results.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  class ResultSet(object):
      """
      A class used to lazily handle page-to-page navigation through a set of
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/table.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/table.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/table.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/table.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  import boto
@@ -1562,48 +1562,48 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
                  py_key[key] = self._dynamizer.decode(value)
  
              unprocessed_keys.append(py_key)
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/attributes.py	(original)RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/attributes.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/blockdevicemapping.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/buyreservation.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/ec2object.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/group.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/image.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/instance.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/instanceinfo.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/instancestatus.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/keypair.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/networkinterface.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/reservedinstance.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/securitygroup.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/snapshot.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/spotinstancerequest.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/spotpricehistory.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/tag.py
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/attributes.py	(original)RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/attributes.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/blockdevicemapping.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/buyreservation.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/ec2object.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/group.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/image.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/instance.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/instanceinfo.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/instancestatus.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/keypair.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/networkinterface.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/reservedinstance.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/securitygroup.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/snapshot.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/spotinstancerequest.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/spotpricehistory.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/tag.py
 
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/attributes.py	(refactored)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/attributes.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/blockdevicemapping.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/blockdevicemapping.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/blockdevicemapping.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/blockdevicemapping.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2009-2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/buyreservation.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/buyreservation.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/buyreservation.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/buyreservation.py	(refactored)
 @@ -1,3 +1,5 @@
 +from __future__ import print_function
 +from builtins import object
  # Copyright (c) 2006-2009 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/connection.py	(refactored)
 @@ -24,6 +24,9 @@
  """
  Represents a connection to the EC2 service.
@@ -1614,8 +1614,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  import base64
  import warnings
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/ec2object.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/ec2object.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/ec2object.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/ec2object.py	(refactored)
 @@ -23,6 +23,7 @@
  """
  Represents an EC2 Object
@@ -1633,22 +1633,22 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              if key in self.tags:
                  if value is None or value == self.tags[key]:
                      del self.tags[key]
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/group.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/group.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/group.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/group.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006-2010 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2010, Eucalyptus Systems, Inc.
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/image.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/image.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/image.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/image.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006-2010 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2010, Eucalyptus Systems, Inc.
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/instance.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/instance.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/instance.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/instance.py	(refactored)
 @@ -24,6 +24,7 @@
  """
  Represents an EC2 Instance
@@ -1657,22 +1657,22 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  import boto
  from boto.ec2.ec2object import EC2Object, TaggedEC2Object
  from boto.resultset import ResultSet
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/instanceinfo.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/instanceinfo.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/instanceinfo.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/instanceinfo.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006-2008 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/instancestatus.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/instancestatus.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/instancestatus.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/instancestatus.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.
  # All Rights Reserved
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/networkinterface.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/networkinterface.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/networkinterface.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/networkinterface.py	(refactored)
 @@ -23,6 +23,8 @@
  """
  Represents an EC2 Elastic Network Interface
@@ -1682,16 +1682,16 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  from boto.exception import BotoClientError
  from boto.ec2.ec2object import TaggedEC2Object
  from boto.resultset import ResultSet
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/reservedinstance.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/reservedinstance.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/reservedinstance.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/reservedinstance.py	(refactored)
 @@ -1,3 +1,5 @@
 +from __future__ import print_function
 +from builtins import object
  # Copyright (c) 2006-2009 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/securitygroup.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/securitygroup.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/securitygroup.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/securitygroup.py	(refactored)
 @@ -23,6 +23,7 @@
  """
  Represents an EC2 Security Group
@@ -1700,8 +1700,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  from boto.ec2.ec2object import TaggedEC2Object
  from boto.exception import BotoClientError
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/snapshot.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/snapshot.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/snapshot.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/snapshot.py	(refactored)
 @@ -23,6 +23,7 @@
  """
  Represents an EC2 Elastic Block Store Snapshot
@@ -1710,8 +1710,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  from boto.ec2.ec2object import TaggedEC2Object
  from boto.ec2.zone import Zone
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/spotinstancerequest.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/spotinstancerequest.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/spotinstancerequest.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/spotinstancerequest.py	(refactored)
 @@ -23,6 +23,7 @@
  """
  Represents an EC2 Spot Instance Request
@@ -1720,15 +1720,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  from boto.ec2.ec2object import TaggedEC2Object
  from boto.ec2.launchspecification import LaunchSpecification
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/tag.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/tag.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/tag.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/tag.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2010 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2010, Eucalyptus Systems, Inc.
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/volume.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/volume.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/volume.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/volume.py	(refactored)
 @@ -24,6 +24,7 @@
  """
  Represents an EC2 Elastic Block Storage Volume
@@ -1737,34 +1737,34 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  from boto.resultset import ResultSet
  from boto.ec2.tag import Tag
  from boto.ec2.ec2object import TaggedEC2Object
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/volume.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/volumestatus.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/__init__.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/activity.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/group.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/instance.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/launchconfig.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/limits.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/policy.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/request.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/scheduled.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/tag.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/cloudwatch/__init__.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/cloudwatch/alarm.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/cloudwatch/metric.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/__init__.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/attributes.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/healthcheck.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/instancestate.py
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/volumestatus.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/volumestatus.py	(refactored)
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/volume.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/volumestatus.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/__init__.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/activity.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/group.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/instance.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/launchconfig.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/limits.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/policy.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/request.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/scheduled.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/tag.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/cloudwatch/__init__.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/cloudwatch/alarm.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/cloudwatch/metric.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/__init__.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/attributes.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/healthcheck.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/instancestate.py
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/volumestatus.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/volumestatus.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.
  # All Rights Reserved
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/__init__.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/__init__.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/__init__.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/__init__.py	(refactored)
 @@ -26,6 +26,8 @@
  This module provides an interface to the Elastic Compute Cloud (EC2)
  Auto Scaling service.
@@ -1774,71 +1774,71 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  import base64
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/activity.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/activity.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/activity.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/activity.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2009-2011 Reza Lotun http://reza.lotun.name/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/group.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/group.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/group.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/group.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2009-2011 Reza Lotun http://reza.lotun.name/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/instance.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/instance.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/instance.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/instance.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2009 Reza Lotun http://reza.lotun.name/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/launchconfig.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/launchconfig.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/launchconfig.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/launchconfig.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2009 Reza Lotun http://reza.lotun.name/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/limits.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/limits.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/limits.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/limits.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2013 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/policy.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/policy.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/policy.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/policy.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2009-2010 Reza Lotun http://reza.lotun.name/
  # Copyright (c) 2011 Jann Kleen
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/request.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/request.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/request.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/request.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2009 Reza Lotun http://reza.lotun.name/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/scheduled.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/scheduled.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/scheduled.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/scheduled.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2009-2010 Reza Lotun http://reza.lotun.name/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/tag.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/tag.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/tag.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/tag.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/cloudwatch/__init__.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/cloudwatch/__init__.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/cloudwatch/__init__.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/cloudwatch/__init__.py	(refactored)
 @@ -23,6 +23,8 @@
  This module provides an interface to the Elastic Compute Cloud (EC2)
  CloudWatch service from AWS.
@@ -1866,94 +1866,94 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              metric_data = {'MetricName': n}
  
              if timestamp:
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/cloudwatch/alarm.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/cloudwatch/alarm.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/cloudwatch/alarm.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/cloudwatch/alarm.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2010 Reza Lotun http://reza.lotun.name
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/cloudwatch/metric.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/cloudwatch/metric.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/cloudwatch/metric.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/cloudwatch/metric.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006-2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.
  # All Rights Reserved
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/attributes.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/attributes.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/attributes.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/attributes.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Permission is hereby granted, free of charge, to any person obtaining a
  # copy of this software and associated documentation files (the
  # "Software"), to deal in the Software without restriction, including
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/healthcheck.py	(original)RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/listener.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/loadbalancer.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/policies.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/securitygroup.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2containerservice/layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ecs/__init__.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ecs/item.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/elasticache/layer1.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/elastictranscoder/layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/bootstrap_action.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/emrobject.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/instance_group.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/step.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/file/bucket.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/file/connection.py
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/healthcheck.py	(original)RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/listener.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/loadbalancer.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/policies.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/securitygroup.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2containerservice/layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ecs/__init__.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ecs/item.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/elasticache/layer1.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/elastictranscoder/layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/bootstrap_action.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/emrobject.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/instance_group.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/step.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/file/bucket.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/file/connection.py
 
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/healthcheck.py	(refactored)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/healthcheck.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006-2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.
  # All Rights Reserved
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/instancestate.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/instancestate.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/instancestate.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/instancestate.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006-2009 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/listener.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/listener.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/listener.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/listener.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006-2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.
  # All Rights Reserved
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/loadbalancer.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/loadbalancer.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/loadbalancer.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/loadbalancer.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006-2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/policies.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/policies.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/policies.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/policies.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2010 Reza Lotun http://reza.lotun.name
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/securitygroup.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/securitygroup.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/securitygroup.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/securitygroup.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2010 Reza Lotun http://reza.lotun.name
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2containerservice/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2containerservice/layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2containerservice/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2containerservice/layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2015 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ecs/__init__.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ecs/__init__.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ecs/__init__.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ecs/__init__.py	(refactored)
 @@ -1,3 +1,5 @@
 +from future import standard_library
 +standard_library.install_aliases()
@@ -1969,29 +1969,29 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  import xml.sax
  from boto.ecs.item import ItemSet
  from boto import handler
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ecs/item.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ecs/item.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ecs/item.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ecs/item.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import next
  # Copyright (c) 2010 Chris Moyer http://coredumped.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/elasticache/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/elasticache/layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/elasticache/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/elasticache/layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2013 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/bootstrap_action.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/bootstrap_action.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/bootstrap_action.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/bootstrap_action.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2010 Spotify AB
  # Copyright (c) 2010 Yelp
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/connection.py	(refactored)
 @@ -23,6 +23,8 @@
  """
  Represents a connection to the EMR service
@@ -2010,8 +2010,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
          params = {}
          for k, ig in enumerate(instance_groups):
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/emrobject.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/emrobject.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/emrobject.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/emrobject.py	(refactored)
 @@ -24,6 +24,7 @@
  """
  This module contains EMR response objects
@@ -2020,56 +2020,56 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  from boto.resultset import ResultSet
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/instance_group.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/instance_group.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/instance_group.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/instance_group.py	(refactored)
 @@ -1,3 +1,5 @@
 +from builtins import str
 +from builtins import object
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
  # copy of this software and associated documentation files (the
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/step.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/step.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/step.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/step.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2010 Spotify AB
  # Copyright (c) 2010-2011 Yelp
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/file/bucket.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/file/bucket.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/file/bucket.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/file/bucket.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright 2010 Google Inc.
  # Copyright (c) 2011, Nexenta Systems Inc.
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/file/connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/file/connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/file/connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/file/connection.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright 2010 Google Inc.
  #
- # Permission is hereby granted, free of charge, to any person obtaining aRefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/file/key.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/fps/connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/fps/response.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/concurrent.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/exceptions.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/job.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/layer2.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/utils.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/vault.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/writer.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/acl.py
+ # Permission is hereby granted, free of charge, to any person obtaining aRefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/file/key.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/fps/connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/fps/response.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/concurrent.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/exceptions.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/job.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/layer2.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/utils.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/vault.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/writer.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/acl.py
 
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/file/key.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/file/key.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/file/key.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/file/key.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright 2010 Google Inc.
  # Copyright (c) 2011, Nexenta Systems Inc.
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/fps/connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/fps/connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/fps/connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/fps/connection.py	(refactored)
 @@ -1,3 +1,8 @@
 +from future import standard_library
 +standard_library.install_aliases()
@@ -2119,8 +2119,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
          encoded = lambda p: '&'.join([k + '=' + v for k, v in p])
          canonical = '\n'.join(['GET', endpoint, base, encoded(payload)])
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/fps/response.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/fps/response.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/fps/response.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/fps/response.py	(refactored)
 @@ -1,3 +1,7 @@
 +from builtins import str
 +from builtins import filter
@@ -2138,8 +2138,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          return '{0}({1})'.format(self.__class__.__name__,
                                 ', '.join(map(render, attrs)))
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/concurrent.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/concurrent.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/concurrent.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/concurrent.py	(refactored)
 @@ -1,3 +1,7 @@
 +from future import standard_library
 +standard_library.install_aliases()
@@ -2148,59 +2148,59 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/job.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/job.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/job.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/job.py	(refactored)
 @@ -1,3 +1,5 @@
 +from builtins import range
 +from builtins import object
  # -*- coding: utf-8 -*-
  # Copyright (c) 2012 Thomas Parslow http://almostobsolete.net/
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # -*- coding: utf-8 -*-
  # Copyright (c) 2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.  All Rights Reserved
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/layer2.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/layer2.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/layer2.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/layer2.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # -*- coding: utf-8 -*-
  # Copyright (c) 2012 Thomas Parslow http://almostobsolete.net/
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/utils.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/utils.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/utils.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/utils.py	(refactored)
 @@ -1,3 +1,5 @@
 +from builtins import range
 +from builtins import object
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/vault.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/vault.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/vault.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/vault.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # -*- coding: utf-8 -*-
  # Copyright (c) 2012 Thomas Parslow http://almostobsolete.net/
  # Copyright (c) 2012 Robie Basak <robie@justgohome.co.uk>
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/writer.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/writer.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/writer.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/writer.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # -*- coding: utf-8 -*-
  # Copyright (c) 2012 Thomas Parslow http://almostobsolete.net/
  # Copyright (c) 2012 Robie Basak <robie@justgohome.co.uk>
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/acl.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/acl.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/acl.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/acl.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright 2010 Google Inc.
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/bucket.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/bucket.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/bucket.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/bucket.py	(refactored)
 @@ -1,3 +1,6 @@
 +from future import standard_library
 +standard_library.install_aliases()
@@ -2212,21 +2212,21 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  # IN THE SOFTWARE.
  
  import re
--import urllibRefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/bucket.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/bucketlistresultset.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/connection.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/cors.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/key.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/lifecycle.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/resumable_upload_handler.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/user.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/iam/connection.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/iam/summarymap.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/kinesis/layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/kms/layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/logs/layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/machinelearning/layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/cmdshell.py
+-import urllibRefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/bucket.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/bucketlistresultset.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/connection.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/cors.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/key.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/lifecycle.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/resumable_upload_handler.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/user.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/iam/connection.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/iam/summarymap.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/kinesis/layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/kms/layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/logs/layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/machinelearning/layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/cmdshell.py
 
 +import urllib.request, urllib.parse, urllib.error
  import xml.sax
@@ -2241,36 +2241,36 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          try:
              key, resp = self._get_key_internal(key_name, headers,
                                                 query_args_l=query_args_l)
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/bucketlistresultset.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/bucketlistresultset.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/bucketlistresultset.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/bucketlistresultset.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright 2012 Google Inc.
  # Copyright (c) 2006,2007 Mitch Garnaat http://garnaat.org/
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/connection.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright 2010 Google Inc.
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/key.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/key.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/key.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/key.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright 2010 Google Inc.
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/lifecycle.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/lifecycle.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/lifecycle.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/lifecycle.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright 2013 Google Inc.
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/resumable_upload_handler.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/resumable_upload_handler.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/resumable_upload_handler.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/resumable_upload_handler.py	(refactored)
 @@ -1,3 +1,8 @@
 +from __future__ import print_function
 +from future import standard_library
@@ -2325,15 +2325,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
                  got_valid_response = True
          else:
              # No Range header, which means the server does not yet have
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/user.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/user.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/user.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/user.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright 2010 Google Inc.
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/iam/connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/iam/connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/iam/connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/iam/connection.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2010-2011 Mitch Garnaat http://garnaat.org/
@@ -2348,37 +2348,37 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
                  if tld is 'default':
                      # Skip the default. We'll fall back to it if we don't find
                      # anything.
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/kinesis/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/kinesis/layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/kinesis/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/kinesis/layer1.py	(refactored)
 @@ -1,3 +1,5 @@
 +from builtins import str
 +from builtins import range
  # Copyright (c) 2014 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/kms/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/kms/layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/kms/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/kms/layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2014 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/logs/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/logs/layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/logs/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/logs/layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2014 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/machinelearning/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/machinelearning/layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/machinelearning/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/machinelearning/layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2015 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/cmdshell.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/cmdshell.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/cmdshell.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/cmdshell.py	(refactored)
 @@ -24,6 +24,9 @@
  functions for running commands, managing files, and opening interactive
  shell sessions over those connections.
@@ -2386,16 +2386,16 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
 +from __future__ import print_function
 +from builtins import input
 +from builtins import object
- from boto.mashups.interactive import interactive_shellRefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/propget.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/server.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/task.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/test_manage.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/volume.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/interactive.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/iobject.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/order.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/server.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/connection.py
+ from boto.mashups.interactive import interactive_shellRefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/propget.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/server.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/task.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/test_manage.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/volume.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/interactive.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/iobject.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/order.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/server.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/connection.py
 
  import boto
  import os
@@ -2408,8 +2408,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
                  retry += 1
              except EOFError:
                  print('Unexpected Error from SSH Connection, retry in 5 seconds')
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/propget.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/propget.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/propget.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/propget.py	(refactored)
 @@ -1,3 +1,6 @@
 +from __future__ import print_function
 +from builtins import input
@@ -2435,8 +2435,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              try:
                  value = prop.validate(value)
                  if prop.empty(value) and prop.required:
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/server.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/server.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/server.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/server.py	(refactored)
 @@ -22,6 +22,10 @@
  """
  High-level abstraction of an EC2 server
@@ -2475,22 +2475,22 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              key_list = self.ec2.get_all_key_pairs()
              for k in key_list:
                  if k.name == keypair:
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/task.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/task.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/task.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/task.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006-2009 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/test_manage.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/test_manage.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/test_manage.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/test_manage.py	(refactored)
 @@ -1,3 +1,4 @@
 +from __future__ import print_function
  from boto.manage.server import Server
  from boto.manage.volume import Volume
  import time
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/volume.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/volume.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/volume.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/volume.py	(refactored)
 @@ -19,6 +19,9 @@
  # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  # IN THE SOFTWARE.
@@ -2501,8 +2501,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  from boto.sdb.db.model import Model
  from boto.sdb.db.property import StringProperty, IntegerProperty, ListProperty, ReferenceProperty, CalculatedProperty
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/iobject.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/iobject.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/iobject.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/iobject.py	(refactored)
 @@ -1,3 +1,6 @@
 +from __future__ import print_function
 +from builtins import input
@@ -2546,8 +2546,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              val = os.path.expanduser(val)
              if os.path.isfile(val):
                  okay = True
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/order.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/order.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/order.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/order.py	(refactored)
 @@ -21,6 +21,7 @@
  """
  High-level abstraction of an EC2 order for servers
@@ -2556,8 +2556,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  import boto
  import boto.ec2
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/server.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/server.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/server.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/server.py	(refactored)
 @@ -21,6 +21,8 @@
  """
  High-level abstraction of an EC2 server
@@ -2567,8 +2567,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  import boto
  import boto.utils
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/connection.py	(refactored)
 @@ -1,3 +1,6 @@
 +from __future__ import print_function
 +from builtins import range
@@ -2578,12 +2578,12 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  # Permission is hereby granted, free of charge, to any person obtaining a
 @@ -322,7 +325,7 @@
          total_records = int(search_rs.TotalNumResults)
-         get_page_hits = lambda page: self.search_hits(page_size=page_size, page_number=page)RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/layoutparam.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/notification.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/price.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/qualification.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/question.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mws/connection.py
+         get_page_hits = lambda page: self.search_hits(page_size=page_size, page_number=page)RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/layoutparam.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/notification.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/price.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/qualification.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/question.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mws/connection.py
 
          page_nums = self._get_pages(page_size, total_records)
 -        hit_sets = itertools.imap(get_page_hits, page_nums)
@@ -2627,15 +2627,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              final_keywords = keywords.encode('utf-8')
          elif keywords is None:
              final_keywords = ""
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/layoutparam.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/layoutparam.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/layoutparam.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/layoutparam.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2008 Chris Moyer http://coredumped.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/notification.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/notification.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/notification.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/notification.py	(refactored)
 @@ -23,6 +23,8 @@
  Provides NotificationMessage and Event classes, with utility methods, for
  implementations of the Mechanical Turk Notification API.
@@ -2645,23 +2645,23 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  import hmac
  try:
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/price.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/price.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/price.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/price.py	(refactored)
 @@ -1,3 +1,5 @@
 +from builtins import str
 +from builtins import object
  # Copyright (c) 2006,2007 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/qualification.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/qualification.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/qualification.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/qualification.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2008 Chris Moyer http://coredumped.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/question.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/question.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/question.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/question.py	(refactored)
 @@ -1,3 +1,8 @@
 +from future import standard_library
 +standard_library.install_aliases()
@@ -2709,8 +2709,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          attrs = ' '.join(
              '%s="%s"' % (name, value)
              for (name, value) in pairs
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mws/connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mws/connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mws/connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mws/connection.py	(refactored)
 @@ -1,3 +1,7 @@
 +from builtins import map
 +from builtins import filter
@@ -2757,18 +2757,18 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          """Instruct the user on how to get service status.
          """
 -        sections = ', '.join(map(str.lower, api_version_path.keys()))
-+        sections = ', '.join(map(str.lower, list(api_version_path.keys())))RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mws/exception.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mws/response.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/opsworks/layer1.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/bootstrap.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/config.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/copybot.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/launch_ami.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/scriptbase.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/startup.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/__init__.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/ubuntu/ebs.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/ubuntu/installer.py
++        sections = ', '.join(map(str.lower, list(api_version_path.keys())))RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mws/exception.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mws/response.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/opsworks/layer1.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/bootstrap.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/config.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/copybot.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/launch_ami.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/scriptbase.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/startup.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/__init__.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/ubuntu/ebs.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/ubuntu/installer.py
 
          message = "Use {0}.get_(section)_service_status(), " \
                    "where (section) is one of the following: " \
@@ -2786,15 +2786,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              if do in kw and any(i in dont for i in kw):
                  message = "Don't include {0} when specifying " \
                            "{1}".format(' or '.join(dont), do)
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mws/exception.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mws/exception.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mws/exception.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mws/exception.py	(refactored)
 @@ -1,3 +1,4 @@
 +from __future__ import print_function
  # Copyright (c) 2012-2014 Andy Davidoff http://www.disruptek.com/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mws/response.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mws/response.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mws/response.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mws/response.py	(refactored)
 @@ -1,3 +1,8 @@
 +from builtins import str
 +from builtins import filter
@@ -2840,15 +2840,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          return 'x'.join(map('{0.Value:0.2f}{0[Units]}'.format, values))
  
      @strip_namespace
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/opsworks/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/opsworks/layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/opsworks/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/opsworks/layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2014 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/config.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/config.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/config.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/config.py	(refactored)
 @@ -1,3 +1,6 @@
 +from __future__ import print_function
 +from future import standard_library
@@ -2870,8 +2870,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
                  attr_value = d[attr_name]
                  if attr_value is None:
                      attr_value = 'None'
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/copybot.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/copybot.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/copybot.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/copybot.py	(refactored)
 @@ -1,3 +1,5 @@
 +from future import standard_library
 +standard_library.install_aliases()
@@ -2896,8 +2896,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          boto.config.dump_safe(fp)
          self.notify('%s (%s) Starting' % (self.name, self.instance_id), fp.getvalue())
          if self.src and self.dst:
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/launch_ami.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/launch_ami.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/launch_ami.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/launch_ami.py	(refactored)
 @@ -20,6 +20,7 @@
  # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  # IN THE SOFTWARE.
@@ -2915,15 +2915,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          if v:
              l.append('%s=%s' % (k, v))
      c = boto.connect_ec2()
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/scriptbase.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/scriptbase.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/scriptbase.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/scriptbase.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  import os
  import sys
  from boto.utils import ShellCommand, get_ts
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/ubuntu/ebs.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/ubuntu/ebs.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/ubuntu/ebs.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/ubuntu/ebs.py	(refactored)
 @@ -43,6 +43,7 @@
      mount_point = <directory to mount device, defaults to /ebs>
  
@@ -2932,8 +2932,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  import boto
  from boto.manage.volume import Volume
  from boto.exception import EC2ResponseError
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/ubuntu/installer.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/ubuntu/installer.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/ubuntu/installer.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/ubuntu/installer.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2006,2007,2008 Mitch Garnaat http://garnaat.org/
@@ -2943,27 +2943,27 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              hour = str(random.randrange(24))
          fp = open('/etc/cron.d/%s' % name, "w")
          if env:
--            for key, value in env.items():RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/ubuntu/mysql.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/ubuntu/trac.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/__init__.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbinstance.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbsecuritygroup.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbsnapshot.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbsubnetgroup.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/event.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/logfile.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/optiongroup.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/parametergroup.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/statusinfo.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/vpcsecuritygroupmembership.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds2/layer1.py
+-            for key, value in env.items():RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/ubuntu/mysql.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/ubuntu/trac.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/__init__.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbinstance.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbsecuritygroup.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbsnapshot.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbsubnetgroup.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/event.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/logfile.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/optiongroup.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/parametergroup.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/statusinfo.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/vpcsecuritygroupmembership.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds2/layer1.py
 
 +            for key, value in list(env.items()):
                  fp.write('%s=%s\n' % (key, value))
          fp.write('%s %s %s %s %s %s %s\n' % (minute, hour, mday, month, wday, who, command))
          fp.close()
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/__init__.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/__init__.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/__init__.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/__init__.py	(refactored)
 @@ -1,3 +1,7 @@
 +from future import standard_library
 +standard_library.install_aliases()
@@ -2999,15 +2999,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          return self.get_object('AuthorizeDBSecurityGroupIngress', params,
                                 DBSecurityGroup)
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbinstance.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbinstance.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbinstance.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbinstance.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006-2009 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbsecuritygroup.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbsecuritygroup.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbsecuritygroup.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbsecuritygroup.py	(refactored)
 @@ -22,6 +22,7 @@
  """
  Represents an DBSecurityGroup
@@ -3016,15 +3016,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  from boto.ec2.securitygroup import SecurityGroup
  
  class DBSecurityGroup(object):
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbsnapshot.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbsnapshot.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbsnapshot.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbsnapshot.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006-2009 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbsubnetgroup.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbsubnetgroup.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbsubnetgroup.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbsubnetgroup.py	(refactored)
 @@ -22,6 +22,7 @@
  """
  Represents an DBSubnetGroup
@@ -3033,22 +3033,22 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  class DBSubnetGroup(object):
      """
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/event.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/event.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/event.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/event.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006-2009 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/logfile.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/logfile.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/logfile.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/logfile.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006-2009 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2014 Jumping Qu http://newrice.blogspot.com/
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/optiongroup.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/optiongroup.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/optiongroup.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/optiongroup.py	(refactored)
 @@ -23,6 +23,7 @@
  """
  Represents an OptionGroup
@@ -3057,8 +3057,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  from boto.rds.dbsecuritygroup import DBSecurityGroup
  from boto.resultset import ResultSet
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/parametergroup.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/parametergroup.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/parametergroup.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/parametergroup.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006-2009 Mitch Garnaat http://garnaat.org/
@@ -3103,15 +3103,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
                  self._set_integer_value(self._value)
              return self._value
          elif self.type == 'boolean':
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/statusinfo.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/statusinfo.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/statusinfo.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/statusinfo.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2013 Amazon.com, Inc. or its affiliates.
  # All Rights Reserved
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/vpcsecuritygroupmembership.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/vpcsecuritygroupmembership.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/vpcsecuritygroupmembership.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/vpcsecuritygroupmembership.py	(refactored)
 @@ -22,6 +22,7 @@
  """
  Represents a VPCSecurityGroupMembership
@@ -3120,36 +3120,36 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  
  class VPCSecurityGroupMembership(object):
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds2/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds2/layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds2/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds2/layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
- # Copyright (c) 2014 Amazon.com, Inc. or its affiliates.  All Rights ReservedRefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/redshift/layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/roboto/awsqueryrequest.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/roboto/awsqueryservice.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/roboto/param.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/healthcheck.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/hostedzone.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/record.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/status.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/zone.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/domains/layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/__init__.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/acl.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/bucket.py
+ # Copyright (c) 2014 Amazon.com, Inc. or its affiliates.  All Rights ReservedRefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/redshift/layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/roboto/awsqueryrequest.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/roboto/awsqueryservice.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/roboto/param.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/healthcheck.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/hostedzone.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/record.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/status.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/zone.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/domains/layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/__init__.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/acl.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/bucket.py
 
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/redshift/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/redshift/layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/redshift/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/redshift/layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2014 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/roboto/awsqueryrequest.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/roboto/awsqueryrequest.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/roboto/awsqueryrequest.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/roboto/awsqueryrequest.py	(refactored)
 @@ -1,3 +1,5 @@
 +from __future__ import print_function
 +from builtins import object
@@ -3165,8 +3165,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
                      line.append(item)
                  line.print_it()
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/roboto/awsqueryservice.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/roboto/awsqueryservice.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/roboto/awsqueryservice.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/roboto/awsqueryservice.py	(refactored)
 @@ -1,6 +1,8 @@
  from __future__ import print_function
 +from future import standard_library
@@ -3186,8 +3186,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              if 'is_secure' not in self.args:
                  if rslt.scheme == 'https':
                      self.args['is_secure'] = True
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/roboto/param.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/roboto/param.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/roboto/param.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/roboto/param.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2010 Mitch Garnaat http://garnaat.org/
@@ -3202,15 +3202,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              raise ValueError
          return value
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/connection.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2006-2010 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2010, Eucalyptus Systems, Inc.
  # Copyright (c) 2011 Blue Pines Technologies LLC, Brad Carleton
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/healthcheck.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/healthcheck.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/healthcheck.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/healthcheck.py	(refactored)
 @@ -45,6 +45,8 @@
     </HealthCheckConfig>
  </CreateHealthCheckRequest>
@@ -3220,43 +3220,43 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  
  class HealthCheck(object):
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/hostedzone.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/hostedzone.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/hostedzone.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/hostedzone.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2010 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2010, Eucalyptus Systems, Inc.
  # All rights reserved.
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/record.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/record.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/record.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/record.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2010 Chris Moyer http://coredumped.org/
  # Copyright (c) 2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/status.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/status.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/status.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/status.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2011 Blue Pines Technologies LLC, Brad Carleton
  # www.bluepines.org
  # All rights reserved.
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/zone.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/zone.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/zone.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/zone.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2011 Blue Pines Technologies LLC, Brad Carleton
  # www.bluepines.org
  # Copyright (c) 2012 42 Lines Inc., Jim Browne
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/domains/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/domains/layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/domains/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/domains/layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2014 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/__init__.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/__init__.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/__init__.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/__init__.py	(refactored)
 @@ -60,7 +60,7 @@
  
  def connect_to_region(region_name, **kw_params):
@@ -3266,15 +3266,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              # Make sure the host specified is not nothing
              if kw_params['host'] not in ['', None]:
                  region.endpoint = kw_params['host']
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/acl.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/acl.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/acl.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/acl.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006,2007 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/bucket.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/bucket.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/bucket.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/bucket.py	(refactored)
 @@ -1,3 +1,6 @@
 +from builtins import str
 +from builtins import next
@@ -3290,37 +3290,37 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
 +        for key, value in sorted(list(params.items()), key=lambda x: x[0]):
              if value is None:
                  continue
-             key = key.replace('_', '-')RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/bucketlistresultset.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/bucketlogging.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/cors.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/deletemarker.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/key.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/keyfile.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/lifecycle.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/multidelete.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/multipart.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/prefix.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/resumable_download_handler.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/tagging.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/user.py
+             key = key.replace('_', '-')RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/bucketlistresultset.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/bucketlogging.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/cors.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/deletemarker.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/key.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/keyfile.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/lifecycle.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/multidelete.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/multipart.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/prefix.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/resumable_download_handler.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/tagging.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/user.py
 
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/bucketlistresultset.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/bucketlistresultset.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/bucketlistresultset.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/bucketlistresultset.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006,2007 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/bucketlogging.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/bucketlogging.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/bucketlogging.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/bucketlogging.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006,2007 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/connection.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006-2012 Mitch Garnaat http://garnaat.org/
@@ -3344,22 +3344,22 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
                  if k.startswith(hdr_prefix):
                      # headers used for sig generation must be
                      # included in the url also.
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/cors.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/cors.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/cors.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/cors.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/deletemarker.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/deletemarker.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/deletemarker.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/deletemarker.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006-2010 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/key.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/key.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/key.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/key.py	(refactored)
 @@ -1,3 +1,5 @@
 +from builtins import str
 +from builtins import object
@@ -3375,8 +3375,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
                  # To get correct size for Range GETs, use Content-Range
                  # header if one was returned. If not, use Content-Length
                  # header.
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/keyfile.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/keyfile.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/keyfile.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/keyfile.py	(refactored)
 @@ -25,11 +25,12 @@
  Python file interface. The only functions supported are those needed for seeking
  in a Key open for reading.
@@ -3391,36 +3391,36 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
    def __init__(self, key):
      self.key = key
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/lifecycle.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/lifecycle.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/lifecycle.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/lifecycle.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/multidelete.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/multidelete.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/multidelete.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/multidelete.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2011 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/multipart.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/multipart.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/multipart.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/multipart.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006-2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.
  # Copyright (c) 2010, Eucalyptus Systems, Inc.
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/prefix.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/prefix.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/prefix.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/prefix.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006,2007 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/resumable_download_handler.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/resumable_download_handler.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/resumable_download_handler.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/resumable_download_handler.py	(refactored)
 @@ -1,3 +1,8 @@
 +from __future__ import print_function
 +from future import standard_library
@@ -3457,40 +3457,40 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
                  pass
  
              sleep_time_secs = 2**progress_less_iterations
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/tagging.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/tagging.py	(refactored)RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/website.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/domain.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/item.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/queryresultset.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/blob.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/key.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/model.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/property.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/query.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/sequence.py
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/tagging.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/tagging.py	(refactored)RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/website.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/domain.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/item.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/queryresultset.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/blob.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/key.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/model.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/property.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/query.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/sequence.py
 
 @@ -1,3 +1,4 @@
 +from builtins import object
  from boto import handler
  import xml.sax
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/user.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/user.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/user.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/user.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006,2007 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/website.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/website.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/website.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/website.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2013 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/connection.py	(refactored)
 @@ -1,3 +1,4 @@
 +from __future__ import print_function
  # Copyright (c) 2006,2007 Mitch Garnaat http://garnaat.org/
@@ -3513,8 +3513,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
                  for attr_name in attr_names:
                      value = item[attr_name]
                      if isinstance(value, list):
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/domain.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/domain.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/domain.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/domain.py	(refactored)
 @@ -19,6 +19,7 @@
  # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  # IN THE SOFTWARE.
@@ -3523,16 +3523,16 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  """
  Represents an SDB Domain
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/queryresultset.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/queryresultset.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/queryresultset.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/queryresultset.py	(refactored)
 @@ -1,3 +1,5 @@
 +from builtins import next
 +from builtins import object
  from boto.compat import six
  # Copyright (c) 2006,2007 Mitch Garnaat http://garnaat.org/
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/blob.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/blob.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/blob.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/blob.py	(refactored)
 @@ -1,3 +1,7 @@
 +from future import standard_library
 +standard_library.install_aliases()
@@ -3550,15 +3550,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          if self._file:
              f = self._file
          else:
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/key.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/key.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/key.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/key.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2006,2007,2008 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/model.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/model.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/model.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/model.py	(refactored)
 @@ -1,3 +1,5 @@
 +from builtins import str
 +from builtins import object
@@ -3625,35 +3625,35 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
                  prop = cls.__dict__[key]
                  if isinstance(prop, Property):
                      if not prop.__class__.__name__.startswith('_') and prop_name == prop.name:
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/property.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/property.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/property.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/property.py	(refactored)
 @@ -1,3 +1,5 @@
 +from builtins import str
 +from builtins import object
  # Copyright (c) 2006,2007,2008 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/query.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/query.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/query.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/query.py	(refactored)
 @@ -1,3 +1,5 @@
 +from builtins import next
 +from builtins import object
  from boto.compat import six
  # Copyright (c) 2006,2007,2008 Mitch Garnaat http://garnaat.org/
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/sequence.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/sequence.py	(refactored)RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/test_db.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/manager/__init__.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/manager/sdbmanager.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/manager/xmlmanager.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/bs.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/message.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/result.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/service.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/servicedef.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/sonofmmm.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/submit.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ses/connection.py
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/sequence.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/sequence.py	(refactored)RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/test_db.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/manager/__init__.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/manager/sdbmanager.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/manager/xmlmanager.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/bs.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/message.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/result.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/service.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/servicedef.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/sonofmmm.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/submit.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ses/connection.py
 
 @@ -1,3 +1,5 @@
 +from builtins import str
@@ -3661,15 +3661,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  # Copyright (c) 2010 Chris Moyer http://coredumped.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/test_db.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/test_db.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/test_db.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/test_db.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  import logging
  import time
  from datetime import datetime
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/manager/sdbmanager.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/manager/sdbmanager.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/manager/sdbmanager.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/manager/sdbmanager.py	(refactored)
 @@ -1,3 +1,9 @@
 +from future import standard_library
 +standard_library.install_aliases()
@@ -3757,8 +3757,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              type_query += " or `__type__` = '%s'" % subclass
          type_query += ")"
          query_parts.append(type_query)
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/manager/xmlmanager.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/manager/xmlmanager.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/manager/xmlmanager.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/manager/xmlmanager.py	(refactored)
 @@ -1,3 +1,7 @@
 +from future import standard_library
 +standard_library.install_aliases()
@@ -3812,8 +3812,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
          query = str(self._build_query(cls, filters, limit, order_by))
          if query:
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/bs.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/bs.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/bs.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/bs.py	(refactored)
 @@ -1,3 +1,5 @@
 +from __future__ import print_function
 +from builtins import object
@@ -3829,16 +3829,16 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              print('  %s\t\t%s' % (key, self.Commands[key]))
  
      def do_reset(self):
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/result.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/result.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/result.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/result.py	(refactored)
 @@ -1,3 +1,5 @@
 +from __future__ import print_function
 +from builtins import object
  #!/usr/bin/env python
  # Copyright (c) 2006,2007 Mitch Garnaat http://garnaat.org/
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/submit.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/submit.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/submit.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/submit.py	(refactored)
 @@ -1,3 +1,6 @@
 +from __future__ import print_function
 +from builtins import str
@@ -3846,25 +3846,25 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  # Copyright (c) 2006,2007 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ses/connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ses/connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ses/connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ses/connection.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import range
  # Copyright (c) 2010 Mitch Garnaat http://garnaat.org/
- # Copyright (c) 2011 Harry Marr http://hmarr.com/RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sns/connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/batchresults.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/bigmessage.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/connection.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/jsonmessage.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/message.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/queue.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sts/connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sts/credentials.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/support/layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/swf/layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/swf/layer1_decisions.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/swf/layer2.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vendored/six.py
+ # Copyright (c) 2011 Harry Marr http://hmarr.com/RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sns/connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/batchresults.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/bigmessage.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/connection.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/jsonmessage.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/message.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/queue.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sts/connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sts/credentials.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/support/layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/swf/layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/swf/layer1_decisions.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/swf/layer2.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vendored/six.py
 
  #
 @@ -91,7 +92,7 @@
@@ -3876,8 +3876,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              if isinstance(v, six.text_type):  # UTF-8 encode only if it's Unicode
                  params[k] = v.encode('utf-8')
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sns/connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sns/connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sns/connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sns/connection.py	(refactored)
 @@ -1,3 +1,5 @@
 +from builtins import zip
 +from builtins import range
@@ -3893,8 +3893,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
        for kv, index in zip(items, list(range(1, len(items)+1))):
          key, value = kv
          prefix = '%s.entry.%s' % (name, index)
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/batchresults.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/batchresults.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/batchresults.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/batchresults.py	(refactored)
 @@ -23,6 +23,7 @@
  """
  A set of results returned by SendMessageBatch.
@@ -3903,8 +3903,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  class ResultEntry(dict):
      """
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/message.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/message.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/message.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/message.py	(refactored)
 @@ -62,6 +62,7 @@
  The Message class must provide a get_body_encoded method that returns the current body of the message
  in the format in which it would be stored in SQS.
@@ -3939,8 +3939,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
      def has_key(self, key):
          return key in self._body
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/queue.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/queue.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/queue.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/queue.py	(refactored)
 @@ -22,6 +22,8 @@
  """
  Represents an SQS Queue
@@ -3950,29 +3950,29 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  from boto.compat import urllib
  from boto.sqs.message import Message
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sts/credentials.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sts/credentials.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sts/credentials.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sts/credentials.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2011 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2011, Eucalyptus Systems, Inc.
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/support/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/support/layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/support/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/support/layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2014 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/swf/layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/swf/layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/swf/layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/swf/layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.
  # All Rights Reserved
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/swf/layer1_decisions.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/swf/layer1_decisions.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/swf/layer1_decisions.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/swf/layer1_decisions.py	(refactored)
 @@ -1,6 +1,7 @@
  """
  Helper class for creating decision responses.
@@ -3981,8 +3981,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  
  class Layer1Decisions(object):
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/swf/layer2.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/swf/layer2.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/swf/layer2.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/swf/layer2.py	(refactored)
 @@ -1,4 +1,6 @@
  """Object-oriented interface to SWF wrapping boto.swf.layer1.Layer1"""
 +from builtins import str
@@ -3990,8 +3990,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  import time
  from functools import wraps
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vendored/six.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vendored/six.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vendored/six.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vendored/six.py	(refactored)
 @@ -1,4 +1,9 @@
  """Utilities for writing code that runs on Python 2 and 3"""
 +from future import standard_library
@@ -4074,22 +4074,22 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
 @@ -651,13 +656,13 @@
          want_unicode = False
          sep = kwargs.pop("sep", None)
-         if sep is not None:RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/__init__.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/internetgateway.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/networkacl.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/routetable.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/subnet.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpc.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpc_peering_connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpnconnection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpngateway.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/docs/source/conf.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/docs/source/extensions/githublinks/__init__.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/compat.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/test.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_lists.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_password.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_query.py
+         if sep is not None:RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/__init__.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/internetgateway.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/networkacl.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/routetable.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/subnet.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpc.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpc_peering_connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpnconnection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpngateway.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/docs/source/conf.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/docs/source/extensions/githublinks/__init__.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/compat.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/test.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_lists.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_password.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_query.py
 
 -            if isinstance(sep, unicode):
 +            if isinstance(sep, str):
@@ -4119,8 +4119,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          else:
              newline = "\n"
              space = " "
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/__init__.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/__init__.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/__init__.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/__init__.py	(refactored)
 @@ -22,6 +22,7 @@
  """
  Represents a connection to the EC2 service.
@@ -4129,8 +4129,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  from boto.ec2.connection import EC2Connection
  from boto.resultset import ResultSet
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/internetgateway.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/internetgateway.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/internetgateway.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/internetgateway.py	(refactored)
 @@ -22,6 +22,7 @@
  """
  Represents an Internet Gateway
@@ -4139,8 +4139,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  from boto.ec2.ec2object import TaggedEC2Object
  from boto.resultset import ResultSet
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/networkacl.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/networkacl.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/networkacl.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/networkacl.py	(refactored)
 @@ -22,6 +22,7 @@
  """
  Represents a Network ACL
@@ -4149,8 +4149,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  from boto.ec2.ec2object import TaggedEC2Object
  from boto.resultset import ResultSet
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/routetable.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/routetable.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/routetable.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/routetable.py	(refactored)
 @@ -22,6 +22,7 @@
  """
  Represents a Route Table
@@ -4159,8 +4159,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  from boto.ec2.ec2object import TaggedEC2Object
  from boto.resultset import ResultSet
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpc_peering_connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpc_peering_connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpc_peering_connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpc_peering_connection.py	(refactored)
 @@ -22,6 +22,7 @@
  """
  Represents a VPC Peering Connection.
@@ -4169,15 +4169,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  from boto.ec2.ec2object import TaggedEC2Object
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpnconnection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpnconnection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpnconnection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpnconnection.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2009-2010 Mitch Garnaat http://garnaat.org/
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpngateway.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpngateway.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpngateway.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpngateway.py	(refactored)
 @@ -22,6 +22,7 @@
  """
  Represents a Vpn Gateway
@@ -4186,8 +4186,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  from boto.ec2.ec2object import TaggedEC2Object
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/docs/source/conf.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/docs/source/conf.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/docs/source/conf.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/docs/source/conf.py	(refactored)
 @@ -1,5 +1,6 @@
  # -*- coding: utf-8 -*-
  
@@ -4209,8 +4209,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
 +    print(e)
  
  html_title = "boto v%s" % version
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/docs/source/extensions/githublinks/__init__.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/docs/source/extensions/githublinks/__init__.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/docs/source/extensions/githublinks/__init__.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/docs/source/extensions/githublinks/__init__.py	(refactored)
 @@ -5,7 +5,10 @@
  (https://bitbucket.org/dhellmann/sphinxcontrib-bitbucket/)
  
@@ -4223,8 +4223,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  from docutils import nodes, utils
  from docutils.parsers.rst.roles import set_classes
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_lists.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_lists.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_lists.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_lists.py	(refactored)
 @@ -1,3 +1,5 @@
 +from __future__ import print_function
 +from builtins import object
@@ -4243,15 +4243,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
 +            # fix_print_with_import
 +            print(tt.strs)
              assert("Fizzle" not in tt.strs)
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_password.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_password.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_password.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_password.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2010 Robert Mela
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_query.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_query.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_query.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_query.py	(refactored)
 @@ -1,3 +1,5 @@
 +from __future__ import print_function
 +from builtins import object
@@ -4266,28 +4266,28 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
 +        # fix_print_with_import
 +        print(query.get_query())
          assert(query.count() == 1)
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_sequence.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_sequence.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_sequence.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_sequence.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2010 Chris Moyer http://coredumped.org/
  #
- # Permission is hereby granted, free of charge, to any person obtaining aRefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_sequence.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/devpay/test_s3.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/fps/test.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/__init__.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/beanstalk/test_wrapper.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/cloudformation/test_connection.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/cloudsearch/test_layers.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/cloudtrail/test_cloudtrail.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/cognito/sync/test_cognito_sync.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/datapipeline/test_layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb/test_layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb/test_layer2.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb/test_table.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb2/test_highlevel.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb2/test_layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/test_connection.py
+ # Permission is hereby granted, free of charge, to any person obtaining aRefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_sequence.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/devpay/test_s3.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/fps/test.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/__init__.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/beanstalk/test_wrapper.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/cloudformation/test_connection.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/cloudsearch/test_layers.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/cloudtrail/test_cloudtrail.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/cognito/sync/test_cognito_sync.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/datapipeline/test_layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb/test_layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb/test_layer2.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb/test_table.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb2/test_highlevel.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb2/test_layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/test_connection.py
 
 @@ -60,11 +61,11 @@
          s = Sequence()
@@ -4332,8 +4332,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          assert(s.val == "Z")
 -        assert(s.next() == "AA")
 +        assert(next(s) == "AA")
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/devpay/test_s3.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/devpay/test_s3.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/devpay/test_s3.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/devpay/test_s3.py	(refactored)
 @@ -24,10 +24,13 @@
  """
  Some unit tests for the S3Connection
@@ -4382,8 +4382,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  if __name__ == '__main__':
      test()
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/fps/test.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/fps/test.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/fps/test.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/fps/test.py	(refactored)
 @@ -1,3 +1,5 @@
 +from __future__ import print_function
 +from builtins import str
@@ -4428,8 +4428,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  
  if __name__ == "__main__":
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/__init__.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/__init__.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/__init__.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/__init__.py	(refactored)
 @@ -23,6 +23,7 @@
  """
  Base class to make checking the certs easier.
@@ -4438,23 +4438,23 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  
  # We subclass from ``object`` instead of ``TestCase`` here so that this doesn't
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/beanstalk/test_wrapper.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/beanstalk/test_wrapper.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/beanstalk/test_wrapper.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/beanstalk/test_wrapper.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  import random
  import time
  from functools import partial
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/cloudformation/test_connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/cloudformation/test_connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/cloudformation/test_connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/cloudformation/test_connection.py	(refactored)
 @@ -1,3 +1,5 @@
 +from builtins import str
 +from builtins import range
  #!/usr/bin/env python
  import time
  import json
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb/test_layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb/test_layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb/test_layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb/test_layer1.py	(refactored)
 @@ -23,6 +23,7 @@
  """
  Tests for Layer1 of DynamoDB
@@ -4463,8 +4463,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  import time
  import base64
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb/test_layer2.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb/test_layer2.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb/test_layer2.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb/test_layer2.py	(refactored)
 @@ -23,6 +23,7 @@
  """
  Tests for Layer2 of Amazon DynamoDB
@@ -4473,8 +4473,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  import time
  import uuid
  from decimal import Decimal
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb2/test_highlevel.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb2/test_highlevel.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb2/test_highlevel.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb2/test_highlevel.py	(refactored)
 @@ -23,6 +23,9 @@
  """
  Tests for DynamoDB v2 high-level abstractions.
@@ -4485,8 +4485,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  import os
  import time
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb2/test_layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb2/test_layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb2/test_layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb2/test_layer1.py	(refactored)
 @@ -23,6 +23,7 @@
  """
  Tests for Layer1 of DynamoDB v2
@@ -4495,18 +4495,18 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  import time
  
  from tests.unit import unittest
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/test_connection.py	(original)RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/autoscale/test_connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/cloudwatch/test_connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/elb/test_connection.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/vpc/test_connection.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/elasticache/test_layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/elastictranscoder/test_layer1.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/glacier/test_layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/cb_test_harness.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_basic.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_generation_conditionals.py
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/test_connection.py	(original)RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/autoscale/test_connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/cloudwatch/test_connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/elb/test_connection.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/vpc/test_connection.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/elasticache/test_layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/elastictranscoder/test_layer1.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/glacier/test_layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/cb_test_harness.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_basic.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_generation_conditionals.py
 
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/test_connection.py	(refactored)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/test_connection.py	(refactored)
 @@ -24,6 +24,8 @@
  """
  Some unit tests for the EC2Connection
@@ -4516,8 +4516,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  import unittest
  import time
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/autoscale/test_connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/autoscale/test_connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/autoscale/test_connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/autoscale/test_connection.py	(refactored)
 @@ -23,6 +23,7 @@
  """
  Some unit tests for the AutoscaleConnection
@@ -4526,8 +4526,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  import time
  from boto.ec2.autoscale import AutoScaleConnection
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/cloudwatch/test_connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/cloudwatch/test_connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/cloudwatch/test_connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/cloudwatch/test_connection.py	(refactored)
 @@ -23,6 +23,7 @@
  """
  Initial, and very limited, unit tests for CloudWatchConnection.
@@ -4536,8 +4536,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  import datetime
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/elb/test_connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/elb/test_connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/elb/test_connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/elb/test_connection.py	(refactored)
 @@ -23,6 +23,7 @@
  """
  Initial, and very limited, unit tests for ELBConnection.
@@ -4546,15 +4546,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  import boto
  import time
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/elastictranscoder/test_layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/elastictranscoder/test_layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/elastictranscoder/test_layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/elastictranscoder/test_layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2013 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/cb_test_harness.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/cb_test_harness.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/cb_test_harness.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/cb_test_harness.py	(refactored)
 @@ -26,6 +26,7 @@
  as the 'cb' parameter to boto.s3.Key.send_file() and boto.s3.Key.get_file(),
  allowing testing of various file upload/download conditions.
@@ -4563,8 +4563,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  import socket
  import time
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_basic.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_basic.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_basic.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_basic.py	(refactored)
 @@ -27,11 +27,13 @@
  """
  Some integration tests for the GSConnection
@@ -4599,8 +4599,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          k.set_contents_from_file(sfp2)
          self.assertEqual(k.get_contents_as_string(), 'foo2')
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_generation_conditionals.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_generation_conditionals.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_generation_conditionals.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_generation_conditionals.py	(refactored)
 @@ -22,8 +22,11 @@
  # IN THE SOFTWARE.
  
@@ -4666,8 +4666,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          k.set_contents_from_stream(fp, if_generation=g1)
          self.assertEqual(k.get_contents_as_string(), s2)
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_resumable_downloads.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_resumable_downloads.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_resumable_downloads.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_resumable_downloads.py	(refactored)
 @@ -22,6 +22,7 @@
  """
  Tests of resumable downloads.
@@ -4701,8 +4701,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
 -        except OSError, e:
 +        except OSError as e:
              # Ensure the error was re-raised.
-             self.assertEqual(e.errno, 13)RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_resumable_downloads.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_resumable_uploads.py
+             self.assertEqual(e.errno, 13)RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_resumable_downloads.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_resumable_uploads.py
 
  
 @@ -228,7 +229,7 @@
@@ -4723,8 +4723,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              self.assertEqual(e.disposition, ResumableTransferDisposition.ABORT)
              self.assertNotEqual(
                  e.message.find('Couldn\'t write URI tracker file'), -1)
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_resumable_uploads.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_resumable_uploads.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_resumable_uploads.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_resumable_uploads.py	(refactored)
 @@ -22,8 +22,13 @@
  """
  Tests of Google Cloud Storage resumable uploads.
@@ -4858,8 +4858,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              self.assertEqual(e.disposition, ResumableTransferDisposition.ABORT)
              self.assertNotEqual(
                  e.message.find('Couldn\'t write URI tracker file'), -1)
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_storage_uri.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_storage_uri.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_storage_uri.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_storage_uri.py	(refactored)
 @@ -22,10 +22,14 @@
  # IN THE SOFTWARE.
  
@@ -4885,20 +4885,20 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          self.assertRegexpMatches(str(key_uri.generation), r"[0-9]+")
          self.assertGreater(key_uri.generation, k.generation)
          k = b.get_key("obj")
-         self.assertEqual(k.generation, key_uri.generation)RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_storage_uri.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_versioning.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/testcase.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/util.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/iam/test_password_policy.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/kinesis/test_kinesis.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/mws/test.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/opsworks/test_layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/rds/test_db_subnet_group.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/rds/test_promote_modify.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/rds2/test_connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/redshift/test_layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/__init__.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_alias_resourcerecordsets.py
+         self.assertEqual(k.generation, key_uri.generation)RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_storage_uri.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_versioning.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/testcase.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/util.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/iam/test_password_policy.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/kinesis/test_kinesis.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/mws/test.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/opsworks/test_layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/rds/test_db_subnet_group.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/rds/test_promote_modify.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/rds2/test_connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/redshift/test_layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/__init__.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_alias_resourcerecordsets.py
 
          self.assertEquals(k.get_contents_as_string(), "data2")
  
@@ -4907,8 +4907,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          self.assertRegexpMatches(str(key_uri.generation), r"[0-9]+")
          self.assertGreater(key_uri.generation, k.generation)
          k = b.get_key("obj")
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/util.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/util.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/util.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/util.py	(refactored)
 @@ -1,3 +1,5 @@
 +from __future__ import print_function
 +from builtins import str
@@ -4931,8 +4931,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
                      time.sleep(mdelay)
                      mtries -= 1
                      mdelay *= backoff
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/rds/test_db_subnet_group.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/rds/test_db_subnet_group.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/rds/test_db_subnet_group.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/rds/test_db_subnet_group.py	(refactored)
 @@ -23,6 +23,8 @@
  """
  Check that db_subnet_groups behave sanely
@@ -4964,8 +4964,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          return 0
      return 1
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/rds/test_promote_modify.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/rds/test_promote_modify.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/rds/test_promote_modify.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/rds/test_promote_modify.py	(refactored)
 @@ -12,6 +12,8 @@
  """
  Check that promotion of read replicas and renaming instances works as expected
@@ -5045,65 +5045,65 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
 -        print '--- tests completed ---'
 +        # fix_print_with_import
 +        print('--- tests completed ---')
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/rds2/test_connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/rds2/test_connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/rds2/test_connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/rds2/test_connection.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2014 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/redshift/test_layer1.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/redshift/test_layer1.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/redshift/test_layer1.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/redshift/test_layer1.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2013 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/__init__.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/__init__.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/__init__.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/__init__.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2012 Mitch Garnaat http://garnaat.org/
  # Copyright (c) 2014 Tellybug, Matt Millar
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_alias_resourcerecordsets.py	(original)RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_health_check.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_resourcerecordsets.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_zone.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/mock_storage_service.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_bucket.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_cors.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_encryption.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_key.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_mfa.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_multidelete.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_multipart.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_pool.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_versioning.py
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_alias_resourcerecordsets.py	(original)RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_health_check.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_resourcerecordsets.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_zone.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/mock_storage_service.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_bucket.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_cors.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_encryption.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_key.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_mfa.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_multidelete.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_multipart.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_pool.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_versioning.py
 
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_alias_resourcerecordsets.py	(refactored)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_alias_resourcerecordsets.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2014 Netflix, Inc. Stefan Praszalowicz
  # Copyright (c) 2014 42Lines, Inc. Jim Browne
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_resourcerecordsets.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_resourcerecordsets.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_resourcerecordsets.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_resourcerecordsets.py	(refactored)
 @@ -1,3 +1,5 @@
 +from builtins import str
 +from builtins import range
  # Copyright (c) 2013 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_zone.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_zone.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_zone.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_zone.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2011 Blue Pines Technologies LLC, Brad Carleton
  # www.bluepines.org
  # Copyright (c) 2012 42 Lines Inc., Jim Browne
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/mock_storage_service.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/mock_storage_service.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/mock_storage_service.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/mock_storage_service.py	(refactored)
 @@ -25,6 +25,7 @@
  the interfaces defined in the real boto classes, but don't handle most
  of the optional params (which we indicate with the constant "NOT_IMPL").
@@ -5112,8 +5112,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  import copy
  import boto
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_connection.py	(refactored)
 @@ -23,6 +23,8 @@
  """
  Some unit tests for the S3Connection
@@ -5123,8 +5123,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  import unittest
  import time
  import os
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_cors.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_cors.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_cors.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_cors.py	(refactored)
 @@ -24,6 +24,7 @@
  """
  Some integration tests for S3 CORS
@@ -5154,8 +5154,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              for v1, v2 in headers:
                  self.assertEqual(v1, v2)
          self.bucket.delete_cors()
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_encryption.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_encryption.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_encryption.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_encryption.py	(refactored)
 @@ -24,6 +24,7 @@
  """
  Some unit tests for the S3 Encryption
@@ -5164,8 +5164,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  import unittest
  import time
  from boto.s3.connection import S3Connection
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_mfa.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_mfa.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_mfa.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_mfa.py	(refactored)
 @@ -24,6 +24,8 @@
  """
  Some unit tests for S3 MfaDelete with versioning
@@ -5200,8 +5200,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          self.bucket.configure_versioning(False, mfa_delete=False, mfa_token=(mfa_sn, mfa_code))
  
          # Lastly, check disabling mfa worked.
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_multidelete.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_multidelete.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_multidelete.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_multidelete.py	(refactored)
 @@ -25,6 +25,7 @@
  """
  Some unit tests for the S3 MultiDelete
@@ -5210,8 +5210,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  import unittest
  import time
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_multipart.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_multipart.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_multipart.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_multipart.py	(refactored)
 @@ -25,6 +25,7 @@
  """
  Some unit tests for the S3 MultiPartUpload
@@ -5220,8 +5220,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  # Note:
  # Multipart uploads require at least one part. If you upload
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_pool.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_pool.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_pool.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_pool.py	(refactored)
 @@ -24,6 +24,9 @@
  Some multi-threading tests of boto in a greenlet environment.
  """
@@ -5232,8 +5232,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  import boto
  import time
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_versioning.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_versioning.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_versioning.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_versioning.py	(refactored)
 @@ -24,6 +24,7 @@
  """
  Some unit tests for the S3 Versioning.
@@ -5242,24 +5242,24 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  import unittest
  import time
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sdb/test_connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sdb/test_connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sdb/test_connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sdb/test_connection.py	(refactored)
 @@ -24,6 +24,7 @@
  """
- Some unit tests for the SDBConnectionRefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sdb/test_connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sns/test_connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sqs/test_connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sts/test_session_token.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/support/test_layer1.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/swf/test_layer1.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/swf/test_layer1_workflow_execution.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/_init_environment.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/all_tests.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/cleanup_tests.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/common.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/create_hit_external.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/create_hit_test.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/create_hit_with_qualifications.py
+ Some unit tests for the SDBConnectionRefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sdb/test_connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sns/test_connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sqs/test_connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sts/test_session_token.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/support/test_layer1.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/swf/test_layer1.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/swf/test_layer1_workflow_execution.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/_init_environment.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/all_tests.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/cleanup_tests.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/common.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/create_hit_external.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/create_hit_test.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/create_hit_with_qualifications.py
 
  """
 +from __future__ import print_function
@@ -5275,15 +5275,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          assert item['name1'] == attrs_1['name1']
          assert item['name2'] == attrs_1['name2']
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sns/test_connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sns/test_connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sns/test_connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sns/test_connection.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2013 Amazon.com, Inc. or its affiliates.
  # All rights reserved.
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sqs/test_connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sqs/test_connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sqs/test_connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sqs/test_connection.py	(refactored)
 @@ -24,6 +24,8 @@
  """
  Some unit tests for the SQSConnection
@@ -5293,8 +5293,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  import time
  from threading import Timer
  from tests.unit import unittest
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sts/test_session_token.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sts/test_session_token.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sts/test_session_token.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sts/test_session_token.py	(refactored)
 @@ -23,6 +23,7 @@
  """
  Tests for Session Tokens
@@ -5303,8 +5303,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  import unittest
  import os
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/swf/test_layer1_workflow_execution.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/swf/test_layer1_workflow_execution.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/swf/test_layer1_workflow_execution.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/swf/test_layer1_workflow_execution.py	(refactored)
 @@ -2,6 +2,7 @@
  Tests for Layer1 of Simple Workflow
  
@@ -5313,8 +5313,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  import time
  import uuid
  import json
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/_init_environment.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/_init_environment.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/_init_environment.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/_init_environment.py	(refactored)
 @@ -1,3 +1,5 @@
 +from __future__ import absolute_import
 +from past.builtins import execfile
@@ -5328,8 +5328,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
 -            from mocks import MTurkConnection
 +            from .mocks import MTurkConnection
      SetHostMTurkConnection = functools.partial(MTurkConnection, host=mturk_host)
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/all_tests.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/all_tests.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/all_tests.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/all_tests.py	(refactored)
 @@ -1,13 +1,14 @@
 +from __future__ import absolute_import
  
@@ -5350,8 +5350,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  doctest_suite = doctest.DocFileSuite(
  	*glob('*.doctest'),
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/cleanup_tests.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/cleanup_tests.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/cleanup_tests.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/cleanup_tests.py	(refactored)
 @@ -1,7 +1,11 @@
 +from __future__ import print_function
 +from __future__ import absolute_import
@@ -5400,8 +5400,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  if __name__ == '__main__':
  	cleanup()
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/common.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/common.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/common.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/common.py	(refactored)
 @@ -1,3 +1,5 @@
 +from __future__ import absolute_import
 +from builtins import str
@@ -5417,8 +5417,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  class MTurkCommon(unittest.TestCase):
          def setUp(self):
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/create_hit_external.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/create_hit_external.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/create_hit_external.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/create_hit_external.py	(refactored)
 @@ -1,9 +1,10 @@
 +from __future__ import absolute_import
  import unittest
@@ -5431,8 +5431,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          config_environment
  
  class Test(unittest.TestCase):
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/create_hit_test.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/create_hit_test.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/create_hit_test.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/create_hit_test.py	(refactored)
 @@ -1,8 +1,9 @@
 +from __future__ import absolute_import
  import unittest
@@ -5444,22 +5444,22 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  class TestHITCreation(MTurkCommon):
  	def testCallCreateHitWithOneQuestion(self):
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/create_hit_with_qualifications.py	(original)RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/hit_persistence.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/selenium_support.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/test_disable_hit.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/__init__.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/test_connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/test_regioninfo.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/auth/test_sigv4.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/awslambda/test_awslambda.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/beanstalk/test_exception.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudformation/test_connection.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudformation/test_stack.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudfront/test_connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudfront/test_invalidation_list.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudfront/test_signed_urls.py
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/create_hit_with_qualifications.py	(original)RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/hit_persistence.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/selenium_support.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/test_disable_hit.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/__init__.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/test_connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/test_regioninfo.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/auth/test_sigv4.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/awslambda/test_awslambda.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/beanstalk/test_exception.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudformation/test_connection.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudformation/test_stack.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudfront/test_connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudfront/test_invalidation_list.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudfront/test_signed_urls.py
 
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/create_hit_with_qualifications.py	(refactored)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/create_hit_with_qualifications.py	(refactored)
 @@ -1,3 +1,4 @@
 +from __future__ import print_function
  from boto.mturk.connection import MTurkConnection
@@ -5475,8 +5475,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  if __name__ == "__main__":
      test()
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/hit_persistence.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/hit_persistence.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/hit_persistence.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/hit_persistence.py	(refactored)
 @@ -1,7 +1,8 @@
 +from __future__ import absolute_import
  import unittest
@@ -5487,8 +5487,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  class TestHITPersistence(MTurkCommon):
  	def create_hit_result(self):
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/selenium_support.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/selenium_support.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/selenium_support.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/selenium_support.py	(refactored)
 @@ -1,4 +1,6 @@
  from __future__ import absolute_import
 +from builtins import str
@@ -5514,8 +5514,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  			if not 'Server Exception' in str(e):
  				raise
  		result = True
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/test_disable_hit.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/test_disable_hit.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/test_disable_hit.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/test_disable_hit.py	(refactored)
 @@ -1,6 +1,7 @@
 +from __future__ import absolute_import
  from tests.mturk.support import unittest
@@ -5525,43 +5525,43 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  from boto.mturk.connection import MTurkRequestError
  
  class TestDisableHITs(MTurkCommon):
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/test_regioninfo.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/test_regioninfo.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/test_regioninfo.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/test_regioninfo.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2014 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/auth/test_sigv4.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/auth/test_sigv4.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/auth/test_sigv4.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/auth/test_sigv4.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/awslambda/test_awslambda.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/awslambda/test_awslambda.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/awslambda/test_awslambda.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/awslambda/test_awslambda.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright (c) 2015 Amazon.com, Inc. or its affiliates. All Rights Reserved
  #
  # Permission is hereby granted, free of charge, to any person obtaining a
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/beanstalk/test_exception.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/beanstalk/test_exception.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/beanstalk/test_exception.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/beanstalk/test_exception.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # Copyright (c) 2014 Amazon.com, Inc. or its affiliates.
  # All Rights Reserved
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudfront/test_invalidation_list.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudfront/test_invalidation_list.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudfront/test_invalidation_list.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudfront/test_invalidation_list.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import range
  #!/usr/bin/env python
  import random
  import string
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudfront/test_signed_urls.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudfront/test_signed_urls.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudfront/test_signed_urls.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudfront/test_signed_urls.py	(refactored)
 @@ -191,16 +191,16 @@
          policy = self.dist._canned_policy(url, expires)
          policy = json.loads(policy)
@@ -5619,12 +5619,12 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          policy = json.loads(policy)
  
 -        self.assertEqual(1, len(policy.keys()))
--        statements = policy["Statement"]RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch/test_document.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch/test_exceptions.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch/test_search.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch2/__init__.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch2/test_document.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch2/test_exceptions.py
+-        statements = policy["Statement"]RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch/test_document.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch/test_exceptions.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch/test_search.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch2/__init__.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch2/test_document.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch2/test_exceptions.py
 
 -        self.assertEqual(1, len(statements))
 -        statement = statements[0]
@@ -5740,8 +5740,8 @@ RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev
          source_ip = ip_address["AWS:SourceIp"]
          self.assertEqual(ip_range, source_ip)
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch/test_document.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch/test_document.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch/test_document.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch/test_document.py	(refactored)
 @@ -128,7 +128,7 @@
          """Check that multiple documents are added correctly to AWS"""
          document = DocumentServiceConnection(
@@ -5760,8 +5760,8 @@ RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev
              document.add(key, obj['version'], obj['fields'])
          doc = document.commit()
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch/test_search.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch/test_search.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch/test_search.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch/test_search.py	(refactored)
 @@ -1,3 +1,6 @@
 +from builtins import str
 +from builtins import next
@@ -5778,8 +5778,8 @@ RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev
  
          # This relies on the default response which is fed into HTTPretty
          self.assertEqual(
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch2/test_document.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch2/test_document.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch2/test_document.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch2/test_document.py	(refactored)
 @@ -145,7 +145,7 @@
          """Check that multiple documents are added correctly to AWS"""
          document = DocumentServiceConnection(
@@ -5798,43 +5798,43 @@ RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev
              document.add(key, obj['fields'])
          doc = document.commit()
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch2/test_search.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch2/test_search.py	(refactored)RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch2/test_search.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearchdomain/test_cloudsearchdomain.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudtrail/test_layer1.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/directconnect/test_layer1.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/dynamodb/test_layer2.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/dynamodb/test_types.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/dynamodb2/test_table.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_address.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_blockdevicemapping.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_connection.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_instance.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_instancestatus.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_instancetype.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_networkinterface.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_reservedinstance.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_securitygroup.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_snapshot.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_spotinstance.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/autoscale/test_group.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/elb/test_listener.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/elb/test_loadbalancer.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ecs/test_connection.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/emr/test_connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/emr/test_emr_responses.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_concurrent.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_job.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_layer2.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_utils.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_vault.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_writer.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/kinesis/test_kinesis.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/logs/test_layer1.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/manage/test_ssh.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/mturk/test_connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/mws/test_connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/mws/test_response.py
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch2/test_search.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch2/test_search.py	(refactored)RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch2/test_search.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearchdomain/test_cloudsearchdomain.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudtrail/test_layer1.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/directconnect/test_layer1.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/dynamodb/test_layer2.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/dynamodb/test_types.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/dynamodb2/test_table.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_address.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_blockdevicemapping.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_connection.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_instance.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_instancestatus.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_instancetype.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_networkinterface.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_reservedinstance.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_securitygroup.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_snapshot.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_spotinstance.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/autoscale/test_group.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/elb/test_listener.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/elb/test_loadbalancer.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ecs/test_connection.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/emr/test_connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/emr/test_emr_responses.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_concurrent.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_job.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_layer2.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_utils.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_vault.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_writer.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/kinesis/test_kinesis.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/logs/test_layer1.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/manage/test_ssh.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/mturk/test_connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/mws/test_connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/mws/test_response.py
 
 @@ -1,3 +1,7 @@
 +from __future__ import print_function
@@ -5853,15 +5853,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
          # This relies on the default response which is fed into HTTPretty
          self.assertEqual(
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/dynamodb/test_types.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/dynamodb/test_types.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/dynamodb/test_types.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/dynamodb/test_types.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import bytes
  #!/usr/bin/env python
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/dynamodb2/test_table.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/dynamodb2/test_table.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/dynamodb2/test_table.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/dynamodb2/test_table.py	(refactored)
 @@ -1,3 +1,6 @@
 +from builtins import next
 +from builtins import str
@@ -5895,8 +5895,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              [
                  ('date_joined', 12345),
                  ('first_name', 'John'),
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_connection.py	(refactored)
 @@ -1,5 +1,7 @@
 +from future import standard_library
 +standard_library.install_aliases()
@@ -5921,8 +5921,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          self.ec2 = boto.ec2.connect_to_region(
              region,
              https_connection_factory=self.https_connection_factory,
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/emr/test_emr_responses.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/emr/test_emr_responses.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/emr/test_emr_responses.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/emr/test_emr_responses.py	(refactored)
 @@ -344,7 +344,7 @@
          return rs
  
@@ -5932,8 +5932,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              actual = getattr(response, field)
              self.assertEquals(expected, actual,
                                "Field %s: %r != %r" % (field, expected, actual))
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_concurrent.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_concurrent.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_concurrent.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_concurrent.py	(refactored)
 @@ -1,3 +1,7 @@
 +from future import standard_library
 +standard_library.install_aliases()
@@ -5942,15 +5942,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  #!/usr/bin/env python
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_vault.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_vault.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_vault.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_vault.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  #!/usr/bin/env python
  # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/mws/test_connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/mws/test_connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/mws/test_connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/mws/test_connection.py	(refactored)
 @@ -1,3 +1,5 @@
 +from builtins import zip
 +from builtins import str
@@ -5975,8 +5975,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
      def test_method_for(self):
          # First, ensure that the map is in "right enough" state.
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/mws/test_response.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/mws/test_response.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/mws/test_response.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/mws/test_response.py	(refactored)
 @@ -1,3 +1,6 @@
 +from builtins import filter
 +from builtins import map
@@ -6011,52 +6011,52 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          item = obj._result.Item
          self.assertEqual(len(item), 3)
 -        nests = [z.Nest for z in filter(lambda x: x.Nest, item)]
-+        nests = [z.Nest for z in [x for x in item if x.Nest]]RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/provider/test_provider.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/rds/test_connection.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/rds/test_snapshot.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/rds2/test_connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/route53/test_connection.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/route53/test_zone.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_bucket.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_key.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_keyfile.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_lifecycle.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_tagging.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_uri.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ses/test_identity.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/sns/test_connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/sqs/test_connection.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/sqs/test_message.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/swf/test_layer2_actors.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/utils/test_utils.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_customergateway.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_dhcpoptions.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_internetgateway.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_networkacl.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_routetable.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_subnet.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_vpc.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_vpc_peering_connection.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_vpnconnection.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_vpngateway.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/filechunkio-1.6/setup.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/filechunkio-1.6/filechunkio/filechunkio.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/filechunkio-1.6/filechunkio/tests.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/compat.py
++        nests = [z.Nest for z in [x for x in item if x.Nest]]RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/provider/test_provider.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/rds/test_connection.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/rds/test_snapshot.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/rds2/test_connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/route53/test_connection.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/route53/test_zone.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_bucket.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_key.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_keyfile.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_lifecycle.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_tagging.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_uri.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ses/test_identity.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/sns/test_connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/sqs/test_connection.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/sqs/test_message.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/swf/test_layer2_actors.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/utils/test_utils.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_customergateway.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_dhcpoptions.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_internetgateway.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_networkacl.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_routetable.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_subnet.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_vpc.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_vpc_peering_connection.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_vpnconnection.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_vpngateway.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/filechunkio-1.6/setup.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/filechunkio-1.6/filechunkio/filechunkio.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/filechunkio-1.6/filechunkio/tests.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/compat.py
 
          self.assertSequenceEqual(
              [[y.Data for y in nest] for nest in nests],
              [[u'2', u'4', u'6'], [u'1', u'3', u'5']],
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/route53/test_connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/route53/test_connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/route53/test_connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/route53/test_connection.py	(refactored)
 @@ -1,3 +1,5 @@
 +from __future__ import print_function
 +from builtins import str
  #!/usr/bin/env python
  # Copyright (c) 2013 Amazon.com, Inc. or its affiliates.  All Rights Reserved
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_key.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_key.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_key.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_key.py	(refactored)
 @@ -21,6 +21,7 @@
  # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
  # IN THE SOFTWARE.
@@ -6065,15 +6065,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  from tests.compat import mock, unittest
  from tests.unit import AWSMockServiceTestCase
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_keyfile.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_keyfile.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_keyfile.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_keyfile.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  # Copyright 2013 Google Inc.
  # Copyright 2011, Nexenta Systems Inc.
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/sqs/test_connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/sqs/test_connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/sqs/test_connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/sqs/test_connection.py	(refactored)
 @@ -112,7 +112,7 @@
  
          self.service_connection.get_queue('my_queue', '599169622985')
@@ -6092,8 +6092,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          self.assertEqual(mattributes['Count']['data_type'], 'Number')
          self.assertEqual(mattributes['Foo']['string_value'], 'Bar')
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/utils/test_utils.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/utils/test_utils.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/utils/test_utils.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/utils/test_utils.py	(refactored)
 @@ -1,3 +1,5 @@
 +from builtins import str
 +from builtins import range
@@ -6109,8 +6109,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
      def test_user_data(self):
          self.set_normal_response(['foo'])
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/filechunkio-1.6/setup.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/filechunkio-1.6/setup.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/filechunkio-1.6/setup.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/filechunkio-1.6/setup.py	(refactored)
 @@ -6,7 +6,7 @@
  
  PY3 = sys.version_info[0] == 3
@@ -6120,8 +6120,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  setup(
      name="filechunkio",
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/filechunkio-1.6/filechunkio/tests.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/filechunkio-1.6/filechunkio/tests.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/filechunkio-1.6/filechunkio/tests.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/filechunkio-1.6/filechunkio/tests.py	(refactored)
 @@ -1,11 +1,13 @@
 +from __future__ import absolute_import
 +from builtins import next
@@ -6139,8 +6139,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  
  class FileChunkIOTest(unittest.TestCase):
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/compat.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/compat.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/compat.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/compat.py	(refactored)
 @@ -1,6 +1,9 @@
  """
  Compatibility...
@@ -6222,8 +6222,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          """
 -        return d.iteritems()
 +        return iter(d.items())
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/distance.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/distance.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/distance.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/distance.py	(refactored)
 @@ -70,6 +70,8 @@
  
  """
@@ -6240,31 +6240,31 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
 -    def __nonzero__(self):
 +    def __bool__(self):
          return bool(self.kilometers)
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/distance.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/format.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/location.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/point.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/units.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/util.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/__init__.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/arcgis.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/baidu.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/base.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/bing.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/databc.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/dot_us.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/geocodefarm.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/geonames.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/googlev3.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/ignfrance.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/navidata.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/opencage.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/openmapquest.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/osm.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/distance.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/format.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/location.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/point.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/units.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/util.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/__init__.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/arcgis.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/baidu.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/base.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/bing.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/databc.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/dot_us.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/geocodefarm.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/geonames.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/googlev3.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/ignfrance.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/navidata.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/opencage.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/openmapquest.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/osm.py
  
      __bool__ = __nonzero__
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/format.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/format.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/format.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/format.py	(refactored)
 @@ -1,17 +1,19 @@
  """
  Formatting...
@@ -6298,8 +6298,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  ANGLE_DIRECTIONS = {
      n * 11.25: d
      for n, d
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/location.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/location.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/location.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/location.py	(refactored)
 @@ -1,6 +1,7 @@
  """
  :class:`.Location` returns geocoder results.
@@ -6308,8 +6308,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  from geopy.point import Point
  from geopy.compat import string_compare, py3k
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/point.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/point.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/point.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/point.py	(refactored)
 @@ -2,6 +2,8 @@
  """
  :class:`.Point` data structure.
@@ -6328,8 +6328,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
                  )
          else:
              return distance
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/util.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/util.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/util.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/util.py	(refactored)
 @@ -1,12 +1,14 @@
  """
  Utils.
@@ -6368,8 +6368,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  else:
      def decode_page(page):
          """
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/__init__.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/__init__.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/__init__.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/__init__.py	(refactored)
 @@ -158,6 +158,6 @@
      except KeyError:
          raise GeocoderNotFound(
@@ -6378,8 +6378,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
 +            (service, list(SERVICE_TO_GEOCODER.keys()))
          )
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/arcgis.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/arcgis.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/arcgis.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/arcgis.py	(refactored)
 @@ -1,6 +1,7 @@
  """
  :class:`.ArcGIS` geocoder.
@@ -6397,8 +6397,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          ])
          url = "&".join((
              "?".join((self.auth_api, token_request_arguments)),
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/baidu.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/baidu.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/baidu.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/baidu.py	(refactored)
 @@ -63,7 +63,7 @@
          """
          return "|".join(
@@ -6408,8 +6408,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              )
          )
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/base.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/base.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/base.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/base.py	(refactored)
 @@ -1,6 +1,8 @@
  """
  :class:`.GeoCoder` base object from which other geocoders are templated.
@@ -6419,8 +6419,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  from ssl import SSLError
  from socket import timeout as SocketTimeout
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/bing.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/bing.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/bing.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/bing.py	(refactored)
 @@ -1,6 +1,7 @@
  """
  :class:`.Bing` geocoder.
@@ -6438,8 +6438,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
                  if key in self.structured_query_params
              }
              params['key'] = self.api_key
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/googlev3.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/googlev3.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/googlev3.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/googlev3.py	(refactored)
 @@ -1,6 +1,7 @@
  """
  :class:`.GoogleV3` is the Google Maps V3 geocoder.
@@ -6457,8 +6457,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              )
          )
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/navidata.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/navidata.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/navidata.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/navidata.py	(refactored)
 @@ -1,6 +1,7 @@
  """
  :class:`.NaviData` is the NaviData.pl geocoder.
@@ -6467,28 +6467,28 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  from geopy.compat import urlencode
  from geopy.location import Location
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/osm.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/osm.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/osm.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/osm.py	(refactored)
 @@ -148,7 +148,7 @@
              params = {
                  key: val
                  for key, val
--                in query.items()RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/photon.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/placefinder.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/smartystreets.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/what3words.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/yandex.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/setup.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/test_requests.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/__init__.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/adapters.py
+-                in query.items()RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/photon.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/placefinder.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/smartystreets.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/what3words.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/yandex.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/setup.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/test_requests.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/__init__.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/adapters.py
 
 +                in list(query.items())
                  if key in self.structured_query_params
              }
          else:
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/placefinder.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/placefinder.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/placefinder.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/placefinder.py	(refactored)
 @@ -1,6 +1,7 @@
  """
  :class:`.YahooPlaceFinder` geocoder.
@@ -6512,8 +6512,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              if not py3k
              else str(consumer_secret)
          )
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/test_requests.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/test_requests.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/test_requests.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/test_requests.py	(refactored)
 @@ -4,6 +4,11 @@
  """Tests for Requests."""
  
@@ -6676,8 +6676,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
      default_keyword_args = {
          'stream': False,
          'verify': True,
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/adapters.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/adapters.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/adapters.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/adapters.py	(refactored)
 @@ -7,6 +7,8 @@
  This module contains the transport adapters that Requests uses to define
  and maintain connections.
@@ -6723,13 +6723,13 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
                          low_conn.putheader(header, value)
  
                      low_conn.endheaders()
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/auth.py	(original)RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/auth.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/certs.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/compat.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/cookies.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/models.py
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/auth.py	(original)RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/auth.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/certs.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/compat.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/cookies.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/models.py
 
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/auth.py	(refactored)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/auth.py	(refactored)
 @@ -6,6 +6,8 @@
  
  This module contains the authentication handlers for Requests.
@@ -6739,8 +6739,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  import os
  import re
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/certs.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/certs.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/certs.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/certs.py	(refactored)
 @@ -11,6 +11,7 @@
  environment, you can change the definition of where() to return a separately
  packaged CA bundle.
@@ -6749,8 +6749,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  import os.path
  
  try:
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/compat.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/compat.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/compat.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/compat.py	(refactored)
 @@ -3,6 +3,8 @@
  """
  pythoncompat
@@ -6795,8 +6795,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
 -    basestring = (str, bytes)
 +    str = (str, bytes)
      numeric_types = (int, float)
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/cookies.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/cookies.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/cookies.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/cookies.py	(refactored)
 @@ -5,6 +5,9 @@
  
  requests.utils imports from here, so be careful with imports.
@@ -6834,8 +6834,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
      def list_domains(self):
          """Utility method to list all the domains in the jar."""
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/models.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/models.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/models.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/models.py	(refactored)
 @@ -6,6 +6,11 @@
  
  This module contains the primary objects that power Requests.
@@ -6938,28 +6938,28 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          """Returns true if :attr:`status_code` is 'OK'."""
          return self.ok
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/sessions.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/sessions.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/sessions.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/sessions.py	(refactored)
 @@ -8,6 +8,9 @@
  requests (cookies, auth, proxies).
  
  """
 +from future import standard_library
-+standard_library.install_aliases()RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/sessions.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/status_codes.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/structures.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/utils.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/__init__.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/big5freq.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/chardistribution.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/charsetgroupprober.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/charsetprober.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/codingstatemachine.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/compat.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/constants.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/escprober.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/escsm.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/eucjpprober.py
++standard_library.install_aliases()RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/sessions.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/status_codes.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/structures.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/utils.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/__init__.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/big5freq.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/chardistribution.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/charsetgroupprober.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/charsetprober.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/codingstatemachine.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/compat.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/constants.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/escprober.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/escsm.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/eucjpprober.py
 
 +from builtins import object
  import os
@@ -7020,8 +7020,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              self.redirect_cache[redirect] = to
  
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/structures.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/structures.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/structures.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/structures.py	(refactored)
 @@ -7,6 +7,7 @@
  Data structures that power Requests.
  
@@ -7061,8 +7061,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  class LookupDict(dict):
      """Dictionary lookup object."""
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/utils.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/utils.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/utils.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/utils.py	(refactored)
 @@ -8,6 +8,9 @@
  that are also useful for external consumption.
  
@@ -7109,8 +7109,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
      return list(value)
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/__init__.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/__init__.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/__init__.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/__init__.py	(refactored)
 @@ -20,7 +20,7 @@
  
  
@@ -7120,8 +7120,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              (version_info >= (3, 0) and not isinstance(aBuf, bytes))):
          raise ValueError('Expected a bytes object, not a unicode object')
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/chardistribution.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/chardistribution.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/chardistribution.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/chardistribution.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  ######################## BEGIN LICENSE BLOCK ########################
@@ -7136,8 +7136,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
      def __init__(self):
          # Mapping table to get frequency order from char order (get from
          # GetOrder())
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/charsetprober.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/charsetprober.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/charsetprober.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/charsetprober.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  ######################## BEGIN LICENSE BLOCK ########################
@@ -7152,8 +7152,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
      def __init__(self):
          pass
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/codingstatemachine.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/codingstatemachine.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/codingstatemachine.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/codingstatemachine.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  ######################## BEGIN LICENSE BLOCK ########################
@@ -7168,8 +7168,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
      def __init__(self, sm):
          self._mModel = sm
          self._mCurrentBytePos = 0
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/compat.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/compat.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/compat.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/compat.py	(refactored)
 @@ -22,7 +22,7 @@
  
  
@@ -7179,41 +7179,41 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  else:
      base_str = (bytes, str)
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/eucjpprober.py	(original)RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/euckrfreq.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/euctwfreq.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/gb2312freq.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/hebrewprober.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/jisfreq.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/jpcntx.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/langbulgarianmodel.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/langcyrillicmodel.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/langgreekmodel.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/langhebrewmodel.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/langhungarianmodel.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/langthaimodel.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/latin1prober.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/mbcharsetprober.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/mbcssm.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/sbcharsetprober.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/sjisprober.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/universaldetector.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/utf8prober.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/__init__.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/_collections.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/connection.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/connectionpool.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/fields.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/filepost.py
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/eucjpprober.py	(original)RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/euckrfreq.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/euctwfreq.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/gb2312freq.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/hebrewprober.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/jisfreq.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/jpcntx.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/langbulgarianmodel.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/langcyrillicmodel.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/langgreekmodel.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/langhebrewmodel.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/langhungarianmodel.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/langthaimodel.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/latin1prober.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/mbcharsetprober.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/mbcssm.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/sbcharsetprober.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/sjisprober.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/universaldetector.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/utf8prober.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/__init__.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/_collections.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/connection.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/connectionpool.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/fields.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/filepost.py
 
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/eucjpprober.py	(refactored)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/eucjpprober.py	(refactored)
 @@ -1,3 +1,5 @@
 +from builtins import str
 +from builtins import range
  ######################## BEGIN LICENSE BLOCK ########################
  # The Original Code is mozilla.org code.
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/jpcntx.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/jpcntx.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/jpcntx.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/jpcntx.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  ######################## BEGIN LICENSE BLOCK ########################
@@ -7228,24 +7228,24 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
      def __init__(self):
          self.reset()
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/mbcharsetprober.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/mbcharsetprober.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/mbcharsetprober.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/mbcharsetprober.py	(refactored)
 @@ -1,3 +1,5 @@
 +from builtins import str
 +from builtins import range
  ######################## BEGIN LICENSE BLOCK ########################
  # The Original Code is Mozilla Universal charset detector code.
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/sjisprober.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/sjisprober.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/sjisprober.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/sjisprober.py	(refactored)
 @@ -1,3 +1,5 @@
 +from builtins import str
 +from builtins import range
  ######################## BEGIN LICENSE BLOCK ########################
  # The Original Code is mozilla.org code.
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/universaldetector.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/universaldetector.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/universaldetector.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/universaldetector.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  ######################## BEGIN LICENSE BLOCK ########################
@@ -7260,15 +7260,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
      def __init__(self):
          self._highBitDetector = re.compile(b'[\x80-\xFF]')
          self._escDetector = re.compile(b'(\033|~{)')
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/utf8prober.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/utf8prober.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/utf8prober.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/utf8prober.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import range
  ######################## BEGIN LICENSE BLOCK ########################
  # The Original Code is mozilla.org code.
  #
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/_collections.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/_collections.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/_collections.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/_collections.py	(refactored)
 @@ -1,8 +1,9 @@
 +from builtins import object
  from collections import Mapping, MutableMapping
@@ -7312,8 +7312,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
      @classmethod
      def from_httplib(cls, message): # Python 2
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/connection.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/connection.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/connection.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/connection.py	(refactored)
 @@ -1,3 +1,6 @@
 +from future import standard_library
 +standard_library.install_aliases()
@@ -7330,8 +7330,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  
  class DummyConnection(object):
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/connectionpool.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/connectionpool.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/connectionpool.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/connectionpool.py	(refactored)
 @@ -1,3 +1,8 @@
 +from future import standard_library
 +standard_library.install_aliases()
@@ -7361,8 +7361,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              self.pool.put(None)
  
          # These are mostly for testing and debugging purposes.
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/fields.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/fields.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/fields.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/fields.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  import email.utils
@@ -7386,23 +7386,23 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              if header_name not in sort_keys:
                  if header_value:
                      lines.append('%s: %s' % (header_name, header_value))
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/filepost.py	(original)RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/poolmanager.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/request.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/response.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/contrib/ntlmpool.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/contrib/pyopenssl.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/ordered_dict.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/six.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/ssl_match_hostname/__init__.py
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/filepost.py	(original)RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/poolmanager.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/request.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/response.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/contrib/ntlmpool.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/contrib/pyopenssl.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/ordered_dict.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/six.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/ssl_match_hostname/__init__.py
 
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/filepost.py	(refactored)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/filepost.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  import codecs
  
  from uuid import uuid4
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/poolmanager.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/poolmanager.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/poolmanager.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/poolmanager.py	(refactored)
 @@ -1,9 +1,11 @@
 +from future import standard_library
 +standard_library.install_aliases()
@@ -7416,8 +7416,8 @@ RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev
  
  from ._collections import RecentlyUsedContainer
  from .connectionpool import HTTPConnectionPool, HTTPSConnectionPool
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/request.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/request.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/request.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/request.py	(refactored)
 @@ -1,7 +1,10 @@
 +from future import standard_library
 +standard_library.install_aliases()
@@ -7430,8 +7430,8 @@ RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev
  
  from .filepost import encode_multipart_formdata
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/response.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/response.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/response.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/response.py	(refactored)
 @@ -1,7 +1,11 @@
 +from future import standard_library
 +standard_library.install_aliases()
@@ -7481,8 +7481,8 @@ RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev
  
      def _handle_chunk(self, amt):
          returned_chunk = None
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/contrib/ntlmpool.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/contrib/ntlmpool.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/contrib/ntlmpool.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/contrib/ntlmpool.py	(refactored)
 @@ -3,11 +3,13 @@
  
  Issue #10, see: http://code.google.com/p/urllib3/issues/detail?id=10
@@ -7498,8 +7498,8 @@ RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev
  from logging import getLogger
  from ntlm import ntlm
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/contrib/pyopenssl.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/contrib/pyopenssl.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/contrib/pyopenssl.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/contrib/pyopenssl.py	(refactored)
 @@ -43,6 +43,9 @@
  .. _crime attack: https://en.wikipedia.org/wiki/CRIME_(security_exploit)
  
@@ -7510,8 +7510,8 @@ RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev
  
  try:
      from ndg.httpsclient.ssl_peer_verification import SUBJ_ALT_NAME_SUPPORT
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/ordered_dict.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/ordered_dict.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/ordered_dict.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/ordered_dict.py	(refactored)
 @@ -1,11 +1,13 @@
 +from future import standard_library
 +standard_library.install_aliases()
@@ -7570,8 +7570,8 @@ RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev
          return dict.__eq__(self, other)
  
      def __ne__(self, other):
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/six.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/six.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/six.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/six.py	(refactored)
 @@ -1,4 +1,9 @@
  """Utilities for writing code that runs on Python 2 and 3"""
 +from future import standard_library
@@ -7592,15 +7592,15 @@ RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev
 -    text_type = unicode
 +    string_types = str,
 +    integer_types = (int, int)
-+    class_types = (type, type)RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/ssl_match_hostname/_implementation.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/connection.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/response.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/retry.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/ssl_.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/timeout.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/url.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/img_browser.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/img_search_dialog.py
++    class_types = (type, type)RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/ssl_match_hostname/_implementation.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/connection.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/response.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/retry.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/ssl_.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/timeout.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/url.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/img_browser.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/img_search_dialog.py
 
 +    text_type = str
      binary_type = str
@@ -7668,16 +7668,16 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          else:
              newline = "\n"
              space = " "
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/ssl_match_hostname/_implementation.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/ssl_match_hostname/_implementation.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/ssl_match_hostname/_implementation.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/ssl_match_hostname/_implementation.py	(refactored)
 @@ -1,4 +1,5 @@
  """The match_hostname() function from Python 3.3.3, essential when using SSL."""
 +from builtins import map
  
  # Note: This file is under the PSF license as the code comes from the python
  # stdlib.   http://docs.python.org/3/license.html
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/retry.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/retry.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/retry.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/retry.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  import time
@@ -7692,29 +7692,29 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          if not retry_counts:
              return False
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/ssl_.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/ssl_.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/ssl_.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/ssl_.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  from binascii import hexlify, unhexlify
  from hashlib import md5, sha1, sha256
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/timeout.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/timeout.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/timeout.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/timeout.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import object
  # The default socket timeout, used by httplib to indicate that no timeout was
  # specified by the user
  from socket import _GLOBAL_DEFAULT_TIMEOUT
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/url.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/url.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/url.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/url.py	(refactored)
 @@ -1,3 +1,4 @@
 +from builtins import str
  from collections import namedtuple
  
  from ..exceptions import LocationParseError
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/img_browser.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/img_browser.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/img_browser.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/img_browser.py	(refactored)
 @@ -22,14 +22,15 @@
   ***************************************************************************/
   This script initializes the plugin, making it known to QGIS.
@@ -7733,8 +7733,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  from PyQt4.Qt import *
  # from PyQt4.Qt import QGraphicsScene, QPixmap
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/img_search_dialog.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/img_search_dialog.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/img_search_dialog.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/img_search_dialog.py	(refactored)
 @@ -22,16 +22,19 @@
   ***************************************************************************/
   This script initializes the plugin, making it known to QGIS.
@@ -7758,8 +7758,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  from module.module_access_oam_catalog import OAMCatalogAccess
  from module.module_geocoding import nominatim_search
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/img_uploader_wizard.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/img_uploader_wizard.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/img_uploader_wizard.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/img_uploader_wizard.py	(refactored)
 @@ -22,10 +22,14 @@
   ***************************************************************************/
   This script initializes the plugin, making it known to QGIS.
@@ -7799,15 +7799,15 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          imgMetaHdlr.extractMetaInImagery()
          metaForUpload = dict(
 -            imgMetaHdlr.getMetaInImagery().items() + metaInputInDict.items())
-+            list(imgMetaHdlr.getMetaInImagery().items()) + list(metaInputInDict.items()))RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/img_uploader_wizard.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/setting_dialog.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/upload_progress_window.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/help/source/conf.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_access_oam_catalog.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_access_s3.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_command_window.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_download_images.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_gdal_utilities.py
++            list(imgMetaHdlr.getMetaInImagery().items()) + list(metaInputInDict.items()))RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/img_uploader_wizard.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/setting_dialog.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/upload_progress_window.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/help/source/conf.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_access_oam_catalog.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_access_s3.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_command_window.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_download_images.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_gdal_utilities.py
 
          strMetaForUpload = str(json.dumps(metaForUpload))
  
@@ -7848,8 +7848,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              refFileAbsPath = str(
                  self.sources_list_widget.item(index).data(Qt.UserRole))
              # print('refFileAbsPath: ' + refFileAbsPath)
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/setting_dialog.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/setting_dialog.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/setting_dialog.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/setting_dialog.py	(refactored)
 @@ -22,10 +22,11 @@
   ***************************************************************************/
   This script initializes the plugin, making it known to QGIS.
@@ -7863,8 +7863,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  from PyQt4.Qt import *
  
  from qgis.core import QgsMessageLog
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/upload_progress_window.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/upload_progress_window.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/upload_progress_window.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/upload_progress_window.py	(refactored)
 @@ -22,15 +22,18 @@
   ***************************************************************************/
   This script initializes the plugin, making it known to QGIS.
@@ -7886,8 +7886,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  from PyQt4.Qt import *
  
  from module.module_access_s3 import S3UploadWorker
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_access_oam_catalog.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_access_oam_catalog.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_access_oam_catalog.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_access_oam_catalog.py	(refactored)
 @@ -22,16 +22,21 @@
   ***************************************************************************/
   This script initializes the plugin, making it known to QGIS.
@@ -7912,8 +7912,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
      def __init__(self, hostUrl, action=None, dictQueries=None, parent=None):
          # probably need to make a textbox for editing hostUrl later
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_access_s3.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_access_s3.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_access_s3.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_access_s3.py	(refactored)
 @@ -28,9 +28,9 @@
  # import traceback
  # from ast import literal_eval
@@ -7935,8 +7935,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              ts_id = post_dict[u'id']
              time = post_dict[u'queued_at']
              QgsMessageLog.logMessage(
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_command_window.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_command_window.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_command_window.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_command_window.py	(refactored)
 @@ -1,10 +1,11 @@
 +from builtins import str
  import os, sys
@@ -7951,8 +7951,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  
  class CommandWindow(QWidget):
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_download_images.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_download_images.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_download_images.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_download_images.py	(refactored)
 @@ -22,13 +22,19 @@
   ***************************************************************************/
   This script initializes the plugin, making it known to QGIS.
@@ -8012,22 +8012,22 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              f = open(self.fileAbsPath, 'wb')
              meta = u.info()
              fileSize = int(meta.getheaders("Content-Length")[0])
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_gdal_utilities.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_gdal_utilities.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_gdal_utilities.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_gdal_utilities.py	(refactored)
 @@ -22,6 +22,8 @@
   ***************************************************************************/
-  This script initializes the plugin, making it known to QGIS.RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_geocoding.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_handle_metadata.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_img_utilities.py
-RefactoringTool: No changes to /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_validate_files.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/qgis_interface.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_init.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_oam_client_dialog.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_qgis_environment.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_resources.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_s3_uploader.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_translations.py
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/utilities.py
+  This script initializes the plugin, making it known to QGIS.RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_geocoding.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_handle_metadata.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_img_utilities.py
+RefactoringTool: No changes to /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_validate_files.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/qgis_interface.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_init.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_oam_client_dialog.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_qgis_environment.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_resources.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_s3_uploader.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_translations.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/utilities.py
 
  """
 +from __future__ import print_function
@@ -8047,8 +8047,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          return (x, y)
  
      # Report the georeferenced coordinates
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_handle_metadata.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_handle_metadata.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_handle_metadata.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_handle_metadata.py	(refactored)
 @@ -22,13 +22,16 @@
   ***************************************************************************/
   This script initializes the plugin, making it known to QGIS.
@@ -8089,8 +8089,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              return (x, y)
  
          # Report the georeferenced coordinates
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_img_utilities.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_img_utilities.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_img_utilities.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_img_utilities.py	(refactored)
 @@ -1,6 +1,8 @@
 +from __future__ import print_function
 +from builtins import object
@@ -8110,8 +8110,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
 +                print((e, infile))
  
          return outfile
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/qgis_interface.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/qgis_interface.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/qgis_interface.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/qgis_interface.py	(refactored)
 @@ -24,7 +24,7 @@
  )
  
@@ -8121,8 +8121,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  from qgis.core import QgsMapLayerRegistry
  from qgis.gui import QgsMapCanvasLayer
  LOGGER = logging.getLogger('QGIS')
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_init.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_init.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_init.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_init.py	(refactored)
 @@ -1,5 +1,7 @@
  # coding=utf-8
  """Tests QGIS plugin init."""
@@ -8149,8 +8149,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
          parser.optionxform = str
          parser.read(file_path)
          message = 'Cannot find a section named "general" in %s' % file_path
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_oam_client_dialog.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_oam_client_dialog.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_oam_client_dialog.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_oam_client_dialog.py	(refactored)
 @@ -7,6 +7,7 @@
       (at your option) any later version.
  
@@ -8173,8 +8173,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  QGIS_APP = get_qgis_app()
  
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_qgis_environment.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_qgis_environment.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_qgis_environment.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_qgis_environment.py	(refactored)
 @@ -8,6 +8,7 @@
       (at your option) any later version.
  
@@ -8192,8 +8192,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  QGIS_APP = get_qgis_app()
  
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_resources.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_resources.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_resources.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_resources.py	(refactored)
 @@ -14,7 +14,7 @@
  
  import unittest
@@ -8203,16 +8203,16 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
  
  
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_s3_uploader.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_s3_uploader.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_s3_uploader.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_s3_uploader.py	(refactored)
 @@ -1,4 +1,4 @@
  import unittest
  import os
  
 -from PyQt4.QtCore import QCoreApplication
 +from qgis.PyQt.QtCore import QCoreApplication
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_translations.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_translations.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_translations.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_translations.py	(refactored)
 @@ -7,7 +7,8 @@
       (at your option) any later version.
  
@@ -8247,8 +8247,8 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
              os.environ.__delitem__('LANG')
  
      def test_qgis_translations(self):
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/utilities.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/utilities.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/utilities.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/utilities.py	(refactored)
 @@ -1,5 +1,6 @@
  # coding=utf-8
  """Common functionality used by regression tests."""
@@ -8263,559 +8263,559 @@ RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oa
 -        from PyQt4 import QtGui, QtCore
 +        from qgis.PyQt import QtGui, QtCore
          from qgis.core import QgsApplication
-RefactoringTool: Refactored /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/utilities_progress_bar.py
+RefactoringTool: Refactored /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/utilities_progress_bar.py
 RefactoringTool: Files that were modified:
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/make_package.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/oam_main.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/plugin_upload.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/set_env.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_backup_img_uploader_wizard.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_img_search_dialog.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_img_uploader_wizard.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_module_access_s3.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_module_command_window.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/get-pip.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/setup.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/__init__.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/auth.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/compat.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/exception.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/handler.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/https_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/jsonresponse.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/plugin.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/provider.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/regioninfo.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/requestlog.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/resultset.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/storage_uri.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/utils.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/awslambda/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/exception.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/response.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/wrapper.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudformation/connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudformation/stack.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudformation/template.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/__init__.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/distribution.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/identity.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/invalidation.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/logging.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/origin.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/signers.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudhsm/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/document.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/domain.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/layer2.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/search.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/sourceattribute.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/document.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/domain.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/layer2.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/search.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearchdomain/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudtrail/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/codedeploy/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cognito/identity/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cognito/sync/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/configservice/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/datapipeline/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/directconnect/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/batch.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/condition.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/item.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/layer2.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/schema.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/table.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/types.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/fields.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/items.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/results.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/table.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/attributes.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/blockdevicemapping.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/buyreservation.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/ec2object.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/group.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/image.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/instance.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/instanceinfo.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/instancestatus.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/keypair.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/networkinterface.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/reservedinstance.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/securitygroup.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/snapshot.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/spotinstancerequest.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/spotpricehistory.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/tag.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/volume.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/volumestatus.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/__init__.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/activity.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/group.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/instance.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/launchconfig.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/limits.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/policy.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/request.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/scheduled.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/tag.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/cloudwatch/__init__.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/cloudwatch/alarm.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/cloudwatch/metric.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/__init__.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/attributes.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/healthcheck.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/instancestate.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/listener.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/loadbalancer.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/policies.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/securitygroup.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2containerservice/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ecs/__init__.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ecs/item.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/elasticache/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/elastictranscoder/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/bootstrap_action.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/emrobject.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/instance_group.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/step.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/file/bucket.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/file/connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/file/key.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/fps/connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/fps/response.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/concurrent.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/exceptions.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/job.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/layer2.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/utils.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/vault.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/writer.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/acl.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/bucket.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/bucketlistresultset.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/cors.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/key.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/lifecycle.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/resumable_upload_handler.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/user.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/iam/connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/iam/summarymap.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/kinesis/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/kms/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/logs/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/machinelearning/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/cmdshell.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/propget.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/server.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/task.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/test_manage.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/volume.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/interactive.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/iobject.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/order.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/server.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/layoutparam.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/notification.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/price.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/qualification.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/question.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mws/connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mws/exception.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mws/response.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/opsworks/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/bootstrap.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/config.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/copybot.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/launch_ami.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/scriptbase.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/startup.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/__init__.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/ubuntu/ebs.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/ubuntu/installer.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/ubuntu/mysql.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/ubuntu/trac.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/__init__.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbinstance.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbsecuritygroup.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbsnapshot.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbsubnetgroup.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/event.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/logfile.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/optiongroup.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/parametergroup.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/statusinfo.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/vpcsecuritygroupmembership.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds2/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/redshift/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/roboto/awsqueryrequest.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/roboto/awsqueryservice.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/roboto/param.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/healthcheck.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/hostedzone.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/record.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/status.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/zone.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/domains/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/__init__.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/acl.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/bucket.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/bucketlistresultset.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/bucketlogging.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/cors.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/deletemarker.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/key.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/keyfile.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/lifecycle.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/multidelete.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/multipart.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/prefix.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/resumable_download_handler.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/tagging.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/user.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/website.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/domain.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/item.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/queryresultset.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/blob.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/key.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/model.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/property.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/query.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/sequence.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/test_db.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/manager/__init__.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/manager/sdbmanager.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/manager/xmlmanager.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/bs.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/message.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/result.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/service.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/servicedef.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/sonofmmm.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/submit.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ses/connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sns/connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/batchresults.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/bigmessage.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/jsonmessage.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/message.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/queue.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sts/connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sts/credentials.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/support/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/swf/layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/swf/layer1_decisions.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/swf/layer2.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vendored/six.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/__init__.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/internetgateway.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/networkacl.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/routetable.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/subnet.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpc.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpc_peering_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpnconnection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpngateway.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/docs/source/conf.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/docs/source/extensions/githublinks/__init__.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/compat.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/test.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_lists.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_password.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_query.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_sequence.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/devpay/test_s3.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/fps/test.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/__init__.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/beanstalk/test_wrapper.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/cloudformation/test_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/cloudsearch/test_layers.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/cloudtrail/test_cloudtrail.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/cognito/sync/test_cognito_sync.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/datapipeline/test_layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb/test_layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb/test_layer2.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb/test_table.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb2/test_highlevel.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb2/test_layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/test_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/autoscale/test_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/cloudwatch/test_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/elb/test_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/vpc/test_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/elasticache/test_layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/elastictranscoder/test_layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/glacier/test_layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/cb_test_harness.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_basic.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_generation_conditionals.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_resumable_downloads.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_resumable_uploads.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_storage_uri.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_versioning.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/testcase.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/util.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/iam/test_password_policy.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/kinesis/test_kinesis.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/mws/test.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/opsworks/test_layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/rds/test_db_subnet_group.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/rds/test_promote_modify.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/rds2/test_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/redshift/test_layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/__init__.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_alias_resourcerecordsets.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_health_check.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_resourcerecordsets.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_zone.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/mock_storage_service.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_bucket.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_cors.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_encryption.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_key.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_mfa.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_multidelete.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_multipart.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_pool.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_versioning.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sdb/test_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sns/test_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sqs/test_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sts/test_session_token.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/support/test_layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/swf/test_layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/swf/test_layer1_workflow_execution.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/_init_environment.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/all_tests.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/cleanup_tests.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/common.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/create_hit_external.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/create_hit_test.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/create_hit_with_qualifications.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/hit_persistence.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/selenium_support.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/test_disable_hit.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/__init__.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/test_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/test_regioninfo.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/auth/test_sigv4.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/awslambda/test_awslambda.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/beanstalk/test_exception.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudformation/test_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudformation/test_stack.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudfront/test_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudfront/test_invalidation_list.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudfront/test_signed_urls.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch/test_document.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch/test_exceptions.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch/test_search.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch2/__init__.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch2/test_document.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch2/test_exceptions.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch2/test_search.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearchdomain/test_cloudsearchdomain.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudtrail/test_layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/directconnect/test_layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/dynamodb/test_layer2.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/dynamodb/test_types.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/dynamodb2/test_table.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_address.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_blockdevicemapping.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_instance.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_instancestatus.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_instancetype.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_networkinterface.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_reservedinstance.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_securitygroup.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_snapshot.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_spotinstance.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/autoscale/test_group.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/elb/test_listener.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/elb/test_loadbalancer.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ecs/test_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/emr/test_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/emr/test_emr_responses.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_concurrent.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_job.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_layer2.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_utils.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_vault.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_writer.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/kinesis/test_kinesis.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/logs/test_layer1.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/manage/test_ssh.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/mturk/test_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/mws/test_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/mws/test_response.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/provider/test_provider.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/rds/test_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/rds/test_snapshot.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/rds2/test_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/route53/test_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/route53/test_zone.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_bucket.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_key.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_keyfile.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_lifecycle.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_tagging.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_uri.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ses/test_identity.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/sns/test_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/sqs/test_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/sqs/test_message.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/swf/test_layer2_actors.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/utils/test_utils.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_customergateway.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_dhcpoptions.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_internetgateway.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_networkacl.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_routetable.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_subnet.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_vpc.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_vpc_peering_connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_vpnconnection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_vpngateway.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/filechunkio-1.6/setup.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/filechunkio-1.6/filechunkio/filechunkio.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/filechunkio-1.6/filechunkio/tests.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/compat.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/distance.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/format.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/location.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/point.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/units.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/util.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/__init__.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/arcgis.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/baidu.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/base.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/bing.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/databc.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/dot_us.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/geocodefarm.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/geonames.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/googlev3.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/ignfrance.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/navidata.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/opencage.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/openmapquest.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/osm.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/photon.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/placefinder.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/smartystreets.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/what3words.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/yandex.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/setup.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/test_requests.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/__init__.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/adapters.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/auth.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/certs.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/compat.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/cookies.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/models.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/sessions.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/status_codes.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/structures.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/utils.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/__init__.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/big5freq.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/chardistribution.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/charsetgroupprober.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/charsetprober.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/codingstatemachine.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/compat.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/constants.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/escprober.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/escsm.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/eucjpprober.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/euckrfreq.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/euctwfreq.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/gb2312freq.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/hebrewprober.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/jisfreq.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/jpcntx.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/langbulgarianmodel.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/langcyrillicmodel.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/langgreekmodel.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/langhebrewmodel.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/langhungarianmodel.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/langthaimodel.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/latin1prober.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/mbcharsetprober.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/mbcssm.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/sbcharsetprober.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/sjisprober.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/universaldetector.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/utf8prober.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/__init__.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/_collections.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/connectionpool.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/fields.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/filepost.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/poolmanager.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/request.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/response.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/contrib/ntlmpool.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/contrib/pyopenssl.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/ordered_dict.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/six.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/ssl_match_hostname/__init__.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/ssl_match_hostname/_implementation.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/connection.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/response.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/retry.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/ssl_.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/timeout.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/url.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/img_browser.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/img_search_dialog.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/img_uploader_wizard.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/setting_dialog.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/upload_progress_window.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/help/source/conf.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_access_oam_catalog.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_access_s3.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_command_window.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_download_images.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_gdal_utilities.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_geocoding.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_handle_metadata.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_img_utilities.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_validate_files.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/qgis_interface.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_init.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_oam_client_dialog.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_qgis_environment.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_resources.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_s3_uploader.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_translations.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/utilities.py
-RefactoringTool: /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/utilities_progress_bar.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/make_package.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/oam_main.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/plugin_upload.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/set_env.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_backup_img_uploader_wizard.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_img_search_dialog.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_img_uploader_wizard.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_module_access_s3.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_module_command_window.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/get-pip.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/setup.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/__init__.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/auth.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/compat.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/exception.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/handler.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/https_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/jsonresponse.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/plugin.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/provider.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/regioninfo.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/requestlog.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/resultset.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/storage_uri.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/utils.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/awslambda/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/exception.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/response.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/beanstalk/wrapper.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudformation/connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudformation/stack.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudformation/template.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/__init__.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/distribution.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/identity.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/invalidation.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/logging.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/origin.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudfront/signers.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudhsm/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/document.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/domain.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/layer2.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/search.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch/sourceattribute.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/document.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/domain.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/layer2.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearch2/search.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudsearchdomain/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cloudtrail/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/codedeploy/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cognito/identity/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/cognito/sync/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/configservice/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/datapipeline/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/directconnect/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/batch.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/condition.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/item.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/layer2.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/schema.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/table.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb/types.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/fields.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/items.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/results.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/dynamodb2/table.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/attributes.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/blockdevicemapping.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/buyreservation.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/ec2object.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/group.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/image.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/instance.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/instanceinfo.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/instancestatus.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/keypair.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/networkinterface.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/reservedinstance.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/securitygroup.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/snapshot.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/spotinstancerequest.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/spotpricehistory.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/tag.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/volume.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/volumestatus.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/__init__.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/activity.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/group.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/instance.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/launchconfig.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/limits.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/policy.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/request.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/scheduled.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/autoscale/tag.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/cloudwatch/__init__.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/cloudwatch/alarm.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/cloudwatch/metric.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/__init__.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/attributes.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/healthcheck.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/instancestate.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/listener.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/loadbalancer.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/policies.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2/elb/securitygroup.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ec2containerservice/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ecs/__init__.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ecs/item.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/elasticache/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/elastictranscoder/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/bootstrap_action.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/emrobject.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/instance_group.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/emr/step.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/file/bucket.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/file/connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/file/key.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/fps/connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/fps/response.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/concurrent.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/exceptions.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/job.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/layer2.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/utils.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/vault.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/glacier/writer.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/acl.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/bucket.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/bucketlistresultset.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/cors.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/key.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/lifecycle.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/resumable_upload_handler.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/gs/user.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/iam/connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/iam/summarymap.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/kinesis/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/kms/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/logs/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/machinelearning/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/cmdshell.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/propget.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/server.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/task.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/test_manage.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/manage/volume.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/interactive.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/iobject.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/order.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mashups/server.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/layoutparam.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/notification.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/price.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/qualification.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mturk/question.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mws/connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mws/exception.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/mws/response.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/opsworks/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/bootstrap.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/config.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/copybot.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/launch_ami.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/scriptbase.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/startup.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/__init__.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/ubuntu/ebs.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/ubuntu/installer.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/ubuntu/mysql.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/pyami/installers/ubuntu/trac.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/__init__.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbinstance.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbsecuritygroup.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbsnapshot.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/dbsubnetgroup.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/event.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/logfile.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/optiongroup.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/parametergroup.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/statusinfo.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds/vpcsecuritygroupmembership.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/rds2/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/redshift/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/roboto/awsqueryrequest.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/roboto/awsqueryservice.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/roboto/param.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/healthcheck.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/hostedzone.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/record.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/status.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/zone.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/route53/domains/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/__init__.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/acl.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/bucket.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/bucketlistresultset.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/bucketlogging.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/cors.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/deletemarker.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/key.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/keyfile.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/lifecycle.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/multidelete.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/multipart.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/prefix.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/resumable_download_handler.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/tagging.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/user.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/s3/website.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/domain.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/item.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/queryresultset.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/blob.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/key.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/model.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/property.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/query.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/sequence.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/test_db.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/manager/__init__.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/manager/sdbmanager.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sdb/db/manager/xmlmanager.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/bs.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/message.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/result.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/service.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/servicedef.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/sonofmmm.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/services/submit.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/ses/connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sns/connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/batchresults.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/bigmessage.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/jsonmessage.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/message.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sqs/queue.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sts/connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/sts/credentials.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/support/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/swf/layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/swf/layer1_decisions.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/swf/layer2.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vendored/six.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/__init__.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/internetgateway.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/networkacl.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/routetable.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/subnet.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpc.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpc_peering_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpnconnection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vpc/vpngateway.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/docs/source/conf.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/docs/source/extensions/githublinks/__init__.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/compat.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/test.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_lists.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_password.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_query.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/db/test_sequence.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/devpay/test_s3.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/fps/test.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/__init__.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/beanstalk/test_wrapper.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/cloudformation/test_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/cloudsearch/test_layers.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/cloudtrail/test_cloudtrail.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/cognito/sync/test_cognito_sync.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/datapipeline/test_layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb/test_layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb/test_layer2.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb/test_table.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb2/test_highlevel.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/dynamodb2/test_layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/test_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/autoscale/test_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/cloudwatch/test_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/elb/test_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/ec2/vpc/test_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/elasticache/test_layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/elastictranscoder/test_layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/glacier/test_layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/cb_test_harness.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_basic.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_generation_conditionals.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_resumable_downloads.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_resumable_uploads.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_storage_uri.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/test_versioning.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/testcase.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/gs/util.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/iam/test_password_policy.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/kinesis/test_kinesis.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/mws/test.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/opsworks/test_layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/rds/test_db_subnet_group.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/rds/test_promote_modify.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/rds2/test_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/redshift/test_layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/__init__.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_alias_resourcerecordsets.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_health_check.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_resourcerecordsets.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/route53/test_zone.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/mock_storage_service.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_bucket.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_cors.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_encryption.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_key.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_mfa.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_multidelete.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_multipart.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_pool.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/s3/test_versioning.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sdb/test_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sns/test_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sqs/test_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/sts/test_session_token.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/support/test_layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/swf/test_layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/integration/swf/test_layer1_workflow_execution.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/_init_environment.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/all_tests.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/cleanup_tests.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/common.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/create_hit_external.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/create_hit_test.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/create_hit_with_qualifications.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/hit_persistence.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/selenium_support.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/test_disable_hit.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/__init__.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/test_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/test_regioninfo.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/auth/test_sigv4.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/awslambda/test_awslambda.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/beanstalk/test_exception.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudformation/test_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudformation/test_stack.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudfront/test_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudfront/test_invalidation_list.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudfront/test_signed_urls.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch/test_document.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch/test_exceptions.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch/test_search.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch2/__init__.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch2/test_document.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch2/test_exceptions.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearch2/test_search.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudsearchdomain/test_cloudsearchdomain.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/cloudtrail/test_layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/directconnect/test_layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/dynamodb/test_layer2.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/dynamodb/test_types.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/dynamodb2/test_table.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_address.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_blockdevicemapping.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_instance.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_instancestatus.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_instancetype.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_networkinterface.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_reservedinstance.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_securitygroup.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_snapshot.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/test_spotinstance.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/autoscale/test_group.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/elb/test_listener.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ec2/elb/test_loadbalancer.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ecs/test_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/emr/test_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/emr/test_emr_responses.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_concurrent.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_job.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_layer2.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_utils.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_vault.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/glacier/test_writer.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/kinesis/test_kinesis.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/logs/test_layer1.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/manage/test_ssh.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/mturk/test_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/mws/test_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/mws/test_response.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/provider/test_provider.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/rds/test_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/rds/test_snapshot.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/rds2/test_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/route53/test_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/route53/test_zone.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_bucket.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_key.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_keyfile.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_lifecycle.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_tagging.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/s3/test_uri.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/ses/test_identity.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/sns/test_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/sqs/test_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/sqs/test_message.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/swf/test_layer2_actors.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/utils/test_utils.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_customergateway.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_dhcpoptions.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_internetgateway.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_networkacl.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_routetable.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_subnet.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_vpc.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_vpc_peering_connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_vpnconnection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/unit/vpc/test_vpngateway.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/filechunkio-1.6/setup.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/filechunkio-1.6/filechunkio/filechunkio.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/filechunkio-1.6/filechunkio/tests.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/compat.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/distance.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/format.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/location.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/point.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/units.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/util.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/__init__.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/arcgis.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/baidu.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/base.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/bing.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/databc.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/dot_us.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/geocodefarm.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/geonames.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/googlev3.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/ignfrance.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/navidata.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/opencage.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/openmapquest.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/osm.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/photon.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/placefinder.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/smartystreets.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/what3words.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/geopy-1.11.0/geopy/geocoders/yandex.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/setup.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/test_requests.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/__init__.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/adapters.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/auth.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/certs.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/compat.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/cookies.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/models.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/sessions.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/status_codes.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/structures.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/utils.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/__init__.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/big5freq.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/chardistribution.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/charsetgroupprober.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/charsetprober.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/codingstatemachine.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/compat.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/constants.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/escprober.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/escsm.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/eucjpprober.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/euckrfreq.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/euctwfreq.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/gb2312freq.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/hebrewprober.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/jisfreq.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/jpcntx.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/langbulgarianmodel.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/langcyrillicmodel.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/langgreekmodel.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/langhebrewmodel.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/langhungarianmodel.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/langthaimodel.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/latin1prober.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/mbcharsetprober.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/mbcssm.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/sbcharsetprober.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/sjisprober.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/universaldetector.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/chardet/utf8prober.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/__init__.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/_collections.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/connectionpool.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/fields.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/filepost.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/poolmanager.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/request.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/response.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/contrib/ntlmpool.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/contrib/pyopenssl.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/ordered_dict.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/six.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/ssl_match_hostname/__init__.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/ssl_match_hostname/_implementation.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/connection.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/response.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/retry.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/ssl_.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/timeout.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/util/url.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/img_browser.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/img_search_dialog.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/img_uploader_wizard.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/setting_dialog.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/upload_progress_window.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/help/source/conf.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_access_oam_catalog.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_access_s3.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_command_window.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_download_images.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_gdal_utilities.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_geocoding.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_handle_metadata.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_img_utilities.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_validate_files.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/qgis_interface.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_init.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_oam_client_dialog.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_qgis_environment.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_resources.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_s3_uploader.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/test_translations.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/utilities.py
+RefactoringTool: /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/utilities_progress_bar.py
 RefactoringTool: Warnings/messages while refactoring:
-RefactoringTool: ### In file /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_module_command_window.py ###
+RefactoringTool: ### In file /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/backup_files/backup_module_command_window.py ###
 RefactoringTool: Line 30: could not convert: from PyQt4.QtCore import *
 RefactoringTool: Cannot handle star imports.
 RefactoringTool: Line 30: could not convert: from PyQt4.QtCore import *
@@ -8996,14 +8996,14 @@ RefactoringTool: Line 31: could not convert: from PyQt4.QtGui import *
 RefactoringTool: Cannot handle star imports.
 RefactoringTool: Line 31: could not convert: from PyQt4.QtGui import *
 RefactoringTool: Cannot handle star imports.
-RefactoringTool: ### In file /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vendored/six.py ###
+RefactoringTool: ### In file /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/boto/vendored/six.py ###
 RefactoringTool: Line 491: Calls to builtin next() possibly shadowed by global binding
-RefactoringTool: ### In file /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/cleanup_tests.py ###
+RefactoringTool: ### In file /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/boto-2.38.0/tests/mturk/cleanup_tests.py ###
 RefactoringTool: Line 37: You should use a for loop here
 RefactoringTool: Line 38: You should use a for loop here
-RefactoringTool: ### In file /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/six.py ###
+RefactoringTool: ### In file /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/ext_libs/requests-2.7.0/requests/packages/urllib3/packages/six.py ###
 RefactoringTool: Line 232: Calls to builtin next() possibly shadowed by global binding
-RefactoringTool: ### In file /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/upload_progress_window.py ###
+RefactoringTool: ### In file /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/gui/upload_progress_window.py ###
 RefactoringTool: Line 32: could not convert: from PyQt4.QtGui import *
 RefactoringTool: Cannot handle star imports.
 RefactoringTool: Line 32: could not convert: from PyQt4.QtGui import *
@@ -9094,7 +9094,7 @@ RefactoringTool: Line 32: could not convert: from PyQt4.QtGui import *
 RefactoringTool: Cannot handle star imports.
 RefactoringTool: Line 32: could not convert: from PyQt4.QtGui import *
 RefactoringTool: Cannot handle star imports.
-RefactoringTool: ### In file /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_access_s3.py ###
+RefactoringTool: ### In file /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_access_s3.py ###
 RefactoringTool: Line 32: could not convert: from PyQt4.QtGui import *
 RefactoringTool: Cannot handle star imports.
 RefactoringTool: Line 32: could not convert: from PyQt4.QtGui import *
@@ -9185,7 +9185,7 @@ RefactoringTool: Line 32: could not convert: from PyQt4.QtGui import *
 RefactoringTool: Cannot handle star imports.
 RefactoringTool: Line 32: could not convert: from PyQt4.QtGui import *
 RefactoringTool: Cannot handle star imports.
-RefactoringTool: ### In file /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_command_window.py ###
+RefactoringTool: ### In file /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_command_window.py ###
 RefactoringTool: Line 5: could not convert: from PyQt4.QtCore import *
 RefactoringTool: Cannot handle star imports.
 RefactoringTool: Line 5: could not convert: from PyQt4.QtCore import *
@@ -9366,7 +9366,7 @@ RefactoringTool: Line 6: could not convert: from PyQt4.QtGui import *
 RefactoringTool: Cannot handle star imports.
 RefactoringTool: Line 6: could not convert: from PyQt4.QtGui import *
 RefactoringTool: Cannot handle star imports.
-RefactoringTool: ### In file /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_download_images.py ###
+RefactoringTool: ### In file /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/module/module_download_images.py ###
 RefactoringTool: Line 30: could not convert: from PyQt4.QtGui import *
 RefactoringTool: Cannot handle star imports.
 RefactoringTool: Line 30: could not convert: from PyQt4.QtGui import *
@@ -9463,8 +9463,8 @@ RefactoringTool: Cannot handle star imports.
      except ImportError:
          return None, None, None, None
  
---- /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/utilities_progress_bar.py	(original)
-+++ /home/geopro/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/utilities_progress_bar.py	(refactored)
+--- /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/utilities_progress_bar.py	(original)
++++ /home/user/Documents/osGeoLive/salientrobot-dev/oam-qgis-plugin/OpenAerialMap/test/utilities_progress_bar.py	(refactored)
 @@ -5,8 +5,8 @@
  """
  
