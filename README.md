@@ -1,3 +1,6 @@
+`Plugin for QGIS v3 here --> https://github.com/yojiyojiyoji/oam_qgis3_express`
+
+
 ## oam-qgis-plugin
 
 QGIS plugin to upload and download data to/from OpenAerialMap. The plugin cosists of following functionalities:  
