@@ -21,10 +21,13 @@
  *                                                                         *
  ***************************************************************************/
 """
+from __future__ import print_function
+from builtins import str
+from builtins import range
 
 import os, sys
 
-from PyQt4 import QtGui, uic
+from qgis.PyQt import QtGui, uic
 from PyQt4.Qt import *
 
 from qgis.gui import QgsMessageBar
@@ -190,7 +193,7 @@ class ImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                     self.layers_list_widget.addItem(item)
 
     def selectFile(self):
-        selected_file = QFileDialog.getOpenFileName(
+        selected_file, __ = QFileDialog.getOpenFileName(
             self,
             'Select imagery file',
             os.path.expanduser("~"))
@@ -435,7 +438,7 @@ amount of time. Are you sure to continue?")
                     # extract metadata from GeoTiff, and merge with the metadata from textbox
                     imgMetaHdlr = ImgMetadataHandler(file_abspath)
                     imgMetaHdlr.extractMetaInImagery()
-                    metaForUpload = dict(imgMetaHdlr.getMetaInImagery().items() + metaInputInDict.items())
+                    metaForUpload = dict(list(imgMetaHdlr.getMetaInImagery().items()) + list(metaInputInDict.items()))
                     strMetaForUpload = str(json.dumps(metaForUpload))
 
                     #json_file_abspath = os.path.splitext(file_abspath)[0] + '.tif_meta.json'
@@ -535,7 +538,7 @@ amount of time. Are you sure to continue?")
 
     def loadMetadataReviewBox(self):
         json_file_abspaths = []
-        for index in xrange(self.sources_list_widget.count()):
+        for index in range(self.sources_list_widget.count()):
             file_abspath = str(self.sources_list_widget.item(index).data(Qt.UserRole))
             json_file_abspath = ''
             #if self.reproject_check_box.isChecked():
@@ -584,7 +587,7 @@ amount of time. Are you sure to continue?")
                 'Please check the lisence term.',
                 level=QgsMessageBar.WARNING)
         else:
-            for index in xrange(self.sources_list_widget.count()):
+            for index in range(self.sources_list_widget.count()):
                 upload_file_abspath = str(self.added_sources_list_widget.item(index).data(Qt.UserRole))
                 upload_file_abspaths.append(upload_file_abspath)
 
@@ -643,7 +646,7 @@ amount of time. Are you sure to continue?")
         #print('fileAbsPath: ' + fileAbsPath)
 
         #print(str(self.added_sources_list_widget.count()))
-        for index in xrange(0, self.added_sources_list_widget.count()):
+        for index in range(0, self.added_sources_list_widget.count()):
             refFileAbsPath = str(self.added_sources_list_widget.item(index).data(Qt.UserRole))
             #print('refFileAbsPath: ' + refFileAbsPath)
             if fileAbsPath == refFileAbsPath:
@@ -651,7 +654,7 @@ amount of time. Are you sure to continue?")
                 break
 
         #print(str(self.sources_list_widget.count()))
-        for index in xrange(0, self.sources_list_widget.count()):
+        for index in range(0, self.sources_list_widget.count()):
             refFileAbsPath = str(self.sources_list_widget.item(index).data(Qt.UserRole))
             #print('refFileAbsPath: ' + refFileAbsPath)
             if fileAbsPath == refFileAbsPath:

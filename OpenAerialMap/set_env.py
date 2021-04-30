@@ -22,15 +22,18 @@
  ***************************************************************************/
  This script initializes the plugin, making it known to QGIS.
 """
+import os
+import sys
+from builtins import map
+from builtins import object
+from builtins import str
 
-import os, sys
-
-from qgis.core import *
 from osgeo import gdal
-from PyQt4.QtCore import QDir
+from qgis.PyQt.QtCore import QDir
+from qgis.core import *
 
 
-class SetEnvironment:
+class SetEnvironment(object):
 
     @staticmethod
     def setPip():
@@ -67,7 +70,7 @@ class SetEnvironment:
             qgis_standalone_gdal_path = u"%s/Frameworks/GDAL.framework" % qgis_app
 
             # get the path to the GDAL framework when installed as external framework
-            gdal_versionsplit = unicode(Version(gdal.VersionInfo("RELEASE_NAME"))).split('.')
+            gdal_versionsplit = str(Version(gdal.VersionInfo("RELEASE_NAME"))).split('.')
             gdal_base_path = u"/Library/Frameworks/GDAL.framework/Versions/%s.%s/Programs" % (gdal_versionsplit[0], gdal_versionsplit[1])
 
             if os.path.exists(qgis_standalone_gdal_path):  # qgis standalone
@@ -83,7 +86,7 @@ class SetEnvironment:
             pass
 
 
-class Version:
+class Version(object):
 
     def __init__(self, ver):
         self.vers = ('0', '0', '0')
@@ -91,7 +94,7 @@ class Version:
         if isinstance(ver, Version):
             self.vers = ver.vers
         elif isinstance(ver, tuple) or isinstance(ver, list):
-            self.vers = map(str, ver)
+            self.vers = list(map(str, ver))
         elif isinstance(ver, str):
             self.vers = self.string2vers(ver)
 
@@ -99,7 +102,7 @@ class Version:
     def string2vers(string):
         vers = ['0', '0', '0']
 
-        nums = unicode(string).split(".")
+        nums = str(string).split(".")
 
         if len(nums) > 0:
             vers[0] = nums[0]

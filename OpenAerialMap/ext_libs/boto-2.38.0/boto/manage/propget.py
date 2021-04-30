@@ -1,3 +1,6 @@
+from __future__ import print_function
+from builtins import input
+from builtins import range
 # Copyright (c) 2006-2009 Mitch Garnaat http://garnaat.org/
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
@@ -38,7 +41,7 @@ def get(prop, choices=None):
                 if isinstance(value, tuple):
                     value = value[0]
                 print('[%d] %s' % (i, value))
-            value = raw_input('%s [%d-%d]: ' % (prompt, min, max))
+            value = eval(input('%s [%d-%d]: ' % (prompt, min, max)))
             try:
                 int_value = int(value)
                 value = choices[int_value-1]
@@ -50,7 +53,7 @@ def get(prop, choices=None):
             except IndexError:
                 print('%s is not within the range[%d-%d]' % (min, max))
         else:
-            value = raw_input('%s: ' % prompt)
+            value = eval(input('%s: ' % prompt))
             try:
                 value = prop.validate(value)
                 if prop.empty(value) and prop.required:

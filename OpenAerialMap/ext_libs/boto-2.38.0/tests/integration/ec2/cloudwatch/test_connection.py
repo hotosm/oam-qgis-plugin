@@ -23,6 +23,7 @@
 """
 Initial, and very limited, unit tests for CloudWatchConnection.
 """
+from builtins import object
 
 import datetime
 

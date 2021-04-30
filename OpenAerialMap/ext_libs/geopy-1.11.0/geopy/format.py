@@ -1,17 +1,19 @@
 """
 Formatting...
 """
+from builtins import chr
+from builtins import zip
 
 from geopy import units
 from geopy.compat import py3k
 
 if py3k:
-    unichr = chr # pylint: disable=W0622
+    chr = chr # pylint: disable=W0622
 
 # Unicode characters for symbols that appear in coordinate strings.
-DEGREE = unichr(176)
-PRIME = unichr(8242)
-DOUBLE_PRIME = unichr(8243)
+DEGREE = chr(176)
+PRIME = chr(8242)
+DOUBLE_PRIME = chr(8243)
 ASCII_DEGREE = ''
 ASCII_PRIME = "'"
 ASCII_DOUBLE_PRIME = '"'
@@ -113,7 +115,7 @@ _DIRECTIONS = [
     ('southeast by south', 'SEbS'),
 ]
 
-DIRECTIONS, DIRECTIONS_ABBR = zip(*_DIRECTIONS)
+DIRECTIONS, DIRECTIONS_ABBR = list(zip(*_DIRECTIONS))
 ANGLE_DIRECTIONS = {
     n * 11.25: d
     for n, d

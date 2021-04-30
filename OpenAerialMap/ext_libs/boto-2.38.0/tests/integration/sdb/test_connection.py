@@ -24,6 +24,7 @@
 """
 Some unit tests for the SDBConnection
 """
+from __future__ import print_function
 
 import unittest
 import time
@@ -62,7 +63,7 @@ class SDBConnectionTest (unittest.TestCase):
 
         # try to get the attributes and see if they match
         item = domain.get_attributes(item_1, consistent_read=True)
-        assert len(item.keys()) == len(attrs_1.keys())
+        assert len(list(item.keys())) == len(list(attrs_1.keys()))
         assert item['name1'] == attrs_1['name1']
         assert item['name2'] == attrs_1['name2']
 

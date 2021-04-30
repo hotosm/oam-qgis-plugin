@@ -23,6 +23,7 @@
 """
 Tests for Layer1 of DynamoDB
 """
+from __future__ import print_function
 import time
 import base64
 

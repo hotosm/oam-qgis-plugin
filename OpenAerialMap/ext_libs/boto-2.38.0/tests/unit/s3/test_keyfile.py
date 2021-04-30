@@ -1,3 +1,4 @@
+from builtins import str
 # Copyright 2013 Google Inc.
 # Copyright 2011, Nexenta Systems Inc.
 #

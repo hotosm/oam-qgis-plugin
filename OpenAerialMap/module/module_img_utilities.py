@@ -1,6 +1,8 @@
+from __future__ import print_function
+from builtins import object
 from PIL import Image
 
-class ThumbnailCreation:
+class ThumbnailCreation(object):
 
     def __init__(self):
         pass
@@ -24,6 +26,7 @@ class ThumbnailCreation:
                 im = im.resize(size)
                 im.save(outfile, "PNG")
             except Exception as e:
-                print(e, infile)
+                # fix_print_with_import
+                print((e, infile))
 
         return outfile

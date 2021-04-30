@@ -1,3 +1,5 @@
+from builtins import str
+from builtins import object
 # Copyright (c) 2006-2010 Chris Moyer http://coredumped.org/
 #
 # Permission is hereby granted, free of charge, to any person obtaining a

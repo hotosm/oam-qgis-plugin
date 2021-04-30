@@ -1,3 +1,5 @@
+from builtins import str
+from builtins import object
 # Copyright (c) 2006,2007,2008 Mitch Garnaat http://garnaat.org/
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
@@ -24,6 +26,7 @@ from boto.sdb.db.key import Key
 from boto.sdb.db.query import Query
 import boto
 from boto.compat import filter
+from future.utils import with_metaclass
 
 class ModelMeta(type):
     "Metaclass for all Models"
@@ -37,12 +40,12 @@ class ModelMeta(type):
         from boto.sdb.db.manager import get_manager
 
         try:
-            if filter(lambda b: issubclass(b, Model), bases):
+            if [b for b in bases if issubclass(b, Model)]:
                 for base in bases:
                     base.__sub_classes__.append(cls)
                 cls._manager = get_manager(cls)
                 # look for all of the Properties and set their names
-                for key in dict.keys():
+                for key in list(dict.keys()):
                     if isinstance(dict[key], Property):
                         property = dict[key]
                         property.__property_config__(cls, key)
@@ -57,8 +60,7 @@ class ModelMeta(type):
             # Model class, defined below.
             pass
 
-class Model(object):
-    __metaclass__ = ModelMeta
+class Model(with_metaclass(ModelMeta, object)):
     __consistent__ = False # Consistent is set off by default
     id = None
 
@@ -95,7 +97,7 @@ class Model(object):
     @classmethod
     def find(cls, limit=None, next_token=None, **params):
         q = Query(cls, limit=limit, next_token=next_token)
-        for key, value in params.items():
+        for key, value in list(params.items()):
             q.filter('%s =' % key, value)
         return q
 
@@ -111,7 +113,7 @@ class Model(object):
     def properties(cls, hidden=True):
         properties = []
         while cls:
-            for key in cls.__dict__.keys():
+            for key in list(cls.__dict__.keys()):
                 prop = cls.__dict__[key]
                 if isinstance(prop, Property):
                     if hidden or not prop.__class__.__name__.startswith('_'):
@@ -126,7 +128,7 @@ class Model(object):
     def find_property(cls, prop_name):
         property = None
         while cls:
-            for key in cls.__dict__.keys():
+            for key in list(cls.__dict__.keys()):
                 prop = cls.__dict__[key]
                 if isinstance(prop, Property):
                     if not prop.__class__.__name__.startswith('_') and prop_name == prop.name:

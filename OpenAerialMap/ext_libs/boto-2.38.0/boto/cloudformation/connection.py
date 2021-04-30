@@ -1,3 +1,4 @@
+from builtins import str
 # Copyright (c) 2006-2009 Mitch Garnaat http://garnaat.org/
 # Copyright (c) 2014 Amazon.com, Inc. or its affiliates.  All Rights Reserved
 #

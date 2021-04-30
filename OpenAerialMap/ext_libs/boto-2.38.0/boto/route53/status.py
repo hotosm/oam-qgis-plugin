@@ -1,3 +1,4 @@
+from builtins import object
 # Copyright (c) 2011 Blue Pines Technologies LLC, Brad Carleton
 # www.bluepines.org
 # All rights reserved.

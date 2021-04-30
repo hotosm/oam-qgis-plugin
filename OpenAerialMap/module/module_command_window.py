@@ -1,10 +1,12 @@
+from builtins import str
 import os, sys
 import time
 
-from PyQt4 import QtCore
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
-from PyQt4.QtCore import QThread, pyqtSignal
+from qgis.PyQt import QtCore
+from qgis.PyQt.QtCore import *
+from qgis.PyQt.QtGui import *
+from qgis.PyQt.QtWidgets import *
+from qgis.PyQt.QtCore import QThread, pyqtSignal
 
 
 class CommandWindow(QWidget):

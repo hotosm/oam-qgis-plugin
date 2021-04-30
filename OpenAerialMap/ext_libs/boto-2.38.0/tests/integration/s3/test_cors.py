@@ -24,6 +24,7 @@
 """
 Some integration tests for S3 CORS
 """
+from builtins import zip
 
 import unittest
 import time
@@ -57,16 +58,16 @@ class S3CORSTest (unittest.TestCase):
         for i, rule in enumerate(cfg):
             self.assertEqual(rule.id, self.cfg[i].id)
             self.assertEqual(rule.max_age_seconds, self.cfg[i].max_age_seconds)
-            methods = zip(rule.allowed_method, self.cfg[i].allowed_method)
+            methods = list(zip(rule.allowed_method, self.cfg[i].allowed_method))
             for v1, v2 in methods:
                 self.assertEqual(v1, v2)
-            origins = zip(rule.allowed_origin, self.cfg[i].allowed_origin)
+            origins = list(zip(rule.allowed_origin, self.cfg[i].allowed_origin))
             for v1, v2 in origins:
                 self.assertEqual(v1, v2)
-            headers = zip(rule.allowed_header, self.cfg[i].allowed_header)
+            headers = list(zip(rule.allowed_header, self.cfg[i].allowed_header))
             for v1, v2 in headers:
                 self.assertEqual(v1, v2)
-            headers = zip(rule.expose_header, self.cfg[i].expose_header)
+            headers = list(zip(rule.expose_header, self.cfg[i].expose_header))
             for v1, v2 in headers:
                 self.assertEqual(v1, v2)
         self.bucket.delete_cors()

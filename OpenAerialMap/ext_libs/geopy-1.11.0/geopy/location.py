@@ -1,6 +1,7 @@
 """
 :class:`.Location` returns geocoder results.
 """
+from builtins import object
 
 from geopy.point import Point
 from geopy.compat import string_compare, py3k

@@ -1,3 +1,5 @@
+from builtins import str
+from builtins import object
 # Copyright 2010 Google Inc.
 # Copyright (c) 2011, Nexenta Systems Inc.
 #

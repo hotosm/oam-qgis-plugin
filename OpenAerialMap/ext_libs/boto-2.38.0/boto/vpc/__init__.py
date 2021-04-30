@@ -22,6 +22,7 @@
 """
 Represents a connection to the EC2 service.
 """
+from builtins import str
 
 from boto.ec2.connection import EC2Connection
 from boto.resultset import ResultSet

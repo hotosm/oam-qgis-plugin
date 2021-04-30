@@ -22,13 +22,16 @@
  ***************************************************************************/
  This script initializes the plugin, making it known to QGIS.
 """
+from __future__ import print_function
+from builtins import str
+from builtins import object
 
 import os, sys
 from osgeo import gdal, osr, ogr
 from ast import literal_eval
 
 
-class ImgMetadataHandler:
+class ImgMetadataHandler(object):
 
     def __init__(self, imgFileAbspath):
         self.imgFileAbspath = imgFileAbspath
@@ -63,7 +66,8 @@ class ImgMetadataHandler:
             self.extractGsd()
             return True
         else:
-            print "Error: could not open the gdaldataset."
+            # fix_print_with_import
+            print("Error: could not open the gdaldataset.")
             return False
 
     def extractProjName(self):
@@ -140,8 +144,9 @@ class ImgMetadataHandler:
             geoX = geoTransform[0] + geoTransform[1] * x + geoTransform[2] * y
             geoY = geoTransform[3] + geoTransform[4] * x + geoTransform[5] * y
         else:
-            print "BBOX might be wrong. Transformation coefficient " + \
-                "could not be fetched from raster"
+            # fix_print_with_import
+            print("BBOX might be wrong. Transformation coefficient " + \
+                "could not be fetched from raster")
             return (x, y)
 
         # Report the georeferenced coordinates

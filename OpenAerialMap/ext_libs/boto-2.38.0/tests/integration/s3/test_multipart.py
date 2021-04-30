@@ -25,6 +25,7 @@
 """
 Some unit tests for the S3 MultiPartUpload
 """
+from builtins import next
 
 # Note:
 # Multipart uploads require at least one part. If you upload

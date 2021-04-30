@@ -1,3 +1,4 @@
+from builtins import str
 import codecs
 
 from uuid import uuid4

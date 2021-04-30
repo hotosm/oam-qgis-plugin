@@ -1,11 +1,13 @@
+from __future__ import absolute_import
+from builtins import next
 import io
 import os
 import tempfile
 import unittest
 
-from filechunkio import FileChunkIO
-from filechunkio import SEEK_CUR
-from filechunkio import SEEK_END
+from .filechunkio import FileChunkIO
+from .filechunkio import SEEK_CUR
+from .filechunkio import SEEK_END
 
 
 class FileChunkIOTest(unittest.TestCase):

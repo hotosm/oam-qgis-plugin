@@ -1,7 +1,8 @@
+from __future__ import absolute_import
 import unittest
 import pickle
 
-from common import MTurkCommon
+from .common import MTurkCommon
 
 class TestHITPersistence(MTurkCommon):
 	def create_hit_result(self):

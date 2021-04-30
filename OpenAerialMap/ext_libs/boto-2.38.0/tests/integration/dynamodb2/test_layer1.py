@@ -23,6 +23,7 @@
 """
 Tests for Layer1 of DynamoDB v2
 """
+from builtins import range
 import time
 
 from tests.unit import unittest

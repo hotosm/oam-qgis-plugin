@@ -1,3 +1,7 @@
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+from builtins import object
 # Copyright (c) 2006-2008 Mitch Garnaat http://garnaat.org/
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
@@ -49,7 +53,7 @@ class XMLConverter(object):
                           Password : (self.encode_password, self.decode_password),
                           datetime : (self.encode_datetime, self.decode_datetime)}
         if six.PY2:
-            self.type_map[long] = (self.encode_long, self.decode_long)
+            self.type_map[int] = (self.encode_long, self.decode_long)
 
     def get_text_value(self, parent_node):
         value = ''
@@ -116,12 +120,12 @@ class XMLConverter(object):
         return value
 
     def encode_long(self, value):
-        value = long(value)
+        value = int(value)
         return '%d' % value
 
     def decode_long(self, value):
         value = self.get_text_value(value)
-        return long(value)
+        return int(value)
 
     def encode_bool(self, value):
         if value == True:
@@ -210,9 +214,9 @@ class XMLManager(object):
     def _connect(self):
         if self.db_host:
             if self.enable_ssl:
-                from httplib import HTTPSConnection as Connection
+                from http.client import HTTPSConnection as Connection
             else:
-                from httplib import HTTPConnection as Connection
+                from http.client import HTTPConnection as Connection
 
             self.connection = Connection(self.db_host, self.db_port)
 
@@ -348,7 +352,7 @@ class XMLManager(object):
         if not self.connection:
             raise NotImplementedError("Can't query without a database connection")
 
-        from urllib import urlencode
+        from urllib.parse import urlencode
 
         query = str(self._build_query(cls, filters, limit, order_by))
         if query:

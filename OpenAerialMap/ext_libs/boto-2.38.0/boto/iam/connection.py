@@ -1,3 +1,4 @@
+from builtins import str
 # Copyright (c) 2010-2011 Mitch Garnaat http://garnaat.org/
 # Copyright (c) 2010-2011, Eucalyptus Systems, Inc.
 #
@@ -1110,7 +1111,7 @@ class IAMConnection(AWSQueryConnection):
                 return assume_role_policy_document
         else:
 
-            for tld, policy in DEFAULT_POLICY_DOCUMENTS.items():
+            for tld, policy in list(DEFAULT_POLICY_DOCUMENTS.items()):
                 if tld is 'default':
                     # Skip the default. We'll fall back to it if we don't find
                     # anything.

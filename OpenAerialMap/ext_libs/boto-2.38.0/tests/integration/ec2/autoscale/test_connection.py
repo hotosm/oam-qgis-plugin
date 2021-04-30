@@ -23,6 +23,7 @@
 """
 Some unit tests for the AutoscaleConnection
 """
+from __future__ import print_function
 
 import time
 from boto.ec2.autoscale import AutoScaleConnection

@@ -1,3 +1,4 @@
+from builtins import object
 ######################## BEGIN LICENSE BLOCK ########################
 # The Original Code is Mozilla Communicator client code.
 #
@@ -43,7 +44,7 @@ SURE_NO = 0.01
 MINIMUM_DATA_THRESHOLD = 3
 
 
-class CharDistributionAnalysis:
+class CharDistributionAnalysis(object):
     def __init__(self):
         # Mapping table to get frequency order from char order (get from
         # GetOrder())

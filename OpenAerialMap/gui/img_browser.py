@@ -22,15 +22,17 @@
  ***************************************************************************/
  This script initializes the plugin, making it known to QGIS.
 """
+from builtins import str
 
 import os, sys
 import json
 from datetime import datetime
 from dateutil import parser
 
-from PyQt4 import QtGui, uic
-from PyQt4 import QtCore
-from PyQt4.Qt import *
+from qgis.PyQt import uic, Qt
+from qgis.PyQt import QtCore
+from qgis.PyQt.QtGui import *
+from qgis.PyQt.QtWidgets import *
 # from PyQt4.Qt import QGraphicsScene, QPixmap
 
 from module.module_download_images import (ThumbnailManager,
@@ -41,7 +43,7 @@ FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/img_browser.ui'))
 
 
-class ImgBrowser(QtGui.QDialog, FORM_CLASS):
+class ImgBrowser(QDialog, FORM_CLASS):
 
     # POSITION_WINDOW_FROM_RIGHT = 50
     # POSITION_WINDOW_FROM_TOP = 100
@@ -61,7 +63,7 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
                             Qt.WindowMinimizeButtonHint)
 
         """
-        screenShape = QtGui.QDesktopWidget().screenGeometry()
+        screenShape = QtWidgets.QDesktopWidget().screenGeometry()
         width, height = screenShape.width(), screenShape.height()
         winW, winH = (self.frameGeometry().width(),
                       self.frameGeometry().height())
@@ -166,7 +168,7 @@ class ImgBrowser(QtGui.QDialog, FORM_CLASS):
         if not os.path.exists(defaultDir):
             os.makedirs(defaultDir)
 
-        rSfn = QtGui.QFileDialog.getSaveFileName(
+        rSfn = QFileDialog.getSaveFileName(
             None, 'Save As', imgAbsPath, "TIF Files (*.tif)")
         imgAbsPath = rSfn
 

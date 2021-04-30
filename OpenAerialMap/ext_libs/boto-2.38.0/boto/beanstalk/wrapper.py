@@ -1,4 +1,5 @@
 """Wraps layer1 api methods and converts layer1 dict responses to objects."""
+from builtins import object
 from boto.beanstalk.layer1 import Layer1
 import boto.beanstalk.response
 from boto.exception import BotoServerError

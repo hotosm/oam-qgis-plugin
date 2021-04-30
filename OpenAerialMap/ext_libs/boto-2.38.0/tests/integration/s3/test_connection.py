@@ -23,6 +23,8 @@
 """
 Some unit tests for the S3Connection
 """
+from __future__ import print_function
+from builtins import next
 import unittest
 import time
 import os

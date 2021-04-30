@@ -1,3 +1,6 @@
+from builtins import next
+from builtins import str
+from builtins import range
 from tests.compat import mock, unittest
 from boto.dynamodb2 import exceptions
 from boto.dynamodb2.fields import (HashKey, RangeKey,
@@ -371,14 +374,14 @@ class ItemTestCase(unittest.TestCase):
     # ordering everywhere & no erroneous failures.
 
     def test_keys(self):
-        self.assertCountEqual(self.johndoe.keys(), [
+        self.assertCountEqual(list(self.johndoe.keys()), [
             'date_joined',
             'first_name',
             'username',
         ])
 
     def test_values(self):
-        self.assertCountEqual(self.johndoe.values(),
+        self.assertCountEqual(list(self.johndoe.values()),
                               [12345, 'John', 'johndoe'])
 
     def test_contains(self):
@@ -403,7 +406,7 @@ class ItemTestCase(unittest.TestCase):
 
     def test_items(self):
         self.assertCountEqual(
-            self.johndoe.items(),
+            list(self.johndoe.items()),
             [
                 ('date_joined', 12345),
                 ('first_name', 'John'),

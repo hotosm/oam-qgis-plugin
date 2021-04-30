@@ -7,7 +7,7 @@ REM SET PATH=%PATH%;C:\Program Files\QGIS Essen\bin or C:\Program Files\QGIS 2.1
 
 REM Set the default plugin folder
 SET PLUGIN_NAME=OpenAerialMap
-SET OAM_PLUGIN_DIR=%HOMEPATH%\.qgis2\python\plugins\%PLUGIN_NAME%
+SET OAM_PLUGIN_DIR=%HOMEPATH%\AppData\Roaming\QGIS\QGIS3\profiles\default\python\plugins\%PLUGIN_NAME%
 
 SET FOLDERS=ext_libs gui icon module temp i18n
 SET TARGET_FILES=__init__.py ABOUT INSTALL LICENSE metadata.txt oam_main.py^
@@ -22,7 +22,7 @@ REM SET LOCALS=, LRELEASE=, etc.
 
 if "%1" == "deploy" (
   ECHO Create resources_rc.py
-  pyrcc4 -o ..\resources_rc.py ..\resources.qrc
+  pyrcc5 -o ..\resources_rc.py ..\resources.qrc
 
   ECHO Create OAM Plugin Directory %OAM_PLUGIN_DIR%
   mkdir %OAM_PLUGIN_DIR%

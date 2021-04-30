@@ -1,3 +1,4 @@
+from __future__ import print_function
 # Copyright (c) 2006,2007 Mitch Garnaat http://garnaat.org/
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
@@ -173,14 +174,14 @@ class SDBConnection(AWSQueryConnection):
             params['Expected.1.Value'] = expected_value[1]
 
     def _build_batch_list(self, params, items, replace=False):
-        item_names = items.keys()
+        item_names = list(items.keys())
         i = 0
         for item_name in item_names:
             params['Item.%d.ItemName' % i] = item_name
             j = 0
             item = items[item_name]
             if item is not None:
-                attr_names = item.keys()
+                attr_names = list(item.keys())
                 for attr_name in attr_names:
                     value = item[attr_name]
                     if isinstance(value, list):

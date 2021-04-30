@@ -24,6 +24,7 @@
 """
 Represents an EC2 Instance
 """
+from builtins import object
 import boto
 from boto.ec2.ec2object import EC2Object, TaggedEC2Object
 from boto.resultset import ResultSet

@@ -21,10 +21,15 @@
  *                                                                         *
  ***************************************************************************/
 """
+from __future__ import print_function
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+from builtins import range
 
 import os, sys
 
-from PyQt4 import QtGui, uic
+from qgis.PyQt import QtGui, uic
 from PyQt4.Qt import *
 
 from qgis.gui import QgsMessageBar
@@ -131,7 +136,7 @@ class BackupedImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                 self.layers_list_widget.addItem(item)
 
     def selectFile(self):
-        selected_file = QFileDialog.getOpenFileName(
+        selected_file, __ = QFileDialog.getOpenFileName(
             self,
             'Select imagery file',
             os.path.expanduser("~"))
@@ -301,7 +306,8 @@ class BackupedImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                     if not "EPSG3857" in filename:
                         json_filename = os.path.splitext(filename)[0]+'_EPSG3857.json'
                 json_file = open(json_filename, 'w')
-                print >> json_file, json_string
+                # fix_print_with_import
+                print(json_string, file=json_file)
                 json_file.close()
 
             self.loadMetadataReviewBox()
@@ -495,9 +501,11 @@ class BackupedImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
                     point.Transform(transform)
                     lower_right = json.loads(point.ExportToJson())['coordinates']
             except (RuntimeError, TypeError, NameError) as error:
-                print error
+                # fix_print_with_import
+                print(error)
             except:
-                print "Unexpected error:", sys.exc_info()[0]
+                # fix_print_with_import
+                print("Unexpected error:", sys.exc_info()[0])
 
             self.metadata[filename]['BBOX'] = (upper_left,lower_left,upper_right,lower_right)
 
@@ -563,7 +571,7 @@ class BackupedImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
 
     def loadMetadataReviewBox(self):
         json_filenames = []
-        for index in xrange(self.sources_list_widget.count()):
+        for index in range(self.sources_list_widget.count()):
             filename = str(self.sources_list_widget.item(index).data(Qt.UserRole))
             if filename not in self.reprojected:
                 f = os.path.splitext(filename)[0]+'.json'
@@ -600,7 +608,7 @@ class BackupedImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
         bucket_secret = str(self.secret_key_edit.text())
 
         self.bucket = None
-        for trial in xrange(3):
+        for trial in range(3):
             if self.bucket: break
             try:
                 connection = S3Connection(bucket_key,bucket_secret)
@@ -647,7 +655,7 @@ class BackupedImgUploaderWizard(QtGui.QWizard, FORM_CLASS):
             self.upload_options.append("trigger_tiling")
 
         if self.startConnection():
-            for index in xrange(self.sources_list_widget.count()):
+            for index in range(self.sources_list_widget.count()):
                 filename = str(self.sources_list_widget.item(index).data(Qt.UserRole))
 
                 self.bar2.clearWidgets()
@@ -768,7 +776,7 @@ class Uploader(QObject):
     '''Handle uploads in a separate thread'''
 
     finished = pyqtSignal(bool)
-    error = pyqtSignal(Exception, basestring)
+    error = pyqtSignal(Exception, str)
     progress = pyqtSignal(float)
 
     def __init__(self,filename,bucket,options):
@@ -817,7 +825,7 @@ class Uploader(QObject):
             'OAM',
             level=QgsMessageLog.INFO)
 
-        if u'id' in post_dict.keys():
+        if u'id' in list(post_dict.keys()):
             ts_id = post_dict[u'id']
             time = post_dict[u'queued_at']
             QgsMessageLog.logMessage(
@@ -874,7 +882,7 @@ class Uploader(QObject):
                     self.notifyOAM()
                 if "trigger_tiling" in self.options:
                     self.triggerTileService()
-        except Exception, e:
+        except Exception as e:
             # forward the exception upstream (or try to...)
             # chunk size smaller than 5MB can cause an error, server does not expect it
             self.error.emit(e, traceback.format_exc())

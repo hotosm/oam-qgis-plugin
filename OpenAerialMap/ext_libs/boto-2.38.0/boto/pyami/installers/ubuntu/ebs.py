@@ -43,6 +43,7 @@ Config file section::
     mount_point = <directory to mount device, defaults to /ebs>
 
 """
+from builtins import next
 import boto
 from boto.manage.volume import Volume
 from boto.exception import EC2ResponseError

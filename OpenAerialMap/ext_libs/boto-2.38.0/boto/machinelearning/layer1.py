@@ -1,3 +1,4 @@
+from builtins import str
 # Copyright (c) 2015 Amazon.com, Inc. or its affiliates.  All Rights Reserved
 #
 # Permission is hereby granted, free of charge, to any person obtaining a

@@ -22,20 +22,21 @@
  ***************************************************************************/
  This script initializes the plugin, making it known to QGIS.
 """
+import os
+from builtins import str
 
-import os, sys
+from qgis.PyQt import uic
+from qgis.PyQt.QtCore import *
+from qgis.PyQt.QtGui import *
+from qgis.PyQt.QtWidgets import *
 
-from PyQt4 import QtGui, uic
-from PyQt4.Qt import *
-
-from qgis.core import QgsMessageLog
-import time
+# from qgis.PyQt.Qt import *
 
 FORM_CLASS, _ = uic.loadUiType(os.path.join(
     os.path.dirname(__file__), 'ui/setting_dialog.ui'))
 
 
-class SettingDialog(QtGui.QDialog, FORM_CLASS):
+class SettingDialog(QDialog, FORM_CLASS):
 
     def __init__(self, iface, settings, parent=None):
         """Constructor."""
@@ -56,9 +57,9 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
 
         # register event handlers
         self.buttonBox.button(
-            QtGui.QDialogButtonBox.Cancel).clicked.connect(self.cancel)
+            QDialogButtonBox.Cancel).clicked.connect(self.cancel)
         self.buttonBox.button(
-            QtGui.QDialogButtonBox.Save).clicked.connect(self.saveSettings)
+            QDialogButtonBox.Save).clicked.connect(self.saveSettings)
 
         # set the calendars
         self.sense_start_edit.setCalendarPopup(1)
@@ -124,9 +125,9 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
                                self.platform_combo_box.currentIndex())
         self.settings.setValue('SENSOR', self.sensor_edit.text())
         self.settings.setValue('SENSE_START',
-            self.sense_start_edit.dateTime().toString(Qt.ISODate))
+                               self.sense_start_edit.dateTime().toString(Qt.ISODate))
         self.settings.setValue('SENSE_END',
-            self.sense_end_edit.dateTime().toString(Qt.ISODate))
+                               self.sense_end_edit.dateTime().toString(Qt.ISODate))
         self.settings.setValue('PROVIDER', self.provider_edit.text())
         self.settings.setValue('CONTACT', self.contact_edit.text())
         self.settings.endGroup()
@@ -146,10 +147,10 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
 
         self.settings.beginGroup("Storage")
 
-        #if self.storage_combo_box.currentIndex() == 0:
+        # if self.storage_combo_box.currentIndex() == 0:
         #    self.settings.setValue('S3_BUCKET_NAME',
         #                           'oam-qgis-plugin-test')
-        #else:
+        # else:
         #    self.settings.setValue('S3_BUCKET_NAME',
         #                           self.specify_edit.text())
 
@@ -262,7 +263,7 @@ class SettingDialog(QtGui.QDialog, FORM_CLASS):
             self.default_storage_combo_box.setCurrentIndex(0)
 
         if self.settings.value('HOT_OAM_CATALOG') is None or \
-            str(self.settings.value('HOT_OAM_CATALOG')).lower() == 'true':
+                str(self.settings.value('HOT_OAM_CATALOG')).lower() == 'true':
             self.hot_oam_catalog_check_box.setCheckState(2)
         else:
             self.hot_oam_catalog_check_box.setCheckState(0)

@@ -22,6 +22,7 @@
 """
 Represents a VPCSecurityGroupMembership
 """
+from builtins import object
 
 
 class VPCSecurityGroupMembership(object):

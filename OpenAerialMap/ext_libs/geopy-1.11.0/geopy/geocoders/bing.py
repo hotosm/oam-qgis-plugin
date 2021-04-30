@@ -1,6 +1,7 @@
 """
 :class:`.Bing` geocoder.
 """
+from builtins import str
 
 from geopy.compat import urlencode
 from geopy.geocoders.base import Geocoder, DEFAULT_FORMAT_STRING, \
@@ -131,7 +132,7 @@ class Bing(Geocoder):
             params = {
                 key: val
                 for key, val
-                in query.items()
+                in list(query.items())
                 if key in self.structured_query_params
             }
             params['key'] = self.api_key

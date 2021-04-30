@@ -1,6 +1,7 @@
 """
 :class:`.GoogleV3` is the Google Maps V3 geocoder.
 """
+from builtins import str
 
 import base64
 import hashlib
@@ -134,7 +135,7 @@ class GoogleV3(Geocoder):  # pylint: disable=R0902
         """
         return "|".join(
             (":".join(item)
-             for item in components.items()
+             for item in list(components.items())
             )
         )
 

@@ -25,6 +25,9 @@
 """
 Handles authentication required to AWS and GS
 """
+from past.builtins import cmp
+from builtins import str
+from builtins import object
 
 import base64
 import boto
@@ -230,7 +233,7 @@ class HmacAuthV3HTTPHandler(AuthHandler, HmacKeys):
         in the StringToSign.
         """
         headers_to_sign = {'Host': self.host}
-        for name, value in http_request.headers.items():
+        for name, value in list(http_request.headers.items()):
             lname = name.lower()
             if lname.startswith('x-amz'):
                 headers_to_sign[name] = value
@@ -324,7 +327,7 @@ class HmacAuthV4Handler(AuthHandler, HmacKeys):
         if http_request.headers.get('Host'):
             host_header_value = http_request.headers['Host']
         headers_to_sign = {'Host': host_header_value}
-        for name, value in http_request.headers.items():
+        for name, value in list(http_request.headers.items()):
             lname = name.lower()
             if lname.startswith('x-amz'):
                 if isinstance(value, bytes):
@@ -601,7 +604,7 @@ class S3HmacAuthV4Handler(HmacAuthV4Handler, AuthHandler):
         """
         host_header_value = self.host_header(self.host, http_request)
         headers_to_sign = {'Host': host_header_value}
-        for name, value in http_request.headers.items():
+        for name, value in list(http_request.headers.items()):
             lname = name.lower()
             # Hooray for the only difference! The main SigV4 signer only does
             # ``Host`` + ``x-amz-*``. But S3 wants pretty much everything
@@ -695,7 +698,7 @@ class S3HmacAuthV4Handler(HmacAuthV4Handler, AuthHandler):
 
         # ``parse_qs`` will return lists. Don't do that unless there's a real,
         # live list provided.
-        for key, value in existing_qs.items():
+        for key, value in list(existing_qs.items()):
             if isinstance(value, (list, tuple)):
                 if len(value) == 1:
                     existing_qs[key] = value[0]
@@ -852,7 +855,7 @@ class QuerySignatureV0AuthHandler(QuerySignatureHelper, AuthHandler):
         hmac = self._get_hmac()
         s = params['Action'] + params['Timestamp']
         hmac.update(s.encode('utf-8'))
-        keys = params.keys()
+        keys = list(params.keys())
         keys.sort(cmp=lambda x, y: cmp(x.lower(), y.lower()))
         pairs = []
         for key in keys:
@@ -878,7 +881,7 @@ class QuerySignatureV1AuthHandler(QuerySignatureHelper, AuthHandler):
     def _calc_signature(self, params, *args):
         boto.log.debug('using _calc_signature_1')
         hmac = self._get_hmac()
-        keys = params.keys()
+        keys = list(params.keys())
         keys.sort(cmp=lambda x, y: cmp(x.lower(), y.lower()))
         pairs = []
         for key in keys:

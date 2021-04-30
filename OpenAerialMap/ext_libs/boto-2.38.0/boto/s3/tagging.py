@@ -1,3 +1,4 @@
+from builtins import object
 from boto import handler
 import xml.sax
 

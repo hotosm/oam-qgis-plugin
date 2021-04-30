@@ -1,3 +1,4 @@
+from builtins import str
 # Copyright (c) 2014 Amazon.com, Inc. or its affiliates.  All Rights Reserved
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
@@ -758,9 +759,9 @@ class CloudSearchConnection(AWSQueryConnection):
         :type value: any
         :param value: The value to serialize
         """
-        for k, v in value.items():
+        for k, v in list(value.items()):
             if isinstance(v, dict):
-                for k2, v2 in v.items():
+                for k2, v2 in list(v.items()):
                     self.build_complex_param(params, label + '.' + k, v)
             elif isinstance(v, bool):
                 params['%s.%s' % (label, k)] = v and 'true' or 'false'

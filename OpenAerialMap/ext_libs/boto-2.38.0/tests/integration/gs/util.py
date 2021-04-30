@@ -1,3 +1,5 @@
+from __future__ import print_function
+from builtins import str
 # Copyright (c) 2012, Google, Inc.
 # All rights reserved.
 #
@@ -70,12 +72,13 @@ def retry(ExceptionToCheck, tries=4, delay=3, backoff=2, logger=None):
                     return f(*args, **kwargs)
                     try_one_last_time = False
                     break
-                except ExceptionToCheck, e:
+                except ExceptionToCheck as e:
                     msg = "%s, Retrying in %d seconds..." % (str(e), mdelay)
                     if logger:
                         logger.warning(msg)
                     else:
-                        print msg
+                        # fix_print_with_import
+                        print(msg)
                     time.sleep(mdelay)
                     mtries -= 1
                     mdelay *= backoff

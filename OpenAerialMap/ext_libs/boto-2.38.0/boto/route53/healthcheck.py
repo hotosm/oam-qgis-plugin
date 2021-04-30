@@ -45,6 +45,8 @@ POST /2013-04-01/healthcheck HTTP/1.1
    </HealthCheckConfig>
 </CreateHealthCheckRequest>
 """
+from builtins import str
+from builtins import object
 
 
 class HealthCheck(object):

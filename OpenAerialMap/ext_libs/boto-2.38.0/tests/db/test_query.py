@@ -1,3 +1,5 @@
+from __future__ import print_function
+from builtins import object
 # Copyright (c) 2010 Chris Moyer http://coredumped.org/
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
@@ -148,5 +150,6 @@ class TestQuerying(object):
         """Test with a "like" expression"""
         query = SimpleModel.all()
         query.filter("strs like", "%oo%")
-        print query.get_query()
+        # fix_print_with_import
+        print(query.get_query())
         assert(query.count() == 1)

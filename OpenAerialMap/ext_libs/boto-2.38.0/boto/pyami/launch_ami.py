@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 # IN THE SOFTWARE.
 #
+from __future__ import print_function
 import getopt
 import sys
 import imp
@@ -140,7 +141,7 @@ def main():
         params['script_md5'] = key.md5
     # we have everything we need, now build userdata string
     l = []
-    for k, v in params.items():
+    for k, v in list(params.items()):
         if v:
             l.append('%s=%s' % (k, v))
     c = boto.connect_ec2()

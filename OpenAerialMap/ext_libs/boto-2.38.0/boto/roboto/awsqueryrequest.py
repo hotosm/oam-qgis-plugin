@@ -1,3 +1,5 @@
+from __future__ import print_function
+from builtins import object
 # Copyright (c) 2010 Mitch Garnaat http://garnaat.org/
 # Copyright (c) 2010, Eucalyptus Systems, Inc.
 #
@@ -482,7 +484,7 @@ class AWSQueryRequest(object):
                 if isinstance(item, dict):
                     for field_name in item:
                         line.append(item[field_name])
-                elif isinstance(item, basestring):
+                elif isinstance(item, str):
                     line.append(item)
                 line.print_it()
 

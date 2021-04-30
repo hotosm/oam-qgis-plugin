@@ -21,6 +21,8 @@
 """
 High-level abstraction of an EC2 server
 """
+from __future__ import print_function
+from builtins import str
 
 import boto
 import boto.utils

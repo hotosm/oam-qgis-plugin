@@ -23,6 +23,8 @@
 """
 Represents an EC2 Elastic Network Interface
 """
+from builtins import str
+from builtins import object
 from boto.exception import BotoClientError
 from boto.ec2.ec2object import TaggedEC2Object
 from boto.resultset import ResultSet

@@ -1,9 +1,11 @@
+from future import standard_library
+standard_library.install_aliases()
 import logging
 
 try:  # Python 3
     from urllib.parse import urljoin
 except ImportError:
-    from urlparse import urljoin
+    from urllib.parse import urljoin
 
 from ._collections import RecentlyUsedContainer
 from .connectionpool import HTTPConnectionPool, HTTPSConnectionPool

@@ -1,3 +1,4 @@
+from builtins import object
 # Copyright (c) 2012 Mitch Garnaat http://garnaat.org/
 # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.
 # All Rights Reserved
@@ -50,9 +51,9 @@ class SearchResults(object):
 
         self.facets = {}
         if 'facets' in attrs:
-            for (facet, values) in attrs['facets'].items():
+            for (facet, values) in list(attrs['facets'].items()):
                 if 'constraints' in values:
-                    self.facets[facet] = dict((k, v) for (k, v) in map(lambda x: (x['value'], x['count']), values['constraints']))
+                    self.facets[facet] = dict((k, v) for (k, v) in [(x['value'], x['count']) for x in values['constraints']])
 
         self.num_pages_needed = ceil(self.hits / self.query.real_size)
 

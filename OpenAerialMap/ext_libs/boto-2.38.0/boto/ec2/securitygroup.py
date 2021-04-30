@@ -23,6 +23,7 @@
 """
 Represents an EC2 Security Group
 """
+from builtins import object
 from boto.ec2.ec2object import TaggedEC2Object
 from boto.exception import BotoClientError
 

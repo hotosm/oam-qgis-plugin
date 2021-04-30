@@ -1,3 +1,4 @@
+from builtins import object
 # Copyright (c) 2010 Mitch Garnaat http://garnaat.org/
 # Copyright (c) 2010, Eucalyptus Systems, Inc.
 # All rights reserved.

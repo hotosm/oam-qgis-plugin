@@ -32,36 +32,47 @@ To install:
 ## Build from source code
 
 ###### Dependencies:
-* [Sphinx](http://www.sphinx-doc.org/en/stable/install.html) - To create help file, Sphinx documentation generator is being used in this plugin. To install Sphinx, please refer to the OS specific instructions at the website. (NOTE: As of July 2016, document generation is supported only in Linux environment. Threfore, users of other operating systems can ignore the dependency of Sphinx.)
-* [Python](https://www.python.org/) - Installation of Sphinx requires python. If your operating system doesn't have python installed, please refer to the instruction at the website. Version 2.7 is presently being used for this plugin development.
-* pyrcc4 - To compile Qt4 resource files into python code, pyrcc4 command must be used. Please refer to the OS specific instructions below for its installation or setting path.
+* [Sphinx](http://www.sphinx-doc.org/en/stable/install.html) - To create help file, Sphinx documentation generator is being used in this plugin. To install Sphinx, please refer to the OS specific instructions at the website. (NOTE: As of July 2016, document generation is supported only in Linux environment. Therefore, users of other operating systems can ignore the dependency of Sphinx.)
+* [Python](https://www.python.org/) - Installation of Sphinx requires python. If your operating system doesn't have python installed, please refer to the instruction at the website. Version 3.6 or above is presently being used for this plugin development.
+* pyrcc5 - To compile Qt5 resource files into python code, pyrcc5 command must be used. Please refer to the OS specific instructions below for its installation or setting path.
+* pyuic5 - Since there ui generated py files have beencustomized and modularized. Please avoid using the tool to generate `*.py` files ,  see **Developer guidelines instead**
 
 ###### Linux
-1. Install pyrcc4:  
-The easiest way to install pyrcc4 is probably to use package manager.
-If using ubuntu 14.04 or its comatible distributions, following command should work:  
-&nbsp;&nbsp;&nbsp;&nbsp;apt-get install pyqt4-dev-tools  
+1. Install pyrcc5:  
+The easiest way to install `pyrcc5` is probably to use package manager.
+If using ubuntu 18.04 or its comatible distributions, following command should work:  
+```shell
+$ sudo apt install pyqt5-dev-tools
+```
 For the other distributions, please use the online resourece to get the information.
 
 2. Download the repository and deploy the code to the plugin directory:  
+```shell
 $ git clone https://github.com/hotosm/oam-qgis-plugin.git  
 $ cd oam-qgis-plugin/OpenAerialMap/  
 $ make deploy
+```
 
 ###### Windows
-1. Set the path to pyrcc4.exe:  
-To execute the make.bat file in MS-Windows, you need to set the path to pyrcc4.exe. Probably, the easiest way to set the path is to use OSGeo4W Shell. (If you open the shell, the path to the file should be automatically set.) However, you can also manually set the path from normal command prompt.
+1. Set the path to pyrcc5.exe:  
+To execute the make.bat file in MS-Windows, you need to set the path to pyrcc5.exe. Probably, the easiest way to set 
+   the path is to use OSGeo4W Shell. (If you open the shell, the path to the file should be automatically set.) However, you can also manually set the path from normal command prompt.
 
-  1. Find the pyrcc4.exe file in the QGIS folder:  
-  Ex. For the version 2.14.4 (Essen), C:\Program Files\QGIS 2.14.4\bin\ or C:\Program Files\QGIS Essen\bin\
+  1. Find the pyrcc5.exe file in the QGIS folder:  
+  Ex. For the version 3.14.1-Pi (Pi), C:\Program Files\QGIS 3.14.1-Pi\bin\ or C:\Program Files\QGIS Pi\bin\
 
   2. Set the path, using set command:  
-  Ex. For the example above, execute SET PATH=%PATH%;C:\Program Files\QGIS 2.14.4\bin or C:\Program Files\QGIS Essen\bin
+  Ex. For the example above, execute 
+```cmd 
+SET PATH=%PATH%;C:\Program Files\QGIS 3.14.1-Pi\bin or C:\Program Files\QGIS Pi\bin
+```
 
 2. Download the repository and deploy the code to the plugin directory:  
+```cmd
 $ git clone https://github.com/hotosm/oam-qgis-plugin.git  
 $ cd oam-qgis-plugin\OpenAerialMap\windows\  
 $ make.bat deploy
+```
 
 ## Activate or reload deployed plugin
 
@@ -87,13 +98,13 @@ During the plugin planning phase, those were the identified required features
 
 ## Development guidelines
 
-1. Use of Qt4 Designer for:
+1. Use of Qt5 Designer for:
   1. GUI layout/development
   2. defining most of the common signals/slots for the GUI components
 2. Do not change any generated code directly but create a subclass and then
 override/extend it, to keep our code and the automatically generated code
 separated
-3. Use QgisPluginCreator that has some basics setup (eg. internationalzation support)
+3. Use `Plugin Builder` that has some basics setup (eg. internationalzation support)
 4. Package any external python modules as a part of the plugin
 
 ## Timeline
@@ -105,3 +116,26 @@ The development progress can be followed through the repository [issues](https:/
 Regular meetings are not being held at the moment, but please leave any comment or request on our gitter channel:
 
 [![Join the chat at https://gitter.im/hotosm/oam-qgis-plugin](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hotosm/oam-qgis-plugin?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+## TODO:
+- [x] Load the plugin to QGIS3.X version
+- [ ] Test windows set up
+- [ ] Test Backend for metadata and upload using OIN
+- [ ] Update windows installation documentation
+- [ ] Update windows .bat and OSGeo4W path setting and script
+- [ ] Debug Error `'ImgSearchDialog' object has no attribute 'connect'` `img_search_dialog.py:77`
+- [ ] Debug `write(self, Union[QByteArray, bytes, bytearray]): argument 1 has unexpected type 'str'` 
+  `img_uploader_wizard.py:724`
+  
+- [ ] Test using required features as indicated above.
+- [x] Test imagery query service from OAM catalog: throws jsonError`JSONDecodeError('Expecting value: line 1  column 1 (char 0)',)`
+  
+- [ ] Inspect api query params and headers for above response
+- [ ] add Date/Calendar widget for catalog query selection
+- [ ] Refactor backup_files to v3 api
+- [x] Refactor Widgets to qt5 api: No changes made using qtdesigner just refactoring imports to respective class 
+  module i.e `imports from QtGui module` to `QtWidgets module`
+- [ ] Icon not display in the toolbar 
+- [ ] Add github actions and pipeline workflow
+- [ ] PR and pipeline tests
+

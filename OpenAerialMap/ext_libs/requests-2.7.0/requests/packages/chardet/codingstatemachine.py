@@ -1,3 +1,4 @@
+from builtins import object
 ######################## BEGIN LICENSE BLOCK ########################
 # The Original Code is mozilla.org code.
 #
@@ -29,7 +30,7 @@ from .constants import eStart
 from .compat import wrap_ord
 
 
-class CodingStateMachine:
+class CodingStateMachine(object):
     def __init__(self, sm):
         self._mModel = sm
         self._mCurrentBytePos = 0

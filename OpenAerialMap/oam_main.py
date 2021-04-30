@@ -22,33 +22,33 @@
  ***************************************************************************/
  This script initializes the plugin, making it known to QGIS.
 """
+from __future__ import absolute_import
+
+import os
+import webbrowser
+from builtins import object
+from builtins import str
+
+from qgis.PyQt.QtCore import QSettings, QTranslator, qVersion, QCoreApplication, QUrl
+from qgis.PyQt.QtGui import QIcon, QDesktopServices
+from qgis.PyQt.QtWidgets import QAction
+
+from .gui.img_search_dialog import ImgSearchDialog
+# classes for GUI
+from .gui.img_uploader_wizard import ImgUploaderWizard
+from .gui.setting_dialog import SettingDialog
+# set os-specific environment
+from .set_env import SetEnvironment
+import resources_rc
 
 # Qt classes
 # from PyQt4.QtCore import *
 # from PyQt4.QtGui import *
 # from qgis.core import *
-
-from PyQt4.QtCore import (QSettings,
-                          QTranslator,
-                          qVersion,
-                          QCoreApplication)
-from PyQt4.QtGui import (QAction, QIcon)
-
 # icon images
-import resources_rc
 
-# classes for GUI
-from gui.img_uploader_wizard import ImgUploaderWizard
-from gui.img_search_dialog import ImgSearchDialog
-from gui.setting_dialog import SettingDialog
 
-# set os-specific environment
-from set_env import SetEnvironment
-
-import os, sys
-import webbrowser
-
-class OpenAerialMap:
+class OpenAerialMap(object):
     """QGIS Plugin Implementation."""
 
     def __init__(self, iface):
@@ -203,9 +203,10 @@ class OpenAerialMap:
         currentAbsPath = os.path.abspath(__file__)
         helpAbsPath = os.path.join(
             os.path.dirname(currentAbsPath),
-            'help/index.html')
+            'help/build/html/index.html')
         url = 'file://' + str(helpAbsPath)
-        webbrowser.open_new(url)
+        QDesktopServices.openUrl(QUrl.fromLocalFile(helpAbsPath))
+        # webbrowser.open_new(url)
 
     def displayTestWidget(self):
         pass

@@ -1,8 +1,9 @@
+from __future__ import absolute_import
 import unittest
 import os
 from boto.mturk.question import QuestionForm
 
-from common import MTurkCommon
+from .common import MTurkCommon
 
 class TestHITCreation(MTurkCommon):
 	def testCallCreateHitWithOneQuestion(self):

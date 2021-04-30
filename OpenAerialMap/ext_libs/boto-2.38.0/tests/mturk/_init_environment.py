@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+from past.builtins import execfile
 import os
 import functools
 
@@ -24,5 +26,5 @@ def config_environment():
             #  they're set to.
             os.environ.setdefault('AWS_ACCESS_KEY_ID', 'foo')
             os.environ.setdefault('AWS_SECRET_ACCESS_KEY', 'bar')
-            from mocks import MTurkConnection
+            from .mocks import MTurkConnection
     SetHostMTurkConnection = functools.partial(MTurkConnection, host=mturk_host)

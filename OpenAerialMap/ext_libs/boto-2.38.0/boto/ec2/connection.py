@@ -24,6 +24,9 @@
 """
 Represents a connection to the EC2 service.
 """
+from past.builtins import cmp
+from builtins import str
+from builtins import range
 
 import base64
 import warnings

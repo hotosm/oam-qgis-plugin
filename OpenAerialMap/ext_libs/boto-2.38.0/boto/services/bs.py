@@ -1,3 +1,5 @@
+from __future__ import print_function
+from builtins import object
 #!/usr/bin/env python
 # Copyright (c) 2006-2008 Mitch Garnaat http://garnaat.org/
 #
@@ -64,7 +66,7 @@ class BS(object):
 
     def print_command_help(self):
         print('\nCommands:')
-        for key in self.Commands.keys():
+        for key in list(self.Commands.keys()):
             print('  %s\t\t%s' % (key, self.Commands[key]))
 
     def do_reset(self):

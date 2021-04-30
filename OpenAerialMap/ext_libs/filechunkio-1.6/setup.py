@@ -6,7 +6,7 @@ from filechunkio import __version__
 
 PY3 = sys.version_info[0] == 3
 
-_unicode = str if PY3 else unicode
+_unicode = str if PY3 else str
 
 setup(
     name="filechunkio",

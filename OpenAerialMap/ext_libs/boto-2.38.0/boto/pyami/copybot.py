@@ -1,3 +1,5 @@
+from future import standard_library
+standard_library.install_aliases()
 # Copyright (c) 2006,2007 Mitch Garnaat http://garnaat.org/
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
@@ -21,7 +23,7 @@
 #
 import boto
 from boto.pyami.scriptbase import ScriptBase
-import os, StringIO
+import os, io
 
 class CopyBot(ScriptBase):
 
@@ -82,7 +84,7 @@ class CopyBot(ScriptBase):
         key.set_contents_from_filename(self.log_path)
 
     def main(self):
-        fp = StringIO.StringIO()
+        fp = io.StringIO()
         boto.config.dump_safe(fp)
         self.notify('%s (%s) Starting' % (self.name, self.instance_id), fp.getvalue())
         if self.src and self.dst:

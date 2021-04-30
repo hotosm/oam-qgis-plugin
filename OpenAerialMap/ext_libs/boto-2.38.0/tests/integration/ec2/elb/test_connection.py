@@ -23,6 +23,7 @@
 """
 Initial, and very limited, unit tests for ELBConnection.
 """
+from builtins import str
 
 import boto
 import time

@@ -25,6 +25,8 @@
 """
 This class encapsulates the provider-specific header differences.
 """
+from builtins import str
+from builtins import object
 
 import os
 from boto.compat import six

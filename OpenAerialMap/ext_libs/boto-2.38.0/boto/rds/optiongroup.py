@@ -23,6 +23,7 @@
 """
 Represents an OptionGroup
 """
+from builtins import object
 
 from boto.rds.dbsecuritygroup import DBSecurityGroup
 from boto.resultset import ResultSet

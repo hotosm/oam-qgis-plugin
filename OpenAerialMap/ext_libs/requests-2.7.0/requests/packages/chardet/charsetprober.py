@@ -1,3 +1,4 @@
+from builtins import object
 ######################## BEGIN LICENSE BLOCK ########################
 # The Original Code is Mozilla Universal charset detector code.
 #
@@ -30,7 +31,7 @@ from . import constants
 import re
 
 
-class CharSetProber:
+class CharSetProber(object):
     def __init__(self):
         pass
 

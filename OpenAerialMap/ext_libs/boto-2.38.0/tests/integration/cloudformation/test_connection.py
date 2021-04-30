@@ -1,3 +1,5 @@
+from builtins import str
+from builtins import range
 #!/usr/bin/env python
 import time
 import json

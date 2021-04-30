@@ -24,6 +24,7 @@
 """
 Some unit tests for the S3 Versioning.
 """
+from builtins import next
 
 import unittest
 import time

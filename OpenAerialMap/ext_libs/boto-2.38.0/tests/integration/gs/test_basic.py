@@ -27,11 +27,13 @@
 """
 Some integration tests for the GSConnection
 """
+from future import standard_library
+standard_library.install_aliases()
 
 import os
 import re
-import StringIO
-import urllib
+import io
+import urllib.request, urllib.parse, urllib.error
 import xml.sax
 
 from boto import handler
@@ -102,14 +104,14 @@ class GSBasicTest(GSTestCase):
         fp.close()
         # Use generate_url to get the contents
         url = self._conn.generate_url(900, 'GET', bucket=bucket.name, key=key_name)
-        f = urllib.urlopen(url)
+        f = urllib.request.urlopen(url)
         self.assertEqual(s1, f.read())
         f.close()
         # check to make sure set_contents_from_file is working
-        sfp = StringIO.StringIO('foo')
+        sfp = io.StringIO('foo')
         k.set_contents_from_file(sfp)
         self.assertEqual(k.get_contents_as_string(), 'foo')
-        sfp2 = StringIO.StringIO('foo2')
+        sfp2 = io.StringIO('foo2')
         k.set_contents_from_file(sfp2)
         self.assertEqual(k.get_contents_as_string(), 'foo2')
 

@@ -1,3 +1,7 @@
+from builtins import map
+from builtins import filter
+from builtins import str
+from builtins import range
 # Copyright (c) 2012-2014 Andy Davidoff http://www.disruptek.com/
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
@@ -134,7 +138,7 @@ def structured_objects(*fields, **kwargs):
 
         def wrapper(*args, **kw):
             members = kwargs.get('members', False)
-            for field in filter(lambda i: i in kw, fields):
+            for field in [i for i in fields if i in kw]:
                 destructure_object(kw.pop(field), kw, field, members=members)
             return func(*args, **kw)
         wrapper.__doc__ = "{0}\nElement|Iter|Map: {1}\n" \
@@ -236,7 +240,7 @@ def api_action(section, quota, restore, *api):
 
     def decorator(func, quota=int(quota), restore=float(restore)):
         version, accesskey, path = api_version_path[section]
-        action = ''.join(api or map(str.capitalize, func.__name__.split('_')))
+        action = ''.join(api or list(map(str.capitalize, func.__name__.split('_'))))
 
         def wrapper(self, *args, **kw):
             kw.setdefault(accesskey, getattr(self, accesskey, None))
@@ -274,12 +278,12 @@ class MWSConnection(AWSQueryConnection):
         super(MWSConnection, self).__init__(*args, **kw)
 
     def _setup_factories(self, extrascopes, **kw):
-        for factory, (scope, Default) in {
+        for factory, (scope, Default) in list({
             'response_factory':
                 (boto.mws.response, self.ResponseFactory),
             'response_error_factory':
                 (boto.mws.exception, self.ResponseErrorFactory),
-        }.items():
+        }.items()):
             if factory in kw:
                 setattr(self, '_' + factory, kw.pop(factory))
             else:
@@ -417,7 +421,7 @@ class MWSConnection(AWSQueryConnection):
     def get_service_status(self, **kw):
         """Instruct the user on how to get service status.
         """
-        sections = ', '.join(map(str.lower, api_version_path.keys()))
+        sections = ', '.join(map(str.lower, list(api_version_path.keys())))
         message = "Use {0}.get_(section)_service_status(), " \
                   "where (section) is one of the following: " \
                   "{1}".format(self.__class__.__name__, sections)
@@ -721,10 +725,10 @@ class MWSConnection(AWSQueryConnection):
         toggle = set(('FulfillmentChannel.Channel.1',
                       'OrderStatus.Status.1', 'PaymentMethod.1',
                       'LastUpdatedAfter', 'LastUpdatedBefore'))
-        for do, dont in {
+        for do, dont in list({
             'BuyerEmail': toggle.union(['SellerOrderId']),
             'SellerOrderId': toggle.union(['BuyerEmail']),
-        }.items():
+        }.items()):
             if do in kw and any(i in dont for i in kw):
                 message = "Don't include {0} when specifying " \
                           "{1}".format(' or '.join(dont), do)

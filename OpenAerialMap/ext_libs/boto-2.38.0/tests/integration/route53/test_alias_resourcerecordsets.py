@@ -1,3 +1,4 @@
+from builtins import str
 # Copyright (c) 2014 Netflix, Inc. Stefan Praszalowicz
 # Copyright (c) 2014 42Lines, Inc. Jim Browne
 #

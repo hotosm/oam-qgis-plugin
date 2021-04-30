@@ -24,6 +24,8 @@
 """
 Some unit tests for the EC2Connection
 """
+from __future__ import print_function
+from builtins import str
 
 import unittest
 import time

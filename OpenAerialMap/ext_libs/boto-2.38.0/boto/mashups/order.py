@@ -21,6 +21,7 @@
 """
 High-level abstraction of an EC2 order for servers
 """
+from __future__ import print_function
 
 import boto
 import boto.ec2

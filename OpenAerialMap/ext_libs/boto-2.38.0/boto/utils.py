@@ -38,6 +38,9 @@
 """
 Some handy utility functions used by several classes.
 """
+from builtins import str
+from builtins import range
+from builtins import object
 
 import subprocess
 import time
@@ -167,7 +170,7 @@ def merge_meta(headers, metadata, provider=None):
         provider = boto.provider.get_default()
     metadata_prefix = provider.metadata_prefix
     final_headers = headers.copy()
-    for k in metadata.keys():
+    for k in list(metadata.keys()):
         if k.lower() in boto.s3.key.Key.base_user_settable_fields:
             final_headers[k] = metadata[k]
         else:
@@ -181,7 +184,7 @@ def get_aws_metadata(headers, provider=None):
         provider = boto.provider.get_default()
     metadata_prefix = provider.metadata_prefix
     metadata = {}
-    for hkey in headers.keys():
+    for hkey in list(headers.keys()):
         if hkey.lower().startswith(metadata_prefix):
             val = urllib.parse.unquote(headers[hkey])
             if isinstance(val, bytes):
@@ -337,11 +340,11 @@ class LazyLoadMetadata(dict):
 
     def values(self):
         self._materialize()
-        return super(LazyLoadMetadata, self).values()
+        return list(super(LazyLoadMetadata, self).values())
 
     def items(self):
         self._materialize()
-        return super(LazyLoadMetadata, self).items()
+        return list(super(LazyLoadMetadata, self).items())
 
     def __str__(self):
         self._materialize()
@@ -956,7 +959,7 @@ def guess_mime_type(content, deftype):
         '#cloud-boothook': 'text/cloud-boothook'
     }
     rtype = deftype
-    for possible_type, mimetype in starts_with_mappings.items():
+    for possible_type, mimetype in list(starts_with_mappings.items()):
         if content.startswith(possible_type):
             rtype = mimetype
             break

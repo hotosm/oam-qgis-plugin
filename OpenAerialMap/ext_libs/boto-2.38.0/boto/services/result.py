@@ -1,3 +1,5 @@
+from __future__ import print_function
+from builtins import object
 #!/usr/bin/env python
 # Copyright (c) 2006,2007 Mitch Garnaat http://garnaat.org/
 #

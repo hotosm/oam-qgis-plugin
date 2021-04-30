@@ -26,6 +26,8 @@
 This module provides an interface to the Elastic Compute Cloud (EC2)
 Auto Scaling service.
 """
+from builtins import str
+from builtins import range
 
 import base64
 

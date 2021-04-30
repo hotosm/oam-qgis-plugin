@@ -1,3 +1,4 @@
+from builtins import object
 # Copyright (c) 2008 Chris Moyer http://coredumped.org/
 #
 # Permission is hereby granted, free of charge, to any person obtaining a

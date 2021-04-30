@@ -1,3 +1,8 @@
+from future import standard_library
+standard_library.install_aliases()
+from builtins import str
+from builtins import range
+from builtins import object
 import errno
 import logging
 import sys
@@ -9,8 +14,8 @@ import socket
 try:  # Python 3
     from queue import LifoQueue, Empty, Full
 except ImportError:
-    from Queue import LifoQueue, Empty, Full
-    import Queue as _  # Platform-specific: Windows
+    from queue import LifoQueue, Empty, Full
+    import queue as _  # Platform-specific: Windows
 
 
 from .exceptions import (
@@ -180,7 +185,7 @@ class HTTPConnectionPool(ConnectionPool, RequestMethods):
         self.proxy_headers = _proxy_headers or {}
 
         # Fill the queue up so that doing get() on it will block properly
-        for _ in xrange(maxsize):
+        for _ in range(maxsize):
             self.pool.put(None)
 
         # These are mostly for testing and debugging purposes.

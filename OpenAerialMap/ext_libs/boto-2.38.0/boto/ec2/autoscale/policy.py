@@ -1,3 +1,4 @@
+from builtins import object
 # Copyright (c) 2009-2010 Reza Lotun http://reza.lotun.name/
 # Copyright (c) 2011 Jann Kleen
 #

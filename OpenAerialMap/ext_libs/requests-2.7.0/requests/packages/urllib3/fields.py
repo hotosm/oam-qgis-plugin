@@ -1,3 +1,4 @@
+from builtins import object
 import email.utils
 import mimetypes
 
@@ -126,7 +127,7 @@ class RequestField(object):
         parts = []
         iterable = header_parts
         if isinstance(header_parts, dict):
-            iterable = header_parts.items()
+            iterable = list(header_parts.items())
 
         for name, value in iterable:
             if value:
@@ -145,7 +146,7 @@ class RequestField(object):
             if self.headers.get(sort_key, False):
                 lines.append('%s: %s' % (sort_key, self.headers[sort_key]))
 
-        for header_name, header_value in self.headers.items():
+        for header_name, header_value in list(self.headers.items()):
             if header_name not in sort_keys:
                 if header_value:
                     lines.append('%s: %s' % (header_name, header_value))

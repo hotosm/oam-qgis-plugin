@@ -1,3 +1,4 @@
+from builtins import object
 # Copyright (c) 2006-2009 Mitch Garnaat http://garnaat.org/
 # Copyright (c) 2014 Jumping Qu http://newrice.blogspot.com/
 #

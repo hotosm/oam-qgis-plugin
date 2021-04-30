@@ -1,3 +1,5 @@
+from future import standard_library
+standard_library.install_aliases()
 # Copyright (c) 2012 Amazon.com, Inc. or its affiliates.  All Rights Reserved
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
@@ -58,10 +60,10 @@ from boto.vendored.six.moves.urllib.request import urlopen
 
 if six.PY3:
     # StandardError was removed, so use the base exception type instead
-    StandardError = Exception
+    Exception = Exception
     long_type = int
     from configparser import ConfigParser
 else:
-    StandardError = StandardError
-    long_type = long
-    from ConfigParser import SafeConfigParser as ConfigParser
+    Exception = Exception
+    long_type = int
+    from configparser import SafeConfigParser as ConfigParser

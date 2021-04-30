@@ -4,6 +4,11 @@
 """Tests for Requests."""
 
 from __future__ import division
+from future import standard_library
+standard_library.install_aliases()
+from builtins import next
+from builtins import str
+from builtins import object
 import json
 import os
 import pickle
@@ -28,7 +33,7 @@ from requests.models import urlencode
 from requests.hooks import default_hooks
 
 try:
-    import StringIO
+    import io
 except ImportError:
     import io as StringIO
 
@@ -666,8 +671,8 @@ class RequestsTestCase(unittest.TestCase):
         jar.set(key1, value1)
 
         d1 = dict(jar)
-        d2 = dict(jar.iteritems())
-        d3 = dict(jar.items())
+        d2 = dict(iter(list(jar.items())))
+        d3 = dict(list(jar.items()))
 
         assert len(jar) == 2
         assert len(d1) == 2
@@ -686,8 +691,8 @@ class RequestsTestCase(unittest.TestCase):
         jar.set(key1, value1)
 
         d1 = dict(jar)
-        d2 = dict(jar.iteritems())
-        d3 = dict(jar.items())
+        d2 = dict(iter(list(jar.items())))
+        d3 = dict(list(jar.items()))
 
         assert d1['some_cookie'] == 'some_value'
         assert d2['some_cookie'] == 'some_value'
@@ -704,7 +709,7 @@ class RequestsTestCase(unittest.TestCase):
         jar.set(key, value)
         jar.set(key1, value1)
 
-        keys = jar.keys()
+        keys = list(jar.keys())
         assert keys == list(keys)
         # make sure one can use keys multiple times
         assert list(keys) == list(keys)
@@ -720,7 +725,7 @@ class RequestsTestCase(unittest.TestCase):
         jar.set(key, value)
         jar.set(key1, value1)
 
-        values = jar.values()
+        values = list(jar.values())
         assert values == list(values)
         # make sure one can use values multiple times
         assert list(values) == list(values)
@@ -736,7 +741,7 @@ class RequestsTestCase(unittest.TestCase):
         jar.set(key, value)
         jar.set(key1, value1)
 
-        items = jar.items()
+        items = list(jar.items())
         assert items == list(items)
         # make sure one can use items multiple times
         assert list(items) == list(items)
@@ -750,7 +755,7 @@ class RequestsTestCase(unittest.TestCase):
 
     def test_response_is_iterable(self):
         r = requests.Response()
-        io = StringIO.StringIO('abc')
+        io = io.StringIO('abc')
         read_ = io.read
 
         def read_mock(amt, decode_content=None):
@@ -924,8 +929,8 @@ class RequestsTestCase(unittest.TestCase):
 
         # This is testing that they are builtin strings. A bit weird, but there
         # we go.
-        assert 'unicode' in p.headers.keys()
-        assert 'byte' in p.headers.keys()
+        assert 'unicode' in list(p.headers.keys())
+        assert 'byte' in list(p.headers.keys())
 
     def test_can_send_nonstring_objects_with_files(self):
         data = {'a': 0.0}
@@ -1235,8 +1240,8 @@ class TestCaseInsensitiveDict(unittest.TestCase):
             'user-Agent': 'requests',
         })
         keyset = frozenset(['Accept', 'user-Agent'])
-        assert frozenset(i[0] for i in cid.items()) == keyset
-        assert frozenset(cid.keys()) == keyset
+        assert frozenset(i[0] for i in list(cid.items())) == keyset
+        assert frozenset(list(cid.keys())) == keyset
         assert frozenset(cid) == keyset
 
     def test_preserve_last_key_case(self):
@@ -1247,8 +1252,8 @@ class TestCaseInsensitiveDict(unittest.TestCase):
         cid.update({'ACCEPT': 'application/json'})
         cid['USER-AGENT'] = 'requests'
         keyset = frozenset(['ACCEPT', 'USER-AGENT'])
-        assert frozenset(i[0] for i in cid.items()) == keyset
-        assert frozenset(cid.keys()) == keyset
+        assert frozenset(i[0] for i in list(cid.items())) == keyset
+        assert frozenset(list(cid.keys())) == keyset
         assert frozenset(cid) == keyset
 
 
@@ -1260,21 +1265,21 @@ class UtilsTestCase(unittest.TestCase):
         from io import BytesIO
         from requests.utils import super_len
 
-        assert super_len(StringIO.StringIO()) == 0
+        assert super_len(io.StringIO()) == 0
         assert super_len(
-            StringIO.StringIO('with so much drama in the LBC')) == 29
+            io.StringIO('with so much drama in the LBC')) == 29
 
         assert super_len(BytesIO()) == 0
         assert super_len(
             BytesIO(b"it's kinda hard bein' snoop d-o-double-g")) == 40
 
         try:
-            import cStringIO
+            import io
         except ImportError:
             pass
         else:
             assert super_len(
-                cStringIO.StringIO('but some how, some way...')) == 25
+                io.StringIO('but some how, some way...')) == 25
 
     def test_get_environ_proxies_ip_ranges(self):
         """Ensures that IP addresses are correctly matches with ranges
@@ -1434,7 +1439,7 @@ class TestMorselToCookieMaxAge(unittest.TestCase):
             morsel_to_cookie(morsel)
 
 
-class TestTimeout:
+class TestTimeout(object):
     def test_stream_timeout(self):
         try:
             requests.get(httpbin('delay/10'), timeout=2.0)
@@ -1520,12 +1525,12 @@ class RedirectSession(SessionRedirectMixin):
         return r
 
     def _build_raw(self):
-        string = StringIO.StringIO('')
+        string = io.StringIO('')
         setattr(string, 'release_conn', lambda *args: args)
         return string
 
 
-class TestRedirects:
+class TestRedirects(object):
     default_keyword_args = {
         'stream': False,
         'verify': True,

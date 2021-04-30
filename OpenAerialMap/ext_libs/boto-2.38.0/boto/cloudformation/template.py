@@ -1,3 +1,4 @@
+from builtins import object
 from boto.resultset import ResultSet
 from boto.cloudformation.stack import Capability
 

@@ -1,3 +1,5 @@
+from __future__ import print_function
+from builtins import str
 #!/usr/bin/env python
 
 from tests.unit import unittest
@@ -11,7 +13,8 @@ if __name__ == "__main__":
     devpath = os.path.relpath(os.path.join('..', '..'),
                               start=os.path.dirname(__file__))
     sys.path = [devpath] + sys.path
-    print '>>> advanced FPS tests; using local boto sources'
+    # fix_print_with_import
+    print('>>> advanced FPS tests; using local boto sources')
     advanced = True
 
 from boto.fps.connection import FPSConnection
@@ -63,7 +66,8 @@ class FPSTestCase(unittest.TestCase):
             'callerReference':      'foo',
         }
         result = self.fps.cbui_url(**inputs)
-        print "cbui_url() yields {0}".format(result)
+        # fix_print_with_import
+        print("cbui_url() yields {0}".format(result))
 
     @unittest.skipUnless(simple, "skipping simple test")
     def test_get_account_activity(self):
@@ -88,12 +92,14 @@ class FPSTestCase(unittest.TestCase):
         try:
             self.fps.write_off_debt(CreditInstrumentId='foo',
                                     AdjustmentAmount=123.45)
-        except Exception, e:
-            print e
+        except Exception as e:
+            # fix_print_with_import
+            print(e)
 
     @unittest.skip('cosmetic')
     def test_repr(self):
-        print self.fps.get_account_balance()
+        # fix_print_with_import
+        print(self.fps.get_account_balance())
 
 
 if __name__ == "__main__":

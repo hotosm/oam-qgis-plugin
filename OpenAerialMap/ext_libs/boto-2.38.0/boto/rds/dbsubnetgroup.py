@@ -22,6 +22,7 @@
 """
 Represents an DBSubnetGroup
 """
+from builtins import object
 
 class DBSubnetGroup(object):
     """

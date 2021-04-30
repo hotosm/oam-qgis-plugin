@@ -23,6 +23,7 @@
 """
 Represents an EC2 Spot Instance Request
 """
+from builtins import object
 
 from boto.ec2.ec2object import TaggedEC2Object
 from boto.ec2.launchspecification import LaunchSpecification

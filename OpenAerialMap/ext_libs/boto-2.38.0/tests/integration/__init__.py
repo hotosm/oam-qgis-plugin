@@ -23,6 +23,7 @@
 """
 Base class to make checking the certs easier.
 """
+from builtins import object
 
 
 # We subclass from ``object`` instead of ``TestCase`` here so that this doesn't
